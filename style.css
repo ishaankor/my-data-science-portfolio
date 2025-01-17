@@ -34,6 +34,11 @@ body {
       font-size: 150%;
     }
 
+    ol li::marker {
+      font-weight: bold;
+      font-size: 100%;
+    }
+
     p {
       margin-bottom: 1em;
     }
@@ -54,7 +59,7 @@ body {
       display: contents;
     }
 
-    li a {
+    nav a {
       flex: 1;
       flex-direction: row;
       text-decoration: none;
@@ -63,7 +68,7 @@ body {
       padding: 0.5em;
     }
 
-    a:hover {
+    nav a:hover {
       border-bottom: 0.4em solid var(--color-accent);
       background-color: oklch(from var(--color-accent) 95% 5% h);
       padding-bottom: 0.1em;
