@@ -1,5 +1,6 @@
 html {
   --color-accent: oklch(65% 50% 0);
+  color-scheme: light dark
 }
 
 body {
@@ -11,7 +12,15 @@ body {
     max-width: 100ch;
     margin-inline: auto;
     padding: 5%;
-    /* display: contents; */
+
+    .color-scheme {
+      display: inline-block;
+      margin-right: 5px;
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font: 70%/1.5 system-ui;
+    }
 
     h1, h2, h3, h4, h5, h6 {
       line-height: 1.1;
@@ -44,11 +53,12 @@ body {
     }
 
     nav {
+      --border-color: oklch(50% 10% 200 / 40%);
       display: flex;
       margin-bottom: auto;
       border-bottom-width: 1px;
       border-bottom-style: solid;
-      border-bottom-color: oklch(80% 3% 200);
+      border-bottom-color: var(--border-color);
     }
 
     nav ul {
@@ -70,7 +80,7 @@ body {
 
     nav a:hover {
       border-bottom: 0.4em solid var(--color-accent);
-      background-color: oklch(from var(--color-accent) 95% 5% h);
+      background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
       padding-bottom: 0.1em;
     }
 
