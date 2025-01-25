@@ -111,12 +111,14 @@ body {
       display: block; 
       width: 100%; 
       box-sizing: border-box; 
+      font: 100%/1.5 system-ui;
     }
 
     textarea {
       display: block; 
       width: 100%; 
-      box-sizing: border-box; 
+      box-sizing: border-box;
+      font: 100%/1.5 system-ui;; 
     }
 
     button {
