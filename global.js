@@ -7,11 +7,11 @@ function $$(selector, context = document) {
 }
 
 let pages = [
-    { url: '/my-data-science-portfolio/', title: 'Home' },
-    { url: '/my-data-science-portfolio/contact/', title: 'Contact' },
-    { url: '/my-data-science-portfolio/projects/', title: 'Projects' },
-    { url: 'https://github.com/ishaankor', title: 'Profile' },
-    { url: '/my-data-science-portfolio/resume/', title: 'Resume' }
+    { url: 'index.html', title: 'Home' },  
+    { url: 'contact/', title: 'Contact' },
+    { url: 'projects/', title: 'Projects' },
+    { url: 'https://github.com/ishaankor', title: 'Profile' }, 
+    { url: 'resume/', title: 'Resume' }
 ];
 
 let nav = document.createElement('nav');
@@ -19,20 +19,23 @@ document.body.prepend(nav);
 
 for (let p of pages) {
     let url = p.url;
-    if (!ARE_WE_HOME && !url.startsWith('http')) {
-        url = '../' + url;
-    }  
+
+    // Ensure correct relative linking when not on the home page
+    url = (!ARE_WE_HOME && !url.startsWith('http')) ? '../' + url : url;
+
     let title = p.title;
     let a = document.createElement('a');
     a.href = url;
     a.textContent = title;
     nav.append(a);
+
     a.classList.toggle(
         'current',
-        a.host === location.host && a.pathname === location.pathname,
+        a.host === location.host && a.pathname === location.pathname
     );
+
     if (a.host !== location.host) {
-        a.toggleAttribute('target', '_blank')
+        a.toggleAttribute('target', '_blank');
     }
 }
 
