@@ -5,12 +5,13 @@ function $$(selector, context = document) {
 }
 
 let pages = [
-    { url: 'index.html', title: 'Home' },
-    { url: 'contact/', title: 'Contact' },
-    { url: 'projects/', title: 'Projects' },
-    { url: 'https://github.com/ishaankor', title: 'Profile' }, 
-    { url: 'resume/', title: 'Resume' }
+    { url: '/my-data-science-portfolio/index.html', title: 'Home' },
+    { url: '/my-data-science-portfolio/projects/index.html', title: 'Projects' },
+    { url: '/my-data-science-portfolio/contact/index.html', title: 'Contact' },
+    { url: 'https://github.com/ishaankor', title: 'Profile' },
+    { url: '/my-data-science-portfolio/resume/index.html', title: 'Resume' },
 ];
+
 
 const ARE_WE_HOME = document.documentElement.classList.contains('home');
 
@@ -19,13 +20,11 @@ document.body.prepend(nav);
 
 for (let p of pages) {
     let url = p.url;
-
-    url = (!ARE_WE_HOME && !url.startsWith('http')) ? '../' + url : url;
+    let title = p.title;
 
     let a = document.createElement('a');
     a.href = url;
-    a.textContent = p.title;
-    nav.append(a);
+    a.textContent = title;
 
     a.classList.toggle(
         'current',
@@ -35,7 +34,10 @@ for (let p of pages) {
     if (a.host !== location.host) {
         a.setAttribute('target', '_blank');
     }
+
+    nav.append(a);
 }
+
 
 
 document.body.insertAdjacentHTML(
