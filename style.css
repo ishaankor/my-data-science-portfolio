@@ -19,7 +19,11 @@ body {
       position: absolute;
       top: 1rem;
       right: 1rem;
-      font: 70%/1.5 system-ui;
+      font: 75%/1.5 system-ui;
+    }
+
+    .color-scheme select {
+      font: 100%/1.5 system-ui;
     }
 
     h1, h2, h3, h4, h5, h6 {
