@@ -8,10 +8,10 @@ function $$(selector, context = document) {
 
 let pages = [
     { url: '', title: 'Home' },
-    { url: 'contact/', title: 'Contact' },
-    { url: 'projects/', title: 'Projects' },
+    { url: 'contact/index.html', title: 'Contact' },
+    { url: 'projects/index.html', title: 'Projects' },
     { url: 'https://github.com/ishaankor', title: 'Profile' },
-    { url: 'resume/', title: 'Resume' }
+    { url: 'resume/index.html', title: 'Resume' }
 ];
 
 let nav = document.createElement('nav');
