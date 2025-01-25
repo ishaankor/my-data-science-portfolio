@@ -1,18 +1,18 @@
 console.log('IT’S ALIVE!');
 
-const ARE_WE_HOME = document.documentElement.classList.contains('home');
-
 function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
 }
 
 let pages = [
-    { url: 'index.html', title: 'Home' },  
+    { url: 'index.html', title: 'Home' },
     { url: 'contact/', title: 'Contact' },
     { url: 'projects/', title: 'Projects' },
     { url: 'https://github.com/ishaankor', title: 'Profile' }, 
     { url: 'resume/', title: 'Resume' }
 ];
+
+const ARE_WE_HOME = document.documentElement.classList.contains('home');
 
 let nav = document.createElement('nav');
 document.body.prepend(nav);
@@ -20,13 +20,11 @@ document.body.prepend(nav);
 for (let p of pages) {
     let url = p.url;
 
-    // Ensure correct relative linking when not on the home page
     url = (!ARE_WE_HOME && !url.startsWith('http')) ? '../' + url : url;
 
-    let title = p.title;
     let a = document.createElement('a');
     a.href = url;
-    a.textContent = title;
+    a.textContent = p.title;
     nav.append(a);
 
     a.classList.toggle(
@@ -35,9 +33,10 @@ for (let p of pages) {
     );
 
     if (a.host !== location.host) {
-        a.toggleAttribute('target', '_blank');
+        a.setAttribute('target', '_blank');
     }
 }
+
 
 document.body.insertAdjacentHTML(
     'afterbegin',
