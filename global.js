@@ -7,11 +7,11 @@ function $$(selector, context = document) {
 }
 
 let pages = [
-    { url: '/my-data-science-portfolio/index.html', title: 'Home' },
-    { url: '/my-data-science-portfolio/contact/index.html', title: 'Contact' },
-    { url: '/my-data-science-portfolio/projects/index.html', title: 'Projects' },
+    { url: '/my-data-science-portfolio/', title: 'Home' },
+    { url: '/my-data-science-portfolio/contact/', title: 'Contact' },
+    { url: '/my-data-science-portfolio/projects/', title: 'Projects' },
     { url: 'https://github.com/ishaankor', title: 'Profile' },
-    { url: '/my-data-science-portfolio/resume/index.html', title: 'Resume' }
+    { url: '/my-data-science-portfolio/resume/', title: 'Resume' }
 ];
 
 let nav = document.createElement('nav');
