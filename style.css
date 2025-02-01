@@ -88,6 +88,44 @@ body {
       padding-bottom: 0.1em;
     }
 
+    /* Style the container */
+    dl {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* Two equal columns per row */
+      gap: 40px; /* Adjust spacing */
+      text-align: left; /* Align text to left */
+      font-family: Arial, sans-serif;
+      margin-top: 10px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Create a flexbox for each dt-dd pair */
+    dt, dd {
+      display: flex;
+      align-items: center;
+    }
+
+    /* Style the labels (dt) */
+    dt {
+      font-size: 16px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: flex;
+      justify-content: start;
+    }
+
+    /* Style the values (dd) */
+    dd {
+      font-size: 32px;
+      font-weight: bold;
+      margin: 0;
+      display: flex;
+      justify-content: end; /* Align numbers to the right */
+    }
+
     .current {
       font-weight: bold;
       border-bottom: 0.4em solid oklch(85% 3% 200);
