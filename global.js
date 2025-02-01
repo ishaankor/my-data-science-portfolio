@@ -33,11 +33,11 @@ function $$(selector, context = document) {
 }
 
 let pages = [
-    { url: '../index.html', title: 'Home' },
-    { url: '../projects/index.html', title: 'Projects' },
-    { url: '../resume/index.html', title: 'Resume' },
+    { url: '/my-data-science-portfolio/index.html', title: 'Home' },
+    { url: '/my-data-science-portfolio//projects/index.html', title: 'Projects' },
+    { url: '/my-data-science-portfolio//resume/index.html', title: 'Resume' },
     { url: 'https://github.com/ishaankor', title: 'Profile' },
-    { url: '../contact/index.html', title: 'Contact' }
+    { url: '/my-data-science-portfolio//contact/index.html', title: 'Contact' }
 ];
 
 const ARE_WE_HOME = document.documentElement.classList.contains('home');
