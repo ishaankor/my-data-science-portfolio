@@ -75,9 +75,6 @@ contact_form?.addEventListener('submit', function (event) {
     location.href = url;
 });
 
-let url = '/lib/projects.json';
-console.log(fetchJSON(url));
-
 export async function fetchJSON(url) {
     try {
         // Fetch the JSON file from the given URL
@@ -93,18 +90,6 @@ export async function fetchJSON(url) {
         console.error('Error fetching or parsing JSON data:', error);
     }
 }
-
-// export function renderProjects(project, containerElement) {
-//     // Your code will go here
-    // containerElement.innerHTML = '';
-    // const article = document.createElement('article');
-    // article.innerHTML = `
-    //     <h3>${project.title}</h3>
-    //     <img src="${project.image}" alt="${project.title}">
-    //     <p>${project.description}</p>
-    // `;
-    // containerElement.appendChild(article);
-// }
 
 export function renderProjects(project, containerElement, headingLevel = 'h2') {
     // write javascript that will allow dynamic heading levels based on previous function
