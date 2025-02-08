@@ -20,9 +20,12 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
     projects.forEach(project => {
         const article = document.createElement('article');
         article.innerHTML = `
-            <${headingLevel}>${project.title}</${headingLevel}>
-            <img src="${project.image}" alt="${project.title}" width="250" height="200">
-            <p>${project.description}</p>
+            <div class="rendered_projects">
+                <${headingLevel}>${project.title}</${headingLevel}>
+                <img src="${project.image}" alt="${project.title}" width="250" height="200">
+                <p>${project.description}</p>
+                <p>c. ${project.year}</p>
+            </div>
         `;
         containerElement.appendChild(article);
     });
@@ -33,11 +36,11 @@ function $$(selector, context = document) {
 }
 
 let pages = [
-    { url: '/my-data-science-portfolio/index.html', title: 'Home' },
-    { url: '/my-data-science-portfolio/projects/index.html', title: 'Projects' },
-    { url: '/my-data-science-portfolio/resume/index.html', title: 'Resume' },
+    { url: 'my-data-science-portfolio/index.html', title: 'Home' },
+    { url: 'my-data-science-portfolio/projects/index.html', title: 'Projects' },
+    { url: 'my-data-science-portfolio/resume/index.html', title: 'Resume' },
     { url: 'https://github.com/ishaankor', title: 'Profile' },
-    { url: '/my-data-science-portfolio/contact/index.html', title: 'Contact' }
+    { url: 'my-data-science-portfolio/contact/index.html', title: 'Contact' }
 ];
 
 const ARE_WE_HOME = document.documentElement.classList.contains('home');

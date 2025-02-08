@@ -163,6 +163,7 @@ body {
     }
 
     .projects {
+      padding-top: 15px;
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
       gap: 1em;
@@ -176,4 +177,90 @@ body {
     .projects h2 {
       margin: 0;
     }
+
+    .rendered_projects p:last-of-type {
+      font: 125%/2 Baskerville;
+      font-variant-numeric: oldstyle-nums;
+    }
+
+    #projects-pie-plot {
+      display: flex;
+      flex: 0 0 auto;
+      width: 300px;
+      height: 300px;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 30px; /* Adds space below the pie chart */
+    }
+    
+    .legend {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
+      list-style: none;
+      border: 1px solid #2e2c2c;
+      border-radius: 10px;
+      padding: 10px;
+      flex: 1;
+      gap: 20px; 
+      align-items: center;
+    }
+  
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: system-ui;
+    }
+  
+    .swatch {
+      width: 12px;
+      height: 12px;
+      aspect-ratio: 1 / 1;
+      background-color: var(--color);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .container {
+      display: flex;
+      align-items: center; 
+      gap: 20px; 
+      flex-wrap: wrap; 
+      margin: auto;
+    }
+
+    .searchBar {
+      padding: 15px 15px;
+      font-size: 16px;
+      font-family: system-ui;
+      border: 1px solid #000000;
+      border-radius: 5px;
+      outline: none;
+    }
+  
+    .searchBar:focus {
+      border-color: #3b82f6;
+    }
+    
+    .selected {
+      --color: oklch(60% 45% 0) !important;
+    
+      &:is(path) {
+        fill: var(--color);
+      }
+    }
+    
+    &:has(path:hover) {
+        path:not(:hover) {
+            opacity: 0.5;
+        }
+    }
+    
+    path {
+        transition: 300ms;
+        cursor: pointer;
+    }
+    
   }
