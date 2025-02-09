@@ -38,12 +38,10 @@ function renderPieChart(projectsGiven) {
         .append("path")
         .attr("d", newArcGenerator)
         .attr("fill", (d, i) => colors(i))
-        .attr("class", "pie-slice")
-        .style("cursor", "pointer")
         .on("click", function (event, d) {
             selectedYear = selectedYear === d.data.label ? null : d.data.label;
             svg.selectAll("path")
-                .attr("class", pathD => (selectedYear && pathD.data.label === selectedYear ? "selected" : "pie-slice"));
+                .attr("class", pathD => (selectedYear && pathD.data.label === selectedYear ? "selected" : ".selected"));
             legend.selectAll("li")
                 .attr("class", legendD => (selectedYear && legendD.label === selectedYear ? "selected" : ""));
             let filteredProjects = projects

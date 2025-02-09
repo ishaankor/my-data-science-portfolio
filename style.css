@@ -185,9 +185,11 @@ body {
 
     #projects-pie-plot {
       display: flex;
-      flex: 0 0 auto;
-      width: 300px;
+      flex: 1;
+      min-width: 200px;
+      min-height: 200px;
       height: 300px;
+      width: 300px;
       align-items: center;
       justify-content: flex-start;
       gap: 20px;
