@@ -39,6 +39,7 @@ let pages = [
     { url: '/my-data-science-portfolio/index.html', title: 'Home' },
     { url: '/my-data-science-portfolio/projects/index.html', title: 'Projects' },
     { url: '/my-data-science-portfolio/resume/index.html', title: 'Resume' },
+    { url: '/my-data-science-portfolio/meta/index.html', title: 'Meta'},
     { url: 'https://github.com/ishaankor', title: 'Profile' },
     { url: '/my-data-science-portfolio/contact/index.html', title: 'Contact' }
 ];
