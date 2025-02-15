@@ -261,8 +261,128 @@ body {
     }
     
     path {
-        transition: 300ms;
-        cursor: pointer;
+      transition: 300ms;
+      cursor: pointer;
+    }
+
+    .stats-summary {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 800px;
+      margin: 20px auto;
+      text-align: center;
+      color: black;
+    }
+  
+    .summary-title {
+      font-size: 1.5em;
+      font-weight: bold;
+      margin-bottom: 25px;
+      text-align: left;
+      color: black;
+      padding-left: 25px; 
+    }
+  
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
     }
     
-  }
+    .stat-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .stat-title {
+      font-size: 0.8em;
+      color: #777;
+      text-transform: uppercase;
+    }
+    
+    .stat-value {
+      font-size: 2em;
+      font-weight: bold;
+      color: black;
+    }  
+
+    .tooltip {
+      position: fixed;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); 
+      border-radius: 8px;
+      padding: 8px 12px; 
+      font-size: 0.85em; 
+      max-width: 200px; 
+      z-index: 1000; 
+      pointer-events: none; 
+      backdrop-filter: blur(5px); 
+      display: none;
+    }
+
+    dl.info {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 4px 8px;
+      margin: 0;
+      transition-duration: 500ms;
+      transition-property: opacity, visibility;
+    }
+
+    dl.info[hidden]:not(:hover, :focus-within) {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    dl.info dt {
+      font-weight: bold;
+      font-size: 0.75em;
+      color: #000000;
+    }
+
+    dl.info dd {
+      margin: 0;
+      font-size: 0.9em;
+      font-weight: normal;
+      color: black;
+    }
+    
+    .tooltip a {
+      font-size: 0.85em;
+      text-decoration: underline;
+    } 
+
+    circle {
+      transition: 200ms;
+      transform-origin: center;
+      transform-box: fill-box;
+    }
+    
+    circle:hover {
+      transform: scale(1.5);
+    }
+    
+    @keyframes marching-ants {
+      to {
+        stroke-dashoffset: -8; /* 5 + 3 */
+      }
+    }
+    
+    .selection {
+      fill-opacity: 0.1;
+      stroke: black;
+      stroke-opacity: 0.7;
+      stroke-dasharray: 5 3;
+      animation: marching-ants 2s linear infinite;
+    }
+
+    circle.selected {
+      fill: #ff6b6b;
+    }
+  
+}
