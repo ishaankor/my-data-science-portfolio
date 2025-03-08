@@ -14,9 +14,32 @@
     <div class="meta">
         This page includes stats about the code of this website.
     </div>
-    <div id="stats"></div>
+    <div id="filter-container">
+        <label class="time-filter">
+            Show commit until: <input type="range" id="time-slider" min="0" max="100" step="1">
+            <time id="time-display"></time>
+        </label>
+    </div>
+    <div id="stats">
+    </div>
     <h2>Commits by time of day</h2>
-    <div id="chart"></div>
+    <div id="scrollytelling">
+        <div id="scroll-container">
+            <div id="spacer"></div>
+            <div id="items-container"></div>
+        </div>
+        <!-- our old scatterplot div -->
+        <div id="chart"></div>
+    </div>
+    <h2> Codebase Evolution </h2>
+    <div id="commit-container">
+        <dl class="files"></dl>
+        <div id="scroll-container">
+          <div id="spacer"></div>
+          <div id="items-container"></div>
+        </div>
+      </div>
+    </div>
     <dl id="commit-tooltip" class="info tooltip">
         <dt>Commit</dt>
         <dd>

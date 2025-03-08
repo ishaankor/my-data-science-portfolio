@@ -3,6 +3,11 @@ html {
   color-scheme: light dark
 }
 
+:global(body) {
+  max-width: min(120ch, 80vw);
+}
+
+
 body {
     /* Set line height to 1.5 times the font size
          and use the OS’s UI font as the website font
@@ -265,14 +270,20 @@ body {
       cursor: pointer;
     }
 
+    #stats {
+      flex-direction: column;
+    }
+
     .stats-summary {
       background: white;
-      padding: 20px;
+      /* padding: 20px; */
       border-radius: 8px;
-      max-width: 800px;
-      margin: 20px auto;
+      /* max-width: 800px; */
+      /* margin: 20px auto; */
       text-align: center;
       color: black;
+      /* grid-template-columns: 1fr; */
+      flex-direction: column;
     }
   
     .summary-title {
@@ -282,6 +293,7 @@ body {
       text-align: left;
       color: black;
       padding-left: 25px; 
+      flex-direction: column;
     }
   
     .summary-grid {
@@ -291,6 +303,7 @@ body {
       justify-content: center;
       align-items: center;
       text-align: center;
+      flex-direction: column;
     }
     
     .stat-block {
@@ -358,9 +371,12 @@ body {
     } 
 
     circle {
-      transition: 200ms;
+      transition: all 200ms, r calc(var(--r) * 100ms);
       transform-origin: center;
       transform-box: fill-box;
+      @starting-style {
+        r: 0;
+      }
     }
     
     circle:hover {
@@ -384,5 +400,164 @@ body {
     circle.selected {
       fill: #ff6b6b;
     }
+
+    #filter-container {
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    #slider-line {margin-top: 1em;
+      flex-direction: row; 
+      flex: 1;
+      align-items: baseline;
+      visibility: hidden;
+      opacity: 0;
+      font-size: small;
+    }
+    
+    #time-display {
+      opacity: 0;
+      visibility: hidden;
+      margin-left: auto;
+    }
+
+    #stats {
+      margin-top: 0px;
+    }
   
+    .files {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 1rem;
+      height: 300px;
+      overflow-y: auto;
+    }
+
+    .files > div {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: subgrid;
+    }
+
+    dt {
+      grid-column: 1;
+    }
+
+    dd {
+      grid-column: 2;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: start;
+      align-content: start;
+      gap: 0.15em;
+      padding-top: 0.6em;
+      margin-left: 0;
+    }
+
+    dt small {
+      display: block;
+      font-size: 0.8em;
+      opacity: 0.6;
+    }
+
+    .line {
+      display: flex;
+      width: 0.5em;
+      aspect-ratio: 1;
+      border-radius: 50%;
+    }
+
+    #scrollytelling {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: subgrid;
+    }
+    
+    #scroll-container {
+      grid-column: 1;
+      position: relative;
+      width: 95%;
+      height: 350px;
+      border: 1px solid #ccc;
+      margin-bottom: 50px;
+      scroll-snap-type: y mandatory;
+      overflow-y: scroll;
+    }
+    
+    #chart {
+      grid-column: 2;
+    }
+
+    #spacer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: none;
+      pointer-events: none;
+    }
+    
+    #items-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+    
+    .item {
+      height: 100px;
+      box-sizing: border-box;
+      border-bottom: 2px solid #eee;
+    }
+
+    #commit-container {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: subgrid;
+    }
+    
+    #commit-container #scroll-container {
+      grid-column: 2;
+      position: relative;
+      width: 95%;
+      height: 350px;
+      border: 1px solid #ccc;
+      margin-bottom: 50px;
+      scroll-snap-type: y mandatory;
+      overflow-y: scroll;
+    }
+    
+    .files {
+      grid-column: 0;
+      position: relative;
+      width: 95%;
+      height: 350px;
+      border: 1px solid #ccc;
+      margin-left: 0px;
+      scroll-snap-type: y mandatory;
+      overflow-y: scroll;
+    }
+    
+    #spacer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: none; 
+      pointer-events: none;
+    }
+    
+    #items-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+    
+    .item {
+      height: 100px; 
+      box-sizing: border-box;
+      border-bottom: 2px solid #eee;
+    }
+    
 }
