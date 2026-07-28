@@ -5,23 +5,23 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Float, MeshDistortMaterial, Sphere, Points, PointMaterial } from '@react-three/drei';
 import * as THREE from 'three';
 
-function AnimatedParticles() {
+function MidnightStarParticles() {
   const pointsRef = useRef<THREE.Points>(null!);
   const [positions] = useState(() => {
-    const count = 750;
+    const count = 900;
     const pos = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
-      pos[i * 3] = (Math.random() - 0.5) * 12;
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 12;
-      pos[i * 3 + 2] = (Math.random() - 0.5) * 12;
+      pos[i * 3] = (Math.random() - 0.5) * 14;
+      pos[i * 3 + 1] = (Math.random() - 0.5) * 14;
+      pos[i * 3 + 2] = (Math.random() - 0.5) * 14;
     }
     return pos;
   });
 
   useFrame((state, delta) => {
     if (pointsRef.current) {
-      pointsRef.current.rotation.x += delta * 0.05;
-      pointsRef.current.rotation.y += delta * 0.07;
+      pointsRef.current.rotation.x += delta * 0.04;
+      pointsRef.current.rotation.y += delta * 0.06;
     }
   });
 
@@ -29,57 +29,56 @@ function AnimatedParticles() {
     <Points ref={pointsRef} positions={positions} stride={3} frustumCulled={false}>
       <PointMaterial
         transparent
-        color="#38bdf8"
-        size={0.035}
+        color="#818cf8"
+        size={0.038}
         sizeAttenuation={true}
         depthWrite={false}
-        opacity={0.7}
+        opacity={0.75}
       />
     </Points>
   );
 }
 
-function InteractiveCoreMesh({ mousePos }: { mousePos: React.MutableRefObject<{ x: number; y: number }> }) {
+function HazeCoreMesh({ mousePos }: { mousePos: React.MutableRefObject<{ x: number; y: number }> }) {
   const meshRef = useRef<THREE.Mesh>(null!);
   const wireframeRef = useRef<THREE.Mesh>(null!);
 
   useFrame((state, delta) => {
     if (!meshRef.current) return;
     
-    // Smooth lerp rotation toward mouse position
-    const targetX = mousePos.current.y * 0.5;
-    const targetY = mousePos.current.x * 0.5;
+    const targetX = mousePos.current.y * 0.45;
+    const targetY = mousePos.current.x * 0.45;
 
     meshRef.current.rotation.x += (targetX - meshRef.current.rotation.x) * 0.05 + delta * 0.2;
-    meshRef.current.rotation.y += (targetY - meshRef.current.rotation.y) * 0.05 + delta * 0.3;
+    meshRef.current.rotation.y += (targetY - meshRef.current.rotation.y) * 0.05 + delta * 0.25;
 
     if (wireframeRef.current) {
-      wireframeRef.current.rotation.x = -meshRef.current.rotation.x * 0.8;
-      wireframeRef.current.rotation.y = -meshRef.current.rotation.y * 0.8;
+      wireframeRef.current.rotation.x = -meshRef.current.rotation.x * 0.7;
+      wireframeRef.current.rotation.y = -meshRef.current.rotation.y * 0.7;
     }
   });
 
   return (
     <group>
-      {/* Central Distorted Glowing Sphere */}
-      <Float speed={2.5} rotationIntensity={0.6} floatIntensity={1.2}>
+      {/* Central Glowing Distorted Sphere */}
+      <Float speed={2.2} rotationIntensity={0.5} floatIntensity={1}>
         <Sphere ref={meshRef} args={[1.5, 64, 64]} scale={1.2}>
           <MeshDistortMaterial
-            color="#06b6d4"
+            color="#818cf8"
             attach="material"
-            distort={0.45}
-            speed={2}
-            roughness={0.2}
-            metalness={0.8}
+            distort={0.4}
+            speed={2.2}
+            roughness={0.15}
+            metalness={0.85}
           />
         </Sphere>
       </Float>
 
-      {/* Orbiting Wireframe Outer Structure */}
-      <Float speed={1.8} rotationIntensity={1} floatIntensity={0.8}>
+      {/* Orbiting Wireframe Geometry */}
+      <Float speed={1.5} rotationIntensity={0.8} floatIntensity={0.6}>
         <mesh ref={wireframeRef} scale={1.9}>
           <icosahedronGeometry args={[1, 2]} />
-          <meshBasicMaterial color="#8b5cf6" wireframe transparent opacity={0.35} />
+          <meshBasicMaterial color="#c084fc" wireframe transparent opacity={0.4} />
         </mesh>
       </Float>
     </group>
@@ -93,13 +92,11 @@ export default function Hero3DCanvas() {
   const mousePos = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
-    // Check user reduced motion preference or low power
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     if (mediaQuery.matches) {
       setIsLowPerformance(true);
     }
 
-    // IntersectionObserver to pause R3F render when scrolled offscreen
     const observer = new IntersectionObserver(
       ([entry]) => setIsInView(entry.isIntersecting),
       { threshold: 0.1 }
@@ -123,8 +120,8 @@ export default function Hero3DCanvas() {
   if (isLowPerformance) {
     return (
       <div className="w-full h-full flex items-center justify-center relative">
-        <div className="w-64 h-64 rounded-full bg-gradient-to-r from-cyan-500 to-violet-600 blur-3xl opacity-30 animate-pulse" />
-        <div className="w-48 h-48 rounded-full border border-cyan-500/30 flex items-center justify-center">
+        <div className="w-64 h-64 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 blur-3xl opacity-30 animate-pulse" />
+        <div className="w-48 h-48 rounded-full border border-indigo-500/30 flex items-center justify-center">
           <div className="w-32 h-32 rounded-full border border-violet-500/40 animate-spin" style={{ animationDuration: '20s' }} />
         </div>
       </div>
@@ -135,8 +132,8 @@ export default function Hero3DCanvas() {
     <div
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="w-full h-[450px] sm:h-[550px] md:h-[650px] relative cursor-grab active:cursor-grabbing"
-      aria-label="Interactive 3D Data Sphere Canvas"
+      className="w-full h-[450px] sm:h-[550px] relative cursor-grab active:cursor-grabbing"
+      aria-label="Interactive Midnight Haze 3D Canvas"
     >
       {isInView && (
         <Canvas
@@ -144,19 +141,19 @@ export default function Hero3DCanvas() {
           gl={{ antialias: true, alpha: true }}
           dpr={[1, 2]}
         >
-          <ambientLight intensity={0.7} />
-          <directionalLight position={[10, 10, 5]} intensity={1.5} color="#38bdf8" />
-          <pointLight position={[-10, -10, -5]} intensity={1.2} color="#a855f7" />
+          <ambientLight intensity={0.8} />
+          <directionalLight position={[10, 10, 5]} intensity={1.5} color="#818cf8" />
+          <pointLight position={[-10, -10, -5]} intensity={1.2} color="#c084fc" />
           
-          <AnimatedParticles />
-          <InteractiveCoreMesh mousePos={mousePos} />
+          <MidnightStarParticles />
+          <HazeCoreMesh mousePos={mousePos} />
         </Canvas>
       )}
 
-      {/* Floating 3D Interaction Badge */}
-      <div className="absolute bottom-4 right-4 pointer-events-none px-3 py-1.5 rounded-full bg-slate-900/80 backdrop-blur-md border border-slate-700/50 text-xs text-slate-400 flex items-center gap-2">
-        <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-        Drag or hover mouse to interact
+      {/* Floating 3D Badge */}
+      <div className="absolute bottom-4 right-4 pointer-events-none px-3.5 py-1.5 rounded-full bg-midnight/90 backdrop-blur-md border border-haze-border text-xs text-haze-muted flex items-center gap-2 font-mono">
+        <span className="w-2 h-2 rounded-full bg-haze-indigo animate-ping" />
+        Interactive 3D Haze Canvas
       </div>
     </div>
   );

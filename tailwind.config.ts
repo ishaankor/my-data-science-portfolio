@@ -11,25 +11,40 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: "#0b0d0f",
-        surface: "#121518",
-        line: "#1e242b",
-        muted: "#64748b",
-        bone: "#f1f5f9",
-        "bone-dim": "#cbd5e1",
-        ember: {
-          DEFAULT: "#f97316",
-          glow: "rgba(249, 115, 22, 0.15)",
-        },
+        midnight: "#090d16",
+        "haze-dark": "#0d111c",
+        "haze-card": "#131826",
+        "haze-border": "rgba(129, 140, 248, 0.18)",
+        "haze-border-hover": "rgba(168, 85, 247, 0.4)",
+        "haze-indigo": "#818cf8",
+        "haze-violet": "#a855f7",
+        "haze-purple": "#c084fc",
+        "haze-cyan": "#38bdf8",
+        "haze-text": "#f8fafc",
+        "haze-dim": "#cbd5e1",
+        "haze-muted": "#94a3b8",
       },
       fontFamily: {
-        display: ["var(--font-inter)", "sans-serif"],
         sans: ["var(--font-inter)", "sans-serif"],
         mono: ["var(--font-jetbrains-mono)", "monospace"],
       },
       boxShadow: {
-        float: "0 10px 30px -10px rgba(0, 0, 0, 0.5)",
-        panel: "0 4px 20px rgba(0, 0, 0, 0.4)",
+        haze: "0 10px 30px -10px rgba(129, 140, 248, 0.15)",
+        "haze-glow": "0 0 35px -5px rgba(168, 85, 247, 0.3)",
+      },
+      animation: {
+        "haze-pulse": "hazePulse 4s ease-in-out infinite",
+        "star-float": "starFloat 6s ease-in-out infinite",
+      },
+      keyframes: {
+        hazePulse: {
+          "0%, 100%": { opacity: "0.4", transform: "scale(1)" },
+          "50%": { opacity: "0.8", transform: "scale(1.08)" },
+        },
+        starFloat: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-8px)" },
+        },
       },
     },
   },

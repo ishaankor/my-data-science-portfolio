@@ -4,118 +4,147 @@ import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { portfolioData } from '@/data/portfolio';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { ArrowRight, Sparkles, Terminal, FileText, Bot, BrainCircuit } from 'lucide-react';
 
 const Hero3DCanvas = dynamic(() => import('./Hero3DCanvas'), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-full min-h-[320px] flex items-center justify-center">
-      <div className="flex items-center gap-2 font-mono text-xs text-muted">
-        <span className="h-2 w-2 animate-ping rounded-full bg-ember" />
-        loading 3D scene...
+    <div className="w-full h-full min-h-[380px] flex items-center justify-center">
+      <div className="flex items-center gap-2 font-mono text-xs text-haze-muted">
+        <span className="h-2 w-2 animate-ping rounded-full bg-haze-indigo" />
+        loading Midnight Haze 3D...
       </div>
     </div>
   ),
 });
 
 export default function HeroSection() {
-  const [terminalLineIndex, setTerminalLineIndex] = useState(0);
-
-  const terminalLines = [
-    '$ python3 -m pipeline.train --model xgboost',
-    '-> Loading 50,000+ scraped records from PostgreSQL...',
-    '-> Evaluating validation ROC-AUC: 0.942',
-    '-> Deploying real-time inference API endpoint...',
-    '✓ System ready at https://api.ishaankoradia.com',
-  ];
+  const [typingIndex, setTypingIndex] = useState(0);
+  const [currentText, setCurrentText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTerminalLineIndex((prev) => (prev + 1) % terminalLines.length);
-    }, 2800);
-    return () => clearInterval(timer);
-  }, [terminalLines.length]);
+    const fullText = portfolioData.typingStrings[typingIndex];
+    let timer: NodeJS.Timeout;
+
+    if (isDeleting) {
+      timer = setTimeout(() => {
+        setCurrentText(fullText.substring(0, currentText.length - 1));
+      }, 50);
+    } else {
+      timer = setTimeout(() => {
+        setCurrentText(fullText.substring(0, currentText.length + 1));
+      }, 100);
+    }
+
+    if (!isDeleting && currentText === fullText) {
+      timer = setTimeout(() => setIsDeleting(true), 1800);
+    } else if (isDeleting && currentText === '') {
+      setIsDeleting(false);
+      setTypingIndex((prev) => (prev + 1) % portfolioData.typingStrings.length);
+    }
+
+    return () => clearTimeout(timer);
+  }, [currentText, isDeleting, typingIndex]);
 
   return (
-    <section className="relative isolate overflow-hidden pt-28 lg:pt-24 lg:pb-24 pb-16 min-h-dvh flex items-center">
+    <section className="relative min-h-[92vh] pt-28 pb-16 flex items-center overflow-hidden bg-midnight-haze">
       
-      {/* Ember Glow Backdrop */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute right-0 top-1/2 -z-10 h-[42rem] w-[42rem] -translate-y-1/2 translate-x-1/3 rounded-full bg-ember/10 blur-[140px]"
-      />
+      {/* Background Ambient Haze Spheres */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-gradient-to-tr from-indigo-600/10 via-purple-600/10 to-cyan-500/10 blur-[130px] pointer-events-none rounded-full" />
 
-      <div className="mx-auto w-full max-w-6xl px-6 sm:px-10 grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
-        
-        {/* Left Column: Text & Terminal Box matching sunnypatel.net */}
-        <div>
-          {/* Status Badge */}
-          <div className="flex items-center gap-3 font-mono text-xs text-muted">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ember opacity-60" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-ember" />
-            </span>
-            <span>Open to data science & software roles</span>
-          </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          {/* Left Column: Intro & Typewriter */}
+          <div className="lg:col-span-7 space-y-6">
+            
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-haze-indigo/10 border border-haze-border text-haze-indigo text-xs font-mono">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Data Science Portfolio + Interactive Web App</span>
+            </div>
 
-          {/* Main Headline */}
-          <h1 className="mt-7 text-balance font-display text-[2.8rem] sm:text-[3.8rem] lg:text-[4.5rem] font-semibold leading-[0.98] tracking-[-0.035em] text-bone">
-            I build data products, analytics & models from screen to <span className="text-ember">systems.</span>
-          </h1>
+            <div className="space-y-2">
+              <h2 className="text-xl sm:text-2xl font-mono text-haze-muted">
+                Hi, I&apos;m <span className="text-white font-bold">{portfolioData.name}</span>
+              </h2>
+              
+              {/* Typewriter Line */}
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white h-[1.3em]">
+                I am <span className="text-haze-gradient">{currentText}</span>
+                <span className="inline-block w-[3px] h-[0.85em] bg-haze-indigo ml-1 animate-pulse" />
+              </h1>
+            </div>
 
-          {/* Bio text */}
-          <p className="mt-7 max-w-md text-[1.02rem] sm:text-lg leading-relaxed text-bone-dim">
-            I build full-stack data software <em className="font-medium not-italic text-ember">people actually use</em>, from automated scraping pipelines and ML recommenders down to interactive 3D web visualizations.
-          </p>
+            <p className="text-base sm:text-lg text-haze-dim max-w-2xl leading-relaxed">
+              Recent <strong className="text-white">UCSD Cognitive Science</strong> (ML & Neural Computation) graduate. I design, train, and deploy AI models, automation scripts, and interactive web data tools.
+            </p>
 
-          {/* Action CTAs */}
-          <div className="mt-9 flex flex-wrap items-center gap-x-5 gap-y-3 font-mono">
-            <Link
-              href="/projects"
-              className="group inline-flex items-center gap-2 rounded-md border border-ember/50 bg-ember/10 px-5 py-3 text-sm text-bone transition-colors duration-300 hover:border-ember hover:bg-ember/20"
-            >
-              <span>See the work</span>
-              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-            </Link>
+            {/* Action CTAs */}
+            <div className="pt-2 flex flex-wrap gap-4 items-center font-mono">
+              <Link
+                href="/projects"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold shadow-haze-glow transition-all transform hover:-translate-y-0.5"
+              >
+                <span>Explore Projects</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
 
-            <Link
-              href="/resume"
-              className="group inline-flex items-center gap-1.5 px-2 py-3 text-sm text-muted transition-colors hover:text-bone"
-            >
-              <span>Résumé</span>
-              <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </Link>
-          </div>
+              <Link
+                href="/resume"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl glass-haze text-haze-dim hover:text-white font-semibold transition-all transform hover:-translate-y-0.5"
+              >
+                <FileText className="w-4 h-4 text-haze-indigo" />
+                <span>View Resume</span>
+              </Link>
+            </div>
 
-          {/* Terminal Session Card matching sunnypatel.net */}
-          <div className="mt-10 max-w-sm">
-            <div className="rounded-xl border border-line bg-surface/70 p-4 font-mono text-[0.74rem] leading-relaxed shadow-panel backdrop-blur-sm">
-              <div className="mb-3 flex items-center gap-1.5">
-                <span className="h-2.5 w-2.5 rounded-full bg-[#262b30]" />
-                <span className="h-2.5 w-2.5 rounded-full bg-[#262b30]" />
-                <span className="h-2.5 w-2.5 rounded-full bg-ember/70" />
-                <span className="ml-2 text-[0.65rem] uppercase tracking-[0.2em] text-muted">session</span>
+            {/* Highlights Grid */}
+            <div className="pt-4 grid grid-cols-1 sm:grid-cols-3 gap-3 font-mono text-xs">
+              <div className="flex items-center gap-2.5 p-3 rounded-xl glass-haze text-haze-dim">
+                <BrainCircuit className="w-4 h-4 text-haze-indigo shrink-0" />
+                <span>UCSD ML & Data Science</span>
               </div>
-              <div className="overflow-hidden space-y-1">
-                <p className="text-bone flex items-center gap-1.5 truncate">
-                  <span className="text-ember font-bold">&gt;</span>
-                  <span>{terminalLines[terminalLineIndex]}</span>
-                  <span className="inline-block h-3.5 w-[0.5ch] animate-pulse bg-ember" />
-                </p>
-                <p className="text-muted text-[0.68rem] truncate">
-                  {terminalLines[(terminalLineIndex + 1) % terminalLines.length]}
-                </p>
+              <div className="flex items-center gap-2.5 p-3 rounded-xl glass-haze text-haze-dim">
+                <Bot className="w-4 h-4 text-haze-purple shrink-0" />
+                <span>AI Bots & Automation</span>
+              </div>
+              <div className="flex items-center gap-2.5 p-3 rounded-xl glass-haze text-haze-dim">
+                <Terminal className="w-4 h-4 text-haze-cyan shrink-0" />
+                <span>Live GitHub Analytics</span>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Right Column: Midnight Haze 3D Canvas */}
+          <div className="lg:col-span-5 relative">
+            <div className="relative glass-haze-card rounded-3xl p-4 overflow-hidden shadow-2xl">
+              <Hero3DCanvas />
+
+              {/* Learning Tags */}
+              <div className="mt-4 p-4 rounded-2xl bg-haze-dark/90 border border-haze-border">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[11px] font-mono text-haze-indigo tracking-wider uppercase flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-haze-indigo animate-ping" />
+                    Currently Building & Exploring
+                  </span>
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {portfolioData.learningNow.slice(0, 4).map((item, idx) => (
+                    <span
+                      key={idx}
+                      className="px-2.5 py-1 rounded-md bg-midnight border border-haze-border text-[11px] text-haze-dim font-mono"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
 
         </div>
-
-        {/* Right Column: Interactive 3D WebGL Canvas */}
-        <div className="relative h-[380px] sm:h-[480px] lg:h-[540px] w-full rounded-2xl border border-line/60 bg-surface/40 overflow-hidden shadow-float">
-          <Hero3DCanvas />
-        </div>
-
       </div>
     </section>
   );

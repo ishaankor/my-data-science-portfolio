@@ -2,8 +2,8 @@ export interface Project {
   id: string;
   title: string;
   year: string;
-  category: 'Machine Learning' | 'Automation' | 'Data Visualization' | 'Web Apps';
-  image: string;
+  category: 'Machine Learning' | 'Automation' | 'Data Visualization' | 'AI & Web';
+  image?: string;
   description: string;
   detailedDescription?: string;
   tags: string[];
@@ -20,7 +20,6 @@ export interface SkillCategory {
   skills: {
     name: string;
     level: number; // 0 to 100
-    icon?: string;
     tag: string;
   }[];
 }
@@ -46,6 +45,7 @@ export interface PortfolioData {
   email: string;
   linkedin: string;
   twitter: string;
+  typingStrings: string[];
   stats: {
     label: string;
     value: number;
@@ -61,70 +61,100 @@ export interface PortfolioData {
 
 export const portfolioData: PortfolioData = {
   name: "Ishaan Koradia",
-  title: "Data Science & Analytics Engineer",
-  location: "Greater Toronto Area, Canada",
-  bio: "I build playful analytics experiences and full-stack data products that turn code, machine learning, and web automation into interactive dashboards, real-time recommenders, and live insights.",
+  title: "AI Engineer & Data Science Developer",
+  location: "California / Remote",
+  bio: "Hi, I'm Ishaan Koradia — an AI Engineer and self-taught developer fascinated by the intersection of Artificial Intelligence, Machine Learning, and web automation. Recent UCSD Cognitive Science (Specialization in Machine Learning & Neural Computation) graduate with Data Science experience.",
   avatarUrl: "./images/personal-picture.avif",
   githubUsername: "ishaankor",
   email: "ishaankoradia@gmail.com",
-  linkedin: "https://www.linkedin.com/in/ishaankoradia",
+  linkedin: "https://linkedin.com/in/ishaankoradia",
   twitter: "https://twitter.com/ishaankoradia",
-  
+
+  typingStrings: [
+    "an AI Engineer.",
+    "a Data Science learner.",
+    "a problem solver.",
+    "a meaningful automater.",
+    "a passionate developer."
+  ],
+
   stats: [
     {
-      label: "Interactive Projects",
-      value: 12,
+      label: "AI & ML Projects",
+      value: 14,
       suffix: "+",
-      description: "Data products, AI bots & dashboards"
+      description: "Bots, recommenders & ML models"
     },
     {
       label: "GitHub Repositories",
       value: 28,
       suffix: "+",
-      description: "Open-source data & web tools"
+      description: "Open-source data & web scripts"
     },
     {
-      label: "Automated Data Pipelines",
+      label: "Automated Pipeline Records",
       value: 50,
       suffix: "k+",
-      description: "Records scraped & processed"
+      description: "Scraped, processed & analyzed"
     },
     {
       label: "Models Deployed",
       value: 8,
       suffix: "",
-      description: "Linear regression, OpenCV & ML tools"
+      description: "Regression, OpenCV vision & NLP"
     }
   ],
 
   learningNow: [
-    "Three.js & WebGL 3D Visualization",
-    "Prompt Engineering for AI Demos",
-    "Python Automation & Cloud Scraping",
-    "Real-time ML Model Pipelines",
-    "Interactive D3 / Chart.js Dashboards"
+    "Deep Learning & PyTorch Models",
+    "WebGL & Three.js 3D Visualizations",
+    "Prompt Engineering & Agent Pipelines",
+    "High-Velocity Python Web Scraping",
+    "Interactive D3 & Chart.js Dashboards"
   ],
 
   projects: [
     {
+      id: "transformi",
+      title: "Transformi! ML Discord Bot",
+      year: "2024",
+      category: "Machine Learning",
+      description: "A Discord bot capable of parsing unstructured user datasets and dynamically fitting Linear Regression models with plots.",
+      detailedDescription: "Integrates Discord API with Python Scikit-Learn and Matplotlib. Users upload CSVs or data snippets via Discord, and Transformi fits regression models, outputs scatter plots with best-fit lines, and returns statistical metrics.",
+      tags: ["Python", "Scikit-Learn", "Discord API", "Linear Regression", "Matplotlib"],
+      githubUrl: "https://github.com/ishaankor/transformi",
+      featured: true,
+      metrics: "Instant ML model fitting & visualization"
+    },
+    {
       id: "daily-motivation",
-      title: "Daily Motivation Bot & Analytics",
-      year: "2022",
+      title: "Daily Motivation Twitter/X Bot",
+      year: "2023",
       category: "Automation",
-      image: "https://pbs.twimg.com/profile_images/1562894482483269632/y_dQWMLb_400x400.jpg",
-      description: "An automated Twitter/X bot delivering daily quotes and weekly user statistics collected in PostgreSQL.",
-      detailedDescription: "Built with Python, Tweepy, and PostgreSQL. It polls user interactions daily, aggregates sentiment and poll responses, and generates end-of-week data graphics automatically tweeted to thousands of followers.",
+      description: "Automated Twitter/X bot delivering motivating quotes daily and collecting poll statistics in PostgreSQL to analyze engagement trends.",
+      detailedDescription: "Built with Python, Tweepy, and PostgreSQL. It polls user interactions daily, aggregates sentiment and poll responses, and generates end-of-week data graphics automatically tweeted to followers.",
       tags: ["Python", "PostgreSQL", "Twitter API", "Automation", "NLP"],
       githubUrl: "https://github.com/ishaankor/daily-motivation",
       featured: true,
       metrics: "Daily polls across 5,000+ impressions"
     },
     {
+      id: "notestaker-ai",
+      title: "NotesTaker AI",
+      year: "2023",
+      category: "AI & Web",
+      description: "An AI-powered audio pipeline that converts lecture audio directly into structured freeform notes in Google Drive.",
+      detailedDescription: "Aims to streamline student note-taking by parsing lecture recordings with speech-to-text models, summarizing key concepts with AI, and exporting structured docs straight into Google Drive.",
+      tags: ["Python", "AI", "Whisper", "Google Drive API", "NLP"],
+      githubUrl: "https://github.com/ishaankor",
+      featured: true,
+      metrics: "Automated audio-to-notes transcription"
+    },
+    {
       id: "twitter-scraping-ai",
       title: "Data Scraping & Vision AI Pipeline",
       year: "2023",
       category: "Machine Learning",
-      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Logo_of_Twitter.svg/2491px-Logo_of_Twitter.svg.png",
       description: "Automation script utilizing OpenCV and AI to filter high-velocity tweets based on custom visual conditions.",
       detailedDescription: "Uses OpenCV computer vision and NLP filtering to scan stream data, extract key visual parameters, and automate multi-condition engagement tasks for data collection.",
       tags: ["Python", "OpenCV", "Machine Learning", "Web Scraping", "AI"],
@@ -133,57 +163,17 @@ export const portfolioData: PortfolioData = {
       metrics: "Processes 1,000+ tweets/min"
     },
     {
-      id: "transformi-discord-ml",
-      title: "Transformi! Discord ML Bot",
-      year: "2024",
-      category: "Machine Learning",
-      image: "https://www.svgrepo.com/show/353655/discord-icon.svg",
-      description: "A Discord bot capable of parsing unstructured user datasets and dynamically training Linear Regression models.",
-      detailedDescription: "Integrates Discord API with Python Scikit-Learn and Matplotlib. Users upload CSVs or data snippets via Discord, and the bot fits regression models, outputs scatter plots with best-fit lines, and returns metrics.",
-      tags: ["Python", "Scikit-Learn", "Discord.js", "Linear Regression", "Data Viz"],
-      githubUrl: "https://github.com/ishaankor/transformi",
-      featured: true,
-      metrics: "Instant model fitting & plot rendering"
-    },
-    {
-      id: "data-science-portfolio-v1",
+      id: "data-science-portfolio",
       title: "Interactive Data Science Showcase",
       year: "2024",
       category: "Data Visualization",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=60",
-      description: "A web data product featuring real-time GitHub API analytics and dynamic project recommendation engine.",
+      description: "A dynamic web data product featuring real-time GitHub API analytics and dynamic project recommendation engine.",
       detailedDescription: "Designed to demonstrate data storytelling by pulling live GitHub metrics, computing repository language distributions, and running client-side tf-idf-like project search.",
       tags: ["Next.js", "React", "TypeScript", "Three.js", "Tailwind CSS"],
       githubUrl: "https://github.com/ishaankor/my-data-science-portfolio",
       liveUrl: "https://ishaankor.github.io/my-data-science-portfolio/",
       featured: true,
       metrics: "Real-time API & 3D WebGL hero"
-    },
-    {
-      id: "customer-churn-analytics",
-      title: "Customer Churn Predictive Model",
-      year: "2023",
-      category: "Machine Learning",
-      image: "https://images.unsplash.com/photo-1543286386-713bdd548da4?w=800&auto=format&fit=crop&q=60",
-      description: "Predictive pipeline modeling customer churn using XGBoost and SHAP explainability analysis.",
-      detailedDescription: "Performed EDA, feature engineering, and hyperparameter tuning on telecom data to predict user churn with 91% ROC-AUC, providing actionable recommendations for retention campaigns.",
-      tags: ["Python", "XGBoost", "Pandas", "SHAP", "Analytics"],
-      githubUrl: "https://github.com/ishaankor",
-      featured: false,
-      metrics: "91% ROC-AUC accuracy"
-    },
-    {
-      id: "realtime-crypto-dashboard",
-      title: "Real-time Financial Stream Dashboard",
-      year: "2023",
-      category: "Data Visualization",
-      image: "https://images.unsplash.com/photo-1642543492481-44e81e3914a7?w=800&auto=format&fit=crop&q=60",
-      description: "High-frequency streaming dashboard visualizing real-time market orderbooks via WebSocket.",
-      detailedDescription: "Built with React and Plotly.js to stream live trade flow, calculate moving averages on the fly, and display volumetric depth charts with zero dropped frames.",
-      tags: ["React", "JavaScript", "WebSocket", "Chart.js", "Streaming"],
-      githubUrl: "https://github.com/ishaankor",
-      featured: false,
-      metrics: "Sub-100ms latency updates"
     }
   ],
 
@@ -197,7 +187,7 @@ export const portfolioData: PortfolioData = {
         { name: "Scikit-Learn", level: 90, tag: "ML Framework" },
         { name: "OpenCV", level: 85, tag: "Computer Vision" },
         { name: "Pandas / NumPy", level: 95, tag: "Data Wrangling" },
-        { name: "PyTorch", level: 75, tag: "Deep Learning" }
+        { name: "PyTorch", level: 78, tag: "Deep Learning" }
       ]
     },
     {
@@ -213,7 +203,7 @@ export const portfolioData: PortfolioData = {
       ]
     },
     {
-      title: "Web Development & 3D Viz",
+      title: "Web Engineering & 3D Viz",
       iconName: "Layout",
       description: "Modern full-stack web engineering with interactive 3D WebGL graphics.",
       skills: [
@@ -229,25 +219,25 @@ export const portfolioData: PortfolioData = {
   experience: [
     {
       id: "edu-ucsd",
-      role: "B.S. in Data Science",
-      organization: "University / Academic Background",
-      period: "2021 — Present",
-      location: "California / Remote",
+      role: "B.S. in Cognitive Science (Specialization in Machine Learning & Neural Computation)",
+      organization: "University of California, San Diego (UCSD)",
+      period: "Graduated",
+      location: "La Jolla, CA",
       description: [
-        "Specialized in Statistical Learning, Machine Learning Algorithms, Data Structures & Algorithms, and Interactive Data Visualization.",
-        "Engineered end-to-end data analysis pipelines, interactive web applications, and automated recommendation engines."
+        "Specialized in Machine Learning Algorithms, Neural Computation, Data Structures & Algorithms, and Data Science.",
+        "Active member in Data Science Student Society (DS3), Cognitive Science Student Association (CSSA Web Team), and Computer Science and Engineering Society (CSES Front-End Developer)."
       ],
-      skills: ["Data Science", "Machine Learning", "Python", "SQL", "Statistics"],
+      skills: ["Machine Learning", "Neural Computation", "Data Science", "Python", "C++", "Statistics"],
       type: "education"
     },
     {
       id: "project-transformi",
       role: "Lead Developer — Transformi! ML Discord Bot",
-      organization: "Open Source / Independent Project",
+      organization: "Independent ML Development",
       period: "2024",
       location: "Remote",
       description: [
-        "Created an interactive Discord bot enabling users to generate linear regression models from custom data.",
+        "Engineered an interactive Discord bot enabling users to generate linear regression models from custom data uploads.",
         "Implemented real-time plot generation, correlation evaluation, and statistical reporting directly within Discord channels."
       ],
       skills: ["Python", "Scikit-Learn", "Matplotlib", "Discord API"],
@@ -255,15 +245,15 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: "project-daily-motivation",
-      role: "Creator & Engineer — Daily Motivation Bot",
-      organization: "Independent Automation Product",
-      period: "2022 — 2023",
+      role: "Creator & Automation Engineer — Daily Motivation Bot",
+      organization: "Independent Product",
+      period: "2023",
       location: "Remote",
       description: [
         "Developed automated Python scripts that published daily content and weekly interactive polls to Twitter/X.",
         "Stored response telemetry in PostgreSQL to analyze engagement trends over time."
       ],
-      skills: ["Python", "PostgreSQL", "Twitter API", "Cron / Automation"],
+      skills: ["Python", "PostgreSQL", "Twitter API", "Cron Automation"],
       type: "project"
     }
   ]

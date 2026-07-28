@@ -4,50 +4,69 @@
 
 @layer base {
   :root {
-    --background: #0b0d0f;
-    --foreground: #f1f5f9;
+    --background: #090d16;
+    --foreground: #f8fafc;
   }
 }
 
 html, body {
-  background-color: #0b0d0f;
-  color: #f1f5f9;
+  background-color: #090d16;
+  color: #f8fafc;
   font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
-/* Custom scrollbar matching sunnypatel.net */
+/* Midnight Haze Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0b0d0f;
+  background: #090d16;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e242b;
-  border-radius: 3px;
+  background: #1e1b4b;
+  border-radius: 4px;
+  border: 1px solid rgba(129, 140, 248, 0.2);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #f97316;
+  background: #818cf8;
 }
 
-/* Glass & Surface styling */
-.glass-panel {
-  background: rgba(18, 21, 24, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid #1e242b;
+/* Midnight Haze Glassmorphism */
+.glass-haze {
+  background: rgba(19, 24, 38, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(129, 140, 248, 0.18);
 }
 
-.grain-card {
-  background: linear-gradient(180deg, rgba(18, 21, 24, 0.9) 0%, rgba(11, 13, 15, 0.95) 100%);
-  border: 1px solid #1e242b;
+.glass-haze-card {
+  background: linear-gradient(135deg, rgba(19, 24, 38, 0.8) 0%, rgba(13, 17, 28, 0.9) 100%);
+  border: 1px solid rgba(129, 140, 248, 0.18);
+  transition: all 0.3s ease;
+}
+.glass-haze-card:hover {
+  border-color: rgba(168, 85, 247, 0.45);
+  box-shadow: 0 0 25px -5px rgba(168, 85, 247, 0.25);
 }
 
-/* Ember Glow Radial Background */
-.bg-ember-glow {
-  background: radial-gradient(circle, rgba(249, 115, 22, 0.12) 0%, rgba(11, 13, 15, 0) 70%);
+/* Gradient Text Utilities */
+.text-haze-gradient {
+  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-violet-gradient {
+  background: linear-gradient(135deg, #a855f7 0%, #e879f9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Background Cosmic Haze Gradients */
+.bg-midnight-haze {
+  background: radial-gradient(circle at 50% 20%, rgba(129, 140, 248, 0.15) 0%, rgba(168, 85, 247, 0.08) 45%, rgba(9, 13, 22, 0) 75%);
 }
 
 /* Accessibility skip link */
@@ -55,7 +74,7 @@ html, body {
   position: absolute;
   top: -100px;
   left: 16px;
-  background: #f97316;
+  background: #818cf8;
   color: #000;
   padding: 8px 16px;
   font-weight: 700;

@@ -3,116 +3,97 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
+import { Sparkles, Menu, X } from 'lucide-react';
+import { portfolioData } from '@/data/portfolio';
 
 export default function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { href: '/projects', number: '01', label: 'Projects' },
-    { href: '/resume', number: '02', label: 'Work' },
-    { href: '/contact', number: '03', label: 'Contact' },
+    { href: '/', label: 'Home' },
+    { href: '/projects', label: 'Projects' },
+    { href: '/resume', label: 'Experience' },
+    { href: '/contact', label: 'Contact' },
   ];
 
   return (
     <>
       <a href="#main-content" className="skip-link">
-        Skip to content
+        Skip to main content
       </a>
 
-      <header className="fixed inset-x-0 top-0 z-40 border-b border-line/40 bg-ink/80 backdrop-blur-md transition-colors duration-300">
-        <nav className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6 sm:px-10">
+      <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-8 py-4 pointer-events-none">
+        <div className="max-w-7xl mx-auto flex items-center justify-between pointer-events-auto px-6 py-3 rounded-2xl glass-haze shadow-xl">
           
-          {/* Logo Brand matching sunnypatel.net */}
-          <Link
-            href="/"
-            className="font-mono text-sm tracking-tight text-bone hover:text-white transition-colors"
-            aria-label="Home"
-          >
-            ishaan<span className="text-ember font-bold">.</span>koradia
+          {/* Logo Brand */}
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-haze-glow group-hover:scale-105 transition-transform">
+              <Sparkles className="w-4 h-4" />
+            </div>
+            <span className="text-base font-bold text-white tracking-tight group-hover:text-haze-indigo transition-colors">
+              {portfolioData.name} <span className="text-haze-indigo font-normal text-xs hidden sm:inline">| AI & Data Science</span>
+            </span>
           </Link>
 
           {/* Desktop Nav Links */}
-          <div className="hidden items-center gap-8 md:flex">
+          <nav className="hidden md:flex items-center gap-1 bg-midnight/70 p-1.5 rounded-xl border border-haze-border">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`group relative flex items-center gap-1.5 py-1 font-mono text-[0.8rem] transition-colors ${
-                    isActive ? 'text-bone font-semibold' : 'text-muted hover:text-bone'
+                  className={`px-4 py-1.5 rounded-lg text-xs font-mono font-medium transition-all ${
+                    isActive
+                      ? 'bg-haze-indigo/20 text-haze-indigo border border-haze-border font-bold'
+                      : 'text-haze-muted hover:text-white hover:bg-midnight/60'
                   }`}
                 >
-                  <span className="text-[0.62rem] tabular-nums text-muted group-hover:text-ember transition-colors">
-                    {link.number}
-                  </span>
-                  <span>{link.label}</span>
-                  <span
-                    aria-hidden="true"
-                    className={`absolute -bottom-0.5 left-0 h-px w-full bg-ember transition-transform duration-300 ${
-                      isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-                    }`}
-                  />
+                  {link.label}
                 </Link>
               );
             })}
-          </div>
+          </nav>
 
           {/* Right Action Button */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <Link
               href="/contact"
-              className="hidden md:inline-block rounded-md border border-line px-4 py-2 font-mono text-[0.8rem] text-bone transition-colors duration-300 hover:border-ember hover:text-ember"
+              className="hidden md:inline-block px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-mono text-xs font-semibold shadow-haze-glow hover:opacity-90 transition-opacity"
             >
-              Get in touch
+              Get In Touch
             </Link>
 
-            {/* Mobile menu hamburger toggle */}
+            {/* Mobile Drawer Button */}
             <button
-              type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="inline-flex h-10 w-10 items-center justify-center text-bone hover:text-ember md:hidden"
+              className="md:hidden p-2 rounded-xl glass-haze text-haze-muted hover:text-white"
               aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
-        </nav>
 
-        {/* Mobile Navigation Drawer */}
+        </div>
+
+        {/* Mobile Menu Drawer */}
         {mobileMenuOpen && (
-          <div className="border-t border-line bg-ink/95 px-6 py-4 md:hidden">
-            <div className="flex flex-col space-y-3 font-mono text-sm">
+          <div className="md:hidden mt-3 pointer-events-auto p-4 rounded-2xl glass-haze space-y-2 animate-in slide-in-from-top duration-200">
+            {navLinks.map((link) => (
               <Link
-                href="/"
+                key={link.href}
+                href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-3 py-2 text-muted hover:text-bone"
+                className={`block px-4 py-2.5 rounded-xl text-sm font-mono ${
+                  pathname === link.href
+                    ? 'bg-haze-indigo/20 text-haze-indigo font-bold'
+                    : 'text-haze-dim hover:bg-midnight'
+                }`}
               >
-                <span className="text-[0.62rem] text-ember">00</span>Home
+                {link.label}
               </Link>
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`flex items-center gap-3 py-2 ${
-                    pathname === link.href ? 'text-bone font-bold' : 'text-muted hover:text-bone'
-                  }`}
-                >
-                  <span className="text-[0.62rem] text-ember">{link.number}</span>
-                  {link.label}
-                </Link>
-              ))}
-              <Link
-                href="/contact"
-                onClick={() => setMobileMenuOpen(false)}
-                className="mt-2 rounded-md border border-ember/50 bg-ember/10 px-4 py-3 text-center text-bone hover:bg-ember/20"
-              >
-                Get in touch
-              </Link>
-            </div>
+            ))}
           </div>
         )}
       </header>
