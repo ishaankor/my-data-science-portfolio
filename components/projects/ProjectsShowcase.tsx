@@ -39,10 +39,10 @@ export default function ProjectsShowcase({ limit }: { limit?: number }) {
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-3 py-1.5 rounded-md text-xs transition-colors ${
+                  className={`px-3 py-1.5 rounded-md text-xs transition-all ${
                     selectedCategory === cat
-                      ? 'bg-ember/20 border border-ember/60 text-bone'
-                      : 'bg-surface/60 border border-line text-muted hover:text-bone'
+                      ? 'bg-gradient-to-r from-ember to-amber-500 text-ink font-bold shadow-md'
+                      : 'bg-surface/60 border border-line text-muted hover:text-bone hover:border-line/80'
                   }`}
                 >
                   {cat}
@@ -59,14 +59,14 @@ export default function ProjectsShowcase({ limit }: { limit?: number }) {
               <div className="group block">
                 <div className="relative">
                   {/* Browser Window Mockup Container */}
-                  <div className="overflow-hidden rounded-xl border border-line bg-surface shadow-float transition-colors duration-300 group-hover:border-ember/40">
+                  <div className="overflow-hidden rounded-xl border border-line bg-surface shadow-float transition-colors duration-300 group-hover:border-ember/60">
                     
                     {/* Browser Header Bar */}
                     <div className="flex items-center gap-1.5 border-b border-line bg-ink/70 px-3.5 py-2.5">
                       <span aria-hidden="true" className="flex items-center gap-1.5">
-                        <span className="h-2.5 w-2.5 rounded-full bg-[#262b30]" />
-                        <span className="h-2.5 w-2.5 rounded-full bg-[#262b30]" />
-                        <span className="h-2.5 w-2.5 rounded-full bg-ember/70" />
+                        <span className="h-2.5 w-2.5 rounded-full bg-rose-500/80" />
+                        <span className="h-2.5 w-2.5 rounded-full bg-amber-500/80" />
+                        <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/80" />
                       </span>
                       <span className="ml-3 truncate font-mono text-[0.68rem] text-muted">
                         {project.id}.app
@@ -74,13 +74,13 @@ export default function ProjectsShowcase({ limit }: { limit?: number }) {
                     </div>
 
                     {/* Card Content & Thumbnail area */}
-                    <div className="relative p-5 aspect-[16/10] bg-gradient-to-br from-surface to-ink flex flex-col justify-between">
+                    <div className="relative p-5 aspect-[16/10] bg-gradient-to-br from-surface via-surface to-ink flex flex-col justify-between">
                       <div>
                         <div className="flex flex-wrap gap-1.5 mb-3">
                           {project.tags.slice(0, 3).map((tag) => (
                             <span
                               key={tag}
-                              className="px-2 py-0.5 rounded bg-ink border border-line font-mono text-[0.65rem] text-muted"
+                              className="px-2 py-0.5 rounded bg-ink/90 border border-line/80 font-mono text-[0.65rem] text-bone-dim"
                             >
                               {tag}
                             </span>
@@ -94,8 +94,8 @@ export default function ProjectsShowcase({ limit }: { limit?: number }) {
 
                       {/* Impact / Metric badge */}
                       {project.metrics && (
-                        <div className="mt-3 font-mono text-[0.68rem] text-ember flex items-center gap-1.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-ember" />
+                        <div className="mt-3 font-mono text-[0.68rem] text-cyan-400 flex items-center gap-1.5 bg-cyan-500/10 px-2.5 py-1 rounded border border-cyan-500/20 w-fit">
+                          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
                           <span>{project.metrics}</span>
                         </div>
                       )}
@@ -125,10 +125,10 @@ export default function ProjectsShowcase({ limit }: { limit?: number }) {
 
                 {/* Active Pulse Badge */}
                 <div className="mt-2 flex items-center justify-between">
-                  <span className="inline-flex items-center gap-1.5 font-mono text-xs text-ember">
+                  <span className="inline-flex items-center gap-1.5 font-mono text-xs text-emerald-400">
                     <span className="relative flex h-1.5 w-1.5">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ember opacity-60" />
-                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-ember" />
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
+                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
                     </span>
                     Actively maintained
                   </span>
@@ -138,7 +138,7 @@ export default function ProjectsShowcase({ limit }: { limit?: number }) {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-mono text-xs text-muted hover:text-bone inline-flex items-center gap-1"
+                      className="font-mono text-xs text-ember hover:underline inline-flex items-center gap-1"
                     >
                       <span>Live</span>
                       <ExternalLink className="w-3 h-3 text-ember" />

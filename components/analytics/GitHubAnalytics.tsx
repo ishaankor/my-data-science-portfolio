@@ -70,19 +70,19 @@ export default function GitHubAnalytics() {
     .sort((a, b) => (b.stargazers_count || 0) - (a.stargazers_count || 0))
     .slice(0, 3);
 
-  const languageColors: Record<string, string> = {
-    Python: '#3572A5',
-    TypeScript: '#3178c6',
-    JavaScript: '#f1e05a',
-    'C++': '#f34b7d',
-    HTML: '#e34c26',
-    CSS: '#563d7c',
-    Jupyter: '#DA5B0B',
-    Shell: '#89e051',
+  const languageColors: Record<string, { hex: string; bg: string }> = {
+    Python: { hex: '#38bdf8', bg: 'from-sky-400 to-blue-600' },
+    TypeScript: { hex: '#818cf8', bg: 'from-indigo-400 to-purple-600' },
+    JavaScript: { hex: '#facc15', bg: 'from-amber-300 to-yellow-500' },
+    'C++': { hex: '#f43f5e', bg: 'from-rose-400 to-pink-600' },
+    HTML: { hex: '#fb923c', bg: 'from-orange-400 to-red-500' },
+    CSS: { hex: '#c084fc', bg: 'from-purple-400 to-violet-600' },
+    Jupyter: { hex: '#f97316', bg: 'from-orange-500 to-amber-600' },
+    Shell: { hex: '#4ade80', bg: 'from-emerald-400 to-teal-500' },
   };
 
   return (
-    <section className="border-t border-line/60 py-20 sm:py-28">
+    <section className="border-t border-line/60 py-20 sm:py-28 relative">
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-10">
         
         {/* Section Header */}
@@ -117,10 +117,12 @@ export default function GitHubAnalytics() {
           {/* Key Metrics Cards */}
           <div className="lg:col-span-4 grid grid-cols-2 gap-4">
             <ScrollReveal direction="up" delay={0.15}>
-              <div className="rounded-xl border border-line bg-surface p-5 shadow-panel flex flex-col justify-between h-full">
-                <div className="flex items-center justify-between text-ember mb-2">
-                  <Code2 className="w-5 h-5" />
-                  <span className="font-mono text-[0.65rem] text-muted uppercase">Live API</span>
+              <div className="rounded-xl border border-indigo-500/20 bg-surface p-5 shadow-panel flex flex-col justify-between h-full hover:border-indigo-500/40 transition-colors">
+                <div className="flex items-center justify-between text-indigo-400 mb-2">
+                  <div className="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center">
+                    <Code2 className="w-4 h-4 text-indigo-400" />
+                  </div>
+                  <span className="font-mono text-[0.65rem] text-indigo-400/80 uppercase">Live API</span>
                 </div>
                 <div>
                   <p className="font-display text-3xl font-bold text-bone">
@@ -132,10 +134,12 @@ export default function GitHubAnalytics() {
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.2}>
-              <div className="rounded-xl border border-line bg-surface p-5 shadow-panel flex flex-col justify-between h-full">
-                <div className="flex items-center justify-between text-yellow-400 mb-2">
-                  <Star className="w-5 h-5" />
-                  <span className="font-mono text-[0.65rem] text-muted uppercase">Stars</span>
+              <div className="rounded-xl border border-amber-500/20 bg-surface p-5 shadow-panel flex flex-col justify-between h-full hover:border-amber-500/40 transition-colors">
+                <div className="flex items-center justify-between text-amber-400 mb-2">
+                  <div className="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
+                    <Star className="w-4 h-4 text-amber-400" />
+                  </div>
+                  <span className="font-mono text-[0.65rem] text-amber-400/80 uppercase">Stars</span>
                 </div>
                 <div>
                   <p className="font-display text-3xl font-bold text-bone">
@@ -147,10 +151,12 @@ export default function GitHubAnalytics() {
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.25}>
-              <div className="rounded-xl border border-line bg-surface p-5 shadow-panel flex flex-col justify-between h-full">
-                <div className="flex items-center justify-between text-ember mb-2">
-                  <GitFork className="w-5 h-5" />
-                  <span className="font-mono text-[0.65rem] text-muted uppercase">Network</span>
+              <div className="rounded-xl border border-purple-500/20 bg-surface p-5 shadow-panel flex flex-col justify-between h-full hover:border-purple-500/40 transition-colors">
+                <div className="flex items-center justify-between text-purple-400 mb-2">
+                  <div className="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center">
+                    <GitFork className="w-4 h-4 text-purple-400" />
+                  </div>
+                  <span className="font-mono text-[0.65rem] text-purple-400/80 uppercase">Network</span>
                 </div>
                 <div>
                   <p className="font-display text-3xl font-bold text-bone">
@@ -162,10 +168,12 @@ export default function GitHubAnalytics() {
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.3}>
-              <div className="rounded-xl border border-line bg-surface p-5 shadow-panel flex flex-col justify-between h-full">
+              <div className="rounded-xl border border-emerald-500/20 bg-surface p-5 shadow-panel flex flex-col justify-between h-full hover:border-emerald-500/40 transition-colors">
                 <div className="flex items-center justify-between text-emerald-400 mb-2">
-                  <Activity className="w-5 h-5" />
-                  <span className="font-mono text-[0.65rem] text-muted uppercase">Status</span>
+                  <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+                    <Activity className="w-4 h-4 text-emerald-400" />
+                  </div>
+                  <span className="font-mono text-[0.65rem] text-emerald-400/80 uppercase">Status</span>
                 </div>
                 <div>
                   <p className="font-mono text-xs font-semibold text-bone flex items-center gap-1.5">
@@ -189,7 +197,7 @@ export default function GitHubAnalytics() {
               <div className="rounded-xl border border-line bg-surface p-6 shadow-panel flex flex-col justify-between h-full">
                 <div>
                   <h3 className="font-display text-lg font-semibold text-bone mb-4 flex items-center gap-2">
-                    <Code2 className="w-4 h-4 text-ember" />
+                    <Code2 className="w-4 h-4 text-cyan-400" />
                     <span>Code Languages Breakdown</span>
                   </h3>
 
@@ -203,20 +211,20 @@ export default function GitHubAnalytics() {
                     <div className="space-y-3 font-mono">
                       {topLanguages.map(([lang, count]) => {
                         const percent = Math.round((count / repos.length) * 100);
-                        const dotColor = languageColors[lang] || '#f97316';
+                        const langInfo = languageColors[lang] || { hex: '#f97316', bg: 'from-orange-500 to-amber-500' };
                         return (
-                          <div key={lang} className="space-y-1">
+                          <div key={lang} className="space-y-1.5">
                             <div className="flex justify-between text-xs text-bone-dim">
                               <span className="flex items-center gap-1.5">
-                                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: dotColor }} />
+                                <span className="w-2 h-2 rounded-full shadow-sm" style={{ backgroundColor: langInfo.hex }} />
                                 <span>{lang}</span>
                               </span>
                               <span className="text-muted">{percent}%</span>
                             </div>
-                            <div className="w-full h-1.5 rounded-full bg-ink overflow-hidden border border-line">
+                            <div className="w-full h-2 rounded-full bg-ink overflow-hidden border border-line p-0.5">
                               <div
-                                className="h-full rounded-full transition-all duration-500"
-                                style={{ width: `${Math.max(percent, 8)}%`, backgroundColor: dotColor }}
+                                className={`h-full rounded-full bg-gradient-to-r ${langInfo.bg} transition-all duration-500`}
+                                style={{ width: `${Math.max(percent, 8)}%` }}
                               />
                             </div>
                           </div>
@@ -229,7 +237,7 @@ export default function GitHubAnalytics() {
                 </div>
 
                 <div className="mt-6 pt-4 border-t border-line text-right">
-                  <span className="font-mono text-[0.68rem] text-muted">Updated in real-time</span>
+                  <span className="font-mono text-[0.68rem] text-cyan-400">Updated in real-time</span>
                 </div>
               </div>
             </ScrollReveal>
@@ -241,7 +249,7 @@ export default function GitHubAnalytics() {
               <div className="rounded-xl border border-line bg-surface p-6 shadow-panel flex flex-col justify-between h-full">
                 <div>
                   <h3 className="font-display text-lg font-semibold text-bone mb-4 flex items-center gap-2">
-                    <Star className="w-4 h-4 text-yellow-400" />
+                    <Star className="w-4 h-4 text-amber-400" />
                     <span>Popular Repositories</span>
                   </h3>
 
@@ -259,10 +267,10 @@ export default function GitHubAnalytics() {
                           href={repo.html_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="group p-3 rounded-lg bg-ink/70 border border-line hover:border-ember/50 flex items-center justify-between transition-colors"
+                          className="group p-3 rounded-lg bg-ink/70 border border-line hover:border-amber-500/40 flex items-center justify-between transition-colors"
                         >
                           <div className="overflow-hidden pr-2">
-                            <p className="font-mono text-xs font-semibold text-bone group-hover:text-ember truncate">
+                            <p className="font-mono text-xs font-semibold text-bone group-hover:text-amber-400 truncate">
                               {repo.name}
                             </p>
                             <p className="text-[0.72rem] text-muted truncate mt-0.5">
@@ -270,7 +278,7 @@ export default function GitHubAnalytics() {
                             </p>
                           </div>
                           <div className="flex items-center gap-1 font-mono text-xs text-muted shrink-0">
-                            <Star className="w-3.5 h-3.5 text-yellow-400" />
+                            <Star className="w-3.5 h-3.5 text-amber-400" />
                             <span>{repo.stargazers_count}</span>
                           </div>
                         </a>
@@ -291,10 +299,10 @@ export default function GitHubAnalytics() {
                     href={`https://github.com/${portfolioData.githubUsername}?tab=repositories`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-ember inline-flex items-center gap-1"
+                    className="hover:text-amber-400 inline-flex items-center gap-1"
                   >
                     <span>View all</span>
-                    <ExternalLink className="w-3 h-3" />
+                    <ExternalLink className="w-3 h-3 text-amber-400" />
                   </a>
                 </div>
               </div>
