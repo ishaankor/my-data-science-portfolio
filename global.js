@@ -4,106 +4,146 @@ export async function fetchJSON(url) {
     try {
         const response = await fetch(url);
         if (!response.ok) {
-            throw new Error(`Failed to fetch projects: ${response.statusText}`);
-        } else {
-            console.log(response)
-            const data = await response.json();
-            return data; 
+            throw new Error(`Failed to fetch ${url}: ${response.statusText}`);
         }
+        return await response.json();
     } catch (error) {
         console.error('Error fetching or parsing JSON data:', error);
+        return null;
     }
 }
 
 export function renderProjects(projects, containerElement, headingLevel = 'h2') {
     containerElement.innerHTML = '';
-    projects.forEach(project => {
+    if (!Array.isArray(projects)) {
+        return;
+    }
+
+    projects.forEach((project, index) => {
         const article = document.createElement('article');
+        article.className = 'project-card reveal';
+        article.dataset.delay = index % 4 + 1;
         article.innerHTML = `
-            <div class="rendered_projects">
+            <div class="project-card-content">
                 <${headingLevel}>${project.title}</${headingLevel}>
-                <img src="${project.image}" alt="${project.title}" width="250" height="200">
+                <img src="${project.image}" alt="${project.title}" loading="lazy">
                 <p>${project.description}</p>
-                <p>c. ${project.year}</p>
+                <div class="project-meta">
+                    <span>${project.year}</span>
+                </div>
             </div>
         `;
         containerElement.appendChild(article);
+        requestAnimationFrame(() => {
+            article.classList.add('revealed');
+        });
     });
 }
 
-function $$(selector, context = document) {
-  return Array.from(context.querySelectorAll(selector));
+function setupScrollReveal() {
+    const selectors = [
+        '.hero-copy',
+        '.hero-panel',
+        '.summary-card',
+        '.dashboard-panel',
+        '.panel-header',
+        '.metric-chart',
+        '.recommender-panel',
+        '.personal-card',
+        '.section-copy',
+        '.activity-item',
+        '.projects-controls',
+        '.projects-chart',
+        '.project-card'
+    ];
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -10% 0px'
+    });
+
+    document.querySelectorAll(selectors.join(',')).forEach(node => {
+        if (!node.classList.contains('reveal')) {
+            node.classList.add('reveal');
+        }
+        observer.observe(node);
+    });
 }
 
-let pages = [
+window.addEventListener('DOMContentLoaded', setupScrollReveal);
+
+function $$(selector, context = document) {
+    return Array.from(context.querySelectorAll(selector));
+}
+
+const pages = [
     { url: '/my-data-science-portfolio/index.html', title: 'Home' },
     { url: '/my-data-science-portfolio/projects/index.html', title: 'Projects' },
     { url: '/my-data-science-portfolio/resume/index.html', title: 'Resume' },
-    { url: '/my-data-science-portfolio/meta/index.html', title: 'Meta'},
+    { url: '/my-data-science-portfolio/meta/index.html', title: 'Meta' },
     { url: 'https://github.com/ishaankor', title: 'Profile' },
     { url: '/my-data-science-portfolio/contact/index.html', title: 'Contact' }
 ];
 
-const ARE_WE_HOME = document.documentElement.classList.contains('home');
-
-let nav = document.createElement('nav');
+const nav = document.createElement('nav');
 document.body.prepend(nav);
 
-for (let p of pages) {
-    let url = p.url;
-    let title = p.title;
-    let a = document.createElement('a');
-    a.href = url;
-    a.textContent = title;
-    a.classList.toggle(
+for (const page of pages) {
+    const link = document.createElement('a');
+    link.href = page.url;
+    link.textContent = page.title;
+    link.classList.toggle(
         'current',
-        a.host === location.host && a.pathname === location.pathname
+        link.host === location.host && link.pathname === location.pathname
     );
-    if (a.host !== location.host) {
-        a.setAttribute('target', '_blank');
+    if (link.host !== location.host) {
+        link.target = '_blank';
     }
-    nav.append(a);
+    nav.append(link);
 }
 
-document.body.insertAdjacentHTML(
-    'afterbegin',
-    `
-        <label class="color-scheme">
-            Theme:
-            <select>
-                <option value="light dark"> Automatic </option>
-                <option value="light"> Light </option>
-                <option value="dark"> Dark </option>
-            </select>
-        </label>`
-);
+const themeControl = document.createElement('label');
+themeControl.className = 'color-scheme';
+themeControl.innerHTML = `
+    Theme:
+    <select>
+        <option value="light dark">Automatic</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+    </select>
+`;
+document.body.prepend(themeControl);
 
-let select = document.querySelector('.color-scheme select');
-
-if ("colorScheme" in localStorage) {
-    let theme = localStorage.colorScheme;
-    document.documentElement.style.colorScheme = theme;
-    select.value = theme; 
+const select = themeControl.querySelector('select');
+if ('colorScheme' in localStorage) {
+    const savedTheme = localStorage.colorScheme;
+    document.documentElement.style.colorScheme = savedTheme;
+    select.value = savedTheme;
 }
-
-select.addEventListener('input', function (event) {
-    let selectedTheme = event.target.value;
-    localStorage.colorScheme = selectedTheme; 
-    console.log('Color scheme changed to', selectedTheme);
+select.addEventListener('input', event => {
+    const selectedTheme = event.target.value;
+    localStorage.colorScheme = selectedTheme;
     document.documentElement.style.colorScheme = selectedTheme;
 });
 
-let contact_form = document.querySelector('.contact-form')
-  
-contact_form?.addEventListener('submit', function (event) {
-    event.preventDefault();
-    let data = new FormData(contact_form)
-    let url = event.target.action + "?";
-    let params = [];
-    for (let [name, value] of data) {
-        params.push(encodeURIComponent(name) + "=" + encodeURIComponent(value));
-    }
-    url += params.join("&"); 
-    location.href = url;
-});
+const contactForm = document.querySelector('.contact-form');
+if (contactForm) {
+    contactForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const data = new FormData(contactForm);
+        const url = event.target.action + '?';
+        const params = [];
+        for (const [name, value] of data) {
+            params.push(`${encodeURIComponent(name)}=${encodeURIComponent(value)}`);
+        }
+        location.href = url + params.join('&');
+    });
+}
 

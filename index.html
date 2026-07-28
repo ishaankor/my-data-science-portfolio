@@ -3,21 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ishaan Koradia: Personal Site and Portfolio</title> 
+    <title>Ishaan Koradia | Data Science Portfolio</title>
     <link rel="stylesheet" href="style.css">
-    <script type="module" src="global.js"></script>
-    <script src="index.js" type="module" defer></script>
+    <script type="module" src="global.js" defer></script>
+    <script type="module" src="index.js" defer></script>
 </head>
-<body>
-    <h1>Ishaan Koradia</h1>
-    <img src="./images/personal-picture.avif" alt="My favorite animal in the world!"> 
-    <p>Welcome to my DSC 106 website! I'm excited to learn more about data visualization! Parrots are my favorite animals in the world!</p>
-    <h1>Latest Projects</h2>
-    <div class="projects">
-        <!-- Dynamically added content will appear here -->
-    </div>
-    <h1>Github Statistics</h1>
-    <div id="profile-stats">
-    </div>
+<body class="home">
+    <header class="hero">
+        <div class="hero-copy">
+            <p class="eyebrow">Data science portfolio + interactive demo</p>
+            <h1>Ishaan Koradia</h1>
+            <p class="hero-text">I build playful analytics experiences that turn code, data, and automation into interactive dashboards, portfolio insights, and live recommendations.</p>
+            <div class="hero-actions">
+                <a class="button" href="projects/index.html">Browse all projects</a>
+                <a class="button button-secondary" href="resume/index.html">View resume</a>
+            </div>
+            <ul class="hero-badges">
+                <li>Live GitHub analytics</li>
+                <li>Project recommender demo</li>
+                <li>Interactive visualization tools</li>
+            </ul>
+        </div>
+        <aside class="hero-panel">
+            <img src="./images/personal-picture.avif" alt="Profile photo" class="hero-image">
+            <div class="hero-panel-card">
+                <p class="panel-label">What I'm learning now</p>
+                <ul class="learning-tags" id="learning-list"></ul>
+            </div>
+        </aside>
+    </header>
+
+    <main>
+        <section class="summary-grid">
+            <article class="summary-card">
+                <p class="summary-label">Featured work</p>
+                <h2>Live portfolio data</h2>
+                <p>This site is both my showcase and a data product: it loads project metadata, displays GitHub analytics, and powers interactive recommendations.</p>
+            </article>
+            <article class="summary-card">
+                <p class="summary-label">Why it matters</p>
+                <h2>Built with impact</h2>
+                <p>Each section is designed to show not just what I've built, but how I think about data, visualization, and automation.</p>
+            </article>
+            <article class="summary-card">
+                <p class="summary-label">What you can explore</p>
+                <h2>Projects, charts, and demos</h2>
+                <p>See the best work, explore GitHub activity, and get tailored project suggestions without leaving the page.</p>
+            </article>
+        </section>
+
+        <section class="dashboard-section">
+            <div class="dashboard-panel" id="github-analytics"></div>
+            <div class="dashboard-panel" id="project-overview">
+                <div class="panel-header">
+                    <p class="panel-label">Project activity</p>
+                    <h2>Projects by year</h2>
+                </div>
+                <div id="project-year-chart" class="metric-chart" aria-label="Projects by year"></div>
+            </div>
+        </section>
+
+        <section class="featured-section">
+            <div class="section-header">
+                <div>
+                    <p class="eyebrow">Featured projects</p>
+                    <h2>Recent work</h2>
+                </div>
+                <a class="link-button" href="projects/index.html">See full project library</a>
+            </div>
+            <div class="projects"></div>
+        </section>
+
+        <section class="demo-section">
+            <div class="section-header">
+                <div>
+                    <p class="eyebrow">Interactive demo</p>
+                    <h2>Project recommender</h2>
+                </div>
+            </div>
+            <p class="section-copy">Type a topic or skill and get the best matching portfolio projects. This demo is powered by the same metadata that fills the project library.</p>
+            <div class="recommender">
+                <label for="query-input">What are you interested in?</label>
+                <input type="search" id="query-input" placeholder="machine learning, automation, visualization" autocomplete="off">
+                <div class="recommender-panel">
+                    <div class="recommender-summary" id="recommender-summary"></div>
+                    <div class="recommender-results" id="recommender-results"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="personal-section">
+            <div class="section-header">
+                <div>
+                    <p class="eyebrow">Built as a data product</p>
+                    <h2>Why this portfolio stands out</h2>
+                </div>
+            </div>
+            <div class="personal-grid">
+                <article class="personal-card">
+                    <h3>Live GitHub analytics</h3>
+                    <p>The page reads GitHub API data and computes summary cards, languages, and top repositories in real time.</p>
+                </article>
+                <article class="personal-card">
+                    <h3>Interactive projects</h3>
+                    <p>Featured work is pulled from structured JSON and can be extended instantly with new project entries.</p>
+                </article>
+                <article class="personal-card">
+                    <h3>Data-first storytelling</h3>
+                    <p>Every section is designed to show both my portfolio and how I work with data to build interactive web experiences.</p>
+                </article>
+            </div>
+        </section>
+    </main>
 </body>
 </html>

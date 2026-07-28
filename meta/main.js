@@ -1,3 +1,5 @@
+import { fetchJSON } from '../global.js';
+
 let data = [];
 let xScale, yScale;
 let selectedCommits = processCommits();
@@ -10,18 +12,9 @@ let ITEM_HEIGHT = 100; // Feel free to change
 let VISIBLE_COUNT = 10; // Feel free to change as well
 let totalHeight = 10;
 let story_commits = processCommits();
-const scrollContainer = d3.select('#scroll-container');
-const spacer = d3.select('#spacer');
-spacer.style('height', `${totalHeight}px`);
-const itemsContainer = d3.select('#items-container');
-scrollContainer.on('scroll', () => {
-  const scrollTop = scrollContainer.property('scrollTop');
-  console.log(scrollTop);
-  let startIndex = Math.floor(scrollTop / ITEM_HEIGHT);
-  startIndex = Math.max(0, Math.min(startIndex, selectedCommits.length - VISIBLE_COUNT));
-  processedFiles = new Set();
-  renderItems(startIndex);
-});
+let scrollContainer;
+let spacer;
+let itemsContainer;
 let fileData = selectedCommits;
 let fileSizeProgress = 100;
 let fileMaxTime = new Date();
@@ -29,19 +22,132 @@ let fileSizeNumItems = 27;
 let fileSizeItemHeight = 100;
 let fileSizeVisibleCount = 10;
 let totalFileSizeHeight = 10;
-const fileSizeScrollContainer = d3.select('#commit-container');
-const fileSizeSpacer = d3.select('#file-size-spacer');
-fileSizeSpacer.style('height', `${totalFileSizeHeight}px`);
-const fileSizeItemsContainer = fileSizeScrollContainer.select('#scroll-container');
-fileSizeItemsContainer.on('scroll', () => {
-  const scrollTop = fileSizeItemsContainer.property('scrollTop');
-  console.log("!");
-  let startIndex = Math.floor(scrollTop / fileSizeItemHeight);
-  startIndex = Math.max(0, Math.min(startIndex, selectedCommits.length - fileSizeVisibleCount));
-  const filteredFileData = selectedCommits.slice(startIndex, startIndex + fileSizeVisibleCount);
-  renderFileSizeItems(startIndex);
-  updateFileDetails(filteredFileData);
-});
+let fileSizeScrollContainer;
+let fileSizeSpacer;
+let fileSizeItemsContainer;
+
+function bindScrollEvents() {
+  if (scrollContainer.node()) {
+    spacer.style('height', `${totalHeight}px`);
+    scrollContainer.on('scroll', () => {
+      const scrollTop = scrollContainer.property('scrollTop');
+      let startIndex = Math.floor(scrollTop / ITEM_HEIGHT);
+      startIndex = Math.max(0, Math.min(startIndex, selectedCommits.length - VISIBLE_COUNT));
+      processedFiles = new Set();
+      renderItems(startIndex);
+    });
+  }
+
+  if (fileSizeItemsContainer.node()) {
+    fileSizeSpacer.style('height', `${totalFileSizeHeight}px`);
+    fileSizeItemsContainer.on('scroll', () => {
+      const scrollTop = fileSizeItemsContainer.property('scrollTop');
+      let startIndex = Math.floor(scrollTop / fileSizeItemHeight);
+      startIndex = Math.max(0, Math.min(startIndex, selectedCommits.length - fileSizeVisibleCount));
+      const filteredFileData = selectedCommits.slice(startIndex, startIndex + fileSizeVisibleCount);
+      renderFileSizeItems(startIndex);
+      updateFileDetails(filteredFileData);
+    });
+  }
+}
+
+async function loadGitHubMeta(username) {
+  const githubMeta = document.getElementById('github-meta');
+  const githubActivity = document.getElementById('github-activity');
+  if (!githubMeta || !githubActivity) return;
+
+  const [userResponse, reposResponse, eventsResponse] = await Promise.all([
+    fetchJSON(`https://api.github.com/users/${username}`),
+    fetchJSON(`https://api.github.com/users/${username}/repos?per_page=100&sort=pushed`),
+    fetchJSON(`https://api.github.com/users/${username}/events/public?per_page=20`)
+  ]);
+
+  const user = userResponse || {};
+  const repos = Array.isArray(reposResponse) ? reposResponse : [];
+  const events = Array.isArray(eventsResponse) ? eventsResponse : [];
+
+  const totalStars = repos.reduce((sum, repo) => sum + (repo.stargazers_count || 0), 0);
+  const languageCounts = repos.reduce((map, repo) => {
+    if (!repo.language) return map;
+    map.set(repo.language, (map.get(repo.language) || 0) + 1);
+    return map;
+  }, new Map());
+
+  const topLanguages = [...languageCounts.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 4)
+    .map(([language]) => language);
+
+  const latestRepo = repos.reduce((latest, repo) => {
+    if (!repo.pushed_at) return latest;
+    if (!latest || new Date(repo.pushed_at) > new Date(latest.pushed_at)) {
+      return repo;
+    }
+    return latest;
+  }, null);
+
+  const activities = events.slice(0, 5);
+  const eventTypes = [...events.reduce((map, event) => {
+    map.set(event.type, (map.get(event.type) || 0) + 1);
+    return map;
+  }, new Map()).entries()].sort((a, b) => b[1] - a[1]);
+
+  githubMeta.innerHTML = `
+    <div class="panel-header">
+      <p class="panel-label">GitHub summary</p>
+      <h2>Live repo analytics</h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-block">
+        <span class="stat-title">Repos</span>
+        <span class="stat-value">${user.public_repos ?? '—'}</span>
+      </div>
+      <div class="stat-block">
+        <span class="stat-title">Followers</span>
+        <span class="stat-value">${user.followers ?? '—'}</span>
+      </div>
+      <div class="stat-block">
+        <span class="stat-title">Stars</span>
+        <span class="stat-value">${totalStars}</span>
+      </div>
+      <div class="stat-block">
+        <span class="stat-title">Top languages</span>
+        <span class="stat-value">${topLanguages.join(', ') || 'None'}</span>
+      </div>
+      <div class="stat-block">
+        <span class="stat-title">Latest push</span>
+        <span class="stat-value">${latestRepo ? new Date(latestRepo.pushed_at).toLocaleDateString() : 'No push yet'}</span>
+      </div>
+      <div class="stat-block">
+        <span class="stat-title">Latest repo</span>
+        <span class="stat-value">${latestRepo ? `<a href="${latestRepo.html_url}" target="_blank">${latestRepo.name}</a>` : 'No repo yet'}</span>
+      </div>
+    </div>
+    <p class="panel-description">${activities.length ? `Most recent public event: ${activities[0].type.replace(/Event$/, '')} on ${new Date(activities[0].created_at).toLocaleDateString()}` : 'No recent public events available.'}</p>
+  `;
+
+  githubActivity.innerHTML = `
+    <div class="panel-header">
+      <p class="panel-label">GitHub activity</p>
+      <h2>Recent public events</h2>
+    </div>
+    <div class="activity-list">
+      ${activities.length
+        ? activities.map(event => `<div class="activity-item">${event.type.replace(/Event$/, '')} on <strong>${event.repo?.name || 'unknown repo'}</strong> — ${new Date(event.created_at).toLocaleDateString()}</div>`).join('')
+        : '<div class="activity-item">No recent public events to display.</div>'}
+    </div>
+    <div class="stats-grid">
+      <div class="stat-block">
+        <span class="stat-title">Events loaded</span>
+        <span class="stat-value">${events.length}</span>
+      </div>
+      <div class="stat-block">
+        <span class="stat-title">Event types</span>
+        <span class="stat-value">${eventTypes.length}</span>
+      </div>
+    </div>
+  `;
+}
 
 function processFileData() {
   return d3.groups(data, (d) => d.file).map(([file, lines]) => {
@@ -462,21 +568,27 @@ function generateNarrative(commit, index) {
   `;
 }
 
-document.getElementById('time-slider').addEventListener('input', function (event) {
-    updateTimeDisplay();
-});
-
 document.addEventListener('DOMContentLoaded', async () => {
+  scrollContainer = d3.select('#scroll-container');
+  spacer = d3.select('#spacer');
+  itemsContainer = d3.select('#items-container');
+  fileSizeScrollContainer = d3.select('#file-size-scroll-container');
+  fileSizeSpacer = d3.select('#file-size-spacer');
+  fileSizeItemsContainer = d3.select('#file-size-items');
+
+  bindScrollEvents();
+
   const timeSlider = document.getElementById('time-slider');
   const timeDisplay = document.getElementById('time-display');
   if (timeSlider && timeDisplay) {
       timeSlider.addEventListener('input', function () {
-          updateTimeDisplay(timeSlider, timeDisplay); 
+          updateTimeDisplay(timeSlider, timeDisplay);
       });
   }
 
   await loadData();
   await loadFileData();
+  await loadGitHubMeta('ishaankor');
   updateScatterplot(selectedCommits);
   updateTimeDisplay(timeSlider, timeDisplay);
   updateFileDetails(selectedCommits);

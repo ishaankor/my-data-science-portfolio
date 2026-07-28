@@ -3,24 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects Information</title>
+    <title>Projects Explorer</title>
     <link rel="stylesheet" href="../style.css">
     <script src="../global.js" type="module"></script>
-    <script src="projects.js" type="module"></script>
+    <script src="projects.js" type="module" defer></script>
 </head>
-<body>
-    <h1 class="projects-title">Projects</h1>
-    <div class="container">
-        <svg id="projects-pie-plot" viewBox="-50 -50 100 100"></svg>
-        <ul class="legend"></ul>
-    </div>
-    <input
-        class="searchBar"
-        type="search"
-        aria-label="Search projects"
-        placeholder="🔍 Search projects…"
-    />
-    <div class="projects">
-    </div>
+<body class="projects-page">
+    <main>
+        <header class="page-header">
+            <p class="eyebrow">Projects library</p>
+            <h1>Project explorer</h1>
+            <p class="section-copy">Search and filter the portfolio with live year groups and a visual project breakdown.</p>
+        </header>
+        <section class="projects-controls">
+            <div class="controls-row">
+                <div id="projects-summary"></div>
+                <div id="year-filter" class="filter-row"></div>
+            </div>
+            <input
+                class="searchBar"
+                type="search"
+                aria-label="Search projects"
+                placeholder="🔍 Search projects…"
+            />
+        </section>
+        <section class="projects-chart">
+            <svg id="projects-pie-plot" viewBox="-50 -50 100 100"></svg>
+            <ul class="legend"></ul>
+        </section>
+        <div class="projects"></div>
+    </main>
 </body>
 </html>

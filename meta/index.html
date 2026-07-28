@@ -1,57 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meta Information</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../style.css" />
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="../global.js" type="module"></script>
     <script src="main.js" type="module"></script>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
-    <h1 class="meta-heading">Meta</h1>
-    <div class="meta">
-        This page includes stats about the code of this website.
-    </div>
-    <div id="filter-container">
-        <label class="time-filter">
-            Show commit until: <input type="range" id="time-slider" min="0" max="100" step="1">
-            <time id="time-display"></time>
-        </label>
-    </div>
-    <div id="stats">
-    </div>
-    <h2>Commits by time of day</h2>
-    <div id="scrollytelling">
-        <div id="scroll-container">
-            <div id="spacer"></div>
-            <div id="items-container"></div>
-        </div>
-        <!-- our old scatterplot div -->
-        <div id="chart"></div>
-    </div>
-    <h2> Codebase Evolution </h2>
-    <div id="commit-container">
-        <dl class="files"></dl>
-        <div id="scroll-container">
-          <div id="spacer"></div>
-          <div id="items-container"></div>
-        </div>
-      </div>
-    </div>
-    <dl id="commit-tooltip" class="info tooltip">
-        <dt>Commit</dt>
-        <dd>
-          <a href="" id="commit-link" target="_blank"></a>
-        </dd>
-      
-        <dt>Date</dt>
-        <dd id="commit-date"></dd>
-      
-        <!-- Add: Time, author, lines edited -->
-    </dl>
-    <p id="selection-count">No commits selected</p>
-    <dl id="language-breakdown" class="stats"></dl>  
+    <main class="page-content">
+        <header class="page-header">
+            <p class="eyebrow">Meta</p>
+            <h1>Repository intelligence</h1>
+            <p class="section-copy">
+                Live code and GitHub metrics for this portfolio. This page refreshes from GitHub and the commit history dataset whenever it loads.
+            </p>
+        </header>
+
+        <section class="github-panel">
+            <div id="github-meta"></div>
+            <div id="github-activity"></div>
+        </section>
+
+        <section class="meta-summary">
+            <div id="filter-container">
+                <label class="time-filter">
+                    Show commit until:
+                    <input type="range" id="time-slider" min="0" max="100" step="1" />
+                    <time id="time-display"></time>
+                </label>
+            </div>
+            <div id="stats"></div>
+        </section>
+
+        <section>
+            <h2>Commits by time of day</h2>
+            <div id="scrollytelling">
+                <div id="scroll-container">
+                    <div id="spacer"></div>
+                    <div id="items-container"></div>
+                </div>
+                <div id="chart"></div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Codebase evolution</h2>
+            <div id="commit-container">
+                <dl class="files"></dl>
+                <div id="file-size-scroll-container">
+                    <div id="file-size-spacer"></div>
+                    <div id="file-size-items"></div>
+                </div>
+            </div>
+            <p id="selection-count">No commits selected</p>
+            <dl id="language-breakdown" class="stats"></dl>
+        </section>
+
+        <dl id="commit-tooltip" class="info tooltip">
+            <dt>Commit</dt>
+            <dd>
+                <a href="" id="commit-link" target="_blank"></a>
+            </dd>
+            <dt>Date</dt>
+            <dd id="commit-date"></dd>
+        </dl>
+    </main>
 </body>
 </html>
