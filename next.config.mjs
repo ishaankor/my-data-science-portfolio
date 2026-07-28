@@ -1,12 +1,10 @@
 /** @type {import('next').NextConfig} */
-const isProd = process.env.NODE_ENV === 'production';
-
 const nextConfig = {
   output: 'export',
   images: {
     unoptimized: true,
   },
-  basePath: isProd ? '/my-data-science-portfolio' : '',
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
   transpilePackages: ['three', '@react-three/fiber', '@react-three/drei'],
 };
 
