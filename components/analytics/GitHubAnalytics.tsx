@@ -73,27 +73,27 @@ export default function GitHubAnalytics() {
     .slice(0, 3);
 
   return (
-    <section className="py-16 relative">
+    <section className="py-20 relative border-t border-haze-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 text-xs font-mono mb-2">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-haze-indigo/10 border border-haze-border text-haze-indigo text-xs font-mono mb-3">
               <Activity className="w-3.5 h-3.5" />
               <span>Real-Time GitHub API Integration</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
-              Live Profile Analytics
+            <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+              Live Profile Summary
             </h2>
           </div>
           <a
             href={`https://github.com/${portfolioData.githubUsername}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl glass-panel text-slate-300 hover:text-white text-sm font-medium transition-all"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl glass-haze text-haze-dim hover:text-white text-xs font-mono font-medium transition-all"
           >
-            <Github className="w-4 h-4 text-cyan-400" />
+            <Github className="w-4 h-4 text-haze-indigo" />
             <span>@{portfolioData.githubUsername}</span>
             <ExternalLink className="w-3.5 h-3.5 opacity-60" />
           </a>
@@ -104,70 +104,70 @@ export default function GitHubAnalytics() {
           
           {/* Key Metrics Cards */}
           <div className="lg:col-span-4 grid grid-cols-2 gap-4">
-            <div className="p-6 rounded-2xl glass-panel border border-slate-800 flex flex-col justify-between">
-              <div className="flex items-center justify-between text-cyan-400 mb-2">
+            <div className="p-6 rounded-3xl glass-haze-card flex flex-col justify-between">
+              <div className="flex items-center justify-between text-haze-indigo mb-2">
                 <Code2 className="w-5 h-5" />
-                <span className="text-xs font-mono text-slate-500">API Live</span>
+                <span className="text-[10px] font-mono text-haze-muted">API Live</span>
               </div>
               <div>
                 <p className="text-3xl font-extrabold text-white">
                   {loading ? '...' : (user?.public_repos ?? portfolioData.stats[1].value)}
                 </p>
-                <p className="text-xs text-slate-400 mt-1">Public Repositories</p>
+                <p className="text-xs text-haze-muted mt-1 font-mono">Public Repos</p>
               </div>
             </div>
 
-            <div className="p-6 rounded-2xl glass-panel border border-slate-800 flex flex-col justify-between">
+            <div className="p-6 rounded-3xl glass-haze-card flex flex-col justify-between">
               <div className="flex items-center justify-between text-yellow-400 mb-2">
                 <Star className="w-5 h-5" />
-                <span className="text-xs font-mono text-slate-500">Stars</span>
+                <span className="text-[10px] font-mono text-haze-muted">Stars</span>
               </div>
               <div>
                 <p className="text-3xl font-extrabold text-white">
                   {loading ? '...' : totalStars}
                 </p>
-                <p className="text-xs text-slate-400 mt-1">Total Stargazers</p>
+                <p className="text-xs text-haze-muted mt-1 font-mono">Total Stargazers</p>
               </div>
             </div>
 
-            <div className="p-6 rounded-2xl glass-panel border border-slate-800 flex flex-col justify-between">
-              <div className="flex items-center justify-between text-violet-400 mb-2">
+            <div className="p-6 rounded-3xl glass-haze-card flex flex-col justify-between">
+              <div className="flex items-center justify-between text-haze-purple mb-2">
                 <GitFork className="w-5 h-5" />
-                <span className="text-xs font-mono text-slate-500">Network</span>
+                <span className="text-[10px] font-mono text-haze-muted">Network</span>
               </div>
               <div>
                 <p className="text-3xl font-extrabold text-white">
                   {loading ? '...' : (user?.followers ?? 12)}
                 </p>
-                <p className="text-xs text-slate-400 mt-1">GitHub Followers</p>
+                <p className="text-xs text-haze-muted mt-1 font-mono">Followers</p>
               </div>
             </div>
 
-            <div className="p-6 rounded-2xl glass-panel border border-slate-800 flex flex-col justify-between">
+            <div className="p-6 rounded-3xl glass-haze-card flex flex-col justify-between">
               <div className="flex items-center justify-between text-emerald-400 mb-2">
                 <Activity className="w-5 h-5" />
-                <span className="text-xs font-mono text-slate-500">Status</span>
+                <span className="text-[10px] font-mono text-haze-muted">Status</span>
               </div>
               <div>
-                <p className="text-base font-bold text-white flex items-center gap-1.5">
+                <p className="text-sm font-bold text-white flex items-center gap-1.5 font-mono">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                   Active
                 </p>
-                <p className="text-xs text-slate-400 mt-1">Building & Committing</p>
+                <p className="text-[11px] text-haze-muted mt-1 font-mono">Building AI</p>
               </div>
             </div>
           </div>
 
           {/* Languages Breakdown */}
-          <div className="lg:col-span-4 p-6 rounded-2xl glass-panel border border-slate-800 flex flex-col justify-between">
-            <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-              <Code2 className="w-4 h-4 text-cyan-400" />
+          <div className="lg:col-span-4 p-7 rounded-3xl glass-haze-card flex flex-col justify-between">
+            <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+              <Code2 className="w-4 h-4 text-haze-indigo" />
               <span>Top Code Languages</span>
             </h3>
             {loading ? (
               <div className="space-y-3 animate-pulse">
                 {[1, 2, 3, 4].map(i => (
-                  <div key={i} className="h-4 bg-slate-800 rounded" />
+                  <div key={i} className="h-4 bg-midnight rounded" />
                 ))}
               </div>
             ) : topLanguages.length > 0 ? (
@@ -176,14 +176,14 @@ export default function GitHubAnalytics() {
                   const percent = Math.round((count / repos.length) * 100);
                   return (
                     <div key={lang} className="space-y-1">
-                      <div className="flex justify-between text-xs text-slate-300 font-mono">
+                      <div className="flex justify-between text-xs text-haze-dim font-mono">
                         <span>{lang}</span>
                         <span>{percent}% ({count} repos)</span>
                       </div>
-                      <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
+                      <div className="w-full h-2 rounded-full bg-midnight overflow-hidden border border-haze-border/60">
                         <div
-                          className="h-full bg-gradient-to-r from-cyan-500 to-indigo-500 rounded-full"
-                          style={{ width: `${Math.max(percent, 8)}%` }}
+                          className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-400 rounded-full"
+                          style={{ width: `${Math.max(percent, 10)}%` }}
                         />
                       </div>
                     </div>
@@ -191,20 +191,20 @@ export default function GitHubAnalytics() {
                 })}
               </div>
             ) : (
-              <p className="text-xs text-slate-500">Python, TypeScript, SQL, HTML/CSS</p>
+              <p className="text-xs text-haze-muted font-mono">Python, TypeScript, SQL, C++, HTML/CSS</p>
             )}
           </div>
 
           {/* Featured GitHub Repos */}
-          <div className="lg:col-span-4 p-6 rounded-2xl glass-panel border border-slate-800 flex flex-col justify-between">
-            <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+          <div className="lg:col-span-4 p-7 rounded-3xl glass-haze-card flex flex-col justify-between">
+            <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
               <Star className="w-4 h-4 text-yellow-400" />
               <span>Popular Repositories</span>
             </h3>
             {loading ? (
               <div className="space-y-3 animate-pulse">
                 {[1, 2, 3].map(i => (
-                  <div key={i} className="h-12 bg-slate-800 rounded-xl" />
+                  <div key={i} className="h-12 bg-midnight rounded-xl" />
                 ))}
               </div>
             ) : popularRepos.length > 0 ? (
@@ -215,17 +215,17 @@ export default function GitHubAnalytics() {
                     href={repo.html_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 rounded-xl bg-slate-900/70 border border-slate-800 hover:border-cyan-500/40 flex items-center justify-between group transition-all"
+                    className="p-3.5 rounded-2xl bg-midnight/80 border border-haze-border hover:border-haze-indigo/50 flex items-center justify-between group transition-all"
                   >
                     <div>
-                      <p className="text-sm font-medium text-white group-hover:text-cyan-400 transition-colors">
+                      <p className="text-sm font-semibold text-white group-hover:text-haze-indigo transition-colors">
                         {repo.name}
                       </p>
-                      <p className="text-xs text-slate-400 line-clamp-1">
-                        {repo.description || 'Data science & analytics code repository'}
+                      <p className="text-xs text-haze-muted line-clamp-1">
+                        {repo.description || 'Data science & AI code repository'}
                       </p>
                     </div>
-                    <div className="flex items-center gap-1 text-xs text-slate-400 shrink-0 ml-2">
+                    <div className="flex items-center gap-1 text-xs text-haze-muted shrink-0 ml-2 font-mono">
                       <Star className="w-3.5 h-3.5 text-yellow-400" />
                       <span>{repo.stargazers_count}</span>
                     </div>
@@ -233,10 +233,10 @@ export default function GitHubAnalytics() {
                 ))}
               </div>
             ) : (
-              <div className="text-xs text-slate-400 space-y-2">
+              <div className="text-xs text-haze-muted font-mono space-y-2">
+                <p>• transformi</p>
                 <p>• daily-motivation</p>
                 <p>• twitter-scraping-ai</p>
-                <p>• transformi</p>
               </div>
             )}
           </div>
