@@ -6,23 +6,23 @@ import { BrainCircuit, Database, Layout, Terminal } from 'lucide-react';
 
 export default function TechStackSection() {
   const iconMap: Record<string, React.ReactNode> = {
-    BrainCircuit: <BrainCircuit className="w-6 h-6 text-cyan-400" />,
-    Database: <Database className="w-6 h-6 text-violet-400" />,
-    Layout: <Layout className="w-6 h-6 text-emerald-400" />,
+    BrainCircuit: <BrainCircuit className="w-6 h-6 text-haze-indigo" />,
+    Database: <Database className="w-6 h-6 text-haze-purple" />,
+    Layout: <Layout className="w-6 h-6 text-haze-cyan" />,
   };
 
   return (
-    <section className="py-16 relative">
+    <section className="py-20 relative border-t border-haze-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
         <div className="mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-mono mb-2">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-haze-indigo/10 border border-haze-border text-haze-indigo text-xs font-mono mb-3">
             <Terminal className="w-3.5 h-3.5" />
             <span>Technical Capabilities</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Tech Stack & Expertise Matrix
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+            Tech Stack & Skills Matrix
           </h2>
         </div>
 
@@ -31,32 +31,32 @@ export default function TechStackSection() {
           {portfolioData.skillCategories.map((category) => (
             <div
               key={category.title}
-              className="glass-panel p-8 rounded-3xl border border-slate-800 flex flex-col justify-between"
+              className="glass-haze-card p-8 rounded-3xl flex flex-col justify-between"
             >
               <div>
-                <div className="w-12 h-12 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center mb-6">
-                  {iconMap[category.iconName] || <Terminal className="w-6 h-6 text-cyan-400" />}
+                <div className="w-12 h-12 rounded-2xl bg-midnight border border-haze-border flex items-center justify-center mb-6">
+                  {iconMap[category.iconName] || <Terminal className="w-6 h-6 text-haze-indigo" />}
                 </div>
 
                 <h3 className="text-xl font-bold text-white mb-2">
                   {category.title}
                 </h3>
 
-                <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-8">
+                <p className="text-haze-dim text-xs sm:text-sm leading-relaxed mb-8">
                   {category.description}
                 </p>
 
                 {/* Skills Progress List */}
-                <div className="space-y-5">
+                <div className="space-y-5 font-mono">
                   {category.skills.map((skill) => (
                     <div key={skill.name} className="space-y-1.5">
-                      <div className="flex justify-between items-center text-xs font-mono">
-                        <span className="text-slate-200 font-medium">{skill.name}</span>
-                        <span className="text-slate-400">{skill.tag}</span>
+                      <div className="flex justify-between items-center text-xs">
+                        <span className="text-white font-medium">{skill.name}</span>
+                        <span className="text-haze-muted">{skill.tag}</span>
                       </div>
-                      <div className="w-full h-2 rounded-full bg-slate-900 overflow-hidden border border-slate-800/80">
+                      <div className="w-full h-2 rounded-full bg-midnight overflow-hidden border border-haze-border/60">
                         <div
-                          className="h-full bg-gradient-to-r from-cyan-500 via-blue-500 to-violet-500 rounded-full"
+                          className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-400 rounded-full"
                           style={{ width: `${skill.level}%` }}
                         />
                       </div>
@@ -65,8 +65,8 @@ export default function TechStackSection() {
                 </div>
               </div>
 
-              <div className="mt-8 pt-4 border-t border-slate-800/60 text-right">
-                <span className="text-[11px] font-mono text-cyan-400">Production Ready</span>
+              <div className="mt-8 pt-4 border-t border-haze-border/60 text-right">
+                <span className="text-[11px] font-mono text-haze-cyan">Production Ready</span>
               </div>
             </div>
           ))}
