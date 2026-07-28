@@ -1,16 +1,12 @@
 /** @type {import('next').NextConfig} */
+const isProd = process.env.NODE_ENV === 'production';
+
 const nextConfig = {
-  reactStrictMode: true,
+  output: 'export',
   images: {
-    remotePatterns: [
-      { protocol: 'https', hostname: 'pbs.twimg.com' },
-      { protocol: 'https', hostname: 'upload.wikimedia.org' },
-      { protocol: 'https', hostname: 'www.svgrepo.com' },
-      { protocol: 'https', hostname: 'vis-society.github.io' },
-      { protocol: 'https', hostname: 'avatars.githubusercontent.com' },
-      { protocol: 'https', hostname: 'images.unsplash.com' }
-    ],
+    unoptimized: true,
   },
+  basePath: isProd ? '/my-data-science-portfolio' : '',
   transpilePackages: ['three', '@react-three/fiber', '@react-three/drei'],
 };
 

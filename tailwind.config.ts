@@ -11,35 +11,25 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        card: "var(--card)",
-        "card-foreground": "var(--card-foreground)",
-        border: "var(--border)",
-        accent: {
-          cyan: "#06b6d4",
-          violet: "#8b5cf6",
-          blue: "#3b82f6",
-          emerald: "#10b981",
+        ink: "#0b0d0f",
+        surface: "#121518",
+        line: "#1e242b",
+        muted: "#64748b",
+        bone: "#f1f5f9",
+        "bone-dim": "#cbd5e1",
+        ember: {
+          DEFAULT: "#f97316",
+          glow: "rgba(249, 115, 22, 0.15)",
         },
       },
       fontFamily: {
+        display: ["var(--font-inter)", "sans-serif"],
         sans: ["var(--font-inter)", "sans-serif"],
         mono: ["var(--font-jetbrains-mono)", "monospace"],
       },
-      animation: {
-        "pulse-glow": "pulseGlow 4s ease-in-out infinite",
-        "float": "float 6s ease-in-out infinite",
-      },
-      keyframes: {
-        pulseGlow: {
-          "0%, 100%": { opacity: "0.4", transform: "scale(1)" },
-          "50%": { opacity: "0.8", transform: "scale(1.05)" },
-        },
-        float: {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-10px)" },
-        },
+      boxShadow: {
+        float: "0 10px 30px -10px rgba(0, 0, 0, 0.5)",
+        panel: "0 4px 20px rgba(0, 0, 0, 0.4)",
       },
     },
   },

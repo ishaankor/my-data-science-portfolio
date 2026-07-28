@@ -3,66 +3,65 @@
 import React from 'react';
 import Link from 'next/link';
 import { portfolioData } from '@/data/portfolio';
-import { Sparkles, Github, Linkedin, Twitter, Heart } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="border-t border-slate-800/80 bg-slate-950/60 py-12 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white">
-              <Sparkles className="w-4 h-4" />
-            </div>
-            <div>
-              <p className="text-sm font-bold text-white">{portfolioData.name}</p>
-              <p className="text-xs text-slate-400 font-mono">Data Science & Web Products</p>
-            </div>
+    <footer className="border-t border-line py-12 bg-ink">
+      <div className="mx-auto w-full max-w-6xl px-6 sm:px-10">
+        
+        <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <Link href="/" className="font-mono text-sm text-bone">
+              ishaan<span className="text-ember font-bold">.</span>koradia
+            </Link>
+            <p className="mt-2 font-mono text-xs text-muted">
+              Data Science & Analytics Engineer, {portfolioData.location}
+            </p>
           </div>
 
-          <div className="flex items-center gap-6 text-xs text-slate-400 font-mono">
-            <Link href="/" className="hover:text-cyan-400 transition-colors">Home</Link>
-            <Link href="/projects" className="hover:text-cyan-400 transition-colors">Projects</Link>
-            <Link href="/resume" className="hover:text-cyan-400 transition-colors">Resume</Link>
-            <Link href="/contact" className="hover:text-cyan-400 transition-colors">Contact</Link>
-          </div>
+          <nav aria-label="Footer" className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs text-muted">
+            <Link href="/projects" className="transition-colors hover:text-bone">
+              Projects
+            </Link>
+            <Link href="/resume" className="transition-colors hover:text-bone">
+              Work
+            </Link>
+            <Link href="/contact" className="transition-colors hover:text-bone">
+              Contact
+            </Link>
+          </nav>
 
-          <div className="flex items-center gap-4">
+          <div className="flex gap-5 font-mono text-xs">
             <a
               href={`https://github.com/${portfolioData.githubUsername}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-400 hover:text-white transition-colors"
-              aria-label="GitHub Profile"
+              className="text-muted transition-colors hover:text-bone"
             >
-              <Github className="w-4 h-4" />
+              GitHub
             </a>
             <a
               href={portfolioData.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-400 hover:text-white transition-colors"
-              aria-label="LinkedIn Profile"
+              className="text-muted transition-colors hover:text-bone"
             >
-              <Linkedin className="w-4 h-4" />
+              LinkedIn
             </a>
             <a
-              href={portfolioData.twitter}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-slate-400 hover:text-white transition-colors"
-              aria-label="Twitter Profile"
+              href={`mailto:${portfolioData.email}`}
+              className="text-muted transition-colors hover:text-bone"
             >
-              <Twitter className="w-4 h-4" />
+              Email
             </a>
           </div>
-
         </div>
 
-        <div className="mt-8 pt-6 border-t border-slate-900 text-center text-xs text-slate-500 font-mono">
-          <p>© {new Date().getFullYear()} {portfolioData.name}. Built with Next.js, React, TypeScript & Three.js.</p>
+        <div className="mt-10 flex flex-col gap-2 border-t border-line pt-6 font-mono text-[0.7rem] text-muted sm:flex-row sm:items-center sm:justify-between">
+          <span>© {new Date().getFullYear()} {portfolioData.name}</span>
+          <span>Designed and built from scratch with Next.js, React, TypeScript & Three.js.</span>
         </div>
+
       </div>
     </footer>
   );

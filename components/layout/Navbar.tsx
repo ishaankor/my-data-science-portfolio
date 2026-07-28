@@ -1,124 +1,118 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Sparkles, Menu, X, Sun, Moon } from 'lucide-react';
-import { portfolioData } from '@/data/portfolio';
+import { Menu, X } from 'lucide-react';
 
 export default function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isDark, setIsDark] = useState(true);
-
-  useEffect(() => {
-    // Check initial color scheme
-    if (localStorage.theme === 'light') {
-      setIsDark(false);
-      document.documentElement.classList.remove('dark');
-    } else {
-      setIsDark(true);
-      document.documentElement.classList.add('dark');
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    if (isDark) {
-      document.documentElement.classList.remove('dark');
-      localStorage.theme = 'light';
-      setIsDark(false);
-    } else {
-      document.documentElement.classList.add('dark');
-      localStorage.theme = 'dark';
-      setIsDark(true);
-    }
-  };
 
   const navLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/projects', label: 'Projects' },
-    { href: '/resume', label: 'Resume' },
-    { href: '/contact', label: 'Contact' },
+    { href: '/projects', number: '01', label: 'Projects' },
+    { href: '/resume', number: '02', label: 'Work' },
+    { href: '/contact', number: '03', label: 'Contact' },
   ];
 
   return (
     <>
       <a href="#main-content" className="skip-link">
-        Skip to main content
+        Skip to content
       </a>
 
-      <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-8 py-4 pointer-events-none">
-        <div className="max-w-7xl mx-auto flex items-center justify-between pointer-events-auto px-6 py-3 rounded-2xl glass-panel border border-slate-800 shadow-xl">
+      <header className="fixed inset-x-0 top-0 z-40 border-b border-line/40 bg-ink/80 backdrop-blur-md transition-colors duration-300">
+        <nav className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6 sm:px-10">
           
-          {/* Logo Brand */}
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white shadow-md shadow-cyan-500/20 group-hover:scale-105 transition-transform">
-              <Sparkles className="w-4 h-4" />
-            </div>
-            <span className="text-base font-bold text-white tracking-tight group-hover:text-cyan-400 transition-colors">
-              {portfolioData.name}
-            </span>
+          {/* Logo Brand matching sunnypatel.net */}
+          <Link
+            href="/"
+            className="font-mono text-sm tracking-tight text-bone hover:text-white transition-colors"
+            aria-label="Home"
+          >
+            ishaan<span className="text-ember font-bold">.</span>koradia
           </Link>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center gap-1 bg-slate-950/60 p-1.5 rounded-xl border border-slate-800/80">
+          <div className="hidden items-center gap-8 md:flex">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`px-4 py-1.5 rounded-lg text-xs font-mono font-medium transition-all ${
-                    isActive
-                      ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30'
-                      : 'text-slate-400 hover:text-white hover:bg-slate-900/60'
+                  className={`group relative flex items-center gap-1.5 py-1 font-mono text-[0.8rem] transition-colors ${
+                    isActive ? 'text-bone font-semibold' : 'text-muted hover:text-bone'
                   }`}
                 >
-                  {link.label}
+                  <span className="text-[0.62rem] tabular-nums text-muted group-hover:text-ember transition-colors">
+                    {link.number}
+                  </span>
+                  <span>{link.label}</span>
+                  <span
+                    aria-hidden="true"
+                    className={`absolute -bottom-0.5 left-0 h-px w-full bg-ember transition-transform duration-300 ${
+                      isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                    }`}
+                  />
                 </Link>
               );
             })}
-          </nav>
+          </div>
 
-          {/* Right Actions: Theme Toggle & Mobile Menu */}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-colors"
-              aria-label="Toggle dark/light color scheme"
+          {/* Right Action Button */}
+          <div className="flex items-center gap-4">
+            <Link
+              href="/contact"
+              className="hidden md:inline-block rounded-md border border-line px-4 py-2 font-mono text-[0.8rem] text-bone transition-colors duration-300 hover:border-ember hover:text-ember"
             >
-              {isDark ? <Sun className="w-4 h-4 text-yellow-400" /> : <Moon className="w-4 h-4 text-slate-300" />}
-            </button>
+              Get in touch
+            </Link>
 
-            {/* Mobile Drawer Button */}
+            {/* Mobile menu hamburger toggle */}
             <button
+              type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white"
+              className="inline-flex h-10 w-10 items-center justify-center text-bone hover:text-ember md:hidden"
               aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
-
-        </div>
+        </nav>
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden mt-3 pointer-events-auto p-4 rounded-2xl glass-panel border border-slate-800 space-y-2 animate-in slide-in-from-top duration-200">
-            {navLinks.map((link) => (
+          <div className="border-t border-line bg-ink/95 px-6 py-4 md:hidden">
+            <div className="flex flex-col space-y-3 font-mono text-sm">
               <Link
-                key={link.href}
-                href={link.href}
+                href="/"
                 onClick={() => setMobileMenuOpen(false)}
-                className={`block px-4 py-2.5 rounded-xl text-sm font-mono ${
-                  pathname === link.href
-                    ? 'bg-cyan-500/20 text-cyan-400 font-bold'
-                    : 'text-slate-300 hover:bg-slate-900'
-                }`}
+                className="flex items-center gap-3 py-2 text-muted hover:text-bone"
               >
-                {link.label}
+                <span className="text-[0.62rem] text-ember">00</span>Home
               </Link>
-            ))}
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`flex items-center gap-3 py-2 ${
+                    pathname === link.href ? 'text-bone font-bold' : 'text-muted hover:text-bone'
+                  }`}
+                >
+                  <span className="text-[0.62rem] text-ember">{link.number}</span>
+                  {link.label}
+                </Link>
+              ))}
+              <Link
+                href="/contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="mt-2 rounded-md border border-ember/50 bg-ember/10 px-4 py-3 text-center text-bone hover:bg-ember/20"
+              >
+                Get in touch
+              </Link>
+            </div>
           </div>
         )}
       </header>
