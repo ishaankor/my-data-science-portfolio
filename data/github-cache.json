@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-29T20:23:33.963Z",
+  "updatedAt": "2026-07-29T21:16:30.553Z",
   "totalRepos": 23,
   "repos": [
     {
@@ -8,8 +8,8 @@
       "language": "HTML",
       "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
       "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
-      "pushed_at": "2026-07-29T20:04:55Z",
-      "updated_at": "2026-07-29T20:05:07Z"
+      "pushed_at": "2026-07-29T20:46:09Z",
+      "updated_at": "2026-07-29T20:46:39Z"
     },
     {
       "id": 911419017,
@@ -212,6 +212,16 @@
   ],
   "commits": [
     {
+      "sha": "c5f48d3c88dd0d870d65b6290131adce3d8e0049",
+      "shortSha": "c5f48d3",
+      "message": "refactor: update analytics and metadata dashboard components",
+      "repoName": "my-data-science-portfolio",
+      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/c5f48d3c88dd0d870d65b6290131adce3d8e0049",
+      "date": "2026-07-29T20:46:01Z",
+      "timeAgo": "30m ago"
+    },
+    {
       "sha": "1b0f8136ac5077926f7e4d7379b2981fb6436dda",
       "shortSha": "1b0f813",
       "message": "build: update metadata dashboard related to the heatmap",
@@ -219,7 +229,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/1b0f8136ac5077926f7e4d7379b2981fb6436dda",
       "date": "2026-07-29T20:04:49Z",
-      "timeAgo": "18m ago"
+      "timeAgo": "1h ago"
     },
     {
       "sha": "049bd5086297240b765b3f1ece6552d8aaeb5434",
@@ -229,7 +239,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/049bd5086297240b765b3f1ece6552d8aaeb5434",
       "date": "2026-07-29T19:57:21Z",
-      "timeAgo": "26m ago"
+      "timeAgo": "1h ago"
     },
     {
       "sha": "267505730bd91cb270c3a8e6ae1da0e28bf73a13",
@@ -239,7 +249,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/267505730bd91cb270c3a8e6ae1da0e28bf73a13",
       "date": "2026-07-29T05:01:40Z",
-      "timeAgo": "15h ago"
+      "timeAgo": "16h ago"
     },
     {
       "sha": "f27bd1930509219736abaaa7bc9f3214a93203a6",
@@ -249,16 +259,6 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/f27bd1930509219736abaaa7bc9f3214a93203a6",
       "date": "2026-07-29T04:44:56Z",
-      "timeAgo": "15h ago"
-    },
-    {
-      "sha": "b3e8a18e69924b37e8e10edcd1c2e64a5a2b5141",
-      "shortSha": "b3e8a18",
-      "message": "feat: update GitHubMetaDashboard component",
-      "repoName": "my-data-science-portfolio",
-      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
-      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/b3e8a18e69924b37e8e10edcd1c2e64a5a2b5141",
-      "date": "2026-07-29T04:12:42Z",
       "timeAgo": "16h ago"
     }
   ]

@@ -11,7 +11,7 @@ interface CachedResponse {
 
 let memoryCache: CachedResponse | null = null;
 let lastFetchTime = 0;
-const CACHE_DURATION_MS = 5 * 60 * 1000; // 5 minutes in-memory cache
+const CACHE_DURATION_MS = 60 * 1000; // 1 minute in-memory cache for live commit streaming
 
 function formatTimeAgo(dateString: string): string {
   const date = new Date(dateString);
