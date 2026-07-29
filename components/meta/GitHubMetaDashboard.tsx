@@ -84,7 +84,7 @@ export default function GitHubMetaDashboard() {
 
   const fetchAllGitHubData = useCallback(async () => {
     try {
-      // 1. Primary: Try fetching from our server proxy /api/github with token & 5-min cache
+      // Fetch exclusively through our server proxy /api/github (with GITHUB_TOKEN & 5,000 req/hr limit)
       const proxyRes = await fetch('/api/github');
       if (proxyRes.ok) {
         const payload = await proxyRes.json();
@@ -95,93 +95,10 @@ export default function GitHubMetaDashboard() {
         if (Array.isArray(payload.commits) && payload.commits.length > 0) {
           setCommits(payload.commits);
         }
-        setRateLimited(false);
         setLastPolledTime(new Date().toLocaleTimeString());
-        setLoading(false);
-        return;
       }
-
-      // 2. Fallback: Direct GitHub API query if proxy is unmounted
-      const [userRes, reposRes] = await Promise.all([
-        fetch(`https://api.github.com/users/${portfolioData.githubUsername}`),
-        fetch(`https://api.github.com/users/${portfolioData.githubUsername}/repos?per_page=100&sort=pushed`),
-      ]);
-
-      if (userRes.status === 403 || reposRes.status === 403) {
-        setRateLimited(true);
-        setRepos(FALLBACK_REPOS);
-        setCommits(FALLBACK_COMMITS);
-        setLoading(false);
-        return;
-      }
-
-      let fetchedRepos: GitHubRepo[] = [];
-      if (userRes.ok) {
-        const userData = await userRes.json();
-        setUser(userData);
-      }
-
-      if (reposRes.ok) {
-        const reposData = await reposRes.json();
-        if (Array.isArray(reposData) && reposData.length > 0) {
-          fetchedRepos = reposData;
-          setRepos(reposData);
-        }
-      }
-
-      if (Array.isArray(fetchedRepos) && fetchedRepos.length > 0) {
-        const topPushed = [...fetchedRepos]
-          .sort((a, b) => new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime())
-          .slice(0, 4);
-
-        const commitPromises = topPushed.map(async (repo) => {
-          try {
-            const res = await fetch(`https://api.github.com/repos/${portfolioData.githubUsername}/${repo.name}/commits?per_page=5`);
-            if (res.ok) {
-              const data = await res.json();
-              if (Array.isArray(data)) {
-                return data.map((c) => {
-                  const commitDate = c.commit?.committer?.date || c.commit?.author?.date || repo.pushed_at;
-                  return {
-                    sha: c.sha,
-                    shortSha: c.sha.substring(0, 7),
-                    message: c.commit?.message?.split('\n')[0] || 'Update repository',
-                    repoName: repo.name,
-                    repoUrl: repo.html_url,
-                    commitUrl: c.html_url || `${repo.html_url}/commit/${c.sha}`,
-                    date: commitDate,
-                    timeAgo: formatTimeAgo(commitDate),
-                  };
-                });
-              }
-            }
-          } catch (e) {
-            console.error(`Error fetching commits for ${repo.name}:`, e);
-          }
-          return [];
-        });
-
-        const nestedCommits = await Promise.all(commitPromises);
-        const allFetchedCommits = nestedCommits.flat().filter(Boolean) as CommitItem[];
-
-        if (allFetchedCommits.length > 0) {
-          const commitMap = new Map<string, CommitItem>();
-          allFetchedCommits.forEach((item) => commitMap.set(item.sha, item));
-
-          const sortedGlobal5 = Array.from(commitMap.values())
-            .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-            .slice(0, 5);
-
-          setCommits(sortedGlobal5);
-          setRateLimited(false);
-        }
-      }
-
-      setLastPolledTime(new Date().toLocaleTimeString());
-    } catch (err) {
-      console.error("Failed to fetch Meta GitHub data:", err);
-      setRepos(FALLBACK_REPOS);
-      setCommits(FALLBACK_COMMITS);
+    } catch {
+      // Fallback cleanly to prebuilt github-cache.json without hitting GitHub API from browser
     } finally {
       setLoading(false);
     }
@@ -556,8 +473,8 @@ export default function GitHubMetaDashboard() {
                         >
                           <div className="px-3 py-2 rounded-lg bg-[#14161d] border-2 border-ember shadow-[0_12px_30px_rgba(0,0,0,0.9)] text-[0.72rem] font-mono text-bone whitespace-nowrap flex items-center gap-2">
                             <span className={`px-2 py-0.5 rounded font-bold ${day.count > 0
-                                ? 'bg-ember text-ink shadow-sm'
-                                : 'bg-surface border border-line text-muted'
+                              ? 'bg-ember text-ink shadow-sm'
+                              : 'bg-surface border border-line text-muted'
                               }`}>
                               {day.count > 0 ? `${day.count} ${day.count === 1 ? 'commit' : 'commits'}` : 'No commits'}
                             </span>
@@ -565,8 +482,8 @@ export default function GitHubMetaDashboard() {
                           </div>
                           <div
                             className={`w-2.5 h-2.5 rotate-45 bg-[#14161d] ${isTopRow
-                                ? '-mb-1.5 border-t-2 border-l-2 border-ember'
-                                : '-mt-1.5 border-r-2 border-b-2 border-ember'
+                              ? '-mb-1.5 border-t-2 border-l-2 border-ember'
+                              : '-mt-1.5 border-r-2 border-b-2 border-ember'
                               }`}
                           />
                         </div>
@@ -638,8 +555,8 @@ export default function GitHubMetaDashboard() {
                   key={lang}
                   onClick={() => setSelectedLanguage(lang)}
                   className={`px-3 py-1.5 rounded-md transition-colors ${selectedLanguage === lang
-                      ? 'bg-ember/20 border border-ember/60 text-bone font-bold'
-                      : 'bg-surface border border-line text-muted hover:text-bone'
+                    ? 'bg-ember/20 border border-ember/60 text-bone font-bold'
+                    : 'bg-surface border border-line text-muted hover:text-bone'
                     }`}
                 >
                   {lang}
