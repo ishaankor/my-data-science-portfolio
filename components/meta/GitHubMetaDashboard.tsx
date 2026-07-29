@@ -36,7 +36,7 @@ interface GitHubRepo {
   html_url: string;
   description: string | null;
   pushed_at: string;
-  updated_at: string;
+  updated_at?: string;
   topics?: string[];
 }
 
@@ -67,77 +67,41 @@ function formatTimeAgo(dateString: string): string {
 }
 
 // Full 23-Repository Registry Cache imported directly from data/github-cache.json
-const FALLBACK_REPOS: GitHubRepo[] = (githubCache?.repos || []) as GitHubRepo[];
+const FALLBACK_REPOS: GitHubRepo[] = (githubCache?.repos || []) as unknown as GitHubRepo[];
 
-// Fallback commits in case GitHub API rate limit is reached
-const FALLBACK_COMMITS: CommitItem[] = [
-  {
-    sha: '597bd25a85ab02f0f6188343efecccade4a8789a',
-    shortSha: '597bd25',
-    message: 'build: updated Meta tab with live commit stream',
-    repoName: 'my-data-science-portfolio',
-    repoUrl: 'https://github.com/ishaankor/my-data-science-portfolio',
-    commitUrl: 'https://github.com/ishaankor/my-data-science-portfolio/commit/597bd25',
-    date: new Date().toISOString(),
-    timeAgo: 'recently',
-  },
-  {
-    sha: 'e5443ec455344b8a7296d043e4c3c888cfb5788e',
-    shortSha: 'e5443ec',
-    message: 'update: added detailed project portfolio highlights',
-    repoName: 'my-personal-website',
-    repoUrl: 'https://github.com/ishaankor/my-personal-website',
-    commitUrl: 'https://github.com/ishaankor/my-personal-website/commit/e5443ec',
-    date: new Date(Date.now() - 3600000 * 4).toISOString(),
-    timeAgo: '4h ago',
-  },
-  {
-    sha: 'adbd563127812983719283719827391827391827',
-    shortSha: 'adbd563',
-    message: 'update: optimized real-time data automation pipeline',
-    repoName: 'Transformi',
-    repoUrl: 'https://github.com/ishaankor/Transformi',
-    commitUrl: 'https://github.com/ishaankor/Transformi/commit/adbd563',
-    date: new Date(Date.now() - 3600000 * 24).toISOString(),
-    timeAgo: '1d ago',
-  },
-  {
-    sha: 'e9b40ac192837192837192837192837192837192',
-    shortSha: 'e9b40ac',
-    message: 'update: verified favicon and metadata assets',
-    repoName: 'Datafy',
-    repoUrl: 'https://github.com/ishaankor/Datafy',
-    commitUrl: 'https://github.com/ishaankor/Datafy/commit/e9b40ac',
-    date: new Date(Date.now() - 3600000 * 36).toISOString(),
-    timeAgo: '1d ago',
-  },
-  {
-    sha: '21ead1f192837192837192837192837192837192',
-    shortSha: '21ead1f',
-    message: 'Update README.md with ML project specs',
-    repoName: 'ishaankor',
-    repoUrl: 'https://github.com/ishaankor/ishaankor',
-    commitUrl: 'https://github.com/ishaankor/ishaankor/commit/21ead1f',
-    date: new Date(Date.now() - 3600000 * 48).toISOString(),
-    timeAgo: '2d ago',
-  },
-];
+// Fallback commits imported directly from prebuilt data/github-cache.json
+const FALLBACK_COMMITS: CommitItem[] = (githubCache?.commits || []) as unknown as CommitItem[];
 
 export default function GitHubMetaDashboard() {
   const [user, setUser] = useState<GitHubUser | null>(null);
   const [repos, setRepos] = useState<GitHubRepo[]>(FALLBACK_REPOS);
   const [commits, setCommits] = useState<CommitItem[]>(FALLBACK_COMMITS);
   const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
   const [rateLimited, setRateLimited] = useState(false);
   const [lastPolledTime, setLastPolledTime] = useState<string>('');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedLanguage, setSelectedLanguage] = useState('All');
 
-  const fetchAllGitHubData = useCallback(async (isSilent = false) => {
+  const fetchAllGitHubData = useCallback(async () => {
     try {
-      if (!isSilent) setRefreshing(true);
-      
+      // 1. Primary: Try fetching from our server proxy /api/github with token & 5-min cache
+      const proxyRes = await fetch('/api/github');
+      if (proxyRes.ok) {
+        const payload = await proxyRes.json();
+        if (payload.user) setUser(payload.user);
+        if (Array.isArray(payload.repos) && payload.repos.length > 0) {
+          setRepos(payload.repos);
+        }
+        if (Array.isArray(payload.commits) && payload.commits.length > 0) {
+          setCommits(payload.commits);
+        }
+        setRateLimited(false);
+        setLastPolledTime(new Date().toLocaleTimeString());
+        setLoading(false);
+        return;
+      }
+
+      // 2. Fallback: Direct GitHub API query if proxy is unmounted
       const [userRes, reposRes] = await Promise.all([
         fetch(`https://api.github.com/users/${portfolioData.githubUsername}`),
         fetch(`https://api.github.com/users/${portfolioData.githubUsername}/repos?per_page=100&sort=pushed`),
@@ -148,7 +112,6 @@ export default function GitHubMetaDashboard() {
         setRepos(FALLBACK_REPOS);
         setCommits(FALLBACK_COMMITS);
         setLoading(false);
-        setRefreshing(false);
         return;
       }
 
@@ -163,11 +126,7 @@ export default function GitHubMetaDashboard() {
         if (Array.isArray(reposData) && reposData.length > 0) {
           fetchedRepos = reposData;
           setRepos(reposData);
-        } else {
-          setRepos(FALLBACK_REPOS);
         }
-      } else {
-        setRepos(FALLBACK_REPOS);
       }
 
       if (Array.isArray(fetchedRepos) && fetchedRepos.length > 0) {
@@ -215,8 +174,6 @@ export default function GitHubMetaDashboard() {
 
           setCommits(sortedGlobal5);
           setRateLimited(false);
-        } else {
-          setCommits(FALLBACK_COMMITS);
         }
       }
 
@@ -227,15 +184,14 @@ export default function GitHubMetaDashboard() {
       setCommits(FALLBACK_COMMITS);
     } finally {
       setLoading(false);
-      setRefreshing(false);
     }
   }, []);
 
   useEffect(() => {
-    fetchAllGitHubData(false);
+    fetchAllGitHubData();
 
     const interval = setInterval(() => {
-      fetchAllGitHubData(true);
+      fetchAllGitHubData();
     }, 30000);
 
     return () => clearInterval(interval);
