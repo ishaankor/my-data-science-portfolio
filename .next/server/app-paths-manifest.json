@@ -1,9 +1,9 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/page": "app/page.js",
   "/api/contact/route": "app/api/contact/route.js",
-  "/projects/page": "app/projects/page.js",
+  "/page": "app/page.js",
+  "/resume/page": "app/resume/page.js",
   "/meta/page": "app/meta/page.js",
-  "/contact/page": "app/contact/page.js",
-  "/resume/page": "app/resume/page.js"
+  "/projects/page": "app/projects/page.js",
+  "/contact/page": "app/contact/page.js"
 }

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { portfolioData } from '@/data/portfolio';
+import githubCache from '@/data/github-cache.json';
 import {
   Github,
   Code2,
@@ -13,7 +14,6 @@ import {
   Sparkles,
   GitBranch,
   Clock,
-  RefreshCw,
   Radio,
   AlertCircle,
 } from 'lucide-react';
@@ -66,90 +66,8 @@ function formatTimeAgo(dateString: string): string {
   return `${days}d ago`;
 }
 
-// Default Fallback Repositories for 100% UI stability during GitHub API rate limiting
-const FALLBACK_REPOS: GitHubRepo[] = [
-  {
-    id: 1,
-    name: 'my-data-science-portfolio',
-    language: 'TypeScript',
-    html_url: 'https://github.com/ishaankor/my-data-science-portfolio',
-    description: 'Modern Next.js 14 & Tailwind Data Science portfolio featuring live WebGL 3D scenes and GitHub analytics.',
-    pushed_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  },
-  {
-    id: 2,
-    name: 'my-personal-website',
-    language: 'TypeScript',
-    html_url: 'https://github.com/ishaankor/my-personal-website',
-    description: 'Personal web application showcasing machine learning projects, interactive demos, and AI automation.',
-    pushed_at: new Date(Date.now() - 3600000 * 4).toISOString(),
-    updated_at: new Date(Date.now() - 3600000 * 4).toISOString(),
-  },
-  {
-    id: 3,
-    name: 'Transformi',
-    language: 'Python',
-    html_url: 'https://github.com/ishaankor/Transformi',
-    description: 'AI-driven Discord automation bot with real-time web scraping, natural language parsing, and automated notifications.',
-    pushed_at: new Date(Date.now() - 3600000 * 24).toISOString(),
-    updated_at: new Date(Date.now() - 3600000 * 24).toISOString(),
-  },
-  {
-    id: 4,
-    name: 'NotesTaker-AI',
-    language: 'Python',
-    html_url: 'https://github.com/ishaankor/NotesTaker-AI',
-    description: 'Real-time lecture audio transcription and AI summarizer tool built with Whisper API and Gemini LLMs.',
-    pushed_at: new Date(Date.now() - 3600000 * 30).toISOString(),
-    updated_at: new Date(Date.now() - 3600000 * 30).toISOString(),
-  },
-  {
-    id: 5,
-    name: 'Datafy',
-    language: 'Python',
-    html_url: 'https://github.com/ishaankor/Datafy',
-    description: 'Automated data cleaning, feature extraction, and exploratory analysis pipeline for high-dimensional datasets.',
-    pushed_at: new Date(Date.now() - 3600000 * 36).toISOString(),
-    updated_at: new Date(Date.now() - 3600000 * 36).toISOString(),
-  },
-  {
-    id: 6,
-    name: 'Twitter-Scraping-AI',
-    language: 'Python',
-    html_url: 'https://github.com/ishaankor/Twitter-Scraping-AI',
-    description: 'Headless browser web scraper and computer vision pipeline for automated trend extraction and sentiment modeling.',
-    pushed_at: new Date(Date.now() - 3600000 * 48).toISOString(),
-    updated_at: new Date(Date.now() - 3600000 * 48).toISOString(),
-  },
-  {
-    id: 7,
-    name: 'Daily-Motivation',
-    language: 'Python',
-    html_url: 'https://github.com/ishaankor/Daily-Motivation',
-    description: 'Automated quote generator and sentiment notification bot deployed with serverless scheduled cron jobs.',
-    pushed_at: new Date(Date.now() - 3600000 * 72).toISOString(),
-    updated_at: new Date(Date.now() - 3600000 * 72).toISOString(),
-  },
-  {
-    id: 8,
-    name: 'Cognitive-ML-Models',
-    language: 'Jupyter Notebook',
-    html_url: 'https://github.com/ishaankor/Cognitive-ML-Models',
-    description: 'UCSD Cognitive Science ML research notebooks evaluating neural computation, backpropagation, and classification.',
-    pushed_at: new Date(Date.now() - 3600000 * 96).toISOString(),
-    updated_at: new Date(Date.now() - 3600000 * 96).toISOString(),
-  },
-  {
-    id: 9,
-    name: 'ishaankor',
-    language: 'Shell',
-    html_url: 'https://github.com/ishaankor/ishaankor',
-    description: 'GitHub Profile README containing interactive status badges, tech stack metrics, and open source activity logs.',
-    pushed_at: new Date(Date.now() - 3600000 * 120).toISOString(),
-    updated_at: new Date(Date.now() - 3600000 * 120).toISOString(),
-  },
-];
+// Full 23-Repository Registry Cache imported directly from data/github-cache.json
+const FALLBACK_REPOS: GitHubRepo[] = (githubCache?.repos || []) as GitHubRepo[];
 
 // Fallback commits in case GitHub API rate limit is reached
 const FALLBACK_COMMITS: CommitItem[] = [
