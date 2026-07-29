@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { Github, Code2, Activity, ExternalLink, GitBranch, Terminal } from 'lucide-react';
 import { portfolioData } from '@/data/portfolio';
+import githubCache from '@/data/github-cache.json';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
 interface GitHubUser {
@@ -18,17 +19,32 @@ interface GitHubRepo {
   html_url: string;
   description: string | null;
   pushed_at: string;
-  updated_at: string;
+  updated_at?: string;
 }
+
+const FALLBACK_REPOS: GitHubRepo[] = (githubCache?.repos || []) as unknown as GitHubRepo[];
 
 export default function GitHubAnalytics() {
   const [user, setUser] = useState<GitHubUser | null>(null);
-  const [repos, setRepos] = useState<GitHubRepo[]>([]);
+  const [repos, setRepos] = useState<GitHubRepo[]>(FALLBACK_REPOS);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchGitHubData() {
       try {
+        // 1. Primary: Try fetching from server proxy /api/github with 5,000 req/hr token & cache
+        const proxyRes = await fetch('/api/github');
+        if (proxyRes.ok) {
+          const payload = await proxyRes.json();
+          if (payload.user) setUser(payload.user);
+          if (Array.isArray(payload.repos) && payload.repos.length > 0) {
+            setRepos(payload.repos);
+          }
+          setLoading(false);
+          return;
+        }
+
+        // 2. Fallback: Direct REST API query
         const [userRes, reposRes] = await Promise.all([
           fetch(`https://api.github.com/users/${portfolioData.githubUsername}`),
           fetch(`https://api.github.com/users/${portfolioData.githubUsername}/repos?per_page=100&sort=pushed`)
@@ -38,7 +54,9 @@ export default function GitHubAnalytics() {
           const userData = await userRes.json();
           const reposData = await reposRes.json();
           setUser(userData);
-          setRepos(Array.isArray(reposData) ? reposData : []);
+          if (Array.isArray(reposData) && reposData.length > 0) {
+            setRepos(reposData);
+          }
         }
       } catch (err) {
         console.error("Failed to fetch GitHub analytics:", err);
@@ -50,7 +68,9 @@ export default function GitHubAnalytics() {
     fetchGitHubData();
   }, []);
 
-  const languageMap = repos.reduce((acc, repo) => {
+  const activeRepos = Array.isArray(repos) && repos.length > 0 ? repos : FALLBACK_REPOS;
+
+  const languageMap = activeRepos.reduce((acc, repo) => {
     if (repo.language) {
       acc[repo.language] = (acc[repo.language] || 0) + 1;
     }
@@ -61,7 +81,7 @@ export default function GitHubAnalytics() {
     .sort((a, b) => b[1] - a[1])
     .slice(0, 5);
 
-  const recentRepos = [...repos]
+  const recentRepos = [...activeRepos]
     .sort((a, b) => new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime())
     .slice(0, 3);
 
@@ -73,6 +93,7 @@ export default function GitHubAnalytics() {
     HTML: { hex: '#fb923c', bg: 'from-orange-400 to-red-500' },
     CSS: { hex: '#c084fc', bg: 'from-purple-400 to-violet-600' },
     Jupyter: { hex: '#f97316', bg: 'from-orange-500 to-amber-600' },
+    'Jupyter Notebook': { hex: '#f97316', bg: 'from-orange-500 to-amber-600' },
     Shell: { hex: '#4ade80', bg: 'from-emerald-400 to-teal-500' },
   };
 
@@ -123,7 +144,7 @@ export default function GitHubAnalytics() {
                 </div>
                 <div>
                   <p className="font-display text-3xl font-bold text-bone">
-                    {loading ? '...' : (user?.public_repos ?? portfolioData.stats[1].value)}
+                    {user?.public_repos ?? activeRepos.length ?? 23}
                   </p>
                   <p className="font-mono text-xs text-muted mt-1">Public Repos</p>
                 </div>
@@ -140,7 +161,7 @@ export default function GitHubAnalytics() {
                 </div>
                 <div>
                   <p className="font-display text-2xl font-bold text-bone truncate">
-                    {loading ? '...' : primaryLang}
+                    {primaryLang}
                   </p>
                   <p className="font-mono text-xs text-muted mt-1">Top Stack</p>
                 </div>
@@ -157,7 +178,7 @@ export default function GitHubAnalytics() {
                 </div>
                 <div>
                   <p className="font-display text-3xl font-bold text-bone">
-                    {loading ? '...' : repos.length}
+                    {activeRepos.length}
                   </p>
                   <p className="font-mono text-xs text-muted mt-1">Active Projects</p>
                 </div>
@@ -198,16 +219,10 @@ export default function GitHubAnalytics() {
                     <span>Code Languages Breakdown</span>
                   </h3>
 
-                  {loading ? (
-                    <div className="space-y-3 animate-pulse">
-                      {[1, 2, 3, 4].map((i) => (
-                        <div key={i} className="h-4 bg-ink rounded" />
-                      ))}
-                    </div>
-                  ) : topLanguages.length > 0 ? (
+                  {topLanguages.length > 0 ? (
                     <div className="space-y-3 font-mono">
                       {topLanguages.map(([lang, count]) => {
-                        const percent = Math.round((count / repos.length) * 100);
+                        const percent = Math.round((count / (activeRepos.length || 1)) * 100);
                         const langInfo = languageColors[lang] || { hex: '#f97316', bg: 'from-orange-500 to-amber-500' };
                         return (
                           <div key={lang} className="space-y-1.5">
@@ -250,13 +265,7 @@ export default function GitHubAnalytics() {
                     <span>Recent Repositories</span>
                   </h3>
 
-                  {loading ? (
-                    <div className="space-y-3 animate-pulse">
-                      {[1, 2, 3].map((i) => (
-                        <div key={i} className="h-12 bg-ink rounded-lg" />
-                      ))}
-                    </div>
-                  ) : recentRepos.length > 0 ? (
+                  {recentRepos.length > 0 ? (
                     <div className="space-y-3">
                       {recentRepos.map((repo) => (
                         <a
