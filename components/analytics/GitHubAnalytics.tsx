@@ -1,14 +1,12 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Github, Star, GitFork, Code2, Activity, ExternalLink } from 'lucide-react';
+import { Github, Code2, Activity, ExternalLink, GitBranch, Terminal } from 'lucide-react';
 import { portfolioData } from '@/data/portfolio';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
 interface GitHubUser {
   public_repos: number;
-  followers: number;
-  following: number;
   avatar_url: string;
   html_url: string;
   bio: string;
@@ -16,11 +14,10 @@ interface GitHubUser {
 
 interface GitHubRepo {
   name: string;
-  stargazers_count: number;
   language: string | null;
   html_url: string;
   description: string | null;
-  forks_count: number;
+  pushed_at: string;
   updated_at: string;
 }
 
@@ -53,8 +50,6 @@ export default function GitHubAnalytics() {
     fetchGitHubData();
   }, []);
 
-  const totalStars = repos.reduce((sum, repo) => sum + (repo.stargazers_count || 0), 0);
-
   const languageMap = repos.reduce((acc, repo) => {
     if (repo.language) {
       acc[repo.language] = (acc[repo.language] || 0) + 1;
@@ -66,8 +61,8 @@ export default function GitHubAnalytics() {
     .sort((a, b) => b[1] - a[1])
     .slice(0, 5);
 
-  const popularRepos = [...repos]
-    .sort((a, b) => (b.stargazers_count || 0) - (a.stargazers_count || 0))
+  const recentRepos = [...repos]
+    .sort((a, b) => new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime())
     .slice(0, 3);
 
   const languageColors: Record<string, { hex: string; bg: string }> = {
@@ -80,6 +75,8 @@ export default function GitHubAnalytics() {
     Jupyter: { hex: '#f97316', bg: 'from-orange-500 to-amber-600' },
     Shell: { hex: '#4ade80', bg: 'from-emerald-400 to-teal-500' },
   };
+
+  const primaryLang = topLanguages.length > 0 ? topLanguages[0][0] : 'Python';
 
   return (
     <section className="border-t border-line/60 py-20 sm:py-28 relative">
@@ -134,35 +131,35 @@ export default function GitHubAnalytics() {
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.2}>
-              <div className="rounded-xl border border-amber-500/20 bg-surface p-5 shadow-panel flex flex-col justify-between h-full hover:border-amber-500/40 transition-colors">
-                <div className="flex items-center justify-between text-amber-400 mb-2">
-                  <div className="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
-                    <Star className="w-4 h-4 text-amber-400" />
+              <div className="rounded-xl border border-purple-500/20 bg-surface p-5 shadow-panel flex flex-col justify-between h-full hover:border-purple-500/40 transition-colors">
+                <div className="flex items-center justify-between text-purple-400 mb-2">
+                  <div className="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center">
+                    <Terminal className="w-4 h-4 text-purple-400" />
                   </div>
-                  <span className="font-mono text-[0.65rem] text-amber-400/80 uppercase">Stars</span>
+                  <span className="font-mono text-[0.65rem] text-purple-400/80 uppercase">Primary</span>
                 </div>
                 <div>
-                  <p className="font-display text-3xl font-bold text-bone">
-                    {loading ? '...' : totalStars}
+                  <p className="font-display text-2xl font-bold text-bone truncate">
+                    {loading ? '...' : primaryLang}
                   </p>
-                  <p className="font-mono text-xs text-muted mt-1">Total Stars</p>
+                  <p className="font-mono text-xs text-muted mt-1">Top Stack</p>
                 </div>
               </div>
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.25}>
-              <div className="rounded-xl border border-purple-500/20 bg-surface p-5 shadow-panel flex flex-col justify-between h-full hover:border-purple-500/40 transition-colors">
-                <div className="flex items-center justify-between text-purple-400 mb-2">
-                  <div className="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center">
-                    <GitFork className="w-4 h-4 text-purple-400" />
+              <div className="rounded-xl border border-cyan-500/20 bg-surface p-5 shadow-panel flex flex-col justify-between h-full hover:border-cyan-500/40 transition-colors">
+                <div className="flex items-center justify-between text-cyan-400 mb-2">
+                  <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
+                    <GitBranch className="w-4 h-4 text-cyan-400" />
                   </div>
-                  <span className="font-mono text-[0.65rem] text-purple-400/80 uppercase">Network</span>
+                  <span className="font-mono text-[0.65rem] text-cyan-400/80 uppercase">Active</span>
                 </div>
                 <div>
                   <p className="font-display text-3xl font-bold text-bone">
-                    {loading ? '...' : (user?.followers ?? 12)}
+                    {loading ? '...' : repos.length}
                   </p>
-                  <p className="font-mono text-xs text-muted mt-1">Followers</p>
+                  <p className="font-mono text-xs text-muted mt-1">Active Projects</p>
                 </div>
               </div>
             </ScrollReveal>
@@ -243,14 +240,14 @@ export default function GitHubAnalytics() {
             </ScrollReveal>
           </div>
 
-          {/* Popular Repositories List */}
+          {/* Recent Repositories List */}
           <div className="lg:col-span-4">
             <ScrollReveal direction="up" delay={0.35}>
               <div className="rounded-xl border border-line bg-surface p-6 shadow-panel flex flex-col justify-between h-full">
                 <div>
                   <h3 className="font-display text-lg font-semibold text-bone mb-4 flex items-center gap-2">
-                    <Star className="w-4 h-4 text-amber-400" />
-                    <span>Popular Repositories</span>
+                    <GitBranch className="w-4 h-4 text-ember" />
+                    <span>Recent Repositories</span>
                   </h3>
 
                   {loading ? (
@@ -259,18 +256,18 @@ export default function GitHubAnalytics() {
                         <div key={i} className="h-12 bg-ink rounded-lg" />
                       ))}
                     </div>
-                  ) : popularRepos.length > 0 ? (
+                  ) : recentRepos.length > 0 ? (
                     <div className="space-y-3">
-                      {popularRepos.map((repo) => (
+                      {recentRepos.map((repo) => (
                         <a
                           key={repo.name}
                           href={repo.html_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="group p-3 rounded-lg bg-ink/70 border border-line hover:border-amber-500/40 flex items-center justify-between transition-colors"
+                          className="group p-3 rounded-lg bg-ink/70 border border-line hover:border-ember/40 flex items-center justify-between transition-colors"
                         >
                           <div className="overflow-hidden pr-2">
-                            <p className="font-mono text-xs font-semibold text-bone group-hover:text-amber-400 truncate">
+                            <p className="font-mono text-xs font-semibold text-bone group-hover:text-ember truncate">
                               {repo.name}
                             </p>
                             <p className="text-[0.72rem] text-muted truncate mt-0.5">
@@ -278,8 +275,7 @@ export default function GitHubAnalytics() {
                             </p>
                           </div>
                           <div className="flex items-center gap-1 font-mono text-xs text-muted shrink-0">
-                            <Star className="w-3.5 h-3.5 text-amber-400" />
-                            <span>{repo.stargazers_count}</span>
+                            <span>{repo.language || 'Code'}</span>
                           </div>
                         </a>
                       ))}
@@ -299,10 +295,10 @@ export default function GitHubAnalytics() {
                     href={`https://github.com/${portfolioData.githubUsername}?tab=repositories`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-amber-400 inline-flex items-center gap-1"
+                    className="hover:text-ember inline-flex items-center gap-1"
                   >
                     <span>View all</span>
-                    <ExternalLink className="w-3 h-3 text-amber-400" />
+                    <ExternalLink className="w-3 h-3 text-ember" />
                   </a>
                 </div>
               </div>

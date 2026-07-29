@@ -1,11 +1,9 @@
 'use client';
 
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { portfolioData } from '@/data/portfolio';
 import {
   Github,
-  Star,
-  GitFork,
   Code2,
   Activity,
   ExternalLink,
@@ -17,6 +15,8 @@ import {
   Sparkles,
   GitBranch,
   Clock,
+  RefreshCw,
+  Radio,
 } from 'lucide-react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
@@ -27,19 +27,15 @@ interface GitHubUser {
   name: string;
   bio: string;
   public_repos: number;
-  followers: number;
-  following: number;
   created_at: string;
 }
 
 interface GitHubRepo {
   id: number;
   name: string;
-  stargazers_count: number;
   language: string | null;
   html_url: string;
   description: string | null;
-  forks_count: number;
   pushed_at: string;
   updated_at: string;
   topics?: string[];
@@ -58,11 +54,23 @@ interface GitHubEvent {
   created_at: string;
 }
 
+interface DirectCommitItem {
+  sha: string;
+  shortSha: string;
+  message: string;
+  repoName: string;
+  repoUrl: string;
+  commitUrl: string;
+  date: string;
+  timeAgo: string;
+}
+
 function formatTimeAgo(dateString: string): string {
   const date = new Date(dateString);
   const now = new Date();
   const seconds = Math.floor((now.getTime() - date.getTime()) / 1000);
 
+  if (isNaN(seconds) || seconds < 0) return 'just now';
   if (seconds < 60) return 'just now';
   const minutes = Math.floor(seconds / 60);
   if (minutes < 60) return `${minutes}m ago`;
@@ -76,76 +84,122 @@ export default function GitHubMetaDashboard() {
   const [user, setUser] = useState<GitHubUser | null>(null);
   const [repos, setRepos] = useState<GitHubRepo[]>([]);
   const [events, setEvents] = useState<GitHubEvent[]>([]);
+  const [directCommits, setDirectCommits] = useState<DirectCommitItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+  const [lastPolledTime, setLastPolledTime] = useState<string>('');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedLanguage, setSelectedLanguage] = useState('All');
 
-  useEffect(() => {
-    async function fetchAllGitHubData() {
-      try {
-        const [userRes, reposRes, eventsRes] = await Promise.all([
-          fetch(`https://api.github.com/users/${portfolioData.githubUsername}`),
-          fetch(`https://api.github.com/users/${portfolioData.githubUsername}/repos?per_page=100&sort=pushed`),
-          fetch(`https://api.github.com/users/${portfolioData.githubUsername}/events?per_page=30`),
-        ]);
+  const fetchAllGitHubData = useCallback(async (isSilent = false) => {
+    try {
+      if (!isSilent) setRefreshing(true);
+      const [userRes, reposRes, eventsRes] = await Promise.all([
+        fetch(`https://api.github.com/users/${portfolioData.githubUsername}`),
+        fetch(`https://api.github.com/users/${portfolioData.githubUsername}/repos?per_page=100&sort=pushed`),
+        fetch(`https://api.github.com/users/${portfolioData.githubUsername}/events?per_page=30`),
+      ]);
 
-        if (userRes.ok && reposRes.ok) {
-          const userData = await userRes.json();
-          const reposData = await reposRes.json();
-          setUser(userData);
-          setRepos(Array.isArray(reposData) ? reposData : []);
-        }
-
-        if (eventsRes.ok) {
-          const eventsData = await eventsRes.json();
-          setEvents(Array.isArray(eventsData) ? eventsData : []);
-        }
-      } catch (err) {
-        console.error("Failed to fetch Meta GitHub data:", err);
-      } finally {
-        setLoading(false);
+      let fetchedRepos: GitHubRepo[] = [];
+      if (userRes.ok && reposRes.ok) {
+        const userData = await userRes.json();
+        fetchedRepos = await reposRes.json();
+        setUser(userData);
+        setRepos(Array.isArray(fetchedRepos) ? fetchedRepos : []);
       }
-    }
 
-    fetchAllGitHubData();
+      if (eventsRes.ok) {
+        const eventsData = await eventsRes.json();
+        setEvents(Array.isArray(eventsData) ? eventsData : []);
+      }
+
+      // Fetch the exact latest commit for each of top 6 recently pushed repos
+      if (Array.isArray(fetchedRepos) && fetchedRepos.length > 0) {
+        const top6PushedRepos = [...fetchedRepos]
+          .sort((a, b) => new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime())
+          .slice(0, 6);
+
+        const commitPromises = top6PushedRepos.map(async (repo) => {
+          try {
+            const res = await fetch(`https://api.github.com/repos/${portfolioData.githubUsername}/${repo.name}/commits?per_page=1`);
+            if (res.ok) {
+              const data = await res.json();
+              if (Array.isArray(data) && data[0]) {
+                const c = data[0];
+                return {
+                  sha: c.sha,
+                  shortSha: c.sha.substring(0, 7),
+                  message: c.commit?.message || 'Update repository',
+                  repoName: repo.name,
+                  repoUrl: repo.html_url,
+                  commitUrl: c.html_url || `${repo.html_url}/commit/${c.sha}`,
+                  date: c.commit?.committer?.date || repo.pushed_at,
+                  timeAgo: formatTimeAgo(c.commit?.committer?.date || repo.pushed_at),
+                };
+              }
+            }
+          } catch (e) {
+            console.error(`Failed commit fetch for ${repo.name}:`, e);
+          }
+          return null;
+        });
+
+        const fetchedCommits = (await Promise.all(commitPromises)).filter(Boolean) as DirectCommitItem[];
+        setDirectCommits(fetchedCommits);
+      }
+
+      setLastPolledTime(new Date().toLocaleTimeString());
+    } catch (err) {
+      console.error("Failed to fetch Meta GitHub data:", err);
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
   }, []);
 
-  const totalStars = useMemo(() => repos.reduce((sum, r) => sum + (r.stargazers_count || 0), 0), [repos]);
-  const totalForks = useMemo(() => repos.reduce((sum, r) => sum + (r.forks_count || 0), 0), [repos]);
+  useEffect(() => {
+    fetchAllGitHubData(false);
 
-  // Extract individual commit objects from PushEvent payloads across all user repos
-  const recentCommits = useMemo(() => {
-    const commitList: {
-      sha: string;
-      shortSha: string;
-      message: string;
-      repoName: string;
-      repoUrl: string;
-      commitUrl: string;
-      date: string;
-      timeAgo: string;
-    }[] = [];
+    // Automated background live polling every 25 seconds
+    const interval = setInterval(() => {
+      fetchAllGitHubData(true);
+    }, 25000);
+
+    return () => clearInterval(interval);
+  }, [fetchAllGitHubData]);
+
+  // Merge direct repository commits + event commits into an ordered Last 5 Commits list
+  const last5Commits = useMemo(() => {
+    const commitMap = new Map<string, DirectCommitItem>();
+
+    directCommits.forEach((item) => {
+      commitMap.set(item.sha, item);
+    });
 
     events.forEach((event) => {
       if (event.type === 'PushEvent' && event.payload.commits) {
         const shortRepo = event.repo.name.replace(`${portfolioData.githubUsername}/`, '');
         event.payload.commits.forEach((commit) => {
-          commitList.push({
-            sha: commit.sha,
-            shortSha: commit.sha.substring(0, 7),
-            message: commit.message,
-            repoName: shortRepo,
-            repoUrl: `https://github.com/${event.repo.name}`,
-            commitUrl: `https://github.com/${event.repo.name}/commit/${commit.sha}`,
-            date: event.created_at,
-            timeAgo: formatTimeAgo(event.created_at),
-          });
+          if (!commitMap.has(commit.sha)) {
+            commitMap.set(commit.sha, {
+              sha: commit.sha,
+              shortSha: commit.sha.substring(0, 7),
+              message: commit.message,
+              repoName: shortRepo,
+              repoUrl: `https://github.com/${event.repo.name}`,
+              commitUrl: `https://github.com/${event.repo.name}/commit/${commit.sha}`,
+              date: event.created_at,
+              timeAgo: formatTimeAgo(event.created_at),
+            });
+          }
         });
       }
     });
 
-    return commitList.slice(0, 10);
-  }, [events]);
+    return Array.from(commitMap.values())
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      .slice(0, 5);
+  }, [directCommits, events]);
 
   const languageMap = useMemo(() => {
     return repos.reduce((acc, repo) => {
@@ -178,6 +232,12 @@ export default function GitHubMetaDashboard() {
     Jupyter: { hex: '#f97316', bg: 'from-orange-500 to-amber-600' },
     Shell: { hex: '#4ade80', bg: 'from-emerald-400 to-teal-500' },
   };
+
+  const topLanguages = useMemo(() => {
+    return Object.entries(languageMap).sort((a, b) => b[1] - a[1]);
+  }, [languageMap]);
+
+  const primaryLang = topLanguages.length > 0 ? topLanguages[0][0] : 'Python';
 
   // Generate 52-week activity heatmap blocks
   const activityWeeks = useMemo(() => {
@@ -250,7 +310,7 @@ export default function GitHubMetaDashboard() {
             </a>
           </div>
 
-          {/* Key Metrics Counter Grid */}
+          {/* Focused Metrics Counter Grid */}
           <div className="mt-8 pt-8 border-t border-line grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono">
             <div className="p-4 rounded-lg bg-ink/70 border border-line">
               <span className="text-[0.68rem] text-indigo-400 uppercase tracking-wider block mb-1">Public Repos</span>
@@ -258,25 +318,28 @@ export default function GitHubMetaDashboard() {
             </div>
 
             <div className="p-4 rounded-lg bg-ink/70 border border-line">
-              <span className="text-[0.68rem] text-amber-400 uppercase tracking-wider block mb-1">Total Stargazers</span>
-              <span className="font-display text-2xl font-bold text-bone">{loading ? '...' : totalStars}</span>
+              <span className="text-[0.68rem] text-purple-400 uppercase tracking-wider block mb-1">Top Stack</span>
+              <span className="font-display text-xl font-bold text-bone truncate block">{loading ? '...' : primaryLang}</span>
             </div>
 
             <div className="p-4 rounded-lg bg-ink/70 border border-line">
-              <span className="text-[0.68rem] text-purple-400 uppercase tracking-wider block mb-1">Total Forks</span>
-              <span className="font-display text-2xl font-bold text-bone">{loading ? '...' : totalForks}</span>
+              <span className="text-[0.68rem] text-cyan-400 uppercase tracking-wider block mb-1">Active Projects</span>
+              <span className="font-display text-2xl font-bold text-bone">{loading ? '...' : repos.length}</span>
             </div>
 
             <div className="p-4 rounded-lg bg-ink/70 border border-line">
-              <span className="text-[0.68rem] text-emerald-400 uppercase tracking-wider block mb-1">Followers</span>
-              <span className="font-display text-2xl font-bold text-bone">{loading ? '...' : (user?.followers ?? 12)}</span>
+              <span className="text-[0.68rem] text-emerald-400 uppercase tracking-wider block mb-1">Dev Status</span>
+              <span className="font-mono text-xs font-semibold text-emerald-400 flex items-center gap-1.5 mt-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                Active Contributor
+              </span>
             </div>
           </div>
 
         </div>
       </ScrollReveal>
 
-      {/* 2. DEDICATED LIVE REPOSITORY COMMIT FEED (The new section requested!) */}
+      {/* 2. DEDICATED LIVE REPOSITORY COMMIT FEED (With Auto Background Polling) */}
       <ScrollReveal direction="up" delay={0.2}>
         <div className="rounded-xl border border-line bg-surface p-7 shadow-panel">
           
@@ -290,14 +353,24 @@ export default function GitHubMetaDashboard() {
               </div>
               <h2 className="font-mono text-sm font-bold text-bone flex items-center gap-2 ml-2">
                 <TerminalIcon className="w-4 h-4 text-ember" />
-                <span>$ git log --all --oneline</span>
+                <span>$ git log -n 5 --all --oneline</span>
               </h2>
             </div>
 
             <div className="flex items-center gap-3 font-mono text-xs">
+              <button
+                onClick={() => fetchAllGitHubData(false)}
+                disabled={refreshing}
+                className="px-2.5 py-1 rounded bg-ink border border-line text-muted hover:text-bone hover:border-ember flex items-center gap-1.5 transition-colors disabled:opacity-50"
+                title="Force refresh commits"
+              >
+                <RefreshCw className={`w-3.5 h-3.5 text-ember ${refreshing ? 'animate-spin' : ''}`} />
+                <span>Sync Now</span>
+              </button>
+
               <span className="px-2.5 py-1 rounded bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-                Live Global Commits
+                <Radio className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
+                <span>Live Polling (25s)</span>
               </span>
             </div>
           </div>
@@ -309,9 +382,9 @@ export default function GitHubMetaDashboard() {
                 <div key={i} className="h-12 bg-ink rounded-lg" />
               ))}
             </div>
-          ) : recentCommits.length > 0 ? (
+          ) : last5Commits.length > 0 ? (
             <div className="space-y-3 font-mono text-xs">
-              {recentCommits.map((commit, idx) => (
+              {last5Commits.map((commit, idx) => (
                 <div
                   key={`${commit.sha}-${idx}`}
                   className="p-4 rounded-lg bg-ink/80 border border-line hover:border-ember/50 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-3 group"
@@ -327,14 +400,14 @@ export default function GitHubMetaDashboard() {
                       {commit.shortSha}
                     </a>
 
-                    {/* Repository Name Pill */}
+                    {/* Target Repository Name Pill */}
                     <a
                       href={commit.repoUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-2 py-0.5 rounded bg-surface border border-line text-bone-dim hover:text-bone shrink-0 font-semibold flex items-center gap-1"
+                      className="px-2.5 py-0.5 rounded bg-surface border border-line text-bone-dim hover:text-bone shrink-0 font-semibold flex items-center gap-1.5"
                     >
-                      <GitBranch className="w-3 h-3 text-muted" />
+                      <GitBranch className="w-3 h-3 text-ember" />
                       <span>{commit.repoName}</span>
                     </a>
 
@@ -346,17 +419,18 @@ export default function GitHubMetaDashboard() {
 
                   {/* Date & Link */}
                   <div className="flex items-center gap-3 text-muted shrink-0 text-[0.7rem] self-end sm:self-auto">
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3 h-3" />
+                    <span className="flex items-center gap-1 text-bone-dim">
+                      <Clock className="w-3 h-3 text-ember" />
                       {commit.timeAgo}
                     </span>
                     <a
                       href={commit.commitUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:text-ember transition-colors"
+                      className="hover:text-ember transition-colors text-muted hover:underline flex items-center gap-1"
                       title="View Commit Diff on GitHub"
                     >
+                      <span>Diff</span>
                       <ExternalLink className="w-3.5 h-3.5" />
                     </a>
                   </div>
@@ -366,6 +440,13 @@ export default function GitHubMetaDashboard() {
           ) : (
             <div className="p-8 text-center font-mono text-xs text-muted rounded-lg bg-ink border border-line">
               <p>Commits pushed across public repositories will stream live right here.</p>
+            </div>
+          )}
+
+          {lastPolledTime && (
+            <div className="mt-4 pt-3 border-t border-line/60 flex items-center justify-between font-mono text-[0.68rem] text-muted">
+              <span>Auto-updates in background every 25 seconds</span>
+              <span>Last checked: {lastPolledTime}</span>
             </div>
           )}
 
@@ -536,8 +617,8 @@ export default function GitHubMetaDashboard() {
                         <span className="px-2 py-0.5 rounded bg-ink border border-line text-muted">Code</span>
                       )}
                       <span className="text-muted flex items-center gap-1">
-                        <Star className="w-3.5 h-3.5 text-amber-400" />
-                        {repo.stargazers_count}
+                        <GitBranch className="w-3.5 h-3.5 text-ember" />
+                        <span>Active</span>
                       </span>
                     </div>
 
@@ -551,7 +632,7 @@ export default function GitHubMetaDashboard() {
 
                   <div className="pt-4 border-t border-line/60 flex items-center justify-between font-mono text-xs">
                     <span className="text-muted text-[0.68rem]">
-                      Updated {new Date(repo.pushed_at).toLocaleDateString()}
+                      Pushed {new Date(repo.pushed_at).toLocaleDateString()}
                     </span>
                     <a
                       href={repo.html_url}
