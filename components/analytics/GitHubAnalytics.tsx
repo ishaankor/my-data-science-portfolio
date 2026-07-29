@@ -32,7 +32,7 @@ export default function GitHubAnalytics() {
   useEffect(() => {
     async function fetchGitHubData() {
       try {
-        // 1. Primary: Try fetching from server proxy /api/github with 5,000 req/hr token & cache
+        // Query server proxy /api/github exclusively
         const proxyRes = await fetch('/api/github');
         if (proxyRes.ok) {
           const payload = await proxyRes.json();
@@ -40,26 +40,9 @@ export default function GitHubAnalytics() {
           if (Array.isArray(payload.repos) && payload.repos.length > 0) {
             setRepos(payload.repos);
           }
-          setLoading(false);
-          return;
         }
-
-        // 2. Fallback: Direct REST API query
-        const [userRes, reposRes] = await Promise.all([
-          fetch(`https://api.github.com/users/${portfolioData.githubUsername}`),
-          fetch(`https://api.github.com/users/${portfolioData.githubUsername}/repos?per_page=100&sort=pushed`)
-        ]);
-
-        if (userRes.ok && reposRes.ok) {
-          const userData = await userRes.json();
-          const reposData = await reposRes.json();
-          setUser(userData);
-          if (Array.isArray(reposData) && reposData.length > 0) {
-            setRepos(reposData);
-          }
-        }
-      } catch (err) {
-        console.error("Failed to fetch GitHub analytics:", err);
+      } catch {
+        // Fallback silently to prebuilt github-cache.json without hitting GitHub API from browser
       } finally {
         setLoading(false);
       }
