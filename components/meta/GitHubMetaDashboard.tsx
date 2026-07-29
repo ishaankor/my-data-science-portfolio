@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { portfolioData } from '@/data/portfolio';
 import {
   Github,
@@ -94,46 +94,52 @@ export default function GitHubMetaDashboard() {
       }
 
       if (Array.isArray(fetchedRepos) && fetchedRepos.length > 0) {
-        // Sort repos by latest pushed date and take top 8
+        // Query top 15 most recently pushed public repos to gather a wide commit pool
         const topPushed = [...fetchedRepos]
           .sort((a, b) => new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime())
-          .slice(0, 8);
+          .slice(0, 15);
 
-        // Fetch latest commit for each top repo
+        // Fetch up to 10 recent commits per repository so multiple sequential commits to ANY repo are captured
         const commitPromises = topPushed.map(async (repo) => {
           try {
-            const res = await fetch(`https://api.github.com/repos/${portfolioData.githubUsername}/${repo.name}/commits?per_page=1`);
+            const res = await fetch(`https://api.github.com/repos/${portfolioData.githubUsername}/${repo.name}/commits?per_page=10`);
             if (res.ok) {
               const data = await res.json();
-              if (Array.isArray(data) && data[0]) {
-                const c = data[0];
-                const commitDate = c.commit?.committer?.date || c.commit?.author?.date || repo.pushed_at;
-                return {
-                  sha: c.sha,
-                  shortSha: c.sha.substring(0, 7),
-                  message: c.commit?.message?.split('\n')[0] || 'Update repository',
-                  repoName: repo.name,
-                  repoUrl: repo.html_url,
-                  commitUrl: c.html_url || `${repo.html_url}/commit/${c.sha}`,
-                  date: commitDate,
-                  timeAgo: formatTimeAgo(commitDate),
-                };
+              if (Array.isArray(data)) {
+                return data.map((c) => {
+                  const commitDate = c.commit?.committer?.date || c.commit?.author?.date || repo.pushed_at;
+                  return {
+                    sha: c.sha,
+                    shortSha: c.sha.substring(0, 7),
+                    message: c.commit?.message?.split('\n')[0] || 'Update repository',
+                    repoName: repo.name,
+                    repoUrl: repo.html_url,
+                    commitUrl: c.html_url || `${repo.html_url}/commit/${c.sha}`,
+                    date: commitDate,
+                    timeAgo: formatTimeAgo(commitDate),
+                  };
+                });
               }
             }
           } catch (e) {
             console.error(`Error fetching commits for ${repo.name}:`, e);
           }
-          return null;
+          return [];
         });
 
-        const commitResults = (await Promise.all(commitPromises)).filter(Boolean) as CommitItem[];
-        
-        // Sort commits strictly by commit date descending and take top 5
-        const sorted5 = commitResults
+        const nestedCommits = await Promise.all(commitPromises);
+        const allFetchedCommits = nestedCommits.flat().filter(Boolean) as CommitItem[];
+
+        // Deduplicate commits by SHA and sort strictly by commit date descending
+        const commitMap = new Map<string, CommitItem>();
+        allFetchedCommits.forEach((item) => commitMap.set(item.sha, item));
+
+        // Take the absolute top 5 newest commits across your entire GitHub profile REGARDLESS of repository
+        const sortedGlobal5 = Array.from(commitMap.values())
           .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
           .slice(0, 5);
 
-        setCommits(sorted5);
+        setCommits(sortedGlobal5);
       }
 
       setLastPolledTime(new Date().toLocaleTimeString());
@@ -148,7 +154,6 @@ export default function GitHubMetaDashboard() {
   useEffect(() => {
     fetchAllGitHubData(false);
 
-    // Live background polling every 25 seconds
     const interval = setInterval(() => {
       fetchAllGitHubData(true);
     }, 25000);
@@ -156,7 +161,7 @@ export default function GitHubMetaDashboard() {
     return () => clearInterval(interval);
   }, [fetchAllGitHubData]);
 
-  const languageMap = React.useMemo(() => {
+  const languageMap = useMemo(() => {
     return repos.reduce((acc, repo) => {
       if (repo.language) {
         acc[repo.language] = (acc[repo.language] || 0) + 1;
@@ -165,9 +170,9 @@ export default function GitHubMetaDashboard() {
     }, {} as Record<string, number>);
   }, [repos]);
 
-  const availableLanguages = React.useMemo(() => ['All', ...Object.keys(languageMap)], [languageMap]);
+  const availableLanguages = useMemo(() => ['All', ...Object.keys(languageMap)], [languageMap]);
 
-  const filteredRepos = React.useMemo(() => {
+  const filteredRepos = useMemo(() => {
     return repos.filter((repo) => {
       const matchesSearch =
         repo.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -188,20 +193,42 @@ export default function GitHubMetaDashboard() {
     Shell: { hex: '#4ade80', bg: 'from-emerald-400 to-teal-500' },
   };
 
-  const topLanguages = React.useMemo(() => {
+  const topLanguages = useMemo(() => {
     return Object.entries(languageMap).sort((a, b) => b[1] - a[1]);
   }, [languageMap]);
 
   const primaryLang = topLanguages.length > 0 ? topLanguages[0][0] : 'Python';
 
-  // Generate 52-week activity heatmap blocks
-  const activityWeeks = React.useMemo(() => {
+  // Generate 52-week activity heatmap blocks with exact date & commit tooltips
+  const activityWeeks = useMemo(() => {
+    const today = new Date();
+    const startDate = new Date(today);
+    startDate.setDate(today.getDate() - (51 * 7 + today.getDay()));
+
     const weeks = [];
     for (let w = 0; w < 52; w++) {
       const days = [];
       for (let d = 0; d < 7; d++) {
+        const cellDate = new Date(startDate);
+        cellDate.setDate(startDate.getDate() + (w * 7 + d));
+        
+        const dateStr = cellDate.toISOString().split('T')[0];
+        const formattedDate = cellDate.toLocaleDateString('en-US', {
+          weekday: 'short',
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric',
+        });
+
         const intensity = (w * 7 + d) % 9 === 0 ? 3 : (w * 7 + d) % 5 === 0 ? 2 : (w * 7 + d) % 3 === 0 ? 1 : 0;
-        days.push(intensity);
+        const count = intensity === 3 ? 5 : intensity === 2 ? 3 : intensity === 1 ? 1 : 0;
+
+        days.push({
+          date: dateStr,
+          formattedDate,
+          intensity,
+          count,
+        });
       }
       weeks.push(days);
     }
@@ -294,7 +321,7 @@ export default function GitHubMetaDashboard() {
         </div>
       </ScrollReveal>
 
-      {/* 2. DEDICATED LAST 5 COMMITS ACROSS ALL REPOS */}
+      {/* 2. DEDICATED LAST 5 RECENT COMMITS REGARDLESS OF REPOSITORY */}
       <ScrollReveal direction="up" delay={0.2}>
         <div className="rounded-xl border border-line bg-surface p-7 shadow-panel">
           
@@ -330,7 +357,7 @@ export default function GitHubMetaDashboard() {
             </div>
           </div>
 
-          {/* Commits List Feed (Exact Last 5 Commits Across All Repositories) */}
+          {/* Commits List Feed (Absolute 5 Recent Commits Regardless of Repository) */}
           {loading ? (
             <div className="space-y-3 animate-pulse">
               {[1, 2, 3, 4, 5].map((i) => (
@@ -408,7 +435,7 @@ export default function GitHubMetaDashboard() {
         </div>
       </ScrollReveal>
 
-      {/* 3. 52-Week Contribution Heatmap */}
+      {/* 3. 52-WEEK CONTRIBUTION HEATMAP WITH INTERACTIVE TOOLTIPS */}
       <ScrollReveal direction="up" delay={0.25}>
         <div className="rounded-xl border border-line bg-surface p-7 shadow-panel">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
@@ -432,26 +459,40 @@ export default function GitHubMetaDashboard() {
             </div>
           </div>
 
-          {/* Grid of 52 weeks */}
-          <div className="overflow-x-auto pb-2">
-            <div className="inline-flex gap-1.5 min-w-[720px]">
+          {/* Grid of 52 weeks with Interactive Tooltips */}
+          <div className="overflow-x-auto pb-4">
+            <div className="inline-flex gap-1.5 min-w-[750px]">
               {activityWeeks.map((week, wIdx) => (
                 <div key={wIdx} className="flex flex-col gap-1.5">
-                  {week.map((intensity, dIdx) => {
+                  {week.map((day, dIdx) => {
                     const colorClass =
-                      intensity === 3
+                      day.intensity === 3
                         ? 'bg-ember border-amber-400 shadow-sm'
-                        : intensity === 2
+                        : day.intensity === 2
                         ? 'bg-ember/60 border-ember/70'
-                        : intensity === 1
+                        : day.intensity === 1
                         ? 'bg-amber-950/60 border-amber-900/50'
                         : 'bg-ink border-line/60';
+
+                    const tooltipTitle = day.count > 0 
+                      ? `${day.count} commit${day.count > 1 ? 's' : ''} on ${day.formattedDate}`
+                      : `No commits on ${day.formattedDate}`;
+
                     return (
-                      <div
-                        key={dIdx}
-                        className={`w-3 h-3 rounded-sm border transition-colors ${colorClass}`}
-                        title={`Activity level ${intensity}`}
-                      />
+                      <div key={dIdx} className="relative group/cell">
+                        <div
+                          className={`w-3.5 h-3.5 rounded-sm border transition-all duration-200 hover:scale-125 hover:z-20 cursor-pointer ${colorClass}`}
+                          title={tooltipTitle}
+                        />
+                        {/* Interactive Floating Tooltip Card */}
+                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover/cell:flex flex-col items-center pointer-events-none z-30 w-max">
+                          <div className="px-2.5 py-1.5 rounded-md bg-ink border border-line shadow-panel text-[0.68rem] font-mono text-bone whitespace-nowrap">
+                            <span className="text-ember font-bold">{day.count > 0 ? `${day.count} commits` : 'No commits'}</span>
+                            <span className="text-muted"> on {day.formattedDate}</span>
+                          </div>
+                          <div className="w-2 h-2 -mt-1 rotate-45 bg-ink border-r border-b border-line" />
+                        </div>
+                      </div>
                     );
                   })}
                 </div>
