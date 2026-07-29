@@ -98,7 +98,6 @@ export default function GitHubMetaDashboard() {
         setLastPolledTime(new Date().toLocaleTimeString());
       }
     } catch {
-      // Fallback cleanly to prebuilt github-cache.json without hitting GitHub API from browser
     } finally {
       setLoading(false);
     }
@@ -106,6 +105,10 @@ export default function GitHubMetaDashboard() {
 
   useEffect(() => {
     fetchAllGitHubData();
+
+    const commitStreamInterval = setInterval(() => {
+      fetchAllGitHubData();
+    }, 60 * 1000);
 
     const now = new Date();
     const midnight = new Date(now);
@@ -121,6 +124,7 @@ export default function GitHubMetaDashboard() {
     }, msUntilMidnight);
 
     return () => {
+      clearInterval(commitStreamInterval);
       clearTimeout(midnightTimeout);
       if (dailyInterval) clearInterval(dailyInterval);
     };
@@ -330,7 +334,7 @@ export default function GitHubMetaDashboard() {
             <div className="flex items-center gap-3 font-mono text-xs">
               <span className="px-2.5 py-1 rounded bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center gap-1.5">
                 <Radio className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
-                <span>Syncs Daily (00:00)</span>
+                <span>Live Stream (1m)</span>
               </span>
             </div>
           </div>
@@ -407,7 +411,7 @@ export default function GitHubMetaDashboard() {
 
           {lastPolledTime && (
             <div className="mt-4 pt-3 border-t border-line/60 flex items-center justify-between font-mono text-[0.68rem] text-muted">
-              <span>Auto-updates matrix daily at 00:00 midnight</span>
+              <span>Live commits stream updates every 1 minute · Matrix updates daily (00:00)</span>
               <span>Last checked: {lastPolledTime}</span>
             </div>
           )}
