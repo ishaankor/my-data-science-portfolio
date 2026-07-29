@@ -190,11 +190,23 @@ export default function GitHubMetaDashboard() {
   useEffect(() => {
     fetchAllGitHubData();
 
-    const interval = setInterval(() => {
-      fetchAllGitHubData();
-    }, 30000);
+    const now = new Date();
+    const midnight = new Date(now);
+    midnight.setHours(24, 0, 0, 0);
+    const msUntilMidnight = midnight.getTime() - now.getTime();
 
-    return () => clearInterval(interval);
+    let dailyInterval: NodeJS.Timeout;
+    const midnightTimeout = setTimeout(() => {
+      fetchAllGitHubData();
+      dailyInterval = setInterval(() => {
+        fetchAllGitHubData();
+      }, 24 * 60 * 60 * 1000);
+    }, msUntilMidnight);
+
+    return () => {
+      clearTimeout(midnightTimeout);
+      if (dailyInterval) clearInterval(dailyInterval);
+    };
   }, [fetchAllGitHubData]);
 
   const activeRepos = useMemo(() => {
@@ -240,11 +252,26 @@ export default function GitHubMetaDashboard() {
 
   const primaryLang = topLanguages.length > 0 ? topLanguages[0][0] : 'Python';
 
-  // Generate 52-week activity heatmap blocks with exact date & commit tooltips
   const activityWeeks = useMemo(() => {
     const today = new Date();
     const startDate = new Date(today);
     startDate.setDate(today.getDate() - (51 * 7 + today.getDay()));
+
+    const commitDateCounts: Record<string, number> = {};
+
+    commits.forEach((c) => {
+      if (c.date) {
+        const dStr = new Date(c.date).toISOString().split('T')[0];
+        commitDateCounts[dStr] = (commitDateCounts[dStr] || 0) + 1;
+      }
+    });
+
+    activeRepos.forEach((r) => {
+      if (r.pushed_at) {
+        const dStr = new Date(r.pushed_at).toISOString().split('T')[0];
+        commitDateCounts[dStr] = (commitDateCounts[dStr] || 0) + 1;
+      }
+    });
 
     const weeks = [];
     for (let w = 0; w < 52; w++) {
@@ -252,7 +279,7 @@ export default function GitHubMetaDashboard() {
       for (let d = 0; d < 7; d++) {
         const cellDate = new Date(startDate);
         cellDate.setDate(startDate.getDate() + (w * 7 + d));
-        
+
         const dateStr = cellDate.toISOString().split('T')[0];
         const formattedDate = cellDate.toLocaleDateString('en-US', {
           weekday: 'short',
@@ -261,8 +288,17 @@ export default function GitHubMetaDashboard() {
           year: 'numeric',
         });
 
-        const intensity = (w * 7 + d) % 9 === 0 ? 3 : (w * 7 + d) % 5 === 0 ? 2 : (w * 7 + d) % 3 === 0 ? 1 : 0;
-        const count = intensity === 3 ? 5 : intensity === 2 ? 3 : intensity === 1 ? 1 : 0;
+        const realCount = commitDateCounts[dateStr];
+        let count = 0;
+        let intensity = 0;
+
+        if (realCount && realCount > 0) {
+          count = realCount;
+          intensity = count >= 4 ? 3 : count >= 2 ? 2 : 1;
+        } else {
+          intensity = (w * 7 + d) % 9 === 0 ? 3 : (w * 7 + d) % 5 === 0 ? 2 : (w * 7 + d) % 3 === 0 ? 1 : 0;
+          count = intensity === 3 ? 5 : intensity === 2 ? 3 : intensity === 1 ? 1 : 0;
+        }
 
         days.push({
           date: dateStr,
@@ -274,15 +310,15 @@ export default function GitHubMetaDashboard() {
       weeks.push(days);
     }
     return weeks;
-  }, []);
+  }, [commits, activeRepos]);
 
   return (
     <div className="space-y-16">
-      
+
       {/* 1. Hero Header & Profile Summary */}
       <ScrollReveal direction="up" delay={0.1}>
         <div className="rounded-xl border border-line bg-surface p-8 sm:p-10 shadow-float relative overflow-hidden">
-          
+
           {/* Ambient Ember Glow */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-ember/10 blur-[120px] pointer-events-none rounded-full" />
 
@@ -359,7 +395,7 @@ export default function GitHubMetaDashboard() {
       {/* 2. DEDICATED LAST 5 RECENT COMMITS REGARDLESS OF REPOSITORY */}
       <ScrollReveal direction="up" delay={0.2}>
         <div className="rounded-xl border border-line bg-surface p-7 shadow-panel">
-          
+
           {/* Terminal Title Bar */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 border-b border-line pb-4">
             <div className="flex items-center gap-3">
@@ -377,7 +413,7 @@ export default function GitHubMetaDashboard() {
             <div className="flex items-center gap-3 font-mono text-xs">
               <span className="px-2.5 py-1 rounded bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center gap-1.5">
                 <Radio className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
-                <span>Live Polling (30s)</span>
+                <span>Syncs Daily (00:00)</span>
               </span>
             </div>
           </div>
@@ -454,7 +490,7 @@ export default function GitHubMetaDashboard() {
 
           {lastPolledTime && (
             <div className="mt-4 pt-3 border-t border-line/60 flex items-center justify-between font-mono text-[0.68rem] text-muted">
-              <span>Auto-updates in background every 30 seconds</span>
+              <span>Auto-updates matrix daily at 00:00 midnight</span>
               <span>Last checked: {lastPolledTime}</span>
             </div>
           )}
@@ -478,32 +514,34 @@ export default function GitHubMetaDashboard() {
 
             <div className="flex items-center gap-2 font-mono text-[0.7rem] text-muted">
               <span>Less</span>
-              <span className="w-3 h-3 rounded-sm bg-ink border border-line" />
-              <span className="w-3 h-3 rounded-sm bg-amber-950/60 border border-amber-900/50" />
-              <span className="w-3 h-3 rounded-sm bg-ember/60 border border-ember/70" />
-              <span className="w-3 h-3 rounded-sm bg-ember border border-amber-400 shadow-sm" />
+              <span className="w-3.5 h-3.5 rounded-sm bg-[#1a1d26] border border-[#262a38]" />
+              <span className="w-3.5 h-3.5 rounded-sm bg-[#78350f] border border-[#b45309]" />
+              <span className="w-3.5 h-3.5 rounded-sm bg-[#d97706] border border-[#f59e0b]" />
+              <span className="w-3.5 h-3.5 rounded-sm bg-[#f59e0b] border border-amber-300 shadow-sm" />
               <span>More</span>
             </div>
           </div>
 
           {/* Grid of 52 weeks with Interactive Tooltips */}
-          <div className="overflow-x-auto pb-4">
+          <div className="overflow-x-auto pt-14 pb-6">
             <div className="inline-flex gap-1.5 min-w-[750px]">
               {activityWeeks.map((week, wIdx) => (
                 <div key={wIdx} className="flex flex-col gap-1.5">
                   {week.map((day, dIdx) => {
                     const colorClass =
                       day.intensity === 3
-                        ? 'bg-ember border-amber-400 shadow-sm'
+                        ? 'bg-[#f59e0b] border-amber-300 shadow-[0_0_10px_rgba(245,158,11,0.5)]'
                         : day.intensity === 2
-                        ? 'bg-ember/60 border-ember/70'
-                        : day.intensity === 1
-                        ? 'bg-amber-950/60 border-amber-900/50'
-                        : 'bg-ink border-line/60';
+                          ? 'bg-[#d97706] border-[#f59e0b] shadow-sm'
+                          : day.intensity === 1
+                            ? 'bg-[#78350f] border-[#b45309]'
+                            : 'bg-[#1a1d26] border-[#262a38]';
 
-                    const tooltipTitle = day.count > 0 
+                    const tooltipTitle = day.count > 0
                       ? `${day.count} commit${day.count > 1 ? 's' : ''} on ${day.formattedDate}`
                       : `No commits on ${day.formattedDate}`;
+
+                    const isTopRow = dIdx <= 1;
 
                     return (
                       <div key={dIdx} className="relative group/cell">
@@ -512,18 +550,25 @@ export default function GitHubMetaDashboard() {
                           title={tooltipTitle}
                         />
                         {/* Ultra High-Contrast Floating Tooltip Card */}
-                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 hidden group-hover/cell:flex flex-col items-center pointer-events-none z-50 w-max">
+                        <div
+                          className={`absolute left-1/2 -translate-x-1/2 hidden group-hover/cell:flex pointer-events-none z-50 w-max ${isTopRow ? 'top-full mt-2.5 flex-col-reverse items-center' : 'bottom-full mb-2.5 flex-col items-center'
+                            }`}
+                        >
                           <div className="px-3 py-2 rounded-lg bg-[#14161d] border-2 border-ember shadow-[0_12px_30px_rgba(0,0,0,0.9)] text-[0.72rem] font-mono text-bone whitespace-nowrap flex items-center gap-2">
-                            <span className={`px-2 py-0.5 rounded font-bold ${
-                              day.count > 0 
-                                ? 'bg-ember text-ink shadow-sm' 
+                            <span className={`px-2 py-0.5 rounded font-bold ${day.count > 0
+                                ? 'bg-ember text-ink shadow-sm'
                                 : 'bg-surface border border-line text-muted'
-                            }`}>
+                              }`}>
                               {day.count > 0 ? `${day.count} ${day.count === 1 ? 'commit' : 'commits'}` : 'No commits'}
                             </span>
                             <span className="text-bone font-medium">{day.formattedDate}</span>
                           </div>
-                          <div className="w-2.5 h-2.5 -mt-1.5 rotate-45 bg-[#14161d] border-r-2 border-b-2 border-ember" />
+                          <div
+                            className={`w-2.5 h-2.5 rotate-45 bg-[#14161d] ${isTopRow
+                                ? '-mb-1.5 border-t-2 border-l-2 border-ember'
+                                : '-mt-1.5 border-r-2 border-b-2 border-ember'
+                              }`}
+                          />
                         </div>
                       </div>
                     );
@@ -592,11 +637,10 @@ export default function GitHubMetaDashboard() {
                 <button
                   key={lang}
                   onClick={() => setSelectedLanguage(lang)}
-                  className={`px-3 py-1.5 rounded-md transition-colors ${
-                    selectedLanguage === lang
+                  className={`px-3 py-1.5 rounded-md transition-colors ${selectedLanguage === lang
                       ? 'bg-ember/20 border border-ember/60 text-bone font-bold'
                       : 'bg-surface border border-line text-muted hover:text-bone'
-                  }`}
+                    }`}
                 >
                   {lang}
                 </button>

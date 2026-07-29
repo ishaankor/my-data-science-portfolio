@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-29T19:55:42.585Z",
+  "updatedAt": "2026-07-29T20:03:28.389Z",
   "totalRepos": 23,
   "repos": [
     {
@@ -8,8 +8,8 @@
       "language": "HTML",
       "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
       "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
-      "pushed_at": "2026-07-29T05:30:41Z",
-      "updated_at": "2026-07-29T05:31:00Z"
+      "pushed_at": "2026-07-29T19:57:30Z",
+      "updated_at": "2026-07-29T19:57:36Z"
     },
     {
       "id": 911419017,
@@ -212,6 +212,16 @@
   ],
   "commits": [
     {
+      "sha": "049bd5086297240b765b3f1ece6552d8aaeb5434",
+      "shortSha": "049bd50",
+      "message": "feat: implement GitHub API route and update build configuration",
+      "repoName": "my-data-science-portfolio",
+      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/049bd5086297240b765b3f1ece6552d8aaeb5434",
+      "date": "2026-07-29T19:57:21Z",
+      "timeAgo": "6m ago"
+    },
+    {
       "sha": "267505730bd91cb270c3a8e6ae1da0e28bf73a13",
       "shortSha": "2675057",
       "message": "chore: rebuild  update Next.js production build",
@@ -219,7 +229,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/267505730bd91cb270c3a8e6ae1da0e28bf73a13",
       "date": "2026-07-29T05:01:40Z",
-      "timeAgo": "14h ago"
+      "timeAgo": "15h ago"
     },
     {
       "sha": "f27bd1930509219736abaaa7bc9f3214a93203a6",
@@ -250,16 +260,6 @@
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/cc2475c2496378d080d36c3180256bebebec38b9",
       "date": "2026-07-29T04:04:51Z",
       "timeAgo": "15h ago"
-    },
-    {
-      "sha": "4d67c250629e312971edf01ba244ad4d60769997",
-      "shortSha": "4d67c25",
-      "message": "update: added a small note for future developments",
-      "repoName": "my-personal-website",
-      "repoUrl": "https://github.com/ishaankor/my-personal-website",
-      "commitUrl": "https://github.com/ishaankor/my-personal-website/commit/4d67c250629e312971edf01ba244ad4d60769997",
-      "date": "2026-07-29T03:51:46Z",
-      "timeAgo": "16h ago"
     }
   ]
 }
