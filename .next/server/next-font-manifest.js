@@ -1,0 +1,1 @@
+self.__NEXT_FONT_MANIFEST='{"pages":{},"app":{"/Users/ishaankoradia/Library/Mobile Documents/com~apple~CloudDocs/Desktop/Programming Instances/my-data-science-portfolio/app/layout":["static/media/e4af272ccee01ff0-s.p.woff2","static/media/bb3ef058b751a6ad-s.p.woff2"]},"appUsingSizeAdjust":true,"pagesUsingSizeAdjust":false}';
