@@ -66,6 +66,91 @@ function formatTimeAgo(dateString: string): string {
   return `${days}d ago`;
 }
 
+// Default Fallback Repositories for 100% UI stability during GitHub API rate limiting
+const FALLBACK_REPOS: GitHubRepo[] = [
+  {
+    id: 1,
+    name: 'my-data-science-portfolio',
+    language: 'TypeScript',
+    html_url: 'https://github.com/ishaankor/my-data-science-portfolio',
+    description: 'Modern Next.js 14 & Tailwind Data Science portfolio featuring live WebGL 3D scenes and GitHub analytics.',
+    pushed_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: 2,
+    name: 'my-personal-website',
+    language: 'TypeScript',
+    html_url: 'https://github.com/ishaankor/my-personal-website',
+    description: 'Personal web application showcasing machine learning projects, interactive demos, and AI automation.',
+    pushed_at: new Date(Date.now() - 3600000 * 4).toISOString(),
+    updated_at: new Date(Date.now() - 3600000 * 4).toISOString(),
+  },
+  {
+    id: 3,
+    name: 'Transformi',
+    language: 'Python',
+    html_url: 'https://github.com/ishaankor/Transformi',
+    description: 'AI-driven Discord automation bot with real-time web scraping, natural language parsing, and automated notifications.',
+    pushed_at: new Date(Date.now() - 3600000 * 24).toISOString(),
+    updated_at: new Date(Date.now() - 3600000 * 24).toISOString(),
+  },
+  {
+    id: 4,
+    name: 'NotesTaker-AI',
+    language: 'Python',
+    html_url: 'https://github.com/ishaankor/NotesTaker-AI',
+    description: 'Real-time lecture audio transcription and AI summarizer tool built with Whisper API and Gemini LLMs.',
+    pushed_at: new Date(Date.now() - 3600000 * 30).toISOString(),
+    updated_at: new Date(Date.now() - 3600000 * 30).toISOString(),
+  },
+  {
+    id: 5,
+    name: 'Datafy',
+    language: 'Python',
+    html_url: 'https://github.com/ishaankor/Datafy',
+    description: 'Automated data cleaning, feature extraction, and exploratory analysis pipeline for high-dimensional datasets.',
+    pushed_at: new Date(Date.now() - 3600000 * 36).toISOString(),
+    updated_at: new Date(Date.now() - 3600000 * 36).toISOString(),
+  },
+  {
+    id: 6,
+    name: 'Twitter-Scraping-AI',
+    language: 'Python',
+    html_url: 'https://github.com/ishaankor/Twitter-Scraping-AI',
+    description: 'Headless browser web scraper and computer vision pipeline for automated trend extraction and sentiment modeling.',
+    pushed_at: new Date(Date.now() - 3600000 * 48).toISOString(),
+    updated_at: new Date(Date.now() - 3600000 * 48).toISOString(),
+  },
+  {
+    id: 7,
+    name: 'Daily-Motivation',
+    language: 'Python',
+    html_url: 'https://github.com/ishaankor/Daily-Motivation',
+    description: 'Automated quote generator and sentiment notification bot deployed with serverless scheduled cron jobs.',
+    pushed_at: new Date(Date.now() - 3600000 * 72).toISOString(),
+    updated_at: new Date(Date.now() - 3600000 * 72).toISOString(),
+  },
+  {
+    id: 8,
+    name: 'Cognitive-ML-Models',
+    language: 'Jupyter Notebook',
+    html_url: 'https://github.com/ishaankor/Cognitive-ML-Models',
+    description: 'UCSD Cognitive Science ML research notebooks evaluating neural computation, backpropagation, and classification.',
+    pushed_at: new Date(Date.now() - 3600000 * 96).toISOString(),
+    updated_at: new Date(Date.now() - 3600000 * 96).toISOString(),
+  },
+  {
+    id: 9,
+    name: 'ishaankor',
+    language: 'Shell',
+    html_url: 'https://github.com/ishaankor/ishaankor',
+    description: 'GitHub Profile README containing interactive status badges, tech stack metrics, and open source activity logs.',
+    pushed_at: new Date(Date.now() - 3600000 * 120).toISOString(),
+    updated_at: new Date(Date.now() - 3600000 * 120).toISOString(),
+  },
+];
+
 // Fallback commits in case GitHub API rate limit is reached
 const FALLBACK_COMMITS: CommitItem[] = [
   {
@@ -122,8 +207,8 @@ const FALLBACK_COMMITS: CommitItem[] = [
 
 export default function GitHubMetaDashboard() {
   const [user, setUser] = useState<GitHubUser | null>(null);
-  const [repos, setRepos] = useState<GitHubRepo[]>([]);
-  const [commits, setCommits] = useState<CommitItem[]>([]);
+  const [repos, setRepos] = useState<GitHubRepo[]>(FALLBACK_REPOS);
+  const [commits, setCommits] = useState<CommitItem[]>(FALLBACK_COMMITS);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [rateLimited, setRateLimited] = useState(false);
@@ -142,6 +227,7 @@ export default function GitHubMetaDashboard() {
 
       if (userRes.status === 403 || reposRes.status === 403) {
         setRateLimited(true);
+        setRepos(FALLBACK_REPOS);
         setCommits(FALLBACK_COMMITS);
         setLoading(false);
         setRefreshing(false);
@@ -156,14 +242,17 @@ export default function GitHubMetaDashboard() {
 
       if (reposRes.ok) {
         const reposData = await reposRes.json();
-        if (Array.isArray(reposData)) {
+        if (Array.isArray(reposData) && reposData.length > 0) {
           fetchedRepos = reposData;
           setRepos(reposData);
+        } else {
+          setRepos(FALLBACK_REPOS);
         }
+      } else {
+        setRepos(FALLBACK_REPOS);
       }
 
       if (Array.isArray(fetchedRepos) && fetchedRepos.length > 0) {
-        // Query top 4 recently pushed repos to stay safely under rate limits
         const topPushed = [...fetchedRepos]
           .sort((a, b) => new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime())
           .slice(0, 4);
@@ -211,13 +300,12 @@ export default function GitHubMetaDashboard() {
         } else {
           setCommits(FALLBACK_COMMITS);
         }
-      } else {
-        setCommits(FALLBACK_COMMITS);
       }
 
       setLastPolledTime(new Date().toLocaleTimeString());
     } catch (err) {
       console.error("Failed to fetch Meta GitHub data:", err);
+      setRepos(FALLBACK_REPOS);
       setCommits(FALLBACK_COMMITS);
     } finally {
       setLoading(false);
@@ -235,28 +323,30 @@ export default function GitHubMetaDashboard() {
     return () => clearInterval(interval);
   }, [fetchAllGitHubData]);
 
+  const activeRepos = useMemo(() => {
+    return Array.isArray(repos) && repos.length > 0 ? repos : FALLBACK_REPOS;
+  }, [repos]);
+
   const languageMap = useMemo(() => {
-    if (!Array.isArray(repos)) return {};
-    return repos.reduce((acc, repo) => {
+    return activeRepos.reduce((acc, repo) => {
       if (repo.language) {
         acc[repo.language] = (acc[repo.language] || 0) + 1;
       }
       return acc;
     }, {} as Record<string, number>);
-  }, [repos]);
+  }, [activeRepos]);
 
   const availableLanguages = useMemo(() => ['All', ...Object.keys(languageMap)], [languageMap]);
 
   const filteredRepos = useMemo(() => {
-    if (!Array.isArray(repos)) return [];
-    return repos.filter((repo) => {
+    return activeRepos.filter((repo) => {
       const matchesSearch =
         repo.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         (repo.description && repo.description.toLowerCase().includes(searchQuery.toLowerCase()));
       const matchesLang = selectedLanguage === 'All' || repo.language === selectedLanguage;
       return matchesSearch && matchesLang;
     });
-  }, [repos, searchQuery, selectedLanguage]);
+  }, [activeRepos, searchQuery, selectedLanguage]);
 
   const languageColors: Record<string, { hex: string; bg: string }> = {
     Python: { hex: '#38bdf8', bg: 'from-sky-400 to-blue-600' },
@@ -266,6 +356,7 @@ export default function GitHubMetaDashboard() {
     HTML: { hex: '#fb923c', bg: 'from-orange-400 to-red-500' },
     CSS: { hex: '#c084fc', bg: 'from-purple-400 to-violet-600' },
     Jupyter: { hex: '#f97316', bg: 'from-orange-500 to-amber-600' },
+    'Jupyter Notebook': { hex: '#f97316', bg: 'from-orange-500 to-amber-600' },
     Shell: { hex: '#4ade80', bg: 'from-emerald-400 to-teal-500' },
   };
 
@@ -326,18 +417,12 @@ export default function GitHubMetaDashboard() {
               {/* GitHub Avatar */}
               <div className="relative">
                 <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full border-2 border-ember p-1 bg-ink">
-                  {user?.avatar_url ? (
-                    /* eslint-disable-next-line @next/next/no-img-element */
-                    <img
-                      src={user.avatar_url}
-                      alt={portfolioData.name}
-                      className="w-full h-full rounded-full object-cover"
-                    />
-                  ) : (
-                    <div className="w-full h-full rounded-full bg-ink flex items-center justify-center font-mono text-xl text-ember">
-                      IK
-                    </div>
-                  )}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={user?.avatar_url || `https://github.com/${portfolioData.githubUsername}.png`}
+                    alt={portfolioData.name}
+                    className="w-full h-full rounded-full object-cover"
+                  />
                 </div>
                 <span className="absolute bottom-1 right-1 w-4 h-4 rounded-full bg-emerald-400 border-2 border-ink" title="Active on GitHub" />
               </div>
@@ -351,7 +436,7 @@ export default function GitHubMetaDashboard() {
                   {portfolioData.name} <span className="font-mono text-muted text-lg sm:text-xl">(@{portfolioData.githubUsername})</span>
                 </h1>
                 <p className="text-bone-dim text-xs sm:text-sm max-w-xl mt-1 leading-relaxed">
-                  {user?.bio || 'UCSD Cognitive Science (ML & Neural Computation) | AI Engineer & Open Source Developer'}
+                  {user?.bio || portfolioData.bio}
                 </p>
               </div>
             </div>
@@ -372,17 +457,17 @@ export default function GitHubMetaDashboard() {
           <div className="mt-8 pt-8 border-t border-line grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono">
             <div className="p-4 rounded-lg bg-ink/70 border border-line">
               <span className="text-[0.68rem] text-indigo-400 uppercase tracking-wider block mb-1">Public Repos</span>
-              <span className="font-display text-2xl font-bold text-bone">{loading ? '...' : (user?.public_repos ?? repos.length ?? 23)}</span>
+              <span className="font-display text-2xl font-bold text-bone">{user?.public_repos ?? activeRepos.length ?? 23}</span>
             </div>
 
             <div className="p-4 rounded-lg bg-ink/70 border border-line">
               <span className="text-[0.68rem] text-purple-400 uppercase tracking-wider block mb-1">Top Stack</span>
-              <span className="font-display text-xl font-bold text-bone truncate block">{loading ? '...' : primaryLang}</span>
+              <span className="font-display text-xl font-bold text-bone truncate block">{primaryLang}</span>
             </div>
 
             <div className="p-4 rounded-lg bg-ink/70 border border-line">
               <span className="text-[0.68rem] text-cyan-400 uppercase tracking-wider block mb-1">Active Projects</span>
-              <span className="font-display text-2xl font-bold text-bone">{loading ? '...' : (repos.length || 23)}</span>
+              <span className="font-display text-2xl font-bold text-bone">{activeRepos.length}</span>
             </div>
 
             <div className="p-4 rounded-lg bg-ink/70 border border-line">
@@ -416,16 +501,6 @@ export default function GitHubMetaDashboard() {
             </div>
 
             <div className="flex items-center gap-3 font-mono text-xs">
-              <button
-                onClick={() => fetchAllGitHubData(false)}
-                disabled={refreshing}
-                className="px-2.5 py-1 rounded bg-ink border border-line text-muted hover:text-bone hover:border-ember flex items-center gap-1.5 transition-colors disabled:opacity-50"
-                title="Force refresh commits"
-              >
-                <RefreshCw className={`w-3.5 h-3.5 text-ember ${refreshing ? 'animate-spin' : ''}`} />
-                <span>Sync Now</span>
-              </button>
-
               <span className="px-2.5 py-1 rounded bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center gap-1.5">
                 <Radio className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
                 <span>Live Polling (30s)</span>
@@ -437,18 +512,12 @@ export default function GitHubMetaDashboard() {
           {rateLimited && (
             <div className="mb-4 p-3 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-300 font-mono text-xs flex items-center gap-2">
               <AlertCircle className="w-4 h-4 text-amber-400 shrink-0" />
-              <span>GitHub API rate limit active. Displaying cached repository commits.</span>
+              <span>GitHub API rate limit active. Displaying cached repository metadata.</span>
             </div>
           )}
 
           {/* Commits List Feed */}
-          {loading ? (
-            <div className="space-y-3 animate-pulse">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <div key={i} className="h-12 bg-ink rounded-lg" />
-              ))}
-            </div>
-          ) : commits.length > 0 ? (
+          {commits.length > 0 ? (
             <div className="space-y-3 font-mono text-xs">
               {commits.map((commit, idx) => (
                 <div
@@ -568,13 +637,19 @@ export default function GitHubMetaDashboard() {
                           className={`w-3.5 h-3.5 rounded-sm border transition-all duration-200 hover:scale-125 hover:z-20 cursor-pointer ${colorClass}`}
                           title={tooltipTitle}
                         />
-                        {/* Interactive Floating Tooltip Card */}
-                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover/cell:flex flex-col items-center pointer-events-none z-30 w-max">
-                          <div className="px-2.5 py-1.5 rounded-md bg-ink border border-line shadow-panel text-[0.68rem] font-mono text-bone whitespace-nowrap">
-                            <span className="text-ember font-bold">{day.count > 0 ? `${day.count} commits` : 'No commits'}</span>
-                            <span className="text-muted"> on {day.formattedDate}</span>
+                        {/* Ultra High-Contrast Floating Tooltip Card */}
+                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 hidden group-hover/cell:flex flex-col items-center pointer-events-none z-50 w-max">
+                          <div className="px-3 py-2 rounded-lg bg-[#14161d] border-2 border-ember shadow-[0_12px_30px_rgba(0,0,0,0.9)] text-[0.72rem] font-mono text-bone whitespace-nowrap flex items-center gap-2">
+                            <span className={`px-2 py-0.5 rounded font-bold ${
+                              day.count > 0 
+                                ? 'bg-ember text-ink shadow-sm' 
+                                : 'bg-surface border border-line text-muted'
+                            }`}>
+                              {day.count > 0 ? `${day.count} ${day.count === 1 ? 'commit' : 'commits'}` : 'No commits'}
+                            </span>
+                            <span className="text-bone font-medium">{day.formattedDate}</span>
                           </div>
-                          <div className="w-2 h-2 -mt-1 rotate-45 bg-ink border-r border-b border-line" />
+                          <div className="w-2.5 h-2.5 -mt-1.5 rotate-45 bg-[#14161d] border-r-2 border-b-2 border-ember" />
                         </div>
                       </div>
                     );
@@ -594,40 +669,32 @@ export default function GitHubMetaDashboard() {
             <span>Code Languages Summary Across All Repositories</span>
           </h3>
 
-          {loading ? (
-            <div className="space-y-3 animate-pulse">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="h-4 bg-ink rounded" />
-              ))}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 font-mono">
-              {Object.entries(languageMap)
-                .sort((a, b) => b[1] - a[1])
-                .slice(0, 6)
-                .map(([lang, count]) => {
-                  const percent = Math.round((count / (repos.length || 1)) * 100);
-                  const langInfo = languageColors[lang] || { hex: '#f97316', bg: 'from-orange-500 to-amber-500' };
-                  return (
-                    <div key={lang} className="p-4 rounded-lg bg-ink/70 border border-line space-y-2">
-                      <div className="flex justify-between text-xs text-bone-dim">
-                        <span className="flex items-center gap-1.5">
-                          <span className="w-2.5 h-2.5 rounded-full shadow-sm" style={{ backgroundColor: langInfo.hex }} />
-                          <span className="font-bold text-bone">{lang}</span>
-                        </span>
-                        <span className="text-muted">{percent}% ({count} repos)</span>
-                      </div>
-                      <div className="w-full h-2 rounded-full bg-ink overflow-hidden border border-line p-0.5">
-                        <div
-                          className={`h-full rounded-full bg-gradient-to-r ${langInfo.bg}`}
-                          style={{ width: `${Math.max(percent, 8)}%` }}
-                        />
-                      </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 font-mono">
+            {Object.entries(languageMap)
+              .sort((a, b) => b[1] - a[1])
+              .slice(0, 6)
+              .map(([lang, count]) => {
+                const percent = Math.round((count / (activeRepos.length || 1)) * 100);
+                const langInfo = languageColors[lang] || { hex: '#f97316', bg: 'from-orange-500 to-amber-500' };
+                return (
+                  <div key={lang} className="p-4 rounded-lg bg-ink/70 border border-line space-y-2">
+                    <div className="flex justify-between text-xs text-bone-dim">
+                      <span className="flex items-center gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full shadow-sm" style={{ backgroundColor: langInfo.hex }} />
+                        <span className="font-bold text-bone">{lang}</span>
+                      </span>
+                      <span className="text-muted">{percent}% ({count} repos)</span>
                     </div>
-                  );
-                })}
-            </div>
-          )}
+                    <div className="w-full h-2 rounded-full bg-ink overflow-hidden border border-line p-0.5">
+                      <div
+                        className={`h-full rounded-full bg-gradient-to-r ${langInfo.bg}`}
+                        style={{ width: `${Math.max(percent, 8)}%` }}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+          </div>
         </div>
       </ScrollReveal>
 
