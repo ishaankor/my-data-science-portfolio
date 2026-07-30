@@ -16,6 +16,7 @@ interface LocRecord {
   datetime: string;
   depth: number;
   length: number;
+  message: string;
 }
 
 interface CommitMeta {
@@ -37,6 +38,9 @@ const TYPE_COLORS: Record<string, string> = {
   tsx: '#2b7489',
   json: '#292929',
   md: '#083fa1',
+  mjs: '#f1e05a',
+  yml: '#cb171e',
+  yaml: '#cb171e',
 };
 
 export default function CodebaseEvolutionSuite() {
@@ -55,18 +59,20 @@ export default function CodebaseEvolutionSuite() {
           const lines = text.trim().split('\n');
           const parsedRows: LocRecord[] = lines.slice(1).map((l) => {
             const parts = l.split(',');
+            const cleanMsg = (parts[11] || 'codebase update').replace(/^"|"$/g, '');
             return {
               file: parts[0] || 'file',
               line: Number(parts[1] || 0),
               type: parts[2] || 'code',
               commit: parts[3] || 'head',
               author: parts[4] || 'Developer',
-              date: parts[5] || '2025-01-01',
+              date: parts[5] || '2025-01-11',
               time: parts[6] || '12:00:00',
               timezone: parts[7] || '-08:00',
               datetime: parts[8] || '',
               depth: Number(parts[9] || 0),
               length: Number(parts[10] || 0),
+              message: cleanMsg,
             };
           });
 
@@ -91,6 +97,7 @@ export default function CodebaseEvolutionSuite() {
       date: string;
       time: string;
       datetime: string;
+      message: string;
       lines: number;
       files: Set<string>;
     }>();
@@ -102,6 +109,7 @@ export default function CodebaseEvolutionSuite() {
           date: r.date,
           time: r.time,
           datetime: r.datetime,
+          message: r.message,
           lines: 0,
           files: new Set(),
         });
@@ -111,13 +119,6 @@ export default function CodebaseEvolutionSuite() {
       item.files.add(r.file);
     });
 
-    const messages: Record<string, string> = {
-      'f189fd9d': 'refactored codebase structure and updated styles',
-      'c6478c7f': 'my first commit, and it was glorious',
-      'ba48eace': 'another glorious commit with expanded components',
-      '74746bc0': 'initial site layout and core assets setup',
-    };
-
     return Array.from(commitMap.entries()).map(([commit, data]) => ({
       commit,
       author: data.author,
@@ -126,7 +127,7 @@ export default function CodebaseEvolutionSuite() {
       datetime: data.datetime,
       linesEdited: data.lines,
       filesEdited: data.files.size,
-      message: messages[commit] || `codebase update (${data.files.size} files edited)`,
+      message: data.message || `codebase update (${data.files.size} files edited)`,
     })).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
   }, [records]);
 
@@ -203,7 +204,7 @@ export default function CodebaseEvolutionSuite() {
     return (
       <div className="p-8 rounded-xl border border-line bg-surface font-mono text-xs text-muted text-center flex items-center justify-center gap-2">
         <span className="w-2 h-2 rounded-full bg-ember animate-ping" />
-        <span>Parsing live loc.csv codebase telemetry...</span>
+        <span>Parsing complete historical loc.csv telemetry...</span>
       </div>
     );
   }
@@ -220,7 +221,7 @@ export default function CodebaseEvolutionSuite() {
               </div>
               <div>
                 <span className="inline-flex items-center gap-2 font-mono text-xs text-muted uppercase tracking-wider">
-                  Live Codebase Telemetry (Dynamic loc.csv)
+                  Complete Historical Telemetry (Jan 2025 – Present)
                 </span>
                 <h2 className="font-display text-xl font-bold text-bone">
                   Codebase Evolution & Analytics
@@ -244,7 +245,7 @@ export default function CodebaseEvolutionSuite() {
                   className="w-32 accent-ember cursor-pointer"
                 />
                 <span className="text-ember font-bold px-2 py-0.5 rounded bg-ember/10 border border-ember/30">
-                  {currentCommit?.date || '2025-01-01'}
+                  {currentCommit?.date || '2025-01-11'}
                 </span>
               </div>
             )}
@@ -355,13 +356,13 @@ export default function CodebaseEvolutionSuite() {
                   <div className="border-b border-line/20 w-full pb-1">00:00</div>
                 </div>
 
-                {/* Plot Commit Bubbles */}
+                {/* Plot Commit Bubbles across Timeline */}
                 {filteredCommits.map((c, i) => {
                   const parts = c.time.split(':').map(Number);
                   const timeInHours = (parts[0] || 12) + (parts[1] || 0) / 60;
                   const yPercent = (timeInHours / 24) * 100;
                   const xPercent = (i / (filteredCommits.length - 1 || 1)) * 90 + 5;
-                  const sizePx = Math.max(14, Math.min(38, Math.round(c.linesEdited / 20)));
+                  const sizePx = Math.max(14, Math.min(38, Math.round(c.linesEdited / 10)));
                   const isSelected = selectedCommit === c.commit;
 
                   return (
@@ -388,8 +389,8 @@ export default function CodebaseEvolutionSuite() {
               </div>
 
               <div className="flex items-center justify-between text-[0.68rem] font-mono text-muted">
-                <span>Earliest Commit ({commitList[0]?.date})</span>
-                <span>Latest Commit ({currentCommit?.date})</span>
+                <span>Earliest ({commitList[0]?.date || '2025-01-11'})</span>
+                <span>Latest ({currentCommit?.date || 'Today'})</span>
               </div>
             </div>
           </div>
@@ -409,12 +410,12 @@ export default function CodebaseEvolutionSuite() {
             <div className="lg:col-span-7 p-6 rounded-lg bg-ink border border-line space-y-6">
               <div className="flex items-center justify-between text-xs font-mono">
                 <span className="text-bone font-semibold">Visual Lines of Code Grid (Unit Dot Matrix)</span>
-                <span className="text-muted">1 dot ≈ 20 LOC</span>
+                <span className="text-muted">1 dot ≈ 10 LOC</span>
               </div>
 
               <div className="space-y-4 font-mono text-xs max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
                 {fileLocCounts.map(([file, info]) => {
-                  const dotsCount = Math.max(3, Math.round(info.loc / 20));
+                  const dotsCount = Math.max(3, Math.round(info.loc / 10));
                   const fileColor = TYPE_COLORS[info.type] || '#f97316';
                   return (
                     <div key={file} className="space-y-1.5">
@@ -436,7 +437,7 @@ export default function CodebaseEvolutionSuite() {
                             key={dIdx}
                             className="w-2.5 h-2.5 rounded-full transition-transform hover:scale-125 cursor-pointer shadow-sm"
                             style={{ backgroundColor: fileColor }}
-                            title={`${file}: ~20 LOC`}
+                            title={`${file}: ~10 LOC`}
                           />
                         ))}
                       </div>
@@ -478,7 +479,7 @@ export default function CodebaseEvolutionSuite() {
 
               <div className="pt-4 border-t border-line/60 text-muted text-[0.68rem] leading-relaxed">
                 <p>
-                  * Codebase metrics are parsed dynamically from <code>loc.csv</code> ({totalLoc.toLocaleString()} lines across {uniqueFiles.length} files).
+                  * Complete historical metrics parsed dynamically from <code>loc.csv</code> ({totalLoc.toLocaleString()} lines across {commitList.length} historical commits).
                 </p>
               </div>
             </div>
