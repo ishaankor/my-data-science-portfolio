@@ -66,6 +66,17 @@ function formatTimeAgo(dateString: string): string {
   return `${days}d ago`;
 }
 
+// User profile cache imported directly from prebuilt data/github-cache.json
+const FALLBACK_USER: GitHubUser = (githubCache?.user || {
+  login: 'ishaankor',
+  avatar_url: 'https://github.com/ishaankor.png',
+  html_url: 'https://github.com/ishaankor',
+  name: 'Ishaan Koradia',
+  bio: portfolioData.bio,
+  public_repos: 23,
+  created_at: '2022-01-01T00:00:00Z',
+}) as unknown as GitHubUser;
+
 // Full 23-Repository Registry Cache imported directly from data/github-cache.json
 const FALLBACK_REPOS: GitHubRepo[] = (githubCache?.repos || []) as unknown as GitHubRepo[];
 
@@ -73,19 +84,18 @@ const FALLBACK_REPOS: GitHubRepo[] = (githubCache?.repos || []) as unknown as Gi
 const FALLBACK_COMMITS: CommitItem[] = (githubCache?.commits || []) as unknown as CommitItem[];
 
 export default function GitHubMetaDashboard() {
-  const [user, setUser] = useState<GitHubUser | null>(null);
+  const [user, setUser] = useState<GitHubUser>(FALLBACK_USER);
   const [repos, setRepos] = useState<GitHubRepo[]>(FALLBACK_REPOS);
   const [commits, setCommits] = useState<CommitItem[]>(FALLBACK_COMMITS);
-  const [loading, setLoading] = useState(true);
-  const [rateLimited, setRateLimited] = useState(false);
+  const [, setLoading] = useState(true);
   const [lastPolledTime, setLastPolledTime] = useState<string>('');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedLanguage, setSelectedLanguage] = useState('All');
 
   const fetchAllGitHubData = useCallback(async () => {
     try {
-      // Fetch exclusively through our server proxy /api/github (with GITHUB_TOKEN & 5,000 req/hr limit)
-      const proxyRes = await fetch('/api/github');
+      const endpoint = process.env.NEXT_PUBLIC_GITHUB_FETCHER_URL || 'https://github-meta-fetcher.vercel.app/api/github';
+      const proxyRes = await fetch(endpoint, { cache: 'no-store' });
       if (proxyRes.ok) {
         const payload = await proxyRes.json();
         if (payload.user) setUser(payload.user);
@@ -98,6 +108,7 @@ export default function GitHubMetaDashboard() {
         setLastPolledTime(new Date().toLocaleTimeString());
       }
     } catch {
+      // Fallback cleanly to prebuilt cache if network is unavailable
     } finally {
       setLoading(false);
     }
@@ -339,13 +350,7 @@ export default function GitHubMetaDashboard() {
             </div>
           </div>
 
-          {/* Rate limit warning badge if triggered */}
-          {rateLimited && (
-            <div className="mb-4 p-3 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-300 font-mono text-xs flex items-center gap-2">
-              <AlertCircle className="w-4 h-4 text-amber-400 shrink-0" />
-              <span>GitHub API rate limit active. Displaying cached repository metadata.</span>
-            </div>
-          )}
+
 
           {/* Commits List Feed */}
           {commits.length > 0 ? (
