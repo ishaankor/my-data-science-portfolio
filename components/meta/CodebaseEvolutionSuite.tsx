@@ -156,10 +156,9 @@ export default function CodebaseEvolutionSuite() {
       .filter((c) => {
         const authorLower = c.author.toLowerCase();
         const msgLower = c.message.toLowerCase();
-        const isIshaan = authorLower.includes('ishaan') || authorLower.includes('ishaankor') || authorLower.includes('developer');
-        const isBot = authorLower.includes('github-actions') || authorLower.includes('bot') || authorLower.includes('action');
-        const isWorkflowMsg = msgLower.includes('loc.csv') || msgLower.includes('[skip ci]') || msgLower.includes('auto-update');
-        return isIshaan && !isBot && !isWorkflowMsg;
+        const isBot = authorLower.includes('github-actions') || authorLower.includes('bot');
+        const isWorkflowMsg = msgLower.includes('[skip ci]') || msgLower.includes('chore: update loc.csv');
+        return !isBot && !isWorkflowMsg;
       })
       // Strictly sort chronologically from oldest (Jan 2025) to newest (today)
       .sort((a, b) => new Date(a.datetime || a.date).getTime() - new Date(b.datetime || b.date).getTime());
