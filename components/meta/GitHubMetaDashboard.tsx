@@ -66,7 +66,6 @@ function formatTimeAgo(dateString: string): string {
   return `${days}d ago`;
 }
 
-// User profile cache imported directly from prebuilt data/github-cache.json
 const FALLBACK_USER: GitHubUser = (githubCache?.user || {
   login: 'ishaankor',
   avatar_url: 'https://github.com/ishaankor.png',
@@ -77,10 +76,8 @@ const FALLBACK_USER: GitHubUser = (githubCache?.user || {
   created_at: '2022-01-01T00:00:00Z',
 }) as unknown as GitHubUser;
 
-// Full 23-Repository Registry Cache imported directly from data/github-cache.json
 const FALLBACK_REPOS: GitHubRepo[] = (githubCache?.repos || []) as unknown as GitHubRepo[];
 
-// Fallback commits imported directly from prebuilt data/github-cache.json
 const FALLBACK_COMMITS: CommitItem[] = (githubCache?.commits || []) as unknown as CommitItem[];
 
 export default function GitHubMetaDashboard() {
@@ -108,7 +105,6 @@ export default function GitHubMetaDashboard() {
         setLastPolledTime(new Date().toLocaleTimeString());
       }
     } catch {
-      // Fallback cleanly to prebuilt cache if network is unavailable
     } finally {
       setLoading(false);
     }
