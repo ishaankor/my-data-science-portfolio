@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import MidnightHazeCursor from '@/components/ui/MidnightHazeCursor';
 import { portfolioData } from '@/data/portfolio';
 
 const inter = Inter({
@@ -52,6 +53,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`dark ${inter.variable} ${jetbrainsMono.variable}`}>
       <body className="bg-[#090d16] text-slate-100 min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-black">
+        <MidnightHazeCursor />
         <Navbar />
         <main id="main-content" className="flex-grow">
           {children}

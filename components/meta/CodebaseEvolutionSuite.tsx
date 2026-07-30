@@ -6,7 +6,8 @@ import ScrollReveal from '@/components/ui/ScrollReveal';
 
 interface LocRecord {
   file: string;
-  line: number;
+  added: number;    // real lines added from git log --numstat
+  deleted: number;  // real lines deleted from git log --numstat
   type: string;
   commit: string;
   author: string;
@@ -15,7 +16,6 @@ interface LocRecord {
   timezone: string;
   datetime: string;
   depth: number;
-  length: number;
   message: string;
 }
 
@@ -58,20 +58,21 @@ export default function CodebaseEvolutionSuite() {
           const text = await res.text();
           const lines = text.trim().split('\n');
           const parsedRows: LocRecord[] = lines.slice(1).map((l) => {
+            // New CSV format: file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
             const parts = l.split(',');
-            const cleanMsg = (parts[11] || 'codebase update').replace(/^"|"$/g, '');
+            const cleanMsg = parts.slice(11).join(',').replace(/^"|"$/g, '') || 'codebase update';
             return {
               file: parts[0] || 'file',
-              line: Number(parts[1] || 0),
-              type: parts[2] || 'code',
-              commit: parts[3] || 'head',
-              author: parts[4] || 'Developer',
-              date: parts[5] || '2025-01-11',
-              time: parts[6] || '12:00:00',
-              timezone: parts[7] || '-08:00',
-              datetime: parts[8] || '',
-              depth: Number(parts[9] || 0),
-              length: Number(parts[10] || 0),
+              added: Number(parts[1] || 0),
+              deleted: Number(parts[2] || 0),
+              type: parts[3] || 'code',
+              commit: parts[4] || 'head',
+              author: parts[5] || 'Developer',
+              date: parts[6] || '2025-01-11',
+              time: parts[7] || '12:00:00',
+              timezone: parts[8] || '-08:00',
+              datetime: parts[9] || '',
+              depth: Number(parts[10] || 0),
               message: cleanMsg,
             };
           });
@@ -111,11 +112,11 @@ export default function CodebaseEvolutionSuite() {
           datetime: r.datetime,
           message: r.message,
           lines: 0,
-          files: new Set(),
+          files: new Set<string>(),
         });
       }
       const item = commitMap.get(r.commit)!;
-      item.lines += 1;
+      item.lines += (r.added + r.deleted); // real lines changed
       item.files.add(r.file);
     });
 
@@ -151,7 +152,10 @@ export default function CodebaseEvolutionSuite() {
     return records.filter((r) => activeCommitHashes.has(r.commit));
   }, [records, activeCommitHashes]);
 
-  const totalLoc = activeRecords.length;
+  // Total LOC = sum of all real added lines across active commits
+  const totalLoc = useMemo(() => {
+    return activeRecords.reduce((sum, r) => sum + r.added, 0);
+  }, [activeRecords]);
 
   const uniqueFiles = useMemo(() => {
     return [...new Set(activeRecords.map((r) => r.file))];
@@ -162,18 +166,11 @@ export default function CodebaseEvolutionSuite() {
     return Math.max(...activeRecords.map((r) => r.depth));
   }, [activeRecords]);
 
-  const longestLine = useMemo(() => {
-    if (activeRecords.length === 0) return 0;
-    return Math.max(...activeRecords.map((r) => r.length));
-  }, [activeRecords]);
-
   const fileLocCounts = useMemo(() => {
     const counts: Record<string, { loc: number; type: string }> = {};
     activeRecords.forEach((r) => {
-      if (!counts[r.file]) {
-        counts[r.file] = { loc: 0, type: r.type };
-      }
-      counts[r.file].loc += 1;
+      if (!counts[r.file]) counts[r.file] = { loc: 0, type: r.type };
+      counts[r.file].loc += r.added;
     });
     return Object.entries(counts).sort((a, b) => b[1].loc - a[1].loc);
   }, [activeRecords]);
@@ -183,11 +180,11 @@ export default function CodebaseEvolutionSuite() {
     return { file: fileLocCounts[0][0], loc: fileLocCounts[0][1].loc };
   }, [fileLocCounts]);
 
-  // 4. DYNAMIC LANGUAGE SHARE: Computed dynamically per file type
+  // 4. DYNAMIC LANGUAGE SHARE: weighted by actual lines added
   const languageShare = useMemo(() => {
     const counts: Record<string, number> = {};
     activeRecords.forEach((r) => {
-      counts[r.type] = (counts[r.type] || 0) + 1;
+      counts[r.type] = (counts[r.type] || 0) + r.added;
     });
 
     return Object.entries(counts).map(([type, count]) => ({
@@ -278,9 +275,11 @@ export default function CodebaseEvolutionSuite() {
             </div>
 
             <div className="p-4 rounded-lg bg-ink/80 border border-line">
-              <span className="text-[0.65rem] text-muted uppercase tracking-wider block mb-1">LONGEST LINE</span>
-              <span className="font-display text-2xl font-bold text-bone">{longestLine}</span>
-              <span className="text-[0.65rem] text-amber-400 block mt-0.5">characters</span>
+              <span className="text-[0.65rem] text-muted uppercase tracking-wider block mb-1">LINES DELETED</span>
+              <span className="font-display text-2xl font-bold text-bone">
+                {activeRecords.reduce((s, r) => s + r.deleted, 0).toLocaleString()}
+              </span>
+              <span className="text-[0.65rem] text-amber-400 block mt-0.5">total deleted</span>
             </div>
 
             <div className="p-4 rounded-lg bg-ink/80 border border-line">
