@@ -1,4 +1,8 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+app/layout.tsx,2,0,tsx,cc57c3c,Ishaan Kor,2026-07-30,12:44:49,-07:00,2026-07-30T12:44:49-07:00,1,"build: upload custom cursor to match website theme"
+components/meta/CodebaseEvolutionSuite.tsx,29,30,tsx,cc57c3c,Ishaan Kor,2026-07-30,12:44:49,-07:00,2026-07-30T12:44:49-07:00,2,"build: upload custom cursor to match website theme"
+components/ui/MidnightHazeCursor.tsx,115,0,tsx,cc57c3c,Ishaan Kor,2026-07-30,12:44:49,-07:00,2026-07-30T12:44:49-07:00,2,"build: upload custom cursor to match website theme"
+scripts/generate-loc.mjs,14,16,mjs,cc57c3c,Ishaan Kor,2026-07-30,12:44:49,-07:00,2026-07-30T12:44:49-07:00,1,"build: upload custom cursor to match website theme"
 .github/workflows/nextjs.yml,1,3,yml,1a36731,Ishaan Kor,2026-07-29,21:46:59,-07:00,2026-07-29T21:46:59-07:00,2,"fix: commit correct 81-commit historical loc.csv directly; build no longer regenerates from git log"
 app/globals.css,8,4,css,1a36731,Ishaan Kor,2026-07-29,21:46:59,-07:00,2026-07-29T21:46:59-07:00,1,"fix: commit correct 81-commit historical loc.csv directly; build no longer regenerates from git log"
 package.json,1,1,json,1a36731,Ishaan Kor,2026-07-29,21:46:59,-07:00,2026-07-29T21:46:59-07:00,0,"fix: commit correct 81-commit historical loc.csv directly; build no longer regenerates from git log"

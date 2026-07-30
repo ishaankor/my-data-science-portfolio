@@ -1,13 +1,13 @@
 'use client';
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { GitCommit, FileCode, Layers, Maximize2, Sparkles, Clock, Sliders, ExternalLink, Code } from 'lucide-react';
+import { GitCommit, FileCode, Layers, Maximize2, Sparkles, Clock, Sliders, ExternalLink, Code, ArrowUpDown } from 'lucide-react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
 interface LocRecord {
   file: string;
-  added: number;    // real lines added from git log --numstat
-  deleted: number;  // real lines deleted from git log --numstat
+  added: number;
+  deleted: number;
   type: string;
   commit: string;
   author: string;
@@ -43,11 +43,32 @@ const TYPE_COLORS: Record<string, string> = {
   yaml: '#cb171e',
 };
 
+// Robust CSV Line Parser (handles quotes and embedded commas)
+function parseCsvLine(line: string): string[] {
+  const result: string[] = [];
+  let current = '';
+  let inQuotes = false;
+  for (let i = 0; i < line.length; i++) {
+    const char = line[i];
+    if (char === '"') {
+      inQuotes = !inQuotes;
+    } else if (char === ',' && !inQuotes) {
+      result.push(current.trim());
+      current = '';
+    } else {
+      current += char;
+    }
+  }
+  result.push(current.trim());
+  return result;
+}
+
 export default function CodebaseEvolutionSuite() {
   const [records, setRecords] = useState<LocRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [sliderIndex, setSliderIndex] = useState(0);
   const [selectedCommit, setSelectedCommit] = useState<string | null>(null);
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc'); // 'asc' = Chronological (oldest first)
 
   // 1. DYNAMIC CSV PARSER: Fetch and parse /loc.csv live on mount
   useEffect(() => {
@@ -57,23 +78,23 @@ export default function CodebaseEvolutionSuite() {
         if (res.ok) {
           const text = await res.text();
           const lines = text.trim().split('\n');
-          const parsedRows: LocRecord[] = lines.slice(1).map((l) => {
-            // New CSV format: file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
-            const parts = l.split(',');
-            const cleanMsg = parts.slice(11).join(',').replace(/^"|"$/g, '') || 'codebase update';
+          if (lines.length < 2) return;
+
+          const parsedRows: LocRecord[] = lines.slice(1).map((line) => {
+            const parts = parseCsvLine(line);
             return {
               file: parts[0] || 'file',
-              added: Number(parts[1] || 0),
-              deleted: Number(parts[2] || 0),
+              added: parseInt(parts[1], 10) || 0,
+              deleted: parseInt(parts[2], 10) || 0,
               type: parts[3] || 'code',
               commit: parts[4] || 'head',
               author: parts[5] || 'Developer',
               date: parts[6] || '2025-01-11',
               time: parts[7] || '12:00:00',
               timezone: parts[8] || '-08:00',
-              datetime: parts[9] || '',
-              depth: Number(parts[10] || 0),
-              message: cleanMsg,
+              datetime: parts[9] || parts[6] || '2025-01-11T12:00:00Z',
+              depth: parseInt(parts[10], 10) || 0,
+              message: (parts[11] || 'codebase update').replace(/^"|"$/g, ''),
             };
           });
 
@@ -89,7 +110,7 @@ export default function CodebaseEvolutionSuite() {
     loadLocCsv();
   }, []);
 
-  // 2. DYNAMIC COMMIT AGGREGATOR: Group rows by commit hash
+  // 2. DYNAMIC COMMIT AGGREGATOR: Group rows by commit hash & sort CHRONOLOGICALLY (oldest to newest)
   const commitList = useMemo<CommitMeta[]>(() => {
     if (records.length === 0) return [];
 
@@ -116,29 +137,38 @@ export default function CodebaseEvolutionSuite() {
         });
       }
       const item = commitMap.get(r.commit)!;
-      item.lines += (r.added + r.deleted); // real lines changed
+      item.lines += (r.added + r.deleted);
       item.files.add(r.file);
     });
 
-    return Array.from(commitMap.entries()).map(([commit, data]) => ({
-      commit,
-      author: data.author,
-      date: data.date,
-      time: data.time,
-      datetime: data.datetime,
-      linesEdited: data.lines,
-      filesEdited: data.files.size,
-      message: data.message || `codebase update (${data.files.size} files edited)`,
-    })).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    return Array.from(commitMap.entries())
+      .map(([commit, data]) => ({
+        commit,
+        author: data.author,
+        date: data.date,
+        time: data.time,
+        datetime: data.datetime,
+        linesEdited: data.lines,
+        filesEdited: data.files.size,
+        message: data.message || `codebase update (${data.files.size} files edited)`,
+      }))
+      .filter((c) => {
+        const isBotAuthor = c.author.toLowerCase().includes('github-actions') || c.author.toLowerCase().includes('bot');
+        const isWorkflowMsg = c.message.toLowerCase().includes('loc.csv') || c.message.toLowerCase().includes('[skip ci]') || c.message.toLowerCase().includes('auto-update');
+        return !isBotAuthor && !isWorkflowMsg;
+      })
+      // Strictly sort chronologically from oldest (Jan 2025) to newest (today)
+      .sort((a, b) => new Date(a.datetime || a.date).getTime() - new Date(b.datetime || b.date).getTime());
   }, [records]);
 
+  // Set default slider index to newest commit when loaded
   useEffect(() => {
     if (commitList.length > 0) {
       setSliderIndex(commitList.length - 1);
     }
   }, [commitList]);
 
-  // 3. DYNAMIC METRICS: Computed dynamically from loc.csv records
+  // 3. DYNAMIC METRICS: Computed dynamically from filtered commits
   const filteredCommits = useMemo(() => {
     return commitList.slice(0, sliderIndex + 1);
   }, [commitList, sliderIndex]);
@@ -154,7 +184,11 @@ export default function CodebaseEvolutionSuite() {
 
   // Total LOC = sum of all real added lines across active commits
   const totalLoc = useMemo(() => {
-    return activeRecords.reduce((sum, r) => sum + r.added, 0);
+    return activeRecords.reduce((sum, r) => sum + (r.added || 0), 0);
+  }, [activeRecords]);
+
+  const totalDeletedLoc = useMemo(() => {
+    return activeRecords.reduce((sum, r) => sum + (r.deleted || 0), 0);
   }, [activeRecords]);
 
   const uniqueFiles = useMemo(() => {
@@ -163,14 +197,15 @@ export default function CodebaseEvolutionSuite() {
 
   const maxDepth = useMemo(() => {
     if (activeRecords.length === 0) return 0;
-    return Math.max(...activeRecords.map((r) => r.depth));
+    const depths = activeRecords.map((r) => r.depth).filter((d) => !isNaN(d));
+    return depths.length > 0 ? Math.max(...depths) : 0;
   }, [activeRecords]);
 
   const fileLocCounts = useMemo(() => {
     const counts: Record<string, { loc: number; type: string }> = {};
     activeRecords.forEach((r) => {
       if (!counts[r.file]) counts[r.file] = { loc: 0, type: r.type };
-      counts[r.file].loc += r.added;
+      counts[r.file].loc += (r.added || 0);
     });
     return Object.entries(counts).sort((a, b) => b[1].loc - a[1].loc);
   }, [activeRecords]);
@@ -184,7 +219,7 @@ export default function CodebaseEvolutionSuite() {
   const languageShare = useMemo(() => {
     const counts: Record<string, number> = {};
     activeRecords.forEach((r) => {
-      counts[r.type] = (counts[r.type] || 0) + r.added;
+      counts[r.type] = (counts[r.type] || 0) + (r.added || 0);
     });
 
     return Object.entries(counts).map(([type, count]) => ({
@@ -194,6 +229,14 @@ export default function CodebaseEvolutionSuite() {
       percent: totalLoc > 0 ? Math.round((count / totalLoc) * 100) : 0,
     })).sort((a, b) => b.loc - a.loc);
   }, [activeRecords, totalLoc]);
+
+  // Display commits in feed according to selected sort order (Chronological vs Reverse)
+  const displayCommits = useMemo(() => {
+    if (sortOrder === 'desc') {
+      return [...filteredCommits].reverse();
+    }
+    return filteredCommits;
+  }, [filteredCommits, sortOrder]);
 
   const currentCommit = commitList[sliderIndex] || commitList[0];
 
@@ -238,7 +281,7 @@ export default function CodebaseEvolutionSuite() {
                   min="0"
                   max={commitList.length - 1}
                   value={sliderIndex}
-                  onChange={(e) => setSliderIndex(parseInt(e.target.value))}
+                  onChange={(e) => setSliderIndex(parseInt(e.target.value, 10))}
                   className="w-32 accent-ember cursor-pointer"
                 />
                 <span className="text-ember font-bold px-2 py-0.5 rounded bg-ember/10 border border-ember/30">
@@ -276,15 +319,13 @@ export default function CodebaseEvolutionSuite() {
 
             <div className="p-4 rounded-lg bg-ink/80 border border-line">
               <span className="text-[0.65rem] text-muted uppercase tracking-wider block mb-1">LINES DELETED</span>
-              <span className="font-display text-2xl font-bold text-bone">
-                {activeRecords.reduce((s, r) => s + r.deleted, 0).toLocaleString()}
-              </span>
+              <span className="font-display text-2xl font-bold text-bone">{totalDeletedLoc.toLocaleString()}</span>
               <span className="text-[0.65rem] text-amber-400 block mt-0.5">total deleted</span>
             </div>
 
             <div className="p-4 rounded-lg bg-ink/80 border border-line">
               <span className="text-[0.65rem] text-muted uppercase tracking-wider block mb-1">MAX LINES</span>
-              <span className="font-display text-2xl font-bold text-bone">{maxLinesInfo.loc}</span>
+              <span className="font-display text-2xl font-bold text-bone">{maxLinesInfo.loc.toLocaleString()}</span>
               <span className="text-[0.65rem] text-indigo-400 block mt-0.5 truncate" title={maxLinesInfo.file}>
                 in {maxLinesInfo.file}
               </span>
@@ -296,15 +337,26 @@ export default function CodebaseEvolutionSuite() {
       {/* 2. Commits by Time of Day: Interactive Scatterplot & Scrollytelling Feed */}
       <ScrollReveal direction="up" delay={0.2}>
         <div className="rounded-xl border border-line bg-surface p-6 shadow-panel">
-          <h3 className="font-display text-lg font-bold text-bone mb-6 flex items-center gap-2 border-b border-line pb-4">
-            <Clock className="w-4.5 h-4.5 text-ember" />
-            <span>Commits by Time of Day & Interactive Scrollytelling</span>
-          </h3>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 border-b border-line pb-4">
+            <h3 className="font-display text-lg font-bold text-bone flex items-center gap-2">
+              <Clock className="w-4.5 h-4.5 text-ember" />
+              <span>Commits by Time of Day & Interactive Scrollytelling</span>
+            </h3>
+
+            {/* Sort Order Toggle */}
+            <button
+              onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
+              className="inline-flex items-center gap-2 font-mono text-xs text-bone-dim hover:text-ember bg-ink/80 px-3 py-1.5 rounded-lg border border-line hover:border-ember/50 transition-colors"
+            >
+              <ArrowUpDown className="w-3.5 h-3.5 text-ember" />
+              <span>Order: {sortOrder === 'asc' ? 'Chronological (Oldest First)' : 'Newest First'}</span>
+            </button>
+          </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* Left: Dynamic Scrollytelling Feed */}
             <div className="lg:col-span-6 space-y-3 max-h-[380px] overflow-y-auto pr-2 custom-scrollbar font-mono text-xs">
-              {filteredCommits.map((c) => {
+              {displayCommits.map((c) => {
                 const isSelected = selectedCommit === c.commit;
                 return (
                   <div
@@ -357,7 +409,7 @@ export default function CodebaseEvolutionSuite() {
 
                 {/* Plot Commit Bubbles across Timeline */}
                 {filteredCommits.map((c, i) => {
-                  const parts = c.time.split(':').map(Number);
+                  const parts = (c.time || '12:00:00').split(':').map(Number);
                   const timeInHours = (parts[0] || 12) + (parts[1] || 0) / 60;
                   const yPercent = (timeInHours / 24) * 100;
                   const xPercent = (i / (filteredCommits.length - 1 || 1)) * 90 + 5;

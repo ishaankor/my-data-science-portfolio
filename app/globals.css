@@ -18,6 +18,21 @@ body {
   scroll-behavior: smooth;
 }
 
+/* Hide default native browser cursor on desktop/fine-pointer devices so only custom cursor is shown */
+@media (pointer: fine) {
+  html,
+  body,
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  [role="button"],
+  [data-cursor="hover"] {
+    cursor: none !important;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
