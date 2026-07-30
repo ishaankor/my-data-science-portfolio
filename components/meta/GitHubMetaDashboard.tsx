@@ -94,7 +94,7 @@ export default function GitHubMetaDashboard() {
 
   const fetchAllGitHubData = useCallback(async () => {
     try {
-      const endpoint = process.env.NEXT_PUBLIC_GITHUB_FETCHER_URL || 'https://github-meta-fetcher.vercel.app/api/github';
+      const endpoint = 'https://github-meta-fetcher.vercel.app/api/github';
       const proxyRes = await fetch(endpoint, { cache: 'no-store' });
       if (proxyRes.ok) {
         const payload = await proxyRes.json();
