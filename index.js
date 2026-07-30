@@ -118,10 +118,9 @@ async function loadGitHubAnalytics(username) {
     const githubPanel = document.querySelector('#github-analytics');
     if (!githubPanel) return;
 
-    const userResponse = await fetchJSON(`https://api.github.com/users/${username}`);
-    const reposResponse = await fetchJSON(`https://api.github.com/users/${username}/repos?per_page=100&sort=pushed`);
-    const user = userResponse || {};
-    const repos = Array.isArray(reposResponse) ? reposResponse : [];
+    const backendData = await fetchJSON('https://github-meta-fetcher.vercel.app/api/github');
+    const user = backendData?.user || {};
+    const repos = Array.isArray(backendData?.repos) ? backendData.repos : [];
 
     const totalStars = repos.reduce((sum, repo) => sum + (repo.stargazers_count || 0), 0);
     const topLanguages = [...repos.reduce((map, repo) => {
