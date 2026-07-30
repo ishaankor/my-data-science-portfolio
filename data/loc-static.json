@@ -1,6 +1,20 @@
 [
   {
     "file": "data/loc-static.json",
+    "added": 14,
+    "deleted": 0,
+    "type": "json",
+    "commit": "6499544",
+    "author": "Ishaan Kor",
+    "date": "2026-07-30",
+    "time": "16:18:39",
+    "timezone": "-07:00",
+    "datetime": "2026-07-30T16:18:39-07:00",
+    "depth": 1,
+    "message": "sync: uploading loc data"
+  },
+  {
+    "file": "data/loc-static.json",
     "added": 56,
     "deleted": 0,
     "type": "json",
