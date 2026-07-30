@@ -1,4 +1,12 @@
 file,line,type,commit,author,date,time,timezone,datetime,depth,length,message
+.github/workflows/nextjs.yml,1,yml,08056ab,Ishaan Kor,2026-07-30,04:37:05,-07:00,2026-07-29T21:37:05-07:00,2,30,"fix: fetch full git history in deploy workflow so loc.csv has all historical commits"
+.github/workflows/nextjs.yml,2,yml,08056ab,Ishaan Kor,2026-07-30,04:37:05,-07:00,2026-07-29T21:37:05-07:00,2,30,"fix: fetch full git history in deploy workflow so loc.csv has all historical commits"
+.github/workflows/nextjs.yml,3,yml,08056ab,Ishaan Kor,2026-07-30,04:37:05,-07:00,2026-07-29T21:37:05-07:00,2,30,"fix: fetch full git history in deploy workflow so loc.csv has all historical commits"
+.github/workflows/nextjs.yml,4,yml,08056ab,Ishaan Kor,2026-07-30,04:37:05,-07:00,2026-07-29T21:37:05-07:00,2,30,"fix: fetch full git history in deploy workflow so loc.csv has all historical commits"
+.github/workflows/nextjs.yml,5,yml,08056ab,Ishaan Kor,2026-07-30,04:37:05,-07:00,2026-07-29T21:37:05-07:00,2,30,"fix: fetch full git history in deploy workflow so loc.csv has all historical commits"
+.github/workflows/nextjs.yml,6,yml,08056ab,Ishaan Kor,2026-07-30,04:37:05,-07:00,2026-07-29T21:37:05-07:00,2,30,"fix: fetch full git history in deploy workflow so loc.csv has all historical commits"
+.github/workflows/nextjs.yml,7,yml,08056ab,Ishaan Kor,2026-07-30,04:37:05,-07:00,2026-07-29T21:37:05-07:00,2,30,"fix: fetch full git history in deploy workflow so loc.csv has all historical commits"
+.github/workflows/nextjs.yml,8,yml,08056ab,Ishaan Kor,2026-07-30,04:37:05,-07:00,2026-07-29T21:37:05-07:00,2,30,"fix: fetch full git history in deploy workflow so loc.csv has all historical commits"
 components/meta/CodebaseEvolutionSuite.tsx,1,tsx,7a7b577,Ishaan Kor,2026-07-30,04:20:34,-07:00,2026-07-29T21:20:34-07:00,2,30,"refactor: update codebase evolution visualization and streamline line count generation script"
 components/meta/CodebaseEvolutionSuite.tsx,2,tsx,7a7b577,Ishaan Kor,2026-07-30,04:20:34,-07:00,2026-07-29T21:20:34-07:00,2,30,"refactor: update codebase evolution visualization and streamline line count generation script"
 components/meta/CodebaseEvolutionSuite.tsx,3,tsx,7a7b577,Ishaan Kor,2026-07-30,04:20:34,-07:00,2026-07-29T21:20:34-07:00,2,30,"refactor: update codebase evolution visualization and streamline line count generation script"
