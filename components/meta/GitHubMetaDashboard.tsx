@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { portfolioData } from '@/data/portfolio';
 import githubCache from '@/data/github-cache.json';
+import CodebaseEvolutionSuite from './CodebaseEvolutionSuite';
 import {
   Github,
   Code2,
@@ -452,107 +453,8 @@ export default function GitHubMetaDashboard() {
         </div>
       </ScrollReveal>
 
-      {/* 3. 52-WEEK CONTRIBUTION HEATMAP WITH INTERACTIVE TOOLTIPS */}
-      <ScrollReveal direction="up" delay={0.25}>
-        <div className="rounded-xl border border-line bg-surface p-7 shadow-panel relative">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-3">
-            <div>
-              <span className="inline-flex items-center gap-2 font-mono text-xs text-muted uppercase tracking-wider">
-                <Calendar className="w-3.5 h-3.5 text-ember" />
-                Contribution Matrix
-              </span>
-              <h2 className="font-display text-xl font-bold text-bone mt-1">
-                Annual GitHub Activity Heatmap
-              </h2>
-            </div>
-
-            <div className="flex items-center gap-4">
-              <span className="px-2.5 py-1 rounded bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center gap-1.5 font-mono text-xs">
-                <Radio className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
-                <span>Live Stream (1d)</span>
-              </span>
-
-              <div className="flex items-center gap-2 font-mono text-[0.7rem] text-muted">
-                <span>Less</span>
-                <span className="w-3.5 h-3.5 rounded-sm bg-[#1a1d26] border border-[#262a38]" />
-                <span className="w-3.5 h-3.5 rounded-sm bg-[#78350f] border border-[#b45309]" />
-                <span className="w-3.5 h-3.5 rounded-sm bg-[#d97706] border border-[#f59e0b]" />
-                <span className="w-3.5 h-3.5 rounded-sm bg-[#f59e0b] border border-amber-300 shadow-sm" />
-                <span>More</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Grid of 52 weeks with Edge-Aware Precision Floating Tooltips */}
-          <div className="overflow-x-auto pt-2 pb-4">
-            <div className="inline-flex gap-1.5 min-w-[750px] p-2">
-              {activityWeeks.map((week, wIdx) => (
-                <div key={wIdx} className="flex flex-col gap-1.5">
-                  {week.map((day, dIdx) => {
-                    const colorClass =
-                      day.intensity === 3
-                        ? 'bg-[#f59e0b] border-amber-300 shadow-[0_0_10px_rgba(245,158,11,0.5)]'
-                        : day.intensity === 2
-                          ? 'bg-[#d97706] border-[#f59e0b] shadow-sm'
-                          : day.intensity === 1
-                            ? 'bg-[#78350f] border-[#b45309]'
-                            : 'bg-[#1a1d26] border-[#262a38]';
-
-                    const tooltipTitle = day.count > 0
-                      ? `${day.count} commit${day.count > 1 ? 's' : ''} on ${day.formattedDate}`
-                      : `No commits on ${day.formattedDate}`;
-
-                    const isTopRow = dIdx <= 1;
-                    const isLeftEdge = wIdx <= 4;
-                    const isRightEdge = wIdx >= 47;
-
-                    let tooltipPosClass = 'left-1/2 -translate-x-1/2';
-                    let arrowPosClass = 'left-1/2 -translate-x-1/2';
-
-                    if (isLeftEdge) {
-                      tooltipPosClass = 'left-0 translate-x-0';
-                      arrowPosClass = 'left-3';
-                    } else if (isRightEdge) {
-                      tooltipPosClass = 'right-0 translate-x-0';
-                      arrowPosClass = 'right-3';
-                    }
-
-                    return (
-                      <div key={dIdx} className="relative group/cell">
-                        <div
-                          className={`w-3.5 h-3.5 rounded-sm border transition-all duration-200 hover:scale-125 hover:z-20 cursor-pointer ${colorClass}`}
-                          title={tooltipTitle}
-                        />
-                        {/* Ultra High-Contrast Edge-Aware Floating Tooltip Card */}
-                        <div
-                          className={`absolute ${tooltipPosClass} hidden group-hover/cell:flex pointer-events-none z-50 w-max ${isTopRow ? 'top-full mt-2.5 flex-col-reverse items-center' : 'bottom-full mb-2.5 flex-col items-center'
-                            }`}
-                        >
-                          <div className="px-3 py-2 rounded-lg bg-[#14161d] border-2 border-ember shadow-[0_12px_30px_rgba(0,0,0,0.9)] text-[0.72rem] font-mono text-bone whitespace-nowrap flex items-center gap-2">
-                            <span className={`px-2 py-0.5 rounded font-bold ${day.count > 0
-                              ? 'bg-ember text-ink shadow-sm'
-                              : 'bg-surface border border-line text-muted'
-                              }`}>
-                              {day.count > 0 ? `${day.count} ${day.count === 1 ? 'commit' : 'commits'}` : 'No commits'}
-                            </span>
-                            <span className="text-bone font-medium">{day.formattedDate}</span>
-                          </div>
-                          <div
-                            className={`w-2.5 h-2.5 rotate-45 bg-[#14161d] absolute ${arrowPosClass} ${isTopRow
-                              ? '-top-1 border-t-2 border-l-2 border-ember'
-                              : '-bottom-1 border-r-2 border-b-2 border-ember'
-                              }`}
-                          />
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </ScrollReveal>
+      {/* 3. CODEBASE EVOLUTION & SCROLLYTELLING SUITE (REPLACING HEATMAP) */}
+      <CodebaseEvolutionSuite />
 
       {/* 4. Code Languages Distribution Summary */}
       <ScrollReveal direction="up" delay={0.3}>
