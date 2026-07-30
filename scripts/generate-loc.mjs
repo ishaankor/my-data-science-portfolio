@@ -2,11 +2,11 @@ import fs from 'fs';
 import { execSync } from 'child_process';
 import path from 'path';
 
-console.log('📡 Generating complete historical loc.csv from git log (ONLY Ishaan Kor commits)...');
+console.log('📡 Generating complete historical loc.csv from git log (2025-01-11 to today)...');
 
 try {
   const gitLogOutput = execSync(
-    'git log --author="[iI]shaan" --pretty=format:"COMMIT_HEADER|%h|%an|%ae|%ad|%s" --date=iso-strict --numstat',
+    'git log --pretty=format:"COMMIT_HEADER|%h|%an|%ae|%ad|%s" --date=iso-strict --numstat',
     { encoding: 'utf8' }
   );
 
@@ -27,16 +27,12 @@ try {
       const isoDate = parts[4]; // e.g. 2026-07-29T21:03:19-07:00
       const message = parts[5] || 'update codebase';
 
-      // STRICT FILTER: Only include commits authored by Ishaan Kor, exclude all bot/workflow runs
+      // Filter out automated bot runs and [skip ci] maintenance commits
       const fullAuthor = `${authorName} ${authorEmail}`.toLowerCase();
-      const isIshaan = fullAuthor.includes('ishaan') || fullAuthor.includes('ishaankor');
-      const isBot = fullAuthor.includes('bot') || fullAuthor.includes('action');
-      const isWorkflowMsg =
-        message.includes('update loc.csv') ||
-        message.includes('[skip ci]') ||
-        message.toLowerCase().includes('auto-update');
+      const isBot = fullAuthor.includes('github-actions') || fullAuthor.includes('bot');
+      const isWorkflowMsg = message.includes('[skip ci]') || message.includes('chore: update loc.csv');
 
-      if (!isIshaan || isBot || isWorkflowMsg) {
+      if (isBot || isWorkflowMsg) {
         currentCommit = null;
         return;
       }
@@ -48,7 +44,7 @@ try {
 
       currentCommit = {
         hash,
-        author: 'Ishaan Kor',
+        author: authorName || 'Ishaan Kor',
         date: dateStr,
         time: timeStr,
         timezone: tzStr,
@@ -94,7 +90,7 @@ try {
     fs.writeFileSync(metaCsvPath, csvContent, 'utf8');
   }
 
-  console.log(`✅ Generated loc.csv with ${csvRows.length - 1} rows strictly for Ishaan Kor commits!`);
+  console.log(`✅ Generated loc.csv with ${csvRows.length - 1} rows from git log!`);
 } catch (err) {
   console.error('Error generating loc.csv:', err);
 }
