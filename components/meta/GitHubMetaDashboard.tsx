@@ -51,6 +51,19 @@ interface CommitItem {
   timeAgo: string;
 }
 
+interface ContributionDay {
+  date: string;
+  contributionCount: number;
+  color?: string;
+}
+
+interface ContributionCalendar {
+  totalContributions: number;
+  weeks: {
+    contributionDays: ContributionDay[];
+  }[];
+}
+
 function formatTimeAgo(dateString: string): string {
   const date = new Date(dateString);
   const now = new Date();
@@ -84,6 +97,7 @@ export default function GitHubMetaDashboard() {
   const [user, setUser] = useState<GitHubUser>(FALLBACK_USER);
   const [repos, setRepos] = useState<GitHubRepo[]>(FALLBACK_REPOS);
   const [commits, setCommits] = useState<CommitItem[]>(FALLBACK_COMMITS);
+  const [contributionCalendar, setContributionCalendar] = useState<ContributionCalendar | null>(null);
   const [, setLoading] = useState(true);
   const [lastPolledTime, setLastPolledTime] = useState<string>('');
   const [searchQuery, setSearchQuery] = useState('');
@@ -101,6 +115,9 @@ export default function GitHubMetaDashboard() {
         }
         if (Array.isArray(payload.commits) && payload.commits.length > 0) {
           setCommits(payload.commits);
+        }
+        if (payload.contributionCalendar) {
+          setContributionCalendar(payload.contributionCalendar);
         }
         setLastPolledTime(new Date().toLocaleTimeString());
       }
@@ -181,6 +198,30 @@ export default function GitHubMetaDashboard() {
   const primaryLang = topLanguages.length > 0 ? topLanguages[0][0] : 'Python';
 
   const activityWeeks = useMemo(() => {
+    if (contributionCalendar?.weeks && contributionCalendar.weeks.length > 0) {
+      return contributionCalendar.weeks.slice(-52).map((w) =>
+        w.contributionDays.map((d) => {
+          const cellDate = new Date(d.date);
+          const formattedDate = cellDate.toLocaleDateString('en-US', {
+            weekday: 'short',
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric',
+          });
+
+          const count = d.contributionCount || 0;
+          const intensity = count >= 4 ? 3 : count >= 2 ? 2 : count >= 1 ? 1 : 0;
+
+          return {
+            date: d.date,
+            formattedDate,
+            intensity,
+            count,
+          };
+        })
+      );
+    }
+
     const today = new Date();
     const startDate = new Date(today);
     startDate.setDate(today.getDate() - (51 * 7 + today.getDay()));
@@ -216,17 +257,8 @@ export default function GitHubMetaDashboard() {
           year: 'numeric',
         });
 
-        const realCount = commitDateCounts[dateStr];
-        let count = 0;
-        let intensity = 0;
-
-        if (realCount && realCount > 0) {
-          count = realCount;
-          intensity = count >= 4 ? 3 : count >= 2 ? 2 : 1;
-        } else {
-          intensity = (w * 7 + d) % 9 === 0 ? 3 : (w * 7 + d) % 5 === 0 ? 2 : (w * 7 + d) % 3 === 0 ? 1 : 0;
-          count = intensity === 3 ? 5 : intensity === 2 ? 3 : intensity === 1 ? 1 : 0;
-        }
+        const count = commitDateCounts[dateStr] || 0;
+        const intensity = count >= 4 ? 3 : count >= 2 ? 2 : count >= 1 ? 1 : 0;
 
         days.push({
           date: dateStr,
@@ -238,7 +270,7 @@ export default function GitHubMetaDashboard() {
       weeks.push(days);
     }
     return weeks;
-  }, [commits, activeRepos]);
+  }, [contributionCalendar, commits, activeRepos]);
 
   return (
     <div className="space-y-16">

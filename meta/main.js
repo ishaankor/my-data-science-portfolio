@@ -56,15 +56,10 @@ async function loadGitHubMeta(username) {
   const githubActivity = document.getElementById('github-activity');
   if (!githubMeta || !githubActivity) return;
 
-  const [userResponse, reposResponse, eventsResponse] = await Promise.all([
-    fetchJSON(`https://api.github.com/users/${username}`),
-    fetchJSON(`https://api.github.com/users/${username}/repos?per_page=100&sort=pushed`),
-    fetchJSON(`https://api.github.com/users/${username}/events/public?per_page=20`)
-  ]);
-
-  const user = userResponse || {};
-  const repos = Array.isArray(reposResponse) ? reposResponse : [];
-  const events = Array.isArray(eventsResponse) ? eventsResponse : [];
+  const backendData = await fetchJSON('https://github-meta-fetcher.vercel.app/api/github');
+  const user = backendData?.user || {};
+  const repos = Array.isArray(backendData?.repos) ? backendData.repos : [];
+  const events = Array.isArray(backendData?.commits) ? backendData.commits : [];
 
   const totalStars = repos.reduce((sum, repo) => sum + (repo.stargazers_count || 0), 0);
   const languageCounts = repos.reduce((map, repo) => {
