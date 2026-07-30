@@ -5,7 +5,6 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { name, email, message, honeypot } = body;
 
-    // Honeypot spam protection check
     if (honeypot) {
       return NextResponse.json(
         { success: false, error: 'Spam detected' },
@@ -13,7 +12,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // Validation
     if (!name || !email || !message) {
       return NextResponse.json(
         { success: false, error: 'Name, email, and message are required fields.' },
@@ -21,7 +19,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // Email format validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return NextResponse.json(
@@ -30,7 +27,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // Log message to server console (or forward via SendGrid / Resend if configured)
     console.log(`[CONTACT FORM] Message received from ${name} (${email}): ${message}`);
 
     return NextResponse.json({
