@@ -18,8 +18,11 @@ body {
   scroll-behavior: smooth;
 }
 
-/* Hide default native browser cursor on desktop/fine-pointer devices so only custom cursor is shown */
+/* Hide default native browser cursor on desktop/fine-pointer devices including scrollbars & pseudo-elements */
 @media (pointer: fine) {
+  *,
+  *::before,
+  *::after,
   html,
   body,
   a,
@@ -27,8 +30,16 @@ body {
   input,
   textarea,
   select,
+  iframe,
   [role="button"],
-  [data-cursor="hover"] {
+  [data-cursor="hover"],
+  ::-webkit-scrollbar,
+  ::-webkit-scrollbar-button,
+  ::-webkit-scrollbar-thumb,
+  ::-webkit-scrollbar-track,
+  ::-webkit-scrollbar-track-piece,
+  ::-webkit-scrollbar-corner,
+  ::-webkit-resizer {
     cursor: none !important;
   }
 }
