@@ -5,9 +5,19 @@ import path from 'path';
 console.log('📡 Generating complete historical loc.csv & loc-static.json from git log (2025-01-11 to today)...');
 
 try {
+  // Sanitize process.env to remove Git hook environment variables (GIT_DIR, GIT_INDEX_FILE, etc.)
+  // that cause git log to restrict output to a single commit when executed during git hooks.
+  const cleanEnv = { ...process.env };
+  delete cleanEnv.GIT_DIR;
+  delete cleanEnv.GIT_WORK_TREE;
+  delete cleanEnv.GIT_INDEX_FILE;
+  delete cleanEnv.GIT_OBJECT_DIRECTORY;
+  delete cleanEnv.GIT_ALTERNATE_OBJECT_DIRECTORIES;
+  delete cleanEnv.GIT_PREFIX;
+
   const gitLogOutput = execSync(
     'git log --pretty=format:"COMMIT_HEADER|%h|%an|%ae|%ad|%s" --date=iso-strict --numstat',
-    { encoding: 'utf8' }
+    { encoding: 'utf8', env: cleanEnv }
   );
 
   const lines = gitLogOutput.split('\n');

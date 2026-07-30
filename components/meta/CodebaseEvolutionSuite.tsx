@@ -101,7 +101,10 @@ export default function CodebaseEvolutionSuite() {
             };
           });
 
-          setRecords(parsedRows);
+          // Only update state if live fetch parsed rows are as comprehensive as prebuilt static fallback
+          if (parsedRows.length >= (locStaticRecords as LocRecord[]).length) {
+            setRecords(parsedRows);
+          }
         }
       } catch (err) {
         console.error('Dynamic loc.csv fetch error:', err);
@@ -168,12 +171,13 @@ export default function CodebaseEvolutionSuite() {
 
   // Set default slider index to newest commit when loaded
   useEffect(() => {
-    if (commitList.length > 0 && sliderIndex === -1) {
+    if (commitList.length > 0 && (sliderIndex === -1 || sliderIndex >= commitList.length)) {
       setSliderIndex(commitList.length - 1);
     }
-  }, [commitList, sliderIndex]);
+  }, [commitList.length, sliderIndex]);
 
-  const effectiveIndex = sliderIndex === -1 ? Math.max(0, commitList.length - 1) : sliderIndex;
+  const effectiveIndex =
+    sliderIndex < 0 || sliderIndex >= commitList.length ? Math.max(0, commitList.length - 1) : sliderIndex;
 
   // 3. DYNAMIC METRICS: Computed dynamically from filtered commits
   const filteredCommits = useMemo(() => {
