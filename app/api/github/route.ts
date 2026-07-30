@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { portfolioData } from '@/data/portfolio';
 import githubCache from '@/data/github-cache.json';
 
+export const dynamic = 'force-dynamic';
+
 interface CachedResponse {
   user: any;
   repos: any[];
@@ -11,7 +13,7 @@ interface CachedResponse {
 
 let memoryCache: CachedResponse | null = null;
 let lastFetchTime = 0;
-const CACHE_DURATION_MS = 60 * 1000; // 1 minute in-memory cache for live commit streaming
+const CACHE_DURATION_MS = 60 * 1000; // 1-minute server in-memory cache for live commit history updates
 
 function formatTimeAgo(dateString: string): string {
   const date = new Date(dateString);
@@ -31,13 +33,17 @@ function formatTimeAgo(dateString: string): string {
 export async function GET() {
   const now = Date.now();
 
-  // Return in-memory cached response if fresh (under 5 minutes)
   if (memoryCache && now - lastFetchTime < CACHE_DURATION_MS) {
+    const updatedCommits = memoryCache.commits.map((c) => ({
+      ...c,
+      timeAgo: formatTimeAgo(c.date),
+    }));
+
     return NextResponse.json(
-      { ...memoryCache, cached: true },
+      { ...memoryCache, commits: updatedCommits, cached: true },
       {
         headers: {
-          'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=60',
+          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
         },
       }
     );
@@ -54,13 +60,19 @@ export async function GET() {
   }
 
   try {
-    const [userRes, reposRes] = await Promise.all([
-      fetch(`https://api.github.com/users/${portfolioData.githubUsername}`, { headers }),
-      fetch(`https://api.github.com/users/${portfolioData.githubUsername}/repos?per_page=100&sort=pushed`, { headers }),
+    const reposUrl = token
+      ? `https://api.github.com/user/repos?per_page=100&sort=pushed&type=all`
+      : `https://api.github.com/users/${portfolioData.githubUsername}/repos?per_page=100&sort=pushed`;
+
+    const [userRes, reposRes, eventsRes] = await Promise.all([
+      fetch(`https://api.github.com/users/${portfolioData.githubUsername}`, { headers, cache: 'no-store' }),
+      fetch(reposUrl, { headers, cache: 'no-store' }),
+      fetch(`https://api.github.com/users/${portfolioData.githubUsername}/events?per_page=30`, { headers, cache: 'no-store' }),
     ]);
 
-    let userData: any = null;
+    let userData: any = githubCache?.user || null;
     let reposData: any[] = (githubCache?.repos || []) as any[];
+    let commitsData: any[] = [];
 
     if (userRes.ok) {
       userData = await userRes.json();
@@ -69,13 +81,51 @@ export async function GET() {
     if (reposRes.ok) {
       const fetchedRepos = await reposRes.json();
       if (Array.isArray(fetchedRepos) && fetchedRepos.length > 0) {
-        reposData = fetchedRepos;
+        reposData = fetchedRepos.filter((r: any) => !r.fork && (r.owner?.login === portfolioData.githubUsername || r.owner?.login === undefined));
       }
     }
 
-    // Query top 5 recently active repos to extract exact last 5 commits across projects
-    let commitsData: any[] = [];
-    if (Array.isArray(reposData) && reposData.length > 0) {
+    // 1. Primary: Parse instant live PushEvents from GitHub Events API
+    if (eventsRes.ok) {
+      const events = await eventsRes.json();
+      if (Array.isArray(events)) {
+        const pushEvents = events.filter((e) => e.type === 'PushEvent');
+        const eventCommits: any[] = [];
+
+        pushEvents.forEach((ev: any) => {
+          const repoFullName = ev.repo?.name || '';
+          const repoShortName = repoFullName.split('/')[1] || repoFullName;
+          const repoUrl = `https://github.com/${repoFullName}`;
+          const payloadCommits = ev.payload?.commits || [];
+
+          payloadCommits.forEach((c: any) => {
+            const sha = c.sha;
+            const shortSha = sha ? sha.substring(0, 7) : 'head';
+            eventCommits.push({
+              sha,
+              shortSha,
+              message: c.message?.split('\n')[0] || 'Update repository',
+              repoName: repoShortName,
+              repoUrl,
+              commitUrl: `https://github.com/${repoFullName}/commit/${sha}`,
+              date: ev.created_at,
+              timeAgo: formatTimeAgo(ev.created_at),
+            });
+          });
+        });
+
+        if (eventCommits.length > 0) {
+          const commitMap = new Map<string, any>();
+          eventCommits.forEach((item) => commitMap.set(item.sha, item));
+          commitsData = Array.from(commitMap.values())
+            .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())
+            .slice(0, 5);
+        }
+      }
+    }
+
+    // 2. Fallback to repository commits endpoint if no PushEvents found
+    if (commitsData.length === 0 && Array.isArray(reposData) && reposData.length > 0) {
       const topPushed = [...reposData]
         .sort((a, b) => new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime())
         .slice(0, 5);
@@ -84,7 +134,7 @@ export async function GET() {
         try {
           const res = await fetch(
             `https://api.github.com/repos/${portfolioData.githubUsername}/${repo.name}/commits?per_page=5`,
-            { headers }
+            { headers, cache: 'no-store' }
           );
           if (res.ok) {
             const data = await res.json();
@@ -113,12 +163,14 @@ export async function GET() {
       const nestedCommits = await Promise.all(commitPromises);
       const allFetchedCommits = nestedCommits.flat().filter(Boolean);
 
-      const commitMap = new Map<string, any>();
-      allFetchedCommits.forEach((item) => commitMap.set(item.sha, item));
+      if (allFetchedCommits.length > 0) {
+        const commitMap = new Map<string, any>();
+        allFetchedCommits.forEach((item) => commitMap.set(item.sha, item));
 
-      commitsData = Array.from(commitMap.values())
-        .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())
-        .slice(0, 5);
+        commitsData = Array.from(commitMap.values())
+          .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())
+          .slice(0, 5);
+      }
     }
 
     memoryCache = {
@@ -133,18 +185,17 @@ export async function GET() {
       { ...memoryCache, cached: false },
       {
         headers: {
-          'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=60',
+          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
         },
       }
     );
   } catch (error: any) {
     console.error('GitHub API Proxy Handler Error:', error);
 
-    // Serve memory cache if available or fallback JSON on error
     const fallbackResponse = memoryCache || {
-      user: null,
+      user: githubCache?.user || null,
       repos: (githubCache?.repos || []) as any[],
-      commits: [],
+      commits: (githubCache?.commits || []) as any[],
       fetchedAt: new Date().toISOString(),
     };
 
