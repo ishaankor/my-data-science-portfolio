@@ -63,10 +63,12 @@ function parseCsvLine(line: string): string[] {
   return result;
 }
 
+import locStaticRecords from '@/data/loc-static.json';
+
 export default function CodebaseEvolutionSuite() {
-  const [records, setRecords] = useState<LocRecord[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [sliderIndex, setSliderIndex] = useState(0);
+  const [records, setRecords] = useState<LocRecord[]>(locStaticRecords as LocRecord[]);
+  const [loading, setLoading] = useState(false);
+  const [sliderIndex, setSliderIndex] = useState(-1);
   const [selectedCommit, setSelectedCommit] = useState<string | null>(null);
   const [hoveredCommit, setHoveredCommit] = useState<CommitMeta | null>(null);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc'); // 'asc' = Chronological (oldest first)
@@ -166,15 +168,17 @@ export default function CodebaseEvolutionSuite() {
 
   // Set default slider index to newest commit when loaded
   useEffect(() => {
-    if (commitList.length > 0) {
+    if (commitList.length > 0 && sliderIndex === -1) {
       setSliderIndex(commitList.length - 1);
     }
-  }, [commitList]);
+  }, [commitList, sliderIndex]);
+
+  const effectiveIndex = sliderIndex === -1 ? Math.max(0, commitList.length - 1) : sliderIndex;
 
   // 3. DYNAMIC METRICS: Computed dynamically from filtered commits
   const filteredCommits = useMemo(() => {
-    return commitList.slice(0, sliderIndex + 1);
-  }, [commitList, sliderIndex]);
+    return commitList.slice(0, effectiveIndex + 1);
+  }, [commitList, effectiveIndex]);
 
   const activeCommitHashes = useMemo(() => {
     return new Set(filteredCommits.map((c) => c.commit));
@@ -241,7 +245,7 @@ export default function CodebaseEvolutionSuite() {
     return filteredCommits;
   }, [filteredCommits, sortOrder]);
 
-  const currentCommit = commitList[sliderIndex] || commitList[0];
+  const currentCommit = commitList[effectiveIndex] || commitList[commitList.length - 1];
 
   if (loading) {
     return (
@@ -283,7 +287,7 @@ export default function CodebaseEvolutionSuite() {
                   type="range"
                   min="0"
                   max={commitList.length - 1}
-                  value={sliderIndex}
+                  value={effectiveIndex}
                   onChange={(e) => setSliderIndex(parseInt(e.target.value, 10))}
                   className="w-32 accent-ember cursor-pointer"
                 />
