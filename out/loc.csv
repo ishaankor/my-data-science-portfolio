@@ -1,4 +1,10 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+app/globals.css,4,0,css,307acde,Ishaan Kor,2026-07-30,14:20:43,-07:00,2026-07-30T14:20:43-07:00,1,"feat: add HazeWaveText component and removed codebase evolution"
+components/meta/CodebaseEvolutionSuite.tsx,45,114,tsx,307acde,Ishaan Kor,2026-07-30,14:20:43,-07:00,2026-07-30T14:20:43-07:00,2,"feat: add HazeWaveText component and removed codebase evolution"
+components/ui/HazeWaveText.tsx,89,0,tsx,307acde,Ishaan Kor,2026-07-30,14:20:43,-07:00,2026-07-30T14:20:43-07:00,2,"feat: add HazeWaveText component and removed codebase evolution"
+components/ui/MidnightHazeCursor.tsx,14,8,tsx,307acde,Ishaan Kor,2026-07-30,14:20:43,-07:00,2026-07-30T14:20:43-07:00,2,"feat: add HazeWaveText component and removed codebase evolution"
+app/globals.css,13,2,css,5fa8070,Ishaan Kor,2026-07-30,14:06:37,-07:00,2026-07-30T14:06:37-07:00,1,"feat: update line-of-code tracking script"
+scripts/generate-loc.mjs,1,1,mjs,5fa8070,Ishaan Kor,2026-07-30,14:06:37,-07:00,2026-07-30T14:06:37-07:00,1,"feat: update line-of-code tracking script"
 components/meta/CodebaseEvolutionSuite.tsx,6,3,tsx,e7c339d,Ishaan Kor,2026-07-30,14:00:21,-07:00,2026-07-30T14:00:21-07:00,2,"feat: update commit history to only fetch my commits."
 scripts/generate-loc.mjs,21,14,mjs,e7c339d,Ishaan Kor,2026-07-30,14:00:21,-07:00,2026-07-30T14:00:21-07:00,1,"feat: update commit history to only fetch my commits."
 app/globals.css,15,0,css,6d9bfe8,Ishaan Kor,2026-07-30,13:21:53,-07:00,2026-07-30T13:21:53-07:00,1,"feat: fixed scrollytelling elements to accurate data"
