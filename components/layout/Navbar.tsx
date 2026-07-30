@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
+import HazeWaveText from '@/components/ui/HazeWaveText';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -27,10 +28,10 @@ export default function Navbar() {
           {/* Logo Brand matching sunnypatel.net */}
           <Link
             href="/"
-            className="font-mono text-sm tracking-tight text-bone hover:text-white transition-colors"
+            className="text-sm transition-transform hover:scale-105"
             aria-label="Home"
           >
-            ishaan<span className="text-ember font-bold">.</span>koradia
+            <HazeWaveText text="ishaan.koradia" className="text-sm" />
           </Link>
 
           {/* Desktop Nav Links */}

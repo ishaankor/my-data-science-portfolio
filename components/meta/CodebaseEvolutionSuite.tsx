@@ -68,6 +68,7 @@ export default function CodebaseEvolutionSuite() {
   const [loading, setLoading] = useState(true);
   const [sliderIndex, setSliderIndex] = useState(0);
   const [selectedCommit, setSelectedCommit] = useState<string | null>(null);
+  const [hoveredCommit, setHoveredCommit] = useState<CommitMeta | null>(null);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc'); // 'asc' = Chronological (oldest first)
 
   // 1. DYNAMIC CSV PARSER: Fetch and parse /loc.csv live on mount
@@ -393,41 +394,48 @@ export default function CodebaseEvolutionSuite() {
             </div>
 
             {/* Right: Time-of-Day Interactive Scatterplot */}
-            <div className="lg:col-span-6 p-6 rounded-lg bg-ink border border-line space-y-4">
-              <div className="flex items-center justify-between text-xs font-mono text-muted">
-                <span>Time of Day Scatterplot (24h vs Date)</span>
-                <span className="text-ember">● Circle Size = Lines Changed</span>
+            <div className="lg:col-span-6 p-6 rounded-lg bg-ink border border-line space-y-4 relative">
+              <div className="flex items-center justify-between text-xs font-mono text-muted border-b border-line/40 pb-2">
+                <span className="font-semibold text-bone">Time of Day Scatterplot (24h vs Date)</span>
+                <span className="text-ember">● Size = Lines Changed</span>
               </div>
 
-              {/* Scatterplot Grid */}
-              <div className="h-64 border-l border-b border-line/80 relative flex items-end justify-between p-4">
-                {/* Horizontal Y-Axis Grid Lines */}
-                <div className="absolute inset-0 flex flex-col justify-between pointer-events-none text-[0.6rem] font-mono text-muted/40">
-                  <div className="border-b border-line/20 w-full pt-1">24:00</div>
-                  <div className="border-b border-line/20 w-full">18:00</div>
-                  <div className="border-b border-line/20 w-full">12:00</div>
-                  <div className="border-b border-line/20 w-full">06:00</div>
-                  <div className="border-b border-line/20 w-full pb-1">00:00</div>
+              {/* Scatterplot Grid Box with bounded height and overflow-hidden */}
+              <div className="h-72 border-l border-b border-line/80 relative flex items-end justify-between p-4 overflow-hidden rounded-bl-lg bg-surface/30">
+                {/* Y-Axis Time Gridlines */}
+                <div className="absolute inset-0 flex flex-col justify-between pointer-events-none text-[0.6rem] font-mono text-muted/50 p-2">
+                  <div className="border-b border-line/30 w-full pt-1 flex items-center justify-between"><span>24:00</span></div>
+                  <div className="border-b border-line/30 w-full flex items-center justify-between"><span>18:00</span></div>
+                  <div className="border-b border-line/30 w-full flex items-center justify-between"><span>12:00</span></div>
+                  <div className="border-b border-line/30 w-full flex items-center justify-between"><span>06:00</span></div>
+                  <div className="border-b border-line/30 w-full pb-1 flex items-center justify-between"><span>00:00</span></div>
                 </div>
 
-                {/* Plot Commit Bubbles across Timeline */}
+                {/* Plot Commit Bubbles with bounded margins */}
                 {filteredCommits.map((c, i) => {
                   const parts = (c.time || '12:00:00').split(':').map(Number);
                   const timeInHours = (parts[0] || 12) + (parts[1] || 0) / 60;
-                  const yPercent = (timeInHours / 24) * 100;
-                  const xPercent = (i / (filteredCommits.length - 1 || 1)) * 90 + 5;
-                  const sizePx = Math.max(14, Math.min(38, Math.round(c.linesEdited / 10)));
+                  // Bounded Y percent between 10% and 88% so bubbles never overlap top header or bottom axis
+                  const yPercent = 10 + (timeInHours / 24) * 78;
+                  // Bounded X percent between 6% and 94%
+                  const xPercent = (i / (filteredCommits.length - 1 || 1)) * 88 + 6;
+                  // Logarithmic bubble size (min 8px, max 22px) to prevent gigantic overlapping bubbles
+                  const sizePx = Math.max(8, Math.min(22, Math.round(Math.log2((c.linesEdited || 0) + 1) * 2.8)));
                   const isSelected = selectedCommit === c.commit;
+                  const isHovered = hoveredCommit?.commit === c.commit;
 
                   return (
                     <div
                       key={c.commit}
-                      onClick={() => setSelectedCommit(c.commit)}
-                      title={`${c.message} (${c.date} ${c.time}) - ${c.linesEdited} lines`}
-                      className={`absolute rounded-full transition-all duration-300 cursor-pointer transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center font-mono text-[0.6rem] font-bold ${
+                      onClick={() => setSelectedCommit(isSelected ? null : c.commit)}
+                      onMouseEnter={() => setHoveredCommit(c)}
+                      onMouseLeave={() => setHoveredCommit(null)}
+                      className={`absolute rounded-full transition-all duration-200 cursor-pointer transform -translate-x-1/2 -translate-y-1/2 ${
                         isSelected
-                          ? 'bg-ember text-ink ring-4 ring-ember/40 z-30 scale-125'
-                          : 'bg-rose-500/70 hover:bg-rose-400 text-bone border border-rose-300 shadow-md hover:scale-110'
+                          ? 'bg-ember ring-4 ring-ember/50 z-30 scale-125 shadow-lg shadow-ember/50'
+                          : isHovered
+                          ? 'bg-cyan-400 ring-4 ring-cyan-400/40 z-20 scale-125 shadow-md shadow-cyan-500/30'
+                          : 'bg-rose-500/75 hover:bg-rose-400 border border-rose-300/60 shadow-sm hover:scale-110'
                       }`}
                       style={{
                         left: `${xPercent}%`,
@@ -435,106 +443,29 @@ export default function CodebaseEvolutionSuite() {
                         width: `${sizePx}px`,
                         height: `${sizePx}px`,
                       }}
-                    >
-                      {c.commit.substring(0, 3)}
-                    </div>
+                    />
                   );
                 })}
-              </div>
 
-              <div className="flex items-center justify-between text-[0.68rem] font-mono text-muted">
-                <span>Earliest ({commitList[0]?.date || '2025-01-11'})</span>
-                <span>Latest ({currentCommit?.date || 'Today'})</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </ScrollReveal>
-
-      {/* 3. Codebase Evolution: Dynamic Dot Matrix & Language Share Breakdown */}
-      <ScrollReveal direction="up" delay={0.25}>
-        <div className="rounded-xl border border-line bg-surface p-6 shadow-panel">
-          <h3 className="font-display text-lg font-bold text-bone mb-6 flex items-center gap-2 border-b border-line pb-4">
-            <Layers className="w-4.5 h-4.5 text-cyan-400" />
-            <span>Codebase Evolution & File Matrix</span>
-          </h3>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            {/* Left Column: File Dot Grid Unit Matrix */}
-            <div className="lg:col-span-7 p-6 rounded-lg bg-ink border border-line space-y-6">
-              <div className="flex items-center justify-between text-xs font-mono">
-                <span className="text-bone font-semibold">Visual Lines of Code Grid (Unit Dot Matrix)</span>
-                <span className="text-muted">1 dot ≈ 10 LOC</span>
-              </div>
-
-              <div className="space-y-4 font-mono text-xs max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
-                {fileLocCounts.map(([file, info]) => {
-                  const dotsCount = Math.max(3, Math.round(info.loc / 10));
-                  const fileColor = TYPE_COLORS[info.type] || '#f97316';
-                  return (
-                    <div key={file} className="space-y-1.5">
-                      <div className="flex items-center justify-between text-[0.72rem]">
-                        <span className="text-bone font-medium flex items-center gap-2">
-                          <span
-                            className="w-2.5 h-2.5 rounded-full"
-                            style={{ backgroundColor: fileColor }}
-                          />
-                          {file}
-                        </span>
-                        <span className="text-muted">{info.loc} lines</span>
-                      </div>
-
-                      {/* Dynamic Dot Grid */}
-                      <div className="flex flex-wrap gap-1">
-                        {Array.from({ length: dotsCount }).map((_, dIdx) => (
-                          <span
-                            key={dIdx}
-                            className="w-2.5 h-2.5 rounded-full transition-transform hover:scale-125 cursor-pointer shadow-sm"
-                            style={{ backgroundColor: fileColor }}
-                            title={`${file}: ~10 LOC`}
-                          />
-                        ))}
-                      </div>
+                {/* Floating Sleek Tooltip */}
+                {hoveredCommit && (
+                  <div className="absolute top-3 right-3 z-40 p-3 rounded-lg bg-surface/95 border border-ember/50 backdrop-blur-md shadow-lg text-[0.7rem] font-mono max-w-xs space-y-1 pointer-events-none transition-all">
+                    <div className="flex items-center justify-between gap-2 text-bone font-semibold border-b border-line pb-1">
+                      <span className="text-ember font-bold">#{hoveredCommit.commit.substring(0, 7)}</span>
+                      <span className="text-muted">{hoveredCommit.date} {hoveredCommit.time}</span>
                     </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Right Column: Codebase File Type Percentages */}
-            <div className="lg:col-span-5 p-6 rounded-lg bg-ink border border-line space-y-6 font-mono text-xs">
-              <h4 className="text-bone font-bold text-sm border-b border-line pb-3">
-                File Breakdown by Type
-              </h4>
-
-              <div className="space-y-4">
-                {languageShare.map((lang) => (
-                  <div key={lang.type} className="space-y-2">
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="text-bone font-semibold uppercase">{lang.type}</span>
-                      <span className="text-bone font-bold">
-                        {lang.loc.toLocaleString()} lines ({lang.percent}%)
-                      </span>
-                    </div>
-
-                    {/* Dynamic Progress Bar */}
-                    <div className="w-full h-3 rounded-full bg-surface border border-line overflow-hidden p-0.5">
-                      <div
-                        className="h-full rounded-full transition-all duration-500"
-                        style={{
-                          width: `${lang.percent}%`,
-                          backgroundColor: lang.color,
-                        }}
-                      />
+                    <p className="text-bone-dim truncate font-medium">{hoveredCommit.message}</p>
+                    <div className="flex items-center gap-3 text-[0.65rem]">
+                      <span className="text-emerald-400 font-bold">{hoveredCommit.linesEdited} lines edited</span>
+                      <span className="text-cyan-400 font-bold">{hoveredCommit.filesEdited} files</span>
                     </div>
                   </div>
-                ))}
+                )}
               </div>
 
-              <div className="pt-4 border-t border-line/60 text-muted text-[0.68rem] leading-relaxed">
-                <p>
-                  * Complete historical metrics parsed dynamically from <code>loc.csv</code> ({totalLoc.toLocaleString()} lines across {commitList.length} historical commits).
-                </p>
+              <div className="flex items-center justify-between text-[0.68rem] font-mono text-muted pt-1">
+                <span>Earliest ({commitList[0]?.date || '2025-01-11'})</span>
+                <span>Latest ({currentCommit?.date || 'Today'})</span>
               </div>
             </div>
           </div>

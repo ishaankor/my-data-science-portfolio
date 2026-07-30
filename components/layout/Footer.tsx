@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import HazeWaveText from '@/components/ui/HazeWaveText';
 import { portfolioData } from '@/data/portfolio';
 
 export default function Footer() {
@@ -11,8 +12,8 @@ export default function Footer() {
         
         <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <Link href="/" className="font-mono text-sm text-bone">
-              ishaan<span className="text-ember font-bold">.</span>koradia
+            <Link href="/" className="inline-block text-sm">
+              <HazeWaveText text="ishaan.koradia" className="text-sm" />
             </Link>
             <p className="mt-2 font-mono text-xs text-muted">
               Data Science & Analytics Engineer, {portfolioData.location}
