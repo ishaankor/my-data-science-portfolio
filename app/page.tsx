@@ -5,7 +5,6 @@ import GitHubAnalytics from '@/components/analytics/GitHubAnalytics';
 import ProjectRecommender from '@/components/recommender/ProjectRecommender';
 import TechStackSection from '@/components/skills/TechStackSection';
 import ExperienceTimeline from '@/components/experience/ExperienceTimeline';
-import ContactSection from '@/components/contact/ContactSection';
 
 export default function HomePage() {
   return (
@@ -17,7 +16,6 @@ export default function HomePage() {
       <ProjectRecommender />
       <TechStackSection />
       <ExperienceTimeline />
-      <ContactSection />
     </div>
   );
 }
