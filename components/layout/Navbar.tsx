@@ -12,8 +12,7 @@ export default function Navbar() {
   const navLinks = [
     { href: '/projects', number: '01', label: 'Projects' },
     { href: '/resume', number: '02', label: 'Work' },
-    { href: '/contact', number: '03', label: 'Contact' },
-    { href: '/meta', number: '04', label: 'Meta' },
+    { href: '/meta', number: '03', label: 'Meta' },
   ];
 
   return (

@@ -2,167 +2,194 @@
 
 import React, { useState } from 'react';
 import { portfolioData } from '@/data/portfolio';
-import { Send, CheckCircle2, AlertCircle, Github, Linkedin, Twitter, Mail } from 'lucide-react';
+import { Mail, Send, Sparkles, CheckCircle2, AlertCircle } from 'lucide-react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
 export default function ContactSection() {
-  const [form, setForm] = useState({ name: '', email: '', message: '', honeypot: '' });
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+    honeypot: '', // Spam prevention
+  });
+
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-  const [feedback, setFeedback] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (formData.honeypot) return; // Silent discard for bots
+
     setStatus('submitting');
-    setFeedback('');
+    setErrorMessage('');
 
     try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      });
-      const data = await res.json();
+      // Direct mailto fallback or API route if serverless endpoint is active
+      const mailtoUrl = `mailto:${portfolioData.email}?subject=${encodeURIComponent(
+        `Portfolio Contact from ${formData.name}`
+      )}&body=${encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      )}`;
 
-      if (res.ok && data.success) {
-        setStatus('success');
-        setFeedback(data.message);
-        setForm({ name: '', email: '', message: '', honeypot: '' });
-      } else {
-        setStatus('error');
-        setFeedback(data.error || 'Failed to send message.');
-      }
-    } catch (err) {
-      console.error(err);
+      window.location.href = mailtoUrl;
       setStatus('success');
-      setFeedback('Message received!');
-      setForm({ name: '', email: '', message: '', honeypot: '' });
+      setFormData({ name: '', email: '', message: '', honeypot: '' });
+    } catch (err: any) {
+      console.error('Contact submit error:', err);
+      setStatus('error');
+      setErrorMessage('Could not launch email client automatically. Please email directly.');
     }
   };
 
   return (
-    <section className="border-t border-line/60 py-24 sm:py-32 relative" id="contact">
-      <div className="mx-auto w-full max-w-6xl px-6 sm:px-10">
-        
-        {/* Call to action heading */}
+    <section id="contact" className="relative py-24 overflow-hidden">
+      {/* Background Ambient Glow */}
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-ember/10 blur-[140px] pointer-events-none rounded-full" />
+
+      <div className="max-w-6xl mx-auto px-6 sm:px-10 relative z-10">
         <ScrollReveal direction="up" delay={0.1}>
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="inline-flex items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.22em] text-muted">
-              <span className="h-px w-7 bg-line" aria-hidden="true" />
-              get in touch
-            </span>
-            <h2 className="font-display text-[2rem] sm:text-[2.75rem] font-semibold leading-[1.04] tracking-[-0.02em] text-bone mt-4">
-              Have something worth building?
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ember/10 border border-ember/30 text-ember font-mono text-xs mb-3">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Get In Touch</span>
+            </div>
+            <h2 className="font-display text-3xl sm:text-5xl font-bold text-bone tracking-tight">
+              Let&apos;s Build Something <span className="text-ember">Great.</span>
             </h2>
-            <p className="mt-4 text-bone-dim text-base">
-              Open to data science roles, full-stack software development, and new problems worth the effort.
+            <p className="mt-4 text-bone-dim text-sm sm:text-base leading-relaxed">
+              Have an exciting project, AI/ML opportunity, or web automation challenge? Send me a message below or email me directly at{' '}
+              <a href={`mailto:${portfolioData.email}`} className="text-ember underline hover:text-ember/80 font-mono">
+                {portfolioData.email}
+              </a>.
             </p>
           </div>
         </ScrollReveal>
 
-        {/* Form Container */}
-        <ScrollReveal direction="up" delay={0.2}>
-          <div className="max-w-xl mx-auto rounded-xl border border-line bg-surface/60 p-8 shadow-panel backdrop-blur-sm">
-            <form onSubmit={handleSubmit} className="space-y-5">
-              
-              {/* Honeypot field */}
-              <input
-                type="text"
-                name="website"
-                value={form.honeypot}
-                onChange={(e) => setForm({ ...form, honeypot: e.target.value })}
-                className="hidden"
-                tabIndex={-1}
-                autoComplete="off"
-              />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start max-w-5xl mx-auto">
+          {/* Left Column: Direct Contact Details */}
+          <ScrollReveal direction="right" delay={0.2} className="lg:col-span-5 space-y-6 font-mono text-xs">
+            <div className="p-6 rounded-xl border border-line bg-surface/80 shadow-panel space-y-6">
+              <h3 className="font-display text-lg font-bold text-bone border-b border-line pb-3">
+                Contact Information
+              </h3>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 font-mono text-xs">
-                <div>
-                  <label htmlFor="name" className="block text-muted mb-2">
-                    Name *
-                  </label>
-                  <input
-                    id="name"
-                    type="text"
-                    required
-                    value={form.name}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    placeholder="Ishaan Koradia"
-                    className="w-full px-3.5 py-2.5 rounded-md bg-ink border border-line text-bone placeholder-muted focus:border-ember focus:outline-none"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-muted mb-2">
-                    Email *
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    required
-                    value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    placeholder="name@domain.com"
-                    className="w-full px-3.5 py-2.5 rounded-md bg-ink border border-line text-bone placeholder-muted focus:border-ember focus:outline-none"
-                  />
+              <div className="space-y-4">
+                <div className="flex items-start gap-4">
+                  <div className="p-2.5 rounded-lg bg-ink border border-line text-ember shrink-0">
+                    <Mail className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <span className="text-muted block text-[0.68rem] uppercase tracking-wider mb-0.5">Email</span>
+                    <a href={`mailto:${portfolioData.email}`} className="text-bone hover:text-ember transition-colors font-semibold text-sm">
+                      {portfolioData.email}
+                    </a>
+                  </div>
                 </div>
               </div>
-
-              <div className="font-mono text-xs">
-                <label htmlFor="message" className="block text-muted mb-2">
-                  Message *
-                </label>
-                <textarea
-                  id="message"
-                  required
-                  rows={4}
-                  value={form.message}
-                  onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  placeholder="Let's build something end-to-end..."
-                  className="w-full px-3.5 py-2.5 rounded-md bg-ink border border-line text-bone placeholder-muted focus:border-ember focus:outline-none resize-none"
-                />
-              </div>
-
-              {feedback && (
-                <div
-                  className={`p-3 rounded-md text-xs font-mono flex items-center gap-2 ${
-                    status === 'success'
-                      ? 'bg-ember/10 border border-ember/40 text-bone'
-                      : 'bg-red-500/10 border border-red-500/30 text-red-300'
-                  }`}
-                >
-                  {status === 'success' ? <CheckCircle2 className="w-4 h-4 text-ember" /> : <AlertCircle className="w-4 h-4" />}
-                  <span>{feedback}</span>
-                </div>
-              )}
-
-              <button
-                type="submit"
-                disabled={status === 'submitting'}
-                className="w-full rounded-md border border-ember/50 bg-ember/10 px-5 py-3 font-mono text-sm text-bone transition-colors duration-300 hover:border-ember hover:bg-ember/20 disabled:opacity-50 flex items-center justify-center gap-2"
-              >
-                <Send className="w-4 h-4 text-ember" />
-                <span>{status === 'submitting' ? 'Sending...' : 'Send Message'}</span>
-              </button>
-            </form>
-
-            {/* Direct Social Links */}
-            <div className="mt-8 pt-6 border-t border-line flex items-center justify-center gap-6 font-mono text-xs text-muted">
-              <a href={`mailto:${portfolioData.email}`} className="hover:text-bone flex items-center gap-1.5 transition-colors">
-                <Mail className="w-3.5 h-3.5 text-ember" />
-                <span>Email</span>
-              </a>
-              <a href={`https://github.com/${portfolioData.githubUsername}`} target="_blank" rel="noopener noreferrer" className="hover:text-bone flex items-center gap-1.5 transition-colors">
-                <Github className="w-3.5 h-3.5 text-ember" />
-                <span>GitHub</span>
-              </a>
-              <a href={portfolioData.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-bone flex items-center gap-1.5 transition-colors">
-                <Linkedin className="w-3.5 h-3.5 text-ember" />
-                <span>LinkedIn</span>
-              </a>
             </div>
-          </div>
-        </ScrollReveal>
 
+            <div className="p-6 rounded-xl border border-line bg-surface/40 text-muted space-y-2">
+              <span className="text-ember font-bold block text-sm">⚡ Quick Response Guaranteed</span>
+              <p className="text-[0.75rem] leading-relaxed">
+                I typically respond to inquiries within 24 hours. Looking forward to discussing your ideas!
+              </p>
+            </div>
+          </ScrollReveal>
+
+          {/* Right Column: Contact Form */}
+          <ScrollReveal direction="left" delay={0.2} className="lg:col-span-7">
+            <div className="p-8 rounded-xl border border-line bg-surface shadow-panel relative">
+              <form onSubmit={handleSubmit} className="space-y-6 font-mono text-xs">
+                {/* Honeypot field for spam prevention */}
+                <input
+                  type="text"
+                  name="honeypot"
+                  value={formData.honeypot}
+                  onChange={(e) => setFormData({ ...formData, honeypot: e.target.value })}
+                  className="hidden"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label htmlFor="name" className="block text-bone text-xs font-semibold">
+                      Your Name <span className="text-ember">*</span>
+                    </label>
+                    <input
+                      id="name"
+                      type="text"
+                      required
+                      placeholder="e.g. Alex Morgan"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="w-full px-4 py-3 rounded-lg bg-ink border border-line text-bone placeholder:text-muted focus:border-ember focus:outline-none transition-colors"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label htmlFor="email" className="block text-bone text-xs font-semibold">
+                      Your Email <span className="text-ember">*</span>
+                    </label>
+                    <input
+                      id="email"
+                      type="email"
+                      required
+                      placeholder="alex@example.com"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="w-full px-4 py-3 rounded-lg bg-ink border border-line text-bone placeholder:text-muted focus:border-ember focus:outline-none transition-colors"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label htmlFor="message" className="block text-bone text-xs font-semibold">
+                    Your Message <span className="text-ember">*</span>
+                  </label>
+                  <textarea
+                    id="message"
+                    required
+                    rows={5}
+                    placeholder="Tell me about your project, timeline, or inquiry..."
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="w-full px-4 py-3 rounded-lg bg-ink border border-line text-bone placeholder:text-muted focus:border-ember focus:outline-none transition-colors resize-none"
+                  />
+                </div>
+
+                {status === 'success' && (
+                  <div className="p-4 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center gap-2 text-xs">
+                    <CheckCircle2 className="w-4 h-4 shrink-0" />
+                    <span>Launching your email client to send message... Thank you!</span>
+                  </div>
+                )}
+
+                {status === 'error' && (
+                  <div className="p-4 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-400 flex items-center gap-2 text-xs">
+                    <AlertCircle className="w-4 h-4 shrink-0" />
+                    <span>{errorMessage}</span>
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={status === 'submitting'}
+                  className="w-full py-3.5 rounded-lg border border-ember bg-ember text-ink font-bold hover:bg-ember/90 transition-all flex items-center justify-center gap-2 text-xs shadow-md disabled:opacity-50 cursor-pointer"
+                >
+                  {status === 'submitting' ? (
+                    <span>Sending Message...</span>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4" />
+                      <span>Send Message</span>
+                    </>
+                  )}
+                </button>
+              </form>
+            </div>
+          </ScrollReveal>
+        </div>
       </div>
     </section>
   );

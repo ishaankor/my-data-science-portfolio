@@ -26,9 +26,6 @@ export default function Footer() {
             <Link href="/resume" className="transition-colors hover:text-bone">
               Work
             </Link>
-            <Link href="/contact" className="transition-colors hover:text-bone">
-              Contact
-            </Link>
             <Link href="/meta" className="transition-colors hover:text-bone">
               Meta
             </Link>
