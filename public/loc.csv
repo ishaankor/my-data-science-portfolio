@@ -1,4 +1,6 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+components/meta/CodebaseEvolutionSuite.tsx,3,4,tsx,9d5a762,Ishaan Kor,2026-07-30,15:56:17,-07:00,2026-07-30T15:56:17-07:00,2,"build: update site localization data"
+scripts/generate-loc.mjs,9,13,mjs,9d5a762,Ishaan Kor,2026-07-30,15:56:17,-07:00,2026-07-30T15:56:17-07:00,1,"build: update site localization data"
 .github/workflows/nextjs.yml,2,0,yml,9e960b5,Ishaan Kor,2026-07-30,15:46:53,-07:00,2026-07-30T15:46:53-07:00,2,"debug: assessing how /public/loc is generated"
 scripts/generate-loc.mjs,1,1,mjs,9e960b5,Ishaan Kor,2026-07-30,15:46:53,-07:00,2026-07-30T15:46:53-07:00,1,"debug: assessing how /public/loc is generated"
 components/ui/HazeWaveText,89,0,code,d712612,Ishaan Kor,2026-07-30,15:01:54,-07:00,2026-07-30T15:01:54-07:00,2,"feat: fixing loc generation for scrollytelling element"
