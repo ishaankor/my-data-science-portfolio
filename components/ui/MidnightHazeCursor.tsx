@@ -50,18 +50,24 @@ export default function MidnightHazeCursor() {
       setIsHovered(!!isInteractive);
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { capture: true });
+    window.addEventListener('pointermove', handleMouseMove as EventListener, { capture: true });
     document.body.addEventListener('mouseleave', handleMouseLeave);
-    window.addEventListener('mousedown', handleMouseDown);
-    window.addEventListener('mouseup', handleMouseUp);
-    window.addEventListener('mouseover', handleMouseOver);
+    window.addEventListener('mousedown', handleMouseDown, { capture: true });
+    window.addEventListener('pointerdown', handleMouseDown as EventListener, { capture: true });
+    window.addEventListener('mouseup', handleMouseUp, { capture: true });
+    window.addEventListener('pointerup', handleMouseUp as EventListener, { capture: true });
+    window.addEventListener('mouseover', handleMouseOver, { capture: true });
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mousemove', handleMouseMove, { capture: true });
+      window.removeEventListener('pointermove', handleMouseMove as EventListener, { capture: true });
       document.body.removeEventListener('mouseleave', handleMouseLeave);
-      window.removeEventListener('mousedown', handleMouseDown);
-      window.removeEventListener('mouseup', handleMouseUp);
-      window.removeEventListener('mouseover', handleMouseOver);
+      window.removeEventListener('mousedown', handleMouseDown, { capture: true });
+      window.removeEventListener('pointerdown', handleMouseDown as EventListener, { capture: true });
+      window.removeEventListener('mouseup', handleMouseUp, { capture: true });
+      window.removeEventListener('pointerup', handleMouseUp as EventListener, { capture: true });
+      window.removeEventListener('mouseover', handleMouseOver, { capture: true });
     };
   }, [mouseX, mouseY, isVisible]);
 
