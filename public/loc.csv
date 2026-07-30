@@ -1,4 +1,6 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+.github/workflows/nextjs.yml,2,0,yml,9e960b5,Ishaan Kor,2026-07-30,15:46:53,-07:00,2026-07-30T15:46:53-07:00,2,"debug: assessing how /public/loc is generated"
+scripts/generate-loc.mjs,1,1,mjs,9e960b5,Ishaan Kor,2026-07-30,15:46:53,-07:00,2026-07-30T15:46:53-07:00,1,"debug: assessing how /public/loc is generated"
 components/ui/HazeWaveText,89,0,code,d712612,Ishaan Kor,2026-07-30,15:01:54,-07:00,2026-07-30T15:01:54-07:00,2,"feat: fixing loc generation for scrollytelling element"
 package.json,2,2,json,d712612,Ishaan Kor,2026-07-30,15:01:54,-07:00,2026-07-30T15:01:54-07:00,0,"feat: fixing loc generation for scrollytelling element"
 app/globals.css,4,0,css,307acde,Ishaan Kor,2026-07-30,14:20:43,-07:00,2026-07-30T14:20:43-07:00,1,"feat: add HazeWaveText component and removed codebase evolution"
