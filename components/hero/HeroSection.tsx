@@ -69,10 +69,10 @@ export default function HeroSection() {
                 Hi, I&apos;m <span className="text-bone font-bold">{portfolioData.name}</span>
               </h2>
               
-              {/* Typewriter Line with flexible min-height to prevent overlap */}
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-bone leading-[1.15] sm:leading-[1.15] min-h-[2.4em] sm:min-h-[2.5em] lg:min-h-[2.4em] flex flex-wrap items-baseline">
+              {/* Typewriter Line with padding-bottom to prevent bg-clip-text descender clipping */}
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-bone leading-[1.25] sm:leading-[1.25] min-h-[2.4em] sm:min-h-[2.5em] lg:min-h-[2.4em] flex flex-wrap items-baseline pb-2">
                 <span>I am&nbsp;</span>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-amber-400">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-amber-400 pb-1">
                   {currentText}
                 </span>
                 <span className="inline-block w-[3px] h-[0.85em] bg-ember ml-1 animate-pulse shrink-0 align-middle" />

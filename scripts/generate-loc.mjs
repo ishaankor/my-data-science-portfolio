@@ -2,7 +2,7 @@ import fs from 'fs';
 import { execSync } from 'child_process';
 import path from 'path';
 
-console.log('📡 Generating complete historical loc.csv from git log (2025-01-11 to today)...');
+console.log('📡 Generating complete historical loc.csv & loc-static.json from git log (2025-01-11 to today)...');
 
 try {
   const gitLogOutput = execSync(
@@ -12,6 +12,7 @@ try {
 
   const lines = gitLogOutput.split('\n');
   const csvRows = ['file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message'];
+  const jsonRecords = [];
 
   let currentCommit = null;
 
@@ -37,7 +38,7 @@ try {
         return;
       }
 
-      // Parse date/time directly from the original ISO string to preserve local timezone
+      // Parse date/time directly from original ISO string to preserve local timezone
       const dateStr = isoDate.slice(0, 10);        // "2026-07-29"
       const timeStr = isoDate.slice(11, 19);       // "21:03:19"
       const tzStr = isoDate.slice(19) || '-08:00'; // "-07:00"
@@ -49,7 +50,7 @@ try {
         time: timeStr,
         timezone: tzStr,
         datetime: isoDate,
-        message: message.replace(/,/g, ' '),
+        message: message.replace(/"/g, "'"),
       };
     } else if (currentCommit) {
       const parts = line.split(/\s+/);
@@ -77,12 +78,28 @@ try {
         csvRows.push(
           `${filePath},${added},${deleted},${ext},${currentCommit.hash},${currentCommit.author},${currentCommit.date},${currentCommit.time},${currentCommit.timezone},${currentCommit.datetime},${depth},"${currentCommit.message}"`
         );
+
+        jsonRecords.push({
+          file: filePath,
+          added,
+          deleted,
+          type: ext,
+          commit: currentCommit.hash,
+          author: currentCommit.author,
+          date: currentCommit.date,
+          time: currentCommit.time,
+          timezone: currentCommit.timezone,
+          datetime: currentCommit.datetime,
+          depth,
+          message: currentCommit.message,
+        });
       }
     }
   });
 
   const publicCsvPath = path.join(process.cwd(), 'public', 'loc.csv');
   const metaCsvPath = path.join(process.cwd(), 'meta', 'loc.csv');
+  const staticJsonPath = path.join(process.cwd(), 'data', 'loc-static.json');
 
   const csvContent = csvRows.join('\n');
   fs.writeFileSync(publicCsvPath, csvContent, 'utf8');
@@ -90,7 +107,13 @@ try {
     fs.writeFileSync(metaCsvPath, csvContent, 'utf8');
   }
 
-  console.log(`✅ Generated loc.csv with ${csvRows.length - 1} rows from git log!`);
+  const dataDir = path.dirname(staticJsonPath);
+  if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir, { recursive: true });
+  }
+  fs.writeFileSync(staticJsonPath, JSON.stringify(jsonRecords, null, 2), 'utf8');
+
+  console.log(`✅ Generated loc.csv (${csvRows.length - 1} rows) and loc-static.json (${jsonRecords.length} records)!`);
 } catch (err) {
-  console.error('Error generating loc.csv:', err);
+  console.error('Error generating loc telemetry:', err);
 }
