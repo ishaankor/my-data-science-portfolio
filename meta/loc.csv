@@ -88,7 +88,7 @@ components/contact/ContactSection.tsx,164,111,tsx,1f3fa20,Ishaan Kor,2026-07-28,
 components/experience/ExperienceTimeline.tsx,22,22,tsx,1f3fa20,Ishaan Kor,2026-07-28,02:38:23,-07:00,2026-07-28T02:38:23-07:00,2,"refactor: update components and rebuild Next.js static assets for portfolio site"
 components/recommender/ProjectRecommender.tsx,33,34,tsx,1f3fa20,Ishaan Kor,2026-07-28,02:38:23,-07:00,2026-07-28T02:38:23-07:00,2,"refactor: update components and rebuild Next.js static assets for portfolio site"
 components/skills/TechStackSection.tsx,19,19,tsx,1f3fa20,Ishaan Kor,2026-07-28,02:38:23,-07:00,2026-07-28T02:38:23-07:00,2,"refactor: update components and rebuild Next.js static assets for portfolio site"
-.github/workflows/nextjs.yml,93,0,yml,8a0d2fd,Ishaan,2026-07-28,02:27:45,-07:00,2026-07-28T02:27:45-07:00,2,"Add GitHub Actions workflow for Next.js deployment"
+.github/workflows/nextjs.yml,93,0,yml,8a0d2fd,Ishaan Kor,2026-07-28,02:27:45,-07:00,2026-07-28T02:27:45-07:00,2,"Add GitHub Actions workflow for Next.js deployment"
 app/globals.css,42,23,css,69784aa,Ishaan Kor,2026-07-28,02:12:52,-07:00,2026-07-28T02:12:52-07:00,1,"feat: update portfolio data and footer layout components"
 app/page.tsx,5,3,tsx,69784aa,Ishaan Kor,2026-07-28,02:12:52,-07:00,2026-07-28T02:12:52-07:00,1,"feat: update portfolio data and footer layout components"
 components/hero/Hero3DCanvas.tsx,39,42,tsx,69784aa,Ishaan Kor,2026-07-28,02:12:52,-07:00,2026-07-28T02:12:52-07:00,2,"feat: update portfolio data and footer layout components"
