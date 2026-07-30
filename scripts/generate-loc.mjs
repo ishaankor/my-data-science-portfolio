@@ -6,7 +6,7 @@ console.log('📡 Generating complete historical loc.csv from git log (ONLY Isha
 
 try {
   const gitLogOutput = execSync(
-    'git log --pretty=format:"COMMIT_HEADER|%h|%an|%ae|%ad|%s" --date=iso-strict --numstat',
+    'git log --author="Ishaan" --pretty=format:"COMMIT_HEADER|%h|%an|%ae|%ad|%s" --date=iso-strict --numstat',
     { encoding: 'utf8' }
   );
 
