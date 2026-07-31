@@ -7,6 +7,7 @@ on:
     paths-ignore:
       - 'public/loc.csv'
       - 'meta/loc.csv'
+      - 'data/loc-static.json'
   workflow_dispatch:
 
 jobs:
@@ -33,4 +34,4 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add public/loc.csv meta/loc.csv data/loc-static.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: update loc.csv on push to repo [skip ci]" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: auto-update telemetry loc data" && git push)
