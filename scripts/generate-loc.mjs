@@ -25,33 +25,57 @@ try {
   const jsonRecords = [];
 
   let currentCommit = null;
+  let commitHasRows = false;
+
+  const pushCommitRecord = (commit, file = 'repository', added = 0, deleted = 0, ext = 'git', depth = 0) => {
+    csvRows.push(
+      `${file},${added},${deleted},${ext},${commit.hash},${commit.author},${commit.date},${commit.time},${commit.timezone},${commit.datetime},${depth},"${commit.message}"`
+    );
+    jsonRecords.push({
+      file,
+      added,
+      deleted,
+      type: ext,
+      commit: commit.hash,
+      author: commit.author,
+      date: commit.date,
+      time: commit.time,
+      timezone: commit.timezone,
+      datetime: commit.datetime,
+      depth,
+      message: commit.message,
+    });
+  };
 
   lines.forEach((line) => {
     line = line.trim();
     if (!line) return;
 
     if (line.startsWith('COMMIT_HEADER|')) {
+      if (currentCommit && !commitHasRows) {
+        pushCommitRecord(currentCommit);
+      }
+
       const parts = line.split('|');
       const hash = parts[1];
       const authorName = parts[2] || '';
       const authorEmail = parts[3] || '';
-      const isoDate = parts[4]; // e.g. 2026-07-29T21:03:19-07:00
+      const isoDate = parts[4];
       const message = parts[5] || 'update codebase';
 
-      // Filter out automated bot runs and [skip ci] maintenance commits
       const fullAuthor = `${authorName} ${authorEmail}`.toLowerCase();
-      const isBot = fullAuthor.includes('github-actions') || fullAuthor.includes('bot');
-      const isWorkflowMsg = message.includes('[skip ci]') || message.includes('chore: update loc.csv');
+      const isBot = fullAuthor.includes('github-actions') || fullAuthor.includes('bot') || authorEmail.includes('action@github.com');
+      const isWorkflowMsg = message.includes('[skip ci]') || message.includes('chore: update loc.csv') || message.includes('update code statistics');
 
       if (isBot || isWorkflowMsg) {
         currentCommit = null;
+        commitHasRows = false;
         return;
       }
 
-      // Parse date/time directly from original ISO string to preserve local timezone
-      const dateStr = isoDate.slice(0, 10);        // "2026-07-29"
-      const timeStr = isoDate.slice(11, 19);       // "21:03:19"
-      const tzStr = isoDate.slice(19) || '-08:00'; // "-07:00"
+      const dateStr = isoDate.slice(0, 10);
+      const timeStr = isoDate.slice(11, 19);
+      const tzStr = isoDate.slice(19) || '-08:00';
 
       currentCommit = {
         hash,
@@ -62,6 +86,7 @@ try {
         datetime: isoDate,
         message: message.replace(/"/g, "'"),
       };
+      commitHasRows = false;
     } else if (currentCommit) {
       const parts = line.split(/\s+/);
       if (parts.length >= 3) {
@@ -69,7 +94,6 @@ try {
         const deleted = parseInt(parts[1], 10) || 0;
         const filePath = parts[2];
 
-        // Skip binary, build output, and generated telemetry files
         if (
           filePath.includes('node_modules') ||
           filePath.includes('.next') ||
@@ -85,45 +109,46 @@ try {
         const ext = path.extname(filePath).replace('.', '') || 'code';
         const depth = (filePath.match(/\//g) || []).length;
 
-        csvRows.push(
-          `${filePath},${added},${deleted},${ext},${currentCommit.hash},${currentCommit.author},${currentCommit.date},${currentCommit.time},${currentCommit.timezone},${currentCommit.datetime},${depth},"${currentCommit.message}"`
-        );
-
-        jsonRecords.push({
-          file: filePath,
-          added,
-          deleted,
-          type: ext,
-          commit: currentCommit.hash,
-          author: currentCommit.author,
-          date: currentCommit.date,
-          time: currentCommit.time,
-          timezone: currentCommit.timezone,
-          datetime: currentCommit.datetime,
-          depth,
-          message: currentCommit.message,
-        });
+        pushCommitRecord(currentCommit, filePath, added, deleted, ext, depth);
+        commitHasRows = true;
       }
     }
   });
+
+  if (currentCommit && !commitHasRows) {
+    pushCommitRecord(currentCommit);
+  }
 
   const publicCsvPath = path.join(process.cwd(), 'public', 'loc.csv');
   const metaCsvPath = path.join(process.cwd(), 'meta', 'loc.csv');
   const staticJsonPath = path.join(process.cwd(), 'data', 'loc-static.json');
 
-  const csvContent = csvRows.join('\n');
-  fs.writeFileSync(publicCsvPath, csvContent, 'utf8');
-  if (fs.existsSync(path.dirname(metaCsvPath))) {
-    fs.writeFileSync(metaCsvPath, csvContent, 'utf8');
+  let existingCount = 0;
+  if (fs.existsSync(staticJsonPath)) {
+    try {
+      const existing = JSON.parse(fs.readFileSync(staticJsonPath, 'utf8'));
+      if (Array.isArray(existing)) existingCount = existing.length;
+    } catch (e) {}
   }
 
-  const dataDir = path.dirname(staticJsonPath);
-  if (!fs.existsSync(dataDir)) {
-    fs.mkdirSync(dataDir, { recursive: true });
+  // SAFEGUARD FOR CLOUDFLARE PAGES & CI SHALLOW CLONES (--depth 1):
+  // Cloudflare Pages clones repositories with a shallow depth 1.
+  // If git log yields 0 or fewer records than the committed loc-static.json, preserve the full committed dataset!
+  if (existingCount > 0 && jsonRecords.length < Math.min(existingCount, 50)) {
+    console.log(`⚠️ Shallow clone detected on build server (git log produced ${jsonRecords.length} records, committed dataset has ${existingCount}). Preserving full committed loc-static.json!`);
+  } else {
+    const csvContent = csvRows.join('\n');
+    fs.writeFileSync(publicCsvPath, csvContent, 'utf8');
+    if (fs.existsSync(path.dirname(metaCsvPath))) {
+      fs.writeFileSync(metaCsvPath, csvContent, 'utf8');
+    }
+    const dataDir = path.dirname(staticJsonPath);
+    if (!fs.existsSync(dataDir)) {
+      fs.mkdirSync(dataDir, { recursive: true });
+    }
+    fs.writeFileSync(staticJsonPath, JSON.stringify(jsonRecords, null, 2), 'utf8');
+    console.log(`✅ Generated loc.csv (${csvRows.length - 1} rows) and loc-static.json (${jsonRecords.length} records)!`);
   }
-  fs.writeFileSync(staticJsonPath, JSON.stringify(jsonRecords, null, 2), 'utf8');
-
-  console.log(`✅ Generated loc.csv (${csvRows.length - 1} rows) and loc-static.json (${jsonRecords.length} records)!`);
 } catch (err) {
-  console.error('Error generating loc telemetry:', err);
+  console.error('⚠️ Warning during loc telemetry generation (preserving existing loc-static.json):', err.message);
 }
