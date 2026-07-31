@@ -266,12 +266,13 @@ export default function CodebaseEvolutionSuite() {
                   <span>Show commit until:</span>
                 </div>
                 <input
+                  key={commitList.length}
                   type="range"
                   min="0"
                   max={commitList.length - 1}
                   value={activeIndex}
                   onInput={(e) => setSliderIndex(parseInt(e.currentTarget.value, 10))}
-                  onChange={(e) => setSliderIndex(parseInt(e.target.value, 10))}
+                  onChange={(e) => setSliderIndex(parseInt(e.currentTarget.value, 10))}
                   className="w-36 accent-ember cursor-pointer touch-none z-10 py-1"
                 />
                 <span className="text-ember font-bold px-2 py-0.5 rounded bg-ember/10 border border-ember/30">
