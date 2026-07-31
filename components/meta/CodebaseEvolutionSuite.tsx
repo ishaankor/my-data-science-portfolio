@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { GitCommit, FileCode, Layers, Maximize2, Sparkles, Clock, Sliders, ExternalLink, Code, ArrowUpDown } from 'lucide-react';
+import { GitCommit, FileCode, Sparkles, Clock, Sliders, ExternalLink, Code, ArrowUpDown } from 'lucide-react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
+import locStaticRecords from '@/data/loc-static.json';
 
 interface LocRecord {
   file: string;
@@ -26,6 +27,8 @@ interface CommitMeta {
   time: string;
   datetime: string;
   linesEdited: number;
+  added: number;
+  deleted: number;
   filesEdited: number;
   message: string;
 }
@@ -63,17 +66,16 @@ function parseCsvLine(line: string): string[] {
   return result;
 }
 
-import locStaticRecords from '@/data/loc-static.json';
-
 export default function CodebaseEvolutionSuite() {
+  // Synchronous initial state from prebuilt static build JSON
   const [records, setRecords] = useState<LocRecord[]>(locStaticRecords as LocRecord[]);
-  const [loading, setLoading] = useState(false);
-  const [sliderIndex, setSliderIndex] = useState(-1);
+  // sliderIndex === null means "Show ALL commits" (default max position)
+  const [sliderIndex, setSliderIndex] = useState<number | null>(null);
   const [selectedCommit, setSelectedCommit] = useState<string | null>(null);
   const [hoveredCommit, setHoveredCommit] = useState<CommitMeta | null>(null);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc'); // 'asc' = Chronological (oldest first)
 
-  // 1. DYNAMIC CSV PARSER: Fetch and parse /loc.csv live on mount
+  // Client-side hydration: optional live update from /loc.csv if more recent rows exist
   useEffect(() => {
     async function loadLocCsv() {
       try {
@@ -101,22 +103,20 @@ export default function CodebaseEvolutionSuite() {
             };
           });
 
-          // Only update state if live fetch parsed rows are as comprehensive as prebuilt static fallback
+          // Safeguard: only update if live fetch is at least as complete as static fallback
           if (parsedRows.length >= (locStaticRecords as LocRecord[]).length) {
             setRecords(parsedRows);
           }
         }
       } catch (err) {
         console.error('Dynamic loc.csv fetch error:', err);
-      } finally {
-        setLoading(false);
       }
     }
 
     loadLocCsv();
   }, []);
 
-  // 2. DYNAMIC COMMIT AGGREGATOR: Group rows by commit hash & sort CHRONOLOGICALLY (oldest to newest)
+  // 1. DYNAMIC COMMIT AGGREGATOR: Group rows by commit hash & sort CHRONOLOGICALLY (oldest to newest)
   const commitList = useMemo<CommitMeta[]>(() => {
     if (records.length === 0) return [];
 
@@ -126,6 +126,8 @@ export default function CodebaseEvolutionSuite() {
       time: string;
       datetime: string;
       message: string;
+      added: number;
+      deleted: number;
       lines: number;
       files: Set<string>;
     }>();
@@ -138,12 +140,16 @@ export default function CodebaseEvolutionSuite() {
           time: r.time,
           datetime: r.datetime,
           message: r.message,
+          added: 0,
+          deleted: 0,
           lines: 0,
           files: new Set<string>(),
         });
       }
       const item = commitMap.get(r.commit)!;
-      item.lines += (r.added + r.deleted);
+      item.added += (r.added || 0);
+      item.deleted += (r.deleted || 0);
+      item.lines += ((r.added || 0) + (r.deleted || 0));
       item.files.add(r.file);
     });
 
@@ -155,6 +161,8 @@ export default function CodebaseEvolutionSuite() {
         time: data.time,
         datetime: data.datetime,
         linesEdited: data.lines,
+        added: data.added,
+        deleted: data.deleted,
         filesEdited: data.files.size,
         message: data.message || `codebase update (${data.files.size} files edited)`,
       }))
@@ -165,24 +173,24 @@ export default function CodebaseEvolutionSuite() {
         const isWorkflowMsg = msgLower.includes('[skip ci]') || msgLower.includes('chore: update loc.csv');
         return !isBot && !isWorkflowMsg;
       })
-      // Strictly sort chronologically from oldest (Jan 2025) to newest (today)
+      // Sort strictly chronologically from oldest (Jan 2025) to newest (today)
       .sort((a, b) => new Date(a.datetime || a.date).getTime() - new Date(b.datetime || b.date).getTime());
   }, [records]);
 
-  // Set default slider index to newest commit when loaded
-  useEffect(() => {
-    if (commitList.length > 0 && (sliderIndex === -1 || sliderIndex >= commitList.length)) {
-      setSliderIndex(commitList.length - 1);
+  // Resolve effective active index (defaults to max index = newest commit)
+  const activeIndex = useMemo(() => {
+    if (commitList.length === 0) return 0;
+    if (sliderIndex === null || sliderIndex < 0 || sliderIndex >= commitList.length) {
+      return commitList.length - 1;
     }
-  }, [commitList.length, sliderIndex]);
+    return sliderIndex;
+  }, [commitList, sliderIndex]);
 
-  const effectiveIndex =
-    sliderIndex < 0 || sliderIndex >= commitList.length ? Math.max(0, commitList.length - 1) : sliderIndex;
-
-  // 3. DYNAMIC METRICS: Computed dynamically from filtered commits
+  // 2. DYNAMIC METRICS: Computed dynamically from filtered active commits
   const filteredCommits = useMemo(() => {
-    return commitList.slice(0, effectiveIndex + 1);
-  }, [commitList, effectiveIndex]);
+    if (commitList.length === 0) return [];
+    return commitList.slice(0, activeIndex + 1);
+  }, [commitList, activeIndex]);
 
   const activeCommitHashes = useMemo(() => {
     return new Set(filteredCommits.map((c) => c.commit));
@@ -193,7 +201,7 @@ export default function CodebaseEvolutionSuite() {
     return records.filter((r) => activeCommitHashes.has(r.commit));
   }, [records, activeCommitHashes]);
 
-  // Total LOC = sum of all real added lines across active commits
+  // Dynamic stat metrics
   const totalLoc = useMemo(() => {
     return activeRecords.reduce((sum, r) => sum + (r.added || 0), 0);
   }, [activeRecords]);
@@ -226,21 +234,6 @@ export default function CodebaseEvolutionSuite() {
     return { file: fileLocCounts[0][0], loc: fileLocCounts[0][1].loc };
   }, [fileLocCounts]);
 
-  // 4. DYNAMIC LANGUAGE SHARE: weighted by actual lines added
-  const languageShare = useMemo(() => {
-    const counts: Record<string, number> = {};
-    activeRecords.forEach((r) => {
-      counts[r.type] = (counts[r.type] || 0) + (r.added || 0);
-    });
-
-    return Object.entries(counts).map(([type, count]) => ({
-      type,
-      loc: count,
-      color: TYPE_COLORS[type] || '#f97316',
-      percent: totalLoc > 0 ? Math.round((count / totalLoc) * 100) : 0,
-    })).sort((a, b) => b.loc - a.loc);
-  }, [activeRecords, totalLoc]);
-
   // Display commits in feed according to selected sort order (Chronological vs Reverse)
   const displayCommits = useMemo(() => {
     if (sortOrder === 'desc') {
@@ -249,16 +242,7 @@ export default function CodebaseEvolutionSuite() {
     return filteredCommits;
   }, [filteredCommits, sortOrder]);
 
-  const currentCommit = commitList[effectiveIndex] || commitList[commitList.length - 1];
-
-  if (loading) {
-    return (
-      <div className="p-8 rounded-xl border border-line bg-surface font-mono text-xs text-muted text-center flex items-center justify-center gap-2">
-        <span className="w-2 h-2 rounded-full bg-ember animate-ping" />
-        <span>Parsing complete historical loc.csv telemetry...</span>
-      </div>
-    );
-  }
+  const currentCommit = commitList[activeIndex] || commitList[commitList.length - 1];
 
   return (
     <div className="space-y-12">
@@ -291,7 +275,7 @@ export default function CodebaseEvolutionSuite() {
                   type="range"
                   min="0"
                   max={commitList.length - 1}
-                  value={effectiveIndex}
+                  value={activeIndex}
                   onInput={(e) => setSliderIndex(parseInt(e.currentTarget.value, 10))}
                   onChange={(e) => setSliderIndex(parseInt(e.target.value, 10))}
                   className="w-36 accent-ember cursor-pointer touch-none z-10 py-1"
@@ -339,45 +323,55 @@ export default function CodebaseEvolutionSuite() {
               <span className="text-[0.65rem] text-muted uppercase tracking-wider block mb-1">MAX LINES</span>
               <span className="font-display text-2xl font-bold text-bone">{maxLinesInfo.loc.toLocaleString()}</span>
               <span className="text-[0.65rem] text-indigo-400 block mt-0.5 truncate" title={maxLinesInfo.file}>
-                in {maxLinesInfo.file}
+                in {maxLinesInfo.file.split('/').pop()}
               </span>
             </div>
           </div>
         </div>
       </ScrollReveal>
 
-      {/* 2. Commits by Time of Day: Interactive Scatterplot & Scrollytelling Feed */}
+      {/* 2. Interactive Scrollytelling Feed & Time-of-Day Scatterplot */}
       <ScrollReveal direction="up" delay={0.2}>
-        <div className="rounded-xl border border-line bg-surface p-6 shadow-panel">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 border-b border-line pb-4">
-            <h3 className="font-display text-lg font-bold text-bone flex items-center gap-2">
-              <Clock className="w-4.5 h-4.5 text-ember" />
-              <span>Commits by Time of Day & Interactive Scrollytelling</span>
-            </h3>
+        <div className="rounded-xl border border-line bg-surface p-6 shadow-panel space-y-6">
+          
+          {/* Header & Controls */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-line pb-4">
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-lg bg-ember/10 border border-ember/30 text-ember">
+                <Clock className="w-4 h-4" />
+              </div>
+              <h3 className="font-display text-lg font-bold text-bone">
+                Commits by Time of Day &amp; Interactive Scrollytelling
+              </h3>
+            </div>
 
-            {/* Sort Order Toggle */}
+            {/* Sort Toggle Button */}
             <button
-              onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
-              className="inline-flex items-center gap-2 font-mono text-xs text-bone-dim hover:text-ember bg-ink/80 px-3 py-1.5 rounded-lg border border-line hover:border-ember/50 transition-colors"
+              onClick={() => setSortOrder((prev) => (prev === 'asc' ? 'desc' : 'asc'))}
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-ink border border-line hover:border-ember/50 text-bone text-xs font-mono transition-colors self-start sm:self-auto"
             >
               <ArrowUpDown className="w-3.5 h-3.5 text-ember" />
-              <span>Order: {sortOrder === 'asc' ? 'Chronological (Oldest First)' : 'Newest First'}</span>
+              <span>
+                Order: {sortOrder === 'asc' ? 'Chronological (Oldest First)' : 'Reverse (Newest First)'}
+              </span>
             </button>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            {/* Left: Dynamic Scrollytelling Feed */}
-            <div className="lg:col-span-6 space-y-3 max-h-[380px] overflow-y-auto pr-2 custom-scrollbar font-mono text-xs">
+            
+            {/* Left: Scrollytelling Commit Cards Feed */}
+            <div className="lg:col-span-6 space-y-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar font-mono text-xs">
               {displayCommits.map((c) => {
                 const isSelected = selectedCommit === c.commit;
                 return (
                   <div
                     key={c.commit}
                     onClick={() => setSelectedCommit(isSelected ? null : c.commit)}
-                    className={`p-4 rounded-lg border transition-all cursor-pointer ${isSelected
+                    className={`p-4 rounded-lg border transition-all cursor-pointer ${
+                      isSelected
                         ? 'bg-ember/10 border-ember text-bone shadow-md'
                         : 'bg-ink/80 border-line hover:border-ember/50 text-bone-dim'
-                      }`}
+                    }`}
                   >
                     <p className="leading-relaxed text-bone">
                       On <strong className="text-ember font-semibold">{c.date}</strong> at{' '}
@@ -392,8 +386,8 @@ export default function CodebaseEvolutionSuite() {
                         <span>{c.message}</span>
                         <ExternalLink className="w-3 h-3" />
                       </a>
-                      . I edited <span className="text-emerald-400 font-bold">{c.linesEdited} lines</span> across{' '}
-                      <span className="text-cyan-400 font-bold">{c.filesEdited} files</span>.
+                      . I edited <span className="text-emerald-400 font-bold">{c.linesEdited.toLocaleString()} lines</span> ({c.added > 0 ? `+${c.added.toLocaleString()}` : '0'}{c.deleted > 0 ? ` / -${c.deleted.toLocaleString()}` : ''}) across{' '}
+                      <span className="text-cyan-400 font-bold">{c.filesEdited} {c.filesEdited === 1 ? 'file' : 'files'}</span>.
                     </p>
                   </div>
                 );
@@ -402,12 +396,15 @@ export default function CodebaseEvolutionSuite() {
 
             {/* Right: Time-of-Day Interactive Scatterplot */}
             <div className="lg:col-span-6 p-6 rounded-lg bg-ink border border-line space-y-4 relative">
-              <div className="flex items-center justify-between text-xs font-mono text-muted border-b border-line/40 pb-2">
-                <span className="font-semibold text-bone">Time of Day Scatterplot (24h vs Date)</span>
-                <span className="text-ember">● Size = Lines Changed</span>
+              <div className="flex items-center justify-between text-xs font-mono">
+                <span className="text-bone font-bold">Time of Day Scatterplot (24h vs Date)</span>
+                <span className="text-muted text-[0.68rem] flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-rose-500" />
+                  <span>Size = Lines Changed</span>
+                </span>
               </div>
 
-              {/* Scatterplot Grid Box with bounded height and overflow-hidden */}
+              {/* Scatterplot Canvas Grid */}
               <div className="h-72 border-l border-b border-line/80 relative flex items-end justify-between p-4 overflow-hidden rounded-bl-lg bg-surface/30">
                 {/* Y-Axis Time Gridlines */}
                 <div className="absolute inset-0 flex flex-col justify-between pointer-events-none text-[0.6rem] font-mono text-muted/50 p-2">
@@ -437,12 +434,13 @@ export default function CodebaseEvolutionSuite() {
                       onClick={() => setSelectedCommit(isSelected ? null : c.commit)}
                       onMouseEnter={() => setHoveredCommit(c)}
                       onMouseLeave={() => setHoveredCommit(null)}
-                      className={`absolute rounded-full transition-all duration-200 cursor-pointer transform -translate-x-1/2 -translate-y-1/2 ${isSelected
+                      className={`absolute rounded-full transition-all duration-200 cursor-pointer transform -translate-x-1/2 -translate-y-1/2 ${
+                        isSelected
                           ? 'bg-ember ring-4 ring-ember/50 z-30 scale-125 shadow-lg shadow-ember/50'
                           : isHovered
-                            ? 'bg-cyan-400 ring-4 ring-cyan-400/40 z-20 scale-125 shadow-md shadow-cyan-500/30'
-                            : 'bg-rose-500/75 hover:bg-rose-400 border border-rose-300/60 shadow-sm hover:scale-110'
-                        }`}
+                          ? 'bg-cyan-400 ring-4 ring-cyan-400/40 z-20 scale-125 shadow-md shadow-cyan-500/30'
+                          : 'bg-rose-500/75 hover:bg-rose-400 border border-rose-300/60 shadow-sm hover:scale-110'
+                      }`}
                       style={{
                         left: `${xPercent}%`,
                         bottom: `${yPercent}%`,
@@ -462,8 +460,8 @@ export default function CodebaseEvolutionSuite() {
                     </div>
                     <p className="text-bone-dim truncate font-medium">{hoveredCommit.message}</p>
                     <div className="flex items-center gap-3 text-[0.65rem]">
-                      <span className="text-emerald-400 font-bold">{hoveredCommit.linesEdited} lines edited</span>
-                      <span className="text-cyan-400 font-bold">{hoveredCommit.filesEdited} files</span>
+                      <span className="text-emerald-400 font-bold">{hoveredCommit.linesEdited.toLocaleString()} lines ({hoveredCommit.added > 0 ? `+${hoveredCommit.added}` : '0'}{hoveredCommit.deleted > 0 ? ` / -${hoveredCommit.deleted}` : ''})</span>
+                      <span className="text-cyan-400 font-bold">{hoveredCommit.filesEdited} {hoveredCommit.filesEdited === 1 ? 'file' : 'files'}</span>
                     </div>
                   </div>
                 )}
@@ -471,7 +469,7 @@ export default function CodebaseEvolutionSuite() {
 
               <div className="flex items-center justify-between text-[0.68rem] font-mono text-muted pt-1">
                 <span>Earliest ({commitList[0]?.date || '2025-01-11'})</span>
-                <span>Latest ({currentCommit?.date || 'Today'})</span>
+                <span>Latest ({commitList[commitList.length - 1]?.date || 'Today'})</span>
               </div>
             </div>
           </div>
