@@ -292,8 +292,9 @@ export default function CodebaseEvolutionSuite() {
                   min="0"
                   max={commitList.length - 1}
                   value={effectiveIndex}
+                  onInput={(e) => setSliderIndex(parseInt(e.currentTarget.value, 10))}
                   onChange={(e) => setSliderIndex(parseInt(e.target.value, 10))}
-                  className="w-32 accent-ember cursor-pointer"
+                  className="w-36 accent-ember cursor-pointer touch-none z-10 py-1"
                 />
                 <span className="text-ember font-bold px-2 py-0.5 rounded bg-ember/10 border border-ember/30">
                   {currentCommit?.date || '2025-01-11'}
@@ -373,11 +374,10 @@ export default function CodebaseEvolutionSuite() {
                   <div
                     key={c.commit}
                     onClick={() => setSelectedCommit(isSelected ? null : c.commit)}
-                    className={`p-4 rounded-lg border transition-all cursor-pointer ${
-                      isSelected
+                    className={`p-4 rounded-lg border transition-all cursor-pointer ${isSelected
                         ? 'bg-ember/10 border-ember text-bone shadow-md'
                         : 'bg-ink/80 border-line hover:border-ember/50 text-bone-dim'
-                    }`}
+                      }`}
                   >
                     <p className="leading-relaxed text-bone">
                       On <strong className="text-ember font-semibold">{c.date}</strong> at{' '}
@@ -437,13 +437,12 @@ export default function CodebaseEvolutionSuite() {
                       onClick={() => setSelectedCommit(isSelected ? null : c.commit)}
                       onMouseEnter={() => setHoveredCommit(c)}
                       onMouseLeave={() => setHoveredCommit(null)}
-                      className={`absolute rounded-full transition-all duration-200 cursor-pointer transform -translate-x-1/2 -translate-y-1/2 ${
-                        isSelected
+                      className={`absolute rounded-full transition-all duration-200 cursor-pointer transform -translate-x-1/2 -translate-y-1/2 ${isSelected
                           ? 'bg-ember ring-4 ring-ember/50 z-30 scale-125 shadow-lg shadow-ember/50'
                           : isHovered
-                          ? 'bg-cyan-400 ring-4 ring-cyan-400/40 z-20 scale-125 shadow-md shadow-cyan-500/30'
-                          : 'bg-rose-500/75 hover:bg-rose-400 border border-rose-300/60 shadow-sm hover:scale-110'
-                      }`}
+                            ? 'bg-cyan-400 ring-4 ring-cyan-400/40 z-20 scale-125 shadow-md shadow-cyan-500/30'
+                            : 'bg-rose-500/75 hover:bg-rose-400 border border-rose-300/60 shadow-sm hover:scale-110'
+                        }`}
                       style={{
                         left: `${xPercent}%`,
                         bottom: `${yPercent}%`,
