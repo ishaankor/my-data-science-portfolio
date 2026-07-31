@@ -65,9 +65,15 @@ function parseCsvLine(line: string): string[] {
   return result;
 }
 
+const rawRecords: LocRecord[] = Array.isArray(locStaticRecords)
+  ? (locStaticRecords as LocRecord[])
+  : (locStaticRecords as any)?.default && Array.isArray((locStaticRecords as any).default)
+  ? ((locStaticRecords as any).default as LocRecord[])
+  : [];
+
 export default function CodebaseEvolutionSuite() {
   // Synchronous initial state from prebuilt static build JSON
-  const [records] = useState<LocRecord[]>(locStaticRecords as LocRecord[]);
+  const [records] = useState<LocRecord[]>(rawRecords);
   // sliderIndex === null means "Show ALL commits" (default max position)
   const [sliderIndex, setSliderIndex] = useState<number | null>(null);
   const [selectedCommit, setSelectedCommit] = useState<string | null>(null);
@@ -76,7 +82,8 @@ export default function CodebaseEvolutionSuite() {
 
   // 1. DYNAMIC COMMIT AGGREGATOR: Group rows by commit hash & sort CHRONOLOGICALLY (oldest to newest)
   const commitList = useMemo<CommitMeta[]>(() => {
-    if (records.length === 0) return [];
+    const validRecords = Array.isArray(records) ? records : [];
+    if (validRecords.length === 0) return [];
 
     const commitMap = new Map<string, {
       author: string;
@@ -90,14 +97,15 @@ export default function CodebaseEvolutionSuite() {
       files: Set<string>;
     }>();
 
-    records.forEach((r) => {
+    validRecords.forEach((r) => {
+      if (!r || !r.commit) return;
       if (!commitMap.has(r.commit)) {
         commitMap.set(r.commit, {
-          author: r.author,
-          date: r.date,
-          time: r.time,
-          datetime: r.datetime,
-          message: r.message,
+          author: r.author || 'Ishaan Kor',
+          date: r.date || (r.datetime ? r.datetime.slice(0, 10) : '2025-01-11'),
+          time: r.time || (r.datetime ? r.datetime.slice(11, 19) : '12:00:00'),
+          datetime: r.datetime || r.date || '2025-01-11T12:00:00Z',
+          message: r.message || 'codebase update',
           added: 0,
           deleted: 0,
           lines: 0,
@@ -108,7 +116,7 @@ export default function CodebaseEvolutionSuite() {
       item.added += (r.added || 0);
       item.deleted += (r.deleted || 0);
       item.lines += ((r.added || 0) + (r.deleted || 0));
-      item.files.add(r.file);
+      if (r.file) item.files.add(r.file);
     });
 
     return Array.from(commitMap.entries())
@@ -125,15 +133,19 @@ export default function CodebaseEvolutionSuite() {
         message: data.message || `codebase update (${data.files.size} files edited)`,
       }))
       .filter((c) => {
-        const authorLower = c.author.toLowerCase();
-        const msgLower = c.message.toLowerCase();
-        const isBot = authorLower.includes('github-actions') || authorLower.includes('bot');
-        const isWorkflowMsg = msgLower.includes('[skip ci]') || msgLower.includes('chore: update loc.csv');
+        const authorLower = (c.author || '').toLowerCase();
+        const msgLower = (c.message || '').toLowerCase();
+        const isBot = authorLower.includes('github-actions') || authorLower.includes('bot') || authorLower.includes('github action');
+        const isWorkflowMsg = msgLower.includes('[skip ci]') || msgLower.includes('chore: update loc.csv') || msgLower.includes('update code statistics');
         return !isBot && !isWorkflowMsg;
       })
       .sort((a, b) => {
-        const keyA = `${a.date || a.datetime.slice(0, 10)}T${a.time || a.datetime.slice(11, 19)}`;
-        const keyB = `${b.date || b.datetime.slice(0, 10)}T${b.time || b.datetime.slice(11, 19)}`;
+        const dateA = a.date || (a.datetime ? a.datetime.slice(0, 10) : '2025-01-11');
+        const timeA = a.time || (a.datetime ? a.datetime.slice(11, 19) : '12:00:00');
+        const dateB = b.date || (b.datetime ? b.datetime.slice(0, 10) : '2025-01-11');
+        const timeB = b.time || (b.datetime ? b.datetime.slice(11, 19) : '12:00:00');
+        const keyA = `${dateA}T${timeA}`;
+        const keyB = `${dateB}T${timeB}`;
         return keyA.localeCompare(keyB);
       });
   }, [records]);
