@@ -66,50 +66,13 @@ function parseCsvLine(line: string): string[] {
 }
 
 export default function CodebaseEvolutionSuite() {
-  const [records, setRecords] = useState<LocRecord[]>(locStaticRecords as LocRecord[]);
+  // Synchronous initial state from prebuilt static build JSON
+  const [records] = useState<LocRecord[]>(locStaticRecords as LocRecord[]);
+  // sliderIndex === null means "Show ALL commits" (default max position)
   const [sliderIndex, setSliderIndex] = useState<number | null>(null);
   const [selectedCommit, setSelectedCommit] = useState<string | null>(null);
   const [hoveredCommit, setHoveredCommit] = useState<CommitMeta | null>(null);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc'); // 'asc' = Chronological (oldest first)
-
-  useEffect(() => {
-    async function loadLocCsv() {
-      try {
-        const res = await fetch('/loc.csv', { cache: 'no-store' });
-        if (res.ok) {
-          const text = await res.text();
-          const lines = text.trim().split('\n');
-          if (lines.length < 2) return;
-
-          const parsedRows: LocRecord[] = lines.slice(1).map((line) => {
-            const parts = parseCsvLine(line);
-            return {
-              file: parts[0] || 'file',
-              added: parseInt(parts[1], 10) || 0,
-              deleted: parseInt(parts[2], 10) || 0,
-              type: parts[3] || 'code',
-              commit: parts[4] || 'head',
-              author: parts[5] || 'Developer',
-              date: parts[6] || '2025-01-11',
-              time: parts[7] || '12:00:00',
-              timezone: parts[8] || '-08:00',
-              datetime: parts[9] || parts[6] || '2025-01-11T12:00:00Z',
-              depth: parseInt(parts[10], 10) || 0,
-              message: (parts[11] || 'codebase update').replace(/^"|"$/g, ''),
-            };
-          });
-
-          if (parsedRows.length >= (locStaticRecords as LocRecord[]).length) {
-            setRecords(parsedRows);
-          }
-        }
-      } catch (err) {
-        console.error('Dynamic loc.csv fetch error:', err);
-      }
-    }
-
-    loadLocCsv();
-  }, []);
 
   // 1. DYNAMIC COMMIT AGGREGATOR: Group rows by commit hash & sort CHRONOLOGICALLY (oldest to newest)
   const commitList = useMemo<CommitMeta[]>(() => {
