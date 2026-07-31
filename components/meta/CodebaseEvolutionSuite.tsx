@@ -46,7 +46,6 @@ const TYPE_COLORS: Record<string, string> = {
   yaml: '#cb171e',
 };
 
-// Robust CSV Line Parser (handles quotes and embedded commas)
 function parseCsvLine(line: string): string[] {
   const result: string[] = [];
   let current = '';
@@ -67,15 +66,12 @@ function parseCsvLine(line: string): string[] {
 }
 
 export default function CodebaseEvolutionSuite() {
-  // Synchronous initial state from prebuilt static build JSON
   const [records, setRecords] = useState<LocRecord[]>(locStaticRecords as LocRecord[]);
-  // sliderIndex === null means "Show ALL commits" (default max position)
   const [sliderIndex, setSliderIndex] = useState<number | null>(null);
   const [selectedCommit, setSelectedCommit] = useState<string | null>(null);
   const [hoveredCommit, setHoveredCommit] = useState<CommitMeta | null>(null);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc'); // 'asc' = Chronological (oldest first)
 
-  // Client-side hydration: optional live update from /loc.csv if more recent rows exist
   useEffect(() => {
     async function loadLocCsv() {
       try {
@@ -103,7 +99,6 @@ export default function CodebaseEvolutionSuite() {
             };
           });
 
-          // Safeguard: only update if live fetch is at least as complete as static fallback
           if (parsedRows.length >= (locStaticRecords as LocRecord[]).length) {
             setRecords(parsedRows);
           }
@@ -173,11 +168,13 @@ export default function CodebaseEvolutionSuite() {
         const isWorkflowMsg = msgLower.includes('[skip ci]') || msgLower.includes('chore: update loc.csv');
         return !isBot && !isWorkflowMsg;
       })
-      // Sort strictly chronologically from oldest (Jan 2025) to newest (today)
-      .sort((a, b) => new Date(a.datetime || a.date).getTime() - new Date(b.datetime || b.date).getTime());
+      .sort((a, b) => {
+        const keyA = `${a.date || a.datetime.slice(0, 10)}T${a.time || a.datetime.slice(11, 19)}`;
+        const keyB = `${b.date || b.datetime.slice(0, 10)}T${b.time || b.datetime.slice(11, 19)}`;
+        return keyA.localeCompare(keyB);
+      });
   }, [records]);
 
-  // Resolve effective active index (defaults to max index = newest commit)
   const activeIndex = useMemo(() => {
     if (commitList.length === 0) return 0;
     if (sliderIndex === null || sliderIndex < 0 || sliderIndex >= commitList.length) {
@@ -186,7 +183,6 @@ export default function CodebaseEvolutionSuite() {
     return sliderIndex;
   }, [commitList, sliderIndex]);
 
-  // 2. DYNAMIC METRICS: Computed dynamically from filtered active commits
   const filteredCommits = useMemo(() => {
     if (commitList.length === 0) return [];
     return commitList.slice(0, activeIndex + 1);
@@ -201,7 +197,6 @@ export default function CodebaseEvolutionSuite() {
     return records.filter((r) => activeCommitHashes.has(r.commit));
   }, [records, activeCommitHashes]);
 
-  // Dynamic stat metrics
   const totalLoc = useMemo(() => {
     return activeRecords.reduce((sum, r) => sum + (r.added || 0), 0);
   }, [activeRecords]);
@@ -234,7 +229,6 @@ export default function CodebaseEvolutionSuite() {
     return { file: fileLocCounts[0][0], loc: fileLocCounts[0][1].loc };
   }, [fileLocCounts]);
 
-  // Display commits in feed according to selected sort order (Chronological vs Reverse)
   const displayCommits = useMemo(() => {
     if (sortOrder === 'desc') {
       return [...filteredCommits].reverse();
@@ -333,7 +327,7 @@ export default function CodebaseEvolutionSuite() {
       {/* 2. Interactive Scrollytelling Feed & Time-of-Day Scatterplot */}
       <ScrollReveal direction="up" delay={0.2}>
         <div className="rounded-xl border border-line bg-surface p-6 shadow-panel space-y-6">
-          
+
           {/* Header & Controls */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-line pb-4">
             <div className="flex items-center gap-3">
@@ -358,7 +352,7 @@ export default function CodebaseEvolutionSuite() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            
+
             {/* Left: Scrollytelling Commit Cards Feed */}
             <div className="lg:col-span-6 space-y-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar font-mono text-xs">
               {displayCommits.map((c) => {
@@ -367,11 +361,10 @@ export default function CodebaseEvolutionSuite() {
                   <div
                     key={c.commit}
                     onClick={() => setSelectedCommit(isSelected ? null : c.commit)}
-                    className={`p-4 rounded-lg border transition-all cursor-pointer ${
-                      isSelected
+                    className={`p-4 rounded-lg border transition-all cursor-pointer ${isSelected
                         ? 'bg-ember/10 border-ember text-bone shadow-md'
                         : 'bg-ink/80 border-line hover:border-ember/50 text-bone-dim'
-                    }`}
+                      }`}
                   >
                     <p className="leading-relaxed text-bone">
                       On <strong className="text-ember font-semibold">{c.date}</strong> at{' '}
@@ -419,11 +412,8 @@ export default function CodebaseEvolutionSuite() {
                 {filteredCommits.map((c, i) => {
                   const parts = (c.time || '12:00:00').split(':').map(Number);
                   const timeInHours = (parts[0] || 12) + (parts[1] || 0) / 60;
-                  // Bounded Y percent between 10% and 88% so bubbles never overlap top header or bottom axis
                   const yPercent = 10 + (timeInHours / 24) * 78;
-                  // Bounded X percent between 6% and 94%
                   const xPercent = (i / (filteredCommits.length - 1 || 1)) * 88 + 6;
-                  // Logarithmic bubble size (min 8px, max 22px) to prevent gigantic overlapping bubbles
                   const sizePx = Math.max(8, Math.min(22, Math.round(Math.log2((c.linesEdited || 0) + 1) * 2.8)));
                   const isSelected = selectedCommit === c.commit;
                   const isHovered = hoveredCommit?.commit === c.commit;
@@ -434,13 +424,12 @@ export default function CodebaseEvolutionSuite() {
                       onClick={() => setSelectedCommit(isSelected ? null : c.commit)}
                       onMouseEnter={() => setHoveredCommit(c)}
                       onMouseLeave={() => setHoveredCommit(null)}
-                      className={`absolute rounded-full transition-all duration-200 cursor-pointer transform -translate-x-1/2 -translate-y-1/2 ${
-                        isSelected
+                      className={`absolute rounded-full transition-all duration-200 cursor-pointer transform -translate-x-1/2 -translate-y-1/2 ${isSelected
                           ? 'bg-ember ring-4 ring-ember/50 z-30 scale-125 shadow-lg shadow-ember/50'
                           : isHovered
-                          ? 'bg-cyan-400 ring-4 ring-cyan-400/40 z-20 scale-125 shadow-md shadow-cyan-500/30'
-                          : 'bg-rose-500/75 hover:bg-rose-400 border border-rose-300/60 shadow-sm hover:scale-110'
-                      }`}
+                            ? 'bg-cyan-400 ring-4 ring-cyan-400/40 z-20 scale-125 shadow-md shadow-cyan-500/30'
+                            : 'bg-rose-500/75 hover:bg-rose-400 border border-rose-300/60 shadow-sm hover:scale-110'
+                        }`}
                       style={{
                         left: `${xPercent}%`,
                         bottom: `${yPercent}%`,
