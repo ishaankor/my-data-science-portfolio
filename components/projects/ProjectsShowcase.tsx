@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { portfolioData } from '@/data/portfolio';
-import { ArrowUpRight, Calendar, Github, ExternalLink } from 'lucide-react';
+import { ArrowUpRight, Github, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 

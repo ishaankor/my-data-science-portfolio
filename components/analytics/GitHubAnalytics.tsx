@@ -22,18 +22,22 @@ interface GitHubRepo {
   updated_at?: string;
 }
 
+const FALLBACK_USER: GitHubUser | null = (githubCache?.user || null) as unknown as GitHubUser;
 const FALLBACK_REPOS: GitHubRepo[] = (githubCache?.repos || []) as unknown as GitHubRepo[];
 
+const GITHUB_API_ENDPOINT =
+  process.env.NEXT_PUBLIC_GITHUB_FETCHER_URL ||
+  'https://github-meta-fetcher.vercel.app/api/github';
+
 export default function GitHubAnalytics() {
-  const [user, setUser] = useState<GitHubUser | null>(null);
+  const [user, setUser] = useState<GitHubUser | null>(FALLBACK_USER);
   const [repos, setRepos] = useState<GitHubRepo[]>(FALLBACK_REPOS);
-  const [loading, setLoading] = useState(true);
+  const [, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchGitHubData() {
       try {
-        // Query server proxy /api/github exclusively
-        const proxyRes = await fetch('/api/github');
+        const proxyRes = await fetch(GITHUB_API_ENDPOINT, { cache: 'no-store' });
         if (proxyRes.ok) {
           const payload = await proxyRes.json();
           if (payload.user) setUser(payload.user);
@@ -42,13 +46,15 @@ export default function GitHubAnalytics() {
           }
         }
       } catch {
-        // Fallback silently to prebuilt github-cache.json without hitting GitHub API from browser
+        // Fallback silently to prebuilt github-cache.json without breaking the UI
       } finally {
         setLoading(false);
       }
     }
 
     fetchGitHubData();
+    const interval = setInterval(fetchGitHubData, 60 * 1000);
+    return () => clearInterval(interval);
   }, []);
 
   const activeRepos = Array.isArray(repos) && repos.length > 0 ? repos : FALLBACK_REPOS;

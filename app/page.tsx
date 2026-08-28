@@ -2,9 +2,7 @@ import HeroSection from '@/components/hero/HeroSection';
 import AboutMeSection from '@/components/sections/AboutMeSection';
 import ProjectsShowcase from '@/components/projects/ProjectsShowcase';
 import GitHubAnalytics from '@/components/analytics/GitHubAnalytics';
-import ProjectRecommender from '@/components/recommender/ProjectRecommender';
 import TechStackSection from '@/components/skills/TechStackSection';
-import ExperienceTimeline from '@/components/experience/ExperienceTimeline';
 
 export default function HomePage() {
   return (
@@ -13,9 +11,7 @@ export default function HomePage() {
       <AboutMeSection />
       <ProjectsShowcase limit={6} />
       <GitHubAnalytics />
-      <ProjectRecommender />
       <TechStackSection />
-      <ExperienceTimeline />
     </div>
   );
 }

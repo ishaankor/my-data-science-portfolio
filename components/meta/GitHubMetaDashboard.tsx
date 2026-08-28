@@ -106,7 +106,9 @@ export default function GitHubMetaDashboard() {
 
   const fetchAllGitHubData = useCallback(async () => {
     try {
-      const endpoint = 'https://github-meta-fetcher.vercel.app/api/github';
+      const endpoint =
+        process.env.NEXT_PUBLIC_GITHUB_FETCHER_URL ||
+        'https://github-meta-fetcher.vercel.app/api/github';
       const proxyRes = await fetch(endpoint, { cache: 'no-store' });
       if (proxyRes.ok) {
         const payload = await proxyRes.json();
@@ -490,106 +492,6 @@ export default function GitHubMetaDashboard() {
                 );
               })}
           </div>
-        </div>
-      </ScrollReveal>
-
-      {/* 5. Interactive Repository Matrix & Explorer */}
-      <ScrollReveal direction="up" delay={0.35}>
-        <div className="space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <span className="inline-flex items-center gap-2 font-mono text-xs text-muted uppercase tracking-wider">
-                <Layers className="w-3.5 h-3.5 text-ember" />
-                Repository Matrix
-              </span>
-              <h2 className="font-display text-xl font-bold text-bone mt-1">
-                Explore Public Code Repositories ({filteredRepos.length})
-              </h2>
-            </div>
-
-            {/* Filter Pills */}
-            <div className="flex flex-wrap items-center gap-2 font-mono text-xs">
-              {availableLanguages.slice(0, 5).map((lang) => (
-                <button
-                  key={lang}
-                  onClick={() => setSelectedLanguage(lang)}
-                  className={`px-3 py-1.5 rounded-md transition-colors ${selectedLanguage === lang
-                    ? 'bg-ember/20 border border-ember/60 text-bone font-bold'
-                    : 'bg-surface border border-line text-muted hover:text-bone'
-                    }`}
-                >
-                  {lang}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Search Box */}
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-muted">
-              <Search className="w-4 h-4" />
-            </div>
-            <input
-              type="search"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search repositories by name or topic..."
-              className="w-full pl-10 pr-4 py-3 rounded-lg bg-surface border border-line text-bone placeholder-muted focus:border-ember focus:outline-none text-sm font-mono"
-            />
-          </div>
-
-          {/* Repos Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredRepos.map((repo) => {
-              const langInfo = repo.language ? languageColors[repo.language] || { hex: '#f97316' } : null;
-              return (
-                <div
-                  key={repo.id}
-                  className="rounded-xl border border-line bg-surface p-6 shadow-panel hover:border-ember/50 transition-colors flex flex-col justify-between group"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-3 font-mono text-xs">
-                      {langInfo ? (
-                        <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-ink border border-line text-bone-dim">
-                          <span className="w-2 h-2 rounded-full" style={{ backgroundColor: langInfo.hex }} />
-                          {repo.language}
-                        </span>
-                      ) : (
-                        <span className="px-2 py-0.5 rounded bg-ink border border-line text-muted">Code</span>
-                      )}
-                      <span className="text-muted flex items-center gap-1">
-                        <GitBranch className="w-3.5 h-3.5 text-ember" />
-                        <span>Active</span>
-                      </span>
-                    </div>
-
-                    <h3 className="font-mono text-base font-bold text-bone group-hover:text-ember transition-colors mb-2 truncate">
-                      {repo.name}
-                    </h3>
-                    <p className="text-bone-dim text-xs line-clamp-3 leading-relaxed mb-4">
-                      {repo.description || 'Data science & machine learning project repository.'}
-                    </p>
-                  </div>
-
-                  <div className="pt-4 border-t border-line/60 flex items-center justify-between font-mono text-xs">
-                    <span className="text-muted text-[0.68rem]">
-                      Pushed {new Date(repo.pushed_at).toLocaleDateString()}
-                    </span>
-                    <a
-                      href={repo.html_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-ember hover:underline inline-flex items-center gap-1 font-semibold"
-                    >
-                      <span>Repository</span>
-                      <ExternalLink className="w-3 h-3" />
-                    </a>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
         </div>
       </ScrollReveal>
 
