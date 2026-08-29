@@ -1,5 +1,19 @@
 [
   {
+    "file": ".gitignore",
+    "added": 1,
+    "deleted": 0,
+    "type": "code",
+    "commit": "91d76d4",
+    "author": "Ishaan Kor",
+    "date": "2026-08-29",
+    "time": "02:32:16",
+    "timezone": "-07:00",
+    "datetime": "2026-08-29T02:32:16-07:00",
+    "depth": 0,
+    "message": "chore: add VS Code workspace file to gitignore"
+  },
+  {
     "file": "repository",
     "added": 0,
     "deleted": 0,

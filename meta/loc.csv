@@ -1,4 +1,5 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+.gitignore,1,0,code,91d76d4,Ishaan Kor,2026-08-29,02:32:16,-07:00,2026-08-29T02:32:16-07:00,0,"chore: add VS Code workspace file to gitignore"
 repository,0,0,git,de19b68,Ishaan Kor,2026-08-29,01:23:47,-07:00,2026-08-29T01:23:47-07:00,0,"Merge branch 'main' of https://github.com/ishaankor/my-data-science-portfolio"
 components/projects/RepositoryMatrix.tsx,18,11,tsx,803aeff,Ishaan Kor,2026-08-29,01:23:47,-07:00,2026-08-29T01:23:47-07:00,2,"feat: group repository matrix and pie chart by created_at date"
 data/github-cache.json,51,33,json,803aeff,Ishaan Kor,2026-08-29,01:23:47,-07:00,2026-08-29T01:23:47-07:00,1,"feat: group repository matrix and pie chart by created_at date"
