@@ -395,11 +395,15 @@ export default function CodebaseEvolutionSuite() {
                   const isHovered = hoveredCommit?.commit === c.commit;
 
                   return (
-                    <div
+                    <a
                       key={c.commit}
-                      onClick={() => setSelectedCommit(isSelected ? null : c.commit)}
+                      href={`https://github.com/ishaankor/my-data-science-portfolio/commit/${c.commit}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setSelectedCommit(c.commit)}
                       onMouseEnter={() => setHoveredCommit(c)}
                       onMouseLeave={() => setHoveredCommit(null)}
+                      aria-label={`Commit ${c.commit.substring(0, 7)}: ${c.message}`}
                       className={`absolute rounded-full transition-all duration-200 cursor-pointer transform -translate-x-1/2 -translate-y-1/2 ${isSelected
                           ? 'bg-ember ring-4 ring-ember/50 z-30 scale-125 shadow-lg shadow-ember/50'
                           : isHovered
@@ -427,6 +431,10 @@ export default function CodebaseEvolutionSuite() {
                     <div className="flex items-center gap-3 text-[0.65rem]">
                       <span className="text-emerald-400 font-bold">{hoveredCommit.linesEdited.toLocaleString()} lines ({hoveredCommit.added > 0 ? `+${hoveredCommit.added}` : '0'}{hoveredCommit.deleted > 0 ? ` / -${hoveredCommit.deleted}` : ''})</span>
                       <span className="text-cyan-400 font-bold">{hoveredCommit.filesEdited} {hoveredCommit.filesEdited === 1 ? 'file' : 'files'}</span>
+                    </div>
+                    <div className="text-[0.6rem] text-ember/90 pt-0.5 flex items-center gap-1 font-semibold">
+                      <span>Click to view commit on GitHub</span>
+                      <ExternalLink className="w-2.5 h-2.5" />
                     </div>
                   </div>
                 )}
