@@ -1,4 +1,12 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+app/page.tsx,0,4,tsx,d8ea0a0,Ishaan Kor,2026-08-28,13:54:51,-07:00,2026-08-28T13:54:51-07:00,1,"feat: add RepositoryMatrix component and update projects showcase and meta dashboard"
+app/projects/page.tsx,6,23,tsx,d8ea0a0,Ishaan Kor,2026-08-28,13:54:51,-07:00,2026-08-28T13:54:51-07:00,2,"feat: add RepositoryMatrix component and update projects showcase and meta dashboard"
+components/analytics/GitHubAnalytics.tsx,11,5,tsx,d8ea0a0,Ishaan Kor,2026-08-28,13:54:51,-07:00,2026-08-28T13:54:51-07:00,2,"feat: add RepositoryMatrix component and update projects showcase and meta dashboard"
+components/meta/GitHubMetaDashboard.tsx,3,101,tsx,d8ea0a0,Ishaan Kor,2026-08-28,13:54:51,-07:00,2026-08-28T13:54:51-07:00,2,"feat: add RepositoryMatrix component and update projects showcase and meta dashboard"
+components/projects/ProjectsShowcase.tsx,1,1,tsx,d8ea0a0,Ishaan Kor,2026-08-28,13:54:51,-07:00,2026-08-28T13:54:51-07:00,2,"feat: add RepositoryMatrix component and update projects showcase and meta dashboard"
+components/projects/RepositoryMatrix.tsx,442,0,tsx,d8ea0a0,Ishaan Kor,2026-08-28,13:54:51,-07:00,2026-08-28T13:54:51-07:00,2,"feat: add RepositoryMatrix component and update projects showcase and meta dashboard"
+data/portfolio.ts,91,19,ts,d8ea0a0,Ishaan Kor,2026-08-28,13:54:51,-07:00,2026-08-28T13:54:51-07:00,1,"feat: add RepositoryMatrix component and update projects showcase and meta dashboard"
+my-data-science-portfolio.code-workspace,11,0,code-workspace,d8ea0a0,Ishaan Kor,2026-08-28,13:54:51,-07:00,2026-08-28T13:54:51-07:00,0,"feat: add RepositoryMatrix component and update projects showcase and meta dashboard"
 data/loc-static.json,112,0,json,4fe284c,Ishaan Kor,2026-07-31,01:34:09,-07:00,2026-07-31T01:34:09-07:00,1,"debug: testing telementry bug"
 scripts/generate-loc.mjs,63,38,mjs,4fe284c,Ishaan Kor,2026-07-31,01:34:09,-07:00,2026-07-31T01:34:09-07:00,1,"debug: testing telementry bug"
 components/meta/CodebaseEvolutionSuite.tsx,27,15,tsx,494222e,Ishaan Kor,2026-07-31,01:01:57,-07:00,2026-07-31T01:01:57-07:00,2,"feat: testing JSON Module Normalization"
