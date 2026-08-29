@@ -27,18 +27,37 @@ const LANGUAGE_COLORS: Record<string, { hex: string }> = {
   'C++': { hex: '#f34b7d' },
   Shell: { hex: '#89e051' },
   Jupyter: { hex: '#DA5B0B' },
+  'Jupyter Notebook': { hex: '#DA5B0B' },
 };
 
 const YEAR_COLORS: Record<string, { fill: string }> = {
-  '2026': { fill: '#38bdf8' }, // Cyan/Blue
-  '2025': { fill: '#818cf8' }, // Indigo/Violet
+  '2027': { fill: '#38bdf8' }, // Sky Blue
+  '2026': { fill: '#06b6d4' }, // Cyan
+  '2025': { fill: '#818cf8' }, // Indigo
   '2024': { fill: '#f43f5e' }, // Rose/Red
   '2023': { fill: '#f97316' }, // Ember/Orange
   '2022': { fill: '#2dd4bf' }, // Teal
   '2021': { fill: '#a855f7' }, // Purple
+  '2020': { fill: '#eab308' }, // Amber
 };
 
-const DEFAULT_COLOR = { fill: '#94a3b8' };
+const PALETTE = [
+  '#06b6d4',
+  '#818cf8',
+  '#f43f5e',
+  '#f97316',
+  '#2dd4bf',
+  '#a855f7',
+  '#38bdf8',
+  '#eab308',
+  '#ec4899',
+  '#10b981',
+];
+
+function getYearColor(year: string, index: number) {
+  if (YEAR_COLORS[year]) return YEAR_COLORS[year];
+  return { fill: PALETTE[index % PALETTE.length] };
+}
 
 const EXCLUDED_REPOS = new Set([
   'lab7',
@@ -50,76 +69,122 @@ const EXCLUDED_REPOS = new Set([
   'it-cert-automation-practice',
 ]);
 
+const GITHUB_API_ENDPOINT =
+  process.env.NEXT_PUBLIC_GITHUB_FETCHER_URL ||
+  'https://github-meta-fetcher.vercel.app/api/github';
+
+function buildRepositoryMatrix(rawRepos: any[]): RepositoryItem[] {
+  const map = new Map<string, RepositoryItem>();
+
+  const getRepoKey = (url: string, name: string) => {
+    const parts = url.replace(/\/+$/, '').split('/');
+    const slug = parts.pop() || name;
+    return slug.toLowerCase().replace(/[^a-z0-9]/g, '');
+  };
+
+  // 1. Ingest GitHub repos (filtering out private repos and course assignment labs)
+  (rawRepos || []).forEach((r: any) => {
+    if (r.private) return;
+    if (!r.html_url || !r.html_url.startsWith('https://github.com/')) return;
+    const nameLower = (r.name || '').toLowerCase();
+    if (EXCLUDED_REPOS.has(nameLower)) return;
+    if (nameLower.startsWith('lab') || nameLower.startsWith('test')) return;
+
+    const year = r.pushed_at ? new Date(r.pushed_at).getFullYear().toString() : '2026';
+    const key = getRepoKey(r.html_url, r.name);
+
+    map.set(key, {
+      id: r.id || key,
+      name: r.name,
+      year,
+      language: r.language || 'Code',
+      html_url: r.html_url,
+      description: r.description,
+      pushed_at: r.pushed_at || `${year}-01-01T00:00:00Z`,
+    });
+  });
+
+  // 2. Merge public portfolio projects, enriching or adding items seamlessly without duplicates
+  (portfolioData.projects || []).forEach((p) => {
+    if (!p.githubUrl || !p.githubUrl.startsWith('https://github.com/')) {
+      const fallbackKey = p.title.toLowerCase().replace(/[^a-z0-9]/g, '');
+      if (!map.has(fallbackKey)) {
+        map.set(fallbackKey, {
+          id: p.id,
+          name: p.title,
+          year: p.year || '2026',
+          language: p.tags[0] || 'Code',
+          html_url: p.liveUrl || '#',
+          description: p.description,
+          pushed_at: `${p.year || '2026'}-06-15T12:00:00Z`,
+          tags: p.tags,
+          metrics: p.metrics,
+        });
+      }
+      return;
+    }
+
+    const key = getRepoKey(p.githubUrl, p.title);
+    const existing = map.get(key);
+
+    if (existing) {
+      existing.name = p.title;
+      existing.description = p.description || existing.description;
+      existing.tags = p.tags;
+      existing.metrics = p.metrics;
+      if (p.year && !existing.pushed_at) {
+        existing.year = p.year;
+      }
+    } else {
+      map.set(key, {
+        id: p.id,
+        name: p.title,
+        year: p.year || '2026',
+        language: p.tags[0] || 'Code',
+        html_url: p.githubUrl,
+        description: p.description,
+        pushed_at: `${p.year || '2026'}-06-15T12:00:00Z`,
+        tags: p.tags,
+        metrics: p.metrics,
+      });
+    }
+  });
+
+  return Array.from(map.values()).sort((a, b) => {
+    const timeA = a.pushed_at ? new Date(a.pushed_at).getTime() : 0;
+    const timeB = b.pushed_at ? new Date(b.pushed_at).getTime() : 0;
+    return timeB - timeA;
+  });
+}
+
 export default function RepositoryMatrix({ limit }: { limit?: number }) {
-  const [repos, setRepos] = useState<RepositoryItem[]>([]);
+  const [repos, setRepos] = useState<RepositoryItem[]>(() =>
+    buildRepositoryMatrix(githubCache?.repos || [])
+  );
   const [selectedYear, setSelectedYear] = useState<string | null>(null);
   const [selectedLanguage, setSelectedLanguage] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [hoveredYear, setHoveredYear] = useState<string | null>(null);
 
-  // Initialize strictly PUBLIC repository items from GitHub cache & public portfolio projects
+  // Synchronize and fetch live GitHub repos in real-time
   useEffect(() => {
-    const map = new Map<string, RepositoryItem>();
-
-    // Helper to get normalized repo key slug (e.g. "https://github.com/ishaankor/Transformi" -> "transformi")
-    const getRepoKey = (url: string, name: string) => {
-      const parts = url.replace(/\/+$/, '').split('/');
-      const slug = parts.pop() || name;
-      return slug.toLowerCase().replace(/[^a-z0-9]/g, '');
-    };
-
-    // 1. Ingest githubCache.repos (filtering out private repos and course assignment labs)
-    (githubCache.repos || []).forEach((r: any) => {
-      if (r.private) return;
-      if (!r.html_url || !r.html_url.startsWith('https://github.com/')) return;
-      const nameLower = r.name.toLowerCase();
-      if (EXCLUDED_REPOS.has(nameLower)) return;
-      if (nameLower.startsWith('lab') || nameLower.startsWith('cogs108') || nameLower.startsWith('test')) return;
-
-      const year = r.pushed_at ? new Date(r.pushed_at).getFullYear().toString() : '2024';
-      const key = getRepoKey(r.html_url, r.name);
-
-      map.set(key, {
-        id: r.id,
-        name: r.name,
-        year,
-        language: r.language || 'Code',
-        html_url: r.html_url,
-        description: r.description,
-        pushed_at: r.pushed_at,
-      });
-    });
-
-    // 2. Merge public portfolio projects, enriching or adding items seamlessly without duplicates
-    (portfolioData.projects || []).forEach((p) => {
-      if (!p.githubUrl || !p.githubUrl.startsWith('https://github.com/')) return;
-
-      const key = getRepoKey(p.githubUrl, p.title);
-      const existing = map.get(key);
-
-      if (existing) {
-        // Enrich existing GitHub cached repo item with human-curated title, tags, and description
-        existing.name = p.title;
-        existing.description = p.description || existing.description;
-        existing.tags = p.tags;
-        existing.metrics = p.metrics;
-        if (p.year) existing.year = p.year;
-      } else {
-        map.set(key, {
-          id: p.id,
-          name: p.title,
-          year: p.year,
-          language: p.tags[0] || 'Code',
-          html_url: p.githubUrl,
-          description: p.description,
-          pushed_at: `${p.year}-06-15T12:00:00Z`,
-          tags: p.tags,
-          metrics: p.metrics,
-        });
+    async function fetchLiveRepositories() {
+      try {
+        const proxyRes = await fetch(GITHUB_API_ENDPOINT, { cache: 'no-store' });
+        if (proxyRes.ok) {
+          const payload = await proxyRes.json();
+          if (Array.isArray(payload.repos) && payload.repos.length > 0) {
+            setRepos(buildRepositoryMatrix(payload.repos));
+          }
+        }
+      } catch {
+        // Fallback gracefully to cache if offline
       }
-    });
+    }
 
-    setRepos(Array.from(map.values()));
+    fetchLiveRepositories();
+    const interval = setInterval(fetchLiveRepositories, 60 * 1000);
+    return () => clearInterval(interval);
   }, []);
 
   // Compute available languages
@@ -135,7 +200,7 @@ export default function RepositoryMatrix({ limit }: { limit?: number }) {
   const yearDistribution = useMemo(() => {
     const counts: Record<string, number> = {};
     repos.forEach((r) => {
-      const y = r.year || '2024';
+      const y = r.year || '2026';
       counts[y] = (counts[y] || 0) + 1;
     });
 
@@ -149,9 +214,21 @@ export default function RepositoryMatrix({ limit }: { limit?: number }) {
   // Compute SVG Pie Slices
   const pieSlices = useMemo(() => {
     let cumulativeAngle = 0;
-    return yearDistribution.map((item) => {
+    return yearDistribution.map((item, idx) => {
       const fraction = item.count / totalRepos;
       const angle = fraction * 360;
+
+      // Handle single item (100% full circle)
+      if (item.count === totalRepos || fraction >= 0.999) {
+        const pathData = `M 0 -90 A 90 90 0 1 1 0 90 A 90 90 0 1 1 0 -90 Z`;
+        return {
+          ...item,
+          pathData,
+          percentage: 100,
+          color: getYearColor(item.year, idx),
+        };
+      }
+
       const startAngle = cumulativeAngle;
       const endAngle = cumulativeAngle + angle;
       cumulativeAngle += angle;
@@ -172,7 +249,7 @@ export default function RepositoryMatrix({ limit }: { limit?: number }) {
         ...item,
         pathData,
         percentage: Math.round(fraction * 100),
-        color: YEAR_COLORS[item.year] || DEFAULT_COLOR,
+        color: getYearColor(item.year, idx),
       };
     });
   }, [yearDistribution, totalRepos]);
