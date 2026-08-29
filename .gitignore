@@ -2,3 +2,4 @@ meta/loc.csv
 node_modules/
 .env.local
 .next/
+my-data-science-portfolio.code-workspace
