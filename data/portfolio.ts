@@ -400,7 +400,7 @@ export const portfolioData: PortfolioData = {
     {
       id: "data-science-portfolio",
       title: "Interactive Data Science Showcase",
-      year: "2024",
+      year: "2025",
       category: "Data Visualization",
       description: "A dynamic web data product featuring real-time GitHub API analytics and dynamic project recommendation engine.",
       detailedDescription: "Designed to demonstrate data storytelling by pulling live GitHub metrics, computing repository language distributions, and running client-side tf-idf-like project search.",
