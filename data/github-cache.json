@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-29T08:18:22.404Z",
+  "updatedAt": "2026-08-29T08:23:27.538Z",
   "totalRepos": 18,
   "user": {
     "login": "ishaankor",
@@ -17,8 +17,9 @@
       "language": "HTML",
       "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
       "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
-      "pushed_at": "2026-08-29T08:00:25Z",
-      "updated_at": "2026-08-29T08:03:38Z"
+      "pushed_at": "2026-08-29T08:19:24Z",
+      "updated_at": "2026-08-29T08:19:40Z",
+      "created_at": "2025-01-11T23:48:23Z"
     },
     {
       "id": 1324783574,
@@ -27,7 +28,8 @@
       "html_url": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
       "description": null,
       "pushed_at": "2026-08-28T20:01:53Z",
-      "updated_at": "2026-08-28T20:02:12Z"
+      "updated_at": "2026-08-28T20:02:12Z",
+      "created_at": "2026-08-06T05:39:59Z"
     },
     {
       "id": 1323680935,
@@ -36,7 +38,8 @@
       "html_url": "https://github.com/ishaankor/RigScouter-AI",
       "description": null,
       "pushed_at": "2026-08-28T20:01:52Z",
-      "updated_at": "2026-08-28T20:02:26Z"
+      "updated_at": "2026-08-28T20:02:26Z",
+      "created_at": "2026-08-05T05:50:28Z"
     },
     {
       "id": 1271861363,
@@ -45,7 +48,8 @@
       "html_url": "https://github.com/ishaankor/Datafy",
       "description": "An AI-powered data science copilot that turns raw CSV data into interactive analysis, visualizations, and narrative insights through a React frontend and FastAPI-backed Python analytics engine using LangChain and RAG.",
       "pushed_at": "2026-08-05T08:49:04Z",
-      "updated_at": "2026-08-05T08:49:41Z"
+      "updated_at": "2026-08-05T08:49:41Z",
+      "created_at": "2026-06-17T04:36:46Z"
     },
     {
       "id": 1316668584,
@@ -54,7 +58,8 @@
       "html_url": "https://github.com/ishaankor/Github-Meta-Fetcher",
       "description": null,
       "pushed_at": "2026-07-30T21:06:16Z",
-      "updated_at": "2026-07-30T21:07:26Z"
+      "updated_at": "2026-07-30T21:07:26Z",
+      "created_at": "2026-07-30T00:16:14Z"
     },
     {
       "id": 911895420,
@@ -63,7 +68,8 @@
       "html_url": "https://github.com/ishaankor/ishaankor",
       "description": "My brief introduction to the world, or in the coding world, print(\"Hello World!\")",
       "pushed_at": "2026-07-30T20:38:37Z",
-      "updated_at": "2026-07-30T20:38:58Z"
+      "updated_at": "2026-07-30T20:38:58Z",
+      "created_at": "2025-01-04T05:55:23Z"
     },
     {
       "id": 911419017,
@@ -72,7 +78,8 @@
       "html_url": "https://github.com/ishaankor/my-personal-website",
       "description": "AI-enhanced personal portfolio website with a responsive frontend and MCP-backed chatbot, showcasing Ishaan Koradia’s skills, projects, and generative AI interaction in a product-style experience.",
       "pushed_at": "2026-07-29T03:51:49Z",
-      "updated_at": "2026-07-29T03:51:54Z"
+      "updated_at": "2026-07-29T03:51:54Z",
+      "created_at": "2025-01-03T01:20:34Z"
     },
     {
       "id": 1069482168,
@@ -81,7 +88,8 @@
       "html_url": "https://github.com/ishaankor/Transformi",
       "description": "An interactive Discord data science assistant that ingests various forms of input in order to run regression/classification and neural network workflows with polished visual analytics in real time.",
       "pushed_at": "2026-07-27T23:30:29Z",
-      "updated_at": "2026-07-27T23:30:39Z"
+      "updated_at": "2026-07-27T23:30:39Z",
+      "created_at": "2025-10-04T02:49:00Z"
     },
     {
       "id": 1068254988,
@@ -90,7 +98,8 @@
       "html_url": "https://github.com/ishaankor/A-Dive-Into-Surgery-Statistics",
       "description": "An interactive data visualization project analyzing factors that influence ICU stay duration after surgery. This project uses D3.js to create engaging visualizations that explore correlations between patient characteristics and recovery times.",
       "pushed_at": "2026-01-07T19:59:29Z",
-      "updated_at": "2026-01-07T19:59:33Z"
+      "updated_at": "2026-01-07T19:59:33Z",
+      "created_at": "2025-10-02T05:11:19Z"
     },
     {
       "id": 1068259962,
@@ -99,7 +108,8 @@
       "html_url": "https://github.com/ishaankor/Childhood-Obesity-Analysis",
       "description": "By better understanding teen health, we we examine how household characteristics, socioeconomic factors, and family dynamics correlate with BMI classifications in this critical developmental age group.",
       "pushed_at": "2025-10-02T05:31:55Z",
-      "updated_at": "2025-10-02T05:35:42Z"
+      "updated_at": "2025-10-02T05:35:42Z",
+      "created_at": "2025-10-02T05:26:48Z"
     },
     {
       "id": 913207233,
@@ -108,7 +118,8 @@
       "html_url": "https://github.com/ishaankor/Minecraft-Server-Upkeeper",
       "description": "Automating the tiresome process of having to keep your Minecraft Server up via Python and Selenium. ",
       "pushed_at": "2025-04-25T19:20:02Z",
-      "updated_at": "2025-04-25T19:20:06Z"
+      "updated_at": "2025-04-25T19:20:06Z",
+      "created_at": "2025-01-07T08:36:14Z"
     },
     {
       "id": 937084877,
@@ -117,7 +128,8 @@
       "html_url": "https://github.com/ishaankor/bikewatching-analysis",
       "description": "Interactive web-based data visualization exploring bike-sharing patterns by analyzing trip origins, destinations, and time-based trends via JavaScript, HTML, and CSS.",
       "pushed_at": "2025-02-23T03:27:45Z",
-      "updated_at": "2026-01-07T19:58:16Z"
+      "updated_at": "2026-01-07T19:58:16Z",
+      "created_at": "2025-02-22T09:48:47Z"
     },
     {
       "id": 915543911,
@@ -126,7 +138,8 @@
       "html_url": "https://github.com/ishaankor/COGS108_Repo",
       "description": null,
       "pushed_at": "2025-01-12T06:00:54Z",
-      "updated_at": "2025-01-12T06:00:56Z"
+      "updated_at": "2025-01-12T06:00:56Z",
+      "created_at": "2025-01-12T06:00:11Z"
     },
     {
       "id": 742050298,
@@ -135,7 +148,8 @@
       "html_url": "https://github.com/ishaankor/Software-Tools-Blog",
       "description": "Demonstrating the necessities of operating with Git on a command line through the development of a ChatBot using Java!",
       "pushed_at": "2025-01-07T08:19:15Z",
-      "updated_at": "2025-01-07T08:19:18Z"
+      "updated_at": "2025-01-07T08:19:18Z",
+      "created_at": "2024-01-11T16:56:07Z"
     },
     {
       "id": 913094289,
@@ -144,7 +158,8 @@
       "html_url": "https://github.com/ishaankor/Mobile-Game-Automations",
       "description": "Automation scripts that help me complete the annoying processes in a certain mobile video game! ",
       "pushed_at": "2025-01-07T07:21:38Z",
-      "updated_at": "2025-01-07T07:14:13Z"
+      "updated_at": "2025-01-07T07:14:13Z",
+      "created_at": "2025-01-07T02:50:22Z"
     },
     {
       "id": 909492023,
@@ -153,7 +168,8 @@
       "html_url": "https://github.com/ishaankor/Notes-Taker",
       "description": "A Python script that allows you to be able to record audio and make useful notes of it so that it can be stored in your Google Drive!",
       "pushed_at": "2024-12-29T00:08:11Z",
-      "updated_at": "2024-12-29T00:09:20Z"
+      "updated_at": "2024-12-29T00:09:20Z",
+      "created_at": "2024-12-28T21:33:49Z"
     },
     {
       "id": 908393333,
@@ -162,7 +178,8 @@
       "html_url": "https://github.com/ishaankor/Canvas-Files-Merger",
       "description": "A Python script to collect, organize, and merge files from Canvas into a single PDF file.",
       "pushed_at": "2024-12-28T23:59:31Z",
-      "updated_at": "2024-12-28T23:59:34Z"
+      "updated_at": "2024-12-28T23:59:34Z",
+      "created_at": "2024-12-26T00:54:16Z"
     },
     {
       "id": 895882703,
@@ -171,10 +188,21 @@
       "html_url": "https://github.com/ishaankor/Ratings-Recipes-Analysis",
       "description": "A deep analysis look into a dataset covering various recipes and their respective ratings through pandas!",
       "pushed_at": "2024-12-11T04:21:07Z",
-      "updated_at": "2025-10-02T02:55:40Z"
+      "updated_at": "2025-10-02T02:55:40Z",
+      "created_at": "2024-11-29T05:32:08Z"
     }
   ],
   "commits": [
+    {
+      "sha": "c294705f8fd52b3bca56dadaeb3fb649c259f786",
+      "shortSha": "c294705",
+      "message": "feat: enable live GitHub sync and dynamic pie chart updates for projects",
+      "repoName": "my-data-science-portfolio",
+      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/c294705f8fd52b3bca56dadaeb3fb649c259f786",
+      "date": "2026-08-29T08:18:40Z",
+      "timeAgo": "4m ago"
+    },
     {
       "sha": "aeca9e59340413bc2f8867bb88ccc4ef0ac8a25e",
       "shortSha": "aeca9e5",
@@ -183,7 +211,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/aeca9e59340413bc2f8867bb88ccc4ef0ac8a25e",
       "date": "2026-08-29T07:59:45Z",
-      "timeAgo": "18m ago"
+      "timeAgo": "23m ago"
     },
     {
       "sha": "39d071aa3a42797d7d816f376fe80fad01a306cf",
@@ -193,7 +221,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/39d071aa3a42797d7d816f376fe80fad01a306cf",
       "date": "2026-08-29T07:53:09Z",
-      "timeAgo": "25m ago"
+      "timeAgo": "30m ago"
     },
     {
       "sha": "3d24db4776c5d6d50b74e5e42ac36d30a936c936",
@@ -203,7 +231,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/3d24db4776c5d6d50b74e5e42ac36d30a936c936",
       "date": "2026-08-29T07:52:57Z",
-      "timeAgo": "25m ago"
+      "timeAgo": "30m ago"
     },
     {
       "sha": "d8ea0a0c06dfef996e6a76a0bddccc3d83a4de45",
@@ -214,16 +242,6 @@
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/d8ea0a0c06dfef996e6a76a0bddccc3d83a4de45",
       "date": "2026-08-28T20:54:51Z",
       "timeAgo": "11h ago"
-    },
-    {
-      "sha": "35c555e360b57fd6681edc5d9d020abac84b37e4",
-      "shortSha": "35c555e",
-      "message": "refactor: enhance product semantic matching and watchlist update logic with strict attribute validation",
-      "repoName": "RigScouter-AI-DataBase-",
-      "repoUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
-      "commitUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-/commit/35c555e360b57fd6681edc5d9d020abac84b37e4",
-      "date": "2026-08-28T20:01:49Z",
-      "timeAgo": "12h ago"
     }
   ],
   "contributionCalendar": {

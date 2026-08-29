@@ -13,7 +13,8 @@ export interface RepositoryItem {
   language: string | null;
   html_url: string;
   description: string | null;
-  pushed_at: string;
+  created_at?: string;
+  pushed_at?: string;
   tags?: string[];
   metrics?: string;
 }
@@ -90,7 +91,9 @@ function buildRepositoryMatrix(rawRepos: any[]): RepositoryItem[] {
     if (EXCLUDED_REPOS.has(nameLower)) return;
     if (nameLower.startsWith('lab') || nameLower.startsWith('test')) return;
 
-    const year = r.pushed_at ? new Date(r.pushed_at).getFullYear().toString() : '2026';
+    // Use created_at to accurately represent project inception year
+    const creationDate = r.created_at || r.pushed_at;
+    const year = creationDate ? new Date(creationDate).getFullYear().toString() : '2024';
     const key = getRepoKey(r.html_url, r.name);
 
     map.set(key, {
@@ -100,7 +103,8 @@ function buildRepositoryMatrix(rawRepos: any[]): RepositoryItem[] {
       language: r.language || 'Code',
       html_url: r.html_url,
       description: r.description,
-      pushed_at: r.pushed_at || `${year}-01-01T00:00:00Z`,
+      created_at: r.created_at || `${year}-01-01T00:00:00Z`,
+      pushed_at: r.pushed_at,
     });
   });
 
@@ -112,11 +116,12 @@ function buildRepositoryMatrix(rawRepos: any[]): RepositoryItem[] {
         map.set(fallbackKey, {
           id: p.id,
           name: p.title,
-          year: p.year || '2026',
+          year: p.year || '2024',
           language: p.tags[0] || 'Code',
           html_url: p.liveUrl || '#',
           description: p.description,
-          pushed_at: `${p.year || '2026'}-06-15T12:00:00Z`,
+          created_at: `${p.year || '2024'}-01-01T00:00:00Z`,
+          pushed_at: `${p.year || '2024'}-06-15T12:00:00Z`,
           tags: p.tags,
           metrics: p.metrics,
         });
@@ -132,18 +137,20 @@ function buildRepositoryMatrix(rawRepos: any[]): RepositoryItem[] {
       existing.description = p.description || existing.description;
       existing.tags = p.tags;
       existing.metrics = p.metrics;
-      if (p.year && !existing.pushed_at) {
+      // Curated project creation year takes precedence
+      if (p.year) {
         existing.year = p.year;
       }
     } else {
       map.set(key, {
         id: p.id,
         name: p.title,
-        year: p.year || '2026',
+        year: p.year || '2024',
         language: p.tags[0] || 'Code',
         html_url: p.githubUrl,
         description: p.description,
-        pushed_at: `${p.year || '2026'}-06-15T12:00:00Z`,
+        created_at: `${p.year || '2024'}-01-01T00:00:00Z`,
+        pushed_at: `${p.year || '2024'}-06-15T12:00:00Z`,
         tags: p.tags,
         metrics: p.metrics,
       });
@@ -151,8 +158,8 @@ function buildRepositoryMatrix(rawRepos: any[]): RepositoryItem[] {
   });
 
   return Array.from(map.values()).sort((a, b) => {
-    const timeA = a.pushed_at ? new Date(a.pushed_at).getTime() : 0;
-    const timeB = b.pushed_at ? new Date(b.pushed_at).getTime() : 0;
+    const timeA = a.created_at ? new Date(a.created_at).getTime() : 0;
+    const timeB = b.created_at ? new Date(b.created_at).getTime() : 0;
     return timeB - timeA;
   });
 }
@@ -479,7 +486,7 @@ export default function RepositoryMatrix({ limit }: { limit?: number }) {
                     {/* Card Bottom Link */}
                     <div className="pt-4 border-t border-line/60 flex items-center justify-between font-mono text-xs">
                       <span className="text-muted text-[0.68rem]">
-                        Pushed {repo.pushed_at ? new Date(repo.pushed_at).toLocaleDateString() : repo.year}
+                        Created {repo.created_at ? new Date(repo.created_at).toLocaleDateString() : repo.year}
                       </span>
                       <a
                         href={repo.html_url}
