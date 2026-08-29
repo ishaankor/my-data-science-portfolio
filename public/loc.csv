@@ -1,4 +1,13 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+components/ui/HazeWaveText,0,89,code,aeca9e5,Ishaan Kor,2026-08-29,00:59:45,-07:00,2026-08-29T00:59:45-07:00,2,"chore: remove legacy iCloud duplicate file"
+app/resume/page.tsx,9,38,tsx,39d071a,Ishaan Kor,2026-08-29,00:53:09,-07:00,2026-08-29T00:53:09-07:00,2,"feat: implement Work & Systems Engineering experience matrix and ignore .next build cache"
+components/experience/CertificationsSection.tsx,106,0,tsx,39d071a,Ishaan Kor,2026-08-29,00:53:09,-07:00,2026-08-29T00:53:09-07:00,2,"feat: implement Work & Systems Engineering experience matrix and ignore .next build cache"
+components/experience/ExperienceMatrix.tsx,365,0,tsx,39d071a,Ishaan Kor,2026-08-29,00:53:09,-07:00,2026-08-29T00:53:09-07:00,2,"feat: implement Work & Systems Engineering experience matrix and ignore .next build cache"
+components/experience/ResumeClient.tsx,23,0,tsx,39d071a,Ishaan Kor,2026-08-29,00:53:09,-07:00,2026-08-29T00:53:09-07:00,2,"feat: implement Work & Systems Engineering experience matrix and ignore .next build cache"
+components/experience/TechnicalSkillsMatrix.tsx,160,0,tsx,39d071a,Ishaan Kor,2026-08-29,00:53:09,-07:00,2026-08-29T00:53:09-07:00,2,"feat: implement Work & Systems Engineering experience matrix and ignore .next build cache"
+components/experience/WorkHeroHUD.tsx,152,0,tsx,39d071a,Ishaan Kor,2026-08-29,00:53:09,-07:00,2026-08-29T00:53:09-07:00,2,"feat: implement Work & Systems Engineering experience matrix and ignore .next build cache"
+data/portfolio.ts,305,184,ts,39d071a,Ishaan Kor,2026-08-29,00:53:09,-07:00,2026-08-29T00:53:09-07:00,1,"feat: implement Work & Systems Engineering experience matrix and ignore .next build cache"
+.gitignore,1,0,code,3d24db4,Ishaan Kor,2026-08-29,00:52:43,-07:00,2026-08-29T00:52:43-07:00,0,"chore: ignore .next build artifacts"
 app/page.tsx,0,4,tsx,d8ea0a0,Ishaan Kor,2026-08-28,13:54:51,-07:00,2026-08-28T13:54:51-07:00,1,"feat: add RepositoryMatrix component and update projects showcase and meta dashboard"
 app/projects/page.tsx,6,23,tsx,d8ea0a0,Ishaan Kor,2026-08-28,13:54:51,-07:00,2026-08-28T13:54:51-07:00,2,"feat: add RepositoryMatrix component and update projects showcase and meta dashboard"
 components/analytics/GitHubAnalytics.tsx,11,5,tsx,d8ea0a0,Ishaan Kor,2026-08-28,13:54:51,-07:00,2026-08-28T13:54:51-07:00,2,"feat: add RepositoryMatrix component and update projects showcase and meta dashboard"
