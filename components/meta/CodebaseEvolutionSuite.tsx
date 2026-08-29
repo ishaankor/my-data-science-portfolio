@@ -78,7 +78,7 @@ export default function CodebaseEvolutionSuite() {
   const [sliderIndex, setSliderIndex] = useState<number | null>(null);
   const [selectedCommit, setSelectedCommit] = useState<string | null>(null);
   const [hoveredCommit, setHoveredCommit] = useState<CommitMeta | null>(null);
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc'); // 'asc' = Chronological (oldest first)
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc'); // 'desc' = Reverse (newest first by default)
 
   // 1. DYNAMIC COMMIT AGGREGATOR: Group rows by commit hash & sort CHRONOLOGICALLY (oldest to newest)
   const commitList = useMemo<CommitMeta[]>(() => {
@@ -327,7 +327,7 @@ export default function CodebaseEvolutionSuite() {
             </button>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
 
             {/* Left: Scrollytelling Commit Cards Feed */}
             <div className="lg:col-span-6 space-y-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar font-mono text-xs">

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-29T08:23:27.538Z",
+  "updatedAt": "2026-08-29T10:00:04.997Z",
   "totalRepos": 18,
   "user": {
     "login": "ishaankor",
@@ -17,39 +17,9 @@
       "language": "HTML",
       "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
       "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
-      "pushed_at": "2026-08-29T08:19:24Z",
-      "updated_at": "2026-08-29T08:19:40Z",
-      "created_at": "2025-01-11T23:48:23Z"
-    },
-    {
-      "id": 1324783574,
-      "name": "RigScouter-AI-DataBase-",
-      "language": "Python",
-      "html_url": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
-      "description": null,
-      "pushed_at": "2026-08-28T20:01:53Z",
-      "updated_at": "2026-08-28T20:02:12Z",
-      "created_at": "2026-08-06T05:39:59Z"
-    },
-    {
-      "id": 1323680935,
-      "name": "RigScouter-AI",
-      "language": "TypeScript",
-      "html_url": "https://github.com/ishaankor/RigScouter-AI",
-      "description": null,
-      "pushed_at": "2026-08-28T20:01:52Z",
-      "updated_at": "2026-08-28T20:02:26Z",
-      "created_at": "2026-08-05T05:50:28Z"
-    },
-    {
-      "id": 1271861363,
-      "name": "Datafy",
-      "language": "TypeScript",
-      "html_url": "https://github.com/ishaankor/Datafy",
-      "description": "An AI-powered data science copilot that turns raw CSV data into interactive analysis, visualizations, and narrative insights through a React frontend and FastAPI-backed Python analytics engine using LangChain and RAG.",
-      "pushed_at": "2026-08-05T08:49:04Z",
-      "updated_at": "2026-08-05T08:49:41Z",
-      "created_at": "2026-06-17T04:36:46Z"
+      "created_at": "2025-01-11T23:48:23Z",
+      "pushed_at": "2026-08-29T09:49:26Z",
+      "updated_at": "2026-08-29T09:50:38Z"
     },
     {
       "id": 1316668584,
@@ -57,9 +27,39 @@
       "language": "JavaScript",
       "html_url": "https://github.com/ishaankor/Github-Meta-Fetcher",
       "description": null,
-      "pushed_at": "2026-07-30T21:06:16Z",
-      "updated_at": "2026-07-30T21:07:26Z",
-      "created_at": "2026-07-30T00:16:14Z"
+      "created_at": "2026-07-30T00:16:14Z",
+      "pushed_at": "2026-08-29T08:23:57Z",
+      "updated_at": "2026-08-29T08:24:26Z"
+    },
+    {
+      "id": 1324783574,
+      "name": "RigScouter-AI-DataBase-",
+      "language": "Python",
+      "html_url": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
+      "description": null,
+      "created_at": "2026-08-06T05:39:59Z",
+      "pushed_at": "2026-08-28T20:01:53Z",
+      "updated_at": "2026-08-28T20:02:12Z"
+    },
+    {
+      "id": 1323680935,
+      "name": "RigScouter-AI",
+      "language": "TypeScript",
+      "html_url": "https://github.com/ishaankor/RigScouter-AI",
+      "description": null,
+      "created_at": "2026-08-05T05:50:28Z",
+      "pushed_at": "2026-08-28T20:01:52Z",
+      "updated_at": "2026-08-28T20:02:26Z"
+    },
+    {
+      "id": 1271861363,
+      "name": "Datafy",
+      "language": "TypeScript",
+      "html_url": "https://github.com/ishaankor/Datafy",
+      "description": "An AI-powered data science copilot that turns raw CSV data into interactive analysis, visualizations, and narrative insights through a React frontend and FastAPI-backed Python analytics engine using LangChain and RAG.",
+      "created_at": "2026-06-17T04:36:46Z",
+      "pushed_at": "2026-08-05T08:49:04Z",
+      "updated_at": "2026-08-05T08:49:41Z"
     },
     {
       "id": 911895420,
@@ -67,9 +67,9 @@
       "language": null,
       "html_url": "https://github.com/ishaankor/ishaankor",
       "description": "My brief introduction to the world, or in the coding world, print(\"Hello World!\")",
+      "created_at": "2025-01-04T05:55:23Z",
       "pushed_at": "2026-07-30T20:38:37Z",
-      "updated_at": "2026-07-30T20:38:58Z",
-      "created_at": "2025-01-04T05:55:23Z"
+      "updated_at": "2026-07-30T20:38:58Z"
     },
     {
       "id": 911419017,
@@ -77,9 +77,9 @@
       "language": "HTML",
       "html_url": "https://github.com/ishaankor/my-personal-website",
       "description": "AI-enhanced personal portfolio website with a responsive frontend and MCP-backed chatbot, showcasing Ishaan Koradia’s skills, projects, and generative AI interaction in a product-style experience.",
+      "created_at": "2025-01-03T01:20:34Z",
       "pushed_at": "2026-07-29T03:51:49Z",
-      "updated_at": "2026-07-29T03:51:54Z",
-      "created_at": "2025-01-03T01:20:34Z"
+      "updated_at": "2026-07-29T03:51:54Z"
     },
     {
       "id": 1069482168,
@@ -87,9 +87,9 @@
       "language": "Python",
       "html_url": "https://github.com/ishaankor/Transformi",
       "description": "An interactive Discord data science assistant that ingests various forms of input in order to run regression/classification and neural network workflows with polished visual analytics in real time.",
+      "created_at": "2025-10-04T02:49:00Z",
       "pushed_at": "2026-07-27T23:30:29Z",
-      "updated_at": "2026-07-27T23:30:39Z",
-      "created_at": "2025-10-04T02:49:00Z"
+      "updated_at": "2026-07-27T23:30:39Z"
     },
     {
       "id": 1068254988,
@@ -97,9 +97,9 @@
       "language": "JavaScript",
       "html_url": "https://github.com/ishaankor/A-Dive-Into-Surgery-Statistics",
       "description": "An interactive data visualization project analyzing factors that influence ICU stay duration after surgery. This project uses D3.js to create engaging visualizations that explore correlations between patient characteristics and recovery times.",
+      "created_at": "2025-10-02T05:11:19Z",
       "pushed_at": "2026-01-07T19:59:29Z",
-      "updated_at": "2026-01-07T19:59:33Z",
-      "created_at": "2025-10-02T05:11:19Z"
+      "updated_at": "2026-01-07T19:59:33Z"
     },
     {
       "id": 1068259962,
@@ -107,9 +107,9 @@
       "language": "Jupyter Notebook",
       "html_url": "https://github.com/ishaankor/Childhood-Obesity-Analysis",
       "description": "By better understanding teen health, we we examine how household characteristics, socioeconomic factors, and family dynamics correlate with BMI classifications in this critical developmental age group.",
+      "created_at": "2025-10-02T05:26:48Z",
       "pushed_at": "2025-10-02T05:31:55Z",
-      "updated_at": "2025-10-02T05:35:42Z",
-      "created_at": "2025-10-02T05:26:48Z"
+      "updated_at": "2025-10-02T05:35:42Z"
     },
     {
       "id": 913207233,
@@ -117,9 +117,9 @@
       "language": "Python",
       "html_url": "https://github.com/ishaankor/Minecraft-Server-Upkeeper",
       "description": "Automating the tiresome process of having to keep your Minecraft Server up via Python and Selenium. ",
+      "created_at": "2025-01-07T08:36:14Z",
       "pushed_at": "2025-04-25T19:20:02Z",
-      "updated_at": "2025-04-25T19:20:06Z",
-      "created_at": "2025-01-07T08:36:14Z"
+      "updated_at": "2025-04-25T19:20:06Z"
     },
     {
       "id": 937084877,
@@ -127,9 +127,9 @@
       "language": "JavaScript",
       "html_url": "https://github.com/ishaankor/bikewatching-analysis",
       "description": "Interactive web-based data visualization exploring bike-sharing patterns by analyzing trip origins, destinations, and time-based trends via JavaScript, HTML, and CSS.",
+      "created_at": "2025-02-22T09:48:47Z",
       "pushed_at": "2025-02-23T03:27:45Z",
-      "updated_at": "2026-01-07T19:58:16Z",
-      "created_at": "2025-02-22T09:48:47Z"
+      "updated_at": "2026-01-07T19:58:16Z"
     },
     {
       "id": 915543911,
@@ -137,9 +137,9 @@
       "language": null,
       "html_url": "https://github.com/ishaankor/COGS108_Repo",
       "description": null,
+      "created_at": "2025-01-12T06:00:11Z",
       "pushed_at": "2025-01-12T06:00:54Z",
-      "updated_at": "2025-01-12T06:00:56Z",
-      "created_at": "2025-01-12T06:00:11Z"
+      "updated_at": "2025-01-12T06:00:56Z"
     },
     {
       "id": 742050298,
@@ -147,9 +147,9 @@
       "language": null,
       "html_url": "https://github.com/ishaankor/Software-Tools-Blog",
       "description": "Demonstrating the necessities of operating with Git on a command line through the development of a ChatBot using Java!",
+      "created_at": "2024-01-11T16:56:07Z",
       "pushed_at": "2025-01-07T08:19:15Z",
-      "updated_at": "2025-01-07T08:19:18Z",
-      "created_at": "2024-01-11T16:56:07Z"
+      "updated_at": "2025-01-07T08:19:18Z"
     },
     {
       "id": 913094289,
@@ -157,9 +157,9 @@
       "language": null,
       "html_url": "https://github.com/ishaankor/Mobile-Game-Automations",
       "description": "Automation scripts that help me complete the annoying processes in a certain mobile video game! ",
+      "created_at": "2025-01-07T02:50:22Z",
       "pushed_at": "2025-01-07T07:21:38Z",
-      "updated_at": "2025-01-07T07:14:13Z",
-      "created_at": "2025-01-07T02:50:22Z"
+      "updated_at": "2025-01-07T07:14:13Z"
     },
     {
       "id": 909492023,
@@ -167,9 +167,9 @@
       "language": "Python",
       "html_url": "https://github.com/ishaankor/Notes-Taker",
       "description": "A Python script that allows you to be able to record audio and make useful notes of it so that it can be stored in your Google Drive!",
+      "created_at": "2024-12-28T21:33:49Z",
       "pushed_at": "2024-12-29T00:08:11Z",
-      "updated_at": "2024-12-29T00:09:20Z",
-      "created_at": "2024-12-28T21:33:49Z"
+      "updated_at": "2024-12-29T00:09:20Z"
     },
     {
       "id": 908393333,
@@ -177,9 +177,9 @@
       "language": "Python",
       "html_url": "https://github.com/ishaankor/Canvas-Files-Merger",
       "description": "A Python script to collect, organize, and merge files from Canvas into a single PDF file.",
+      "created_at": "2024-12-26T00:54:16Z",
       "pushed_at": "2024-12-28T23:59:31Z",
-      "updated_at": "2024-12-28T23:59:34Z",
-      "created_at": "2024-12-26T00:54:16Z"
+      "updated_at": "2024-12-28T23:59:34Z"
     },
     {
       "id": 895882703,
@@ -187,65 +187,65 @@
       "language": "HTML",
       "html_url": "https://github.com/ishaankor/Ratings-Recipes-Analysis",
       "description": "A deep analysis look into a dataset covering various recipes and their respective ratings through pandas!",
+      "created_at": "2024-11-29T05:32:08Z",
       "pushed_at": "2024-12-11T04:21:07Z",
-      "updated_at": "2025-10-02T02:55:40Z",
-      "created_at": "2024-11-29T05:32:08Z"
+      "updated_at": "2025-10-02T02:55:40Z"
     }
   ],
   "commits": [
     {
-      "sha": "c294705f8fd52b3bca56dadaeb3fb649c259f786",
-      "shortSha": "c294705",
-      "message": "feat: enable live GitHub sync and dynamic pie chart updates for projects",
+      "sha": "cdc7a83a6fdd61f2aff756d442f9e1c9a93b267a",
+      "shortSha": "cdc7a83",
+      "message": "feat: update portfolio project year to 2025",
       "repoName": "my-data-science-portfolio",
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
-      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/c294705f8fd52b3bca56dadaeb3fb649c259f786",
-      "date": "2026-08-29T08:18:40Z",
-      "timeAgo": "4m ago"
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/cdc7a83a6fdd61f2aff756d442f9e1c9a93b267a",
+      "date": "2026-08-29T09:48:38Z",
+      "timeAgo": "11m ago"
     },
     {
-      "sha": "aeca9e59340413bc2f8867bb88ccc4ef0ac8a25e",
-      "shortSha": "aeca9e5",
-      "message": "chore: remove legacy iCloud duplicate file",
+      "sha": "91d76d4ba58cbe9031aa6e9f27383d49205be0ff",
+      "shortSha": "91d76d4",
+      "message": "chore: add VS Code workspace file to gitignore",
       "repoName": "my-data-science-portfolio",
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
-      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/aeca9e59340413bc2f8867bb88ccc4ef0ac8a25e",
-      "date": "2026-08-29T07:59:45Z",
-      "timeAgo": "23m ago"
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/91d76d4ba58cbe9031aa6e9f27383d49205be0ff",
+      "date": "2026-08-29T09:32:16Z",
+      "timeAgo": "27m ago"
     },
     {
-      "sha": "39d071aa3a42797d7d816f376fe80fad01a306cf",
-      "shortSha": "39d071a",
-      "message": "feat: implement Work & Systems Engineering experience matrix and ignore .next build cache",
-      "repoName": "my-data-science-portfolio",
-      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
-      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/39d071aa3a42797d7d816f376fe80fad01a306cf",
-      "date": "2026-08-29T07:53:09Z",
-      "timeAgo": "30m ago"
+      "sha": "3d0add2ad757914a1bc317512ac1cde89a3f9ea7",
+      "shortSha": "3d0add2",
+      "message": "feat: include created_at timestamp in repository metadata mapping",
+      "repoName": "Github-Meta-Fetcher",
+      "repoUrl": "https://github.com/ishaankor/Github-Meta-Fetcher",
+      "commitUrl": "https://github.com/ishaankor/Github-Meta-Fetcher/commit/3d0add2ad757914a1bc317512ac1cde89a3f9ea7",
+      "date": "2026-08-29T08:23:54Z",
+      "timeAgo": "1h ago"
     },
     {
-      "sha": "3d24db4776c5d6d50b74e5e42ac36d30a936c936",
-      "shortSha": "3d24db4",
-      "message": "chore: ignore .next build artifacts",
+      "sha": "de19b683772d86bf11050f7007c7359af8e08ea0",
+      "shortSha": "de19b68",
+      "message": "Merge branch 'main' of https://github.com/ishaankor/my-data-science-portfolio",
       "repoName": "my-data-science-portfolio",
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
-      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/3d24db4776c5d6d50b74e5e42ac36d30a936c936",
-      "date": "2026-08-29T07:52:57Z",
-      "timeAgo": "30m ago"
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/de19b683772d86bf11050f7007c7359af8e08ea0",
+      "date": "2026-08-29T08:23:47Z",
+      "timeAgo": "1h ago"
     },
     {
-      "sha": "d8ea0a0c06dfef996e6a76a0bddccc3d83a4de45",
-      "shortSha": "d8ea0a0",
-      "message": "feat: add RepositoryMatrix component and update projects showcase and meta dashboard",
+      "sha": "803aeff22da662661dbeafaf8338e59b64e10ead",
+      "shortSha": "803aeff",
+      "message": "feat: group repository matrix and pie chart by created_at date",
       "repoName": "my-data-science-portfolio",
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
-      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/d8ea0a0c06dfef996e6a76a0bddccc3d83a4de45",
-      "date": "2026-08-28T20:54:51Z",
-      "timeAgo": "11h ago"
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/803aeff22da662661dbeafaf8338e59b64e10ead",
+      "date": "2026-08-29T08:23:47Z",
+      "timeAgo": "1h ago"
     }
   ],
   "contributionCalendar": {
-    "totalContributions": 678,
+    "totalContributions": 679,
     "weeks": [
       {
         "contributionDays": [
@@ -2309,7 +2309,7 @@
           },
           {
             "date": "2026-08-29",
-            "contributionCount": 3,
+            "contributionCount": 4,
             "color": "#9be9a8"
           }
         ]
