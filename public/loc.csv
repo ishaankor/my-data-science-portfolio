@@ -1,4 +1,7 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+components/projects/RepositoryMatrix.tsx,143,66,tsx,c294705,Ishaan Kor,2026-08-29,01:18:40,-07:00,2026-08-29T01:18:40-07:00,2,"feat: enable live GitHub sync and dynamic pie chart updates for projects"
+data/github-cache.json,2156,129,json,c294705,Ishaan Kor,2026-08-29,01:18:40,-07:00,2026-08-29T01:18:40-07:00,1,"feat: enable live GitHub sync and dynamic pie chart updates for projects"
+scripts/fetch-github-cache.mjs,32,1,mjs,c294705,Ishaan Kor,2026-08-29,01:18:40,-07:00,2026-08-29T01:18:40-07:00,1,"feat: enable live GitHub sync and dynamic pie chart updates for projects"
 components/ui/HazeWaveText,0,89,code,aeca9e5,Ishaan Kor,2026-08-29,00:59:45,-07:00,2026-08-29T00:59:45-07:00,2,"chore: remove legacy iCloud duplicate file"
 app/resume/page.tsx,9,38,tsx,39d071a,Ishaan Kor,2026-08-29,00:53:09,-07:00,2026-08-29T00:53:09-07:00,2,"feat: implement Work & Systems Engineering experience matrix and ignore .next build cache"
 components/experience/CertificationsSection.tsx,106,0,tsx,39d071a,Ishaan Kor,2026-08-29,00:53:09,-07:00,2026-08-29T00:53:09-07:00,2,"feat: implement Work & Systems Engineering experience matrix and ignore .next build cache"
