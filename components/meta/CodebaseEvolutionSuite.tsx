@@ -80,6 +80,19 @@ export default function CodebaseEvolutionSuite() {
   const [hoveredCommit, setHoveredCommit] = useState<CommitMeta | null>(null);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc'); // 'desc' = Reverse (newest first by default)
 
+  // Clear hover tooltip and selection states when switching tabs or window blurs
+  useEffect(() => {
+    const handleReset = () => {
+      setHoveredCommit(null);
+    };
+    window.addEventListener('blur', handleReset);
+    document.addEventListener('visibilitychange', handleReset);
+    return () => {
+      window.removeEventListener('blur', handleReset);
+      document.removeEventListener('visibilitychange', handleReset);
+    };
+  }, []);
+
   // 1. DYNAMIC COMMIT AGGREGATOR: Group rows by commit hash & sort CHRONOLOGICALLY (oldest to newest)
   const commitList = useMemo<CommitMeta[]>(() => {
     const validRecords = Array.isArray(records) ? records : [];
@@ -400,14 +413,16 @@ export default function CodebaseEvolutionSuite() {
                       href={`https://github.com/ishaankor/my-data-science-portfolio/commit/${c.commit}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={() => setSelectedCommit(c.commit)}
+                      onClick={() => {
+                        setHoveredCommit(null);
+                      }}
                       onMouseEnter={() => setHoveredCommit(c)}
                       onMouseLeave={() => setHoveredCommit(null)}
                       aria-label={`Commit ${c.commit.substring(0, 7)}: ${c.message}`}
-                      className={`absolute rounded-full transition-all duration-200 cursor-pointer transform -translate-x-1/2 -translate-y-1/2 ${isSelected
-                          ? 'bg-ember ring-4 ring-ember/50 z-30 scale-125 shadow-lg shadow-ember/50'
+                      className={`absolute rounded-full transition-all duration-200 cursor-pointer transform -translate-x-1/2 -translate-y-1/2 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none ${isSelected
+                          ? 'bg-ember scale-125 z-30 shadow-lg shadow-ember/50 border-2 border-white'
                           : isHovered
-                            ? 'bg-cyan-400 ring-4 ring-cyan-400/40 z-20 scale-125 shadow-md shadow-cyan-500/30'
+                            ? 'bg-rose-400 scale-125 z-20 shadow-md shadow-rose-500/50 border border-white'
                             : 'bg-rose-500/75 hover:bg-rose-400 border border-rose-300/60 shadow-sm hover:scale-110'
                         }`}
                       style={{

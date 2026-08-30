@@ -24,12 +24,35 @@ export default function MidnightHazeCursor() {
     }
 
     const handleMouseMove = (e: MouseEvent) => {
+      if (!isVisible) {
+        cursorX.jump(e.clientX);
+        cursorY.jump(e.clientY);
+        setIsVisible(true);
+      }
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
-      if (!isVisible) setIsVisible(true);
     };
 
-    const handleMouseLeave = () => setIsVisible(false);
+    const handleMouseLeave = () => {
+      setIsVisible(false);
+      setIsHovered(false);
+      setIsClicked(false);
+    };
+
+    const handleBlur = () => {
+      setIsVisible(false);
+      setIsHovered(false);
+      setIsClicked(false);
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        setIsVisible(false);
+        setIsHovered(false);
+        setIsClicked(false);
+      }
+    };
+
     const handleMouseDown = () => setIsClicked(true);
     const handleMouseUp = () => setIsClicked(false);
 
@@ -53,6 +76,8 @@ export default function MidnightHazeCursor() {
     window.addEventListener('mousemove', handleMouseMove, { capture: true });
     window.addEventListener('pointermove', handleMouseMove as EventListener, { capture: true });
     document.body.addEventListener('mouseleave', handleMouseLeave);
+    window.addEventListener('blur', handleBlur);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
     window.addEventListener('mousedown', handleMouseDown, { capture: true });
     window.addEventListener('pointerdown', handleMouseDown as EventListener, { capture: true });
     window.addEventListener('mouseup', handleMouseUp, { capture: true });
@@ -63,13 +88,15 @@ export default function MidnightHazeCursor() {
       window.removeEventListener('mousemove', handleMouseMove, { capture: true });
       window.removeEventListener('pointermove', handleMouseMove as EventListener, { capture: true });
       document.body.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('blur', handleBlur);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('mousedown', handleMouseDown, { capture: true });
       window.removeEventListener('pointerdown', handleMouseDown as EventListener, { capture: true });
       window.removeEventListener('mouseup', handleMouseUp, { capture: true });
       window.removeEventListener('pointerup', handleMouseUp as EventListener, { capture: true });
       window.removeEventListener('mouseover', handleMouseOver, { capture: true });
     };
-  }, [mouseX, mouseY, isVisible]);
+  }, [mouseX, mouseY, cursorX, cursorY, isVisible]);
 
   if (!isVisible) return null;
 

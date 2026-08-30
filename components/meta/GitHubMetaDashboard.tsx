@@ -4,6 +4,7 @@ import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { portfolioData } from '@/data/portfolio';
 import githubCache from '@/data/github-cache.json';
 import CodebaseEvolutionSuite from './CodebaseEvolutionSuite';
+import RepositoryTimeline from './RepositoryTimeline';
 import {
   Github,
   Code2,
@@ -334,8 +335,8 @@ export default function GitHubMetaDashboard() {
             </div>
 
             <div className="p-4 rounded-lg bg-ink/70 border border-line">
-              <span className="text-[0.68rem] text-purple-400 uppercase tracking-wider block mb-1">Top Stack</span>
-              <span className="font-display text-xl font-bold text-bone truncate block">{primaryLang}</span>
+              <span className="text-[0.68rem] text-purple-400 uppercase tracking-wider block mb-1">Timeline</span>
+              <span className="font-display text-sm font-bold text-bone truncate block">Active Milestones</span>
             </div>
 
             <div className="p-4 rounded-lg bg-ink/70 border border-line">
@@ -355,7 +356,10 @@ export default function GitHubMetaDashboard() {
         </div>
       </ScrollReveal>
 
-      {/* 2. DEDICATED LAST 5 RECENT COMMITS REGARDLESS OF REPOSITORY */}
+      {/* 2. INTERACTIVE REPOSITORY TIMELINE (ABOVE MIDDLE 1) */}
+      <RepositoryTimeline />
+
+      {/* 3. DEDICATED LAST 5 RECENT COMMITS REGARDLESS OF REPOSITORY (MIDDLE 1) */}
       <ScrollReveal direction="up" delay={0.2}>
         <div className="rounded-xl border border-line bg-surface p-7 shadow-panel">
 
@@ -455,45 +459,8 @@ export default function GitHubMetaDashboard() {
         </div>
       </ScrollReveal>
 
-      {/* 3. CODEBASE EVOLUTION & SCROLLYTELLING SUITE (REPLACING HEATMAP) */}
+      {/* 4. CODEBASE EVOLUTION & SCROLLYTELLING SUITE (MIDDLE 2) */}
       <CodebaseEvolutionSuite />
-
-      {/* 4. Code Languages Distribution Summary */}
-      <ScrollReveal direction="up" delay={0.3}>
-        <div className="rounded-xl border border-line bg-surface p-7 shadow-panel">
-          <h3 className="font-display text-lg font-bold text-bone mb-6 flex items-center gap-2 border-b border-line pb-4">
-            <Code2 className="w-4 h-4 text-cyan-400" />
-            <span>Code Languages Summary Across All Repositories</span>
-          </h3>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 font-mono">
-            {Object.entries(languageMap)
-              .sort((a, b) => b[1] - a[1])
-              .slice(0, 6)
-              .map(([lang, count]) => {
-                const percent = Math.round((count / (activeRepos.length || 1)) * 100);
-                const langInfo = languageColors[lang] || { hex: '#f97316', bg: 'from-orange-500 to-amber-500' };
-                return (
-                  <div key={lang} className="p-4 rounded-lg bg-ink/70 border border-line space-y-2">
-                    <div className="flex justify-between text-xs text-bone-dim">
-                      <span className="flex items-center gap-1.5">
-                        <span className="w-2.5 h-2.5 rounded-full shadow-sm" style={{ backgroundColor: langInfo.hex }} />
-                        <span className="font-bold text-bone">{lang}</span>
-                      </span>
-                      <span className="text-muted">{percent}% ({count} repos)</span>
-                    </div>
-                    <div className="w-full h-2 rounded-full bg-ink overflow-hidden border border-line p-0.5">
-                      <div
-                        className={`h-full rounded-full bg-gradient-to-r ${langInfo.bg}`}
-                        style={{ width: `${Math.max(percent, 8)}%` }}
-                      />
-                    </div>
-                  </div>
-                );
-              })}
-          </div>
-        </div>
-      </ScrollReveal>
 
     </div>
   );

@@ -64,22 +64,22 @@ export default function HeroSection() {
               <span>Data Science Portfolio + Interactive Web App</span>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-2">
               <h2 className="text-xl sm:text-2xl font-mono text-muted">
                 Hi, I&apos;m <span className="text-bone font-bold">{portfolioData.name}</span>
               </h2>
               
-              {/* Typewriter Line with padding-bottom to prevent bg-clip-text descender clipping */}
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-bone leading-[1.25] sm:leading-[1.25] min-h-[2.4em] sm:min-h-[2.5em] lg:min-h-[2.4em] flex flex-wrap items-baseline pb-2">
+              {/* Typewriter Line */}
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-bone leading-[1.18] sm:leading-[1.18] min-h-[1.2em] flex flex-wrap items-baseline">
                 <span>I am&nbsp;</span>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-amber-400 pb-1">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-amber-400">
                   {currentText}
                 </span>
                 <span className="inline-block w-[3px] h-[0.85em] bg-ember ml-1 animate-pulse shrink-0 align-middle" />
               </h1>
             </div>
 
-            <p className="text-base sm:text-lg text-bone-dim max-w-2xl leading-relaxed pt-1">
+            <p className="text-base sm:text-lg text-bone-dim max-w-2xl leading-relaxed mt-3">
               Recent <strong className="text-bone font-semibold">UCSD Cognitive Science</strong> (ML & Neural Computation) graduate. I design, train, and deploy AI models, automation scripts, and interactive web data tools.
             </p>
 
