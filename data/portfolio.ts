@@ -113,8 +113,7 @@ export const portfolioData: PortfolioData = {
     "an AI Engineer.",
     "a Frontier LLM Evaluator.",
     "an Agentic Systems Builder.",
-    "a UCSD ML Graduate (3.76 GPA).",
-    "a Model Context Protocol Explorer."
+    "a UCSD ML Graduate."
   ],
 
   stats: [

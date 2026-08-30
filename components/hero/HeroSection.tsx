@@ -4,19 +4,9 @@ import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { portfolioData } from '@/data/portfolio';
-import { ArrowRight, Sparkles, FileText, Bot, BrainCircuit, Activity } from 'lucide-react';
+import { ArrowRight, FileText } from 'lucide-react';
 
-const Hero3DCanvas = dynamic(() => import('./Hero3DCanvas'), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-full min-h-[380px] flex items-center justify-center">
-      <div className="flex items-center gap-2 font-mono text-xs text-muted">
-        <span className="h-2 w-2 animate-ping rounded-full bg-ember" />
-        loading 3D scene...
-      </div>
-    </div>
-  ),
-});
+import HeroMemojiInteractive from './HeroMemojiInteractive';
 
 export default function HeroSection() {
   const [typingIndex, setTypingIndex] = useState(0);
@@ -57,37 +47,30 @@ export default function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           {/* Left Column: Intro & Typewriter */}
-          <div className="lg:col-span-7 space-y-6">
+          <div className="lg:col-span-7 flex flex-col justify-center">
             
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-ember/10 border border-ember/30 text-ember text-xs font-mono">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Data Science Portfolio + Interactive Web App</span>
-            </div>
+            <p className="font-mono text-base sm:text-lg lg:text-xl text-muted tracking-wide mb-3">
+              Hi, I&apos;m <span className="text-bone font-bold">{portfolioData.name}</span>
+            </p>
+            
+            {/* Typewriter Line: Natural multi-line word wrapping with bold scale */}
+            <h1 className="text-5xl sm:text-6xl lg:text-[4.25rem] xl:text-[4.75rem] font-extrabold tracking-tight text-bone leading-[1.08]">
+              <span>I am </span>
+              <span className="inline text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-amber-400">
+                {currentText}
+              </span>
+              <span className="inline-block w-[5px] h-[0.8em] bg-ember ml-2 animate-pulse align-middle" />
+            </h1>
 
-            <div className="space-y-2">
-              <h2 className="text-xl sm:text-2xl font-mono text-muted">
-                Hi, I&apos;m <span className="text-bone font-bold">{portfolioData.name}</span>
-              </h2>
-              
-              {/* Typewriter Line */}
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-bone leading-[1.18] sm:leading-[1.18] min-h-[1.2em] flex flex-wrap items-baseline">
-                <span>I am&nbsp;</span>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-amber-400">
-                  {currentText}
-                </span>
-                <span className="inline-block w-[3px] h-[0.85em] bg-ember ml-1 animate-pulse shrink-0 align-middle" />
-              </h1>
-            </div>
-
-            <p className="text-base sm:text-lg text-bone-dim max-w-2xl leading-relaxed mt-3">
-              Recent <strong className="text-bone font-semibold">UCSD Cognitive Science</strong> (ML & Neural Computation) graduate. I design, train, and deploy AI models, automation scripts, and interactive web data tools.
+            <p className="text-xl sm:text-2xl lg:text-[1.55rem] text-bone-dim max-w-3xl leading-relaxed mt-5">
+              I design, train, and deploy AI models, automation scripts, and interactive web data tools that make navigating life and work easier.
             </p>
 
             {/* Action CTAs */}
-            <div className="pt-3 flex flex-wrap gap-4 items-center font-mono text-sm">
+            <div className="mt-7 flex flex-wrap gap-4 items-center font-mono text-xs sm:text-sm">
               <Link
                 href="/projects"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg border border-ember/50 bg-ember/10 hover:border-ember hover:bg-ember/20 text-bone font-semibold transition-all transform hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-ember/50 bg-ember/10 hover:border-ember hover:bg-ember/20 text-bone font-semibold transition-all transform hover:-translate-y-0.5 shadow-md"
               >
                 <span>Explore Projects</span>
                 <ArrowRight className="w-4 h-4 text-ember" />
@@ -95,34 +78,18 @@ export default function HeroSection() {
 
               <Link
                 href="/resume"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg border border-line bg-surface/80 hover:border-ember hover:text-ember text-bone-dim font-semibold transition-all transform hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-line bg-surface/80 hover:border-ember hover:text-ember text-bone-dim font-semibold transition-all transform hover:-translate-y-0.5 shadow-sm"
               >
                 <FileText className="w-4 h-4 text-muted group-hover:text-ember" />
                 <span>View Resume</span>
               </Link>
             </div>
 
-            {/* Feature Pills */}
-            <div className="pt-6 border-t border-line/60 grid grid-cols-1 sm:grid-cols-3 gap-3 font-mono text-xs">
-              <div className="p-3 rounded-lg border border-line bg-surface/50 text-muted flex items-center gap-2">
-                <BrainCircuit className="w-4 h-4 text-indigo-400 shrink-0" />
-                <span>UCSD ML & Data Science</span>
-              </div>
-              <div className="p-3 rounded-lg border border-line bg-surface/50 text-muted flex items-center gap-2">
-                <Bot className="w-4 h-4 text-purple-400 shrink-0" />
-                <span>AI Bots & Automation</span>
-              </div>
-              <div className="p-3 rounded-lg border border-line bg-surface/50 text-muted flex items-center gap-2">
-                <Activity className="w-4 h-4 text-amber-400 shrink-0" />
-                <span>Live GitHub Analytics</span>
-              </div>
-            </div>
-
           </div>
 
-          {/* Right Column: 3D Canvas Container */}
-          <div className="lg:col-span-5 h-[400px] sm:h-[500px] w-full rounded-2xl border border-line bg-surface/40 overflow-hidden shadow-float relative">
-            <Hero3DCanvas />
+          {/* Right Column: Animated & Interactive Memoji Hero Card */}
+          <div className="lg:col-span-5 h-[480px] sm:h-[540px] w-full flex items-center justify-center relative">
+            <HeroMemojiInteractive />
           </div>
 
         </div>
