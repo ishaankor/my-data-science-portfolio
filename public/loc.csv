@@ -1,4 +1,5 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+index.html,2,2,html,d9e4fa8,Ishaan Kor,2026-08-30,18:12:45,-07:00,2026-08-30T18:12:45-07:00,0,"refactor: simplify page title and hero eyebrow text"
 components/hero/Hero3DCanvas.tsx,216,48,tsx,828e7e8,Ishaan Kor,2026-08-30,02:30:47,-07:00,2026-08-30T02:30:47-07:00,2,"feat: add interactive Hero components and update portfolio data and assets"
 components/hero/HeroAgenticConsole.tsx,321,0,tsx,828e7e8,Ishaan Kor,2026-08-30,02:30:47,-07:00,2026-08-30T02:30:47-07:00,2,"feat: add interactive Hero components and update portfolio data and assets"
 components/hero/HeroMemojiInteractive.tsx,132,0,tsx,828e7e8,Ishaan Kor,2026-08-30,02:30:47,-07:00,2026-08-30T02:30:47-07:00,2,"feat: add interactive Hero components and update portfolio data and assets"

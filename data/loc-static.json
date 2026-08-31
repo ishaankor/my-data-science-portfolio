@@ -1,5 +1,19 @@
 [
   {
+    "file": "index.html",
+    "added": 2,
+    "deleted": 2,
+    "type": "html",
+    "commit": "d9e4fa8",
+    "author": "Ishaan Kor",
+    "date": "2026-08-30",
+    "time": "18:12:45",
+    "timezone": "-07:00",
+    "datetime": "2026-08-30T18:12:45-07:00",
+    "depth": 0,
+    "message": "refactor: simplify page title and hero eyebrow text"
+  },
+  {
     "file": "components/hero/Hero3DCanvas.tsx",
     "added": 216,
     "deleted": 48,
