@@ -5,6 +5,7 @@ import githubCache from '@/data/github-cache.json';
 import { portfolioData } from '@/data/portfolio';
 import { Search, ExternalLink, Layers, X, GitBranch } from 'lucide-react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
+import ProjectsDeepDiveShowcase from './ProjectsDeepDiveShowcase';
 
 export interface RepositoryItem {
   id: string | number;
@@ -285,11 +286,14 @@ export default function RepositoryMatrix({ limit }: { limit?: number }) {
 
   return (
     <section className="py-12 sm:py-16">
-      <div className="mx-auto w-full max-w-6xl px-6 sm:px-10 space-y-12">
+      <div className="mx-auto w-full max-w-6xl px-6 sm:px-10 space-y-20">
+
+        {/* Flagship Showcase: Things I've Built, End to End */}
+        <ProjectsDeepDiveShowcase />
 
         {/* 1. Header & Dynamic Project Count */}
         <ScrollReveal direction="up" delay={0.1}>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-line">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-line pt-10">
             <div>
               <span className="inline-flex items-center gap-2 font-mono text-xs text-muted uppercase tracking-wider mb-2">
                 <Layers className="w-3.5 h-3.5 text-ember" />

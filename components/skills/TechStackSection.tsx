@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { portfolioData } from '@/data/portfolio';
-import { BrainCircuit, Database, Layout, Terminal } from 'lucide-react';
+import { BrainCircuit, Database, Layout, Terminal, Layers } from 'lucide-react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
 export default function TechStackSection() {
@@ -34,8 +34,8 @@ export default function TechStackSection() {
         {/* Header */}
         <ScrollReveal direction="up" delay={0.1}>
           <div className="mb-12">
-            <span className="inline-flex items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.22em] text-muted">
-              <span className="h-px w-7 bg-line" aria-hidden="true" />
+            <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted">
+              <Layers className="w-3.5 h-3.5 text-ember" />
               technical matrix
             </span>
             <h2 className="font-display text-[2rem] sm:text-[2.75rem] font-semibold leading-[1.04] tracking-[-0.02em] text-bone mt-4">

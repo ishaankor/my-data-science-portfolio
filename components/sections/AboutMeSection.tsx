@@ -15,8 +15,8 @@ export default function AboutMeSection() {
         <ScrollReveal direction="up" delay={0.1}>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
             <div>
-              <span className="inline-flex items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.22em] text-muted">
-                <span className="h-px w-7 bg-line" aria-hidden="true" />
+              <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted">
+                <Sparkles className="w-3.5 h-3.5 text-ember" />
                 about me &amp; background
               </span>
               <h2 className="font-display text-[2rem] sm:text-[2.75rem] font-semibold leading-[1.04] tracking-[-0.02em] text-bone mt-4">
@@ -73,7 +73,7 @@ export default function AboutMeSection() {
                       </div>
 
                       <p className="text-xs sm:text-sm text-bone-dim leading-relaxed">
-                        Hi, I&apos;m <strong className="text-bone font-semibold">Ishaan Koradia</strong>, an AI Engineer fascinated by the intersection between Artificial Intelligence, Machine Learning, and Agentic Workflows. What started with small shortcuts in Apple Automation has evolved into building robust Python scrapers, automated Twitter/X bots, Discord ML models, and interactive WebGL tools.
+                        AI Engineer specializing in LLM evaluation, autonomous agent pipelines, and high-performance Python tools. Focused on Model Context Protocol (MCP), FastAPI inference, and scalable automation.
                       </p>
                     </div>
 
@@ -153,7 +153,7 @@ export default function AboutMeSection() {
                       </div>
 
                       <p className="text-xs sm:text-sm text-bone-dim leading-relaxed">
-                        B.S. in <strong className="text-bone font-semibold">Cognitive Science</strong> with Specialization in Machine Learning and Neural Computation with Data Science. Active in <strong className="text-bone font-semibold">Data Science Student Society (DS3)</strong>, Cognitive Science Student Association (CSSA Web Team), and Computer Science &amp; Engineering Society (CSES).
+                        B.S. in <strong className="text-bone font-semibold">Cognitive Science</strong> (Machine Learning &amp; Neural Computation) from UC San Diego. Active technical contributor across DS3, CSSA Web Team, and CSES.
                       </p>
                     </div>
 

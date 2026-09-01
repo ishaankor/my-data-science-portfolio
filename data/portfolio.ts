@@ -353,7 +353,7 @@ export const portfolioData: PortfolioData = {
       title: "Transformi! ML Discord Bot",
       year: "2025",
       category: "Machine Learning",
-      description: "A Discord bot capable of parsing unstructured user datasets and dynamically fitting Linear Regression models with plots.",
+      description: "Discord ML bot with parallelized ETL pipelines for automated regression modeling and visual plots.",
       detailedDescription: "Integrates Discord API with Python Scikit-Learn and Matplotlib. Users upload CSVs or data snippets via Discord, and Transformi fits regression models, outputs scatter plots with best-fit lines, and returns statistical metrics.",
       tags: ["Python", "TensorFlow", "scikit-learn", "asyncio", "Discord API"],
       githubUrl: "https://github.com/ishaankor/Transformi",
@@ -365,7 +365,7 @@ export const portfolioData: PortfolioData = {
       title: "Datafy AI Data Science Copilot",
       year: "2026",
       category: "AI & Web",
-      description: "An AI-powered data science copilot that turns raw CSV data into interactive analysis, visualizations, and narrative insights.",
+      description: "AI data copilot converting raw CSV data into interactive visual analytics and narrative insights.",
       detailedDescription: "React frontend and FastAPI-backed Python analytics engine using LangChain and node-based reflection agentic workflows for automated visual canvas generation.",
       tags: ["Python", "LangChain", "FastAPI", "Pandas", "Agentic AI"],
       githubUrl: "https://github.com/ishaankor/Datafy",
@@ -377,7 +377,7 @@ export const portfolioData: PortfolioData = {
       title: "Personal AI Chatbot (IshaanBot)",
       year: "2025",
       category: "AI & Web",
-      description: "Modular LLM application using Model Context Protocol (MCP) with 15+ composable tools, streaming inference, and persistent memory.",
+      description: "Modular LLM assistant powered by Model Context Protocol (MCP) with 15+ composable tools and streaming memory.",
       detailedDescription: "FastAPI rate-limited backend with robust CI/CD, persistent context-aware AI reasoning, and dynamic tool-routing.",
       tags: ["Python", "Gemini API", "FastAPI", "Docker", "MCP"],
       githubUrl: "https://github.com/ishaankor/my-personal-website",
@@ -389,7 +389,7 @@ export const portfolioData: PortfolioData = {
       title: "Daily Motivation Twitter/X Bot",
       year: "2023",
       category: "Automation",
-      description: "Automated Twitter/X bot delivering motivating quotes daily and collecting poll statistics in PostgreSQL to analyze engagement trends.",
+      description: "Automated social bot delivering daily inspirations and logging engagement metrics in PostgreSQL.",
       detailedDescription: "Built with Python, Tweepy, and PostgreSQL. It polls user interactions daily, aggregates sentiment and poll responses, and generates end-of-week data graphics automatically tweeted to followers.",
       tags: ["Python", "PostgreSQL", "Twitter API", "Automation", "NLP"],
       githubUrl: "https://github.com/ishaankor/daily-motivation",
@@ -401,7 +401,7 @@ export const portfolioData: PortfolioData = {
       title: "Interactive Data Science Showcase",
       year: "2025",
       category: "Data Visualization",
-      description: "A dynamic web data product featuring real-time GitHub API analytics and dynamic project recommendation engine.",
+      description: "Dynamic web showcase featuring live GitHub API analytics and interactive project explorer.",
       detailedDescription: "Designed to demonstrate data storytelling by pulling live GitHub metrics, computing repository language distributions, and running client-side tf-idf-like project search.",
       tags: ["Next.js", "React", "TypeScript", "Three.js", "Tailwind CSS"],
       githubUrl: "https://github.com/ishaankor/my-data-science-portfolio",
@@ -415,7 +415,7 @@ export const portfolioData: PortfolioData = {
     {
       title: "Machine Learning & Frontier AI",
       iconName: "BrainCircuit",
-      description: "Frontier LLM evaluation, golden dataset baselines, instruction tuning, RAG, and computer vision.",
+      description: "LLM evaluation, agentic pipelines, RAG, and neural computation.",
       skills: [
         { name: "Python", level: 98, tag: "Core Language" },
         { name: "Frontier LLM Eval (ChatGPT/Claude/Gemini)", level: 95, tag: "LLM Systems" },
@@ -427,7 +427,7 @@ export const portfolioData: PortfolioData = {
     {
       title: "Data Engineering & Backend Systems",
       iconName: "Database",
-      description: "FastAPI / FastMCP microservices, PostgreSQL, parallel ETL pipelines, and Docker containerization.",
+      description: "FastAPI/FastMCP services, PostgreSQL, parallel ETL, and Docker.",
       skills: [
         { name: "FastAPI / FastMCP", level: 94, tag: "Backend APIs" },
         { name: "PostgreSQL & SQL", level: 90, tag: "Databases" },
@@ -439,7 +439,7 @@ export const portfolioData: PortfolioData = {
     {
       title: "Web Engineering & Dataviz",
       iconName: "Layout",
-      description: "Modern full-stack web engineering with interactive 3D WebGL graphics and data storytelling.",
+      description: "TypeScript, React, Next.js, and interactive data visualization.",
       skills: [
         { name: "TypeScript / React", level: 92, tag: "Frontend" },
         { name: "Next.js (App Router)", level: 90, tag: "Framework" },

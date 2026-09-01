@@ -1,4 +1,11 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+index.html,2,2,html,d9e4fa8,Ishaan Kor,2026-08-30,18:12:45,-07:00,2026-08-30T18:12:45-07:00,0,"refactor: simplify page title and hero eyebrow text"
+components/hero/Hero3DCanvas.tsx,216,48,tsx,828e7e8,Ishaan Kor,2026-08-30,02:30:47,-07:00,2026-08-30T02:30:47-07:00,2,"feat: add interactive Hero components and update portfolio data and assets"
+components/hero/HeroAgenticConsole.tsx,321,0,tsx,828e7e8,Ishaan Kor,2026-08-30,02:30:47,-07:00,2026-08-30T02:30:47-07:00,2,"feat: add interactive Hero components and update portfolio data and assets"
+components/hero/HeroMemojiInteractive.tsx,132,0,tsx,828e7e8,Ishaan Kor,2026-08-30,02:30:47,-07:00,2026-08-30T02:30:47-07:00,2,"feat: add interactive Hero components and update portfolio data and assets"
+components/hero/HeroSection.tsx,24,57,tsx,828e7e8,Ishaan Kor,2026-08-30,02:30:47,-07:00,2026-08-30T02:30:47-07:00,2,"feat: add interactive Hero components and update portfolio data and assets"
+data/github-cache.json,28,58,json,828e7e8,Ishaan Kor,2026-08-30,02:30:47,-07:00,2026-08-30T02:30:47-07:00,1,"feat: add interactive Hero components and update portfolio data and assets"
+data/portfolio.ts,1,2,ts,828e7e8,Ishaan Kor,2026-08-30,02:30:47,-07:00,2026-08-30T02:30:47-07:00,1,"feat: add interactive Hero components and update portfolio data and assets"
 components/hero/HeroSection.tsx,5,5,tsx,5f55c97,Ishaan Kor,2026-08-29,22:24:38,-07:00,2026-08-29T22:24:38-07:00,2,"feat: add RepositoryConstellation and DeveloperHabitsMatrix components with associated build updates"
 components/meta/CodebaseEvolutionSuite.tsx,19,4,tsx,5f55c97,Ishaan Kor,2026-08-29,22:24:38,-07:00,2026-08-29T22:24:38-07:00,2,"feat: add RepositoryConstellation and DeveloperHabitsMatrix components with associated build updates"
 components/meta/DeveloperHabitsMatrix.tsx,484,0,tsx,5f55c97,Ishaan Kor,2026-08-29,22:24:38,-07:00,2026-08-29T22:24:38-07:00,2,"feat: add RepositoryConstellation and DeveloperHabitsMatrix components with associated build updates"

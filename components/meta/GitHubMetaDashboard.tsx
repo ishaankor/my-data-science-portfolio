@@ -335,8 +335,8 @@ export default function GitHubMetaDashboard() {
             </div>
 
             <div className="p-4 rounded-lg bg-ink/70 border border-line">
-              <span className="text-[0.68rem] text-purple-400 uppercase tracking-wider block mb-1">Timeline</span>
-              <span className="font-display text-sm font-bold text-bone truncate block">Active Milestones</span>
+              <span className="text-[0.68rem] text-purple-400 uppercase tracking-wider block mb-1">Top Stack</span>
+              <span className="font-display text-2xl font-bold text-bone truncate block">{primaryLang}</span>
             </div>
 
             <div className="p-4 rounded-lg bg-ink/70 border border-line">

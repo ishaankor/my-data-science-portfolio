@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-30T09:21:09.943Z",
+  "updatedAt": "2026-08-31T09:23:46.723Z",
   "totalRepos": 18,
   "user": {
     "login": "ishaankor",
@@ -18,8 +18,8 @@
       "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
       "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
       "created_at": "2025-01-11T23:48:23Z",
-      "pushed_at": "2026-08-30T05:25:33Z",
-      "updated_at": "2026-08-30T05:25:49Z"
+      "pushed_at": "2026-08-31T01:13:29Z",
+      "updated_at": "2026-08-31T01:13:46Z"
     },
     {
       "id": 1316668584,
@@ -194,6 +194,26 @@
   ],
   "commits": [
     {
+      "sha": "d9e4fa8352754a9c128acb55454f4893345187ec",
+      "shortSha": "d9e4fa8",
+      "message": "refactor: simplify page title and hero eyebrow text",
+      "repoName": "my-data-science-portfolio",
+      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/d9e4fa8352754a9c128acb55454f4893345187ec",
+      "date": "2026-08-31T01:12:46Z",
+      "timeAgo": "8h ago"
+    },
+    {
+      "sha": "828e7e8941bd67a7233b969173fa4524cfc5be29",
+      "shortSha": "828e7e8",
+      "message": "feat: add interactive Hero components and update portfolio data and assets",
+      "repoName": "my-data-science-portfolio",
+      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/828e7e8941bd67a7233b969173fa4524cfc5be29",
+      "date": "2026-08-30T09:30:49Z",
+      "timeAgo": "23h ago"
+    },
+    {
       "sha": "5f55c9793ac05b468692333b30aeed4386d716f4",
       "shortSha": "5f55c97",
       "message": "feat: add RepositoryConstellation and DeveloperHabitsMatrix components with associated build updates",
@@ -201,7 +221,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/5f55c9793ac05b468692333b30aeed4386d716f4",
       "date": "2026-08-30T05:24:40Z",
-      "timeAgo": "3h ago"
+      "timeAgo": "1d ago"
     },
     {
       "sha": "daea783c7992c013d05b925f02ca71320d1244cf",
@@ -211,7 +231,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/daea783c7992c013d05b925f02ca71320d1244cf",
       "date": "2026-08-29T10:09:55Z",
-      "timeAgo": "23h ago"
+      "timeAgo": "1d ago"
     },
     {
       "sha": "e2faff8486dfb2917dbe8bd1954b0cb29d47e531",
@@ -221,31 +241,11 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/e2faff8486dfb2917dbe8bd1954b0cb29d47e531",
       "date": "2026-08-29T10:00:44Z",
-      "timeAgo": "23h ago"
-    },
-    {
-      "sha": "cdc7a83a6fdd61f2aff756d442f9e1c9a93b267a",
-      "shortSha": "cdc7a83",
-      "message": "feat: update portfolio project year to 2025",
-      "repoName": "my-data-science-portfolio",
-      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
-      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/cdc7a83a6fdd61f2aff756d442f9e1c9a93b267a",
-      "date": "2026-08-29T09:48:38Z",
-      "timeAgo": "23h ago"
-    },
-    {
-      "sha": "91d76d4ba58cbe9031aa6e9f27383d49205be0ff",
-      "shortSha": "91d76d4",
-      "message": "chore: add VS Code workspace file to gitignore",
-      "repoName": "my-data-science-portfolio",
-      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
-      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/91d76d4ba58cbe9031aa6e9f27383d49205be0ff",
-      "date": "2026-08-29T09:32:16Z",
-      "timeAgo": "23h ago"
+      "timeAgo": "1d ago"
     }
   ],
   "contributionCalendar": {
-    "totalContributions": 758,
+    "totalContributions": 760,
     "weeks": [
       {
         "contributionDays": [
@@ -2279,6 +2279,11 @@
         "contributionDays": [
           {
             "date": "2026-08-30",
+            "contributionCount": 2,
+            "color": "#9be9a8"
+          },
+          {
+            "date": "2026-08-31",
             "contributionCount": 0,
             "color": "#ebedf0"
           }

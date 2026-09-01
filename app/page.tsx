@@ -9,7 +9,7 @@ export default function HomePage() {
     <div className="space-y-4">
       <HeroSection />
       <AboutMeSection />
-      <ProjectsShowcase limit={6} />
+      <ProjectsShowcase limit={3} />
       <GitHubAnalytics />
       <TechStackSection />
     </div>

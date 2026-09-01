@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { Code2 } from 'lucide-react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
 export default function WhatIDo() {
@@ -28,8 +29,8 @@ export default function WhatIDo() {
         
         {/* Section label */}
         <ScrollReveal direction="up" delay={0.1}>
-          <span className="inline-flex items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.22em] text-muted">
-            <span className="h-px w-7 bg-line" aria-hidden="true" />
+          <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted">
+            <Code2 className="w-3.5 h-3.5 text-ember" />
             what I do
           </span>
         </ScrollReveal>

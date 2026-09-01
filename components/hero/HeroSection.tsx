@@ -62,8 +62,8 @@ export default function HeroSection() {
               <span className="inline-block w-[5px] h-[0.8em] bg-ember ml-2 animate-pulse align-middle" />
             </h1>
 
-            <p className="text-xl sm:text-2xl lg:text-[1.55rem] text-bone-dim max-w-3xl leading-relaxed mt-5">
-              I design, train, and deploy AI models, automation scripts, and interactive web data tools that make navigating life and work easier.
+            <p className="text-xl sm:text-2xl lg:text-[1.55rem] text-bone-dim max-w-2xl leading-relaxed mt-5">
+              Building production AI models, autonomous agents, and interactive web tools.
             </p>
 
             {/* Action CTAs */}

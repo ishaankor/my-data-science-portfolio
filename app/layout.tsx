@@ -19,7 +19,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: `${portfolioData.name} | Data Science Portfolio & Interactive Web App`,
+  title: 'Ishaan Koradia | Portfolio',
   description: portfolioData.bio,
   keywords: [
     'Ishaan Koradia',
@@ -33,14 +33,14 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: portfolioData.name }],
   openGraph: {
-    title: `${portfolioData.name} — Data Science Portfolio`,
+    title: 'Ishaan Koradia | Portfolio',
     description: portfolioData.bio,
     type: 'website',
     url: 'https://ishaankor.github.io/my-data-science-portfolio/',
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${portfolioData.name} — Data Science Portfolio`,
+    title: 'Ishaan Koradia | Portfolio',
     description: portfolioData.bio,
   },
 };
