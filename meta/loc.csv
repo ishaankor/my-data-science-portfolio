@@ -1,4 +1,11 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+components/experience/WorkHeroHUD.tsx,2,2,tsx,6075617,Ishaan Kor,2026-09-01,16:13:32,-07:00,2026-09-01T16:13:32-07:00,2,"refactor: update portfolio data, project components, and rebuild static assets"
+components/meta/RepositoryTimeline.tsx,2,2,tsx,6075617,Ishaan Kor,2026-09-01,16:13:32,-07:00,2026-09-01T16:13:32-07:00,2,"refactor: update portfolio data, project components, and rebuild static assets"
+components/projects/ProjectsDeepDiveShowcase.tsx,7,7,tsx,6075617,Ishaan Kor,2026-09-01,16:13:32,-07:00,2026-09-01T16:13:32-07:00,2,"refactor: update portfolio data, project components, and rebuild static assets"
+components/projects/ProjectsShowcase.tsx,4,4,tsx,6075617,Ishaan Kor,2026-09-01,16:13:32,-07:00,2026-09-01T16:13:32-07:00,2,"refactor: update portfolio data, project components, and rebuild static assets"
+components/projects/RepositoryMatrix.tsx,2,2,tsx,6075617,Ishaan Kor,2026-09-01,16:13:32,-07:00,2026-09-01T16:13:32-07:00,2,"refactor: update portfolio data, project components, and rebuild static assets"
+data/github-cache.json,24,34,json,6075617,Ishaan Kor,2026-09-01,16:13:32,-07:00,2026-09-01T16:13:32-07:00,1,"refactor: update portfolio data, project components, and rebuild static assets"
+data/portfolio.ts,30,33,ts,6075617,Ishaan Kor,2026-09-01,16:13:32,-07:00,2026-09-01T16:13:32-07:00,1,"refactor: update portfolio data, project components, and rebuild static assets"
 components/meta/GitHubMetaDashboard.tsx,2,1,tsx,fafa1b6,Ishaan Kor,2026-09-01,12:16:43,-07:00,2026-09-01T12:16:43-07:00,2,"feat: add Datafy AI project details and update repository metadata dashboards"
 components/meta/RepositoryConstellation.tsx,70,19,tsx,fafa1b6,Ishaan Kor,2026-09-01,12:16:43,-07:00,2026-09-01T12:16:43-07:00,2,"feat: add Datafy AI project details and update repository metadata dashboards"
 components/meta/RepositoryTimeline.tsx,73,11,tsx,fafa1b6,Ishaan Kor,2026-09-01,12:16:43,-07:00,2026-09-01T12:16:43-07:00,2,"feat: add Datafy AI project details and update repository metadata dashboards"
