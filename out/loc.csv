@@ -1,4 +1,11 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+components/meta/GitHubMetaDashboard.tsx,2,1,tsx,fafa1b6,Ishaan Kor,2026-09-01,12:16:43,-07:00,2026-09-01T12:16:43-07:00,2,"feat: add Datafy AI project details and update repository metadata dashboards"
+components/meta/RepositoryConstellation.tsx,70,19,tsx,fafa1b6,Ishaan Kor,2026-09-01,12:16:43,-07:00,2026-09-01T12:16:43-07:00,2,"feat: add Datafy AI project details and update repository metadata dashboards"
+components/meta/RepositoryTimeline.tsx,73,11,tsx,fafa1b6,Ishaan Kor,2026-09-01,12:16:43,-07:00,2026-09-01T12:16:43-07:00,2,"feat: add Datafy AI project details and update repository metadata dashboards"
+components/projects/RepositoryMatrix.tsx,19,4,tsx,fafa1b6,Ishaan Kor,2026-09-01,12:16:43,-07:00,2026-09-01T12:16:43-07:00,2,"feat: add Datafy AI project details and update repository metadata dashboards"
+data/github-cache.json,72,57,json,fafa1b6,Ishaan Kor,2026-09-01,12:16:43,-07:00,2026-09-01T12:16:43-07:00,1,"feat: add Datafy AI project details and update repository metadata dashboards"
+projects/projects.js,55,3,js,fafa1b6,Ishaan Kor,2026-09-01,12:16:43,-07:00,2026-09-01T12:16:43-07:00,1,"feat: add Datafy AI project details and update repository metadata dashboards"
+scripts/fetch-github-cache.mjs,5,26,mjs,fafa1b6,Ishaan Kor,2026-09-01,12:16:43,-07:00,2026-09-01T12:16:43-07:00,1,"feat: add Datafy AI project details and update repository metadata dashboards"
 app/layout.tsx,3,3,tsx,12fd5c6,Ishaan Kor,2026-08-31,23:34:06,-07:00,2026-08-31T23:34:06-07:00,1,"feat: update portfolio components, refresh project assets, and optimize repository data visualization"
 app/page.tsx,1,1,tsx,12fd5c6,Ishaan Kor,2026-08-31,23:34:06,-07:00,2026-08-31T23:34:06-07:00,1,"feat: update portfolio components, refresh project assets, and optimize repository data visualization"
 app/projects/page.tsx,1,1,tsx,12fd5c6,Ishaan Kor,2026-08-31,23:34:06,-07:00,2026-08-31T23:34:06-07:00,2,"feat: update portfolio components, refresh project assets, and optimize repository data visualization"

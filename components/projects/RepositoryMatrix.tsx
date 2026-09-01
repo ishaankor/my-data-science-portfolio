@@ -497,8 +497,8 @@ export default function RepositoryMatrix({
                       </h3>
 
                       {/* Description */}
-                      <p className="text-bone-dim text-xs line-clamp-3 leading-relaxed mb-4">
-                        {repo.description || 'Data science & machine learning project repository.'}
+                      <p className="text-bone-dim text-xs line-clamp-2 leading-relaxed mb-4">
+                        {repo.description || 'Open-source ML & data science engineering repository.'}
                       </p>
                     </div>
 

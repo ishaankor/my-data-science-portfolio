@@ -50,11 +50,11 @@ export default function WorkHeroHUD({
         <ScrollReveal direction="up" delay={0.1}>
           <div className="space-y-4">
             <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-bone tracking-tight leading-[1.12]">
-              Work & Systems Engineering
+              Experience & Impact
             </h1>
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
               <p className="text-bone-dim text-base sm:text-lg leading-relaxed max-w-2xl">
-                AI Engineer specializing in frontier LLM evaluation, agentic reflection workflows, Model Context Protocol (MCP) integrations, and high-throughput data science pipelines.
+                AI Engineer specializing in frontier LLM evaluation, agentic workflows, MCP integrations, and production ML pipelines.
               </p>
               
               <div className="flex items-center gap-3 shrink-0 font-mono text-xs">

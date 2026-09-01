@@ -364,7 +364,7 @@ export default function RepositoryTimeline({ repos: propRepos }: RepositoryTimel
           <div>
             <span className="inline-flex items-center gap-2 font-mono text-xs text-muted uppercase tracking-wider mb-2">
               <Compass className="w-3.5 h-3.5 text-ember" />
-              Harmonic Sine-Wave Trajectory ({yearRange})
+              Repository Trajectory ({yearRange})
             </span>
             <h2 className="font-display text-2xl sm:text-3xl font-bold text-bone flex items-center gap-2.5">
               <span>Interactive Repository Timeline</span>
@@ -373,7 +373,7 @@ export default function RepositoryTimeline({ repos: propRepos }: RepositoryTimel
               </span>
             </h2>
             <p className="text-bone-dim text-xs sm:text-sm mt-1 max-w-2xl font-mono">
-              Continuous wave trajectory oscillating through repository releases with live kinetic animations.
+              Continuous flow documenting my repositories with live kinetic animations.
             </p>
           </div>
 

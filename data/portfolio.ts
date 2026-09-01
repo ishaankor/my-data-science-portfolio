@@ -184,9 +184,9 @@ export const portfolioData: PortfolioData = {
       featuredMetric: "~95% Strategy Accuracy",
       awardOrHighlight: "NVIDIA Nemotron-12B Collaborator",
       description: [
-        "Developed golden datasets to serve as ground-truth baselines, standardizing accuracy metrics across frontier LLMs (ChatGPT, Gemini, Claude, Versus).",
-        "Collaborated with NVIDIA on training and evaluation of the Nemotron-12B LLM, improving financial and business-domain reasoning through curated charts and visualizations.",
-        "Engineered 300+ instruction-tuning and context-design strategies for model failure cases including hallucinations, instruction drift, and misgeneralizations with ~95% accuracy."
+        "Built golden ground-truth datasets standardizing evaluation baselines across frontier LLMs (ChatGPT, Gemini, Claude).",
+        "Collaborated with NVIDIA on Nemotron-12B evaluation, improving domain reasoning via structured benchmarks.",
+        "Engineered 300+ context-design strategies resolving hallucinations and drift with ~95% accuracy."
       ],
       skills: ["Frontier LLMs", "NVIDIA Nemotron-12B", "Golden Datasets", "Instruction Tuning", "RLHF", "Hallucination Mitigation", "Evaluation Pipelines"],
       type: "work"
@@ -201,9 +201,9 @@ export const portfolioData: PortfolioData = {
       featuredMetric: "Ranked #1 of 15 Teams",
       awardOrHighlight: "1st Place Innovation Award",
       description: [
-        "Collaborated with a 5-member team to design ML-based environmental engineering solutions addressing water pollution.",
-        "Built a computer vision system powering an ML-driven \"eco-bucket\" to detect and extract pollutants in real time.",
-        "Ranked #1 among 15 teams for innovation and measurable impact across proposed engineering solutions."
+        "Co-designed ML solutions for environmental water pollution detection in a 5-member engineering team.",
+        "Built real-time OpenCV computer vision pipeline for automated pollutant extraction.",
+        "Awarded 1st place among 15 teams for innovation and engineering impact."
       ],
       skills: ["Computer Vision", "OpenCV", "Machine Learning", "Environmental ML", "Cross-Functional Leadership", "Real-Time Detection"],
       type: "work"
@@ -219,9 +219,9 @@ export const portfolioData: PortfolioData = {
       awardOrHighlight: "99% Error-Free Serverless Execution",
       githubUrl: "https://github.com/ishaankor/Datafy",
       description: [
-        "Architected an end-to-end data analysis web platform utilizing a node-based reflection agentic workflow to transform user-uploaded files into composed, annotated visual canvases.",
-        "Engineered specialized AI processing nodes using LangChain to iteratively analyze data inputs and ensure rigorous and accurate data interpretation.",
-        "Scaled serverless architecture to process 25,000+ weekly requests, maintaining a ~99% error-free execution rate."
+        "Architected node-based reflection agent converting CSV uploads into composed visual canvases.",
+        "Engineered LangChain analysis nodes for schema validation and automated chart generation.",
+        "Scaled serverless engine to 25k+ weekly requests with ~99% error-free execution."
       ],
       skills: ["Python", "LangChain", "FastAPI", "Pandas", "Agentic Workflows", "Serverless Architecture", "Reflection Nodes"],
       type: "project"
@@ -237,9 +237,9 @@ export const portfolioData: PortfolioData = {
       awardOrHighlight: "Production MCP & FastMCP Infrastructure",
       githubUrl: "https://github.com/ishaankor/my-personal-website",
       description: [
-        "Built a modular LLM application using Model Context Protocol (MCP) with 15+ composable tools, streaming inference, and persistent memory.",
-        "Architected a rate-limited FastAPI backend by establishing a robust CI/CD workflow to support scalable real-time inference.",
-        "Integrated RAG pipelines and dynamic tool-routing to enable persistent, context-aware AI reasoning across user sessions."
+        "Built modular LLM assistant using Model Context Protocol (MCP) with 15+ composable tools.",
+        "Architected rate-limited FastAPI backend with automated CI/CD for real-time streaming inference.",
+        "Integrated RAG pipelines and tool-routing for persistent context across user sessions."
       ],
       skills: ["Python", "Gemini API", "FastAPI", "Docker", "Model Context Protocol (MCP)", "RAG Pipelines", "CI/CD"],
       type: "project"
@@ -255,9 +255,9 @@ export const portfolioData: PortfolioData = {
       awardOrHighlight: "Parallelized Async ML Pipelines",
       githubUrl: "https://github.com/ishaankor/Transformi",
       description: [
-        "Developed a scalable Discord-based ML system serving 10,000+ users by utilizing parallelized ETL pipelines to execute data science tasks.",
-        "Implemented asynchronous backend architecture with optimized event loops for concurrent model training workflows.",
-        "Designed flexible data ingestion methods such as random automated Kaggle API datasets, manual inputs, and direct user uploads."
+        "Engineered Discord ML bot serving 10k+ users with parallelized ETL pipelines.",
+        "Implemented async backend architecture for concurrent regression model training.",
+        "Built multi-source data ingestion via Kaggle API, direct CSV uploads, and manual entry."
       ],
       skills: ["Python", "asyncio", "TensorFlow", "scikit-learn", "Discord API", "Parallel ETL", "Kaggle API"],
       type: "project"
@@ -272,8 +272,8 @@ export const portfolioData: PortfolioData = {
       featuredMetric: "GPA: 3.76",
       awardOrHighlight: "Minor in Data Science",
       description: [
-        "Rigorous specialization in Machine Learning Algorithms, Neural Computation, Biological Neural Networks, and Advanced Data Science.",
-        "Active leadership in Data Science Student Society (DS3), Cognitive Science Student Association (CSSA Web Team), and Computer Science and Engineering Society (CSES Dev)."
+        "B.S. specialization in Machine Learning, Neural Computation, and Applied Data Science (GPA 3.76).",
+        "Leadership in Data Science Student Society (DS3) and CSSA Web Team."
       ],
       skills: ["Machine Learning", "Neural Computation", "Data Science", "Python", "C++", "Linear Algebra", "Statistical Modeling"],
       type: "education"
@@ -288,8 +288,7 @@ export const portfolioData: PortfolioData = {
       badgeColor: "#38bdf8",
       skills: ["SQL", "PyTorch", "scikit-learn", "MLOps", "Git", "Python", "Pytest"],
       description: [
-        "Demonstrated skills in AI and machine learning workflows including unsupervised learning, SWE principles, data preprocessing, model training/evaluation, MLOps, and Python testing.",
-        "Proven competence in full AI solution lifecycle: data preparation, model development/evaluation, governance, and deploying AI systems with maintainable code and modern engineering workflows."
+        "Full AI lifecycle: data prep, PyTorch/scikit-learn modeling, MLOps, and pytest testing."
       ]
     },
     {
@@ -299,8 +298,7 @@ export const portfolioData: PortfolioData = {
       badgeColor: "#a855f7",
       skills: ["Sampling", "Roots", "JSON", "Stdio/SSE/StreamableHTTP Transports", "FastMCP", "Security"],
       description: [
-        "Explored advanced MCP integrations and production scaling protocols for AI infrastructure through various transport protocols either locally or remotely.",
-        "Acquired practical skills in MCP server patterns including sampling, notifications, secure file access, JSON messaging for scalable deployments."
+        "Advanced MCP server architectures, transport protocols (Stdio/SSE/HTTP), FastMCP, and secure tool execution."
       ]
     },
     {
@@ -310,8 +308,7 @@ export const portfolioData: PortfolioData = {
       badgeColor: "#f97316",
       skills: ["Python", "Git/GitHub", "Puppet", "IaaS", "OOP", "API", "SSH", "regex", "Bash/Linux"],
       description: [
-        "Completed a career-focused program consisting of 7 courses covering Python programming, debugging and troubleshooting, system administration, and cloud management.",
-        "Gained hands-on experience with BASH/Linux scripting, managing files and processes via SSH, and automating tasks to improve IT workflows."
+        "7-course certification in Python scripting, Linux/Bash automation, Git workflows, and system administration."
       ]
     }
   ],
@@ -353,8 +350,8 @@ export const portfolioData: PortfolioData = {
       title: "Transformi! ML Discord Bot",
       year: "2025",
       category: "Machine Learning",
-      description: "Discord ML bot with parallelized ETL pipelines for automated regression modeling and visual plots.",
-      detailedDescription: "Integrates Discord API with Python Scikit-Learn and Matplotlib. Users upload CSVs or data snippets via Discord, and Transformi fits regression models, outputs scatter plots with best-fit lines, and returns statistical metrics.",
+      description: "Discord ML bot with parallelized ETL for automated regression modeling and live scatter plots.",
+      detailedDescription: "Integrates Discord API with Python, scikit-learn, and matplotlib to fit regression models and stream visual plots into chat.",
       tags: ["Python", "TensorFlow", "scikit-learn", "asyncio", "Discord API"],
       githubUrl: "https://github.com/ishaankor/Transformi",
       featured: true,
@@ -365,8 +362,8 @@ export const portfolioData: PortfolioData = {
       title: "Datafy AI Data Science Copilot",
       year: "2026",
       category: "AI & Web",
-      description: "AI data copilot converting raw CSV data into interactive visual analytics and narrative insights.",
-      detailedDescription: "React frontend and FastAPI-backed Python analytics engine using LangChain and node-based reflection agentic workflows for automated visual canvas generation.",
+      description: "AI data canvas converting CSV uploads into interactive charts, statistical grids, and executive briefs.",
+      detailedDescription: "FastAPI & Next.js platform using LangChain reflection agents for automated visual data analysis.",
       tags: ["Python", "LangChain", "FastAPI", "Pandas", "Agentic AI"],
       githubUrl: "https://github.com/ishaankor/Datafy",
       featured: true,
@@ -377,8 +374,8 @@ export const portfolioData: PortfolioData = {
       title: "Personal AI Chatbot (IshaanBot)",
       year: "2025",
       category: "AI & Web",
-      description: "Modular LLM assistant powered by Model Context Protocol (MCP) with 15+ composable tools and streaming memory.",
-      detailedDescription: "FastAPI rate-limited backend with robust CI/CD, persistent context-aware AI reasoning, and dynamic tool-routing.",
+      description: "Modular LLM assistant powered by Model Context Protocol (MCP) with 15+ composable tools.",
+      detailedDescription: "FastAPI backend with streaming inference, RAG memory, and dynamic tool-routing.",
       tags: ["Python", "Gemini API", "FastAPI", "Docker", "MCP"],
       githubUrl: "https://github.com/ishaankor/my-personal-website",
       featured: true,
@@ -389,8 +386,8 @@ export const portfolioData: PortfolioData = {
       title: "Daily Motivation Twitter/X Bot",
       year: "2023",
       category: "Automation",
-      description: "Automated social bot delivering daily inspirations and logging engagement metrics in PostgreSQL.",
-      detailedDescription: "Built with Python, Tweepy, and PostgreSQL. It polls user interactions daily, aggregates sentiment and poll responses, and generates end-of-week data graphics automatically tweeted to followers.",
+      description: "Automated Python Twitter/X bot delivering daily content and logging engagement in PostgreSQL.",
+      detailedDescription: "Automated Python cron pipeline polling interactions and persisting analytics to PostgreSQL.",
       tags: ["Python", "PostgreSQL", "Twitter API", "Automation", "NLP"],
       githubUrl: "https://github.com/ishaankor/daily-motivation",
       featured: true,
@@ -401,8 +398,8 @@ export const portfolioData: PortfolioData = {
       title: "Interactive Data Science Showcase",
       year: "2025",
       category: "Data Visualization",
-      description: "Dynamic web showcase featuring live GitHub API analytics and interactive project explorer.",
-      detailedDescription: "Designed to demonstrate data storytelling by pulling live GitHub metrics, computing repository language distributions, and running client-side tf-idf-like project search.",
+      description: "Dynamic engineering portfolio featuring live GitHub analytics, 3D visual canvas, and timeline trajectories.",
+      detailedDescription: "Next.js & Three.js showcase with real-time GitHub meta-fetcher API and interactive D3 visualizations.",
       tags: ["Next.js", "React", "TypeScript", "Three.js", "Tailwind CSS"],
       githubUrl: "https://github.com/ishaankor/my-data-science-portfolio",
       liveUrl: "https://ishaankor.github.io/my-data-science-portfolio/",

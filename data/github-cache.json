@@ -1,25 +1,25 @@
 {
-  "updatedAt": "2026-09-01T19:15:16.129Z",
-  "totalRepos": 19,
+  "updatedAt": "2026-09-01T21:54:17.344Z",
+  "totalRepos": 18,
   "user": {
     "login": "ishaankor",
     "avatar_url": "https://avatars.githubusercontent.com/u/113160688?v=4",
     "html_url": "https://github.com/ishaankor",
     "name": "Ishaan",
     "bio": "An AI engineer who loves to automate the tedious works of life through programming and coding!",
-    "public_repos": 21,
+    "public_repos": 20,
     "created_at": "2022-09-09T04:43:15Z"
   },
   "repos": [
     {
-      "id": 1353930890,
-      "name": "TESTING",
-      "language": null,
-      "html_url": "https://github.com/ishaankor/TESTING",
-      "description": null,
-      "created_at": "2026-09-01T19:02:44Z",
-      "pushed_at": "2026-09-01T19:02:45Z",
-      "updated_at": "2026-09-01T19:10:55Z"
+      "id": 915475199,
+      "name": "my-data-science-portfolio",
+      "language": "HTML",
+      "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
+      "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
+      "created_at": "2025-01-11T23:48:23Z",
+      "pushed_at": "2026-09-01T19:17:41Z",
+      "updated_at": "2026-09-01T19:19:12Z"
     },
     {
       "id": 1324783574,
@@ -40,16 +40,6 @@
       "created_at": "2026-08-05T05:50:28Z",
       "pushed_at": "2026-09-01T10:03:59Z",
       "updated_at": "2026-09-01T10:10:52Z"
-    },
-    {
-      "id": 915475199,
-      "name": "my-data-science-portfolio",
-      "language": "HTML",
-      "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
-      "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
-      "created_at": "2025-01-11T23:48:23Z",
-      "pushed_at": "2026-09-01T06:34:55Z",
-      "updated_at": "2026-09-01T06:35:25Z"
     },
     {
       "id": 1316668584,
@@ -204,6 +194,16 @@
   ],
   "commits": [
     {
+      "sha": "fafa1b64be3ae27fbc8d48984a5413fe6dd31c7d",
+      "shortSha": "fafa1b6",
+      "message": "feat: add Datafy AI project details and update repository metadata dashboards",
+      "repoName": "my-data-science-portfolio",
+      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/fafa1b64be3ae27fbc8d48984a5413fe6dd31c7d",
+      "date": "2026-09-01T19:16:43Z",
+      "timeAgo": "2h ago"
+    },
+    {
       "sha": "8439ce6930833686b8ee6af87e832fabeb7eaf9c",
       "shortSha": "8439ce6",
       "message": "feat: implement query classification caching and unified multi-retailer scraping for improved efficiency",
@@ -211,7 +211,7 @@
       "repoUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
       "commitUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-/commit/8439ce6930833686b8ee6af87e832fabeb7eaf9c",
       "date": "2026-09-01T10:03:58Z",
-      "timeAgo": "9h ago"
+      "timeAgo": "11h ago"
     },
     {
       "sha": "2dd0c23000ac11f82420eba37e7dfae0613596f9",
@@ -221,7 +221,7 @@
       "repoUrl": "https://github.com/ishaankor/RigScouter-AI",
       "commitUrl": "https://github.com/ishaankor/RigScouter-AI/commit/2dd0c23000ac11f82420eba37e7dfae0613596f9",
       "date": "2026-09-01T10:03:53Z",
-      "timeAgo": "9h ago"
+      "timeAgo": "11h ago"
     },
     {
       "sha": "12fd5c6cbe6e3abfed224d32cb3f6fc760ac3605",
@@ -231,7 +231,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/12fd5c6cbe6e3abfed224d32cb3f6fc760ac3605",
       "date": "2026-09-01T06:34:06Z",
-      "timeAgo": "12h ago"
+      "timeAgo": "15h ago"
     },
     {
       "sha": "d9e4fa8352754a9c128acb55454f4893345187ec",
@@ -242,16 +242,6 @@
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/d9e4fa8352754a9c128acb55454f4893345187ec",
       "date": "2026-08-31T01:12:46Z",
       "timeAgo": "1d ago"
-    },
-    {
-      "sha": "828e7e8941bd67a7233b969173fa4524cfc5be29",
-      "shortSha": "828e7e8",
-      "message": "feat: add interactive Hero components and update portfolio data and assets",
-      "repoName": "my-data-science-portfolio",
-      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
-      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/828e7e8941bd67a7233b969173fa4524cfc5be29",
-      "date": "2026-08-30T09:30:49Z",
-      "timeAgo": "2d ago"
     }
   ],
   "contributionCalendar": {

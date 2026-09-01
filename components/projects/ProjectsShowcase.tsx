@@ -23,18 +23,18 @@ export default function ProjectsShowcase({ limit }: { limit?: number }) {
         
         {/* Section Header */}
         <ScrollReveal direction="up" delay={0.1}>
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div>
               <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted">
                 <Sparkles className="w-3.5 h-3.5 text-ember" />
                 selected work
               </span>
-              <h2 className="font-display text-[2rem] sm:text-[2.75rem] font-semibold leading-[1.04] tracking-[-0.02em] text-bone mt-4">
-                Things people actually use.
+              <h2 className="font-display text-2xl sm:text-3xl lg:text-[2.15rem] font-semibold leading-tight tracking-[-0.02em] text-bone mt-3 sm:whitespace-nowrap">
+                Built for real-world impact.
               </h2>
             </div>
 
-            <div className="flex flex-wrap gap-2 font-mono">
+            <div className="flex flex-wrap gap-2 font-mono shrink-0">
               {categories.map((cat) => (
                 <button
                   key={cat}

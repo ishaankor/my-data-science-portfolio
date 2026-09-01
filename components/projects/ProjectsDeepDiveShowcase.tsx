@@ -21,7 +21,7 @@ export default function ProjectsDeepDiveShowcase() {
           </h2>
 
           <p className="text-bone-dim text-base sm:text-lg leading-relaxed">
-            Apps real people use, systems work that goes down to the machine code, and production automation pipelines, each one shipped and documented. Open any project for the full story.
+            Production AI applications, agentic platforms, and automation systems shipped and documented end-to-end.
           </p>
         </div>
       </ScrollReveal>
@@ -85,11 +85,11 @@ export default function ProjectsDeepDiveShowcase() {
               </h3>
 
               <p className="font-mono text-xs text-muted">
-                Editorial data canvas for deep research &amp; interactive charts
+                AI data canvas for deep research &amp; interactive charts
               </p>
 
               <p className="text-bone-dim text-sm sm:text-[0.95rem] leading-relaxed">
-                An aesthetic, AI-curated data canvas that transforms raw CSV uploads into interactive charts, statistical grids, and natural language executive briefs. Operates with zero client cold-start, instant in-memory schema inferencing, and an inline AI Curator sidekick.
+                AI data canvas transforming CSV uploads into interactive charts, statistical grids, and executive briefs with instant schema inferencing and an inline AI assistant.
               </p>
 
               {/* Tag Pills */}
@@ -173,11 +173,11 @@ export default function ProjectsDeepDiveShowcase() {
               </h3>
 
               <p className="font-mono text-xs text-muted">
-                Distributed Discord ML bot with parallelized async ETL pipelines
+                Discord ML bot with parallelized async ETL pipelines
               </p>
 
               <p className="text-bone-dim text-sm sm:text-[0.95rem] leading-relaxed">
-                A scalable Discord-based ML bot serving 10,000+ community users. Parses unstructured user datasets, fits regression models dynamically, and streams regression scatter plots directly into chat with zero latency using asyncio background worker pools and Kaggle API integrations.
+                Discord ML bot serving 10,000+ users. Fits regression models dynamically on user datasets and streams plots into chat with zero latency via asyncio worker pools.
               </p>
 
               {/* Tag Pills */}
@@ -319,11 +319,11 @@ export default function ProjectsDeepDiveShowcase() {
               </h3>
 
               <p className="font-mono text-xs text-muted">
-                Automated Twitter/X bot with engagement logging in PostgreSQL
+                Automated Twitter/X bot with PostgreSQL analytics
               </p>
 
               <p className="text-bone-dim text-sm sm:text-[0.95rem] leading-relaxed">
-                An automated Python social bot delivering curated daily inspirational content, conducting interactive audience sentiment polls, and persisting engagement analytics to PostgreSQL for longitudinal trend analysis.
+                Automated Python bot delivering daily content, running sentiment polls, and logging engagement in PostgreSQL for trend analysis.
               </p>
 
               {/* Tag Pills */}
