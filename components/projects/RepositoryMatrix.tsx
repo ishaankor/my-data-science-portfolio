@@ -90,7 +90,6 @@ function buildRepositoryMatrix(rawRepos: any[]): RepositoryItem[] {
     if (!r.html_url || !r.html_url.startsWith('https://github.com/')) return;
     const nameLower = (r.name || '').toLowerCase();
     if (EXCLUDED_REPOS.has(nameLower)) return;
-    if (nameLower.startsWith('lab') || nameLower.startsWith('test')) return;
 
     // Use created_at to accurately represent project inception year
     const creationDate = r.created_at || r.pushed_at;
@@ -165,14 +164,30 @@ function buildRepositoryMatrix(rawRepos: any[]): RepositoryItem[] {
   });
 }
 
-export default function RepositoryMatrix({ limit }: { limit?: number }) {
+export default function RepositoryMatrix({
+  limit,
+  repos: propRepos,
+}: {
+  limit?: number;
+  repos?: any[];
+}) {
   const [repos, setRepos] = useState<RepositoryItem[]>(() =>
-    buildRepositoryMatrix(githubCache?.repos || [])
+    buildRepositoryMatrix(
+      Array.isArray(propRepos) && propRepos.length > 0
+        ? propRepos
+        : githubCache?.repos || []
+    )
   );
   const [selectedYear, setSelectedYear] = useState<string | null>(null);
   const [selectedLanguage, setSelectedLanguage] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [hoveredYear, setHoveredYear] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (Array.isArray(propRepos) && propRepos.length > 0) {
+      setRepos(buildRepositoryMatrix(propRepos));
+    }
+  }, [propRepos]);
 
   // Synchronize and fetch live GitHub repos in real-time
   useEffect(() => {
@@ -186,7 +201,7 @@ export default function RepositoryMatrix({ limit }: { limit?: number }) {
           }
         }
       } catch {
-        // Fallback gracefully to cache if offline
+        // Fallback gracefully to existing cache without direct GitHub calls
       }
     }
 

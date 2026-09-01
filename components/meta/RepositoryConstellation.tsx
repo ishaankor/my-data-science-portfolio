@@ -125,18 +125,60 @@ const DOMAINS: Omit<DomainHub, 'x' | 'y' | 'vx' | 'vy'>[] = [
   },
 ];
 
-export default function RepositoryConstellation() {
+const GITHUB_API_ENDPOINT =
+  process.env.NEXT_PUBLIC_GITHUB_FETCHER_URL ||
+  'https://github-meta-fetcher.vercel.app/api/github';
+
+export default function RepositoryConstellation({
+  repos: propRepos,
+}: {
+  repos?: any[];
+} = {}) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
+
+  const [liveRepos, setLiveRepos] = useState<any[]>(() =>
+    Array.isArray(propRepos) && propRepos.length > 0
+      ? propRepos
+      : (githubCache?.repos || [])
+  );
 
   const [selectedDomain, setSelectedDomain] = useState<string>('all');
   const [hoveredNode, setHoveredNode] = useState<ConstellationNode | null>(null);
   const [pinnedNode, setPinnedNode] = useState<ConstellationNode | null>(null);
   const [activeSearch, setActiveSearch] = useState<string>('');
 
+  useEffect(() => {
+    if (Array.isArray(propRepos) && propRepos.length > 0) {
+      setLiveRepos(propRepos);
+    }
+  }, [propRepos]);
+
+  useEffect(() => {
+    async function fetchConstellationRepos() {
+      try {
+        const proxyRes = await fetch(GITHUB_API_ENDPOINT, { cache: 'no-store' });
+        if (proxyRes.ok) {
+          const payload = await proxyRes.json();
+          if (Array.isArray(payload.repos) && payload.repos.length > 0) {
+            setLiveRepos(payload.repos);
+          }
+        }
+      } catch {
+        // Fallback gracefully without direct GitHub calls
+      }
+    }
+
+    fetchConstellationRepos();
+    const interval = setInterval(fetchConstellationRepos, 60 * 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   // 1. Ingest repositories and map them to domain hubs with curated connections
   const { initialNodes, initialEdges } = useMemo(() => {
-    const rawRepos = (githubCache?.repos || []) as any[];
+    const rawRepos = Array.isArray(liveRepos) && liveRepos.length > 0
+      ? liveRepos
+      : ((githubCache?.repos || []) as any[]);
     const curated = portfolioData.projects || [];
 
     const nodes: ConstellationNode[] = [];
@@ -225,7 +267,6 @@ export default function RepositoryConstellation() {
       const name = r.name || '';
       const key = name.toLowerCase().replace(/[^a-z0-9]/g, '');
       if (addedRepoKeys.has(key)) return;
-      if (name.startsWith('lab') || name.startsWith('test')) return;
       addedRepoKeys.add(key);
 
       const mapping = getPrimaryDomain(name, r.description || '', r.language || '');
@@ -270,7 +311,7 @@ export default function RepositoryConstellation() {
     }
 
     return { initialNodes: nodes, initialEdges: edges };
-  }, []);
+  }, [liveRepos]);
 
   // Mutable simulation state stored in refs for 60 FPS physics loop
   const nodesRef = useRef<ConstellationNode[]>([]);
@@ -280,25 +321,35 @@ export default function RepositoryConstellation() {
   const mousePosRef = useRef<{ x: number; y: number } | null>(null);
   const animFrameRef = useRef<number | null>(null);
 
-  // Initialize simulation data once
+  // Initialize and update simulation data
   useEffect(() => {
-    nodesRef.current = initialNodes.map((n) => ({ ...n }));
+    // Preserve existing node positions if already simulated, else use initial positions
+    const existingPosMap = new Map(nodesRef.current.map((n) => [n.id, { x: n.x, y: n.y, vx: n.vx, vy: n.vy }]));
+    nodesRef.current = initialNodes.map((n) => {
+      const prev = existingPosMap.get(n.id);
+      if (prev) {
+        return { ...n, x: prev.x, y: prev.y, vx: prev.vx, vy: prev.vy };
+      }
+      return { ...n };
+    });
     edgesRef.current = initialEdges.map((e) => ({ ...e }));
 
-    // Generate Stardust Background Particles
-    const particles: StardustParticle[] = [];
-    for (let i = 0; i < 45; i++) {
-      particles.push({
-        x: (Math.random() - 0.5) * 900,
-        y: (Math.random() - 0.5) * 600,
-        vx: (Math.random() - 0.5) * 0.15,
-        vy: (Math.random() - 0.5) * 0.15,
-        radius: Math.random() * 1.5 + 0.5,
-        alpha: Math.random() * 0.6 + 0.2,
-        pulseSpeed: Math.random() * 0.02 + 0.008,
-      });
+    if (particlesRef.current.length === 0) {
+      // Generate Stardust Background Particles
+      const particles: StardustParticle[] = [];
+      for (let i = 0; i < 45; i++) {
+        particles.push({
+          x: (Math.random() - 0.5) * 900,
+          y: (Math.random() - 0.5) * 600,
+          vx: (Math.random() - 0.5) * 0.15,
+          vy: (Math.random() - 0.5) * 0.15,
+          radius: Math.random() * 1.5 + 0.5,
+          alpha: Math.random() * 0.6 + 0.2,
+          pulseSpeed: Math.random() * 0.02 + 0.008,
+        });
+      }
+      particlesRef.current = particles;
     }
-    particlesRef.current = particles;
   }, [initialNodes, initialEdges]);
 
   // Reset constellation node positions gently

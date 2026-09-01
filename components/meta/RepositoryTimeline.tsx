@@ -56,7 +56,11 @@ const EXCLUDED_REPOS = new Set([
   'it-cert-automation-practice',
 ]);
 
-function buildMilestones(): TimelineMilestone[] {
+const GITHUB_API_ENDPOINT =
+  process.env.NEXT_PUBLIC_GITHUB_FETCHER_URL ||
+  'https://github-meta-fetcher.vercel.app/api/github';
+
+function buildMilestones(rawRepos?: any[]): TimelineMilestone[] {
   const map = new Map<string, TimelineMilestone>();
 
   const getRepoKey = (url: string, name: string) => {
@@ -66,13 +70,15 @@ function buildMilestones(): TimelineMilestone[] {
   };
 
   // 1. Ingest raw GitHub repos
-  const rawRepos = (githubCache?.repos || []) as any[];
-  rawRepos.forEach((r) => {
+  const reposToProcess = Array.isArray(rawRepos) && rawRepos.length > 0
+    ? rawRepos
+    : ((githubCache?.repos || []) as any[]);
+
+  reposToProcess.forEach((r) => {
     if (r.private) return;
     if (!r.html_url || !r.html_url.startsWith('https://github.com/')) return;
     const nameLower = (r.name || '').toLowerCase();
     if (EXCLUDED_REPOS.has(nameLower)) return;
-    if (nameLower.startsWith('lab') || nameLower.startsWith('test')) return;
 
     const rawDate = r.created_at || r.pushed_at || '2025-01-01T00:00:00Z';
     const dateObj = new Date(rawDate);
@@ -145,8 +151,44 @@ function buildMilestones(): TimelineMilestone[] {
   );
 }
 
-export default function RepositoryTimeline() {
-  const allMilestones = useMemo(() => buildMilestones(), []);
+export interface RepositoryTimelineProps {
+  repos?: any[];
+}
+
+export default function RepositoryTimeline({ repos: propRepos }: RepositoryTimelineProps = {}) {
+  const [liveRepos, setLiveRepos] = useState<any[]>(() =>
+    Array.isArray(propRepos) && propRepos.length > 0 ? propRepos : (githubCache?.repos || [])
+  );
+
+  // Sync with prop updates
+  useEffect(() => {
+    if (Array.isArray(propRepos) && propRepos.length > 0) {
+      setLiveRepos(propRepos);
+    }
+  }, [propRepos]);
+
+  // Live polling for newly added GitHub repositories
+  useEffect(() => {
+    async function fetchLiveTimelineRepos() {
+      try {
+        const proxyRes = await fetch(GITHUB_API_ENDPOINT, { cache: 'no-store' });
+        if (proxyRes.ok) {
+          const payload = await proxyRes.json();
+          if (Array.isArray(payload.repos) && payload.repos.length > 0) {
+            setLiveRepos(payload.repos);
+          }
+        }
+      } catch {
+        // Fallback gracefully to existing cache without direct GitHub calls
+      }
+    }
+
+    fetchLiveTimelineRepos();
+    const interval = setInterval(fetchLiveTimelineRepos, 60 * 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const allMilestones = useMemo(() => buildMilestones(liveRepos), [liveRepos]);
   const [activeIndex, setActiveIndex] = useState<number>(() =>
     Math.max(0, allMilestones.length - 1)
   );
@@ -164,15 +206,17 @@ export default function RepositoryTimeline() {
 
   const activeMilestone = allMilestones[clampedIndex] || allMilestones[allMilestones.length - 1];
 
-  // Auto-play / Walkthrough mode: ALWAYS starts from beginning (index 0)
+  // Auto-play / Walkthrough mode: Continues from current selection; restarts from beginning if at the end
   const handleTogglePlay = useCallback(() => {
     if (!isPlaying) {
-      setActiveIndex(0);
+      if (clampedIndex >= allMilestones.length - 1) {
+        setActiveIndex(0);
+      }
       setIsPlaying(true);
     } else {
       setIsPlaying(false);
     }
-  }, [isPlaying]);
+  }, [isPlaying, clampedIndex, allMilestones.length]);
 
   // Step interval for auto-play
   useEffect(() => {
@@ -279,6 +323,18 @@ export default function RepositoryTimeline() {
     return d;
   }, [nodePositions, clampedIndex]);
 
+  // Compute dynamic min and max year range
+  const yearRange = useMemo(() => {
+    if (allMilestones.length === 0) return '2023 – 2026';
+    const years = allMilestones
+      .map((m) => parseInt(m.year))
+      .filter((y) => !isNaN(y) && y > 2000 && y < 2100);
+    if (years.length === 0) return '2023 – 2026';
+    const minYear = Math.min(...years);
+    const maxYear = Math.max(...years);
+    return minYear === maxYear ? `${minYear}` : `${minYear} – ${maxYear}`;
+  }, [allMilestones]);
+
   return (
     <ScrollReveal direction="up" delay={0.15}>
       <div className="rounded-xl border border-line bg-surface p-6 sm:p-8 shadow-panel space-y-7 relative overflow-hidden">
@@ -308,7 +364,7 @@ export default function RepositoryTimeline() {
           <div>
             <span className="inline-flex items-center gap-2 font-mono text-xs text-muted uppercase tracking-wider mb-2">
               <Compass className="w-3.5 h-3.5 text-ember" />
-              Harmonic Sine-Wave Trajectory (2023 – 2026)
+              Harmonic Sine-Wave Trajectory ({yearRange})
             </span>
             <h2 className="font-display text-2xl sm:text-3xl font-bold text-bone flex items-center gap-2.5">
               <span>Interactive Repository Timeline</span>
@@ -335,7 +391,13 @@ export default function RepositoryTimeline() {
             <button
               onClick={handleTogglePlay}
               className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-ember/10 border border-ember/40 text-ember hover:bg-ember/20 font-bold transition-colors shadow-sm"
-              title={isPlaying ? 'Pause Auto-Play' : 'Start Auto Walk from Beginning'}
+              title={
+                isPlaying
+                  ? 'Pause Auto Walk'
+                  : clampedIndex >= allMilestones.length - 1
+                  ? 'Start Auto Walk from Beginning'
+                  : 'Continue Auto Walk'
+              }
             >
               {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
               <span>{isPlaying ? 'Pause' : 'Auto Walk'}</span>

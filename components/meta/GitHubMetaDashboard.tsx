@@ -126,6 +126,7 @@ export default function GitHubMetaDashboard() {
         setLastPolledTime(new Date().toLocaleTimeString());
       }
     } catch {
+      // Fallback gracefully without direct GitHub calls
     } finally {
       setLoading(false);
     }
@@ -357,7 +358,7 @@ export default function GitHubMetaDashboard() {
       </ScrollReveal>
 
       {/* 2. INTERACTIVE REPOSITORY TIMELINE (ABOVE MIDDLE 1) */}
-      <RepositoryTimeline />
+      <RepositoryTimeline repos={activeRepos} />
 
       {/* 3. DEDICATED LAST 5 RECENT COMMITS REGARDLESS OF REPOSITORY (MIDDLE 1) */}
       <ScrollReveal direction="up" delay={0.2}>

@@ -1,7 +1,8 @@
 import { fetchJSON, renderProjects } from '../global.js';
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
 
-const projects = (await fetchJSON('../lib/projects.json')) || [];
+const baseProjects = (await fetchJSON('../lib/projects.json')) || [];
+let projects = [...baseProjects];
 const projectsTitle = document.querySelector('.projects-title');
 const projectsContainer = document.querySelector('.projects');
 const searchInput = document.querySelector('.searchBar');
@@ -14,9 +15,60 @@ let selectedYear = null;
 let query = '';
 let filteredProjects = projects;
 
-if (projectsTitle) {
-    projectsTitle.textContent = `${projects.length} Projects`;
+function updateTitle() {
+    if (projectsTitle) {
+        projectsTitle.textContent = `${projects.length} Projects`;
+    }
 }
+updateTitle();
+
+async function syncLiveGitHubProjects() {
+    try {
+        let liveRepos = [];
+        const res = await fetch('https://github-meta-fetcher.vercel.app/api/github');
+        if (res.ok) {
+            const data = await res.json();
+            if (Array.isArray(data.repos) && data.repos.length > 0) {
+                liveRepos = data.repos;
+            }
+        }
+
+        if (Array.isArray(liveRepos) && liveRepos.length > 0) {
+            const existingTitles = new Set(baseProjects.map(p => p.title.toLowerCase().replace(/[^a-z0-9]/g, '')));
+            const newProjectItems = [];
+
+            liveRepos.forEach(r => {
+                if (r.private) return;
+                const key = (r.name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+                if (existingTitles.has(key)) return;
+                existingTitles.add(key);
+
+                const creationDate = r.created_at || r.pushed_at;
+                const year = creationDate ? new Date(creationDate).getFullYear().toString() : '2025';
+
+                newProjectItems.push({
+                    title: r.name,
+                    year: year,
+                    image: 'https://vis-society.github.io/labs/2/images/empty.svg',
+                    description: r.description || 'Open source machine learning and data science engineering repository.',
+                    githubUrl: r.html_url,
+                });
+            });
+
+            if (newProjectItems.length > 0) {
+                projects = [...baseProjects, ...newProjectItems];
+                updateTitle();
+                buildSummary();
+                buildYearButtons();
+                filterProjects();
+            }
+        }
+    } catch {
+        // Fallback silently
+    }
+}
+
+syncLiveGitHubProjects();
 
 function normalizeText(text) {
     return String(text).toLowerCase().replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
