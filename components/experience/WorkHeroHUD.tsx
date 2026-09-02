@@ -30,17 +30,13 @@ export default function WorkHeroHUD({
         <ScrollReveal direction="up" delay={0.05}>
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="inline-flex items-center gap-2 font-mono text-[0.72rem] text-muted">
-              <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-bone">02 // CAREER MATRIX & SYSTEM EXPERIENCE</span>
+              <span className="text-bone">02 // CAREER MATRIX &amp; SYSTEM EXPERIENCE</span>
               <span className="text-line">/</span>
               <span className="text-ember">PRODUCTION VERIFIED</span>
             </div>
 
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 font-mono text-xs text-emerald-400">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-              </span>
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
               <span>Available for AI/ML Engineering</span>
             </div>
           </div>

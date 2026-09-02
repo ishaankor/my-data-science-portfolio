@@ -9,18 +9,28 @@ export default function ProjectsDeepDiveShowcase() {
     <div className="space-y-24 mb-16">
       
       {/* Top Section Header */}
-      <ScrollReveal direction="up" delay={0.1}>
-        <div className="space-y-4 max-w-3xl">
-          <div className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted">
-            <span className="h-px w-6 bg-ember inline-block" />
-            <span className="text-ember font-semibold">Projects</span>
+      <ScrollReveal direction="up" delay={0.05}>
+        <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+          <div className="inline-flex items-center gap-2 font-mono text-[0.72rem] text-muted">
+            <span className="text-bone">01 // PROJECT BUILDS</span>
+            <span className="text-line">/</span>
+            <span className="text-ember">PRODUCTION SHIPPED</span>
           </div>
-          
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-bone tracking-tight leading-[1.08]">
+
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25 font-mono text-xs text-cyan-400">
+            <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
+            <span>Live Software Release Feed</span>
+          </div>
+        </div>
+      </ScrollReveal>
+
+      <ScrollReveal direction="up" delay={0.1}>
+        <div className="space-y-4">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold text-bone tracking-tight leading-[1.08] sm:whitespace-nowrap">
             Things I&apos;ve built, end to end.
           </h2>
 
-          <p className="text-bone-dim text-base sm:text-lg leading-relaxed">
+          <p className="text-bone-dim text-base sm:text-lg leading-relaxed max-w-2xl">
             Production AI applications, agentic platforms, and automation systems shipped and documented end-to-end.
           </p>
         </div>

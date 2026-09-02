@@ -77,10 +77,9 @@ export default function HeroMemojiInteractive() {
             <span className="text-xs text-muted ml-1 font-bold">ishaan.avatar</span>
           </div>
 
-          <span className="text-[0.7rem] font-mono text-muted/70 flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            <span>active</span>
-          </span>
+          {/* <span className="text-[0.68rem] font-mono text-muted/80 tracking-tight">
+            homage to data science portfolio }
+          { </span> */}
         </div>
 
         {/* Center: Clean, Large Interactive Animated Memoji Avatar */}
@@ -117,9 +116,9 @@ export default function HeroMemojiInteractive() {
           style={{ transform: 'translateZ(20px)' }}
         >
           <span className="flex items-center gap-2 text-emerald-400">
-            <span className="relative flex h-2.5 w-2.5">
+            <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
             </span>
             <span className="font-bold">Building AI &amp; Agents</span>
           </span>

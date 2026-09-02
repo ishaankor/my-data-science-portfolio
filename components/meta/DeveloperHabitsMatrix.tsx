@@ -445,7 +445,7 @@ export default function DeveloperHabitsMatrix() {
           {/* Intent Legend Badges */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs pt-1">
             <div className="flex items-center gap-2 p-2.5 rounded-lg bg-ink/70 border border-line">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-sm shadow-emerald-400/50 shrink-0" />
+              <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-sm shadow-cyan-400/50 shrink-0" />
               <div className="truncate">
                 <span className="text-bone font-bold block">{analytics.featPct}%</span>
                 <span className="text-[0.65rem] text-muted">New Features</span>

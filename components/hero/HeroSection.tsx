@@ -49,6 +49,14 @@ export default function HeroSection() {
           {/* Left Column: Intro & Typewriter */}
           <div className="lg:col-span-7 flex flex-col justify-center">
             
+            {/* <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 font-mono text-xs text-emerald-400 w-fit mb-4 shadow-sm">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+              </span>
+              <span>Available for AI/ML Engineering</span>
+            </div> */}
+
             <p className="font-mono text-base sm:text-lg lg:text-xl text-muted tracking-wide mb-3">
               Hi, I&apos;m <span className="text-bone font-bold">{portfolioData.name}</span>
             </p>

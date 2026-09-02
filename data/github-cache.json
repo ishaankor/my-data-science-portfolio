@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-01T21:54:17.344Z",
+  "updatedAt": "2026-09-02T07:35:01.684Z",
   "totalRepos": 18,
   "user": {
     "login": "ishaankor",
@@ -18,8 +18,8 @@
       "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
       "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
       "created_at": "2025-01-11T23:48:23Z",
-      "pushed_at": "2026-09-01T19:17:41Z",
-      "updated_at": "2026-09-01T19:19:12Z"
+      "pushed_at": "2026-09-01T23:14:25Z",
+      "updated_at": "2026-09-01T23:19:37Z"
     },
     {
       "id": 1324783574,
@@ -194,6 +194,16 @@
   ],
   "commits": [
     {
+      "sha": "6075617cd4ebb8fd83443fec9a927ab0380d9a91",
+      "shortSha": "6075617",
+      "message": "refactor: update portfolio data, project components, and rebuild static assets",
+      "repoName": "my-data-science-portfolio",
+      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/6075617cd4ebb8fd83443fec9a927ab0380d9a91",
+      "date": "2026-09-01T23:13:33Z",
+      "timeAgo": "8h ago"
+    },
+    {
       "sha": "fafa1b64be3ae27fbc8d48984a5413fe6dd31c7d",
       "shortSha": "fafa1b6",
       "message": "feat: add Datafy AI project details and update repository metadata dashboards",
@@ -201,7 +211,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/fafa1b64be3ae27fbc8d48984a5413fe6dd31c7d",
       "date": "2026-09-01T19:16:43Z",
-      "timeAgo": "2h ago"
+      "timeAgo": "12h ago"
     },
     {
       "sha": "8439ce6930833686b8ee6af87e832fabeb7eaf9c",
@@ -211,7 +221,7 @@
       "repoUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
       "commitUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-/commit/8439ce6930833686b8ee6af87e832fabeb7eaf9c",
       "date": "2026-09-01T10:03:58Z",
-      "timeAgo": "11h ago"
+      "timeAgo": "21h ago"
     },
     {
       "sha": "2dd0c23000ac11f82420eba37e7dfae0613596f9",
@@ -221,7 +231,7 @@
       "repoUrl": "https://github.com/ishaankor/RigScouter-AI",
       "commitUrl": "https://github.com/ishaankor/RigScouter-AI/commit/2dd0c23000ac11f82420eba37e7dfae0613596f9",
       "date": "2026-09-01T10:03:53Z",
-      "timeAgo": "11h ago"
+      "timeAgo": "21h ago"
     },
     {
       "sha": "12fd5c6cbe6e3abfed224d32cb3f6fc760ac3605",
@@ -231,21 +241,11 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/12fd5c6cbe6e3abfed224d32cb3f6fc760ac3605",
       "date": "2026-09-01T06:34:06Z",
-      "timeAgo": "15h ago"
-    },
-    {
-      "sha": "d9e4fa8352754a9c128acb55454f4893345187ec",
-      "shortSha": "d9e4fa8",
-      "message": "refactor: simplify page title and hero eyebrow text",
-      "repoName": "my-data-science-portfolio",
-      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
-      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/d9e4fa8352754a9c128acb55454f4893345187ec",
-      "date": "2026-08-31T01:12:46Z",
       "timeAgo": "1d ago"
     }
   ],
   "contributionCalendar": {
-    "totalContributions": 761,
+    "totalContributions": 767,
     "weeks": [
       {
         "contributionDays": [
@@ -2289,6 +2289,11 @@
           },
           {
             "date": "2026-09-01",
+            "contributionCount": 6,
+            "color": "#9be9a8"
+          },
+          {
+            "date": "2026-09-02",
             "contributionCount": 0,
             "color": "#ebedf0"
           }

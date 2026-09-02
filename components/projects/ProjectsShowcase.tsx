@@ -125,11 +125,8 @@ export default function ProjectsShowcase({ limit }: { limit?: number }) {
 
                 {/* Active Pulse Badge */}
                 <div className="mt-2 flex items-center justify-between">
-                  <span className="inline-flex items-center gap-1.5 font-mono text-xs text-emerald-400">
-                    <span className="relative flex h-1.5 w-1.5">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
-                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                    </span>
+                  <span className="inline-flex items-center gap-1.5 font-mono text-xs text-bone-dim">
+                    <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
                     Actively maintained
                   </span>
 

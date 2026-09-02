@@ -1,204 +1,104 @@
 'use client';
 
 import React from 'react';
-import { portfolioData } from '@/data/portfolio';
-import { Sparkles, GraduationCap, ArrowRight, ExternalLink, Bot, BookOpen } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
 export default function AboutMeSection() {
+  const whatIDoItems = [
+    {
+      number: '01',
+      title: 'Product & AI engineering',
+      description:
+        'Real-time, type-safe web apps people use every day, taken from first pixel to production with agentic workflows.',
+    },
+    {
+      number: '02',
+      title: 'Systems & infrastructure',
+      description:
+        'Model Context Protocol (MCP) integrations, high-throughput FastAPI backends, and parallelized ETL pipelines kept reliable at scale.',
+    },
+    {
+      number: '03',
+      title: 'Cloud & delivery',
+      description:
+        'Docker, automated CI/CD workflows, and serverless architectures that move work from my machine to production safely and repeatably.',
+    },
+  ];
+
   return (
     <section className="border-t border-line/60 py-20 sm:py-28 relative">
-      <div className="mx-auto w-full max-w-6xl px-6 sm:px-10">
+      <div className="mx-auto w-full max-w-6xl px-6 sm:px-10 space-y-20">
         
-        {/* Section Header matching SELECTED WORK */}
+        {/* 1. WHAT I DO Section */}
         <ScrollReveal direction="up" delay={0.1}>
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
-            <div>
-              <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted">
-                <Sparkles className="w-3.5 h-3.5 text-ember" />
-                about me &amp; background
-              </span>
-              <h2 className="font-display text-[2rem] sm:text-[2.75rem] font-semibold leading-[1.04] tracking-[-0.02em] text-bone mt-4">
-                Engineering at the intersection of AI &amp; systems.
-              </h2>
+          <div>
+            {/* Section Eyebrow */}
+            <div className="inline-flex items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted mb-8">
+              <span className="h-px w-6 bg-muted/60 inline-block" aria-hidden="true" />
+              <span>WHAT I DO</span>
             </div>
 
-            <div className="flex flex-wrap gap-2 font-mono">
-              <span className="px-3 py-1.5 rounded-md text-xs bg-surface/60 border border-line text-muted">
-                UCSD Cognitive Science &apos;25
-              </span>
-              <span className="px-3 py-1.5 rounded-md text-xs bg-ember/10 border border-ember/30 text-ember font-bold">
-                AI &amp; ML Specialization
-              </span>
+            {/* Numbered Row List */}
+            <div className="divide-y divide-line/60 border-t border-b border-line/60">
+              {whatIDoItems.map((item) => (
+                <div
+                  key={item.number}
+                  className="py-7 sm:py-9 grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-8 items-baseline group"
+                >
+                  {/* Left Column: Number & Title */}
+                  <div className="md:col-span-5 flex items-baseline gap-3">
+                    <span className="font-mono text-xs font-bold text-ember">
+                      {item.number}
+                    </span>
+                    <h3 className="font-display text-base sm:text-lg font-bold text-bone group-hover:text-ember transition-colors">
+                      {item.title}
+                    </h3>
+                  </div>
+
+                  {/* Right Column: Description */}
+                  <div className="md:col-span-7">
+                    <p className="text-bone-dim text-xs sm:text-sm leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </ScrollReveal>
 
-        {/* 2-Column Bio Cards Grid matching SELECTED WORK cards */}
-        <div className="grid gap-8 md:grid-cols-2">
-          
-          {/* Card 1: AI Engineer & Automater */}
-          <ScrollReveal direction="up" delay={0.15}>
-            <div className="group block h-full flex flex-col justify-between">
-              <div>
-                {/* Browser Mockup Container */}
-                <div className="overflow-hidden rounded-xl border border-line bg-surface shadow-float transition-colors duration-300 group-hover:border-ember/60">
-                  
-                  {/* Browser Header Bar */}
-                  <div className="flex items-center gap-1.5 border-b border-line bg-ink/70 px-3.5 py-2.5">
-                    <span aria-hidden="true" className="flex items-center gap-1.5">
-                      <span className="h-2.5 w-2.5 rounded-full bg-rose-500/80" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-amber-500/80" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/80" />
-                    </span>
-                    <span className="ml-3 truncate font-mono text-[0.68rem] text-muted">
-                      engineer.bio
-                    </span>
-                  </div>
-
-                  {/* Card Content & Bio */}
-                  <div className="relative p-6 sm:p-7 bg-gradient-to-br from-surface via-surface to-ink flex flex-col justify-between min-h-[260px]">
-                    <div>
-                      {/* Tag Pills */}
-                      <div className="flex flex-wrap gap-1.5 mb-4">
-                        {['Machine Learning', 'Python Scraping', 'AI Bots', 'FastAPI & MCP'].map((tag) => (
-                          <span
-                            key={tag}
-                            className="px-2.5 py-0.5 rounded bg-ink/90 border border-line/80 font-mono text-[0.68rem] text-bone-dim"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-
-                      <p className="text-xs sm:text-sm text-bone-dim leading-relaxed">
-                        AI Engineer specializing in LLM evaluation, autonomous agent pipelines, and high-performance Python tools. Focused on Model Context Protocol (MCP), FastAPI inference, and scalable automation.
-                      </p>
-                    </div>
-
-                    {/* Impact / Metric badge */}
-                    <div className="mt-5 font-mono text-[0.7rem] text-cyan-400 flex items-center gap-1.5 bg-cyan-500/10 px-3 py-1.5 rounded-md border border-cyan-500/20 w-fit">
-                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-                      <span>Production Deployments &amp; Agentic AI</span>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
-              {/* Title & Metadata Below Card */}
-              <div className="mt-4 flex items-baseline justify-between gap-4">
-                <h3 className="font-display text-xl font-semibold text-bone transition-colors group-hover:text-ember flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-ember shrink-0" />
-                  <span>AI Engineer &amp; Automater</span>
-                </h3>
-                <span className="font-mono text-xs text-muted">Focus Area</span>
-              </div>
-
-              {/* Bottom Row */}
-              <div className="mt-2 flex items-center justify-between">
-                <span className="inline-flex items-center gap-1.5 font-mono text-xs text-emerald-400">
-                  <span className="relative flex h-1.5 w-1.5">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
-                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                  </span>
-                  Active Systems Builder
-                </span>
-
-                <Link
-                  href="/projects"
-                  className="font-mono text-xs text-ember hover:underline inline-flex items-center gap-1"
-                >
-                  <span>Explore Projects</span>
-                  <ArrowRight className="w-3 h-3" />
-                </Link>
-              </div>
-
+        {/* 2. CURRENTLY Section */}
+        <ScrollReveal direction="up" delay={0.2}>
+          <div className="space-y-4">
+            {/* Section Eyebrow */}
+            <div className="inline-flex items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted">
+              <span className="h-px w-6 bg-muted/60 inline-block" aria-hidden="true" />
+              <span>CURRENTLY</span>
             </div>
-          </ScrollReveal>
 
-          {/* Card 2: UC San Diego (UCSD) Alum */}
-          <ScrollReveal direction="up" delay={0.25}>
-            <div className="group block h-full flex flex-col justify-between">
-              <div>
-                {/* Browser Mockup Container */}
-                <div className="overflow-hidden rounded-xl border border-line bg-surface shadow-float transition-colors duration-300 group-hover:border-ember/60">
-                  
-                  {/* Browser Header Bar */}
-                  <div className="flex items-center gap-1.5 border-b border-line bg-ink/70 px-3.5 py-2.5">
-                    <span aria-hidden="true" className="flex items-center gap-1.5">
-                      <span className="h-2.5 w-2.5 rounded-full bg-rose-500/80" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-amber-500/80" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/80" />
-                    </span>
-                    <span className="ml-3 truncate font-mono text-[0.68rem] text-muted">
-                      ucsd.alumni
-                    </span>
-                  </div>
-
-                  {/* Card Content & Bio */}
-                  <div className="relative p-6 sm:p-7 bg-gradient-to-br from-surface via-surface to-ink flex flex-col justify-between min-h-[260px]">
-                    <div>
-                      {/* Tag Pills */}
-                      <div className="flex flex-wrap gap-1.5 mb-4">
-                        {['DS3 Member', 'CSSA Web Team', 'CSES Dev', 'Neural Computation'].map((tag) => (
-                          <span
-                            key={tag}
-                            className="px-2.5 py-0.5 rounded bg-ink/90 border border-line/80 font-mono text-[0.68rem] text-bone-dim"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-
-                      <p className="text-xs sm:text-sm text-bone-dim leading-relaxed">
-                        B.S. in <strong className="text-bone font-semibold">Cognitive Science</strong> (Machine Learning &amp; Neural Computation) from UC San Diego. Active technical contributor across DS3, CSSA Web Team, and CSES.
-                      </p>
-                    </div>
-
-                    {/* Impact / Metric badge */}
-                    <div className="mt-5 font-mono text-[0.7rem] text-cyan-400 flex items-center gap-1.5 bg-cyan-500/10 px-3 py-1.5 rounded-md border border-cyan-500/20 w-fit">
-                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-                      <span>B.S. Cognitive Science • 3.76 GPA</span>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
-              {/* Title & Metadata Below Card */}
-              <div className="mt-4 flex items-baseline justify-between gap-4">
-                <h3 className="font-display text-xl font-semibold text-bone transition-colors group-hover:text-ember flex items-center gap-2">
-                  <GraduationCap className="w-4 h-4 text-purple-400 shrink-0" />
-                  <span>UC San Diego (UCSD) Alum</span>
+            {/* Headline & Link Row */}
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pt-1">
+              <div className="space-y-2 max-w-2xl">
+                <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-bone tracking-tight">
+                  AI Engineer at Handshake AI.
                 </h3>
-                <span className="font-mono text-xs text-muted">Education</span>
+                <p className="text-bone-dim text-xs sm:text-sm leading-relaxed">
+                  Frontier LLM evaluation, golden benchmark datasets, and instruction-tuning on NVIDIA Nemotron-12B.
+                </p>
               </div>
 
-              {/* Bottom Row */}
-              <div className="mt-2 flex items-center justify-between">
-                <span className="inline-flex items-center gap-1.5 font-mono text-xs text-emerald-400">
-                  <span className="relative flex h-1.5 w-1.5">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
-                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                  </span>
-                  Graduated 2025
-                </span>
-
-                <Link
-                  href="/resume"
-                  className="font-mono text-xs text-ember hover:underline inline-flex items-center gap-1"
-                >
-                  <span>View Resume</span>
-                  <ArrowRight className="w-3 h-3" />
-                </Link>
-              </div>
-
+              <Link
+                href="/resume"
+                className="inline-flex items-center gap-1.5 font-mono text-xs text-bone-dim hover:text-ember transition-colors shrink-0 group self-start sm:self-auto"
+              >
+                <span>See the full path</span>
+                <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </Link>
             </div>
-          </ScrollReveal>
-
-        </div>
+          </div>
+        </ScrollReveal>
 
       </div>
     </section>

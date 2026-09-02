@@ -46,7 +46,22 @@ export default function ContactSection() {
       {/* Background Ambient Glow */}
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-ember/10 blur-[140px] pointer-events-none rounded-full" />
 
-      <div className="max-w-6xl mx-auto px-6 sm:px-10 relative z-10">
+      <div className="max-w-6xl mx-auto px-6 sm:px-10 relative z-10 space-y-12">
+        {/* Top Telemetry Path & Status Tag */}
+        <ScrollReveal direction="up" delay={0.05}>
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="inline-flex items-center gap-2 font-mono text-[0.72rem] text-muted">
+              <span className="text-bone">04 // COMMUNICATIONS &amp; DISPATCH</span>
+              <span className="text-line">/</span>
+              <span className="text-ember">CHANNELS OPEN</span>
+            </div>
+
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface border border-line font-mono text-xs text-bone-dim">
+              <span>Direct Inquiries Open</span>
+            </div>
+          </div>
+        </ScrollReveal>
+
         <ScrollReveal direction="up" delay={0.1}>
           <div className="text-center max-w-2xl mx-auto mb-16">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ember/10 border border-ember/30 text-ember font-mono text-xs mb-3">
