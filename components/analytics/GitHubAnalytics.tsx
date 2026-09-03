@@ -1,63 +1,14 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Github, Code2, Activity, ExternalLink, GitBranch, Terminal } from 'lucide-react';
 import { portfolioData } from '@/data/portfolio';
-import githubCache from '@/data/github-cache.json';
+import { useGitHubData } from '@/hooks/useGitHubData';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
-interface GitHubUser {
-  public_repos: number;
-  avatar_url: string;
-  html_url: string;
-  bio: string;
-}
-
-interface GitHubRepo {
-  name: string;
-  language: string | null;
-  html_url: string;
-  description: string | null;
-  pushed_at: string;
-  updated_at?: string;
-}
-
-const FALLBACK_USER: GitHubUser | null = (githubCache?.user || null) as unknown as GitHubUser;
-const FALLBACK_REPOS: GitHubRepo[] = (githubCache?.repos || []) as unknown as GitHubRepo[];
-
-const GITHUB_API_ENDPOINT =
-  process.env.NEXT_PUBLIC_GITHUB_FETCHER_URL ||
-  'https://github-meta-fetcher.vercel.app/api/github';
-
 export default function GitHubAnalytics() {
-  const [user, setUser] = useState<GitHubUser | null>(FALLBACK_USER);
-  const [repos, setRepos] = useState<GitHubRepo[]>(FALLBACK_REPOS);
-  const [, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchGitHubData() {
-      try {
-        const proxyRes = await fetch(GITHUB_API_ENDPOINT, { cache: 'no-store' });
-        if (proxyRes.ok) {
-          const payload = await proxyRes.json();
-          if (payload.user) setUser(payload.user);
-          if (Array.isArray(payload.repos) && payload.repos.length > 0) {
-            setRepos(payload.repos);
-          }
-        }
-      } catch {
-        // Fallback silently to prebuilt github-cache.json without breaking the UI
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchGitHubData();
-    const interval = setInterval(fetchGitHubData, 60 * 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const activeRepos = Array.isArray(repos) && repos.length > 0 ? repos : FALLBACK_REPOS;
+  const { user, repos } = useGitHubData();
+  const activeRepos = Array.isArray(repos) && repos.length > 0 ? repos : [];
 
   const languageMap = activeRepos.reduce((acc, repo) => {
     if (repo.language) {

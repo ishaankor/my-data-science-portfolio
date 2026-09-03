@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useState, useMemo, useEffect } from 'react';
-import githubCache from '@/data/github-cache.json';
+import React, { useState, useMemo } from 'react';
 import { portfolioData } from '@/data/portfolio';
 import { Search, ExternalLink, Layers, X, GitBranch } from 'lucide-react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import ProjectsDeepDiveShowcase from './ProjectsDeepDiveShowcase';
+import { useGitHubData } from '@/hooks/useGitHubData';
 
 export interface RepositoryItem {
   id: string | number;
@@ -70,10 +70,6 @@ const EXCLUDED_REPOS = new Set([
   'myfirstpullrequest',
   'it-cert-automation-practice',
 ]);
-
-const GITHUB_API_ENDPOINT =
-  process.env.NEXT_PUBLIC_GITHUB_FETCHER_URL ||
-  'https://github-meta-fetcher.vercel.app/api/github';
 
 function buildRepositoryMatrix(rawRepos: any[]): RepositoryItem[] {
   const map = new Map<string, RepositoryItem>();
@@ -171,44 +167,16 @@ export default function RepositoryMatrix({
   limit?: number;
   repos?: any[];
 }) {
-  const [repos, setRepos] = useState<RepositoryItem[]>(() =>
-    buildRepositoryMatrix(
-      Array.isArray(propRepos) && propRepos.length > 0
-        ? propRepos
-        : githubCache?.repos || []
-    )
-  );
+  const { repos: hookRepos } = useGitHubData();
+  const rawRepos = useMemo(() => {
+    return Array.isArray(propRepos) && propRepos.length > 0 ? propRepos : hookRepos;
+  }, [propRepos, hookRepos]);
+
+  const repos = useMemo(() => buildRepositoryMatrix(rawRepos), [rawRepos]);
   const [selectedYear, setSelectedYear] = useState<string | null>(null);
   const [selectedLanguage, setSelectedLanguage] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [hoveredYear, setHoveredYear] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (Array.isArray(propRepos) && propRepos.length > 0) {
-      setRepos(buildRepositoryMatrix(propRepos));
-    }
-  }, [propRepos]);
-
-  // Synchronize and fetch live GitHub repos in real-time
-  useEffect(() => {
-    async function fetchLiveRepositories() {
-      try {
-        const proxyRes = await fetch(GITHUB_API_ENDPOINT, { cache: 'no-store' });
-        if (proxyRes.ok) {
-          const payload = await proxyRes.json();
-          if (Array.isArray(payload.repos) && payload.repos.length > 0) {
-            setRepos(buildRepositoryMatrix(payload.repos));
-          }
-        }
-      } catch {
-        // Fallback gracefully to existing cache without direct GitHub calls
-      }
-    }
-
-    fetchLiveRepositories();
-    const interval = setInterval(fetchLiveRepositories, 60 * 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   // Compute available languages
   const availableLanguages = useMemo(() => {

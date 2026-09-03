@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo } from 'react';
 import { portfolioData } from '@/data/portfolio';
-import githubCache from '@/data/github-cache.json';
+import { useGitHubData } from '@/hooks/useGitHubData';
 import CodebaseEvolutionSuite from './CodebaseEvolutionSuite';
 import RepositoryTimeline from './RepositoryTimeline';
 import {
@@ -21,146 +21,19 @@ import {
 } from 'lucide-react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
-interface GitHubUser {
-  login: string;
-  avatar_url: string;
-  html_url: string;
-  name: string;
-  bio: string;
-  public_repos: number;
-  created_at: string;
-}
-
-interface GitHubRepo {
-  id: number;
-  name: string;
-  language: string | null;
-  html_url: string;
-  description: string | null;
-  pushed_at: string;
-  updated_at?: string;
-  topics?: string[];
-}
-
-interface CommitItem {
-  sha: string;
-  shortSha: string;
-  message: string;
-  repoName: string;
-  repoUrl: string;
-  commitUrl: string;
-  date: string;
-  timeAgo: string;
-}
-
-interface ContributionDay {
-  date: string;
-  contributionCount: number;
-  color?: string;
-}
-
-interface ContributionCalendar {
-  totalContributions: number;
-  weeks: {
-    contributionDays: ContributionDay[];
-  }[];
-}
-
-function formatTimeAgo(dateString: string): string {
-  const date = new Date(dateString);
-  const now = new Date();
-  const seconds = Math.floor((now.getTime() - date.getTime()) / 1000);
-
-  if (isNaN(seconds) || seconds < 0) return 'just now';
-  if (seconds < 60) return 'just now';
-  const minutes = Math.floor(seconds / 60);
-  if (minutes < 60) return `${minutes}m ago`;
-  const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours}h ago`;
-  const days = Math.floor(hours / 24);
-  return `${days}d ago`;
-}
-
-const FALLBACK_USER: GitHubUser = (githubCache?.user || {
-  login: 'ishaankor',
-  avatar_url: 'https://github.com/ishaankor.png',
-  html_url: 'https://github.com/ishaankor',
-  name: 'Ishaan Koradia',
-  bio: portfolioData.bio,
-  public_repos: 23,
-  created_at: '2022-01-01T00:00:00Z',
-}) as unknown as GitHubUser;
-
-const FALLBACK_REPOS: GitHubRepo[] = (githubCache?.repos || []) as unknown as GitHubRepo[];
-
-const FALLBACK_COMMITS: CommitItem[] = (githubCache?.commits || []) as unknown as CommitItem[];
-
 export default function GitHubMetaDashboard() {
-  const [user, setUser] = useState<GitHubUser>(FALLBACK_USER);
-  const [repos, setRepos] = useState<GitHubRepo[]>(FALLBACK_REPOS);
-  const [commits, setCommits] = useState<CommitItem[]>(FALLBACK_COMMITS);
-  const [contributionCalendar, setContributionCalendar] = useState<ContributionCalendar | null>(null);
-  const [, setLoading] = useState(true);
-  const [lastPolledTime, setLastPolledTime] = useState<string>('');
+  const {
+    user,
+    repos,
+    commits,
+    contributionCalendar,
+    lastPolledTime,
+  } = useGitHubData();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedLanguage, setSelectedLanguage] = useState('All');
 
-  const fetchAllGitHubData = useCallback(async () => {
-    try {
-      const endpoint =
-        process.env.NEXT_PUBLIC_GITHUB_FETCHER_URL ||
-        'https://github-meta-fetcher.vercel.app/api/github';
-      const proxyRes = await fetch(endpoint, { cache: 'no-store' });
-      if (proxyRes.ok) {
-        const payload = await proxyRes.json();
-        if (payload.user) setUser(payload.user);
-        if (Array.isArray(payload.repos) && payload.repos.length > 0) {
-          setRepos(payload.repos);
-        }
-        if (Array.isArray(payload.commits) && payload.commits.length > 0) {
-          setCommits(payload.commits);
-        }
-        if (payload.contributionCalendar) {
-          setContributionCalendar(payload.contributionCalendar);
-        }
-        setLastPolledTime(new Date().toLocaleTimeString());
-      }
-    } catch {
-      // Fallback gracefully without direct GitHub calls
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchAllGitHubData();
-
-    const commitStreamInterval = setInterval(() => {
-      fetchAllGitHubData();
-    }, 60 * 1000);
-
-    const now = new Date();
-    const midnight = new Date(now);
-    midnight.setHours(24, 0, 0, 0);
-    const msUntilMidnight = midnight.getTime() - now.getTime();
-
-    let dailyInterval: NodeJS.Timeout;
-    const midnightTimeout = setTimeout(() => {
-      fetchAllGitHubData();
-      dailyInterval = setInterval(() => {
-        fetchAllGitHubData();
-      }, 24 * 60 * 60 * 1000);
-    }, msUntilMidnight);
-
-    return () => {
-      clearInterval(commitStreamInterval);
-      clearTimeout(midnightTimeout);
-      if (dailyInterval) clearInterval(dailyInterval);
-    };
-  }, [fetchAllGitHubData]);
-
   const activeRepos = useMemo(() => {
-    return Array.isArray(repos) && repos.length > 0 ? repos : FALLBACK_REPOS;
+    return Array.isArray(repos) && repos.length > 0 ? repos : [];
   }, [repos]);
 
   const languageMap = useMemo(() => {

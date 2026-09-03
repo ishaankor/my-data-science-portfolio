@@ -15,8 +15,8 @@ import {
   Compass,
 } from 'lucide-react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
-import githubCache from '@/data/github-cache.json';
 import { portfolioData } from '@/data/portfolio';
+import { useGitHubData } from '@/hooks/useGitHubData';
 
 export interface TimelineMilestone {
   id: string | number;
@@ -56,10 +56,6 @@ const EXCLUDED_REPOS = new Set([
   'it-cert-automation-practice',
 ]);
 
-const GITHUB_API_ENDPOINT =
-  process.env.NEXT_PUBLIC_GITHUB_FETCHER_URL ||
-  'https://github-meta-fetcher.vercel.app/api/github';
-
 function buildMilestones(rawRepos?: any[]): TimelineMilestone[] {
   const map = new Map<string, TimelineMilestone>();
 
@@ -70,9 +66,7 @@ function buildMilestones(rawRepos?: any[]): TimelineMilestone[] {
   };
 
   // 1. Ingest raw GitHub repos
-  const reposToProcess = Array.isArray(rawRepos) && rawRepos.length > 0
-    ? rawRepos
-    : ((githubCache?.repos || []) as any[]);
+  const reposToProcess = Array.isArray(rawRepos) ? rawRepos : [];
 
   reposToProcess.forEach((r) => {
     if (r.private) return;
@@ -156,37 +150,10 @@ export interface RepositoryTimelineProps {
 }
 
 export default function RepositoryTimeline({ repos: propRepos }: RepositoryTimelineProps = {}) {
-  const [liveRepos, setLiveRepos] = useState<any[]>(() =>
-    Array.isArray(propRepos) && propRepos.length > 0 ? propRepos : (githubCache?.repos || [])
-  );
-
-  // Sync with prop updates
-  useEffect(() => {
-    if (Array.isArray(propRepos) && propRepos.length > 0) {
-      setLiveRepos(propRepos);
-    }
-  }, [propRepos]);
-
-  // Live polling for newly added GitHub repositories
-  useEffect(() => {
-    async function fetchLiveTimelineRepos() {
-      try {
-        const proxyRes = await fetch(GITHUB_API_ENDPOINT, { cache: 'no-store' });
-        if (proxyRes.ok) {
-          const payload = await proxyRes.json();
-          if (Array.isArray(payload.repos) && payload.repos.length > 0) {
-            setLiveRepos(payload.repos);
-          }
-        }
-      } catch {
-        // Fallback gracefully to existing cache without direct GitHub calls
-      }
-    }
-
-    fetchLiveTimelineRepos();
-    const interval = setInterval(fetchLiveTimelineRepos, 60 * 1000);
-    return () => clearInterval(interval);
-  }, []);
+  const { repos: hookRepos } = useGitHubData();
+  const liveRepos = useMemo(() => {
+    return Array.isArray(propRepos) && propRepos.length > 0 ? propRepos : hookRepos;
+  }, [propRepos, hookRepos]);
 
   const allMilestones = useMemo(() => buildMilestones(liveRepos), [liveRepos]);
   const [activeIndex, setActiveIndex] = useState<number>(() =>

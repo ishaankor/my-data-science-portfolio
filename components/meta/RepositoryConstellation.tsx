@@ -17,8 +17,8 @@ import {
   Layers,
 } from 'lucide-react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
-import githubCache from '@/data/github-cache.json';
 import { portfolioData } from '@/data/portfolio';
+import { useGitHubData } from '@/hooks/useGitHubData';
 
 interface DomainHub {
   id: string;
@@ -125,10 +125,6 @@ const DOMAINS: Omit<DomainHub, 'x' | 'y' | 'vx' | 'vy'>[] = [
   },
 ];
 
-const GITHUB_API_ENDPOINT =
-  process.env.NEXT_PUBLIC_GITHUB_FETCHER_URL ||
-  'https://github-meta-fetcher.vercel.app/api/github';
-
 export default function RepositoryConstellation({
   repos: propRepos,
 }: {
@@ -136,49 +132,20 @@ export default function RepositoryConstellation({
 } = {}) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const { repos: hookRepos } = useGitHubData();
 
-  const [liveRepos, setLiveRepos] = useState<any[]>(() =>
-    Array.isArray(propRepos) && propRepos.length > 0
-      ? propRepos
-      : (githubCache?.repos || [])
-  );
+  const liveRepos = useMemo(() => {
+    return Array.isArray(propRepos) && propRepos.length > 0 ? propRepos : hookRepos;
+  }, [propRepos, hookRepos]);
 
   const [selectedDomain, setSelectedDomain] = useState<string>('all');
   const [hoveredNode, setHoveredNode] = useState<ConstellationNode | null>(null);
   const [pinnedNode, setPinnedNode] = useState<ConstellationNode | null>(null);
   const [activeSearch, setActiveSearch] = useState<string>('');
 
-  useEffect(() => {
-    if (Array.isArray(propRepos) && propRepos.length > 0) {
-      setLiveRepos(propRepos);
-    }
-  }, [propRepos]);
-
-  useEffect(() => {
-    async function fetchConstellationRepos() {
-      try {
-        const proxyRes = await fetch(GITHUB_API_ENDPOINT, { cache: 'no-store' });
-        if (proxyRes.ok) {
-          const payload = await proxyRes.json();
-          if (Array.isArray(payload.repos) && payload.repos.length > 0) {
-            setLiveRepos(payload.repos);
-          }
-        }
-      } catch {
-        // Fallback gracefully without direct GitHub calls
-      }
-    }
-
-    fetchConstellationRepos();
-    const interval = setInterval(fetchConstellationRepos, 60 * 1000);
-    return () => clearInterval(interval);
-  }, []);
-
   // 1. Ingest repositories and map them to domain hubs with curated connections
   const { initialNodes, initialEdges } = useMemo(() => {
-    const rawRepos = Array.isArray(liveRepos) && liveRepos.length > 0
-      ? liveRepos
-      : ((githubCache?.repos || []) as any[]);
+    const rawRepos = Array.isArray(liveRepos) ? liveRepos : [];
     const curated = portfolioData.projects || [];
 
     const nodes: ConstellationNode[] = [];
