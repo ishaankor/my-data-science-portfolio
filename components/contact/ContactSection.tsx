@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { portfolioData } from '@/data/portfolio';
-import { Mail, Send, Sparkles, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Mail, Send, Sparkles, CheckCircle2, AlertCircle, Github, Linkedin, ArrowUpRight } from 'lucide-react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
 export default function ContactSection() {
@@ -40,6 +40,33 @@ export default function ContactSection() {
       setErrorMessage('Could not launch email client automatically. Please email directly.');
     }
   };
+
+  const contactChannels = [
+    {
+      name: 'Email',
+      value: portfolioData.email,
+      href: `mailto:${portfolioData.email}`,
+      icon: Mail,
+      external: false,
+      detail: 'Direct inbox correspondence',
+    },
+    {
+      name: 'LinkedIn',
+      value: 'linkedin.com/in/ishaankoradia',
+      href: portfolioData.linkedin,
+      icon: Linkedin,
+      external: true,
+      detail: 'Professional network & messaging',
+    },
+    {
+      name: 'GitHub',
+      value: `github.com/${portfolioData.githubUsername}`,
+      href: `https://github.com/${portfolioData.githubUsername}`,
+      icon: Github,
+      external: true,
+      detail: 'Open source work & commits',
+    },
+  ];
 
   return (
     <section id="contact" className="relative py-24 overflow-hidden">
@@ -84,22 +111,46 @@ export default function ContactSection() {
           {/* Left Column: Direct Contact Details */}
           <ScrollReveal direction="right" delay={0.2} className="lg:col-span-5 space-y-6 font-mono text-xs">
             <div className="p-6 rounded-xl border border-line bg-surface/80 shadow-panel space-y-6">
-              <h3 className="font-display text-lg font-bold text-bone border-b border-line pb-3">
-                Contact Information
-              </h3>
+              <div className="flex items-center justify-between border-b border-line pb-3">
+                <h3 className="font-display text-lg font-bold text-bone">
+                  Contact Information
+                </h3>
+                <span className="text-[0.65rem] text-ember uppercase tracking-wider font-mono">
+                  Direct Channels
+                </span>
+              </div>
 
-              <div className="space-y-4">
-                <div className="flex items-start gap-4">
-                  <div className="p-2.5 rounded-lg bg-ink border border-line text-ember shrink-0">
-                    <Mail className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <span className="text-muted block text-[0.68rem] uppercase tracking-wider mb-0.5">Email</span>
-                    <a href={`mailto:${portfolioData.email}`} className="text-bone hover:text-ember transition-colors font-semibold text-sm">
-                      {portfolioData.email}
+              <div className="space-y-3">
+                {contactChannels.map((channel) => {
+                  const Icon = channel.icon;
+                  return (
+                    <a
+                      key={channel.name}
+                      href={channel.href}
+                      target={channel.external ? '_blank' : undefined}
+                      rel={channel.external ? 'noopener noreferrer' : undefined}
+                      className="group flex items-start gap-3.5 p-3.5 rounded-lg border border-line/70 bg-ink/60 hover:border-ember/60 hover:bg-ink transition-all duration-200"
+                    >
+                      <div className="p-2.5 rounded-lg bg-surface border border-line text-ember group-hover:border-ember/50 group-hover:text-amber-400 group-hover:scale-105 transition-all shrink-0">
+                        <Icon className="w-4 h-4" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between gap-1 mb-0.5">
+                          <span className="text-muted text-[0.68rem] uppercase tracking-wider font-mono">
+                            {channel.name}
+                          </span>
+                          <ArrowUpRight className="w-3.5 h-3.5 text-muted group-hover:text-ember group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0" />
+                        </div>
+                        <span className="text-bone font-semibold text-sm truncate block group-hover:text-ember transition-colors">
+                          {channel.value}
+                        </span>
+                        <p className="text-[0.68rem] text-muted truncate mt-0.5">
+                          {channel.detail}
+                        </p>
+                      </div>
                     </a>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
             </div>
 

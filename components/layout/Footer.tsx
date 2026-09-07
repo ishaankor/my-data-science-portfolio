@@ -24,38 +24,16 @@ export default function Footer() {
             <Link href="/projects" className="transition-colors hover:text-bone">
               Projects
             </Link>
-            <Link href="/resume" className="transition-colors hover:text-bone">
+            <Link href="/work" className="transition-colors hover:text-bone">
               Work
             </Link>
             <Link href="/meta" className="transition-colors hover:text-bone">
               Meta
             </Link>
+            <Link href="/contact" className="transition-colors hover:text-bone">
+              Contact
+            </Link>
           </nav>
-
-          <div className="flex gap-5 font-mono text-xs">
-            <a
-              href={`https://github.com/${portfolioData.githubUsername}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted transition-colors hover:text-bone"
-            >
-              GitHub
-            </a>
-            <a
-              href={portfolioData.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted transition-colors hover:text-bone"
-            >
-              LinkedIn
-            </a>
-            <a
-              href={`mailto:${portfolioData.email}`}
-              className="text-muted transition-colors hover:text-bone"
-            >
-              Email
-            </a>
-          </div>
         </div>
 
         <div className="mt-10 flex flex-col gap-2 border-t border-line pt-6 font-mono text-[0.7rem] text-muted sm:flex-row sm:items-center sm:justify-between">

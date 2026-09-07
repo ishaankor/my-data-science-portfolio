@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Code2, Briefcase } from 'lucide-react';
 import Link from 'next/link';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
@@ -35,8 +35,8 @@ export default function AboutMeSection() {
         <ScrollReveal direction="up" delay={0.1}>
           <div>
             {/* Section Eyebrow */}
-            <div className="inline-flex items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted mb-8">
-              <span className="h-px w-6 bg-muted/60 inline-block" aria-hidden="true" />
+            <div className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted mb-8">
+              <Code2 className="w-3.5 h-3.5 text-ember" />
               <span>WHAT I DO</span>
             </div>
 
@@ -73,8 +73,8 @@ export default function AboutMeSection() {
         <ScrollReveal direction="up" delay={0.2}>
           <div className="space-y-4">
             {/* Section Eyebrow */}
-            <div className="inline-flex items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted">
-              <span className="h-px w-6 bg-muted/60 inline-block" aria-hidden="true" />
+            <div className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted">
+              <Briefcase className="w-3.5 h-3.5 text-ember" />
               <span>CURRENTLY</span>
             </div>
 
@@ -90,7 +90,7 @@ export default function AboutMeSection() {
               </div>
 
               <Link
-                href="/resume"
+                href="/work"
                 className="inline-flex items-center gap-1.5 font-mono text-xs text-bone-dim hover:text-ember transition-colors shrink-0 group self-start sm:self-auto"
               >
                 <span>See the full path</span>

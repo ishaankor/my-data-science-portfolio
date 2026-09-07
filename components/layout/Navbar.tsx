@@ -12,7 +12,7 @@ export default function Navbar() {
 
   const navLinks = [
     { href: '/projects', number: '01', label: 'Projects' },
-    { href: '/resume', number: '02', label: 'Work' },
+    { href: '/work', number: '02', label: 'Work' },
     { href: '/meta', number: '03', label: 'Meta' },
   ];
 
@@ -37,7 +37,7 @@ export default function Navbar() {
           {/* Desktop Nav Links */}
           <div className="hidden items-center gap-8 md:flex">
             {navLinks.map((link) => {
-              const isActive = pathname === link.href;
+              const isActive = pathname === link.href || (link.href === '/work' && pathname === '/resume');
               return (
                 <Link
                   key={link.href}
@@ -99,7 +99,7 @@ export default function Navbar() {
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`flex items-center gap-3 py-2 ${
-                    pathname === link.href ? 'text-bone font-bold' : 'text-muted hover:text-bone'
+                    pathname === link.href || (link.href === '/work' && pathname === '/resume') ? 'text-bone font-bold' : 'text-muted hover:text-bone'
                   }`}
                 >
                   <span className="text-[0.62rem] text-ember">{link.number}</span>
