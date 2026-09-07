@@ -1,4 +1,10 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+components/projects/ProjectsDeepDiveShowcase.tsx,5,5,tsx,4094fc5,Ishaan Kor,2026-09-07,12:29:48,-07:00,2026-09-07T12:29:48-07:00,2,"feat: implement GitHub data fetching hook and integrate enhanced analytics dashboard components"
+components/projects/RepositoryMatrix.tsx,4,19,tsx,4094fc5,Ishaan Kor,2026-09-07,12:29:48,-07:00,2026-09-07T12:29:48-07:00,2,"feat: implement GitHub data fetching hook and integrate enhanced analytics dashboard components"
+data/github-cache.json,96,96,json,4094fc5,Ishaan Kor,2026-09-07,12:29:48,-07:00,2026-09-07T12:29:48-07:00,1,"feat: implement GitHub data fetching hook and integrate enhanced analytics dashboard components"
+data/portfolio.ts,2,2,ts,4094fc5,Ishaan Kor,2026-09-07,12:29:48,-07:00,2026-09-07T12:29:48-07:00,1,"feat: implement GitHub data fetching hook and integrate enhanced analytics dashboard components"
+lib/projects.json,35,72,json,4094fc5,Ishaan Kor,2026-09-07,12:29:48,-07:00,2026-09-07T12:29:48-07:00,1,"feat: implement GitHub data fetching hook and integrate enhanced analytics dashboard components"
+projects/projects.js,28,10,js,4094fc5,Ishaan Kor,2026-09-07,12:29:48,-07:00,2026-09-07T12:29:48-07:00,1,"feat: implement GitHub data fetching hook and integrate enhanced analytics dashboard components"
 components/analytics/GitHubAnalytics.tsx,4,53,tsx,dfed65e,Ishaan Kor,2026-09-02,18:59:47,-07:00,2026-09-02T18:59:47-07:00,2,"feat: implement GitHub data fetching hook and integrate enhanced analytics dashboard components"
 components/meta/GitHubMetaDashboard.tsx,10,137,tsx,dfed65e,Ishaan Kor,2026-09-02,18:59:47,-07:00,2026-09-02T18:59:47-07:00,2,"feat: implement GitHub data fetching hook and integrate enhanced analytics dashboard components"
 components/meta/RepositoryConstellation.tsx,6,39,tsx,dfed65e,Ishaan Kor,2026-09-02,18:59:47,-07:00,2026-09-02T18:59:47-07:00,2,"feat: implement GitHub data fetching hook and integrate enhanced analytics dashboard components"
