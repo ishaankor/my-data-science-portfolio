@@ -32,6 +32,8 @@ export interface TimelineMilestone {
   metrics?: string;
   tags?: string[];
   isFeatured?: boolean;
+  migratedDate?: string;
+  inceptionDate?: string;
 }
 
 const LANGUAGE_COLORS: Record<string, string> = {
@@ -117,10 +119,30 @@ function buildMilestones(rawRepos?: any[]): TimelineMilestone[] {
       existing.tags = p.tags;
       existing.liveUrl = p.liveUrl;
       existing.isFeatured = p.featured;
+      if (p.tags && p.tags[0] && (!existing.language || existing.language === 'Code')) {
+        existing.language = p.tags[0];
+      }
       if (p.year) existing.year = p.year;
+      if (p.inceptionDate) {
+        existing.created_at = p.inceptionDate;
+        existing.inceptionDate = p.inceptionDate;
+        const dateObj = new Date(p.inceptionDate);
+        existing.formattedDate = dateObj.toLocaleDateString('en-US', {
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric',
+        });
+        existing.monthYear = dateObj.toLocaleDateString('en-US', {
+          month: 'short',
+          year: 'numeric',
+        });
+      }
+      if (p.migratedDate) {
+        existing.migratedDate = p.migratedDate;
+      }
     } else {
       const year = p.year || '2025';
-      const dateStr = `${year}-01-15T12:00:00Z`;
+      const dateStr = p.inceptionDate || `${year}-01-15T12:00:00Z`;
       const dateObj = new Date(dateStr);
       map.set(key, {
         id: p.id,
@@ -136,6 +158,8 @@ function buildMilestones(rawRepos?: any[]): TimelineMilestone[] {
         metrics: p.metrics,
         tags: p.tags,
         isFeatured: p.featured,
+        migratedDate: p.migratedDate,
+        inceptionDate: p.inceptionDate,
       });
     }
   });
@@ -622,8 +646,15 @@ export default function RepositoryTimeline({ repos: propRepos }: RepositoryTimel
 
                   <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded bg-surface border border-line text-bone font-medium text-[0.7rem]">
                     <Calendar className="w-3 h-3 text-indigo-400" />
-                    <span>{activeMilestone.formattedDate}</span>
+                    <span>{activeMilestone.migratedDate ? `Built ${activeMilestone.formattedDate}` : activeMilestone.formattedDate}</span>
                   </span>
+
+                  {activeMilestone.migratedDate && (
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded bg-amber-500/10 border border-amber-500/30 text-amber-300 font-medium text-[0.7rem]">
+                      <GitBranch className="w-3 h-3 text-amber-400" />
+                      <span>Migrated to GitHub ({activeMilestone.migratedDate})</span>
+                    </span>
+                  )}
 
                   <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-surface border border-line text-bone-dim text-[0.7rem] font-semibold">
                     <span

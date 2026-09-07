@@ -11,6 +11,8 @@ export interface Project {
   liveUrl?: string;
   featured: boolean;
   metrics?: string;
+  inceptionDate?: string;
+  migratedDate?: string;
 }
 
 export interface SkillCategory {
@@ -405,6 +407,62 @@ export const portfolioData: PortfolioData = {
       liveUrl: "https://ishaankor.github.io/my-data-science-portfolio/",
       featured: true,
       metrics: "Real-time API & 3D WebGL hero"
+    },
+    {
+      id: "canvas-files-merger",
+      title: "Canvas Files Merger",
+      year: "2023",
+      inceptionDate: "2023-10-15T00:00:00Z",
+      migratedDate: "Dec 2024",
+      category: "Automation",
+      description: "Python automation script to collect, organize, and merge files from Canvas into a single consolidated PDF file.",
+      detailedDescription: "Batch-processes coursework downloads from Canvas LMS, automatically organizing folder structures and indexing course modules into a unified PDF document.",
+      tags: ["Python", "PDF Processing", "Automation", "CLI"],
+      githubUrl: "https://github.com/ishaankor/Canvas-Files-Merger",
+      featured: false,
+      metrics: "Batch-compilation & automated indexing"
+    },
+    {
+      id: "notes-taker",
+      title: "Notes Taker",
+      year: "2023",
+      inceptionDate: "2023-11-20T00:00:00Z",
+      migratedDate: "Dec 2024",
+      category: "Automation",
+      description: "Python audio-recording utility that records audio notes, structures transcriptions, and automatically syncs to Google Drive.",
+      detailedDescription: "Streamlines lecture capture by recording ambient audio, formatting useful notes, and automatically syncing structured study materials to cloud Google Drive storage.",
+      tags: ["Python", "Audio Processing", "Google Drive API", "Automation"],
+      githubUrl: "https://github.com/ishaankor/Notes-Taker",
+      featured: false,
+      metrics: "Audio capture & automated cloud sync"
+    },
+    {
+      id: "mobile-game-automations",
+      title: "Mobile Game Automations",
+      year: "2022",
+      inceptionDate: "2022-11-15T00:00:00Z",
+      migratedDate: "Jan 2025",
+      category: "Automation",
+      description: "Python automation scripts that streamline repetitive gameplay processes and routine tasks in mobile video games.",
+      detailedDescription: "Automated macro scripts and interaction loops designed to minimize manual grinding in mobile games through headless automation routines.",
+      tags: ["Python", "Automation", "Scripting", "PyAutoGUI"],
+      githubUrl: "https://github.com/ishaankor/Mobile-Game-Automations",
+      featured: false,
+      metrics: "Game automation & task routines"
+    },
+    {
+      id: "minecraft-server-upkeeper",
+      title: "Minecraft Server Upkeeper",
+      year: "2023",
+      inceptionDate: "2023-05-15T00:00:00Z",
+      migratedDate: "Jan 2025",
+      category: "Automation",
+      description: "Automated Python and Selenium bot keeping Minecraft servers reliably online with scheduled health checks.",
+      detailedDescription: "Automates the tedious task of keeping hosted Minecraft servers awake and active via headless browser sessions with Selenium and automated uptime monitors.",
+      tags: ["Python", "Selenium", "Automation", "Bot"],
+      githubUrl: "https://github.com/ishaankor/Minecraft-Server-Upkeeper",
+      featured: false,
+      metrics: "Automated uptime & server health checks"
     }
   ],
 

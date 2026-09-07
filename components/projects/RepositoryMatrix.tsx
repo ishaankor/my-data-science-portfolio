@@ -18,6 +18,8 @@ export interface RepositoryItem {
   pushed_at?: string;
   tags?: string[];
   metrics?: string;
+  migratedDate?: string;
+  inceptionDate?: string;
 }
 
 const LANGUAGE_COLORS: Record<string, { hex: string }> = {
@@ -119,8 +121,18 @@ function buildRepositoryMatrix(rawRepos: any[]): RepositoryItem[] {
       existing.description = p.description || existing.description;
       existing.tags = p.tags;
       existing.metrics = p.metrics;
+      if (p.tags && p.tags[0] && (!existing.language || existing.language === 'Code')) {
+        existing.language = p.tags[0];
+      }
       if (p.year) {
         existing.year = p.year;
+      }
+      if (p.inceptionDate) {
+        existing.created_at = p.inceptionDate;
+        existing.inceptionDate = p.inceptionDate;
+      }
+      if (p.migratedDate) {
+        existing.migratedDate = p.migratedDate;
       }
     } else {
       map.set(key, {
@@ -130,10 +142,12 @@ function buildRepositoryMatrix(rawRepos: any[]): RepositoryItem[] {
         language: p.tags[0] || 'Code',
         html_url: p.githubUrl,
         description: p.description,
-        created_at: `${p.year || '2024'}-01-01T00:00:00Z`,
+        created_at: p.inceptionDate || `${p.year || '2024'}-01-01T00:00:00Z`,
         pushed_at: `${p.year || '2024'}-06-15T12:00:00Z`,
         tags: p.tags,
         metrics: p.metrics,
+        migratedDate: p.migratedDate,
+        inceptionDate: p.inceptionDate,
       });
     }
   });
@@ -438,10 +452,20 @@ export default function RepositoryMatrix({
                         ) : (
                           <span className="px-2.5 py-0.5 rounded bg-ink border border-line text-muted">Code</span>
                         )}
-                        <span className="text-muted flex items-center gap-1 text-[0.7rem]">
-                          <GitBranch className="w-3.5 h-3.5 text-ember" />
-                          <span>{repo.year}</span>
-                        </span>
+                        <div className="flex items-center gap-2">
+                          {repo.migratedDate && (
+                            <span
+                              className="px-1.5 py-0.5 rounded bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[0.62rem] font-medium"
+                              title={`Built in ${repo.year}, migrated to GitHub in ${repo.migratedDate}`}
+                            >
+                              Migrated
+                            </span>
+                          )}
+                          <span className="text-muted flex items-center gap-1 text-[0.7rem]">
+                            <GitBranch className="w-3.5 h-3.5 text-ember" />
+                            <span>{repo.year}</span>
+                          </span>
+                        </div>
                       </div>
 
                       {/* Title */}
@@ -458,7 +482,10 @@ export default function RepositoryMatrix({
                     {/* Card Bottom Link */}
                     <div className="pt-4 border-t border-line/60 flex items-center justify-between font-mono text-xs">
                       <span className="text-muted text-[0.68rem]">
-                        Created {repo.created_at ? new Date(repo.created_at).toLocaleDateString() : repo.year}
+                        {repo.migratedDate
+                          ? `Built ${repo.created_at ? new Date(repo.created_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : repo.year} • Migrated ${repo.migratedDate}`
+                          : `Created ${repo.created_at ? new Date(repo.created_at).toLocaleDateString() : repo.year}`
+                        }
                       </span>
                       <a
                         href={repo.html_url}
