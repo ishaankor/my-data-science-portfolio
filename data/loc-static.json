@@ -1,5 +1,19 @@
 [
   {
+    "file": "components/experience/WorkHeroHUD.tsx",
+    "added": 1,
+    "deleted": 1,
+    "type": "tsx",
+    "commit": "3cf165d",
+    "author": "Ishaan Kor",
+    "date": "2026-09-07",
+    "time": "15:48:29",
+    "timezone": "-07:00",
+    "datetime": "2026-09-07T15:48:29-07:00",
+    "depth": 2,
+    "message": "style: rename CAREER MATRIX & SYSTEM EXPERIENCE to CAREER PATHWAY in WorkHeroHUD"
+  },
+  {
     "file": "app/work/page.tsx",
     "added": 16,
     "deleted": 0,
