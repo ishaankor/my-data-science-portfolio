@@ -30,7 +30,7 @@ export default function WorkHeroHUD({
         <ScrollReveal direction="up" delay={0.05}>
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="inline-flex items-center gap-2 font-mono text-[0.72rem] text-muted">
-              <span className="text-bone">02 // CAREER MATRIX &amp; SYSTEM EXPERIENCE</span>
+              <span className="text-bone">02 // CAREER PATHWAY</span>
               <span className="text-line">/</span>
               <span className="text-ember">PRODUCTION VERIFIED</span>
             </div>
