@@ -22,6 +22,16 @@ function updateTitle() {
 }
 updateTitle();
 
+const EXCLUDED_REPOS = new Set([
+    'lab7',
+    'lab3',
+    'list-examples-grader',
+    'githubpractice',
+    'cogs108_repo',
+    'myfirstpullrequest',
+    'it-cert-automation-practice',
+]);
+
 async function syncLiveGitHubProjects() {
     try {
         let liveRepos = [];
@@ -39,12 +49,22 @@ async function syncLiveGitHubProjects() {
 
             liveRepos.forEach(r => {
                 if (r.private) return;
-                const key = (r.name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-                if (existingTitles.has(key)) return;
-                existingTitles.add(key);
+                const nameLower = (r.name || '').toLowerCase();
+                if (EXCLUDED_REPOS.has(nameLower)) return;
+                const key = nameLower.replace(/[^a-z0-9]/g, '');
 
                 const creationDate = r.created_at || r.pushed_at;
                 const year = creationDate ? new Date(creationDate).getFullYear().toString() : '2025';
+
+                const existingItem = baseProjects.find(p => p.title.toLowerCase().replace(/[^a-z0-9]/g, '') === key);
+                if (existingItem) {
+                    existingItem.title = r.name;
+                    if (creationDate) existingItem.year = year;
+                    return;
+                }
+
+                if (existingTitles.has(key)) return;
+                existingTitles.add(key);
 
                 newProjectItems.push({
                     title: r.name,
@@ -55,13 +75,11 @@ async function syncLiveGitHubProjects() {
                 });
             });
 
-            if (newProjectItems.length > 0) {
-                projects = [...baseProjects, ...newProjectItems];
-                updateTitle();
-                buildSummary();
-                buildYearButtons();
-                filterProjects();
-            }
+            projects = [...baseProjects, ...newProjectItems];
+            updateTitle();
+            buildSummary();
+            buildYearButtons();
+            filterProjects();
         }
     } catch {
         // Fallback silently

@@ -1,4 +1,11 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+components/analytics/GitHubAnalytics.tsx,4,53,tsx,dfed65e,Ishaan Kor,2026-09-02,18:59:47,-07:00,2026-09-02T18:59:47-07:00,2,"feat: implement GitHub data fetching hook and integrate enhanced analytics dashboard components"
+components/meta/GitHubMetaDashboard.tsx,10,137,tsx,dfed65e,Ishaan Kor,2026-09-02,18:59:47,-07:00,2026-09-02T18:59:47-07:00,2,"feat: implement GitHub data fetching hook and integrate enhanced analytics dashboard components"
+components/meta/RepositoryConstellation.tsx,6,39,tsx,dfed65e,Ishaan Kor,2026-09-02,18:59:47,-07:00,2026-09-02T18:59:47-07:00,2,"feat: implement GitHub data fetching hook and integrate enhanced analytics dashboard components"
+components/meta/RepositoryTimeline.tsx,6,39,tsx,dfed65e,Ishaan Kor,2026-09-02,18:59:47,-07:00,2026-09-02T18:59:47-07:00,2,"feat: implement GitHub data fetching hook and integrate enhanced analytics dashboard components"
+components/projects/RepositoryMatrix.tsx,8,40,tsx,dfed65e,Ishaan Kor,2026-09-02,18:59:47,-07:00,2026-09-02T18:59:47-07:00,2,"feat: implement GitHub data fetching hook and integrate enhanced analytics dashboard components"
+data/github-cache.json,19,19,json,dfed65e,Ishaan Kor,2026-09-02,18:59:47,-07:00,2026-09-02T18:59:47-07:00,1,"feat: implement GitHub data fetching hook and integrate enhanced analytics dashboard components"
+hooks/useGitHubData.ts,201,0,ts,dfed65e,Ishaan Kor,2026-09-02,18:59:47,-07:00,2026-09-02T18:59:47-07:00,1,"feat: implement GitHub data fetching hook and integrate enhanced analytics dashboard components"
 components/contact/ContactSection.tsx,16,1,tsx,7d34cb0,Ishaan Kor,2026-09-02,00:40:46,-07:00,2026-09-02T00:40:46-07:00,2,"refactor: update project components and refresh static build assets for the portfolio site."
 components/experience/WorkHeroHUD.tsx,2,6,tsx,7d34cb0,Ishaan Kor,2026-09-02,00:40:46,-07:00,2026-09-02T00:40:46-07:00,2,"refactor: update project components and refresh static build assets for the portfolio site."
 components/hero/HeroMemojiInteractive.tsx,5,6,tsx,7d34cb0,Ishaan Kor,2026-09-02,00:40:46,-07:00,2026-09-02T00:40:46-07:00,2,"refactor: update project components and refresh static build assets for the portfolio site."

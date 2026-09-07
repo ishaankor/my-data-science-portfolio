@@ -104,43 +104,28 @@ function buildRepositoryMatrix(rawRepos: any[]): RepositoryItem[] {
     });
   });
 
-  // 2. Merge public portfolio projects, enriching or adding items seamlessly without duplicates
+  // 2. Enrich matched GitHub repos with curated portfolio metadata (preserving GitHub repo titles)
   (portfolioData.projects || []).forEach((p) => {
     if (!p.githubUrl || !p.githubUrl.startsWith('https://github.com/')) {
-      const fallbackKey = p.title.toLowerCase().replace(/[^a-z0-9]/g, '');
-      if (!map.has(fallbackKey)) {
-        map.set(fallbackKey, {
-          id: p.id,
-          name: p.title,
-          year: p.year || '2024',
-          language: p.tags[0] || 'Code',
-          html_url: p.liveUrl || '#',
-          description: p.description,
-          created_at: `${p.year || '2024'}-01-01T00:00:00Z`,
-          pushed_at: `${p.year || '2024'}-06-15T12:00:00Z`,
-          tags: p.tags,
-          metrics: p.metrics,
-        });
-      }
       return;
     }
 
     const key = getRepoKey(p.githubUrl, p.title);
     const existing = map.get(key);
+    const repoSlug = p.githubUrl.replace(/\/+$/, '').split('/').pop() || p.title;
 
     if (existing) {
-      existing.name = p.title;
+      // Retain only the title of the GitHub repo
       existing.description = p.description || existing.description;
       existing.tags = p.tags;
       existing.metrics = p.metrics;
-      // Curated project creation year takes precedence
       if (p.year) {
         existing.year = p.year;
       }
     } else {
       map.set(key, {
         id: p.id,
-        name: p.title,
+        name: repoSlug, // Only keep the title of the GitHub repo
         year: p.year || '2024',
         language: p.tags[0] || 'Code',
         html_url: p.githubUrl,

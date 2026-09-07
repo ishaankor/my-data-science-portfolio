@@ -384,12 +384,12 @@ export const portfolioData: PortfolioData = {
     {
       id: "daily-motivation",
       title: "Daily Motivation Twitter/X Bot",
-      year: "2023",
+      year: "2022",
       category: "Automation",
       description: "Automated Python Twitter/X bot delivering daily content and logging engagement in PostgreSQL.",
       detailedDescription: "Automated Python cron pipeline polling interactions and persisting analytics to PostgreSQL.",
       tags: ["Python", "PostgreSQL", "Twitter API", "Automation", "NLP"],
-      githubUrl: "https://github.com/ishaankor/daily-motivation",
+      githubUrl: "https://github.com/ishaankor/Daily-Motivation-",
       featured: true,
       metrics: "Daily polls across 5,000+ impressions"
     },

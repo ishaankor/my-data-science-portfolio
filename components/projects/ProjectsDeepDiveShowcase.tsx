@@ -281,7 +281,7 @@ export default function ProjectsDeepDiveShowcase() {
             {/* Real Project Thumbnail Frame Left */}
             <div className="lg:col-span-6 order-2 lg:order-1">
               <a
-                href="https://github.com/ishaankor/daily-motivation"
+                href="https://github.com/ishaankor/Daily-Motivation-"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block rounded-2xl border border-line/80 bg-ink/95 shadow-2xl overflow-hidden group hover:border-ember/60 transition-all duration-300 transform hover:-translate-y-1"
@@ -294,7 +294,7 @@ export default function ProjectsDeepDiveShowcase() {
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
                   </div>
                   <span className="font-mono text-[0.7rem] text-muted group-hover:text-ember transition-colors flex items-center gap-1">
-                    github.com/ishaankor/daily-motivation
+                    github.com/ishaankor/Daily-Motivation-
                     <ExternalLink className="w-2.5 h-2.5 inline" />
                   </span>
                   <div className="w-8" />
@@ -316,7 +316,7 @@ export default function ProjectsDeepDiveShowcase() {
             <div className="lg:col-span-6 space-y-5 order-1 lg:order-2">
               <div className="font-mono text-xs text-muted flex items-center gap-3">
                 <span className="font-bold text-bone">03</span>
-                <span>2023</span>
+                <span>2022</span>
                 <span className="text-muted/60">—</span>
                 <span className="inline-flex items-center gap-1.5 text-ember font-medium">
                   <span className="w-2 h-2 rounded-full bg-ember animate-pulse" />
@@ -361,7 +361,7 @@ export default function ProjectsDeepDiveShowcase() {
               {/* Action Links */}
               <div className="flex items-center gap-6 pt-3 font-mono text-xs">
                 <a
-                  href="https://github.com/ishaankor/daily-motivation"
+                  href="https://github.com/ishaankor/Daily-Motivation-"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-ember hover:underline font-semibold inline-flex items-center gap-1.5 group"
@@ -371,7 +371,7 @@ export default function ProjectsDeepDiveShowcase() {
                 </a>
 
                 <a
-                  href="https://github.com/ishaankor/daily-motivation#readme"
+                  href="https://github.com/ishaankor/Daily-Motivation-#readme"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-muted hover:text-bone transition-colors inline-flex items-center gap-1"
