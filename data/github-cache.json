@@ -1,16 +1,26 @@
 {
-  "updatedAt": "2026-09-07T21:35:03.543Z",
-  "totalRepos": 19,
+  "updatedAt": "2026-09-11T23:19:16.739Z",
+  "totalRepos": 20,
   "user": {
     "login": "ishaankor",
     "avatar_url": "https://avatars.githubusercontent.com/u/113160688?v=4",
     "html_url": "https://github.com/ishaankor",
     "name": "Ishaan",
     "bio": "An AI engineer who loves to automate the tedious works of life through programming and coding!",
-    "public_repos": 21,
+    "public_repos": 22,
     "created_at": "2022-09-09T04:43:15Z"
   },
   "repos": [
+    {
+      "id": 1360924158,
+      "name": "Claimr-",
+      "language": "JavaScript",
+      "html_url": "https://github.com/ishaankor/Claimr-",
+      "description": null,
+      "created_at": "2026-09-08T04:35:15Z",
+      "pushed_at": "2026-09-11T00:55:54Z",
+      "updated_at": "2026-09-11T01:45:35Z"
+    },
     {
       "id": 915475199,
       "name": "my-data-science-portfolio",
@@ -18,8 +28,8 @@
       "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
       "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
       "created_at": "2025-01-11T23:48:23Z",
-      "pushed_at": "2026-09-07T20:52:54Z",
-      "updated_at": "2026-09-07T20:52:58Z"
+      "pushed_at": "2026-09-07T22:49:17Z",
+      "updated_at": "2026-09-07T22:49:35Z"
     },
     {
       "id": 534513593,
@@ -204,58 +214,58 @@
   ],
   "commits": [
     {
-      "sha": "326fa6e187d10e05e774ac7730d491f4ee2112df",
-      "shortSha": "326fa6e",
-      "message": "feat: update portfolio data and refresh static build artifacts for core pages",
-      "repoName": "my-data-science-portfolio",
-      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
-      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/326fa6e187d10e05e774ac7730d491f4ee2112df",
-      "date": "2026-09-07T20:52:06Z",
-      "timeAgo": "41m ago"
+      "sha": "0378be298023cbf2032e254f0dbd76522e9c0bd1",
+      "shortSha": "0378be2",
+      "message": "feat: implement custom cross-platform floating notification banner with audio chime and remove legacy test notification utilities",
+      "repoName": "Claimr-",
+      "repoUrl": "https://github.com/ishaankor/Claimr-",
+      "commitUrl": "https://github.com/ishaankor/Claimr-/commit/0378be298023cbf2032e254f0dbd76522e9c0bd1",
+      "date": "2026-09-11T00:38:46Z",
+      "timeAgo": "22h ago"
     },
     {
-      "sha": "4094fc52b3edfaaf6683ab868b3ecd191f6da03e",
-      "shortSha": "4094fc5",
-      "message": "feat: implement GitHub data fetching hook and integrate enhanced analytics dashboard components",
-      "repoName": "my-data-science-portfolio",
-      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
-      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/4094fc52b3edfaaf6683ab868b3ecd191f6da03e",
-      "date": "2026-09-07T19:29:50Z",
-      "timeAgo": "2h ago"
+      "sha": "c2a3527c6790ad974cd310d895d5d7df4ac784a9",
+      "shortSha": "c2a3527",
+      "message": "feat: implement native notification system with test script, IPC support, and hardened macOS app signing",
+      "repoName": "Claimr-",
+      "repoUrl": "https://github.com/ishaankor/Claimr-",
+      "commitUrl": "https://github.com/ishaankor/Claimr-/commit/c2a3527c6790ad974cd310d895d5d7df4ac784a9",
+      "date": "2026-09-10T20:27:24Z",
+      "timeAgo": "1d ago"
     },
     {
-      "sha": "4b151f9ffee7fcf1882ed274d33b5aa01e2fbc66",
-      "shortSha": "4b151f9",
-      "message": "refactor: remove Canopy API integration and update retailer status information",
-      "repoName": "RigScouter-AI-DataBase-",
-      "repoUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
-      "commitUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-/commit/4b151f9ffee7fcf1882ed274d33b5aa01e2fbc66",
-      "date": "2026-09-07T03:52:55Z",
-      "timeAgo": "17h ago"
+      "sha": "2a376b7a09e48c8a58f0eb550e5bc4fbe720f329",
+      "shortSha": "2a376b7",
+      "message": "feat: request native system notification permission on app startup",
+      "repoName": "Claimr-",
+      "repoUrl": "https://github.com/ishaankor/Claimr-",
+      "commitUrl": "https://github.com/ishaankor/Claimr-/commit/2a376b7a09e48c8a58f0eb550e5bc4fbe720f329",
+      "date": "2026-09-10T18:38:07Z",
+      "timeAgo": "1d ago"
     },
     {
-      "sha": "40017190a7755b33c40128053732258015424aeb",
-      "shortSha": "4001719",
-      "message": "feat: implement Canopy API integration for Amazon products and add robust eBay item lookup via API",
-      "repoName": "RigScouter-AI-DataBase-",
-      "repoUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
-      "commitUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-/commit/40017190a7755b33c40128053732258015424aeb",
-      "date": "2026-09-07T03:40:10Z",
-      "timeAgo": "17h ago"
+      "sha": "4a0a054083fb3a65b1f9b7d5d6f9f969877efe3b",
+      "shortSha": "4a0a054",
+      "message": "refactor: improve cross-platform notifications using execFile and add automated desktop alerts for headless operations",
+      "repoName": "Claimr-",
+      "repoUrl": "https://github.com/ishaankor/Claimr-",
+      "commitUrl": "https://github.com/ishaankor/Claimr-/commit/4a0a054083fb3a65b1f9b7d5d6f9f969877efe3b",
+      "date": "2026-09-10T18:08:33Z",
+      "timeAgo": "1d ago"
     },
     {
-      "sha": "7e273de0ef41e1bc139a236a676bf3d871e6789b",
-      "shortSha": "7e273de",
-      "message": "feat: add daily hardware price refresh automation with GitHub Action and server background task",
-      "repoName": "RigScouter-AI-DataBase-",
-      "repoUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
-      "commitUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-/commit/7e273de0ef41e1bc139a236a676bf3d871e6789b",
-      "date": "2026-09-05T09:21:11Z",
-      "timeAgo": "2d ago"
+      "sha": "e2696157e500f85830b4dedb8cf65304aeaaa686",
+      "shortSha": "e269615",
+      "message": "(v1.1.0) feat: implement multi-account claiming support, optimize service interval, and update background process monitoring",
+      "repoName": "Claimr-",
+      "repoUrl": "https://github.com/ishaankor/Claimr-",
+      "commitUrl": "https://github.com/ishaankor/Claimr-/commit/e2696157e500f85830b4dedb8cf65304aeaaa686",
+      "date": "2026-09-10T17:31:24Z",
+      "timeAgo": "1d ago"
     }
   ],
   "contributionCalendar": {
-    "totalContributions": 785,
+    "totalContributions": 814,
     "weeks": [
       {
         "contributionDays": [
@@ -2294,8 +2304,28 @@
           },
           {
             "date": "2026-09-07",
-            "contributionCount": 2,
+            "contributionCount": 13,
             "color": "#9be9a8"
+          },
+          {
+            "date": "2026-09-08",
+            "contributionCount": 12,
+            "color": "#9be9a8"
+          },
+          {
+            "date": "2026-09-09",
+            "contributionCount": 0,
+            "color": "#ebedf0"
+          },
+          {
+            "date": "2026-09-10",
+            "contributionCount": 6,
+            "color": "#9be9a8"
+          },
+          {
+            "date": "2026-09-11",
+            "contributionCount": 0,
+            "color": "#ebedf0"
           }
         ]
       }

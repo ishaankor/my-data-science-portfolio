@@ -55,8 +55,8 @@ export default function CertificationsSection() {
                     <div className="w-10 h-10 rounded-xl bg-ink border border-line flex items-center justify-center shadow-sm">
                       {certIcons[idx]}
                     </div>
-                    <span className="font-mono text-[0.68rem] text-muted bg-ink px-2.5 py-0.5 rounded border border-line/60">
-                      Credential
+                    <span className="font-mono text-[0.68rem] text-emerald-400 bg-emerald-500/10 border border-emerald-500/25 px-2.5 py-0.5 rounded">
+                      Verified
                     </span>
                   </div>
 
@@ -82,7 +82,7 @@ export default function CertificationsSection() {
                 </div>
 
                 {/* Skills Footer */}
-                <div className="pt-4 border-t border-line/60">
+                <div className="pt-4 border-t border-line/60 flex flex-col gap-2">
                   <div className="flex flex-wrap gap-1.5 font-mono text-[10px]">
                     {cert.skills.map((skill) => (
                       <span

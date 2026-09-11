@@ -1,4 +1,9 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+components/experience/WorkHeroHUD.tsx,1,1,tsx,3cf165d,Ishaan Kor,2026-09-07,15:48:29,-07:00,2026-09-07T15:48:29-07:00,2,"style: rename CAREER MATRIX & SYSTEM EXPERIENCE to CAREER PATHWAY in WorkHeroHUD"
+app/work/page.tsx,16,0,tsx,ab3b8d7,Ishaan Kor,2026-09-07,15:30:48,-07:00,2026-09-07T15:30:48-07:00,2,"feat: add work page and update project layout with refreshed build artifacts"
+components/contact/ContactSection.tsx,67,16,tsx,ab3b8d7,Ishaan Kor,2026-09-07,15:30:48,-07:00,2026-09-07T15:30:48-07:00,2,"feat: add work page and update project layout with refreshed build artifacts"
+components/sections/AboutMeSection.tsx,6,6,tsx,ab3b8d7,Ishaan Kor,2026-09-07,15:30:48,-07:00,2026-09-07T15:30:48-07:00,2,"feat: add work page and update project layout with refreshed build artifacts"
+data/github-cache.json,18,18,json,ab3b8d7,Ishaan Kor,2026-09-07,15:30:48,-07:00,2026-09-07T15:30:48-07:00,1,"feat: add work page and update project layout with refreshed build artifacts"
 components/meta/RepositoryTimeline.tsx,33,2,tsx,326fa6e,Ishaan Kor,2026-09-07,13:52:04,-07:00,2026-09-07T13:52:04-07:00,2,"feat: update portfolio data and refresh static build artifacts for core pages"
 components/projects/RepositoryMatrix.tsx,33,6,tsx,326fa6e,Ishaan Kor,2026-09-07,13:52:04,-07:00,2026-09-07T13:52:04-07:00,2,"feat: update portfolio data and refresh static build artifacts for core pages"
 data/github-cache.json,26,26,json,326fa6e,Ishaan Kor,2026-09-07,13:52:04,-07:00,2026-09-07T13:52:04-07:00,1,"feat: update portfolio data and refresh static build artifacts for core pages"

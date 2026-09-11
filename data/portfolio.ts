@@ -50,6 +50,7 @@ export interface CertificationItem {
   description: string[];
   badgeColor?: string;
   iconType?: string;
+  credentialUrl?: string;
 }
 
 export interface TechnicalSkillsDetailed {
@@ -209,60 +210,6 @@ export const portfolioData: PortfolioData = {
       ],
       skills: ["Computer Vision", "OpenCV", "Machine Learning", "Environmental ML", "Cross-Functional Leadership", "Real-Time Detection"],
       type: "work"
-    },
-    {
-      id: "exp-datafy",
-      role: "Lead Architect — AI-Assisted Canvas (Datafy!)",
-      organization: "Datafy AI Engine",
-      organizationType: "project",
-      period: "Jan 2026 – Present",
-      location: "Production Platform",
-      featuredMetric: "25,000+ Weekly Requests",
-      awardOrHighlight: "99% Error-Free Serverless Execution",
-      githubUrl: "https://github.com/ishaankor/Datafy",
-      description: [
-        "Architected node-based reflection agent converting CSV uploads into composed visual canvases.",
-        "Engineered LangChain analysis nodes for schema validation and automated chart generation.",
-        "Scaled serverless engine to 25k+ weekly requests with ~99% error-free execution."
-      ],
-      skills: ["Python", "LangChain", "FastAPI", "Pandas", "Agentic Workflows", "Serverless Architecture", "Reflection Nodes"],
-      type: "project"
-    },
-    {
-      id: "exp-ishaanbot",
-      role: "Creator & Engineer — Personal AI Chatbot (IshaanBot)",
-      organization: "Model Context Protocol Suite",
-      organizationType: "project",
-      period: "Jul 2025 – Present",
-      location: "Open Source Systems",
-      featuredMetric: "15+ MCP Composable Tools",
-      awardOrHighlight: "Production MCP & FastMCP Infrastructure",
-      githubUrl: "https://github.com/ishaankor/my-personal-website",
-      description: [
-        "Built modular LLM assistant using Model Context Protocol (MCP) with 15+ composable tools.",
-        "Architected rate-limited FastAPI backend with automated CI/CD for real-time streaming inference.",
-        "Integrated RAG pipelines and tool-routing for persistent context across user sessions."
-      ],
-      skills: ["Python", "Gemini API", "FastAPI", "Docker", "Model Context Protocol (MCP)", "RAG Pipelines", "CI/CD"],
-      type: "project"
-    },
-    {
-      id: "exp-transformi",
-      role: "Lead Systems Engineer — Transformative Data Bot (Transformi!)",
-      organization: "Distributed Discord ML Bot",
-      organizationType: "project",
-      period: "Dec 2024 – June 2025",
-      location: "Production Community",
-      featuredMetric: "10,000+ Users Served",
-      awardOrHighlight: "Parallelized Async ML Pipelines",
-      githubUrl: "https://github.com/ishaankor/Transformi",
-      description: [
-        "Engineered Discord ML bot serving 10k+ users with parallelized ETL pipelines.",
-        "Implemented async backend architecture for concurrent regression model training.",
-        "Built multi-source data ingestion via Kaggle API, direct CSV uploads, and manual entry."
-      ],
-      skills: ["Python", "asyncio", "TensorFlow", "scikit-learn", "Discord API", "Parallel ETL", "Kaggle API"],
-      type: "project"
     },
     {
       id: "exp-ucsd-degree",

@@ -4,10 +4,10 @@ import React from 'react';
 import {
   Terminal,
   Cpu,
-  Layers,
   GraduationCap,
-  Code2,
   Sparkles,
+  Award,
+  ShieldCheck,
 } from 'lucide-react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
@@ -30,14 +30,14 @@ export default function WorkHeroHUD({
         <ScrollReveal direction="up" delay={0.05}>
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="inline-flex items-center gap-2 font-mono text-[0.72rem] text-muted">
-              <span className="text-bone">02 // CAREER PATHWAY</span>
+              <span className="text-bone">02 // CAREER &amp; CREDENTIALS</span>
               <span className="text-line">/</span>
               <span className="text-ember">PRODUCTION VERIFIED</span>
             </div>
 
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 font-mono text-xs text-emerald-400">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              <span>Available for AI/ML Engineering</span>
+              <span>Available for AI/ML Engineering roles</span>
             </div>
           </div>
         </ScrollReveal>
@@ -46,11 +46,11 @@ export default function WorkHeroHUD({
         <ScrollReveal direction="up" delay={0.1}>
           <div className="space-y-4">
             <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-bone tracking-tight leading-[1.12]">
-              Experience & Impact
+              Experience &amp; Credentials
             </h1>
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
               <p className="text-bone-dim text-base sm:text-lg leading-relaxed max-w-2xl">
-                AI Engineer specializing in frontier LLM evaluation, agentic workflows, MCP integrations, and production ML pipelines.
+                AI Engineer specializing in frontier LLM evaluation, golden benchmark datasets, and production ML pipelines.
               </p>
               
               <div className="flex items-center gap-3 shrink-0 font-mono text-xs">
@@ -83,21 +83,7 @@ export default function WorkHeroHUD({
         <ScrollReveal direction="up" delay={0.15}>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2">
             
-            {/* Card 1: Degree & GPA */}
-            <div className="rounded-xl border border-line bg-surface/70 p-5 shadow-panel flex flex-col justify-between hover:border-cyan-500/40 transition-colors">
-              <div className="flex items-center justify-between text-cyan-400 mb-3">
-                <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
-                  <GraduationCap className="w-4 h-4 text-cyan-400" />
-                </div>
-                <span className="font-mono text-[0.65rem] text-cyan-400/80 uppercase font-semibold">UCSD Honors</span>
-              </div>
-              <div>
-                <p className="font-display text-3xl font-bold text-bone">3.76</p>
-                <p className="font-mono text-xs text-muted mt-1">B.S. Cognitive Science (ML)</p>
-              </div>
-            </div>
-
-            {/* Card 2: Model Evaluation & Handshake/NVIDIA */}
+            {/* Card 1: Handshake AI / Frontier AI (Work) */}
             <div className="rounded-xl border border-line bg-surface/70 p-5 shadow-panel flex flex-col justify-between hover:border-indigo-500/40 transition-colors">
               <div className="flex items-center justify-between text-indigo-400 mb-3">
                 <div className="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center">
@@ -111,31 +97,45 @@ export default function WorkHeroHUD({
               </div>
             </div>
 
-            {/* Card 3: Agentic Scale (Datafy!) */}
-            <div className="rounded-xl border border-line bg-surface/70 p-5 shadow-panel flex flex-col justify-between hover:border-ember/40 transition-colors">
-              <div className="flex items-center justify-between text-ember mb-3">
-                <div className="w-8 h-8 rounded-lg bg-ember/10 border border-ember/20 flex items-center justify-center">
-                  <Layers className="w-4 h-4 text-ember" />
+            {/* Card 2: Verizon Project Engineering (Work) */}
+            <div className="rounded-xl border border-line bg-surface/70 p-5 shadow-panel flex flex-col justify-between hover:border-amber-500/40 transition-colors">
+              <div className="flex items-center justify-between text-amber-400 mb-3">
+                <div className="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
+                  <Award className="w-4 h-4 text-amber-400" />
                 </div>
-                <span className="font-mono text-[0.65rem] text-ember/80 uppercase font-semibold">Datafy! Agent</span>
+                <span className="font-mono text-[0.65rem] text-amber-400/80 uppercase font-semibold">Verizon Eng</span>
               </div>
               <div>
-                <p className="font-display text-3xl font-bold text-bone">25k+</p>
-                <p className="font-mono text-xs text-muted mt-1">Weekly Requests (~99% Clean)</p>
+                <p className="font-display text-3xl font-bold text-bone">#1 / 15</p>
+                <p className="font-mono text-xs text-muted mt-1">1st Place Innovation Award</p>
               </div>
             </div>
 
-            {/* Card 4: Discord Bot Community Scale */}
-            <div className="rounded-xl border border-line bg-surface/70 p-5 shadow-panel flex flex-col justify-between hover:border-purple-500/40 transition-colors">
-              <div className="flex items-center justify-between text-purple-400 mb-3">
-                <div className="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center">
-                  <Code2 className="w-4 h-4 text-purple-400" />
+            {/* Card 3: Degree & GPA (Education) */}
+            <div className="rounded-xl border border-line bg-surface/70 p-5 shadow-panel flex flex-col justify-between hover:border-cyan-500/40 transition-colors">
+              <div className="flex items-center justify-between text-cyan-400 mb-3">
+                <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
+                  <GraduationCap className="w-4 h-4 text-cyan-400" />
                 </div>
-                <span className="font-mono text-[0.65rem] text-purple-400/80 uppercase font-semibold">Scale</span>
+                <span className="font-mono text-[0.65rem] text-cyan-400/80 uppercase font-semibold">UCSD Honors</span>
               </div>
               <div>
-                <p className="font-display text-3xl font-bold text-bone">10k+</p>
-                <p className="font-mono text-xs text-muted mt-1">Users on Transformi! ML</p>
+                <p className="font-display text-3xl font-bold text-bone">3.76</p>
+                <p className="font-mono text-xs text-muted mt-1">B.S. Cognitive Science (ML)</p>
+              </div>
+            </div>
+
+            {/* Card 4: Verified Credentials (Certification) */}
+            <div className="rounded-xl border border-line bg-surface/70 p-5 shadow-panel flex flex-col justify-between hover:border-emerald-500/40 transition-colors">
+              <div className="flex items-center justify-between text-emerald-400 mb-3">
+                <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+                  <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                </div>
+                <span className="font-mono text-[0.65rem] text-emerald-400/80 uppercase font-semibold">Credentials</span>
+              </div>
+              <div>
+                <p className="font-display text-3xl font-bold text-bone">3</p>
+                <p className="font-mono text-xs text-muted mt-1">Industry Certifications</p>
               </div>
             </div>
 

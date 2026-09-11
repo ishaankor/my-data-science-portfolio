@@ -16,23 +16,18 @@ import {
   Workflow,
   CheckCircle2,
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
 export default function ExperienceMatrix({ isTerminalMode }: { isTerminalMode: boolean }) {
-  const [selectedFilter, setSelectedFilter] = useState<'all' | 'work' | 'project' | 'education'>('all');
-  const [terminalCommand, setTerminalCommand] = useState<string>('cat resume.json');
+  const [terminalCommand, setTerminalCommand] = useState<string>('whoami');
+  const [customInput, setCustomInput] = useState<string>('');
 
-  const filteredItems = portfolioData.experience.filter((item) => {
-    if (selectedFilter === 'all') return true;
-    return item.type === selectedFilter;
-  });
+  const items = portfolioData.experience;
 
   const getIconForType = (item: ExperienceItem) => {
     if (item.type === 'education') return <GraduationCap className="w-5 h-5 text-cyan-400" />;
     if (item.id === 'exp-handshake-ai') return <Cpu className="w-5 h-5 text-indigo-400" />;
     if (item.id === 'exp-verizon') return <Award className="w-5 h-5 text-amber-400" />;
-    if (item.type === 'project') return <Workflow className="w-5 h-5 text-ember" />;
     return <Briefcase className="w-5 h-5 text-ember" />;
   };
 
@@ -50,81 +45,25 @@ export default function ExperienceMatrix({ isTerminalMode }: { isTerminalMode: b
     return 'bg-ember/10 text-ember border-ember/30';
   };
 
-  // Sync tab filter clicks with terminal command when in CLI mode
-  const handleTabClick = (tabId: 'all' | 'work' | 'project' | 'education') => {
-    setSelectedFilter(tabId);
-    if (tabId === 'all') setTerminalCommand('cat resume.json');
-    else if (tabId === 'work') setTerminalCommand('cat experience_work.json');
-    else if (tabId === 'project') setTerminalCommand('cat ai_systems.json');
-    else if (tabId === 'education') setTerminalCommand('cat academics_ucsd.json');
-  };
-
   return (
     <section className="py-16 sm:py-24 relative" id="experience-matrix">
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-10 space-y-10">
         
-        {/* Section Header & Interactive Filter Bar */}
+        {/* Section Header */}
         <ScrollReveal direction="up" delay={0.1}>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-line">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-line">
             <div className="space-y-1">
               <span className="inline-flex items-center gap-2 font-mono text-xs text-muted uppercase tracking-wider">
                 <Workflow className="w-3.5 h-3.5 text-ember" />
-                Technical Trajectory &amp; Operations
+                Career &amp; Academic Trajectory
               </span>
               <h2 className="font-display text-2xl sm:text-4xl font-bold text-bone tracking-tight">
-                {selectedFilter === 'all'
-                  ? 'All Career Operations'
-                  : selectedFilter === 'work'
-                  ? 'Industry Experience & Contracts'
-                  : selectedFilter === 'project'
-                  ? 'Technical Systems & AI Platforms'
-                  : 'Academics & Research'}
+                Work Experience &amp; Education
               </h2>
             </div>
-
-            {/* Filter Pills with Counts */}
-            <div className="flex flex-wrap items-center gap-2 font-mono text-xs">
-              {[
-                { id: 'all', label: 'All Operations', count: portfolioData.experience.length },
-                {
-                  id: 'work',
-                  label: 'Work & Industry',
-                  count: portfolioData.experience.filter((e) => e.type === 'work').length,
-                },
-                {
-                  id: 'project',
-                  label: 'AI Systems',
-                  count: portfolioData.experience.filter((e) => e.type === 'project').length,
-                },
-                {
-                  id: 'education',
-                  label: 'Academics',
-                  count: portfolioData.experience.filter((e) => e.type === 'education').length,
-                },
-              ].map((tab) => {
-                const isActive = selectedFilter === tab.id;
-                return (
-                  <button
-                    key={tab.id}
-                    onClick={() => handleTabClick(tab.id as any)}
-                    className={`px-3.5 py-2 rounded-lg transition-all font-mono text-xs flex items-center gap-2 ${
-                      isActive
-                        ? 'bg-gradient-to-r from-ember to-amber-500 text-ink font-bold shadow-md shadow-ember/25 transform scale-[1.02]'
-                        : 'bg-surface border border-line text-muted hover:text-bone hover:border-line/90'
-                    }`}
-                  >
-                    <span>{tab.label}</span>
-                    <span
-                      className={`px-1.5 py-0.2 rounded text-[10px] ${
-                        isActive ? 'bg-ink/30 text-ink font-extrabold' : 'bg-ink text-muted'
-                      }`}
-                    >
-                      {tab.count}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
+            <span className="font-mono text-xs text-muted">
+              {items.length} Verified Milestones
+            </span>
           </div>
         </ScrollReveal>
 
@@ -151,31 +90,27 @@ export default function ExperienceMatrix({ isTerminalMode }: { isTerminalMode: b
 
               {/* Command Shortcut Buttons */}
               <div className="px-4 py-2 bg-surface/40 border-b border-line flex flex-wrap items-center gap-2 text-xs">
-                <span className="text-muted">Commands:</span>
+                <span className="text-muted">Quick run:</span>
                 {[
-                  { cmd: 'cat resume.json', label: 'All (resume.json)' },
-                  { cmd: 'cat experience_work.json', label: 'Work (Handshake/Verizon)' },
-                  { cmd: 'cat ai_systems.json', label: 'AI Systems (Datafy/IshaanBot)' },
-                  { cmd: 'cat academics_ucsd.json', label: 'Academics (UCSD)' },
-                  { cmd: 'git log --career', label: 'Git Timeline' },
-                  { cmd: 'skills --verbose', label: 'Skills' },
+                  { cmd: 'whoami', label: 'whoami' },
+                  { cmd: 'tree', label: 'tree (career)' },
+                  { cmd: 'git log', label: 'git log' },
+                  { cmd: 'stack', label: 'cat stack.txt' },
+                  { cmd: 'status', label: 'status' },
+                  { cmd: 'help', label: 'help' },
                 ].map((item) => (
                   <button
                     key={item.cmd}
                     onClick={() => {
                       setTerminalCommand(item.cmd);
-                      if (item.cmd.includes('work')) setSelectedFilter('work');
-                      else if (item.cmd.includes('ai_systems')) setSelectedFilter('project');
-                      else if (item.cmd.includes('academics')) setSelectedFilter('education');
-                      else if (item.cmd.includes('resume')) setSelectedFilter('all');
                     }}
-                    className={`px-2.5 py-1 rounded text-xs transition-colors ${
-                      terminalCommand === item.cmd
+                    className={`px-2.5 py-1 rounded text-xs font-mono transition-colors ${
+                      terminalCommand.startsWith(item.cmd)
                         ? 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/40'
                         : 'bg-ink border border-line text-muted hover:text-bone'
                     }`}
                   >
-                    $ {item.cmd}
+                    $ {item.label}
                   </button>
                 ))}
               </div>
@@ -187,71 +122,153 @@ export default function ExperienceMatrix({ isTerminalMode }: { isTerminalMode: b
                   <span className="text-amber-400 font-semibold">$ {terminalCommand}</span>
                 </div>
 
-                {(terminalCommand === 'cat resume.json' ||
-                  terminalCommand === 'cat experience_work.json' ||
-                  terminalCommand === 'cat ai_systems.json' ||
-                  terminalCommand === 'cat academics_ucsd.json') && (
-                  <pre className="text-bone font-mono text-[0.75rem] leading-5 whitespace-pre-wrap">
-                    {JSON.stringify(
-                      {
-                        categoryFilter: selectedFilter,
-                        totalMatched: filteredItems.length,
-                        operations: filteredItems.map((e) => ({
-                          role: e.role,
-                          organization: e.organization,
-                          type: e.organizationType || e.type,
-                          period: e.period,
-                          location: e.location,
-                          highlight: e.awardOrHighlight,
-                          metrics: e.featuredMetric,
-                          deliverables: e.description,
-                          techStack: e.skills,
-                        })),
-                      },
-                      null,
-                      2
-                    )}
+                {/* whoami / summary */}
+                {(terminalCommand === 'whoami' || terminalCommand === 'summary') && (
+                  <pre className="text-cyan-300 font-mono text-[0.75rem] leading-relaxed whitespace-pre-wrap">
+{`┌────────────────────────────────────────────────────────────────────────┐
+│ ishaankor@portfolio-vm                                                 │
+├────────────────────────────────────────────────────────────────────────┤
+│ Developer:   Ishaan Koradia                                            │
+│ Focus:       Frontier LLM Evaluation & Agentic Architecture (MCP)      │
+│ Status:      Available for AI/ML Engineering Roles                     │
+│ Education:   UC San Diego — B.S. Cognitive Science (ML Specialization) │
+│ Honors:      UCSD Honors (GPA 3.76) | Verizon Innovation (#1 of 15)    │
+│ Production:  Handshake AI & NVIDIA Nemotron-12B Evaluation (~95% Acc)  │
+│ Core Stack:  Python, PyTorch, FastAPI, FastMCP, OpenCV, Docker, GCP    │
+└────────────────────────────────────────────────────────────────────────┘`}
                   </pre>
                 )}
 
-                {terminalCommand === 'git log --career' && (
-                  <pre className="text-amber-300 font-mono text-[0.75rem] leading-5 whitespace-pre-wrap">
-{`* commit 2026-08 (HEAD -> main) Lead Architect: Datafy! Agentic Visual Canvas (25k+ req/wk)
-* commit 2025-10 AI Engineer: Handshake AI & NVIDIA Nemotron-12B Evaluation (~95% accuracy)
-* commit 2025-07 Creator: IshaanBot MCP Architecture (15+ composable tools, FastAPI)
-* commit 2025-06 Lead Systems: Transformi! ML Discord Bot (10k+ users served)
-* commit 2023-09 UCSD B.S. in Cognitive Science (Machine Learning & Neural Computation, GPA 3.76)
-* commit 2021-07 Verizon Project Engineer Intern (Ranked #1 of 15 Teams for Innovation)`}
+                {/* tree */}
+                {terminalCommand.startsWith('tree') && (
+                  <pre className="text-emerald-300 font-mono text-[0.75rem] leading-relaxed whitespace-pre-wrap">
+{`~/career
+├── 📁 01_work/
+│   ├── 📄 handshake-ai/    [Oct 2025 – Present] AI Engineer (Nemotron-12B, ~95% Acc)
+│   │   ├── golden-baselines.json
+│   │   ├── instruction-tuning.py
+│   │   └── rlhf-benchmarks.yaml
+│   └── 📄 verizon/         [Jul 2021 – Aug 2021] Project Engineer Intern (Ranked #1 of 15)
+│       ├── opencv-pipeline.py
+│       └── environmental-ml.onnx
+├── 📁 02_education/
+│   └── 🎓 ucsd/            [2023 – 2025] B.S. Cognitive Science (Machine Learning)
+│       ├── transcript-gpa-3.76.pdf
+│       ├── neural-computation-models/
+│       └── ds3-student-society/
+└── 📁 03_credentials/
+    ├── 🏅 ibm-ai/          AI Engineer for Data Scientists (PyTorch, MLOps, SQL)
+    ├── 🏅 anthropic-mcp/   Model Context Protocol: Advanced Topics (FastMCP, SSE)
+    └── 🏅 google-it/       Google IT Automation with Python (Linux, Bash, Git)
+
+3 directories, 8 files`}
                   </pre>
                 )}
 
-                {terminalCommand === 'skills --verbose' && (
-                  <pre className="text-cyan-300 font-mono text-[0.75rem] leading-5 whitespace-pre-wrap">
-{`[AI ECOSYSTEM] : ChatGPT, Gemini, Claude, GitHub Copilot, Sora, Quillbot, n8n
-[TECH STACK]   : LangChain, Model Context Protocol (MCP), RAG, Prompt Engineering, RLHF
-[LANGUAGES]    : Python, Java, Javascript, SQL, Postgres, HTML, CSS
-[FRAMEWORKS]   : FastAPI, FastMCP, TensorFlow, Keras, scikit-learn, Selenium
-[DEVOPS/TOOLS] : Docker, Linux, Bash, GCP, cronjob, Git, GitHub
-[LIBRARIES]    : pandas, numpy, matplotlib, seaborn, OpenCV, asyncio`}
+                {/* git log */}
+                {terminalCommand.startsWith('git') && (
+                  <pre className="text-amber-300 font-mono text-[0.75rem] leading-relaxed whitespace-pre-wrap">
+{`* 8f4a21e (HEAD -> main, origin/main) feat(eval): Handshake AI & NVIDIA Nemotron-12B benchmarks (~95% acc)
+* 4c19d02 feat(degree): Graduate UC San Diego B.S. Cognitive Science ML specialization (GPA 3.76)
+* 1b82e44 feat(innovation): Verizon OpenCV real-time environmental detection (Ranked #1 of 15 Teams)
+* 0a73f18 init(career): career trajectory repository initialized`}
                   </pre>
                 )}
+
+                {/* stack / cat stack.txt */}
+                {(terminalCommand === 'stack' || terminalCommand === 'cat stack.txt') && (
+                  <pre className="text-purple-300 font-mono text-[0.75rem] leading-relaxed whitespace-pre-wrap">
+{`+---------------+-------------------------------------------------------------------------+
+| DOMAIN        | CORE TECHNOLOGIES & TOOLS                                               |
++---------------+-------------------------------------------------------------------------+
+| 01_Work       | Python, FastAPI, NVIDIA Nemotron-12B, OpenCV, Docker, Linux/Bash, GCP  |
+| 02_Education  | PyTorch, C++, Java, scikit-learn, NumPy, Pandas, Linear Algebra, SQL    |
+| 03_Credential | Model Context Protocol (MCP), FastMCP, MLOps, Pytest, Puppet, Bash      |
++---------------+-------------------------------------------------------------------------+`}
+                  </pre>
+                )}
+
+                {/* status */}
+                {terminalCommand === 'status' && (
+                  <pre className="text-bone font-mono text-[0.75rem] leading-relaxed whitespace-pre-wrap">
+{`SYSTEM INTEGRITY & PRODUCTION CHECK:
+────────────────────────────────────────────────────────────────────────
+ [✓ ACTIVE]     Handshake AI (AI Engineer)            --> Production Evaluation Live (~95% Acc)
+ [✓ VERIFIED]   Verizon Engineering Internship        --> Ranked #1 of 15 Teams (Innovation Award)
+ [✓ VERIFIED]   UC San Diego B.S. Cognitive Science   --> Degree Conferred, GPA 3.76 Confirmed
+ [✓ ACCREDITED] IBM AI Engineer Associate             --> Verified Credential
+ [✓ ACCREDITED] Anthropic Model Context Protocol      --> Verified Credential
+ [✓ ACCREDITED] Google IT Automation with Python      --> Verified Credential
+────────────────────────────────────────────────────────────────────────
+All credentials production verified. Zero drift detected.`}
+                  </pre>
+                )}
+
+                {/* help */}
+                {terminalCommand === 'help' && (
+                  <pre className="text-bone-dim font-mono text-[0.75rem] leading-relaxed whitespace-pre-wrap">
+{`Available CLI commands:
+  whoami        - Print developer identity & career overview
+  tree          - Display Unix directory tree of career milestones
+  git log       - Show git commit timeline and milestone hashes
+  stack         - Display ASCII comparison table of technologies by domain
+  status        - Run integrity & credential verification checks
+  clear         - Reset terminal output
+  help          - Display this command reference`}
+                  </pre>
+                )}
+
+                {/* clear */}
+                {terminalCommand === 'clear' && (
+                  <p className="text-muted italic">Terminal cleared. Type &apos;help&apos; or click a button above.</p>
+                )}
+
+                {/* Unrecognized fallback */}
+                {!['whoami', 'summary', 'tree', 'git', 'stack', 'cat stack.txt', 'status', 'help', 'clear'].some((k) =>
+                  terminalCommand.startsWith(k)
+                ) && (
+                  <div className="space-y-1 text-xs">
+                    <p className="text-rose-400">zsh: command not found: {terminalCommand}</p>
+                    <p className="text-muted">Type &apos;help&apos; or click one of the quick run buttons above.</p>
+                  </div>
+                )}
+
+                {/* Interactive Shell Prompt Input */}
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    if (!customInput.trim()) return;
+                    setTerminalCommand(customInput.trim().toLowerCase());
+                    setCustomInput('');
+                  }}
+                  className="flex items-center gap-2 pt-4 border-t border-line/50 text-xs font-mono"
+                >
+                  <span className="text-emerald-400">➜</span>
+                  <span className="text-cyan-400">~/work</span>
+                  <span className="text-amber-400 font-semibold">$</span>
+                  <input
+                    type="text"
+                    value={customInput}
+                    onChange={(e) => setCustomInput(e.target.value)}
+                    placeholder="type command (whoami, tree, git log, stack, status, help)..."
+                    className="flex-1 bg-transparent border-none text-bone placeholder-muted/50 focus:outline-none font-mono text-xs"
+                  />
+                  <button
+                    type="submit"
+                    className="px-2 py-0.5 rounded bg-surface border border-line text-[10px] text-muted hover:text-bone"
+                  >
+                    run ↵
+                  </button>
+                </form>
               </div>
             </div>
           </ScrollReveal>
         ) : (
-          /* Visual Architecture View with Smooth AnimatePresence */
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={selectedFilter}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
-              className="space-y-8"
-            >
-              {filteredItems.map((item, idx) => (
+          /* Visual Architecture View */
+          <div className="space-y-8">
+            {items.map((item, idx) => (
+              <ScrollReveal key={item.id} direction="up" delay={0.1 + idx * 0.08}>
                 <div
-                  key={item.id}
                   className={`rounded-2xl border bg-surface/80 p-6 sm:p-8 transition-all duration-300 relative overflow-hidden group ${getBorderTheme(
                     item
                   )}`}
@@ -354,9 +371,9 @@ export default function ExperienceMatrix({ isTerminalMode }: { isTerminalMode: b
                   </div>
 
                 </div>
-              ))}
-            </motion.div>
-          </AnimatePresence>
+              </ScrollReveal>
+            ))}
+          </div>
         )}
 
       </div>
