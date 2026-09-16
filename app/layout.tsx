@@ -40,15 +40,14 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/favicon.ico?v=5', sizes: 'any' },
-      { url: '/favicon.svg?v=5', type: 'image/svg+xml' },
-      { url: '/favicon.png?v=5', type: 'image/png', sizes: '64x64' },
-      { url: '/icon.png?v=5', type: 'image/png', sizes: '512x512' },
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon-96x96.png', type: 'image/png', sizes: '96x96' },
     ],
     apple: [
-      { url: '/apple-touch-icon.png?v=5', sizes: '180x180', type: 'image/png' },
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
-    shortcut: '/favicon.ico?v=5',
+    shortcut: '/favicon.ico',
   },
   twitter: {
     card: 'summary_large_image',
