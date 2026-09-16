@@ -39,10 +39,6 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-[92vh] pt-28 pb-16 flex items-center overflow-hidden">
-      
-      {/* Background Ambient Glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-ember/10 blur-[140px] pointer-events-none rounded-full" />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           

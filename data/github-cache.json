@@ -1,16 +1,56 @@
 {
-  "updatedAt": "2026-09-11T23:19:16.739Z",
-  "totalRepos": 20,
+  "updatedAt": "2026-09-15T23:23:50.326Z",
+  "totalRepos": 19,
   "user": {
     "login": "ishaankor",
     "avatar_url": "https://avatars.githubusercontent.com/u/113160688?v=4",
     "html_url": "https://github.com/ishaankor",
     "name": "Ishaan",
     "bio": "An AI engineer who loves to automate the tedious works of life through programming and coding!",
-    "public_repos": 22,
+    "public_repos": 21,
     "created_at": "2022-09-09T04:43:15Z"
   },
   "repos": [
+    {
+      "id": 1323680935,
+      "name": "RigScouter-AI",
+      "language": "TypeScript",
+      "html_url": "https://github.com/ishaankor/RigScouter-AI",
+      "description": null,
+      "created_at": "2026-08-05T05:50:28Z",
+      "pushed_at": "2026-09-15T21:28:41Z",
+      "updated_at": "2026-09-15T21:28:45Z"
+    },
+    {
+      "id": 911419017,
+      "name": "my-personal-website",
+      "language": "HTML",
+      "html_url": "https://github.com/ishaankor/my-personal-website",
+      "description": "AI-enhanced personal portfolio website with a responsive frontend and MCP-backed chatbot, showcasing Ishaan Koradia’s skills, projects, and generative AI interaction in a product-style experience.",
+      "created_at": "2025-01-03T01:20:34Z",
+      "pushed_at": "2026-09-14T22:22:44Z",
+      "updated_at": "2026-09-14T22:22:48Z"
+    },
+    {
+      "id": 1324783574,
+      "name": "RigScouter-AI-DataBase-",
+      "language": "Python",
+      "html_url": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
+      "description": null,
+      "created_at": "2026-08-06T05:39:59Z",
+      "pushed_at": "2026-09-13T02:12:17Z",
+      "updated_at": "2026-09-13T02:12:21Z"
+    },
+    {
+      "id": 915475199,
+      "name": "my-data-science-portfolio",
+      "language": "HTML",
+      "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
+      "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
+      "created_at": "2025-01-11T23:48:23Z",
+      "pushed_at": "2026-09-11T23:29:07Z",
+      "updated_at": "2026-09-11T23:29:10Z"
+    },
     {
       "id": 1360924158,
       "name": "Claimr-",
@@ -22,16 +62,6 @@
       "updated_at": "2026-09-11T01:45:35Z"
     },
     {
-      "id": 915475199,
-      "name": "my-data-science-portfolio",
-      "language": "HTML",
-      "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
-      "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
-      "created_at": "2025-01-11T23:48:23Z",
-      "pushed_at": "2026-09-07T22:49:17Z",
-      "updated_at": "2026-09-07T22:49:35Z"
-    },
-    {
       "id": 534513593,
       "name": "Daily-Motivation-",
       "language": "Python",
@@ -40,26 +70,6 @@
       "created_at": "2022-09-09T05:41:44Z",
       "pushed_at": "2026-09-07T05:40:16Z",
       "updated_at": "2026-09-07T05:42:45Z"
-    },
-    {
-      "id": 1324783574,
-      "name": "RigScouter-AI-DataBase-",
-      "language": "Python",
-      "html_url": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
-      "description": null,
-      "created_at": "2026-08-06T05:39:59Z",
-      "pushed_at": "2026-09-07T03:52:59Z",
-      "updated_at": "2026-09-07T03:53:02Z"
-    },
-    {
-      "id": 1323680935,
-      "name": "RigScouter-AI",
-      "language": "TypeScript",
-      "html_url": "https://github.com/ishaankor/RigScouter-AI",
-      "description": null,
-      "created_at": "2026-08-05T05:50:28Z",
-      "pushed_at": "2026-09-05T09:07:22Z",
-      "updated_at": "2026-09-05T09:07:25Z"
     },
     {
       "id": 1316668584,
@@ -90,16 +100,6 @@
       "created_at": "2025-01-04T05:55:23Z",
       "pushed_at": "2026-07-30T20:38:37Z",
       "updated_at": "2026-07-30T20:38:58Z"
-    },
-    {
-      "id": 911419017,
-      "name": "my-personal-website",
-      "language": "HTML",
-      "html_url": "https://github.com/ishaankor/my-personal-website",
-      "description": "AI-enhanced personal portfolio website with a responsive frontend and MCP-backed chatbot, showcasing Ishaan Koradia’s skills, projects, and generative AI interaction in a product-style experience.",
-      "created_at": "2025-01-03T01:20:34Z",
-      "pushed_at": "2026-07-29T03:51:49Z",
-      "updated_at": "2026-07-29T03:51:54Z"
     },
     {
       "id": 1069482168,
@@ -150,16 +150,6 @@
       "created_at": "2025-02-22T09:48:47Z",
       "pushed_at": "2025-02-23T03:27:45Z",
       "updated_at": "2026-01-07T19:58:16Z"
-    },
-    {
-      "id": 915543911,
-      "name": "COGS108_Repo",
-      "language": null,
-      "html_url": "https://github.com/ishaankor/COGS108_Repo",
-      "description": null,
-      "created_at": "2025-01-12T06:00:11Z",
-      "pushed_at": "2025-01-12T06:00:54Z",
-      "updated_at": "2025-01-12T06:00:56Z"
     },
     {
       "id": 742050298,
@@ -214,98 +204,59 @@
   ],
   "commits": [
     {
-      "sha": "0378be298023cbf2032e254f0dbd76522e9c0bd1",
-      "shortSha": "0378be2",
-      "message": "feat: implement custom cross-platform floating notification banner with audio chime and remove legacy test notification utilities",
-      "repoName": "Claimr-",
-      "repoUrl": "https://github.com/ishaankor/Claimr-",
-      "commitUrl": "https://github.com/ishaankor/Claimr-/commit/0378be298023cbf2032e254f0dbd76522e9c0bd1",
-      "date": "2026-09-11T00:38:46Z",
-      "timeAgo": "22h ago"
+      "sha": "06e7c3039927f47fda4968d0f06c83575a1b689d",
+      "shortSha": "06e7c30",
+      "message": "feat: add site icons, favicons, and branding assets",
+      "repoName": "RigScouter-AI",
+      "repoUrl": "https://github.com/ishaankor/RigScouter-AI",
+      "commitUrl": "https://github.com/ishaankor/RigScouter-AI/commit/06e7c3039927f47fda4968d0f06c83575a1b689d",
+      "date": "2026-09-15T21:28:38Z",
+      "timeAgo": "1h ago"
     },
     {
-      "sha": "c2a3527c6790ad974cd310d895d5d7df4ac784a9",
-      "shortSha": "c2a3527",
-      "message": "feat: implement native notification system with test script, IPC support, and hardened macOS app signing",
-      "repoName": "Claimr-",
-      "repoUrl": "https://github.com/ishaankor/Claimr-",
-      "commitUrl": "https://github.com/ishaankor/Claimr-/commit/c2a3527c6790ad974cd310d895d5d7df4ac784a9",
-      "date": "2026-09-10T20:27:24Z",
+      "sha": "0b49452f6a7303d7bb4bf8c62ea59c39e173b633",
+      "shortSha": "0b49452",
+      "message": "feat: add project hover state for scroll indicator and remove hardcoded credentials",
+      "repoName": "my-personal-website",
+      "repoUrl": "https://github.com/ishaankor/my-personal-website",
+      "commitUrl": "https://github.com/ishaankor/my-personal-website/commit/0b49452f6a7303d7bb4bf8c62ea59c39e173b633",
+      "date": "2026-09-14T22:22:41Z",
       "timeAgo": "1d ago"
     },
     {
-      "sha": "2a376b7a09e48c8a58f0eb550e5bc4fbe720f329",
-      "shortSha": "2a376b7",
-      "message": "feat: request native system notification permission on app startup",
-      "repoName": "Claimr-",
-      "repoUrl": "https://github.com/ishaankor/Claimr-",
-      "commitUrl": "https://github.com/ishaankor/Claimr-/commit/2a376b7a09e48c8a58f0eb550e5bc4fbe720f329",
-      "date": "2026-09-10T18:38:07Z",
+      "sha": "9f9a6f38e90652efb4291f91b075b5c4264acf78",
+      "shortSha": "9f9a6f3",
+      "message": "feat: add Cloudflare Pages function for Spotify playback telemetry",
+      "repoName": "my-personal-website",
+      "repoUrl": "https://github.com/ishaankor/my-personal-website",
+      "commitUrl": "https://github.com/ishaankor/my-personal-website/commit/9f9a6f38e90652efb4291f91b075b5c4264acf78",
+      "date": "2026-09-14T22:07:11Z",
       "timeAgo": "1d ago"
     },
     {
-      "sha": "4a0a054083fb3a65b1f9b7d5d6f9f969877efe3b",
-      "shortSha": "4a0a054",
-      "message": "refactor: improve cross-platform notifications using execFile and add automated desktop alerts for headless operations",
-      "repoName": "Claimr-",
-      "repoUrl": "https://github.com/ishaankor/Claimr-",
-      "commitUrl": "https://github.com/ishaankor/Claimr-/commit/4a0a054083fb3a65b1f9b7d5d6f9f969877efe3b",
-      "date": "2026-09-10T18:08:33Z",
+      "sha": "45be8592bfaad6f475d77485485cb38b5cc42d4f",
+      "shortSha": "45be859",
+      "message": "feat: overhaul portfolio UI, add Spotify API endpoint, and configure Vercel headers",
+      "repoName": "my-personal-website",
+      "repoUrl": "https://github.com/ishaankor/my-personal-website",
+      "commitUrl": "https://github.com/ishaankor/my-personal-website/commit/45be8592bfaad6f475d77485485cb38b5cc42d4f",
+      "date": "2026-09-14T22:01:40Z",
       "timeAgo": "1d ago"
     },
     {
-      "sha": "e2696157e500f85830b4dedb8cf65304aeaaa686",
-      "shortSha": "e269615",
-      "message": "(v1.1.0) feat: implement multi-account claiming support, optimize service interval, and update background process monitoring",
-      "repoName": "Claimr-",
-      "repoUrl": "https://github.com/ishaankor/Claimr-",
-      "commitUrl": "https://github.com/ishaankor/Claimr-/commit/e2696157e500f85830b4dedb8cf65304aeaaa686",
-      "date": "2026-09-10T17:31:24Z",
-      "timeAgo": "1d ago"
+      "sha": "33cf9166d305f9ad45e538fb7fdbeea6722e1e23",
+      "shortSha": "33cf916",
+      "message": "feat: add ZenRows proxy fallback to bypass anti-bot blocks during HTML fetching",
+      "repoName": "RigScouter-AI-DataBase-",
+      "repoUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
+      "commitUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-/commit/33cf9166d305f9ad45e538fb7fdbeea6722e1e23",
+      "date": "2026-09-13T02:12:14Z",
+      "timeAgo": "2d ago"
     }
   ],
   "contributionCalendar": {
-    "totalContributions": 814,
+    "totalContributions": 784,
     "weeks": [
-      {
-        "contributionDays": [
-          {
-            "date": "2025-09-07",
-            "contributionCount": 3,
-            "color": "#9be9a8"
-          },
-          {
-            "date": "2025-09-08",
-            "contributionCount": 1,
-            "color": "#9be9a8"
-          },
-          {
-            "date": "2025-09-09",
-            "contributionCount": 3,
-            "color": "#9be9a8"
-          },
-          {
-            "date": "2025-09-10",
-            "contributionCount": 0,
-            "color": "#ebedf0"
-          },
-          {
-            "date": "2025-09-11",
-            "contributionCount": 1,
-            "color": "#9be9a8"
-          },
-          {
-            "date": "2025-09-12",
-            "contributionCount": 29,
-            "color": "#30a14e"
-          },
-          {
-            "date": "2025-09-13",
-            "contributionCount": 0,
-            "color": "#ebedf0"
-          }
-        ]
-      },
       {
         "contributionDays": [
           {
@@ -2324,8 +2275,32 @@
           },
           {
             "date": "2026-09-11",
+            "contributionCount": 1,
+            "color": "#9be9a8"
+          },
+          {
+            "date": "2026-09-12",
+            "contributionCount": 2,
+            "color": "#9be9a8"
+          }
+        ]
+      },
+      {
+        "contributionDays": [
+          {
+            "date": "2026-09-13",
             "contributionCount": 0,
             "color": "#ebedf0"
+          },
+          {
+            "date": "2026-09-14",
+            "contributionCount": 3,
+            "color": "#9be9a8"
+          },
+          {
+            "date": "2026-09-15",
+            "contributionCount": 1,
+            "color": "#9be9a8"
           }
         ]
       }

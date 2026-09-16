@@ -23,6 +23,16 @@ const config: Config = {
         "haze-text": "#f8fafc",
         "haze-dim": "#cbd5e1",
         "haze-muted": "#94a3b8",
+        ink: "#0b0d0f",
+        surface: "#121518",
+        line: "#1e242b",
+        muted: "#64748b",
+        bone: "#f1f5f9",
+        "bone-dim": "#cbd5e1",
+        ember: {
+          DEFAULT: "#f97316",
+          glow: "rgba(249, 115, 22, 0.15)",
+        },
       },
       fontFamily: {
         sans: ["var(--font-inter)", "sans-serif"],
@@ -31,6 +41,8 @@ const config: Config = {
       boxShadow: {
         haze: "0 10px 30px -10px rgba(129, 140, 248, 0.15)",
         "haze-glow": "0 0 35px -5px rgba(168, 85, 247, 0.3)",
+        float: "0 10px 30px -10px rgba(0, 0, 0, 0.5)",
+        panel: "0 4px 20px rgba(0, 0, 0, 0.4)",
       },
       animation: {
         "haze-pulse": "hazePulse 4s ease-in-out infinite",
