@@ -1,4 +1,6 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+app/layout.tsx,5,6,tsx,d120344,Ishaan Kor,2026-09-16,12:57:16,-07:00,2026-09-16T12:57:16-07:00,1,"chore: update favicon asset paths, sizes, and remove version parameters"
+index.html,4,4,html,d120344,Ishaan Kor,2026-09-16,12:57:16,-07:00,2026-09-16T12:57:16-07:00,0,"chore: update favicon asset paths, sizes, and remove version parameters"
 .DS_Store,0,0,code,4001383,Ishaan Kor,2026-09-16,12:47:01,-07:00,2026-09-16T12:47:01-07:00,0,"feat: update portfolio components, data, and configuration"
 README.md,215,0,md,4001383,Ishaan Kor,2026-09-16,12:47:01,-07:00,2026-09-16T12:47:01-07:00,0,"feat: update portfolio components, data, and configuration"
 app/layout.tsx,12,0,tsx,4001383,Ishaan Kor,2026-09-16,12:47:01,-07:00,2026-09-16T12:47:01-07:00,1,"feat: update portfolio components, data, and configuration"

@@ -1,5 +1,33 @@
 [
   {
+    "file": "app/layout.tsx",
+    "added": 5,
+    "deleted": 6,
+    "type": "tsx",
+    "commit": "d120344",
+    "author": "Ishaan Kor",
+    "date": "2026-09-16",
+    "time": "12:57:16",
+    "timezone": "-07:00",
+    "datetime": "2026-09-16T12:57:16-07:00",
+    "depth": 1,
+    "message": "chore: update favicon asset paths, sizes, and remove version parameters"
+  },
+  {
+    "file": "index.html",
+    "added": 4,
+    "deleted": 4,
+    "type": "html",
+    "commit": "d120344",
+    "author": "Ishaan Kor",
+    "date": "2026-09-16",
+    "time": "12:57:16",
+    "timezone": "-07:00",
+    "datetime": "2026-09-16T12:57:16-07:00",
+    "depth": 0,
+    "message": "chore: update favicon asset paths, sizes, and remove version parameters"
+  },
+  {
     "file": ".DS_Store",
     "added": 0,
     "deleted": 0,
