@@ -73,6 +73,18 @@ const EXCLUDED_REPOS = new Set([
   'it-cert-automation-practice',
 ]);
 
+function getRepoFavicon(name: string, url: string): string {
+  const target = `${name} ${url}`.toLowerCase();
+  if (target.includes('datafy')) return '/favicons/datafy.png';
+  if (target.includes('rigscouter')) return '/favicons/rigscouter.png';
+  if (target.includes('mcp') || target.includes('ishaanbot') || target.includes('my-personal-website') || target.includes('personal-website')) return '/favicons/mcp-favicon.svg';
+  if (target.includes('data-science-portfolio') || target.includes('portfolio')) return '/favicons/portfolio.png';
+  if (target.includes('transformi')) return '/favicons/transformi.png';
+  if (target.includes('daily-motivation') || target.includes('dailymotivation')) return '/favicons/dailymotivation.png';
+  if (target.includes('free-game') || target.includes('claimr')) return '/favicons/claimr.png';
+  return '/favicons/github.svg';
+}
+
 function buildRepositoryMatrix(rawRepos: any[]): RepositoryItem[] {
   const map = new Map<string, RepositoryItem>();
 
@@ -469,9 +481,20 @@ export default function RepositoryMatrix({
                       </div>
 
                       {/* Title */}
-                      <h3 className="font-mono text-base font-bold text-bone group-hover:text-ember transition-colors mb-2 truncate">
-                        {repo.name}
-                      </h3>
+                      <div className="flex items-center gap-2 mb-2">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={getRepoFavicon(repo.name, repo.html_url)}
+                          alt=""
+                          className="w-4 h-4 rounded-md object-contain p-0.5 bg-ink border border-line shrink-0"
+                          onError={(e) => {
+                            (e.currentTarget as HTMLImageElement).src = '/favicons/github.svg';
+                          }}
+                        />
+                        <h3 className="font-mono text-base font-bold text-bone group-hover:text-ember transition-colors truncate">
+                          {repo.name}
+                        </h3>
+                      </div>
 
                       {/* Description */}
                       <p className="text-bone-dim text-xs line-clamp-2 leading-relaxed mb-4">

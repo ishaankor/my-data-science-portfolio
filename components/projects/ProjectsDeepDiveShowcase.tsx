@@ -14,12 +14,7 @@ export default function ProjectsDeepDiveShowcase() {
           <div className="inline-flex items-center gap-2 font-mono text-[0.72rem] text-muted">
             <span className="text-bone">01 // PROJECT BUILDS</span>
             <span className="text-line">/</span>
-            <span className="text-ember">PRODUCTION SHIPPED</span>
-          </div>
-
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25 font-mono text-xs text-cyan-400">
-            <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
-            <span>Live Software Release Feed</span>
+            <span className="text-ember">FEATURED HIGHLIGHTS</span>
           </div>
         </div>
       </ScrollReveal>
@@ -58,20 +53,24 @@ export default function ProjectsDeepDiveShowcase() {
                     <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
                   </div>
-                  <span className="font-mono text-[0.7rem] text-muted group-hover:text-ember transition-colors flex items-center gap-1">
-                    datafy.ishaankoradia.com
-                    <ExternalLink className="w-2.5 h-2.5 inline" />
-                  </span>
-                  <div className="w-8" />
+                  <div className="flex items-center gap-2 bg-ink/70 px-3 py-1 rounded-md border border-line/50">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src="/favicons/datafy.png" alt="Datafy Favicon" className="w-3.5 h-3.5 rounded-sm shrink-0 object-contain" />
+                    <span className="font-mono text-[0.7rem] text-muted group-hover:text-ember transition-colors flex items-center gap-1">
+                      datafy.ishaankoradia.com
+                      <ExternalLink className="w-2.5 h-2.5 inline" />
+                    </span>
+                  </div>
+                  <div className="w-6" />
                 </div>
 
                 {/* Real High-Resolution Project Photo */}
                 <div className="relative overflow-hidden bg-ink aspect-[16/9]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src="./images/datafy-photo.png"
+                    src="/favicons/datafy-cover.png"
                     alt="Datafy! Editorial AI Data Canvas"
-                    className="w-full h-full object-cover transform group-hover:scale-[1.03] transition-transform duration-500"
+                    className="w-full h-full object-cover object-center transform group-hover:scale-[1.03] transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent pointer-events-none" />
                 </div>
@@ -84,15 +83,16 @@ export default function ProjectsDeepDiveShowcase() {
                 <span className="font-bold text-bone">01</span>
                 <span>2026</span>
                 <span className="text-muted/60">—</span>
-                <span className="inline-flex items-center gap-1.5 text-ember font-medium">
-                  <span className="w-2 h-2 rounded-full bg-ember animate-pulse" />
-                  Actively maintained
-                </span>
+                <span className="text-bone-dim">AI Data Canvas</span>
               </div>
 
-              <h3 className="font-display text-3xl sm:text-4xl font-extrabold text-bone tracking-tight">
-                Datafy AI Copilot
-              </h3>
+              <div className="flex items-center gap-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/favicons/datafy.png" alt="Datafy" className="w-8 h-8 rounded-lg border border-line/80 p-0.5 bg-surface shrink-0" />
+                <h3 className="font-display text-3xl sm:text-4xl font-extrabold text-bone tracking-tight">
+                  Datafy AI Copilot
+                </h3>
+              </div>
 
               <p className="font-mono text-xs text-muted">
                 AI data canvas for deep research &amp; interactive charts
@@ -112,16 +112,6 @@ export default function ProjectsDeepDiveShowcase() {
                     {tag}
                   </span>
                 ))}
-              </div>
-
-              {/* Badges / Metrics */}
-              <div className="flex flex-wrap items-center gap-3 pt-2 font-mono text-xs">
-                <div className="px-3 py-1 rounded-md bg-ember/10 border border-ember/30 text-ember font-bold text-[11px]">
-                  0ms Client Cold-Start
-                </div>
-                <div className="px-3 py-1 rounded-md bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[11px]">
-                  25,000+ weekly requests
-                </div>
               </div>
 
               {/* Action Links */}
@@ -162,7 +152,7 @@ export default function ProjectsDeepDiveShowcase() {
         </ScrollReveal>
 
 
-        {/* ---------------- PROJECT 02: TRANSFORMI (Real Thumbnail Right) ---------------- */}
+        {/* ---------------- PROJECT 02: RIGSCOUTER-AI (Real Landing Page Right) ---------------- */}
         <ScrollReveal direction="up" delay={0.2}>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             
@@ -170,29 +160,30 @@ export default function ProjectsDeepDiveShowcase() {
             <div className="lg:col-span-6 space-y-5">
               <div className="font-mono text-xs text-muted flex items-center gap-3">
                 <span className="font-bold text-bone">02</span>
-                <span>2025</span>
+                <span>2026</span>
                 <span className="text-muted/60">—</span>
-                <span className="inline-flex items-center gap-1.5 text-ember font-medium">
-                  <span className="w-2 h-2 rounded-full bg-ember animate-pulse" />
-                  Actively maintained
-                </span>
+                <span className="text-bone-dim">Deal Intelligence</span>
               </div>
 
-              <h3 className="font-display text-3xl sm:text-4xl font-extrabold text-bone tracking-tight">
-                Transformi! ML Bot
-              </h3>
+              <div className="flex items-center gap-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/favicons/rigscouter.png" alt="RigScouter-AI" className="w-8 h-8 rounded-lg border border-line/80 p-0.5 bg-surface shrink-0" />
+                <h3 className="font-display text-3xl sm:text-4xl font-extrabold text-bone tracking-tight">
+                  RigScouter-AI Deal Intelligence
+                </h3>
+              </div>
 
               <p className="font-mono text-xs text-muted">
-                Discord ML bot with parallelized async ETL pipelines
+                Autonomous PC hardware deal scouting &amp; real-time SSE price radar
               </p>
 
               <p className="text-bone-dim text-sm sm:text-[0.95rem] leading-relaxed">
-                Discord ML bot serving 10,000+ users. Fits regression models dynamically on user datasets and streams plots into chat with zero latency via asyncio worker pools.
+                Autonomous hardware deal intelligence engine combining multi-retailer web scraping across Amazon and eBay, real-time Server-Sent Events (SSE) price feeds, and algorithmic Groq AI deal scoring.
               </p>
 
               {/* Tag Pills */}
               <div className="flex flex-wrap gap-2 pt-1 font-mono text-xs">
-                {['Python', 'asyncio', 'TensorFlow', 'scikit-learn', 'Discord API', 'Kaggle API'].map((tag) => (
+                {['Next.js 15', 'TypeScript', 'Supabase RLS', 'Prisma', 'Groq AI', 'SSE Radar', 'Multi-Scraper'].map((tag) => (
                   <span
                     key={tag}
                     className="px-3 py-1 rounded-lg bg-surface border border-line text-bone-dim text-[11px]"
@@ -202,20 +193,10 @@ export default function ProjectsDeepDiveShowcase() {
                 ))}
               </div>
 
-              {/* Badges / Metrics */}
-              <div className="flex flex-wrap items-center gap-3 pt-2 font-mono text-xs">
-                <div className="px-3 py-1 rounded-md bg-purple-500/10 border border-purple-500/30 text-purple-400 font-bold text-[11px]">
-                  10,000+ users served
-                </div>
-                <div className="px-3 py-1 rounded-md bg-ember/10 border border-ember/30 text-ember text-[11px]">
-                  Parallelized async ETL
-                </div>
-              </div>
-
               {/* Action Links */}
               <div className="flex items-center gap-6 pt-3 font-mono text-xs">
                 <a
-                  href="https://github.com/ishaankor/Transformi"
+                  href="https://github.com/ishaankor/RigScouter-AI"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-ember hover:underline font-semibold inline-flex items-center gap-1.5 group"
@@ -225,7 +206,7 @@ export default function ProjectsDeepDiveShowcase() {
                 </a>
 
                 <a
-                  href="https://github.com/ishaankor/Transformi#readme"
+                  href="https://github.com/ishaankor/RigScouter-AI#readme"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-muted hover:text-bone transition-colors inline-flex items-center gap-1"
@@ -236,13 +217,13 @@ export default function ProjectsDeepDiveShowcase() {
               </div>
             </div>
 
-            {/* Real Project Thumbnail Frame Right */}
+            {/* Real Project Landing Page Frame Right */}
             <div className="lg:col-span-6">
               <a
-                href="https://github.com/ishaankor/Transformi"
+                href="https://github.com/ishaankor/RigScouter-AI"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block rounded-2xl border border-line/80 bg-ink/95 shadow-2xl overflow-hidden group hover:border-ember/60 transition-all duration-300 transform hover:-translate-y-1"
+                className="block rounded-2xl border border-line/80 bg-ink/95 shadow-2xl overflow-hidden group hover:border-cyan-500/60 transition-all duration-300 transform hover:-translate-y-1"
               >
                 {/* Window Header */}
                 <div className="flex items-center justify-between px-4 py-3 bg-[#0d131f] border-b border-line/60">
@@ -251,21 +232,26 @@ export default function ProjectsDeepDiveShowcase() {
                     <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
                   </div>
-                  <span className="font-mono text-[0.7rem] text-muted group-hover:text-ember transition-colors flex items-center gap-1">
-                    github.com/ishaankor/Transformi
-                    <ExternalLink className="w-2.5 h-2.5 inline" />
-                  </span>
-                  <div className="w-8" />
+                  <div className="flex items-center gap-2 bg-ink/70 px-3 py-1 rounded-md border border-line/50">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src="/favicons/rigscouter.png" alt="RigScouter Favicon" className="w-3.5 h-3.5 rounded-sm shrink-0 object-contain" />
+                    <span className="font-mono text-[0.7rem] text-muted group-hover:text-cyan-400 transition-colors flex items-center gap-1">
+                      rigscouter.ishaankoradia.com
+                      <ExternalLink className="w-2.5 h-2.5 inline" />
+                    </span>
+                  </div>
+                  <div className="w-6" />
                 </div>
 
-                {/* Real User Project Thumbnail */}
-                <div className="relative overflow-hidden bg-gradient-to-br from-indigo-950/40 via-surface to-ink aspect-[16/10] flex items-center justify-center p-6">
+                {/* Real Landing Page Photo */}
+                <div className="relative overflow-hidden bg-ink aspect-[16/9]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src="./images/transformi-photo.jpeg"
-                    alt="Transformi! ML Discord Bot Mascot"
-                    className="max-h-full w-auto object-contain rounded-xl shadow-lg transform group-hover:scale-105 transition-transform duration-500"
+                    src="/favicons/rigscouter-cover.png"
+                    alt="RigScouter-AI Autonomous Hardware Deal Intelligence"
+                    className="w-full h-full object-cover object-center transform group-hover:scale-[1.03] transition-transform duration-500"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent pointer-events-none" />
                 </div>
               </a>
             </div>
@@ -274,14 +260,14 @@ export default function ProjectsDeepDiveShowcase() {
         </ScrollReveal>
 
 
-        {/* ---------------- PROJECT 03: DAILY MOTIVATION (Real Thumbnail Left) ---------------- */}
+        {/* ---------------- PROJECT 03: ISHAANBOT MCP (Real Landing Page Left) ---------------- */}
         <ScrollReveal direction="up" delay={0.25}>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             
-            {/* Real Project Thumbnail Frame Left */}
+            {/* Real Project Landing Page Frame Left */}
             <div className="lg:col-span-6 order-2 lg:order-1">
               <a
-                href="https://github.com/ishaankor/Daily-Motivation-"
+                href="https://ishaankoradia.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block rounded-2xl border border-line/80 bg-ink/95 shadow-2xl overflow-hidden group hover:border-ember/60 transition-all duration-300 transform hover:-translate-y-1"
@@ -293,21 +279,26 @@ export default function ProjectsDeepDiveShowcase() {
                     <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
                   </div>
-                  <span className="font-mono text-[0.7rem] text-muted group-hover:text-ember transition-colors flex items-center gap-1">
-                    github.com/ishaankor/Daily-Motivation-
-                    <ExternalLink className="w-2.5 h-2.5 inline" />
-                  </span>
-                  <div className="w-8" />
+                  <div className="flex items-center gap-2 bg-ink/70 px-3 py-1 rounded-md border border-line/50">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src="/favicons/mcp-favicon.svg" alt="Model Context Protocol Favicon" className="w-3.5 h-3.5 rounded-sm shrink-0 object-contain" />
+                    <span className="font-mono text-[0.7rem] text-muted group-hover:text-ember transition-colors flex items-center gap-1">
+                      ishaankoradia.com
+                      <ExternalLink className="w-2.5 h-2.5 inline" />
+                    </span>
+                  </div>
+                  <div className="w-6" />
                 </div>
 
-                {/* Real User Project Thumbnail */}
-                <div className="relative overflow-hidden bg-gradient-to-br from-purple-950/40 via-surface to-ink aspect-[16/10] flex items-center justify-center p-6">
+                {/* Real Landing Page Workspace Photo */}
+                <div className="relative overflow-hidden bg-ink aspect-[16/9]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src="./images/daily-motivation-photo.jpg"
-                    alt="Daily Motivation Twitter/X Bot"
-                    className="max-h-full w-auto object-contain rounded-xl shadow-lg transform group-hover:scale-105 transition-transform duration-500"
+                    src="/favicons/mcp-cover.png"
+                    alt="Model Context Protocol AI Assistant Workspace"
+                    className="w-full h-full object-cover object-center transform group-hover:scale-[1.03] transition-transform duration-500"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent pointer-events-none" />
                 </div>
               </a>
             </div>
@@ -316,29 +307,30 @@ export default function ProjectsDeepDiveShowcase() {
             <div className="lg:col-span-6 space-y-5 order-1 lg:order-2">
               <div className="font-mono text-xs text-muted flex items-center gap-3">
                 <span className="font-bold text-bone">03</span>
-                <span>2022</span>
+                <span>2025</span>
                 <span className="text-muted/60">—</span>
-                <span className="inline-flex items-center gap-1.5 text-ember font-medium">
-                  <span className="w-2 h-2 rounded-full bg-ember animate-pulse" />
-                  Actively maintained
-                </span>
+                <span className="text-bone-dim">Agentic Assistant</span>
               </div>
 
-              <h3 className="font-display text-3xl sm:text-4xl font-extrabold text-bone tracking-tight">
-                Daily Motivation Bot
-              </h3>
+              <div className="flex items-center gap-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/favicons/mcp-favicon.svg" alt="Model Context Protocol" className="w-8 h-8 rounded-lg border border-line/80 p-0.5 bg-surface shrink-0" />
+                <h3 className="font-display text-3xl sm:text-4xl font-extrabold text-bone tracking-tight">
+                  IshaanBot MCP AI Assistant
+                </h3>
+              </div>
 
               <p className="font-mono text-xs text-muted">
-                Automated Twitter/X bot with PostgreSQL analytics
+                Modular LLM assistant &amp; systems platform powered by MCP
               </p>
 
               <p className="text-bone-dim text-sm sm:text-[0.95rem] leading-relaxed">
-                Automated Python bot delivering daily content, running sentiment polls, and logging engagement in PostgreSQL for trend analysis.
+                Agentic digital twin powered by Model Context Protocol (MCP) with 15+ composable tools, FastAPI streaming inference, RAG memory, and live Spotify playback telemetry.
               </p>
 
               {/* Tag Pills */}
               <div className="flex flex-wrap gap-2 pt-1 font-mono text-xs">
-                {['Python', 'PostgreSQL', 'Twitter API', 'Automation', 'NLP', 'Tweepy'].map((tag) => (
+                {['Model Context Protocol', 'FastAPI', 'Python', 'Docker', 'Gemini API', 'RAG Memory', 'Spotify API'].map((tag) => (
                   <span
                     key={tag}
                     className="px-3 py-1 rounded-lg bg-surface border border-line text-bone-dim text-[11px]"
@@ -348,35 +340,35 @@ export default function ProjectsDeepDiveShowcase() {
                 ))}
               </div>
 
-              {/* Badges / Metrics */}
-              <div className="flex flex-wrap items-center gap-3 pt-2 font-mono text-xs">
-                <div className="px-3 py-1 rounded-md bg-purple-500/10 border border-purple-500/30 text-purple-400 font-bold text-[11px]">
-                  5,000+ Daily Impressions
-                </div>
-                <div className="px-3 py-1 rounded-md bg-ember/10 border border-ember/30 text-ember text-[11px]">
-                  Automated Cron Pipeline
-                </div>
-              </div>
-
               {/* Action Links */}
               <div className="flex items-center gap-6 pt-3 font-mono text-xs">
                 <a
-                  href="https://github.com/ishaankor/Daily-Motivation-"
+                  href="https://ishaankoradia.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-ember hover:underline font-semibold inline-flex items-center gap-1.5 group"
                 >
-                  <span>Source Code</span>
-                  <Github className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                  <span>Live App</span>
+                  <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                 </a>
 
                 <a
-                  href="https://github.com/ishaankor/Daily-Motivation-#readme"
+                  href="https://github.com/ishaankor/my-personal-website"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-muted hover:text-bone transition-colors inline-flex items-center gap-1"
                 >
-                  <span>Architecture</span>
+                  <Github className="w-3.5 h-3.5" />
+                  <span>Source</span>
+                </a>
+
+                <a
+                  href="https://github.com/ishaankor/my-personal-website#readme"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted hover:text-bone transition-colors inline-flex items-center gap-1"
+                >
+                  <span>Docs</span>
                   <ArrowUpRight className="w-3 h-3" />
                 </a>
               </div>

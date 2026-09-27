@@ -66,10 +66,22 @@ async function syncLiveGitHubProjects() {
                 if (existingTitles.has(key)) return;
                 existingTitles.add(key);
 
+                function resolveFavicon(title) {
+                    const t = String(title).toLowerCase();
+                    if (t.includes('datafy')) return '/favicons/datafy.png';
+                    if (t.includes('rigscouter')) return '/favicons/rigscouter.png';
+                    if (t.includes('mcp') || t.includes('ishaanbot') || t.includes('personal-website')) return '/favicons/mcp-favicon.svg';
+                    if (t.includes('portfolio')) return '/favicons/portfolio.png';
+                    if (t.includes('transformi')) return '/favicons/transformi.png';
+                    if (t.includes('daily-motivation') || t.includes('dailymotivation')) return '/favicons/dailymotivation.png';
+                    if (t.includes('claimr') || t.includes('free-game')) return '/favicons/claimr.png';
+                    return '/favicons/github.svg';
+                }
+
                 newProjectItems.push({
                     title: r.name,
                     year: year,
-                    image: 'https://vis-society.github.io/labs/2/images/empty.svg',
+                    image: resolveFavicon(r.name),
                     description: r.description || 'Open source machine learning and data science engineering repository.',
                     githubUrl: r.html_url,
                 });

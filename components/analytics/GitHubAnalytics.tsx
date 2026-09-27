@@ -135,14 +135,11 @@ export default function GitHubAnalytics() {
                 </div>
                 <div>
                   <p className="font-mono text-xs font-semibold text-bone flex items-center gap-1.5">
-                    <span className="relative flex h-2 w-2">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                      <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-                    </span>
+                    <span className="h-2 w-2 rounded-full bg-emerald-400" />
                     Active
                   </p>
                   <p className="font-mono text-[0.68rem] text-muted mt-1 truncate">
-                    Building AI & ML
+                    Public Repositories
                   </p>
                 </div>
               </div>

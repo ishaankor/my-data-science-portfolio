@@ -4,6 +4,7 @@ export interface Project {
   year: string;
   category: 'Machine Learning' | 'Automation' | 'Data Visualization' | 'AI & Web';
   image?: string;
+  favicon?: string;
   description: string;
   detailedDescription?: string;
   tags: string[];
@@ -184,12 +185,11 @@ export const portfolioData: PortfolioData = {
       organizationType: "contract",
       period: "Oct 2025 – Present",
       location: "Remote",
-      featuredMetric: "~95% Strategy Accuracy",
-      awardOrHighlight: "NVIDIA Nemotron-12B Collaborator",
+      awardOrHighlight: "Nemotron-12B Evaluation",
       description: [
         "Built golden ground-truth datasets standardizing evaluation baselines across frontier LLMs (ChatGPT, Gemini, Claude).",
         "Collaborated with NVIDIA on Nemotron-12B evaluation, improving domain reasoning via structured benchmarks.",
-        "Engineered 300+ context-design strategies resolving hallucinations and drift with ~95% accuracy."
+        "Engineered context-design strategies resolving hallucinations and model drift across domain tasks."
       ],
       skills: ["Frontier LLMs", "NVIDIA Nemotron-12B", "Golden Datasets", "Instruction Tuning", "RLHF", "Hallucination Mitigation", "Evaluation Pipelines"],
       type: "work"
@@ -201,12 +201,11 @@ export const portfolioData: PortfolioData = {
       organizationType: "internship",
       period: "Jul 2021 – Aug 2021",
       location: "San Jose, CA",
-      featuredMetric: "Ranked #1 of 15 Teams",
-      awardOrHighlight: "1st Place Innovation Award",
+      awardOrHighlight: "Computer Vision Project",
       description: [
         "Co-designed ML solutions for environmental water pollution detection in a 5-member engineering team.",
         "Built real-time OpenCV computer vision pipeline for automated pollutant extraction.",
-        "Awarded 1st place among 15 teams for innovation and engineering impact."
+        "Delivered computer vision proof-of-concept presented to engineering leadership."
       ],
       skills: ["Computer Vision", "OpenCV", "Machine Learning", "Environmental ML", "Cross-Functional Leadership", "Real-Time Detection"],
       type: "work"
@@ -218,11 +217,10 @@ export const portfolioData: PortfolioData = {
       organizationType: "academic",
       period: "Sept 2023 – Sept 2025",
       location: "La Jolla, CA",
-      featuredMetric: "GPA: 3.76",
       awardOrHighlight: "Minor in Data Science",
       description: [
-        "B.S. specialization in Machine Learning, Neural Computation, and Applied Data Science (GPA 3.76).",
-        "Leadership in Data Science Student Society (DS3) and CSSA Web Team."
+        "B.S. specialization in Machine Learning, Neural Computation, and Applied Data Science.",
+        "Active member in Data Science Student Society (DS3) and CSSA Web Team."
       ],
       skills: ["Machine Learning", "Neural Computation", "Data Science", "Python", "C++", "Linear Algebra", "Statistical Modeling"],
       type: "education"
@@ -295,70 +293,99 @@ export const portfolioData: PortfolioData = {
 
   projects: [
     {
-      id: "transformi",
-      title: "Transformi! ML Discord Bot",
-      year: "2025",
-      category: "Machine Learning",
-      image: "/images/transformi-preview.jpg",
-      description: "Discord ML bot with parallelized ETL for automated regression modeling and live scatter plots.",
-      detailedDescription: "Integrates Discord API with Python, scikit-learn, and matplotlib to fit regression models and stream visual plots into chat.",
-      tags: ["Python", "TensorFlow", "scikit-learn", "asyncio", "Discord API"],
-      githubUrl: "https://github.com/ishaankor/Transformi",
-      featured: true,
-      metrics: "10,000+ users & parallelized ETL"
-    },
-    {
       id: "datafy",
       title: "Datafy AI Data Science Copilot",
       year: "2026",
       category: "AI & Web",
-      image: "/images/datafy-preview.jpg",
+      image: "/favicons/datafy-cover.png",
+      favicon: "/favicons/datafy.png",
       description: "AI data canvas converting CSV uploads into interactive charts, statistical grids, and executive briefs.",
       detailedDescription: "FastAPI & Next.js platform using LangChain reflection agents for automated visual data analysis.",
       tags: ["Python", "LangChain", "FastAPI", "Pandas", "Agentic AI"],
       githubUrl: "https://github.com/ishaankor/Datafy",
+      liveUrl: "https://datafy.ishaankoradia.com",
       featured: true,
-      metrics: "25,000+ weekly requests (99% error-free)"
+    },
+    {
+      id: "rigscouter",
+      title: "RigScouter-AI Deal Intelligence",
+      year: "2026",
+      category: "AI & Web",
+      image: "/favicons/rigscouter-cover.png",
+      favicon: "/favicons/rigscouter.png",
+      description: "Autonomous PC hardware deal intelligence platform with multi-retailer scraping and real-time SSE deal radar.",
+      detailedDescription: "Next.js 15 and Supabase platform with Groq AI inference, quantitative deal scoring, and automated daily price drop digests.",
+      tags: ["Next.js 15", "TypeScript", "Supabase RLS", "Prisma", "Groq AI", "SSE Stream"],
+      githubUrl: "https://github.com/ishaankor/RigScouter-AI",
+      liveUrl: "https://github.com/ishaankor/RigScouter-AI",
+      featured: true,
     },
     {
       id: "ishaanbot",
       title: "Personal AI Chatbot (IshaanBot)",
       year: "2025",
       category: "AI & Web",
-      image: "/images/ishaanbot-preview.jpg",
+      image: "/favicons/mcp-cover.png",
+      favicon: "/favicons/mcp-favicon.svg",
       description: "Modular LLM assistant powered by Model Context Protocol (MCP) with 15+ composable tools.",
       detailedDescription: "FastAPI backend with streaming inference, RAG memory, and dynamic tool-routing.",
       tags: ["Python", "Gemini API", "FastAPI", "Docker", "MCP"],
       githubUrl: "https://github.com/ishaankor/my-personal-website",
+      liveUrl: "https://ishaankoradia.com",
       featured: true,
-      metrics: "15+ composable MCP tools"
+    },
+    {
+      id: "transformi",
+      title: "Transformi! ML Discord Bot",
+      year: "2025",
+      category: "Machine Learning",
+      image: "/favicons/transformi-cover.png",
+      favicon: "/favicons/transformi.png",
+      description: "Discord ML bot with parallelized ETL for automated regression modeling and live scatter plots.",
+      detailedDescription: "Integrates Discord API with Python, scikit-learn, and matplotlib to fit regression models and stream visual plots into chat.",
+      tags: ["Python", "TensorFlow", "scikit-learn", "asyncio", "Discord API"],
+      githubUrl: "https://github.com/ishaankor/Transformi",
+      featured: false,
     },
     {
       id: "daily-motivation",
       title: "Daily Motivation Twitter/X Bot",
       year: "2022",
       category: "Automation",
-      image: "/images/daily-motivation-photo.jpg",
+      image: "/favicons/dailymotivation-cover.png",
+      favicon: "/favicons/dailymotivation.png",
       description: "Automated Python Twitter/X bot delivering daily content and logging engagement in PostgreSQL.",
       detailedDescription: "Automated Python cron pipeline polling interactions and persisting analytics to PostgreSQL.",
       tags: ["Python", "PostgreSQL", "Twitter API", "Automation", "NLP"],
       githubUrl: "https://github.com/ishaankor/Daily-Motivation-",
-      featured: true,
-      metrics: "Daily polls across 5,000+ impressions"
+      featured: false,
     },
     {
       id: "data-science-portfolio",
       title: "Interactive Data Science Showcase",
       year: "2025",
       category: "Data Visualization",
-      image: "/images/dataviz-photo.png",
-      description: "Dynamic engineering portfolio featuring live GitHub analytics, 3D visual canvas, and timeline trajectories.",
+      image: "/favicons/portfolio-cover.png",
+      favicon: "/favicons/portfolio.png",
+      description: "Dynamic engineering portfolio featuring live GitHub telemetry, 3D visual canvas, and timeline trajectories.",
       detailedDescription: "Next.js & Three.js showcase with real-time GitHub meta-fetcher API and interactive D3 visualizations.",
       tags: ["Next.js", "React", "TypeScript", "Three.js", "Tailwind CSS"],
       githubUrl: "https://github.com/ishaankor/my-data-science-portfolio",
       liveUrl: "https://ishaankor.github.io/my-data-science-portfolio/",
       featured: true,
-      metrics: "Real-time API & 3D WebGL hero"
+    },
+    {
+      id: "claimr",
+      title: "Claimr Desktop Free Game Claimer",
+      year: "2026",
+      category: "Automation",
+      favicon: "/favicons/claimr.png",
+      description: "Cross-platform desktop application automating free game drops across Epic Games Store and GOG.com.",
+      detailedDescription: "Multi-account background auto-claimer with system tray integration and real-time library synchronization.",
+      tags: ["Electron", "Node.js", "Automation", "Chromium", "APIs"],
+      githubUrl: "https://github.com/ishaankor/Claimr-",
+      featured: false,
+      metrics: "Silent auto-claim & multi-store sync"
     },
     {
       id: "canvas-files-merger",

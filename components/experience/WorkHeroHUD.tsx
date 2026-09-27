@@ -2,22 +2,14 @@
 
 import React from 'react';
 import {
-  Terminal,
   Cpu,
   GraduationCap,
-  Sparkles,
-  Award,
+  Briefcase,
   ShieldCheck,
 } from 'lucide-react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
-export default function WorkHeroHUD({
-  isTerminalMode,
-  setIsTerminalMode,
-}: {
-  isTerminalMode: boolean;
-  setIsTerminalMode: (val: boolean | ((prev: boolean) => boolean)) => void;
-}) {
+export default function WorkHeroHUD() {
   return (
     <section className="relative pt-24 pb-14 overflow-hidden border-b border-line/60">
       {/* Ambient background glow */}
@@ -30,112 +22,87 @@ export default function WorkHeroHUD({
         <ScrollReveal direction="up" delay={0.05}>
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="inline-flex items-center gap-2 font-mono text-[0.72rem] text-muted">
-              <span className="text-bone">02 // CAREER &amp; CREDENTIALS</span>
+              <span className="text-bone">02 // CAREER &amp; EDUCATION</span>
               <span className="text-line">/</span>
-              <span className="text-ember">PRODUCTION VERIFIED</span>
+              <span className="text-ember">EXPERIENCE PATHWAY</span>
             </div>
 
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 font-mono text-xs text-emerald-400">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface border border-line font-mono text-xs text-bone-dim">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              <span>Available for AI/ML Engineering roles</span>
+              <span>AI &amp; Machine Learning Engineering</span>
             </div>
           </div>
         </ScrollReveal>
 
-        {/* Main Title & Description with Action Button & Speech Bubble */}
+        {/* Main Title & Description */}
         <ScrollReveal direction="up" delay={0.1}>
           <div className="space-y-4">
             <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-bone tracking-tight leading-[1.12]">
-              Experience &amp; Credentials
+              Experience &amp; Background
             </h1>
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-              <p className="text-bone-dim text-base sm:text-lg leading-relaxed max-w-2xl">
-                AI Engineer specializing in frontier LLM evaluation, golden benchmark datasets, and production ML pipelines.
-              </p>
-              
-              <div className="flex items-center gap-3 shrink-0 font-mono text-xs">
-                {/* Speech Bubble Callout pointing right toward the button */}
-                <div className="hidden sm:inline-flex relative items-center gap-1.5 px-3 py-2 rounded-lg bg-indigo-950/80 border border-indigo-500/30 text-[0.7rem] font-medium text-indigo-200 shadow-panel backdrop-blur-sm">
-                  <Sparkles className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
-                  <span>{isTerminalMode ? 'CLI Active' : 'Try CLI Mode!'}</span>
-                  {/* Right-pointing speech bubble arrow */}
-                  <span className="absolute -right-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-indigo-950/90 border-r border-t border-indigo-500/30 rotate-45" />
-                </div>
-
-                <button
-                  onClick={() => setIsTerminalMode((prev) => !prev)}
-                  className={`inline-flex items-center gap-2 px-4 py-3 rounded-lg border transition-all ${
-                    isTerminalMode
-                      ? 'bg-indigo-500/20 border-indigo-500 text-bone shadow-md shadow-indigo-500/20'
-                      : 'bg-surface border-line text-muted hover:border-indigo-500/50 hover:text-bone hover:shadow-md hover:shadow-indigo-500/10'
-                  }`}
-                  title="Toggle interactive developer terminal mode"
-                >
-                  <Terminal className="w-4 h-4 text-indigo-400" />
-                  <span>{isTerminalMode ? 'Exit CLI Mode' : 'CLI Terminal Mode'}</span>
-                </button>
-              </div>
-            </div>
+            <p className="text-bone-dim text-base sm:text-lg leading-relaxed max-w-2xl">
+              AI Engineer with experience in frontier LLM evaluation, golden benchmark datasets, computer vision, and machine learning systems.
+            </p>
           </div>
         </ScrollReveal>
 
-        {/* Telemetry Metrics HUD Grid */}
+        {/* Grounded Experience Highlights Grid */}
         <ScrollReveal direction="up" delay={0.15}>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
             
-            {/* Card 1: Handshake AI / Frontier AI (Work) */}
+            {/* Card 1: Handshake AI */}
             <div className="rounded-xl border border-line bg-surface/70 p-5 shadow-panel flex flex-col justify-between hover:border-indigo-500/40 transition-colors">
               <div className="flex items-center justify-between text-indigo-400 mb-3">
                 <div className="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center">
                   <Cpu className="w-4 h-4 text-indigo-400" />
                 </div>
-                <span className="font-mono text-[0.65rem] text-indigo-400/80 uppercase font-semibold">Frontier AI</span>
+                <span className="font-mono text-[0.65rem] text-indigo-400/80 uppercase font-semibold">AI Engineering</span>
               </div>
               <div>
-                <p className="font-display text-3xl font-bold text-bone">300+</p>
-                <p className="font-mono text-xs text-muted mt-1">Tuning Strategies (~95% Acc)</p>
+                <p className="font-display text-lg font-bold text-bone">Handshake AI</p>
+                <p className="font-mono text-xs text-muted mt-1">LLM Eval &amp; Nemotron-12B</p>
               </div>
             </div>
 
-            {/* Card 2: Verizon Project Engineering (Work) */}
+            {/* Card 2: Verizon */}
             <div className="rounded-xl border border-line bg-surface/70 p-5 shadow-panel flex flex-col justify-between hover:border-amber-500/40 transition-colors">
               <div className="flex items-center justify-between text-amber-400 mb-3">
                 <div className="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
-                  <Award className="w-4 h-4 text-amber-400" />
+                  <Briefcase className="w-4 h-4 text-amber-400" />
                 </div>
-                <span className="font-mono text-[0.65rem] text-amber-400/80 uppercase font-semibold">Verizon Eng</span>
+                <span className="font-mono text-[0.65rem] text-amber-400/80 uppercase font-semibold">Project Engineering</span>
               </div>
               <div>
-                <p className="font-display text-3xl font-bold text-bone">#1 / 15</p>
-                <p className="font-mono text-xs text-muted mt-1">1st Place Innovation Award</p>
+                <p className="font-display text-lg font-bold text-bone">Verizon</p>
+                <p className="font-mono text-xs text-muted mt-1">Computer Vision &amp; OpenCV</p>
               </div>
             </div>
 
-            {/* Card 3: Degree & GPA (Education) */}
+            {/* Card 3: UC San Diego */}
             <div className="rounded-xl border border-line bg-surface/70 p-5 shadow-panel flex flex-col justify-between hover:border-cyan-500/40 transition-colors">
               <div className="flex items-center justify-between text-cyan-400 mb-3">
                 <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
                   <GraduationCap className="w-4 h-4 text-cyan-400" />
                 </div>
-                <span className="font-mono text-[0.65rem] text-cyan-400/80 uppercase font-semibold">UCSD Honors</span>
+                <span className="font-mono text-[0.65rem] text-cyan-400/80 uppercase font-semibold">Academic Foundation</span>
               </div>
               <div>
-                <p className="font-display text-3xl font-bold text-bone">3.76</p>
+                <p className="font-display text-lg font-bold text-bone">UC San Diego</p>
                 <p className="font-mono text-xs text-muted mt-1">B.S. Cognitive Science (ML)</p>
               </div>
             </div>
 
-            {/* Card 4: Verified Credentials (Certification) */}
+            {/* Card 4: Technical Credentials */}
             <div className="rounded-xl border border-line bg-surface/70 p-5 shadow-panel flex flex-col justify-between hover:border-emerald-500/40 transition-colors">
               <div className="flex items-center justify-between text-emerald-400 mb-3">
                 <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
                   <ShieldCheck className="w-4 h-4 text-emerald-400" />
                 </div>
-                <span className="font-mono text-[0.65rem] text-emerald-400/80 uppercase font-semibold">Credentials</span>
+                <span className="font-mono text-[0.65rem] text-emerald-400/80 uppercase font-semibold">Specializations</span>
               </div>
               <div>
-                <p className="font-display text-3xl font-bold text-bone">3</p>
-                <p className="font-mono text-xs text-muted mt-1">Industry Certifications</p>
+                <p className="font-display text-lg font-bold text-bone">Certifications</p>
+                <p className="font-mono text-xs text-muted mt-1">MCP, MLOps &amp; Python</p>
               </div>
             </div>
 

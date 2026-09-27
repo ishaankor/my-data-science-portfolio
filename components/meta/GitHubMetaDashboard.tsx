@@ -159,12 +159,12 @@ export default function GitHubMetaDashboard() {
           <div className="inline-flex items-center gap-2 font-mono text-[0.72rem] text-muted">
             <span className="text-bone">03 // REPOSITORY TELEMETRY</span>
             <span className="text-line">/</span>
-            <span className="text-ember">PRODUCTION LOG</span>
+            <span className="text-ember">GIT ACTIVITY</span>
           </div>
 
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25 font-mono text-xs text-cyan-400">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface border border-line font-mono text-xs text-bone-dim">
             <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
-            <span>Real-Time Meta Sync</span>
+            <span>Live GitHub Sync</span>
           </div>
         </div>
       </ScrollReveal>
@@ -237,7 +237,7 @@ export default function GitHubMetaDashboard() {
             <div className="p-4 rounded-lg bg-ink/70 border border-line">
               <span className="text-[0.68rem] text-cyan-400 uppercase tracking-wider block mb-1">Dev Status</span>
               <span className="font-mono text-xs font-semibold text-cyan-400 flex items-center gap-1.5 mt-2">
-                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                <span className="w-2 h-2 rounded-full bg-cyan-400" />
                 Active Contributor
               </span>
             </div>

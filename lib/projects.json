@@ -1,36 +1,49 @@
 [
   {
-    "title": "Daily-Motivation-",
-    "year": "2022",
-    "image": "https://pbs.twimg.com/profile_images/1562894482483269632/y_dQWMLb_400x400.jpg",
-    "description": "Automated Python bot delivering daily motivational quotes, running sentiment polls, and logging engagement in PostgreSQL for trend analysis.",
-    "githubUrl": "https://github.com/ishaankor/Daily-Motivation-"
-  },
-  {
-    "title": "Transformi",
-    "year": "2025",
-    "image": "https://www.svgrepo.com/show/353655/discord-icon.svg",
-    "description": "An interactive Discord data science assistant that ingests various forms of input in order to run regression/classification and neural network workflows.",
-    "githubUrl": "https://github.com/ishaankor/Transformi"
-  },
-  {
     "title": "Datafy",
     "year": "2026",
-    "image": "./images/datafy-photo.png",
-    "description": "AI-powered data science copilot that turns raw CSV data into interactive analysis, visualizations, and narrative insights.",
+    "image": "/favicons/datafy.png",
+    "favicon": "/favicons/datafy.png",
+    "description": "Autonomous AI copilot that converts raw datasets into statistical intelligence, automated visual analytics, and conversational insights.",
     "githubUrl": "https://github.com/ishaankor/Datafy"
+  },
+  {
+    "title": "RigScouter-AI",
+    "year": "2026",
+    "image": "/favicons/rigscouter.png",
+    "favicon": "/favicons/rigscouter.png",
+    "description": "Autonomous deal intelligence platform evaluating real estate & energy compute assets using multimodal vision and LLMs.",
+    "githubUrl": "https://github.com/ishaankor/RigScouter-AI"
   },
   {
     "title": "my-personal-website",
     "year": "2025",
-    "image": "./images/ishaanbot-photo.png",
-    "description": "AI-enhanced personal portfolio website with a responsive frontend and MCP-backed chatbot.",
+    "image": "/favicons/mcp-cover.png",
+    "favicon": "/favicons/mcp-favicon.svg",
+    "description": "AI-enhanced personal website with live GitHub telemetry, responsive portfolio layout, and an MCP-backed conversational assistant.",
     "githubUrl": "https://github.com/ishaankor/my-personal-website"
+  },
+  {
+    "title": "Transformi",
+    "year": "2025",
+    "image": "/favicons/transformi.png",
+    "favicon": "/favicons/transformi.png",
+    "description": "An interactive Discord data science assistant that ingests tabular datasets to run regression, classification, and neural network workflows.",
+    "githubUrl": "https://github.com/ishaankor/Transformi"
+  },
+  {
+    "title": "Daily-Motivation-",
+    "year": "2022",
+    "image": "/favicons/dailymotivation.png",
+    "favicon": "/favicons/dailymotivation.png",
+    "description": "Automated Python bot delivering daily motivational quotes, running sentiment polls, and logging engagement in PostgreSQL for trend analysis.",
+    "githubUrl": "https://github.com/ishaankor/Daily-Motivation-"
   },
   {
     "title": "my-data-science-portfolio",
     "year": "2025",
-    "image": "./images/portfolio-photo.png",
+    "image": "/favicons/portfolio.png",
+    "favicon": "/favicons/portfolio.png",
     "description": "Interactive data science portfolio featuring live GitHub telemetry, 3D visual canvas, and timeline trajectories.",
     "githubUrl": "https://github.com/ishaankor/my-data-science-portfolio"
   }

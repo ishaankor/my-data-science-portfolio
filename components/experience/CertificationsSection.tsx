@@ -28,17 +28,12 @@ export default function CertificationsSection() {
             <div>
               <span className="inline-flex items-center gap-2 font-mono text-xs text-muted uppercase tracking-wider mb-2">
                 <ShieldCheck className="w-3.5 h-3.5 text-ember" />
-                Verified Credentials &amp; Specializations
+                Specializations &amp; Training
               </span>
               <h2 className="font-display text-3xl sm:text-4xl font-bold text-bone tracking-tight">
-                Industry Certifications &amp; Accreditations
+                Certifications &amp; Technical Programs
               </h2>
             </div>
-
-            <span className="font-mono text-xs text-emerald-400 bg-emerald-500/10 px-3 py-1.5 rounded-full border border-emerald-500/25 flex items-center gap-1.5 w-fit">
-              <CheckCircle2 className="w-3.5 h-3.5" />
-              <span>3 Verified Industry Credentials</span>
-            </span>
           </div>
         </ScrollReveal>
 
@@ -50,14 +45,11 @@ export default function CertificationsSection() {
                 className={`rounded-2xl border bg-surface/70 p-7 shadow-panel flex flex-col justify-between h-full hover:border-line/90 transition-all ${certGradients[idx]}`}
               >
                 <div>
-                  {/* Top Badge & Icon */}
+                  {/* Top Icon */}
                   <div className="flex items-center justify-between mb-5">
                     <div className="w-10 h-10 rounded-xl bg-ink border border-line flex items-center justify-center shadow-sm">
                       {certIcons[idx]}
                     </div>
-                    <span className="font-mono text-[0.68rem] text-emerald-400 bg-emerald-500/10 border border-emerald-500/25 px-2.5 py-0.5 rounded">
-                      Verified
-                    </span>
                   </div>
 
                   {/* Title & Issuer */}

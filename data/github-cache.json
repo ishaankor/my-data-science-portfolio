@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-15T23:23:50.326Z",
+  "updatedAt": "2026-09-27T04:37:46.764Z",
   "totalRepos": 19,
   "user": {
     "login": "ishaankor",
@@ -12,44 +12,24 @@
   },
   "repos": [
     {
-      "id": 1323680935,
-      "name": "RigScouter-AI",
-      "language": "TypeScript",
-      "html_url": "https://github.com/ishaankor/RigScouter-AI",
-      "description": null,
-      "created_at": "2026-08-05T05:50:28Z",
-      "pushed_at": "2026-09-15T21:28:41Z",
-      "updated_at": "2026-09-15T21:28:45Z"
-    },
-    {
-      "id": 911419017,
-      "name": "my-personal-website",
-      "language": "HTML",
-      "html_url": "https://github.com/ishaankor/my-personal-website",
-      "description": "AI-enhanced personal portfolio website with a responsive frontend and MCP-backed chatbot, showcasing Ishaan Koradia’s skills, projects, and generative AI interaction in a product-style experience.",
-      "created_at": "2025-01-03T01:20:34Z",
-      "pushed_at": "2026-09-14T22:22:44Z",
-      "updated_at": "2026-09-14T22:22:48Z"
-    },
-    {
       "id": 1324783574,
       "name": "RigScouter-AI-DataBase-",
       "language": "Python",
       "html_url": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
       "description": null,
       "created_at": "2026-08-06T05:39:59Z",
-      "pushed_at": "2026-09-13T02:12:17Z",
-      "updated_at": "2026-09-13T02:12:21Z"
+      "pushed_at": "2026-09-26T00:50:05Z",
+      "updated_at": "2026-09-26T00:50:09Z"
     },
     {
-      "id": 915475199,
-      "name": "my-data-science-portfolio",
-      "language": "HTML",
-      "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
-      "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
-      "created_at": "2025-01-11T23:48:23Z",
-      "pushed_at": "2026-09-11T23:29:07Z",
-      "updated_at": "2026-09-11T23:29:10Z"
+      "id": 1323680935,
+      "name": "RigScouter-AI",
+      "language": "TypeScript",
+      "html_url": "https://github.com/ishaankor/RigScouter-AI",
+      "description": null,
+      "created_at": "2026-08-05T05:50:28Z",
+      "pushed_at": "2026-09-25T23:38:28Z",
+      "updated_at": "2026-09-25T23:38:31Z"
     },
     {
       "id": 1360924158,
@@ -58,8 +38,8 @@
       "html_url": "https://github.com/ishaankor/Claimr-",
       "description": null,
       "created_at": "2026-09-08T04:35:15Z",
-      "pushed_at": "2026-09-11T00:55:54Z",
-      "updated_at": "2026-09-11T01:45:35Z"
+      "pushed_at": "2026-09-25T10:39:05Z",
+      "updated_at": "2026-09-25T10:39:09Z"
     },
     {
       "id": 534513593,
@@ -68,8 +48,28 @@
       "html_url": "https://github.com/ishaankor/Daily-Motivation-",
       "description": "Daily Motivation!",
       "created_at": "2022-09-09T05:41:44Z",
-      "pushed_at": "2026-09-07T05:40:16Z",
-      "updated_at": "2026-09-07T05:42:45Z"
+      "pushed_at": "2026-09-24T07:50:40Z",
+      "updated_at": "2026-09-24T07:50:44Z"
+    },
+    {
+      "id": 911419017,
+      "name": "my-personal-website",
+      "language": "HTML",
+      "html_url": "https://github.com/ishaankor/my-personal-website",
+      "description": "AI-enhanced personal portfolio website with a responsive frontend and MCP-backed chatbot, showcasing Ishaan Koradia’s skills, projects, and generative AI interaction in a product-style experience.",
+      "created_at": "2025-01-03T01:20:34Z",
+      "pushed_at": "2026-09-20T10:35:16Z",
+      "updated_at": "2026-09-20T10:35:20Z"
+    },
+    {
+      "id": 915475199,
+      "name": "my-data-science-portfolio",
+      "language": "HTML",
+      "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
+      "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
+      "created_at": "2025-01-11T23:48:23Z",
+      "pushed_at": "2026-09-16T19:58:09Z",
+      "updated_at": "2026-09-16T19:58:13Z"
     },
     {
       "id": 1316668584,
@@ -204,98 +204,59 @@
   ],
   "commits": [
     {
-      "sha": "06e7c3039927f47fda4968d0f06c83575a1b689d",
-      "shortSha": "06e7c30",
-      "message": "feat: add site icons, favicons, and branding assets",
-      "repoName": "RigScouter-AI",
-      "repoUrl": "https://github.com/ishaankor/RigScouter-AI",
-      "commitUrl": "https://github.com/ishaankor/RigScouter-AI/commit/06e7c3039927f47fda4968d0f06c83575a1b689d",
-      "date": "2026-09-15T21:28:38Z",
-      "timeAgo": "1h ago"
-    },
-    {
-      "sha": "0b49452f6a7303d7bb4bf8c62ea59c39e173b633",
-      "shortSha": "0b49452",
-      "message": "feat: add project hover state for scroll indicator and remove hardcoded credentials",
-      "repoName": "my-personal-website",
-      "repoUrl": "https://github.com/ishaankor/my-personal-website",
-      "commitUrl": "https://github.com/ishaankor/my-personal-website/commit/0b49452f6a7303d7bb4bf8c62ea59c39e173b633",
-      "date": "2026-09-14T22:22:41Z",
-      "timeAgo": "1d ago"
-    },
-    {
-      "sha": "9f9a6f38e90652efb4291f91b075b5c4264acf78",
-      "shortSha": "9f9a6f3",
-      "message": "feat: add Cloudflare Pages function for Spotify playback telemetry",
-      "repoName": "my-personal-website",
-      "repoUrl": "https://github.com/ishaankor/my-personal-website",
-      "commitUrl": "https://github.com/ishaankor/my-personal-website/commit/9f9a6f38e90652efb4291f91b075b5c4264acf78",
-      "date": "2026-09-14T22:07:11Z",
-      "timeAgo": "1d ago"
-    },
-    {
-      "sha": "45be8592bfaad6f475d77485485cb38b5cc42d4f",
-      "shortSha": "45be859",
-      "message": "feat: overhaul portfolio UI, add Spotify API endpoint, and configure Vercel headers",
-      "repoName": "my-personal-website",
-      "repoUrl": "https://github.com/ishaankor/my-personal-website",
-      "commitUrl": "https://github.com/ishaankor/my-personal-website/commit/45be8592bfaad6f475d77485485cb38b5cc42d4f",
-      "date": "2026-09-14T22:01:40Z",
-      "timeAgo": "1d ago"
-    },
-    {
-      "sha": "33cf9166d305f9ad45e538fb7fdbeea6722e1e23",
-      "shortSha": "33cf916",
-      "message": "feat: add ZenRows proxy fallback to bypass anti-bot blocks during HTML fetching",
+      "sha": "4b9521d71942f7712f34c446d8b5e36fb69deaf9",
+      "shortSha": "4b9521d",
+      "message": "feat: add normal search scraper fallback for daily price refresh",
       "repoName": "RigScouter-AI-DataBase-",
       "repoUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
-      "commitUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-/commit/33cf9166d305f9ad45e538fb7fdbeea6722e1e23",
-      "date": "2026-09-13T02:12:14Z",
+      "commitUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-/commit/4b9521d71942f7712f34c446d8b5e36fb69deaf9",
+      "date": "2026-09-26T00:50:02Z",
+      "timeAgo": "1d ago"
+    },
+    {
+      "sha": "6d5f7e6a5c2ea27e1c960bf7cb3f4d854587c515",
+      "shortSha": "6d5f7e6",
+      "message": "feat: add price history interval computations and tracking to watchlist API",
+      "repoName": "RigScouter-AI",
+      "repoUrl": "https://github.com/ishaankor/RigScouter-AI",
+      "commitUrl": "https://github.com/ishaankor/RigScouter-AI/commit/6d5f7e6a5c2ea27e1c960bf7cb3f4d854587c515",
+      "date": "2026-09-25T23:38:25Z",
+      "timeAgo": "1d ago"
+    },
+    {
+      "sha": "60ecb62306ad58cd0767e120616b21567ff45bc9",
+      "shortSha": "60ecb62",
+      "message": "feat: add Tavily search fallback for Amazon scraping, handle ZenRows quota limits, and remove daily price refresh workflow",
+      "repoName": "RigScouter-AI-DataBase-",
+      "repoUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
+      "commitUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-/commit/60ecb62306ad58cd0767e120616b21567ff45bc9",
+      "date": "2026-09-25T23:38:20Z",
+      "timeAgo": "1d ago"
+    },
+    {
+      "sha": "78e2f6469983e87f77656af0af97296fc8981bb7",
+      "shortSha": "78e2f64",
+      "message": "feat: enhance Cloudflare bypass and Turnstile detection with offscreen window foregrounding and robust CTA selectors",
+      "repoName": "Claimr-",
+      "repoUrl": "https://github.com/ishaankor/Claimr-",
+      "commitUrl": "https://github.com/ishaankor/Claimr-/commit/78e2f6469983e87f77656af0af97296fc8981bb7",
+      "date": "2026-09-25T10:39:03Z",
+      "timeAgo": "1d ago"
+    },
+    {
+      "sha": "48c2c98443eafb8de7357e91c319ff4be21493e0",
+      "shortSha": "48c2c98",
+      "message": "fix: improve captcha detection safeguards and Cloudflare Turnstile handling",
+      "repoName": "Claimr-",
+      "repoUrl": "https://github.com/ishaankor/Claimr-",
+      "commitUrl": "https://github.com/ishaankor/Claimr-/commit/48c2c98443eafb8de7357e91c319ff4be21493e0",
+      "date": "2026-09-25T04:05:04Z",
       "timeAgo": "2d ago"
     }
   ],
   "contributionCalendar": {
-    "totalContributions": 784,
+    "totalContributions": 771,
     "weeks": [
-      {
-        "contributionDays": [
-          {
-            "date": "2025-09-14",
-            "contributionCount": 0,
-            "color": "#ebedf0"
-          },
-          {
-            "date": "2025-09-15",
-            "contributionCount": 12,
-            "color": "#9be9a8"
-          },
-          {
-            "date": "2025-09-16",
-            "contributionCount": 5,
-            "color": "#9be9a8"
-          },
-          {
-            "date": "2025-09-17",
-            "contributionCount": 31,
-            "color": "#30a14e"
-          },
-          {
-            "date": "2025-09-18",
-            "contributionCount": 12,
-            "color": "#9be9a8"
-          },
-          {
-            "date": "2025-09-19",
-            "contributionCount": 2,
-            "color": "#9be9a8"
-          },
-          {
-            "date": "2025-09-20",
-            "contributionCount": 0,
-            "color": "#ebedf0"
-          }
-        ]
-      },
       {
         "contributionDays": [
           {
@@ -2294,13 +2255,72 @@
           },
           {
             "date": "2026-09-14",
-            "contributionCount": 3,
+            "contributionCount": 6,
             "color": "#9be9a8"
           },
           {
             "date": "2026-09-15",
             "contributionCount": 1,
             "color": "#9be9a8"
+          },
+          {
+            "date": "2026-09-16",
+            "contributionCount": 5,
+            "color": "#9be9a8"
+          },
+          {
+            "date": "2026-09-17",
+            "contributionCount": 0,
+            "color": "#ebedf0"
+          },
+          {
+            "date": "2026-09-18",
+            "contributionCount": 3,
+            "color": "#9be9a8"
+          },
+          {
+            "date": "2026-09-19",
+            "contributionCount": 7,
+            "color": "#9be9a8"
+          }
+        ]
+      },
+      {
+        "contributionDays": [
+          {
+            "date": "2026-09-20",
+            "contributionCount": 7,
+            "color": "#9be9a8"
+          },
+          {
+            "date": "2026-09-21",
+            "contributionCount": 3,
+            "color": "#9be9a8"
+          },
+          {
+            "date": "2026-09-22",
+            "contributionCount": 8,
+            "color": "#9be9a8"
+          },
+          {
+            "date": "2026-09-23",
+            "contributionCount": 4,
+            "color": "#9be9a8"
+          },
+          {
+            "date": "2026-09-24",
+            "contributionCount": 5,
+            "color": "#9be9a8"
+          },
+          {
+            "date": "2026-09-25",
+            "contributionCount": 4,
+            "color": "#9be9a8"
+          },
+          {
+            "date": "2026-09-26",
+            "contributionCount": 0,
+            "color": "#ebedf0"
           }
         ]
       }
