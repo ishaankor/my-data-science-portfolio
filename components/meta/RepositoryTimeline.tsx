@@ -8,11 +8,9 @@ import {
   Sparkles,
   ChevronLeft,
   ChevronRight,
-  Play,
-  Pause,
   RotateCcw,
-  Clock,
-  Compass,
+  Globe,
+  Filter,
 } from 'lucide-react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import { portfolioData } from '@/data/portfolio';
@@ -34,6 +32,7 @@ export interface TimelineMilestone {
   isFeatured?: boolean;
   migratedDate?: string;
   inceptionDate?: string;
+  category: string;
 }
 
 const LANGUAGE_COLORS: Record<string, string> = {
@@ -46,6 +45,10 @@ const LANGUAGE_COLORS: Record<string, string> = {
   Shell: '#4ade80',
   Jupyter: '#f97316',
   'Jupyter Notebook': '#f97316',
+  Electron: '#38bdf8',
+  React: '#61dafb',
+  'Next.js': '#e2e8f0',
+  Code: '#94a3b8',
 };
 
 const EXCLUDED_REPOS = new Set([
@@ -58,16 +61,32 @@ const EXCLUDED_REPOS = new Set([
   'it-cert-automation-practice',
 ]);
 
+function inferCategory(name: string, description: string, language: string): string {
+  const text = `${name} ${description}`.toLowerCase();
+  if (text.includes('deal') || text.includes('copilot') || text.includes('ai') || text.includes('bot') || text.includes('mcp') || text.includes('agent')) {
+    return 'Agentic AI & Web';
+  }
+  if (text.includes('analysis') || text.includes('stats') || text.includes('obesity') || text.includes('surgery') || text.includes('bikewatching') || text.includes('eda') || language.includes('Jupyter')) {
+    return 'Data Science & EDA';
+  }
+  if (text.includes('automation') || text.includes('merger') || text.includes('upkeeper') || text.includes('notes') || text.includes('claimer') || text.includes('claimr') || text.includes('selenium')) {
+    return 'Automation & Tooling';
+  }
+  if (language === 'TypeScript' || language === 'JavaScript' || language === 'HTML') {
+    return 'Web Platform';
+  }
+  return 'Systems & Codebase';
+}
+
 function buildMilestones(rawRepos?: any[]): TimelineMilestone[] {
   const map = new Map<string, TimelineMilestone>();
 
   const getRepoKey = (url: string, name: string) => {
-    const parts = url.replace(/\/+$/, '').split('/');
+    const parts = (url || '').replace(/\/+$/, '').split('/');
     const slug = parts.pop() || name;
     return slug.toLowerCase().replace(/[^a-z0-9]/g, '');
   };
 
-  // 1. Ingest raw GitHub repos
   const reposToProcess = Array.isArray(rawRepos) ? rawRepos : [];
 
   reposToProcess.forEach((r) => {
@@ -92,6 +111,8 @@ function buildMilestones(rawRepos?: any[]): TimelineMilestone[] {
     });
 
     const key = getRepoKey(r.html_url, r.name);
+    const lang = r.language || 'Code';
+    const desc = r.description || 'Open-source repository engineered for production scale.';
 
     map.set(key, {
       id: r.id || key,
@@ -100,14 +121,14 @@ function buildMilestones(rawRepos?: any[]): TimelineMilestone[] {
       formattedDate,
       year,
       monthYear,
-      language: r.language || 'Code',
+      language: lang,
       html_url: r.html_url,
-      description: r.description || 'Open-source repository engineered for production scale.',
+      description: desc,
       isFeatured: false,
+      category: inferCategory(r.name, desc, lang),
     });
   });
 
-  // 2. Enrich with curated portfolio flagships
   (portfolioData.projects || []).forEach((p) => {
     const key = p.githubUrl ? getRepoKey(p.githubUrl, p.title) : p.title.toLowerCase().replace(/[^a-z0-9]/g, '');
     const existing = map.get(key);
@@ -119,6 +140,7 @@ function buildMilestones(rawRepos?: any[]): TimelineMilestone[] {
       existing.tags = p.tags;
       existing.liveUrl = p.liveUrl;
       existing.isFeatured = p.featured;
+      if (p.category) existing.category = p.category;
       if (p.tags && p.tags[0] && (!existing.language || existing.language === 'Code')) {
         existing.language = p.tags[0];
       }
@@ -160,6 +182,7 @@ function buildMilestones(rawRepos?: any[]): TimelineMilestone[] {
         isFeatured: p.featured,
         migratedDate: p.migratedDate,
         inceptionDate: p.inceptionDate,
+        category: p.category || inferCategory(p.title, p.description, p.tags[0] || 'Code'),
       });
     }
   });
@@ -180,78 +203,60 @@ export default function RepositoryTimeline({ repos: propRepos }: RepositoryTimel
   }, [propRepos, hookRepos]);
 
   const allMilestones = useMemo(() => buildMilestones(liveRepos), [liveRepos]);
-  const [activeIndex, setActiveIndex] = useState<number>(() =>
-    Math.max(0, allMilestones.length - 1)
-  );
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+
+  const [selectedYear, setSelectedYear] = useState<string>('All');
+  const availableYears = useMemo(() => {
+    const years = Array.from(new Set(allMilestones.map((m) => m.year))).sort((a, b) => b.localeCompare(a));
+    return ['All', ...years];
+  }, [allMilestones]);
+
+  const filteredMilestones = useMemo(() => {
+    if (selectedYear === 'All') return allMilestones;
+    return allMilestones.filter((m) => m.year === selectedYear);
+  }, [allMilestones, selectedYear]);
+
+  const [activeId, setActiveId] = useState<string | number>(() => {
+    return allMilestones[allMilestones.length - 1]?.id || '';
+  });
+
+  useEffect(() => {
+    if (!activeId && allMilestones.length > 0) {
+      setActiveId(allMilestones[allMilestones.length - 1].id);
+    }
+  }, [allMilestones, activeId]);
+
+  const activeMilestone = useMemo(() => {
+    const found = allMilestones.find((m) => m.id === activeId);
+    return found || allMilestones[allMilestones.length - 1] || null;
+  }, [allMilestones, activeId]);
+
+  const activeOverallIndex = useMemo(() => {
+    if (!activeMilestone) return 0;
+    const idx = allMilestones.findIndex((m) => m.id === activeMilestone.id);
+    return idx >= 0 ? idx : 0;
+  }, [allMilestones, activeMilestone]);
 
   const scrollTrackRef = useRef<HTMLDivElement | null>(null);
+  const isFirstMountRef = useRef(true);
 
-  // Clamp active milestone index safely
-  const clampedIndex = useMemo(() => {
-    if (allMilestones.length === 0) return 0;
-    if (activeIndex >= allMilestones.length) return allMilestones.length - 1;
-    if (activeIndex < 0) return 0;
-    return activeIndex;
-  }, [allMilestones, activeIndex]);
-
-  const activeMilestone = allMilestones[clampedIndex] || allMilestones[allMilestones.length - 1];
-
-  // Auto-play / Walkthrough mode: Continues from current selection; restarts from beginning if at the end
-  const handleTogglePlay = useCallback(() => {
-    if (!isPlaying) {
-      if (clampedIndex >= allMilestones.length - 1) {
-        setActiveIndex(0);
+  const handleStep = useCallback((direction: number) => {
+    const targetIdx = activeOverallIndex + direction;
+    if (targetIdx >= 0 && targetIdx < allMilestones.length) {
+      const nextMilestone = allMilestones[targetIdx];
+      setActiveId(nextMilestone.id);
+      if (selectedYear !== 'All' && nextMilestone.year !== selectedYear) {
+        setSelectedYear('All');
       }
-      setIsPlaying(true);
-    } else {
-      setIsPlaying(false);
     }
-  }, [isPlaying, clampedIndex, allMilestones.length]);
+  }, [activeOverallIndex, allMilestones, selectedYear]);
 
-  // Step interval for auto-play
-  useEffect(() => {
-    if (!isPlaying) return;
-    const timer = setInterval(() => {
-      setActiveIndex((prev) => {
-        if (prev >= allMilestones.length - 1) {
-          setIsPlaying(false);
-          return prev;
-        }
-        return prev + 1;
-      });
-    }, 2500);
-
-    return () => clearInterval(timer);
-  }, [isPlaying, allMilestones.length]);
-
-  // Smoothly center active milestone node in horizontal scroll view
-  useEffect(() => {
-    if (!scrollTrackRef.current) return;
-    const nodeEl = scrollTrackRef.current.querySelector(
-      `[data-milestone-idx="${clampedIndex}"]`
-    ) as HTMLElement | null;
-    if (nodeEl) {
-      const containerWidth = scrollTrackRef.current.clientWidth;
-      const nodeLeft = nodeEl.offsetLeft;
-      const nodeWidth = nodeEl.clientWidth;
-      scrollTrackRef.current.scrollTo({
-        left: nodeLeft - containerWidth / 2 + nodeWidth / 2,
-        behavior: 'smooth',
-      });
-    }
-  }, [clampedIndex]);
-
-  // Keyboard navigation shortcuts (Left/Right arrow)
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight') {
-        setActiveIndex((prev) => Math.min(allMilestones.length - 1, prev + 1));
-      } else if (e.key === 'ArrowLeft') {
-        setActiveIndex((prev) => Math.max(0, prev - 1));
-      }
+      if (['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement)?.tagName)) return;
+      if (e.key === 'ArrowRight') handleStep(1);
+      else if (e.key === 'ArrowLeft') handleStep(-1);
     },
-    [allMilestones.length]
+    [handleStep]
   );
 
   useEffect(() => {
@@ -259,470 +264,376 @@ export default function RepositoryTimeline({ repos: propRepos }: RepositoryTimel
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [handleKeyDown]);
 
-  // Sine Wave Geometry Calculations
-  const NODE_SPACING = 170;
-  const AMPLITUDE = 48; // Peak/Trough offset from center
-  const CENTER_Y = 145; // Center of the sine wave stage
-  const STAGE_HEIGHT = 290;
-  const totalTrackWidth = Math.max(allMilestones.length * NODE_SPACING + 220, 880);
+  // Center active node into view on initial mount and when activeId changes
+  useEffect(() => {
+    if (!scrollTrackRef.current || !activeMilestone) return;
 
-  // Compute exact (x, y) coordinates for each node on the sine wave
-  const nodePositions = useMemo(() => {
-    return allMilestones.map((_, idx) => {
-      const x = 90 + idx * NODE_SPACING;
-      // Even index: Crest (up at Y = CENTER_Y - AMPLITUDE)
-      // Odd index: Trough (down at Y = CENTER_Y + AMPLITUDE)
-      const isCrest = idx % 2 === 0;
-      const y = isCrest ? CENTER_Y - AMPLITUDE : CENTER_Y + AMPLITUDE;
-      return { x, y, isCrest };
+    const timer = setTimeout(() => {
+      if (!scrollTrackRef.current) return;
+      const nodeEl = scrollTrackRef.current.querySelector(
+        `[data-milestone-id="${activeMilestone.id}"]`
+      ) as HTMLElement | null;
+
+      if (nodeEl) {
+        const container = scrollTrackRef.current;
+        const nodeLeft = nodeEl.offsetLeft;
+        const nodeWidth = nodeEl.clientWidth;
+        const targetScrollLeft = nodeLeft - container.clientWidth / 2 + nodeWidth / 2;
+        
+        const behavior = isFirstMountRef.current ? 'auto' : 'smooth';
+        container.scrollTo({
+          left: Math.max(0, targetScrollLeft),
+          behavior,
+        });
+        isFirstMountRef.current = false;
+      }
+    }, 20);
+
+    return () => clearTimeout(timer);
+  }, [activeMilestone, selectedYear]);
+
+  const handleWheelScroll = (e: React.WheelEvent<HTMLDivElement>) => {
+    if (!scrollTrackRef.current) return;
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX) && !e.shiftKey) {
+      scrollTrackRef.current.scrollLeft += e.deltaY;
+    }
+  };
+
+  const scrollRunway = (direction: 'left' | 'right') => {
+    if (!scrollTrackRef.current) return;
+    scrollTrackRef.current.scrollBy({
+      left: direction === 'left' ? -360 : 360,
+      behavior: 'smooth',
     });
-  }, [allMilestones]);
+  };
 
-  // Generate SVG Sine-Wave Bezier Path String weaving through all nodes
-  const fullSinePathD = useMemo(() => {
-    if (nodePositions.length === 0) return '';
-    const first = nodePositions[0];
-    // Start curve smoothly from left
-    let d = `M 20 ${CENTER_Y} C 50 ${CENTER_Y}, ${first.x - 45} ${first.y}, ${first.x} ${first.y}`;
-
-    for (let i = 0; i < nodePositions.length - 1; i++) {
-      const p1 = nodePositions[i];
-      const p2 = nodePositions[i + 1];
-      const dx = p2.x - p1.x;
-      // Cubic Bezier with horizontal tangents at crests and troughs (dy/dx = 0)
-      d += ` C ${p1.x + dx * 0.5} ${p1.y}, ${p2.x - dx * 0.5} ${p2.y}, ${p2.x} ${p2.y}`;
+  const handleSelectYear = (year: string) => {
+    setSelectedYear(year);
+    if (year !== 'All') {
+      const firstInYear = allMilestones.find((m) => m.year === year);
+      if (firstInYear) setActiveId(firstInYear.id);
     }
+  };
 
-    // End curve smoothly to right
-    const last = nodePositions[nodePositions.length - 1];
-    d += ` C ${last.x + 45} ${last.y}, ${totalTrackWidth - 40} ${CENTER_Y}, ${totalTrackWidth - 15} ${CENTER_Y}`;
-    return d;
-  }, [nodePositions, totalTrackWidth]);
+  // Group milestones by year for integrated epoch dividers
+  const milestonesWithYearMarkers = useMemo(() => {
+    const result: Array<{ type: 'epoch'; year: string; count: number } | { type: 'milestone'; milestone: TimelineMilestone; indexInFiltered: number }> = [];
+    let lastYear = '';
 
-  // Generate Illuminated Path up to current active milestone
-  const activeSinePathD = useMemo(() => {
-    if (nodePositions.length === 0 || clampedIndex < 0) return '';
-    const first = nodePositions[0];
-    let d = `M 20 ${CENTER_Y} C 50 ${CENTER_Y}, ${first.x - 45} ${first.y}, ${first.x} ${first.y}`;
+    filteredMilestones.forEach((m, idx) => {
+      if (m.year !== lastYear) {
+        lastYear = m.year;
+        const countInThisYear = allMilestones.filter((item) => item.year === m.year).length;
+        result.push({ type: 'epoch', year: m.year, count: countInThisYear });
+      }
+      result.push({ type: 'milestone', milestone: m, indexInFiltered: idx });
+    });
 
-    for (let i = 0; i < clampedIndex; i++) {
-      const p1 = nodePositions[i];
-      const p2 = nodePositions[i + 1];
-      const dx = p2.x - p1.x;
-      d += ` C ${p1.x + dx * 0.5} ${p1.y}, ${p2.x - dx * 0.5} ${p2.y}, ${p2.x} ${p2.y}`;
-    }
-    return d;
-  }, [nodePositions, clampedIndex]);
+    return result;
+  }, [filteredMilestones, allMilestones]);
 
-  // Compute dynamic min and max year range
-  const yearRange = useMemo(() => {
-    if (allMilestones.length === 0) return '2023 – 2026';
-    const years = allMilestones
-      .map((m) => parseInt(m.year))
-      .filter((y) => !isNaN(y) && y > 2000 && y < 2100);
-    if (years.length === 0) return '2023 – 2026';
-    const minYear = Math.min(...years);
-    const maxYear = Math.max(...years);
-    return minYear === maxYear ? `${minYear}` : `${minYear} – ${maxYear}`;
-  }, [allMilestones]);
+  const activeLangColor = activeMilestone ? (LANGUAGE_COLORS[activeMilestone.language] || '#38bdf8') : '#38bdf8';
 
   return (
     <ScrollReveal direction="up" delay={0.15}>
-      <div className="rounded-xl border border-line bg-surface p-6 sm:p-8 shadow-panel space-y-7 relative overflow-hidden">
+      <div className="rounded-xl border border-line bg-surface p-4 sm:p-5 shadow-panel space-y-3.5 relative overflow-hidden">
         
-        {/* CSS Keyframe Style for Flowing Sine-Wave Energy Beam */}
-        <style dangerouslySetInnerHTML={{
-          __html: `
-            @keyframes sineWaveFlow {
-              0% { stroke-dashoffset: 320; }
-              100% { stroke-dashoffset: 0; }
-            }
-            .animate-sine-flow {
-              animation: sineWaveFlow 12s linear infinite;
-            }
-            .animate-fast-glow {
-              animation: sineWaveFlow 6s linear infinite;
-            }
-          `
-        }} />
-
-        {/* Ambient Glow */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-ember/5 blur-[120px] pointer-events-none rounded-full" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-cyan-500/5 blur-[120px] pointer-events-none rounded-full" />
-
-        {/* 1. Header & Timeline Stepper Controls */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-line pb-6">
-          <div>
-            <span className="inline-flex items-center gap-2 font-mono text-xs text-muted uppercase tracking-wider mb-2">
-              <Compass className="w-3.5 h-3.5 text-ember" />
-              Repository Trajectory ({yearRange})
-            </span>
-            <h2 className="font-display text-2xl sm:text-3xl font-bold text-bone flex items-center gap-2.5">
-              <span>Interactive Repository Timeline</span>
-              <span className="text-xs font-mono font-normal px-2.5 py-0.5 rounded-full bg-ember/10 border border-ember/30 text-ember">
-                {allMilestones.length} Inceptions
-              </span>
+        {/* 1. Ultra-Compact Header & Era Filter Bar (Single Row) */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-line pb-3.5">
+          <div className="flex items-center gap-2.5">
+            <GitBranch className="w-4 h-4 text-ember shrink-0" />
+            <h2 className="font-display text-base sm:text-lg font-bold text-bone">
+              Repository Timeline
             </h2>
-            <p className="text-bone-dim text-xs sm:text-sm mt-1 max-w-2xl font-mono">
-              Continuous flow documenting my repositories with live kinetic animations.
-            </p>
+            <span className="text-[0.68rem] font-mono px-2 py-0.5 rounded-full bg-ink border border-line text-muted">
+              {allMilestones.length} Inceptions
+            </span>
           </div>
 
-          {/* Stepper & Playback Controls */}
-          <div className="flex items-center gap-2 font-mono text-xs shrink-0 self-start md:self-auto">
-            <button
-              onClick={() => setActiveIndex((prev) => Math.max(0, prev - 1))}
-              disabled={clampedIndex === 0}
-              className="p-2 rounded-lg bg-ink border border-line hover:border-ember/50 disabled:opacity-40 disabled:hover:border-line text-bone transition-colors"
-              title="Previous Milestone (←)"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
+          {/* Era Filter Pills & Stepper */}
+          <div className="flex items-center gap-2 font-mono text-xs overflow-x-auto custom-scrollbar pb-0.5">
+            <div className="flex items-center gap-1 bg-ink/70 border border-line rounded-lg p-0.5 shrink-0">
+              {availableYears.map((year) => {
+                const isSelected = selectedYear === year;
+                return (
+                  <button
+                    key={year}
+                    onClick={() => handleSelectYear(year)}
+                    className={`px-2 py-0.5 rounded text-[0.68rem] transition-all ${
+                      isSelected
+                        ? 'bg-ember/20 text-ember font-bold shadow-xs'
+                        : 'text-muted hover:text-bone'
+                    }`}
+                  >
+                    {year === 'All' ? 'All' : year}
+                  </button>
+                );
+              })}
+            </div>
 
-            <button
-              onClick={handleTogglePlay}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-ember/10 border border-ember/40 text-ember hover:bg-ember/20 font-bold transition-colors shadow-sm"
-              title={
-                isPlaying
-                  ? 'Pause Auto Walk'
-                  : clampedIndex >= allMilestones.length - 1
-                  ? 'Start Auto Walk from Beginning'
-                  : 'Continue Auto Walk'
-              }
-            >
-              {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
-              <span>{isPlaying ? 'Pause' : 'Auto Walk'}</span>
-            </button>
+            {/* Stepper */}
+            <div className="flex items-center bg-ink border border-line rounded-lg p-0.5 shrink-0">
+              <button
+                onClick={() => handleStep(-1)}
+                disabled={activeOverallIndex === 0}
+                className="p-1 rounded hover:bg-surface disabled:opacity-30 text-bone transition-colors"
+                title="Previous (←)"
+              >
+                <ChevronLeft className="w-3.5 h-3.5" />
+              </button>
 
-            <button
-              onClick={() => setActiveIndex((prev) => Math.min(allMilestones.length - 1, prev + 1))}
-              disabled={clampedIndex >= allMilestones.length - 1}
-              className="p-2 rounded-lg bg-ink border border-line hover:border-ember/50 disabled:opacity-40 disabled:hover:border-line text-bone transition-colors"
-              title="Next Milestone (→)"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
+              <span className="px-1.5 text-[0.68rem] font-mono text-bone-dim select-none">
+                {String(activeOverallIndex + 1).padStart(2, '0')}/{String(allMilestones.length).padStart(2, '0')}
+              </span>
+
+              <button
+                onClick={() => handleStep(1)}
+                disabled={activeOverallIndex === allMilestones.length - 1}
+                className="p-1 rounded hover:bg-surface disabled:opacity-30 text-bone transition-colors"
+                title="Next (→)"
+              >
+                <ChevronRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
 
             <button
               onClick={() => {
-                setActiveIndex(allMilestones.length - 1);
-                setIsPlaying(false);
+                setActiveId(allMilestones[allMilestones.length - 1]?.id);
+                setSelectedYear('All');
               }}
-              className="p-2 rounded-lg bg-ink border border-line hover:border-ember/50 text-muted hover:text-bone transition-colors ml-1"
-              title="Jump to Latest"
+              className="p-1.5 rounded-lg bg-ink border border-line hover:border-ember/50 text-muted hover:text-bone transition-colors shrink-0"
+              title="Jump to latest"
             >
-              <RotateCcw className="w-4 h-4" />
+              <RotateCcw className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>
 
-        {/* 2. Sine-Wave Animated Timeline Stage */}
-        <div className="rounded-xl border border-line bg-[#060911] shadow-inner relative overflow-hidden">
+        {/* 2. Compact Horizontal Trunk Runway (Height ~88px) */}
+        <div className="rounded-lg border border-line bg-[#060911] relative overflow-hidden group/runway">
           
+          {/* Scroll arrow buttons */}
+          <button
+            onClick={() => scrollRunway('left')}
+            className="absolute left-1.5 top-1/2 -translate-y-1/2 z-20 p-1.5 rounded-full bg-ink/90 border border-line hover:border-ember text-bone shadow-md opacity-0 group-hover/runway:opacity-100 transition-all backdrop-blur-sm"
+            title="Scroll left"
+          >
+            <ChevronLeft className="w-3.5 h-3.5" />
+          </button>
+
+          <button
+            onClick={() => scrollRunway('right')}
+            className="absolute right-1.5 top-1/2 -translate-y-1/2 z-20 p-1.5 rounded-full bg-ink/90 border border-line hover:border-ember text-bone shadow-md opacity-0 group-hover/runway:opacity-100 transition-all backdrop-blur-sm"
+            title="Scroll right"
+          >
+            <ChevronRight className="w-3.5 h-3.5" />
+          </button>
+
+          {/* Fade edges */}
+          <div className="absolute top-0 bottom-0 left-0 w-6 bg-gradient-to-r from-[#060911] to-transparent pointer-events-none z-10" />
+          <div className="absolute top-0 bottom-0 right-0 w-6 bg-gradient-to-l from-[#060911] to-transparent pointer-events-none z-10" />
+
+          {/* Scroll Track */}
           <div
             ref={scrollTrackRef}
-            className="overflow-x-auto custom-scrollbar p-6 select-none relative"
-            style={{ minHeight: `${STAGE_HEIGHT}px` }}
+            onWheel={handleWheelScroll}
+            className="overflow-x-auto custom-scrollbar px-4 py-3 select-none"
           >
-            <div style={{ width: `${totalTrackWidth}px`, height: `${STAGE_HEIGHT - 30}px` }} className="relative">
+            <div className="relative pt-2 pb-1 inline-flex">
               
-              {/* SVG Sine-Wave Pathway & Animated Light Beams */}
-              <svg className="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  {/* Glowing Gradients */}
-                  <linearGradient id="sineGlowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#f97316" stopOpacity="0.8" />
-                    <stop offset="45%" stopColor="#a855f7" stopOpacity="0.9" />
-                    <stop offset="80%" stopColor="#38bdf8" stopOpacity="0.9" />
-                    <stop offset="100%" stopColor="#10b981" stopOpacity="0.8" />
-                  </linearGradient>
+              {/* Horizontal Trunk Rail (Mathematically centered at 20px) */}
+              <div
+                className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-line via-line/80 to-line pointer-events-none"
+                style={{ top: '19px' }}
+              />
 
-                  <linearGradient id="sineBaseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#f97316" stopOpacity="0.25" />
-                    <stop offset="50%" stopColor="#818cf8" stopOpacity="0.3" />
-                    <stop offset="100%" stopColor="#38bdf8" stopOpacity="0.25" />
-                  </linearGradient>
-
-                  {/* Soft Blur Filter for Atmospheric Sine Glow */}
-                  <filter id="sineBlur" x="-10%" y="-20%" width="120%" height="140%">
-                    <feGaussianBlur stdDeviation="4" result="blur" />
-                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                  </filter>
-                </defs>
-
-                {/* 1. Subtle Center Reference Axis */}
-                <line
-                  x1="20"
-                  y1={CENTER_Y}
-                  x2={totalTrackWidth - 20}
-                  y2={CENTER_Y}
-                  stroke="rgba(255, 255, 255, 0.05)"
-                  strokeWidth="1"
-                  strokeDasharray="4 8"
-                />
-
-                {/* 2. Sine Wave Ambient Blurred Outer Halo */}
-                {fullSinePathD && (
-                  <path
-                    d={fullSinePathD}
-                    fill="none"
-                    stroke="url(#sineGlowGrad)"
-                    strokeWidth="8"
-                    opacity="0.2"
-                    filter="url(#sineBlur)"
-                  />
-                )}
-
-                {/* 3. Base Sine-Wave Curve Track */}
-                {fullSinePathD && (
-                  <path
-                    id="sinePathTrack"
-                    d={fullSinePathD}
-                    fill="none"
-                    stroke="url(#sineBaseGrad)"
-                    strokeWidth="2.5"
-                  />
-                )}
-
-                {/* 4. Kinetic Moving Dash Energy Flow along Sine Wave */}
-                {fullSinePathD && (
-                  <path
-                    d={fullSinePathD}
-                    fill="none"
-                    stroke="url(#sineGlowGrad)"
-                    strokeWidth="2.5"
-                    strokeDasharray="8 16"
-                    className="animate-sine-flow"
-                    opacity="0.75"
-                  />
-                )}
-
-                {/* 5. Active Progress Illuminated Sine Path */}
-                {activeSinePathD && (
-                  <path
-                    d={activeSinePathD}
-                    fill="none"
-                    stroke="url(#sineGlowGrad)"
-                    strokeWidth="3.5"
-                    strokeLinecap="round"
-                    className="animate-fast-glow"
-                    opacity="0.95"
-                  />
-                )}
-
-                {/* 6. Continuous Traveling Photon Particle #1 (Ember) */}
-                {fullSinePathD && (
-                  <g>
-                    <circle r="4" fill="#f97316" filter="drop-shadow(0 0 6px #f97316)">
-                      <animateMotion
-                        dur="9s"
-                        repeatCount="indefinite"
-                        path={fullSinePathD}
-                      />
-                    </circle>
-                  </g>
-                )}
-
-                {/* 7. Continuous Traveling Photon Particle #2 (Cyan) */}
-                {fullSinePathD && (
-                  <g>
-                    <circle r="3.5" fill="#38bdf8" filter="drop-shadow(0 0 6px #38bdf8)">
-                      <animateMotion
-                        dur="9s"
-                        begin="4.5s"
-                        repeatCount="indefinite"
-                        path={fullSinePathD}
-                      />
-                    </circle>
-                  </g>
-                )}
-
-                {/* 8. Continuous Traveling Photon Particle #3 (Purple) */}
-                {fullSinePathD && (
-                  <g>
-                    <circle r="3" fill="#a855f7" filter="drop-shadow(0 0 5px #a855f7)">
-                      <animateMotion
-                        dur="12s"
-                        begin="2s"
-                        repeatCount="indefinite"
-                        path={fullSinePathD}
-                      />
-                    </circle>
-                  </g>
-                )}
-              </svg>
-
-              {/* Milestone Nodes positioned at each Crest and Trough on the Sine Curve */}
-              {allMilestones.map((m, idx) => {
-                const pos = nodePositions[idx] || { x: 90 + idx * NODE_SPACING, y: CENTER_Y, isCrest: idx % 2 === 0 };
-                const isSelected = idx === clampedIndex;
-                const isCrest = pos.isCrest;
-                const langColor = LANGUAGE_COLORS[m.language] || '#38bdf8';
-
-                return (
-                  <div
-                    key={m.id}
-                    data-milestone-idx={idx}
-                    onClick={() => {
-                      setActiveIndex(idx);
-                      setIsPlaying(false);
-                    }}
-                    style={{ left: `${pos.x}px`, top: `${pos.y}px` }}
-                    className="absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer group z-20"
-                  >
-                    {/* Pulsing Concentric Aura on Active Node */}
-                    {isSelected && (
+              {/* Items strip */}
+              <div className="flex items-start gap-2.5">
+                {milestonesWithYearMarkers.map((item, idx) => {
+                  if (item.type === 'epoch') {
+                    return (
                       <div
-                        className="absolute inset-0 -m-3.5 rounded-full animate-ping opacity-70"
-                        style={{ backgroundColor: langColor }}
-                      />
-                    )}
+                        key={`epoch-${item.year}-${idx}`}
+                        className="shrink-0 flex flex-col items-center justify-start px-1"
+                        style={{ width: '70px' }}
+                      >
+                        <div className="flex items-center justify-center h-6 mb-2">
+                          <div className="w-2 h-2 rounded-full bg-ember/70 border border-ember" />
+                        </div>
+                        <div className="w-full px-1.5 py-1 rounded bg-ink/90 border border-line/80 text-center">
+                          <span className="font-mono text-[0.65rem] font-bold text-ember block leading-tight">
+                            {item.year}
+                          </span>
+                          <span className="font-mono text-[0.55rem] text-muted block leading-tight">
+                            {item.count} repos
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  }
 
-                    {/* Milestone Node Circle */}
-                    <div
-                      className={`rounded-full transition-all duration-300 flex items-center justify-center ${
-                        isSelected
-                          ? 'w-10 h-10 bg-ink border-2 border-white shadow-xl scale-115'
-                          : 'w-7 h-7 bg-ink/95 border-2 hover:scale-125 hover:bg-ink'
-                      }`}
-                      style={{
-                        borderColor: isSelected ? '#ffffff' : langColor,
-                        boxShadow: isSelected ? `0 0 24px ${langColor}` : undefined,
-                      }}
-                    >
-                      <span
-                        className={`rounded-full transition-all ${
-                          isSelected ? 'w-4 h-4' : 'w-2.5 h-2.5'
-                        }`}
-                        style={{ backgroundColor: isSelected ? '#ffffff' : langColor }}
-                      />
-                    </div>
+                  const m = item.milestone;
+                  const isSelected = activeMilestone?.id === m.id;
+                  const langColor = LANGUAGE_COLORS[m.language] || '#38bdf8';
 
-                    {/* Alternating Labels: Above Crests, Below Troughs */}
+                  return (
                     <div
-                      className={`absolute left-1/2 -translate-x-1/2 pointer-events-none font-mono text-center transition-all whitespace-nowrap ${
-                        isCrest ? '-top-12' : 'top-10'
+                      key={m.id}
+                      data-milestone-id={m.id}
+                      onClick={() => setActiveId(m.id)}
+                      className={`shrink-0 cursor-pointer flex flex-col items-center group transition-transform duration-150 ${
+                        isSelected ? 'scale-102' : 'hover:scale-101 opacity-80 hover:opacity-100'
                       }`}
+                      style={{ width: '135px' }}
                     >
-                      <span
-                        className={`text-[0.7rem] font-bold block transition-colors ${
-                          isSelected ? 'text-bone font-black' : 'text-bone-dim/80 group-hover:text-bone'
+                      {/* Commit Node Marker (Mathematically centered at 20px) */}
+                      <div className="relative mb-2 flex items-center justify-center h-6">
+                        {isSelected && (
+                          <div
+                            className="absolute w-5 h-5 rounded-full opacity-35 blur-xs pointer-events-none"
+                            style={{ backgroundColor: langColor }}
+                          />
+                        )}
+                        <div
+                          className={`rounded-full transition-all flex items-center justify-center ${
+                            isSelected
+                              ? 'w-4 h-4 bg-ink border-2 border-white shadow-sm'
+                              : 'w-3 h-3 bg-ink border-2 group-hover:border-bone'
+                          }`}
+                          style={{ borderColor: isSelected ? '#ffffff' : langColor }}
+                        >
+                          <div
+                            className={`rounded-full ${isSelected ? 'w-1.5 h-1.5 bg-white' : 'w-1 h-1'}`}
+                            style={{ backgroundColor: isSelected ? '#ffffff' : langColor }}
+                          />
+                        </div>
+                      </div>
+
+                      {/* Milestone Chip */}
+                      <div
+                        className={`w-full px-2.5 py-1.5 rounded-md border text-left transition-all ${
+                          isSelected
+                            ? 'bg-surface border-ember shadow-sm ring-1 ring-ember/30'
+                            : 'bg-ink/80 border-line/70 hover:border-line'
                         }`}
                       >
-                        {m.name.length > 17 ? `${m.name.substring(0, 15)}…` : m.name}
-                      </span>
-                      <span className="text-[0.62rem] text-muted block -mt-0.5">{m.monthYear}</span>
+                        <div className="flex items-center justify-between text-[0.58rem] font-mono text-muted mb-0.5">
+                          <span>{m.monthYear}</span>
+                          {m.isFeatured && (
+                            <span className="text-amber-400 font-bold" title="Flagship Platform">★</span>
+                          )}
+                        </div>
+                        <h4
+                          className={`text-[0.72rem] font-bold font-sans line-clamp-1 leading-tight transition-colors ${
+                            isSelected ? 'text-bone' : 'text-bone-dim group-hover:text-bone'
+                          }`}
+                          title={m.name}
+                        >
+                          {m.name}
+                        </h4>
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
-
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
 
-        {/* 3. Active Milestone Spotlight HUD */}
+        {/* 3. Compact Active Milestone Telemetry Deck */}
         {activeMilestone && (
-          <div className="p-6 rounded-xl border border-ember/40 bg-ink/95 shadow-panel relative overflow-hidden space-y-4">
+          <div className="p-3.5 sm:p-4 rounded-lg border border-line bg-ink/85 font-mono text-xs flex flex-col md:flex-row md:items-center justify-between gap-3 shadow-panel relative">
             
-            {/* Top Accent Gradient */}
+            {/* Top Accent Strip */}
             <div
-              className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r"
+              className="absolute top-0 left-0 right-0 h-[2px] rounded-t-lg bg-gradient-to-r"
               style={{
-                backgroundImage: `linear-gradient(to right, ${
-                  LANGUAGE_COLORS[activeMilestone.language] || '#f97316'
-                }, transparent)`,
+                backgroundImage: `linear-gradient(to right, ${activeLangColor}, transparent)`,
               }}
             />
 
-            <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
-              <div className="space-y-2">
-                
-                {/* Milestone Counter & Inception Date */}
-                <div className="flex flex-wrap items-center gap-2.5 font-mono text-xs">
-                  <span className="px-2.5 py-0.5 rounded bg-ember/10 border border-ember/30 text-ember font-bold text-[0.7rem]">
-                    Milestone #{clampedIndex + 1} of {allMilestones.length}
+            {/* Left: Metadata & Project Information */}
+            <div className="space-y-1 min-w-0 flex-1">
+              <div className="flex flex-wrap items-center gap-2 text-[0.68rem]">
+                <span className="px-2 py-0.2 rounded bg-ember/10 border border-ember/30 text-ember font-bold">
+                  #{activeOverallIndex + 1} of {allMilestones.length}
+                </span>
+
+                <span className="text-bone-dim flex items-center gap-1">
+                  <Calendar className="w-3 h-3 text-indigo-400" />
+                  <span>{activeMilestone.formattedDate}</span>
+                </span>
+
+                <span className="text-muted/60">•</span>
+
+                <span className="text-bone-dim flex items-center gap-1">
+                  <span
+                    className="w-1.5 h-1.5 rounded-full"
+                    style={{ backgroundColor: activeLangColor }}
+                  />
+                  <span>{activeMilestone.language}</span>
+                </span>
+
+                <span className="text-muted/60">•</span>
+                <span className="text-muted truncate max-w-[140px]">{activeMilestone.category}</span>
+
+                {activeMilestone.migratedDate && (
+                  <span className="text-amber-400/90 text-[0.62rem]">
+                    (Synced: {activeMilestone.migratedDate})
                   </span>
-
-                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded bg-surface border border-line text-bone font-medium text-[0.7rem]">
-                    <Calendar className="w-3 h-3 text-indigo-400" />
-                    <span>{activeMilestone.migratedDate ? `Built ${activeMilestone.formattedDate}` : activeMilestone.formattedDate}</span>
-                  </span>
-
-                  {activeMilestone.migratedDate && (
-                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded bg-amber-500/10 border border-amber-500/30 text-amber-300 font-medium text-[0.7rem]">
-                      <GitBranch className="w-3 h-3 text-amber-400" />
-                      <span>Migrated to GitHub ({activeMilestone.migratedDate})</span>
-                    </span>
-                  )}
-
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-surface border border-line text-bone-dim text-[0.7rem] font-semibold">
-                    <span
-                      className="w-2 h-2 rounded-full"
-                      style={{ backgroundColor: LANGUAGE_COLORS[activeMilestone.language] || '#38bdf8' }}
-                    />
-                    <span>{activeMilestone.language}</span>
-                  </span>
-                </div>
-
-                {/* Project Title */}
-                <h3 className="font-display text-2xl font-bold text-bone flex items-center gap-2">
-                  <span>{activeMilestone.name}</span>
-                  {activeMilestone.isFeatured && (
-                    <span className="text-xs font-mono font-normal px-2 py-0.5 rounded-full bg-ember/15 border border-ember text-ember">
-                      Flagship
-                    </span>
-                  )}
-                </h3>
-
-                {/* Description */}
-                <p className="text-bone-dim text-xs sm:text-sm font-mono max-w-3xl leading-relaxed">
-                  {activeMilestone.description}
-                </p>
-
-                {/* Production Metrics & Tech Tags */}
-                <div className="flex flex-wrap items-center gap-2 pt-2 font-mono">
-                  {activeMilestone.metrics && (
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-medium">
-                      <Sparkles className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                      <span>{activeMilestone.metrics}</span>
-                    </span>
-                  )}
-
-                  {(activeMilestone.tags || []).slice(0, 4).map((tag) => (
-                    <span key={tag} className="px-2 py-1 rounded bg-surface/50 border border-line/60 text-[0.7rem] text-muted">
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex sm:flex-col items-stretch gap-2.5 font-mono text-xs shrink-0 self-start">
-                <a
-                  href={activeMilestone.html_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-ember text-ink font-bold hover:bg-ember/90 shadow-md shadow-ember/20 transition-all"
-                >
-                  <GitBranch className="w-4 h-4" />
-                  <span>View Repository</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-
-                {activeMilestone.liveUrl && (
-                  <a
-                    href={activeMilestone.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-surface border border-line hover:border-cyan-400 text-bone hover:text-cyan-400 transition-colors"
-                  >
-                    <span>Live Demo</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
                 )}
               </div>
+
+              <div className="flex items-center gap-2">
+                <h3 className="font-display text-base font-bold text-bone truncate">
+                  {activeMilestone.name}
+                </h3>
+                {activeMilestone.isFeatured && (
+                  <span className="text-[0.6rem] font-mono px-2 py-0.2 rounded-full bg-ember/15 border border-ember text-ember shrink-0">
+                    Flagship
+                  </span>
+                )}
+              </div>
+
+              <p className="text-bone-dim text-xs line-clamp-1 font-mono text-muted max-w-3xl">
+                {activeMilestone.description}
+              </p>
             </div>
+
+            {/* Right: Metric badge & Action links */}
+            <div className="flex items-center gap-2 shrink-0 self-end md:self-center pt-1 md:pt-0">
+              {activeMilestone.metrics && (
+                <span className="hidden lg:inline-flex items-center gap-1 px-2.5 py-1 rounded bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-[0.68rem]">
+                  <Sparkles className="w-3 h-3 text-emerald-400 shrink-0" />
+                  <span className="truncate max-w-[170px]">{activeMilestone.metrics}</span>
+                </span>
+              )}
+
+              <a
+                href={activeMilestone.html_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-ember text-ink font-bold hover:bg-ember/90 transition-all text-xs"
+              >
+                <GitBranch className="w-3.5 h-3.5" />
+                <span>Repo</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+
+              {activeMilestone.liveUrl && (
+                <a
+                  href={activeMilestone.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface border border-line hover:border-cyan-400 text-bone hover:text-cyan-400 transition-colors text-xs"
+                >
+                  <Globe className="w-3.5 h-3.5" />
+                  <span>Demo</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              )}
+            </div>
+
           </div>
         )}
 

@@ -246,7 +246,7 @@ export default function GitHubMetaDashboard() {
         </div>
       </ScrollReveal>
 
-      {/* 2. INTERACTIVE REPOSITORY TIMELINE (ABOVE MIDDLE 1) */}
+      {/* 2. COMPACT INTERACTIVE REPOSITORY TIMELINE */}
       <RepositoryTimeline repos={activeRepos} />
 
       {/* 3. DEDICATED LAST 5 RECENT COMMITS REGARDLESS OF REPOSITORY (MIDDLE 1) */}

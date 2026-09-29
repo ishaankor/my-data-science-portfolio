@@ -136,8 +136,8 @@ export default function ProjectsShowcase({ limit }: { limit?: number }) {
                   </a>
 
                 {/* Title & Year Below Card */}
-                <div className="mt-4 flex items-baseline justify-between gap-4">
-                  <h3 className="font-display text-xl font-semibold text-bone transition-colors group-hover:text-ember flex items-center gap-2">
+                <div className="mt-4 flex items-baseline justify-between gap-3">
+                  <h3 className="font-display text-xl font-semibold text-bone transition-colors group-hover:text-ember flex items-center gap-2 flex-wrap">
                     <span>{project.title}</span>
                     {project.githubUrl && (
                       <a
@@ -146,32 +146,36 @@ export default function ProjectsShowcase({ limit }: { limit?: number }) {
                         rel="noopener noreferrer"
                         className="text-muted hover:text-ember transition-colors"
                         aria-label="GitHub Repo"
+                        onClick={(e) => e.stopPropagation()}
                       >
                         <Github className="w-4 h-4 inline" />
                       </a>
                     )}
                   </h3>
-                  <span className="font-mono text-xs text-muted">{project.year}</span>
+                  <div className="flex items-center gap-2 shrink-0 font-mono text-xs">
+                    <span className="text-muted">{project.year}</span>
+                    {project.liveUrl && (
+                      <>
+                        <span className="text-muted/40">•</span>
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-ember hover:underline inline-flex items-center gap-1 font-semibold"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <span>Live</span>
+                          <ExternalLink className="w-3 h-3 text-ember" />
+                        </a>
+                      </>
+                    )}
+                  </div>
                 </div>
 
-                {/* Description & Links */}
-                <div className="mt-2 flex items-center justify-between">
-                  <p className="text-xs text-bone-dim line-clamp-1 leading-relaxed max-w-[80%]">
-                    {project.description}
-                  </p>
-
-                  {project.liveUrl && (
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-mono text-xs text-ember hover:underline inline-flex items-center gap-1 shrink-0"
-                    >
-                      <span>Live</span>
-                      <ExternalLink className="w-3 h-3 text-ember" />
-                    </a>
-                  )}
-                </div>
+                {/* Full Description */}
+                <p className="mt-2 text-xs text-bone-dim leading-relaxed">
+                  {project.description}
+                </p>
               </div>
             </ScrollReveal>
           ))}

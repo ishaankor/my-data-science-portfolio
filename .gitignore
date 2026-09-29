@@ -3,3 +3,5 @@ node_modules/
 .env.local
 .next/
 my-data-science-portfolio.code-workspace
+public/images/ishaanbot-landing.png
+public/images/ishaanbot-clean.png

@@ -59,7 +59,7 @@ const AGENT_SCENARIOS: AgentScenario[] = [
   {
     id: 'datafy-copilot',
     name: 'LangGraph Agentic Canvas',
-    shortTag: 'Datafy AI Copilot',
+    shortTag: 'Datafy!',
     toolName: 'agent.generate_visual_canvas()',
     category: 'Autonomous Workflows',
     color: '#818cf8', // Indigo
@@ -77,7 +77,7 @@ const AGENT_SCENARIOS: AgentScenario[] = [
   {
     id: 'transformi-ml',
     name: 'Discord ML Bot Engine',
-    shortTag: 'Transformi ML Bot',
+    shortTag: 'Transformi!',
     toolName: 'scikit.fit_regression_model()',
     category: 'Neural Computation',
     color: '#38bdf8', // Cyan

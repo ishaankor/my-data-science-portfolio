@@ -1,4 +1,13 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+.gitignore,2,0,code,7c7e5ce,Ishaan Kor,2026-09-28,03:38:06,-07:00,2026-09-28T03:38:06-07:00,0,"feat: add ExploratoryDataAnalysisShowcase component and new project preview images"
+app/globals.css,20,0,css,7c7e5ce,Ishaan Kor,2026-09-28,03:38:06,-07:00,2026-09-28T03:38:06-07:00,1,"feat: add ExploratoryDataAnalysisShowcase component and new project preview images"
+components/hero/HeroAgenticConsole.tsx,2,2,tsx,7c7e5ce,Ishaan Kor,2026-09-28,03:38:06,-07:00,2026-09-28T03:38:06-07:00,2,"feat: add ExploratoryDataAnalysisShowcase component and new project preview images"
+components/projects/ExploratoryDataAnalysisShowcase.tsx,253,0,tsx,7c7e5ce,Ishaan Kor,2026-09-28,03:38:06,-07:00,2026-09-28T03:38:06-07:00,2,"feat: add ExploratoryDataAnalysisShowcase component and new project preview images"
+components/projects/ProjectsDeepDiveShowcase.tsx,110,35,tsx,7c7e5ce,Ishaan Kor,2026-09-28,03:38:06,-07:00,2026-09-28T03:38:06-07:00,2,"feat: add ExploratoryDataAnalysisShowcase component and new project preview images"
+components/projects/RepositoryMatrix.tsx,28,309,tsx,7c7e5ce,Ishaan Kor,2026-09-28,03:38:06,-07:00,2026-09-28T03:38:06-07:00,2,"feat: add ExploratoryDataAnalysisShowcase component and new project preview images"
+public/images/ishaanbot-animated-landing.webp,0,0,webp,7c7e5ce,Ishaan Kor,2026-09-28,03:38:06,-07:00,2026-09-28T03:38:06-07:00,2,"feat: add ExploratoryDataAnalysisShowcase component and new project preview images"
+public/images/ishaanbot-landing-animated.webp,0,0,webp,7c7e5ce,Ishaan Kor,2026-09-28,03:38:06,-07:00,2026-09-28T03:38:06-07:00,2,"feat: add ExploratoryDataAnalysisShowcase component and new project preview images"
+public/images/rigscouter-landing-animated.webp,0,0,webp,7c7e5ce,Ishaan Kor,2026-09-28,03:38:06,-07:00,2026-09-28T03:38:06-07:00,2,"feat: add ExploratoryDataAnalysisShowcase component and new project preview images"
 app/globals.css,2,2,css,843ffa1,Ishaan Kor,2026-09-27,03:19:16,-07:00,2026-09-27T03:19:16-07:00,1,"feat: add project assets and update portfolio components and data"
 app/layout.tsx,1,14,tsx,843ffa1,Ishaan Kor,2026-09-27,03:19:16,-07:00,2026-09-27T03:19:16-07:00,1,"feat: add project assets and update portfolio components and data"
 components/analytics/GitHubAnalytics.tsx,2,5,tsx,843ffa1,Ishaan Kor,2026-09-27,03:19:16,-07:00,2026-09-27T03:19:16-07:00,2,"feat: add project assets and update portfolio components and data"

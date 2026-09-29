@@ -121,3 +121,23 @@ body {
 .skip-link:focus {
   top: 16px;
 }
+
+/* Live Price Drops Horizontal Marquee Ticker */
+@keyframes liveTicker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-live-ticker {
+  display: flex;
+  width: max-content;
+  animation: liveTicker 26s linear infinite;
+}
+
+.animate-live-ticker:hover {
+  animation-play-state: paused;
+}
