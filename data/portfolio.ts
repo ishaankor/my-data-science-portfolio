@@ -326,7 +326,7 @@ export const portfolioData: PortfolioData = {
       year: "2025",
       category: "AI & Web",
       image: "/favicons/ishaanbot-cover.png",
-      favicon: "/favicons/mcp-favicon.svg",
+      favicon: "/favicons/ishaanbot.png",
       description: "A modular AI assistant bridging frontier LLMs to 15+ real-world tools via MCP.",
       detailedDescription: "FastAPI backend with streaming inference, RAG memory, and dynamic tool-routing.",
       tags: ["Python", "Gemini API", "FastAPI", "Docker", "MCP"],

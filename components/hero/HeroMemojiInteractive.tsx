@@ -9,6 +9,8 @@ export default function HeroMemojiInteractive() {
   const [rotateY, setRotateY] = useState(0);
   const [glarePos, setGlarePos] = useState({ x: 50, y: 50 });
   const [isHovered, setIsHovered] = useState(false);
+  const [isAvatarHovered, setIsAvatarHovered] = useState(false);
+  const [shockwaveKey, setShockwaveKey] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -39,6 +41,7 @@ export default function HeroMemojiInteractive() {
   };
 
   const handleCardClick = () => {
+    setShockwaveKey((k) => k + 1);
     setIsFlipped((prev) => !prev);
   };
 
@@ -122,19 +125,50 @@ export default function HeroMemojiInteractive() {
               </div>
             </div>
 
-            {/* Center: Clean, Large Interactive Animated Memoji Avatar */}
+            {/* Center: Clean Interactive Animated Avatar with Synchronized Ripples & Bounce */}
             <div
-              className="relative my-auto flex flex-col items-center justify-center group"
+              className="relative my-auto flex items-center justify-center select-none"
               style={{ transform: 'translateZ(50px)' }}
             >
-              {/* Memoji Image Container */}
-              <div className="relative w-36 h-36 sm:w-40 sm:h-40 rounded-full overflow-hidden p-1 border border-line bg-surface shadow-panel transition-all duration-300 group-hover:scale-105 group-hover:border-ember/50">
-                <div className="w-full h-full rounded-full overflow-hidden bg-ink/90 relative border border-line flex items-center justify-center">
+              {/* Bouncing & Floating Avatar Wrapper with Synchronized Ripple Aura */}
+              <div
+                className={`relative cursor-pointer transition-transform duration-300 ${
+                  isAvatarHovered ? 'animate-avatar-hover-spring' : 'animate-avatar-sync-bounce'
+                }`}
+                onMouseEnter={() => setIsAvatarHovered(true)}
+                onMouseLeave={() => setIsAvatarHovered(false)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShockwaveKey((k) => k + 1);
+                  setIsFlipped((prev) => !prev);
+                }}
+              >
+                {/* Synchronized Concentric Ripple Rings (travels WITH avatar, 100% concentric) */}
+                <div className="absolute inset-0 rounded-full pointer-events-none" aria-hidden="true">
+                  {/* Wave 1: In sync with bounce landing */}
+                  <div className="absolute inset-0 rounded-full border border-emerald-400/40 bg-emerald-500/10 animate-avatar-sync-ripple-1 shadow-[0_0_20px_rgba(16,185,129,0.25)]" />
+                  {/* Wave 2: Staggered half-cycle */}
+                  <div className="absolute inset-0 rounded-full border border-teal-400/35 bg-teal-500/5 animate-avatar-sync-ripple-2 shadow-[0_0_20px_rgba(45,212,191,0.2)]" />
+
+                  {/* Click Shockwave Burst */}
+                  {shockwaveKey > 0 && (
+                    <div
+                      key={shockwaveKey}
+                      className="absolute inset-0 rounded-full border-2 border-emerald-400 animate-avatar-shockwave bg-emerald-500/20"
+                    />
+                  )}
+                </div>
+
+                {/* Soft Ambient Core Glow behind Avatar */}
+                <div className="absolute -inset-2 rounded-full bg-gradient-to-tr from-emerald-500/25 via-teal-500/20 to-cyan-500/25 blur-lg opacity-70 group-hover:opacity-100 transition-opacity pointer-events-none" />
+
+                {/* Avatar Image Container with Natural Contact Depth Shadow */}
+                <div className="relative w-36 h-36 sm:w-40 sm:h-40 rounded-full overflow-hidden border-2 border-line/90 bg-ink shadow-[0_14px_40px_-8px_rgba(0,0,0,0.7),0_0_25px_rgba(16,185,129,0.25)] transition-all duration-300 hover:border-emerald-400/80 hover:shadow-[0_16px_50px_-6px_rgba(0,0,0,0.8),0_0_35px_rgba(16,185,129,0.45)]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="/images/personal-picture.avif"
-                    alt="Ishaan Koradia Memoji"
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    alt="Avatar"
+                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                   />
                 </div>
               </div>
@@ -236,6 +270,8 @@ export default function HeroMemojiInteractive() {
               {/* Avatar Mini Circle */}
               <div className="flex items-center gap-3 mt-1">
                 <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full p-0.5 border border-line bg-surface shadow-sm">
+                  {/* Subtle ripple ping */}
+                  <div className="absolute -inset-1 rounded-full border border-emerald-400/40 animate-ping opacity-25 pointer-events-none" />
                   <div className="w-full h-full rounded-full overflow-hidden bg-ink/90 border border-line flex items-center justify-center">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
@@ -252,13 +288,13 @@ export default function HeroMemojiInteractive() {
                   </span>
                 </div>
 
-                <div className="text-left font-mono">
+                {/* <div className="text-left font-mono">
                   <div className="text-xs font-bold text-bone">Ishaan Koradia</div>
-                  <div className="text-[10px] text-emerald-400 flex items-center gap-1.5 mt-0.5">
+                  {/* <div className="text-[10px] text-emerald-400 flex items-center gap-1.5 mt-0.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                     Always exploring &amp; building
-                  </div>
-                </div>
+                  </div> */}
+                {/* </div> */}
               </div>
             </div>
 

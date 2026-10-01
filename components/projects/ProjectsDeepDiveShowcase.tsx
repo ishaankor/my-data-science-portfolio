@@ -322,7 +322,7 @@ export default function ProjectsDeepDiveShowcase() {
                   </div>
                   <div className="flex items-center gap-2 bg-ink/70 px-3 py-1 rounded-md border border-line/50">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/favicons/mcp-favicon.svg" alt="Model Context Protocol Favicon" className="w-3.5 h-3.5 rounded-sm shrink-0 object-contain" />
+                    <img src="/favicons/favicon.ico" alt="Model Context Protocol Favicon" className="w-3.5 h-3.5 rounded-sm shrink-0 object-contain" />
                     <span className="font-mono text-[0.7rem] text-muted group-hover:text-emerald-400 transition-colors flex items-center gap-1">
                       ishaankoradia.com
                       <ExternalLink className="w-2.5 h-2.5 inline" />
@@ -351,7 +351,7 @@ export default function ProjectsDeepDiveShowcase() {
                   <span className="font-bold text-bone">03</span>
                   <span>2025</span>
                   <span className="text-muted/60">—</span>
-                  <span className="text-bone-dim"> MCP Agentic Assistant</span>
+                  <span className="text-bone-dim"> Personal Chatbot</span>
                 </div>
 
                 {/* Quantitative Statistic Tag */}
@@ -363,7 +363,7 @@ export default function ProjectsDeepDiveShowcase() {
 
               <div className="flex items-center gap-3">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/favicons/mcp-favicon.svg" alt="Model Context Protocol" className="w-8 h-8 rounded-lg border border-line/80 p-0.5 bg-surface shrink-0" />
+                <img src="/favicons/ishaanbot.png" alt="IshaanBot" className="w-8 h-8 rounded-lg border border-line/80 p-0.5 bg-surface shrink-0 object-contain" />
                 <h3 className="font-display text-3xl sm:text-4xl font-extrabold text-bone tracking-tight">
                   IshaanBot
                 </h3>
@@ -374,7 +374,7 @@ export default function ProjectsDeepDiveShowcase() {
               </p>
 
               <p className="text-bone-dim text-sm sm:text-[0.95rem] leading-relaxed">
-                Agentic digital twin powered by Model Context Protocol (MCP) with 15+ composable tools, FastAPI streaming inference, RAG memory, and live Spotify playback telemetry.
+                A digital twin powered by Model Context Protocol (MCP) with 15+ composable tools, FastAPI streaming inference, RAG memory, and live Spotify playback telemetry.
               </p>
 
               {/* Tag Pills */}
