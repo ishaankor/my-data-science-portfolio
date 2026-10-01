@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-import MidnightHazeCursor from '@/components/ui/MidnightHazeCursor';
 import { portfolioData } from '@/data/portfolio';
 
 export const metadata: Metadata = {
@@ -50,8 +49,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className="bg-[#090d16] text-slate-100 min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-black">
-        <MidnightHazeCursor />
+      <body className="bg-[#090d16] text-slate-100 min-h-screen flex flex-col antialiased selection:bg-ember selection:text-white">
         <Navbar />
         <main id="main-content" className="flex-grow">
           {children}

@@ -15,33 +15,7 @@ const rigScouterDeals = [
 
 export default function ProjectsDeepDiveShowcase() {
   return (
-    <div className="space-y-24 mb-16">
-      
-      {/* Top Section Header */}
-      <ScrollReveal direction="up" delay={0.05}>
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-          <div className="inline-flex items-center gap-2 font-mono text-[0.72rem] text-muted">
-            <span className="text-bone">01 // PROJECT BUILDS</span>
-            <span className="text-line">/</span>
-            <span className="text-ember">FEATURED HIGHLIGHTS</span>
-          </div>
-        </div>
-      </ScrollReveal>
-
-      <ScrollReveal direction="up" delay={0.1}>
-        <div className="space-y-4">
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold text-bone tracking-tight leading-[1.08] sm:whitespace-nowrap">
-            Things I&apos;ve built, end to end.
-          </h2>
-
-          <p className="text-bone-dim text-base sm:text-lg leading-relaxed max-w-2xl">
-            Production AI applications, agentic platforms, and automation systems shipped and documented end-to-end.
-          </p>
-        </div>
-      </ScrollReveal>
-
-      {/* Project Rows */}
-      <div className="space-y-20">
+    <div className="space-y-20">
 
         {/* ---------------- PROJECT 01: DATAFY (Interactive Web Data Canvas) ---------------- */}
         <ScrollReveal direction="up" delay={0.15}>
@@ -451,8 +425,6 @@ export default function ProjectsDeepDiveShowcase() {
 
           </div>
         </ScrollReveal>
-
-      </div>
 
     </div>
   );

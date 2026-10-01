@@ -12,10 +12,6 @@ import ScrollReveal from '@/components/ui/ScrollReveal';
 export default function WorkHeroHUD() {
   return (
     <section className="relative pt-24 pb-14 overflow-hidden border-b border-line/60">
-      {/* Ambient background glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-ember/5 blur-[120px] pointer-events-none rounded-full" />
-      <div className="absolute top-1/2 right-10 w-72 h-72 bg-indigo-500/5 blur-[100px] pointer-events-none rounded-full" />
-
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-10 space-y-8">
         
         {/* Top Telemetry Path & Status Tag */}
@@ -27,10 +23,10 @@ export default function WorkHeroHUD() {
               <span className="text-ember">EXPERIENCE PATHWAY</span>
             </div>
 
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface border border-line font-mono text-xs text-bone-dim">
+            {/* <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface border border-line font-mono text-xs text-bone-dim">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
               <span>AI &amp; Machine Learning Engineering</span>
-            </div>
+            </div> */}
           </div>
         </ScrollReveal>
 
@@ -51,12 +47,12 @@ export default function WorkHeroHUD() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
             
             {/* Card 1: Handshake AI */}
-            <div className="rounded-xl border border-line bg-surface/70 p-5 shadow-panel flex flex-col justify-between hover:border-indigo-500/40 transition-colors">
-              <div className="flex items-center justify-between text-indigo-400 mb-3">
-                <div className="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center">
-                  <Cpu className="w-4 h-4 text-indigo-400" />
+            <div className="rounded-xl border border-line bg-surface p-5 shadow-panel flex flex-col justify-between hover:border-line/80 transition-colors">
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-8 h-8 rounded-lg bg-ink border border-line flex items-center justify-center text-bone">
+                  <Cpu className="w-4 h-4 text-bone-dim" />
                 </div>
-                <span className="font-mono text-[0.65rem] text-indigo-400/80 uppercase font-semibold">AI Engineering</span>
+                <span className="font-mono text-[0.65rem] text-muted uppercase font-semibold">AI Engineering</span>
               </div>
               <div>
                 <p className="font-display text-lg font-bold text-bone">Handshake AI</p>
@@ -65,12 +61,12 @@ export default function WorkHeroHUD() {
             </div>
 
             {/* Card 2: Verizon */}
-            <div className="rounded-xl border border-line bg-surface/70 p-5 shadow-panel flex flex-col justify-between hover:border-amber-500/40 transition-colors">
-              <div className="flex items-center justify-between text-amber-400 mb-3">
-                <div className="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
-                  <Briefcase className="w-4 h-4 text-amber-400" />
+            <div className="rounded-xl border border-line bg-surface p-5 shadow-panel flex flex-col justify-between hover:border-line/80 transition-colors">
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-8 h-8 rounded-lg bg-ink border border-line flex items-center justify-center text-bone">
+                  <Briefcase className="w-4 h-4 text-bone-dim" />
                 </div>
-                <span className="font-mono text-[0.65rem] text-amber-400/80 uppercase font-semibold">Project Engineering</span>
+                <span className="font-mono text-[0.65rem] text-muted uppercase font-semibold">Project Engineering</span>
               </div>
               <div>
                 <p className="font-display text-lg font-bold text-bone">Verizon</p>
@@ -79,12 +75,12 @@ export default function WorkHeroHUD() {
             </div>
 
             {/* Card 3: UC San Diego */}
-            <div className="rounded-xl border border-line bg-surface/70 p-5 shadow-panel flex flex-col justify-between hover:border-cyan-500/40 transition-colors">
-              <div className="flex items-center justify-between text-cyan-400 mb-3">
-                <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
-                  <GraduationCap className="w-4 h-4 text-cyan-400" />
+            <div className="rounded-xl border border-line bg-surface p-5 shadow-panel flex flex-col justify-between hover:border-line/80 transition-colors">
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-8 h-8 rounded-lg bg-ink border border-line flex items-center justify-center text-bone">
+                  <GraduationCap className="w-4 h-4 text-bone-dim" />
                 </div>
-                <span className="font-mono text-[0.65rem] text-cyan-400/80 uppercase font-semibold">Academic Foundation</span>
+                <span className="font-mono text-[0.65rem] text-muted uppercase font-semibold">Academic Foundation</span>
               </div>
               <div>
                 <p className="font-display text-lg font-bold text-bone">UC San Diego</p>
@@ -93,12 +89,12 @@ export default function WorkHeroHUD() {
             </div>
 
             {/* Card 4: Technical Credentials */}
-            <div className="rounded-xl border border-line bg-surface/70 p-5 shadow-panel flex flex-col justify-between hover:border-emerald-500/40 transition-colors">
-              <div className="flex items-center justify-between text-emerald-400 mb-3">
-                <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+            <div className="rounded-xl border border-line bg-surface p-5 shadow-panel flex flex-col justify-between hover:border-line/80 transition-colors">
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-8 h-8 rounded-lg bg-ink border border-line flex items-center justify-center text-emerald-400">
                   <ShieldCheck className="w-4 h-4 text-emerald-400" />
                 </div>
-                <span className="font-mono text-[0.65rem] text-emerald-400/80 uppercase font-semibold">Specializations</span>
+                <span className="font-mono text-[0.65rem] text-muted uppercase font-semibold">Specializations</span>
               </div>
               <div>
                 <p className="font-display text-lg font-bold text-bone">Certifications</p>

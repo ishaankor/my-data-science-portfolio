@@ -17,9 +17,11 @@ export default function GitHubAnalytics() {
     return acc;
   }, {} as Record<string, number>);
 
-  const topLanguages = Object.entries(languageMap)
+  const topLanguageEntries = Object.entries(languageMap)
     .sort((a, b) => b[1] - a[1])
     .slice(0, 5);
+
+  const topLanguages = topLanguageEntries;
 
   const recentRepos = [...activeRepos]
     .sort((a, b) => new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime())
@@ -38,6 +40,29 @@ export default function GitHubAnalytics() {
   };
 
   const primaryLang = topLanguages.length > 0 ? topLanguages[0][0] : 'Python';
+
+  const totalTracked = activeRepos.length || 1;
+  const topCount = topLanguageEntries.reduce((sum, [, count]) => sum + count, 0);
+  const otherCount = Math.max(0, activeRepos.length - topCount);
+
+  const languagesList = [
+    ...topLanguageEntries.map(([lang, count]) => ({
+      lang,
+      count,
+      percent: Math.round((count / totalTracked) * 100),
+      color: languageColors[lang]?.hex || '#f97316',
+    })),
+    ...(otherCount > 0
+      ? [
+          {
+            lang: 'Other',
+            count: otherCount,
+            percent: Math.max(0, 100 - topLanguageEntries.reduce((acc, [, c]) => acc + Math.round((c / totalTracked) * 100), 0)),
+            color: '#64748b',
+          },
+        ]
+      : []),
+  ];
 
   return (
     <section className="border-t border-line/60 py-20 sm:py-28 relative">
@@ -75,12 +100,12 @@ export default function GitHubAnalytics() {
           {/* Key Metrics Cards */}
           <div className="lg:col-span-4 grid grid-cols-2 gap-4">
             <ScrollReveal direction="up" delay={0.15}>
-              <div className="rounded-xl border border-indigo-500/20 bg-surface p-5 shadow-panel flex flex-col justify-between h-full hover:border-indigo-500/40 transition-colors">
-                <div className="flex items-center justify-between text-indigo-400 mb-2">
-                  <div className="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center">
-                    <Code2 className="w-4 h-4 text-indigo-400" />
+              <div className="rounded-xl border border-line bg-surface p-5 shadow-panel flex flex-col justify-between h-full hover:border-line/80 transition-colors">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="w-8 h-8 rounded-lg bg-ink border border-line flex items-center justify-center text-bone">
+                    <Code2 className="w-4 h-4 text-bone-dim" />
                   </div>
-                  <span className="font-mono text-[0.65rem] text-indigo-400/80 uppercase">Live API</span>
+                  <span className="font-mono text-[0.65rem] text-muted uppercase tracking-wider">Live API</span>
                 </div>
                 <div>
                   <p className="font-display text-3xl font-bold text-bone">
@@ -92,12 +117,12 @@ export default function GitHubAnalytics() {
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.2}>
-              <div className="rounded-xl border border-purple-500/20 bg-surface p-5 shadow-panel flex flex-col justify-between h-full hover:border-purple-500/40 transition-colors">
-                <div className="flex items-center justify-between text-purple-400 mb-2">
-                  <div className="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center">
-                    <Terminal className="w-4 h-4 text-purple-400" />
+              <div className="rounded-xl border border-line bg-surface p-5 shadow-panel flex flex-col justify-between h-full hover:border-line/80 transition-colors">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="w-8 h-8 rounded-lg bg-ink border border-line flex items-center justify-center text-bone">
+                    <Terminal className="w-4 h-4 text-bone-dim" />
                   </div>
-                  <span className="font-mono text-[0.65rem] text-purple-400/80 uppercase">Primary</span>
+                  <span className="font-mono text-[0.65rem] text-muted uppercase tracking-wider">Primary</span>
                 </div>
                 <div>
                   <p className="font-display text-2xl font-bold text-bone truncate">
@@ -109,12 +134,12 @@ export default function GitHubAnalytics() {
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.25}>
-              <div className="rounded-xl border border-cyan-500/20 bg-surface p-5 shadow-panel flex flex-col justify-between h-full hover:border-cyan-500/40 transition-colors">
-                <div className="flex items-center justify-between text-cyan-400 mb-2">
-                  <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
-                    <GitBranch className="w-4 h-4 text-cyan-400" />
+              <div className="rounded-xl border border-line bg-surface p-5 shadow-panel flex flex-col justify-between h-full hover:border-line/80 transition-colors">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="w-8 h-8 rounded-lg bg-ink border border-line flex items-center justify-center text-bone">
+                    <GitBranch className="w-4 h-4 text-bone-dim" />
                   </div>
-                  <span className="font-mono text-[0.65rem] text-cyan-400/80 uppercase">Active</span>
+                  <span className="font-mono text-[0.65rem] text-muted uppercase tracking-wider">Active</span>
                 </div>
                 <div>
                   <p className="font-display text-3xl font-bold text-bone">
@@ -126,12 +151,12 @@ export default function GitHubAnalytics() {
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.3}>
-              <div className="rounded-xl border border-emerald-500/20 bg-surface p-5 shadow-panel flex flex-col justify-between h-full hover:border-emerald-500/40 transition-colors">
-                <div className="flex items-center justify-between text-emerald-400 mb-2">
-                  <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+              <div className="rounded-xl border border-line bg-surface p-5 shadow-panel flex flex-col justify-between h-full hover:border-line/80 transition-colors">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="w-8 h-8 rounded-lg bg-ink border border-line flex items-center justify-center text-emerald-400">
                     <Activity className="w-4 h-4 text-emerald-400" />
                   </div>
-                  <span className="font-mono text-[0.65rem] text-emerald-400/80 uppercase">Status</span>
+                  <span className="font-mono text-[0.65rem] text-muted uppercase tracking-wider">Status</span>
                 </div>
                 <div>
                   <p className="font-mono text-xs font-semibold text-bone flex items-center gap-1.5">
@@ -151,42 +176,72 @@ export default function GitHubAnalytics() {
             <ScrollReveal direction="up" delay={0.25}>
               <div className="rounded-xl border border-line bg-surface p-6 shadow-panel flex flex-col justify-between h-full">
                 <div>
-                  <h3 className="font-display text-lg font-semibold text-bone mb-4 flex items-center gap-2">
-                    <Code2 className="w-4 h-4 text-cyan-400" />
-                    <span>Code Languages Breakdown</span>
-                  </h3>
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="font-display text-lg font-semibold text-bone flex items-center gap-2">
+                      <Code2 className="w-4 h-4 text-ember" />
+                      <span>Code Languages Breakdown</span>
+                    </h3>
+                    <span className="font-mono text-[10px] text-muted uppercase tracking-wider">
+                      {activeRepos.length} Repos
+                    </span>
+                  </div>
 
-                  {topLanguages.length > 0 ? (
-                    <div className="space-y-3 font-mono">
-                      {topLanguages.map(([lang, count]) => {
-                        const percent = Math.round((count / (activeRepos.length || 1)) * 100);
-                        const langInfo = languageColors[lang] || { hex: '#f97316', bg: 'from-orange-500 to-amber-500' };
-                        return (
-                          <div key={lang} className="space-y-1.5">
-                            <div className="flex justify-between text-xs text-bone-dim">
-                              <span className="flex items-center gap-1.5">
-                                <span className="w-2 h-2 rounded-full shadow-sm" style={{ backgroundColor: langInfo.hex }} />
-                                <span>{lang}</span>
+                  {languagesList.length > 0 ? (
+                    <div className="space-y-4">
+                      {/* GitHub-style Multi-Segmented Language Distribution Bar */}
+                      <div className="w-full h-2 rounded-full overflow-hidden flex bg-ink border border-line/60 p-0.5 gap-0.5">
+                        {languagesList.map((item) => (
+                          <div
+                            key={item.lang}
+                            style={{
+                              width: `${Math.max(item.percent, 3)}%`,
+                              backgroundColor: item.color,
+                            }}
+                            title={`${item.lang}: ${item.percent}% (${item.count} repos)`}
+                            className="h-full rounded-full transition-all duration-500"
+                          />
+                        ))}
+                      </div>
+
+                      {/* Individual Language Bars */}
+                      <div className="space-y-3 font-mono">
+                        {languagesList.map((item) => (
+                          <div key={item.lang} className="space-y-1.5">
+                            <div className="flex justify-between items-center text-xs text-bone-dim">
+                              <span className="flex items-center gap-2">
+                                <span
+                                  className="w-2 h-2 rounded-full shadow-xs shrink-0"
+                                  style={{ backgroundColor: item.color }}
+                                />
+                                <span className="font-medium text-bone">{item.lang}</span>
                               </span>
-                              <span className="text-muted">{percent}%</span>
+                              <span className="text-muted text-[11px] tabular-nums flex items-center gap-2">
+                                <span className="text-muted/80">{item.count} {item.count === 1 ? 'repo' : 'repos'}</span>
+                                <span className="text-bone font-semibold">{item.percent}%</span>
+                              </span>
                             </div>
-                            <div className="w-full h-2 rounded-full bg-ink overflow-hidden border border-line p-0.5">
+                            <div className="w-full h-1.5 rounded-full bg-ink overflow-hidden border border-line/50">
                               <div
-                                className={`h-full rounded-full bg-gradient-to-r ${langInfo.bg} transition-all duration-500`}
-                                style={{ width: `${Math.max(percent, 8)}%` }}
+                                className="h-full rounded-full transition-all duration-700"
+                                style={{
+                                  width: `${Math.max(item.percent, 4)}%`,
+                                  backgroundColor: item.color,
+                                  boxShadow: `0 0 8px ${item.color}50`,
+                                }}
                               />
                             </div>
                           </div>
-                        );
-                      })}
+                        ))}
+                      </div>
                     </div>
                   ) : (
                     <p className="font-mono text-xs text-muted">Python, TypeScript, SQL, C++, HTML/CSS</p>
                   )}
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-line text-right">
-                  <span className="font-mono text-[0.68rem] text-cyan-400">Updated in real-time</span>
+                <div className="mt-6 pt-4 border-t border-line flex items-center justify-between text-[0.68rem] font-mono text-muted">
+                  <span>Stack Distribution</span>
+                  <span>Updated in real-time</span>
                 </div>
               </div>
             </ScrollReveal>

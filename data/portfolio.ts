@@ -325,7 +325,7 @@ export const portfolioData: PortfolioData = {
       title: "IshaanBot",
       year: "2025",
       category: "AI & Web",
-      image: "/favicons/mcp-cover.png",
+      image: "/favicons/ishaanbot-cover.png",
       favicon: "/favicons/mcp-favicon.svg",
       description: "A modular AI assistant bridging frontier LLMs to 15+ real-world tools via MCP.",
       detailedDescription: "FastAPI backend with streaming inference, RAG memory, and dynamic tool-routing.",

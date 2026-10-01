@@ -57,7 +57,7 @@ export default function HeroSection() {
               Hi, I&apos;m <span className="text-bone font-bold">{portfolioData.name}</span>
             </p>
             
-            {/* Typewriter Line: Natural multi-line word wrapping with bold scale */}
+            {/* Typewriter Line */}
             <h1 className="text-5xl sm:text-6xl lg:text-[4.25rem] xl:text-[4.75rem] font-extrabold tracking-tight text-bone leading-[1.08]">
               <span>I am </span>
               <span className="inline text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-amber-400">
@@ -74,7 +74,7 @@ export default function HeroSection() {
             <div className="mt-7 flex flex-wrap gap-4 items-center font-mono text-xs sm:text-sm">
               <Link
                 href="/projects"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-ember/50 bg-ember/10 hover:border-ember hover:bg-ember/20 text-bone font-semibold transition-all transform hover:-translate-y-0.5 shadow-md"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-ember/60 bg-ember/10 hover:bg-ember/20 text-bone font-semibold transition-colors shadow-sm"
               >
                 <span>Explore Projects</span>
                 <ArrowRight className="w-4 h-4 text-ember" />
@@ -82,9 +82,9 @@ export default function HeroSection() {
 
               <Link
                 href="/resume"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-line bg-surface/80 hover:border-ember hover:text-ember text-bone-dim font-semibold transition-all transform hover:-translate-y-0.5 shadow-sm"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-line bg-surface hover:border-line/80 hover:text-bone text-bone-dim font-semibold transition-colors shadow-sm"
               >
-                <FileText className="w-4 h-4 text-muted group-hover:text-ember" />
+                <FileText className="w-4 h-4 text-muted" />
                 <span>View Resume</span>
               </Link>
             </div>

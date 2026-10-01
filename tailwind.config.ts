@@ -67,24 +67,8 @@ const config: Config = {
         ],
       },
       boxShadow: {
-        haze: "0 10px 30px -10px rgba(129, 140, 248, 0.15)",
-        "haze-glow": "0 0 35px -5px rgba(168, 85, 247, 0.3)",
         float: "0 10px 30px -10px rgba(0, 0, 0, 0.5)",
-        panel: "0 4px 20px rgba(0, 0, 0, 0.4)",
-      },
-      animation: {
-        "haze-pulse": "hazePulse 4s ease-in-out infinite",
-        "star-float": "starFloat 6s ease-in-out infinite",
-      },
-      keyframes: {
-        hazePulse: {
-          "0%, 100%": { opacity: "0.4", transform: "scale(1)" },
-          "50%": { opacity: "0.8", transform: "scale(1.08)" },
-        },
-        starFloat: {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-8px)" },
-        },
+        panel: "0 4px 20px rgba(0, 0, 0, 0.3)",
       },
     },
   },

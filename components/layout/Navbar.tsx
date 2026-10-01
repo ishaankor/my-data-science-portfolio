@@ -25,7 +25,7 @@ export default function Navbar() {
       <header className="fixed inset-x-0 top-0 z-40 border-b border-line/40 bg-ink/80 backdrop-blur-md transition-colors duration-300">
         <nav className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6 sm:px-10">
           
-          {/* Logo Brand matching sunnypatel.net */}
+          {/* Logo Brand */}
           <Link
             href="/"
             className="text-sm transition-transform hover:scale-105"

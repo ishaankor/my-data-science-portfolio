@@ -18,23 +18,9 @@ export default function ExperienceMatrix() {
   const items = portfolioData.experience;
 
   const getIconForType = (item: ExperienceItem) => {
-    if (item.type === 'education') return <GraduationCap className="w-5 h-5 text-cyan-400" />;
-    if (item.id === 'exp-handshake-ai') return <Cpu className="w-5 h-5 text-indigo-400" />;
-    return <Briefcase className="w-5 h-5 text-ember" />;
-  };
-
-  const getBorderTheme = (item: ExperienceItem) => {
-    if (item.id === 'exp-handshake-ai') return 'border-indigo-500/30 hover:border-indigo-500/60 shadow-indigo-500/5';
-    if (item.id === 'exp-verizon') return 'border-amber-500/30 hover:border-amber-500/60 shadow-amber-500/5';
-    if (item.type === 'education') return 'border-cyan-500/30 hover:border-cyan-500/60 shadow-cyan-500/5';
-    return 'border-line hover:border-ember/50 shadow-panel';
-  };
-
-  const getBadgeColor = (item: ExperienceItem) => {
-    if (item.id === 'exp-handshake-ai') return 'bg-indigo-500/10 text-indigo-400 border-indigo-500/30';
-    if (item.id === 'exp-verizon') return 'bg-amber-500/10 text-amber-400 border-amber-500/30';
-    if (item.type === 'education') return 'bg-cyan-500/10 text-cyan-400 border-cyan-500/30';
-    return 'bg-ember/10 text-ember border-ember/30';
+    if (item.type === 'education') return <GraduationCap className="w-5 h-5 text-bone-dim" />;
+    if (item.id === 'exp-handshake-ai') return <Cpu className="w-5 h-5 text-bone-dim" />;
+    return <Briefcase className="w-5 h-5 text-bone-dim" />;
   };
 
   return (
@@ -64,13 +50,8 @@ export default function ExperienceMatrix() {
           {items.map((item, idx) => (
             <ScrollReveal key={item.id} direction="up" delay={0.1 + idx * 0.08}>
               <div
-                className={`rounded-2xl border bg-surface/80 p-6 sm:p-8 transition-all duration-300 relative overflow-hidden group ${getBorderTheme(
-                  item
-                )}`}
+                className="rounded-2xl border border-line bg-surface p-6 sm:p-8 transition-colors duration-200 relative overflow-hidden group shadow-panel hover:border-line/90"
               >
-                {/* Subtle card top glow indicator */}
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-line/40 to-transparent group-hover:via-ember/50 transition-all" />
-
                 {/* Header Row: Role Title, Organization, Badge, Period */}
                 <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4 mb-6">
                   <div className="space-y-2">
@@ -99,11 +80,9 @@ export default function ExperienceMatrix() {
                   <div className="flex flex-wrap lg:flex-col lg:items-end gap-2 font-mono text-xs">
                     {item.awardOrHighlight && (
                       <span
-                        className={`px-3 py-1 rounded-full border text-[0.7rem] font-bold inline-flex items-center gap-1.5 shadow-sm ${getBadgeColor(
-                          item
-                        )}`}
+                        className="px-3 py-1 rounded-full border border-line bg-ink text-bone-dim text-[0.7rem] font-semibold inline-flex items-center gap-1.5 shadow-xs"
                       >
-                        <Sparkles className="w-3 h-3" />
+                        <Sparkles className="w-3 h-3 text-ember" />
                         <span>{item.awardOrHighlight}</span>
                       </span>
                     )}

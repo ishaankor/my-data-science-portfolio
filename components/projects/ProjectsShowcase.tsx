@@ -39,17 +39,6 @@ export default function ProjectsShowcase({ limit }: { limit?: number }) {
     return <Code2 className="w-10 h-10 text-bone-dim group-hover:text-ember transition-colors" />;
   };
 
-  const getProjectGlowColor = (id: string) => {
-    if (id === 'datafy') return 'bg-amber-500/15 group-hover:bg-amber-500/30';
-    if (id === 'rigscouter') return 'bg-blue-500/15 group-hover:bg-blue-500/30';
-    if (id === 'ishaanbot') return 'bg-emerald-500/15 group-hover:bg-emerald-500/30';
-    if (id === 'transformi') return 'bg-indigo-500/15 group-hover:bg-indigo-500/30';
-    if (id === 'daily-motivation') return 'bg-amber-500/15 group-hover:bg-amber-500/30';
-    if (id === 'data-science-portfolio') return 'bg-cyan-500/15 group-hover:bg-cyan-500/30';
-    if (id === 'claimr') return 'bg-violet-500/15 group-hover:bg-violet-500/30';
-    return 'bg-ember/15 group-hover:bg-ember/30';
-  };
-
   return (
     <section className="border-t border-line/60 py-20 sm:py-28">
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-10">
@@ -72,9 +61,9 @@ export default function ProjectsShowcase({ limit }: { limit?: number }) {
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-3 py-1.5 rounded-md text-xs transition-all ${
+                  className={`px-3 py-1.5 rounded-md text-xs transition-colors ${
                     selectedCategory === cat
-                      ? 'bg-gradient-to-r from-ember to-amber-500 text-ink font-bold shadow-md'
+                      ? 'bg-ember text-ink font-semibold shadow-xs'
                       : 'bg-surface/60 border border-line text-muted hover:text-bone hover:border-line/80'
                   }`}
                 >
@@ -116,7 +105,31 @@ export default function ProjectsShowcase({ limit }: { limit?: number }) {
 
                     {/* Card Content & Thumbnail area - Expanded Favicon Cover */}
                     <div className="relative aspect-[16/10] overflow-hidden bg-ink/90 flex items-center justify-center">
-                      {(project.image || project.favicon) ? (
+                      {project.id === 'ishaanbot' ? (
+                        <div className="w-full h-full flex items-center justify-center relative overflow-hidden bg-[#080c16]">
+                          {/* Ambient radial glow */}
+                          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.14)_0%,transparent_70%)] pointer-events-none" />
+                          
+                          {/* Centered Avatar with MCP badge on top right */}
+                          <div className="relative w-28 h-28 sm:w-32 sm:h-32 transform group-hover:scale-105 transition-transform duration-500">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src="https://github.com/ishaankor.png"
+                              alt="Ishaan Koradia"
+                              className="w-full h-full rounded-full object-cover border-2 border-line/90 p-1 bg-surface shadow-2xl"
+                            />
+                            <div className="absolute -top-1.5 -right-1.5 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#0a0e18] border-2 border-line/90 flex items-center justify-center p-1.5 shadow-lg">
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img
+                                src="/favicons/mcp-favicon.svg"
+                                alt="Model Context Protocol"
+                                className="w-full h-full object-contain"
+                              />
+                            </div>
+                          </div>
+                          <div className="absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                        </div>
+                      ) : (project.image || project.favicon) ? (
                         <>
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img

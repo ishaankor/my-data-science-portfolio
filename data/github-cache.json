@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-29T02:56:15.138Z",
+  "updatedAt": "2026-10-01T17:09:28.572Z",
   "totalRepos": 19,
   "user": {
     "login": "ishaankor",
@@ -12,14 +12,14 @@
   },
   "repos": [
     {
-      "id": 1271861363,
-      "name": "Datafy",
-      "language": "TypeScript",
-      "html_url": "https://github.com/ishaankor/Datafy",
-      "description": "An AI-powered data science copilot that turns raw CSV data into interactive analysis, visualizations, and narrative insights through a React frontend and FastAPI-backed Python analytics engine using LangChain and RAG.",
-      "created_at": "2026-06-17T04:36:46Z",
-      "pushed_at": "2026-09-28T01:29:14Z",
-      "updated_at": "2026-09-28T01:29:17Z"
+      "id": 1324783574,
+      "name": "RigScouter-AI-DataBase-",
+      "language": "Python",
+      "html_url": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
+      "description": null,
+      "created_at": "2026-08-06T05:39:59Z",
+      "pushed_at": "2026-10-01T05:17:47Z",
+      "updated_at": "2026-10-01T05:17:52Z"
     },
     {
       "id": 915475199,
@@ -28,18 +28,18 @@
       "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
       "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
       "created_at": "2025-01-11T23:48:23Z",
-      "pushed_at": "2026-09-27T10:20:14Z",
-      "updated_at": "2026-09-27T10:20:17Z"
+      "pushed_at": "2026-09-29T03:19:34Z",
+      "updated_at": "2026-09-29T03:19:37Z"
     },
     {
-      "id": 1324783574,
-      "name": "RigScouter-AI-DataBase-",
-      "language": "Python",
-      "html_url": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
-      "description": null,
-      "created_at": "2026-08-06T05:39:59Z",
-      "pushed_at": "2026-09-26T00:50:05Z",
-      "updated_at": "2026-09-26T00:50:09Z"
+      "id": 1271861363,
+      "name": "Datafy",
+      "language": "TypeScript",
+      "html_url": "https://github.com/ishaankor/Datafy",
+      "description": "An AI-powered data science copilot that turns raw CSV data into interactive analysis, visualizations, and narrative insights through a React frontend and FastAPI-backed Python analytics engine using LangChain and RAG.",
+      "created_at": "2026-06-17T04:36:46Z",
+      "pushed_at": "2026-09-28T01:29:14Z",
+      "updated_at": "2026-09-28T01:29:17Z"
     },
     {
       "id": 1323680935,
@@ -204,58 +204,58 @@
   ],
   "commits": [
     {
-      "sha": "e1871f7b276774f55fbe576602bc6051991669f8",
-      "shortSha": "e1871f7",
-      "message": "fix(chat): send only active user query to reduce token usage and add Reset conversation action",
-      "repoName": "Datafy",
-      "repoUrl": "https://github.com/ishaankor/Datafy",
-      "commitUrl": "https://github.com/ishaankor/Datafy/commit/e1871f7b276774f55fbe576602bc6051991669f8",
-      "date": "2026-09-28T01:29:13Z",
-      "timeAgo": "1d ago"
-    },
-    {
-      "sha": "d00366f224ce155c7293bd77468db155df00a608",
-      "shortSha": "d00366f",
-      "message": "feat: add default fallback Supabase credentials and environment variables",
-      "repoName": "Datafy",
-      "repoUrl": "https://github.com/ishaankor/Datafy",
-      "commitUrl": "https://github.com/ishaankor/Datafy/commit/d00366f224ce155c7293bd77468db155df00a608",
-      "date": "2026-09-27T23:54:40Z",
-      "timeAgo": "1d ago"
-    },
-    {
-      "sha": "aa4d56028cce290a44904ac3a9941b4e8b6e70b0",
-      "shortSha": "aa4d560",
-      "message": "feat: add keep-alive edge function, support raw CSV in chat requests, and improve chart component layout",
-      "repoName": "Datafy",
-      "repoUrl": "https://github.com/ishaankor/Datafy",
-      "commitUrl": "https://github.com/ishaankor/Datafy/commit/aa4d56028cce290a44904ac3a9941b4e8b6e70b0",
-      "date": "2026-09-27T22:47:53Z",
-      "timeAgo": "1d ago"
-    },
-    {
-      "sha": "843ffa130597ce73bbd47a37001a4d2564067873",
-      "shortSha": "843ffa1",
-      "message": "feat: add project assets and update portfolio components and data",
-      "repoName": "my-data-science-portfolio",
-      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
-      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/843ffa130597ce73bbd47a37001a4d2564067873",
-      "date": "2026-09-27T10:19:16Z",
-      "timeAgo": "1d ago"
-    },
-    {
-      "sha": "4b9521d71942f7712f34c446d8b5e36fb69deaf9",
-      "shortSha": "4b9521d",
-      "message": "feat: add normal search scraper fallback for daily price refresh",
+      "sha": "ff05a1cc9ce05914ffe55ef9eb5d2bfd78420f59",
+      "shortSha": "ff05a1c",
+      "message": "[v2.0] refactor: streamline validate_offer into lightweight validate_offer_fast by removing complex heuristic checks",
       "repoName": "RigScouter-AI-DataBase-",
       "repoUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
-      "commitUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-/commit/4b9521d71942f7712f34c446d8b5e36fb69deaf9",
-      "date": "2026-09-26T00:50:02Z",
-      "timeAgo": "3d ago"
+      "commitUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-/commit/ff05a1cc9ce05914ffe55ef9eb5d2bfd78420f59",
+      "date": "2026-10-01T05:17:45Z",
+      "timeAgo": "11h ago"
+    },
+    {
+      "sha": "b889c163e41a10ec8ccd47f548c4655f80c6f9cd",
+      "shortSha": "b889c16",
+      "message": "fix: resolve cooler family brand conflicts, exempt AIO from all-in-one check, and handle discontinued out-of-stock items",
+      "repoName": "RigScouter-AI-DataBase-",
+      "repoUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
+      "commitUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-/commit/b889c163e41a10ec8ccd47f548c4655f80c6f9cd",
+      "date": "2026-10-01T00:30:29Z",
+      "timeAgo": "16h ago"
+    },
+    {
+      "sha": "17c21f2814aee53d2522073bc56c0ad1a3794b98",
+      "shortSha": "17c21f2",
+      "message": "feat: add Tavily snippet price parsing helper to accurately extract current and original prices",
+      "repoName": "RigScouter-AI-DataBase-",
+      "repoUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
+      "commitUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-/commit/17c21f2814aee53d2522073bc56c0ad1a3794b98",
+      "date": "2026-09-30T20:34:23Z",
+      "timeAgo": "20h ago"
+    },
+    {
+      "sha": "08dade7efb18d64d68b83c754459a1986d0e8188",
+      "shortSha": "08dade7",
+      "message": "feat: add Best Buy priceBlocks API integration and Tavily search fallback for robust scraping",
+      "repoName": "RigScouter-AI-DataBase-",
+      "repoUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
+      "commitUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-/commit/08dade7efb18d64d68b83c754459a1986d0e8188",
+      "date": "2026-09-30T20:08:06Z",
+      "timeAgo": "20h ago"
+    },
+    {
+      "sha": "6566d3cd5140a775ffebd6e9da085819ff7cc647",
+      "shortSha": "6566d3c",
+      "message": "docs: fix grammar in SSE broadcast comment",
+      "repoName": "RigScouter-AI-DataBase-",
+      "repoUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
+      "commitUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-/commit/6566d3cd5140a775ffebd6e9da085819ff7cc647",
+      "date": "2026-09-30T05:53:37Z",
+      "timeAgo": "1d ago"
     }
   ],
   "contributionCalendar": {
-    "totalContributions": 779,
+    "totalContributions": 784,
     "weeks": [
       {
         "contributionDays": [
@@ -2294,6 +2294,21 @@
           },
           {
             "date": "2026-09-28",
+            "contributionCount": 1,
+            "color": "#9be9a8"
+          },
+          {
+            "date": "2026-09-29",
+            "contributionCount": 1,
+            "color": "#9be9a8"
+          },
+          {
+            "date": "2026-09-30",
+            "contributionCount": 3,
+            "color": "#9be9a8"
+          },
+          {
+            "date": "2026-10-01",
             "contributionCount": 0,
             "color": "#ebedf0"
           }

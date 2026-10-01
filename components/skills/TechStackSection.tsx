@@ -6,22 +6,10 @@ import { BrainCircuit, Database, Layout, Layers } from 'lucide-react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
 export default function TechStackSection() {
-  const categoryThemes = [
-    {
-      icon: <BrainCircuit className="w-5 h-5 text-indigo-400" />,
-      iconBg: 'bg-indigo-500/10 border-indigo-500/30',
-      badge: 'border-indigo-500/30 text-indigo-400 bg-indigo-500/10',
-    },
-    {
-      icon: <Database className="w-5 h-5 text-purple-400" />,
-      iconBg: 'bg-purple-500/10 border-purple-500/30',
-      badge: 'border-purple-500/30 text-purple-400 bg-purple-500/10',
-    },
-    {
-      icon: <Layout className="w-5 h-5 text-cyan-400" />,
-      iconBg: 'bg-cyan-500/10 border-cyan-500/30',
-      badge: 'border-cyan-500/30 text-cyan-400 bg-cyan-500/10',
-    },
+  const categoryIcons = [
+    <BrainCircuit key="brain" className="w-5 h-5 text-ember" />,
+    <Database key="db" className="w-5 h-5 text-ember" />,
+    <Layout key="layout" className="w-5 h-5 text-ember" />,
   ];
 
   return (
@@ -44,13 +32,13 @@ export default function TechStackSection() {
         {/* Categories Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {portfolioData.skillCategories.map((category, idx) => {
-            const theme = categoryThemes[idx % categoryThemes.length];
+            const icon = categoryIcons[idx % categoryIcons.length];
             return (
               <ScrollReveal key={category.title} direction="up" delay={0.15 + idx * 0.1}>
                 <div className="rounded-xl border border-line bg-surface p-7 shadow-panel flex flex-col justify-between h-full hover:border-line/80 transition-colors">
                   <div>
-                    <div className={`w-10 h-10 rounded-lg border flex items-center justify-center mb-6 ${theme.iconBg}`}>
-                      {theme.icon}
+                    <div className="w-10 h-10 rounded-lg border border-line bg-ink flex items-center justify-center mb-6 shadow-sm">
+                      {icon}
                     </div>
 
                     <h3 className="font-display text-lg font-bold text-bone mb-2">

@@ -4,16 +4,20 @@ import React from 'react';
 import Link from 'next/link';
 import { ExternalLink, ArrowRight } from 'lucide-react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
+import ProjectsHeroHUD from './ProjectsHeroHUD';
 import ProjectsDeepDiveShowcase from './ProjectsDeepDiveShowcase';
 import ExploratoryDataAnalysisShowcase from './ExploratoryDataAnalysisShowcase';
 
 export default function RepositoryMatrix() {
   return (
-    <section className="py-12 sm:py-16">
-      <div className="mx-auto w-full max-w-6xl px-6 sm:px-10 space-y-16">
+    <div className="min-h-screen space-y-4">
+      {/* Flagship Projects Hero matching WorkHeroHUD */}
+      <ProjectsHeroHUD />
 
-        {/* Flagship Showcase: Things I've Built, End to End */}
-        <ProjectsDeepDiveShowcase />
+      <section className="py-16 sm:py-24 relative">
+        <div className="mx-auto w-full max-w-6xl px-6 sm:px-10 space-y-16">
+          {/* Flagship Showcase: Things I've Built, End to End */}
+          <ProjectsDeepDiveShowcase />
 
         {/* Subtle Line Break between Flagship Builds and EDA Research */}
         <div className="relative py-2 sm:py-4" aria-hidden="true">
@@ -51,5 +55,6 @@ export default function RepositoryMatrix() {
 
       </div>
     </section>
+    </div>
   );
 }

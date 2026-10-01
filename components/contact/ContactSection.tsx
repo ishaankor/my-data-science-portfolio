@@ -70,9 +70,6 @@ export default function ContactSection() {
 
   return (
     <section id="contact" className="relative py-24 overflow-hidden">
-      {/* Background Ambient Glow */}
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-ember/10 blur-[140px] pointer-events-none rounded-full" />
-
       <div className="max-w-6xl mx-auto px-6 sm:px-10 relative z-10 space-y-12">
         {/* Top Telemetry Path & Status Tag */}
         <ScrollReveal direction="up" delay={0.05}>
