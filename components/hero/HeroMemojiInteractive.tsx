@@ -117,20 +117,45 @@ export default function HeroMemojiInteractive() {
               </div>
             </div>
 
-            {/* Center: Clean Interactive Avatar */}
+            {/* Center: Clean Interactive Animated Avatar with Synchronized Ripples & Bounce */}
             <div
               className="relative my-auto flex items-center justify-center select-none"
               style={{ transform: 'translateZ(50px)' }}
             >
+              {/* Bouncing & Floating Avatar Wrapper with Synchronized Ripple Aura */}
               <div
-                className="relative cursor-pointer transition-transform duration-300 animate-avatar-float"
+                className={`relative cursor-pointer transition-transform duration-300 ${
+                  isAvatarHovered ? 'animate-avatar-hover-spring' : 'animate-avatar-sync-bounce'
+                }`}
+                onMouseEnter={() => setIsAvatarHovered(true)}
+                onMouseLeave={() => setIsAvatarHovered(false)}
                 onClick={(e) => {
                   e.stopPropagation();
+                  setShockwaveKey((k) => k + 1);
                   setIsFlipped((prev) => !prev);
                 }}
               >
-                {/* Avatar Image Container */}
-                <div className="relative w-36 h-36 sm:w-40 sm:h-40 rounded-full overflow-hidden border border-line/90 bg-ink shadow-float transition-all duration-300 hover:border-sky-400/80">
+                {/* Synchronized Concentric Ripple Rings (travels WITH avatar, 100% concentric) */}
+                <div className="absolute inset-0 rounded-full pointer-events-none" aria-hidden="true">
+                  {/* Wave 1: In sync with bounce landing */}
+                  <div className="absolute inset-0 rounded-full border border-emerald-400/40 bg-emerald-500/10 animate-avatar-sync-ripple-1 shadow-[0_0_20px_rgba(16,185,129,0.25)]" />
+                  {/* Wave 2: Staggered half-cycle */}
+                  <div className="absolute inset-0 rounded-full border border-teal-400/35 bg-teal-500/5 animate-avatar-sync-ripple-2 shadow-[0_0_20px_rgba(45,212,191,0.2)]" />
+
+                  {/* Click Shockwave Burst */}
+                  {shockwaveKey > 0 && (
+                    <div
+                      key={shockwaveKey}
+                      className="absolute inset-0 rounded-full border-2 border-emerald-400 animate-avatar-shockwave bg-emerald-500/20"
+                    />
+                  )}
+                </div>
+
+                {/* Soft Ambient Core Glow behind Avatar */}
+                <div className="absolute -inset-2 rounded-full bg-gradient-to-tr from-emerald-500/25 via-teal-500/20 to-cyan-500/25 blur-lg opacity-70 group-hover:opacity-100 transition-opacity pointer-events-none" />
+
+                {/* Avatar Image Container with Natural Contact Depth Shadow */}
+                <div className="relative w-36 h-36 sm:w-40 sm:h-40 rounded-full overflow-hidden border-2 border-line/90 bg-ink shadow-[0_14px_40px_-8px_rgba(0,0,0,0.7),0_0_25px_rgba(16,185,129,0.25)] transition-all duration-300 hover:border-emerald-400/80 hover:shadow-[0_16px_50px_-6px_rgba(0,0,0,0.8),0_0_35px_rgba(16,185,129,0.45)]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="/images/personal-picture.avif"
@@ -203,10 +228,10 @@ export default function HeroMemojiInteractive() {
                 {/* Speech Bubble Tail pointing down to avatar */}
                 <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-surface border-r border-b border-line rotate-45 transform" />
 
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-ink border border-line font-mono text-[11px] text-bone-dim mb-2 font-medium">
+                {/* <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-ink border border-line font-mono text-[11px] text-bone-dim mb-2 font-medium">
                   <Sparkles className="w-3 h-3 text-sky-400" />
                   <span>Hey there!</span>
-                </div>
+                </div> */}
 
                 <p className="text-xs sm:text-[13px] text-bone leading-relaxed mb-3.5 font-sans">
                   Looking for my full personal hub, writings, and interactive projects?
