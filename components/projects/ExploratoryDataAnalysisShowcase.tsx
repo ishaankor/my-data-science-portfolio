@@ -193,7 +193,7 @@ export default function ExploratoryDataAnalysisShowcase() {
                     rel="noopener noreferrer"
                     className="text-muted hover:text-bone transition-colors inline-flex items-center gap-1"
                   >
-                    <Award className="w-3.5 h-3.5 text-amber-400" />
+                    <Award className="w-3.5 h-3.5 text-sky-400" />
                     <span>{study.extraUrl.label}</span>
                     <ExternalLink className="w-2.5 h-2.5" />
                   </a>

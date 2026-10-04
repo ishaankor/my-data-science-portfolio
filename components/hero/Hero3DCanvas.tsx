@@ -61,8 +61,8 @@ const ORBIT_SATELLITES: OrbitSatellite[] = [
     label: 'Datafy & Transformi',
     subtitle: 'Production AI Apps',
     icon: Sparkles,
-    color: '#f97316', // Ember
-    glowColor: 'rgba(249, 115, 22, 0.4)',
+    color: '#38bdf8', // Sky
+    glowColor: 'rgba(56, 189, 248, 0.3)',
     radius: 2.35,
     speed: 0.4,
     phase: (Math.PI * 4) / 3,
@@ -189,11 +189,11 @@ function Animated3DAvatarCore({
         <Html center distanceFactor={5.2} className="pointer-events-auto select-none">
           <div className="relative group cursor-pointer">
             
-            {/* Outer Pulsing Ambient Glowing Aura */}
-            <div className="absolute -inset-4 rounded-full bg-gradient-to-tr from-ember via-purple-500 to-cyan-400 opacity-60 blur-xl group-hover:opacity-90 animate-pulse transition-opacity" />
+            {/* Outer Subtle Ambient Glowing Aura */}
+            <div className="absolute -inset-4 rounded-full bg-gradient-to-tr from-sky-500/20 via-indigo-500/20 to-purple-500/20 opacity-40 blur-lg transition-opacity" />
 
             {/* 3D Glassmorphic Avatar Disk Container */}
-            <div className="relative w-44 h-44 sm:w-48 sm:h-48 rounded-full p-1.5 bg-gradient-to-tr from-ember/80 via-purple-500/80 to-cyan-400/80 shadow-2xl border border-white/20 backdrop-blur-xl">
+            <div className="relative w-44 h-44 sm:w-48 sm:h-48 rounded-full p-1.5 bg-gradient-to-tr from-sky-400/40 via-indigo-500/40 to-purple-500/40 shadow-2xl border border-white/20 backdrop-blur-xl">
               
               {/* Inner Avatar Image */}
               <div className="w-full h-full rounded-full overflow-hidden bg-ink relative border-2 border-ink">
@@ -235,7 +235,7 @@ function Animated3DAvatarCore({
       {/* 3. Orbiting Gyroscopic Rings */}
       <mesh rotation={[Math.PI / 3, 0, 0]}>
         <ringGeometry args={[2.3, 2.32, 64]} />
-        <meshBasicMaterial color="#f97316" transparent opacity={0.3} side={THREE.DoubleSide} />
+        <meshBasicMaterial color="#38bdf8" transparent opacity={0.25} side={THREE.DoubleSide} />
       </mesh>
 
       <mesh rotation={[-Math.PI / 4, Math.PI / 4, 0]}>
@@ -287,7 +287,7 @@ export default function Hero3DCanvas() {
   if (isLowPerformance) {
     return (
       <div className="w-full h-full flex items-center justify-center relative">
-        <div className="w-48 h-48 rounded-full overflow-hidden border-2 border-ember shadow-2xl">
+        <div className="w-48 h-48 rounded-full overflow-hidden border border-line shadow-2xl">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={AVATAR_URL} alt="Ishaan Koradia" className="w-full h-full object-cover" />
         </div>
@@ -309,7 +309,7 @@ export default function Hero3DCanvas() {
           dpr={[1, 2]}
         >
           <ambientLight intensity={1.0} />
-          <directionalLight position={[10, 10, 5]} intensity={1.6} color="#f97316" />
+          <directionalLight position={[10, 10, 5]} intensity={1.4} color="#38bdf8" />
           <directionalLight position={[-10, -10, -5]} intensity={1.4} color="#818cf8" />
           <pointLight position={[0, 0, 4]} intensity={1.2} color="#a855f7" />
           
@@ -320,7 +320,7 @@ export default function Hero3DCanvas() {
 
       {/* Floating 3D Badge */}
       <div className="absolute bottom-4 right-4 pointer-events-none px-3.5 py-1.5 rounded-full bg-ink/90 backdrop-blur-md border border-line text-[0.68rem] text-bone-dim flex items-center gap-2 font-mono shadow-sm">
-        <span className="w-2 h-2 rounded-full bg-ember animate-ping" />
+        <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse" />
         <span>3D Holographic Avatar • Ishaan Koradia</span>
       </div>
     </div>

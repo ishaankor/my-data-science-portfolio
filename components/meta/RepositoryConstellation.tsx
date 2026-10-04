@@ -107,8 +107,8 @@ const DOMAINS: Omit<DomainHub, 'x' | 'y' | 'vx' | 'vy'>[] = [
     id: 'dataviz-webgl',
     name: 'Interactive Dataviz & WebGL',
     shortName: 'Dataviz & 3D',
-    color: '#f97316', // Ember
-    haloColor: 'rgba(249, 115, 22, 0.35)',
+    color: '#06b6d4', // Cyan
+    haloColor: 'rgba(6, 182, 212, 0.3)',
     description: 'Three.js 3D shaders, real-time client analytics, and interactive data storytelling.',
     radius: 25,
     isHub: true,

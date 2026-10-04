@@ -238,7 +238,7 @@ export default function ContactSection() {
                 <button
                   type="submit"
                   disabled={status === 'submitting'}
-                  className="w-full py-3.5 rounded-lg border border-ember bg-ember text-ink font-bold hover:bg-ember/90 transition-all flex items-center justify-center gap-2 text-xs shadow-md disabled:opacity-50 cursor-pointer"
+                  className="w-full py-3.5 rounded-lg border border-line bg-bone text-ink font-bold hover:bg-white transition-all flex items-center justify-center gap-2 text-xs shadow-md disabled:opacity-50 cursor-pointer"
                 >
                   {status === 'submitting' ? (
                     <span>Sending Message...</span>

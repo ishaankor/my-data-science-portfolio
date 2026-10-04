@@ -98,14 +98,6 @@ export default function HeroMemojiInteractive() {
               transform: 'rotateY(0deg)',
             }}
           >
-            {/* Dynamic Sheen / Glare Overlay */}
-            <div
-              className="absolute inset-0 pointer-events-none rounded-3xl opacity-20 transition-opacity duration-300"
-              style={{
-                background: `radial-gradient(circle at ${glarePos.x}% ${glarePos.y}%, rgba(255,255,255,0.15) 0%, transparent 60%)`,
-              }}
-            />
-
             {/* Top Header Row: Status Bar */}
             <div
               className="w-full flex items-center justify-between z-10 font-mono text-xs border-b border-line/70 pb-3.5"
@@ -120,50 +112,25 @@ export default function HeroMemojiInteractive() {
 
               {/* Click to flip affordance badge */}
               <div className="flex items-center gap-1.5 text-[11px] font-mono text-bone-dim/90 bg-white/5 hover:bg-white/10 px-2.5 py-1 rounded-full border border-line/60 transition-colors shadow-sm">
-                <RotateCw className="w-3 h-3 text-ember" />
+                <RotateCw className="w-3 h-3 text-sky-400" />
                 <span>Click to flip</span>
               </div>
             </div>
 
-            {/* Center: Clean Interactive Animated Avatar with Synchronized Ripples & Bounce */}
+            {/* Center: Clean Interactive Avatar */}
             <div
               className="relative my-auto flex items-center justify-center select-none"
               style={{ transform: 'translateZ(50px)' }}
             >
-              {/* Bouncing & Floating Avatar Wrapper with Synchronized Ripple Aura */}
               <div
-                className={`relative cursor-pointer transition-transform duration-300 ${
-                  isAvatarHovered ? 'animate-avatar-hover-spring' : 'animate-avatar-sync-bounce'
-                }`}
-                onMouseEnter={() => setIsAvatarHovered(true)}
-                onMouseLeave={() => setIsAvatarHovered(false)}
+                className="relative cursor-pointer transition-transform duration-300 animate-avatar-float"
                 onClick={(e) => {
                   e.stopPropagation();
-                  setShockwaveKey((k) => k + 1);
                   setIsFlipped((prev) => !prev);
                 }}
               >
-                {/* Synchronized Concentric Ripple Rings (travels WITH avatar, 100% concentric) */}
-                <div className="absolute inset-0 rounded-full pointer-events-none" aria-hidden="true">
-                  {/* Wave 1: In sync with bounce landing */}
-                  <div className="absolute inset-0 rounded-full border border-emerald-400/40 bg-emerald-500/10 animate-avatar-sync-ripple-1 shadow-[0_0_20px_rgba(16,185,129,0.25)]" />
-                  {/* Wave 2: Staggered half-cycle */}
-                  <div className="absolute inset-0 rounded-full border border-teal-400/35 bg-teal-500/5 animate-avatar-sync-ripple-2 shadow-[0_0_20px_rgba(45,212,191,0.2)]" />
-
-                  {/* Click Shockwave Burst */}
-                  {shockwaveKey > 0 && (
-                    <div
-                      key={shockwaveKey}
-                      className="absolute inset-0 rounded-full border-2 border-emerald-400 animate-avatar-shockwave bg-emerald-500/20"
-                    />
-                  )}
-                </div>
-
-                {/* Soft Ambient Core Glow behind Avatar */}
-                <div className="absolute -inset-2 rounded-full bg-gradient-to-tr from-emerald-500/25 via-teal-500/20 to-cyan-500/25 blur-lg opacity-70 group-hover:opacity-100 transition-opacity pointer-events-none" />
-
-                {/* Avatar Image Container with Natural Contact Depth Shadow */}
-                <div className="relative w-36 h-36 sm:w-40 sm:h-40 rounded-full overflow-hidden border-2 border-line/90 bg-ink shadow-[0_14px_40px_-8px_rgba(0,0,0,0.7),0_0_25px_rgba(16,185,129,0.25)] transition-all duration-300 hover:border-emerald-400/80 hover:shadow-[0_16px_50px_-6px_rgba(0,0,0,0.8),0_0_35px_rgba(16,185,129,0.45)]">
+                {/* Avatar Image Container */}
+                <div className="relative w-36 h-36 sm:w-40 sm:h-40 rounded-full overflow-hidden border border-line/90 bg-ink shadow-float transition-all duration-300 hover:border-sky-400/80">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="/images/personal-picture.avif"
@@ -199,14 +166,6 @@ export default function HeroMemojiInteractive() {
               transform: 'rotateY(180deg)',
             }}
           >
-            {/* Dynamic Sheen / Glare Overlay (reflected for back side) */}
-            <div
-              className="absolute inset-0 pointer-events-none rounded-3xl opacity-20 transition-opacity duration-300"
-              style={{
-                background: `radial-gradient(circle at ${100 - glarePos.x}% ${glarePos.y}%, rgba(255,255,255,0.15) 0%, transparent 60%)`,
-              }}
-            />
-
             {/* Top Header Row */}
             <div
               className="w-full flex items-center justify-between z-10 font-mono text-xs border-b border-line/70 pb-3"
@@ -226,10 +185,10 @@ export default function HeroMemojiInteractive() {
                   e.stopPropagation();
                   setIsFlipped(false);
                 }}
-                className="flex items-center gap-1.5 text-[11px] font-mono text-ember hover:text-amber-300 bg-ember/10 hover:bg-ember/20 border border-ember/30 rounded-full px-2.5 py-1 transition-colors shadow-sm"
+                className="flex items-center gap-1.5 text-[11px] font-mono text-bone-dim hover:text-bone bg-white/5 hover:bg-white/10 border border-line/60 rounded-full px-2.5 py-1 transition-colors shadow-sm"
                 aria-label="Flip back to front"
               >
-                <RotateCcw className="w-3 h-3" />
+                <RotateCcw className="w-3 h-3 text-sky-400" />
                 <span>Flip front</span>
               </button>
             </div>
@@ -245,7 +204,7 @@ export default function HeroMemojiInteractive() {
                 <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-surface border-r border-b border-line rotate-45 transform" />
 
                 <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-ink border border-line font-mono text-[11px] text-bone-dim mb-2 font-medium">
-                  <Sparkles className="w-3 h-3 text-ember" />
+                  <Sparkles className="w-3 h-3 text-sky-400" />
                   <span>Hey there!</span>
                 </div>
 
@@ -259,7 +218,7 @@ export default function HeroMemojiInteractive() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="group/btn relative inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-ember hover:bg-ember/90 text-ink font-mono text-xs sm:text-sm font-bold shadow-sm transition-all duration-200 border border-ember"
+                  className="group/btn relative inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-bone hover:bg-white text-ink font-mono text-xs sm:text-sm font-bold shadow-sm transition-all duration-200 border border-bone"
                 >
                   <Globe className="w-4 h-4 text-ink group-hover/btn:rotate-12 transition-transform duration-300" />
                   <span>ishaankoradia.com</span>

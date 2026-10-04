@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-01T17:09:28.572Z",
+  "updatedAt": "2026-10-04T06:34:13.373Z",
   "totalRepos": 19,
   "user": {
     "login": "ishaankor",
@@ -12,14 +12,24 @@
   },
   "repos": [
     {
-      "id": 1324783574,
-      "name": "RigScouter-AI-DataBase-",
-      "language": "Python",
-      "html_url": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
+      "id": 1360924158,
+      "name": "Claimr-",
+      "language": "JavaScript",
+      "html_url": "https://github.com/ishaankor/Claimr-",
       "description": null,
-      "created_at": "2026-08-06T05:39:59Z",
-      "pushed_at": "2026-10-01T05:17:47Z",
-      "updated_at": "2026-10-01T05:17:52Z"
+      "created_at": "2026-09-08T04:35:15Z",
+      "pushed_at": "2026-10-03T06:37:30Z",
+      "updated_at": "2026-10-03T06:37:34Z"
+    },
+    {
+      "id": 911419017,
+      "name": "my-personal-website",
+      "language": "HTML",
+      "html_url": "https://github.com/ishaankor/my-personal-website",
+      "description": "AI-enhanced personal portfolio website with a responsive frontend and MCP-backed chatbot, showcasing Ishaan Koradia’s skills, projects, and generative AI interaction in a product-style experience.",
+      "created_at": "2025-01-03T01:20:34Z",
+      "pushed_at": "2026-10-01T21:34:41Z",
+      "updated_at": "2026-10-01T21:34:45Z"
     },
     {
       "id": 915475199,
@@ -28,8 +38,18 @@
       "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
       "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
       "created_at": "2025-01-11T23:48:23Z",
-      "pushed_at": "2026-09-29T03:19:34Z",
-      "updated_at": "2026-09-29T03:19:37Z"
+      "pushed_at": "2026-10-01T21:29:31Z",
+      "updated_at": "2026-10-01T21:29:36Z"
+    },
+    {
+      "id": 1324783574,
+      "name": "RigScouter-AI-DataBase-",
+      "language": "Python",
+      "html_url": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
+      "description": null,
+      "created_at": "2026-08-06T05:39:59Z",
+      "pushed_at": "2026-10-01T05:17:47Z",
+      "updated_at": "2026-10-01T05:17:52Z"
     },
     {
       "id": 1271861363,
@@ -52,16 +72,6 @@
       "updated_at": "2026-09-25T23:38:31Z"
     },
     {
-      "id": 1360924158,
-      "name": "Claimr-",
-      "language": "JavaScript",
-      "html_url": "https://github.com/ishaankor/Claimr-",
-      "description": null,
-      "created_at": "2026-09-08T04:35:15Z",
-      "pushed_at": "2026-09-25T10:39:05Z",
-      "updated_at": "2026-09-25T10:39:09Z"
-    },
-    {
       "id": 534513593,
       "name": "Daily-Motivation-",
       "language": "Python",
@@ -70,16 +80,6 @@
       "created_at": "2022-09-09T05:41:44Z",
       "pushed_at": "2026-09-24T07:50:40Z",
       "updated_at": "2026-09-24T07:50:44Z"
-    },
-    {
-      "id": 911419017,
-      "name": "my-personal-website",
-      "language": "HTML",
-      "html_url": "https://github.com/ishaankor/my-personal-website",
-      "description": "AI-enhanced personal portfolio website with a responsive frontend and MCP-backed chatbot, showcasing Ishaan Koradia’s skills, projects, and generative AI interaction in a product-style experience.",
-      "created_at": "2025-01-03T01:20:34Z",
-      "pushed_at": "2026-09-20T10:35:16Z",
-      "updated_at": "2026-09-20T10:35:20Z"
     },
     {
       "id": 1316668584,
@@ -204,6 +204,46 @@
   ],
   "commits": [
     {
+      "sha": "28247935e7d53a1e314c6a985e1ed25d476d5926",
+      "shortSha": "2824793",
+      "message": "refactor: enhance stealth scripts, improve Cloudflare handling, and add headless mode support",
+      "repoName": "Claimr-",
+      "repoUrl": "https://github.com/ishaankor/Claimr-",
+      "commitUrl": "https://github.com/ishaankor/Claimr-/commit/28247935e7d53a1e314c6a985e1ed25d476d5926",
+      "date": "2026-10-03T06:37:28Z",
+      "timeAgo": "23h ago"
+    },
+    {
+      "sha": "94b3b6fa001df9087c7be12cd185158e87f16445",
+      "shortSha": "94b3b6f",
+      "message": "feat: add smooth toggle animations, layout updates, and escape key support to chatbot widget",
+      "repoName": "my-personal-website",
+      "repoUrl": "https://github.com/ishaankor/my-personal-website",
+      "commitUrl": "https://github.com/ishaankor/my-personal-website/commit/94b3b6fa001df9087c7be12cd185158e87f16445",
+      "date": "2026-10-01T21:34:37Z",
+      "timeAgo": "2d ago"
+    },
+    {
+      "sha": "8ba78ee65d75cc7047fa9a8d06ee0a86a0648bd8",
+      "shortSha": "8ba78ee",
+      "message": "feat: add interactive avatar animations with synchronized ripples and update project favicons",
+      "repoName": "my-data-science-portfolio",
+      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/8ba78ee65d75cc7047fa9a8d06ee0a86a0648bd8",
+      "date": "2026-10-01T21:28:39Z",
+      "timeAgo": "2d ago"
+    },
+    {
+      "sha": "9b3c1cd95292e0875f0f834823c261369c192405",
+      "shortSha": "9b3c1cd",
+      "message": "feat: add ProjectsHeroHUD component and update portfolio components and data",
+      "repoName": "my-data-science-portfolio",
+      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/9b3c1cd95292e0875f0f834823c261369c192405",
+      "date": "2026-10-01T19:13:26Z",
+      "timeAgo": "2d ago"
+    },
+    {
       "sha": "ff05a1cc9ce05914ffe55ef9eb5d2bfd78420f59",
       "shortSha": "ff05a1c",
       "message": "[v2.0] refactor: streamline validate_offer into lightweight validate_offer_fast by removing complex heuristic checks",
@@ -211,51 +251,11 @@
       "repoUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
       "commitUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-/commit/ff05a1cc9ce05914ffe55ef9eb5d2bfd78420f59",
       "date": "2026-10-01T05:17:45Z",
-      "timeAgo": "11h ago"
-    },
-    {
-      "sha": "b889c163e41a10ec8ccd47f548c4655f80c6f9cd",
-      "shortSha": "b889c16",
-      "message": "fix: resolve cooler family brand conflicts, exempt AIO from all-in-one check, and handle discontinued out-of-stock items",
-      "repoName": "RigScouter-AI-DataBase-",
-      "repoUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
-      "commitUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-/commit/b889c163e41a10ec8ccd47f548c4655f80c6f9cd",
-      "date": "2026-10-01T00:30:29Z",
-      "timeAgo": "16h ago"
-    },
-    {
-      "sha": "17c21f2814aee53d2522073bc56c0ad1a3794b98",
-      "shortSha": "17c21f2",
-      "message": "feat: add Tavily snippet price parsing helper to accurately extract current and original prices",
-      "repoName": "RigScouter-AI-DataBase-",
-      "repoUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
-      "commitUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-/commit/17c21f2814aee53d2522073bc56c0ad1a3794b98",
-      "date": "2026-09-30T20:34:23Z",
-      "timeAgo": "20h ago"
-    },
-    {
-      "sha": "08dade7efb18d64d68b83c754459a1986d0e8188",
-      "shortSha": "08dade7",
-      "message": "feat: add Best Buy priceBlocks API integration and Tavily search fallback for robust scraping",
-      "repoName": "RigScouter-AI-DataBase-",
-      "repoUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
-      "commitUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-/commit/08dade7efb18d64d68b83c754459a1986d0e8188",
-      "date": "2026-09-30T20:08:06Z",
-      "timeAgo": "20h ago"
-    },
-    {
-      "sha": "6566d3cd5140a775ffebd6e9da085819ff7cc647",
-      "shortSha": "6566d3c",
-      "message": "docs: fix grammar in SSE broadcast comment",
-      "repoName": "RigScouter-AI-DataBase-",
-      "repoUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
-      "commitUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-/commit/6566d3cd5140a775ffebd6e9da085819ff7cc647",
-      "date": "2026-09-30T05:53:37Z",
-      "timeAgo": "1d ago"
+      "timeAgo": "3d ago"
     }
   ],
   "contributionCalendar": {
-    "totalContributions": 784,
+    "totalContributions": 788,
     "weeks": [
       {
         "contributionDays": [
@@ -2309,6 +2309,16 @@
           },
           {
             "date": "2026-10-01",
+            "contributionCount": 3,
+            "color": "#9be9a8"
+          },
+          {
+            "date": "2026-10-02",
+            "contributionCount": 1,
+            "color": "#9be9a8"
+          },
+          {
+            "date": "2026-10-03",
             "contributionCount": 0,
             "color": "#ebedf0"
           }

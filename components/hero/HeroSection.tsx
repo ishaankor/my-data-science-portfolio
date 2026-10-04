@@ -60,10 +60,10 @@ export default function HeroSection() {
             {/* Typewriter Line */}
             <h1 className="text-5xl sm:text-6xl lg:text-[4.25rem] xl:text-[4.75rem] font-extrabold tracking-tight text-bone leading-[1.08]">
               <span>I am </span>
-              <span className="inline text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-amber-400">
+              <span className="inline text-transparent bg-clip-text bg-gradient-to-r from-bone via-slate-200 to-sky-400">
                 {currentText}
               </span>
-              <span className="inline-block w-[5px] h-[0.8em] bg-ember ml-2 animate-pulse align-middle" />
+              <span className="inline-block w-[5px] h-[0.8em] bg-sky-400 ml-2 animate-pulse align-middle" />
             </h1>
 
             <p className="text-xl sm:text-2xl lg:text-[1.55rem] text-bone-dim max-w-2xl leading-relaxed mt-5">
@@ -74,10 +74,10 @@ export default function HeroSection() {
             <div className="mt-7 flex flex-wrap gap-4 items-center font-mono text-xs sm:text-sm">
               <Link
                 href="/projects"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-ember/60 bg-ember/10 hover:bg-ember/20 text-bone font-semibold transition-colors shadow-sm"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-sky-500/40 bg-sky-500/10 hover:bg-sky-500/20 text-bone font-semibold transition-colors shadow-sm"
               >
                 <span>Explore Projects</span>
-                <ArrowRight className="w-4 h-4 text-ember" />
+                <ArrowRight className="w-4 h-4 text-sky-400" />
               </Link>
 
               <Link

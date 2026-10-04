@@ -9,13 +9,13 @@ export default function CertificationsSection() {
   const certIcons = [
     <Cpu key="1" className="w-5 h-5 text-cyan-400" />,
     <Sparkles key="2" className="w-5 h-5 text-purple-400" />,
-    <Terminal key="3" className="w-5 h-5 text-amber-400" />,
+    <Terminal key="3" className="w-5 h-5 text-sky-400" />,
   ];
 
   const certGradients = [
     'from-cyan-500/10 via-sky-500/5 to-transparent border-cyan-500/30',
     'from-purple-500/10 via-indigo-500/5 to-transparent border-purple-500/30',
-    'from-amber-500/10 via-orange-500/5 to-transparent border-amber-500/30',
+    'from-sky-500/10 via-blue-500/5 to-transparent border-sky-500/30',
   ];
 
   return (

@@ -185,7 +185,7 @@ export default function DeveloperHabitsMatrix() {
     if (afternoonPct >= nightPct && afternoonPct >= morningPct) {
       personaTitle = 'Peak Afternoon Sprinter';
       personaSubtitle = `${afternoonPct}% of engineering velocity logged during midday sprints`;
-      personaBadgeColor = 'text-amber-400 bg-amber-500/10 border-amber-500/30';
+      personaBadgeColor = 'text-sky-400 bg-sky-500/10 border-sky-500/30';
     } else if (morningPct >= nightPct && morningPct >= afternoonPct) {
       personaTitle = 'Early Bird Builder';
       personaSubtitle = `${morningPct}% of engineering logged during morning flow`;
@@ -229,7 +229,7 @@ export default function DeveloperHabitsMatrix() {
     const ratio = count / max;
     if (ratio < 0.25) return 'bg-cyan-500/30 border-cyan-500/40';
     if (ratio < 0.6) return 'bg-cyan-400/65 border-cyan-300 shadow-sm shadow-cyan-500/20';
-    return 'bg-ember border-ember-light shadow-md shadow-ember/40 scale-105';
+    return 'bg-sky-400 border-sky-300 shadow-sm shadow-sky-500/20';
   };
 
   return (
@@ -325,7 +325,7 @@ export default function DeveloperHabitsMatrix() {
                 <span className="w-2.5 h-2.5 rounded-sm bg-ink/50 border border-line/40" />
                 <span className="w-2.5 h-2.5 rounded-sm bg-cyan-500/30 border border-cyan-500/40" />
                 <span className="w-2.5 h-2.5 rounded-sm bg-cyan-400/65 border border-cyan-300" />
-                <span className="w-2.5 h-2.5 rounded-sm bg-ember border-ember-light shadow-sm shadow-ember/50" />
+                <span className="w-2.5 h-2.5 rounded-sm bg-sky-400 border-sky-300 shadow-sm shadow-sky-500/30" />
               </div>
               <span>More</span>
             </div>

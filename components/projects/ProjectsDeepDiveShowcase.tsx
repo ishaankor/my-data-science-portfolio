@@ -27,7 +27,7 @@ export default function ProjectsDeepDiveShowcase() {
                 href="https://datafy.ishaankoradia.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block rounded-2xl border border-line/80 bg-ink/95 shadow-2xl overflow-hidden group hover:border-amber-500/60 transition-all duration-300 transform hover:-translate-y-1"
+                className="block rounded-2xl border border-line/80 bg-ink/95 shadow-2xl overflow-hidden group hover:border-line transition-all duration-300 transform hover:-translate-y-1"
               >
                 {/* Window Header */}
                 <div className="flex items-center justify-between px-4 py-3 bg-[#0d131f] border-b border-line/60">
@@ -39,7 +39,7 @@ export default function ProjectsDeepDiveShowcase() {
                   <div className="flex items-center gap-2 bg-ink/70 px-3 py-1 rounded-md border border-line/50">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src="/favicons/datafy.png" alt="Datafy Favicon" className="w-3.5 h-3.5 rounded-sm shrink-0 object-contain" />
-                    <span className="font-mono text-[0.7rem] text-muted group-hover:text-amber-400 transition-colors flex items-center gap-1">
+                    <span className="font-mono text-[0.7rem] text-muted group-hover:text-bone transition-colors flex items-center gap-1">
                       datafy.ishaankoradia.com
                       <ExternalLink className="w-2.5 h-2.5 inline" />
                     </span>
@@ -71,8 +71,8 @@ export default function ProjectsDeepDiveShowcase() {
                 </div>
 
                 {/* Quantitative Statistic Tag */}
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono font-medium bg-amber-500/10 text-amber-300 border border-amber-500/25 shadow-sm">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono font-medium bg-emerald-500/10 text-emerald-300 border border-emerald-500/25 shadow-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                   <span>+25,000 weekly requests</span>
                 </div>
               </div>
@@ -111,7 +111,7 @@ export default function ProjectsDeepDiveShowcase() {
                   href="https://datafy.ishaankoradia.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-amber-400 hover:underline font-semibold inline-flex items-center gap-1.5 group"
+                  className="text-sky-400 hover:underline font-semibold inline-flex items-center gap-1.5 group"
                 >
                   <span>Live App</span>
                   <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -261,7 +261,6 @@ export default function ProjectsDeepDiveShowcase() {
                     {/* Pinned Left Badge */}
                     <div className="relative z-20 flex items-center gap-1.5 px-2.5 sm:px-3 h-full bg-[#070b13] border-r border-line/70 shrink-0 font-mono text-[9px] sm:text-[10px] font-bold text-cyan-400 tracking-wider">
                       <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping shrink-0" />
-                      <span className="text-orange-400">🔥</span>
                       <span className="whitespace-nowrap">LIVE PRICE DROPS</span>
                     </div>
 
@@ -274,7 +273,7 @@ export default function ProjectsDeepDiveShowcase() {
                             <span className="text-bone-dim truncate max-w-[110px] sm:max-w-[150px]">{deal.title}</span>
                             <span className="font-bold text-cyan-400">{deal.price}</span>
                             <span className="text-emerald-400 font-semibold">{deal.save}</span>
-                            <span className="px-1 py-0.2 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20 text-[8px]">{deal.source} {deal.score}</span>
+                            <span className="px-1 py-0.2 rounded bg-sky-500/10 text-sky-300 border border-sky-500/20 text-[8px]">{deal.source} {deal.score}</span>
                           </div>
                         ))}
                         {/* Loop 2 */}
@@ -283,7 +282,7 @@ export default function ProjectsDeepDiveShowcase() {
                             <span className="text-bone-dim truncate max-w-[110px] sm:max-w-[150px]">{deal.title}</span>
                             <span className="font-bold text-cyan-400">{deal.price}</span>
                             <span className="text-emerald-400 font-semibold">{deal.save}</span>
-                            <span className="px-1 py-0.2 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20 text-[8px]">{deal.source} {deal.score}</span>
+                            <span className="px-1 py-0.2 rounded bg-sky-500/10 text-sky-300 border border-sky-500/20 text-[8px]">{deal.source} {deal.score}</span>
                           </div>
                         ))}
                       </div>

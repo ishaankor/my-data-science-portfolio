@@ -50,7 +50,7 @@ export default function GitHubAnalytics() {
       lang,
       count,
       percent: Math.round((count / totalTracked) * 100),
-      color: languageColors[lang]?.hex || '#f97316',
+      color: languageColors[lang]?.hex || '#38bdf8',
     })),
     ...(otherCount > 0
       ? [

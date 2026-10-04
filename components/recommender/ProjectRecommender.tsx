@@ -57,7 +57,7 @@ export default function ProjectRecommender() {
           <div className="rounded-xl border border-line bg-surface p-8 sm:p-12 shadow-float relative overflow-hidden">
             
             {/* Ambient Glow */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-ember/10 blur-[100px] pointer-events-none rounded-full" />
+            <div className="absolute top-0 right-0 w-96 h-96 bg-sky-500/5 blur-[100px] pointer-events-none rounded-full" />
 
             <div className="max-w-3xl mb-8">
               <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-ember/10 border border-ember/40 text-ember text-xs font-mono mb-3">

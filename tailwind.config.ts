@@ -30,8 +30,9 @@ const config: Config = {
         bone: "#f1f5f9",
         "bone-dim": "#cbd5e1",
         ember: {
-          DEFAULT: "#f97316",
-          glow: "rgba(249, 115, 22, 0.15)",
+          DEFAULT: "#38bdf8",
+          light: "#7dd3fc",
+          glow: "rgba(56, 189, 248, 0.15)",
         },
       },
       fontFamily: {

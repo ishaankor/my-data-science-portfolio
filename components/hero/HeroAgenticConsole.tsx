@@ -98,8 +98,8 @@ const AGENT_SCENARIOS: AgentScenario[] = [
     shortTag: 'Real-time API Sync',
     toolName: 'api.sync_github_telemetry()',
     category: 'Data Products',
-    color: '#f97316', // Ember
-    glowColor: 'rgba(249, 115, 22, 0.3)',
+    color: '#38bdf8', // Sky
+    glowColor: 'rgba(56, 189, 248, 0.25)',
     prompt: 'Pull live repository metadata, calculate language distributions, and sync diurnal commits.',
     thought: 'Querying GitHub v3 REST API -> computing diurnal 24h scatterplot -> caching static json',
     toolCall: 'fetch("https://github-meta-fetcher.vercel.app/api/github")',

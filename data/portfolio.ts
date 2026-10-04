@@ -252,7 +252,7 @@ export const portfolioData: PortfolioData = {
       id: "cert-google-it-python",
       title: "Google IT Automation with Python Specialization",
       issuer: "Google Career Certificates (7-Course Program)",
-      badgeColor: "#f97316",
+      badgeColor: "#38bdf8",
       skills: ["Python", "Git/GitHub", "Puppet", "IaaS", "OOP", "API", "SSH", "regex", "Bash/Linux"],
       description: [
         "7-course certification in Python scripting, Linux/Bash automation, Git workflows, and system administration."
