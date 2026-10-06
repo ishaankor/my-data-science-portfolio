@@ -199,13 +199,23 @@ export default function ProjectsDeepDiveShowcase() {
               {/* Action Links */}
               <div className="flex items-center gap-6 pt-3 font-mono text-xs">
                 <a
-                  href="https://github.com/ishaankor/RigScouter-AI"
+                  href="https://rigscouter.ishaankoradia.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-cyan-400 hover:underline font-semibold inline-flex items-center gap-1.5 group"
                 >
-                  <span>Source Code</span>
-                  <Github className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                  <span>Live App</span>
+                  <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                </a>
+
+                <a
+                  href="https://github.com/ishaankor/RigScouter-AI"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted hover:text-bone transition-colors inline-flex items-center gap-1"
+                >
+                  <Github className="w-3.5 h-3.5" />
+                  <span>Source</span>
                 </a>
 
                 <a
@@ -223,7 +233,7 @@ export default function ProjectsDeepDiveShowcase() {
             {/* Real Project Landing Page Frame Right with Live Animated Ticker */}
             <div className="lg:col-span-6">
               <a
-                href="https://github.com/ishaankor/RigScouter-AI"
+                href="https://rigscouter.ishaankoradia.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block rounded-2xl border border-line/80 bg-ink/95 shadow-2xl overflow-hidden group hover:border-cyan-500/60 transition-all duration-300 transform hover:-translate-y-1"
@@ -307,7 +317,7 @@ export default function ProjectsDeepDiveShowcase() {
             {/* Real Project Landing Page Frame Left */}
             <div className="lg:col-span-6 order-2 lg:order-1">
               <a
-                href="https://ishaankoradia.com"
+                href="https://ishaankoradia.com?chat=open"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block rounded-2xl border border-line/80 bg-ink/95 shadow-2xl overflow-hidden group hover:border-emerald-500/60 transition-all duration-300 transform hover:-translate-y-1"
@@ -391,7 +401,7 @@ export default function ProjectsDeepDiveShowcase() {
               {/* Action Links */}
               <div className="flex items-center gap-6 pt-3 font-mono text-xs">
                 <a
-                  href="https://ishaankoradia.com"
+                  href="https://ishaankoradia.com?chat=open"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-emerald-400 hover:underline font-semibold inline-flex items-center gap-1.5 group"

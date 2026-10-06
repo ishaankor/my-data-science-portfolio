@@ -317,7 +317,7 @@ export const portfolioData: PortfolioData = {
       detailedDescription: "Next.js 15 and Supabase platform with Groq AI inference, quantitative deal scoring, and automated daily price drop digests.",
       tags: ["Next.js 15", "TypeScript", "Supabase RLS", "Prisma", "Groq AI", "SSE Stream"],
       githubUrl: "https://github.com/ishaankor/RigScouter-AI",
-      liveUrl: "https://github.com/ishaankor/RigScouter-AI",
+      liveUrl: "https://rigscouter.ishaankoradia.com",
       featured: true,
     },
     {
@@ -331,7 +331,7 @@ export const portfolioData: PortfolioData = {
       detailedDescription: "FastAPI backend with streaming inference, RAG memory, and dynamic tool-routing.",
       tags: ["Python", "Gemini API", "FastAPI", "Docker", "MCP"],
       githubUrl: "https://github.com/ishaankor/my-personal-website",
-      liveUrl: "https://ishaankoradia.com",
+      liveUrl: "https://ishaankoradia.com?chat=open",
       featured: true,
     },
     {
