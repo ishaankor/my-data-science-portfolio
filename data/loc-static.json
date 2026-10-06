@@ -1,5 +1,47 @@
 [
   {
+    "file": "components/projects/ProjectsDeepDiveShowcase.tsx",
+    "added": 16,
+    "deleted": 6,
+    "type": "tsx",
+    "commit": "970146c",
+    "author": "Ishaan Kor",
+    "date": "2026-10-06",
+    "time": "14:17:42",
+    "timezone": "-07:00",
+    "datetime": "2026-10-06T14:17:42-07:00",
+    "depth": 2,
+    "message": "refactor: update portfolio project URLs and live demo links"
+  },
+  {
+    "file": "data/portfolio.ts",
+    "added": 2,
+    "deleted": 2,
+    "type": "ts",
+    "commit": "970146c",
+    "author": "Ishaan Kor",
+    "date": "2026-10-06",
+    "time": "14:17:42",
+    "timezone": "-07:00",
+    "datetime": "2026-10-06T14:17:42-07:00",
+    "depth": 1,
+    "message": "refactor: update portfolio project URLs and live demo links"
+  },
+  {
+    "file": "tsconfig.tsbuildinfo",
+    "added": 1,
+    "deleted": 1,
+    "type": "tsbuildinfo",
+    "commit": "970146c",
+    "author": "Ishaan Kor",
+    "date": "2026-10-06",
+    "time": "14:17:42",
+    "timezone": "-07:00",
+    "datetime": "2026-10-06T14:17:42-07:00",
+    "depth": 0,
+    "message": "refactor: update portfolio project URLs and live demo links"
+  },
+  {
     "file": "app/globals.css",
     "added": 77,
     "deleted": 7,

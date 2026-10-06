@@ -1,4 +1,7 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+components/projects/ProjectsDeepDiveShowcase.tsx,16,6,tsx,970146c,Ishaan Kor,2026-10-06,14:17:42,-07:00,2026-10-06T14:17:42-07:00,2,"refactor: update portfolio project URLs and live demo links"
+data/portfolio.ts,2,2,ts,970146c,Ishaan Kor,2026-10-06,14:17:42,-07:00,2026-10-06T14:17:42-07:00,1,"refactor: update portfolio project URLs and live demo links"
+tsconfig.tsbuildinfo,1,1,tsbuildinfo,970146c,Ishaan Kor,2026-10-06,14:17:42,-07:00,2026-10-06T14:17:42-07:00,0,"refactor: update portfolio project URLs and live demo links"
 app/globals.css,77,7,css,56d5ccb,Ishaan Kor,2026-10-04,00:34:06,-07:00,2026-10-04T00:34:06-07:00,1,"build: update static site output and assets"
 components/hero/HeroMemojiInteractive.tsx,31,6,tsx,56d5ccb,Ishaan Kor,2026-10-04,00:34:06,-07:00,2026-10-04T00:34:06-07:00,2,"build: update static site output and assets"
 data/github-cache.json,2,2,json,56d5ccb,Ishaan Kor,2026-10-04,00:34:06,-07:00,2026-10-04T00:34:06-07:00,1,"build: update static site output and assets"
