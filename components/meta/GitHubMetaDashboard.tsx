@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { portfolioData } from '@/data/portfolio';
-import { useGitHubData } from '@/hooks/useGitHubData';
+import { useGitHubData, formatTimeAgo } from '@/hooks/useGitHubData';
 import CodebaseEvolutionSuite from './CodebaseEvolutionSuite';
 import RepositoryTimeline from './RepositoryTimeline';
 import {
@@ -31,6 +31,15 @@ export default function GitHubMetaDashboard() {
   } = useGitHubData();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedLanguage, setSelectedLanguage] = useState('All');
+  const [, setTick] = useState(0);
+
+  // Periodic 30s re-render to keep relative timeAgo labels ("just now", "1m ago") live
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTick((t) => t + 1);
+    }, 30000);
+    return () => clearInterval(timer);
+  }, []);
 
   const activeRepos = useMemo(() => {
     return Array.isArray(repos) && repos.length > 0 ? repos : [];
@@ -310,7 +319,7 @@ export default function GitHubMetaDashboard() {
                   <div className="flex items-center gap-3 text-muted shrink-0 text-[0.7rem] self-end sm:self-auto">
                     <span className="flex items-center gap-1 text-bone-dim">
                       <Clock className="w-3 h-3 text-ember" />
-                      {commit.timeAgo}
+                      {formatTimeAgo(commit.date) || commit.timeAgo}
                     </span>
                     <a
                       href={commit.commitUrl}

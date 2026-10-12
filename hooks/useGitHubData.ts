@@ -78,6 +78,22 @@ const GITHUB_API_ENDPOINT =
   process.env.NEXT_PUBLIC_GITHUB_FETCHER_URL ||
   'https://personal-meta-fetcher.vercel.app/api/github';
 
+export function formatTimeAgo(dateString?: string): string {
+  if (!dateString) return 'recently';
+  const date = new Date(dateString);
+  const now = new Date();
+  const seconds = Math.floor((now.getTime() - date.getTime()) / 1000);
+
+  if (isNaN(seconds) || seconds < 0) return 'just now';
+  if (seconds < 60) return 'just now';
+  const minutes = Math.floor(seconds / 60);
+  if (minutes < 60) return `${minutes}m ago`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours}h ago`;
+  const days = Math.floor(hours / 24);
+  return `${days}d ago`;
+}
+
 // Module-level singleton state to share across all mounting components
 let sharedData: GitHubTelemetryData = {
   user: FALLBACK_USER,
@@ -92,7 +108,7 @@ let inFlightPromise: Promise<GitHubTelemetryData | null> | null = null;
 let lastFetchTimestamp = 0;
 const subscribers = new Set<() => void>();
 let pollingTimer: NodeJS.Timeout | null = null;
-const CLIENT_CACHE_TTL_MS = 3 * 60 * 1000; // 3 minutes deduplication window
+const CLIENT_CACHE_TTL_MS = 60 * 1000; // 1 minute live stream polling window
 
 function notifySubscribers() {
   subscribers.forEach((callback) => {
@@ -118,7 +134,14 @@ async function fetchGitHubDataSingleton(force = false): Promise<GitHubTelemetryD
 
   inFlightPromise = (async () => {
     try {
-      const res = await fetch(GITHUB_API_ENDPOINT);
+      const fetchUrl = `${GITHUB_API_ENDPOINT}${GITHUB_API_ENDPOINT.includes('?') ? '&' : '?'}_t=${Date.now()}`;
+      const res = await fetch(fetchUrl, {
+        cache: 'no-store',
+        headers: {
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          Pragma: 'no-cache',
+        },
+      });
       if (res.ok) {
         const payload = await res.json();
 
@@ -132,7 +155,17 @@ async function fetchGitHubDataSingleton(force = false): Promise<GitHubTelemetryD
           hasChanges = true;
         }
         if (Array.isArray(payload.commits) && payload.commits.length > 0) {
-          sharedData.commits = payload.commits;
+          sharedData.commits = payload.commits.map((c: CommitItem) => ({
+            ...c,
+            timeAgo: formatTimeAgo(c.date) || c.timeAgo,
+          }));
+          hasChanges = true;
+        } else if (sharedData.commits.length > 0) {
+          // Re-evaluate relative time for existing commits
+          sharedData.commits = sharedData.commits.map((c: CommitItem) => ({
+            ...c,
+            timeAgo: formatTimeAgo(c.date) || c.timeAgo,
+          }));
           hasChanges = true;
         }
         if (payload.contributionCalendar) {
@@ -174,10 +207,10 @@ export function useGitHubData() {
       fetchGitHubDataSingleton();
     }
 
-    // Manage single shared polling loop
+    // Manage single shared polling loop (force fresh fetch every 1 minute)
     if (subscribers.size === 1 && !pollingTimer) {
       pollingTimer = setInterval(() => {
-        fetchGitHubDataSingleton();
+        fetchGitHubDataSingleton(true);
       }, CLIENT_CACHE_TTL_MS);
     }
 
