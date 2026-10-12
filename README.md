@@ -37,7 +37,7 @@ This repository contains the source code for the personal engineering portfolio 
 
 Unlike traditional static developer resumes, this project is architected as an **interactive data product**:
 - **Real-Time Telemetry**: Automatically mines commit history from git logs to compute lines-of-code (LOC) metrics, file modifications, and author timelines.
-- **Companion Microservice Integration**: Seamlessly pulls and synchronizes live GitHub contribution statistics from [Github-Meta-Fetcher](https://github-meta-fetcher.vercel.app/api/github).
+- **Companion Microservice Integration**: Seamlessly pulls and synchronizes live GitHub contribution statistics from [Personal-Meta-Fetcher](https://personal-meta-fetcher.vercel.app/api/github).
 - **Interactive 3D WebGL Canvas**: Features custom Three.js scenes, an interactive 3D physics-based tilt and flip Memoji card, and custom cursor haze tracking.
 - **Midnight Haze Aesthetic**: Built on a curated dark palette blending obsidian space tones (`#090d16`), neon cyan (`#38bdf8`), luminous violet (`#a855f7`), and signature ember orange accents (`#f97316`).
 
@@ -54,7 +54,7 @@ flowchart TD
     end
 
     subgraph GitHub_Microservice [Remote GitHub Sync]
-        GMF["Github-Meta-Fetcher API\n(vercel.app)"] -->|HTTP Fetch| GHScript["scripts/fetch-github-cache.mjs"]
+        GMF["Personal-Meta-Fetcher API\n(vercel.app)"] -->|HTTP Fetch| GHScript["scripts/fetch-github-cache.mjs"]
         GHScript -->|Generates| GHCache["data/github-cache.json"]
     end
 

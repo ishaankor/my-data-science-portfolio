@@ -56,7 +56,7 @@ async function loadGitHubMeta(username) {
   const githubActivity = document.getElementById('github-activity');
   if (!githubMeta || !githubActivity) return;
 
-  const backendData = await fetchJSON('https://github-meta-fetcher.vercel.app/api/github');
+  const backendData = await fetchJSON('https://personal-meta-fetcher.vercel.app/api/github');
   const user = backendData?.user || {};
   const repos = Array.isArray(backendData?.repos) ? backendData.repos : [];
   const events = Array.isArray(backendData?.commits) ? backendData.commits : [];

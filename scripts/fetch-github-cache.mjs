@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const OUTPUT_PATH = path.join(__dirname, '../data/github-cache.json');
-const API_URL = 'https://github-meta-fetcher.vercel.app/api/github';
+const API_URL = 'https://personal-meta-fetcher.vercel.app/api/github';
 
 async function generateGitHubCache() {
   console.log('📡 Prebuild GitHub cache script running...');

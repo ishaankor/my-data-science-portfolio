@@ -76,7 +76,7 @@ const FALLBACK_CALENDAR: ContributionCalendar | null = ((githubCache as any)?.co
 
 const GITHUB_API_ENDPOINT =
   process.env.NEXT_PUBLIC_GITHUB_FETCHER_URL ||
-  'https://github-meta-fetcher.vercel.app/api/github';
+  'https://personal-meta-fetcher.vercel.app/api/github';
 
 // Module-level singleton state to share across all mounting components
 let sharedData: GitHubTelemetryData = {

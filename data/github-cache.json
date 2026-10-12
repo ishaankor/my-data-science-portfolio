@@ -204,54 +204,64 @@
   ],
   "commits": [
     {
-      "sha": "28247935e7d53a1e314c6a985e1ed25d476d5926",
-      "shortSha": "2824793",
-      "message": "refactor: enhance stealth scripts, improve Cloudflare handling, and add headless mode support",
-      "repoName": "Claimr-",
-      "repoUrl": "https://github.com/ishaankor/Claimr-",
-      "commitUrl": "https://github.com/ishaankor/Claimr-/commit/28247935e7d53a1e314c6a985e1ed25d476d5926",
-      "date": "2026-10-03T06:37:28Z",
-      "timeAgo": "1d ago"
-    },
-    {
-      "sha": "94b3b6fa001df9087c7be12cd185158e87f16445",
-      "shortSha": "94b3b6f",
-      "message": "feat: add smooth toggle animations, layout updates, and escape key support to chatbot widget",
+      "sha": "f62237299b46fb7600c8f0b9c0b3d5b7985fd1ee",
+      "shortSha": "f622372",
+      "message": "feat: add live playback progress bar and update default Spotify widget UI",
       "repoName": "my-personal-website",
       "repoUrl": "https://github.com/ishaankor/my-personal-website",
-      "commitUrl": "https://github.com/ishaankor/my-personal-website/commit/94b3b6fa001df9087c7be12cd185158e87f16445",
-      "date": "2026-10-01T21:34:37Z",
-      "timeAgo": "2d ago"
+      "commitUrl": "https://github.com/ishaankor/my-personal-website/commit/f62237299b46fb7600c8f0b9c0b3d5b7985fd1ee",
+      "date": "2026-10-12T01:07:31Z",
+      "timeAgo": "2m ago"
     },
     {
-      "sha": "8ba78ee65d75cc7047fa9a8d06ee0a86a0648bd8",
-      "shortSha": "8ba78ee",
-      "message": "feat: add interactive avatar animations with synchronized ripples and update project favicons",
-      "repoName": "my-data-science-portfolio",
-      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
-      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/8ba78ee65d75cc7047fa9a8d06ee0a86a0648bd8",
-      "date": "2026-10-01T21:28:39Z",
-      "timeAgo": "2d ago"
+      "sha": "dce8b5a505942877da74189c8a7c18e77c0b0bb9",
+      "shortSha": "dce8b5a",
+      "message": "refactor: remove redundant fallback endpoints for GitHub and Spotify API fetches",
+      "repoName": "my-personal-website",
+      "repoUrl": "https://github.com/ishaankor/my-personal-website",
+      "commitUrl": "https://github.com/ishaankor/my-personal-website/commit/dce8b5a505942877da74189c8a7c18e77c0b0bb9",
+      "date": "2026-10-12T00:53:57Z",
+      "timeAgo": "15m ago"
     },
     {
-      "sha": "9b3c1cd95292e0875f0f834823c261369c192405",
-      "shortSha": "9b3c1cd",
-      "message": "feat: add ProjectsHeroHUD component and update portfolio components and data",
-      "repoName": "my-data-science-portfolio",
-      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
-      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/9b3c1cd95292e0875f0f834823c261369c192405",
-      "date": "2026-10-01T19:13:26Z",
-      "timeAgo": "2d ago"
+      "sha": "2cda36b22510dca775a55a7f882888d8da57d5dc",
+      "shortSha": "2cda36b",
+      "message": "refactor: add fallback endpoints and Spotify telemetry integration to live pulse fetcher",
+      "repoName": "my-personal-website",
+      "repoUrl": "https://github.com/ishaankor/my-personal-website",
+      "commitUrl": "https://github.com/ishaankor/my-personal-website/commit/2cda36b22510dca775a55a7f882888d8da57d5dc",
+      "date": "2026-10-12T00:46:28Z",
+      "timeAgo": "23m ago"
     },
     {
-      "sha": "ff05a1cc9ce05914ffe55ef9eb5d2bfd78420f59",
-      "shortSha": "ff05a1c",
-      "message": "[v2.0] refactor: streamline validate_offer into lightweight validate_offer_fast by removing complex heuristic checks",
-      "repoName": "RigScouter-AI-DataBase-",
-      "repoUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
-      "commitUrl": "https://github.com/ishaankor/RigScouter-AI-DataBase-/commit/ff05a1cc9ce05914ffe55ef9eb5d2bfd78420f59",
-      "date": "2026-10-01T05:17:45Z",
-      "timeAgo": "3d ago"
+      "sha": "55636f7b5045f3e37e6cce75d5d0abd69d316049",
+      "shortSha": "55636f7",
+      "message": "feat: rebrand to personal-meta-fetcher and add Spotify telemetry",
+      "repoName": "Github-Meta-Fetcher",
+      "repoUrl": "https://github.com/ishaankor/Github-Meta-Fetcher",
+      "commitUrl": "https://github.com/ishaankor/Github-Meta-Fetcher/commit/55636f7b5045f3e37e6cce75d5d0abd69d316049",
+      "date": "2026-10-12T00:44:25Z",
+      "timeAgo": "25m ago"
+    },
+    {
+      "sha": "a33799863b9353a2c733014210665c1578a936b3",
+      "shortSha": "a337998",
+      "message": "ci: pause daily bot cron and add server posting guard during cooling-off",
+      "repoName": "Daily-Motivation-",
+      "repoUrl": "https://github.com/ishaankor/Daily-Motivation-",
+      "commitUrl": "https://github.com/ishaankor/Daily-Motivation-/commit/a33799863b9353a2c733014210665c1578a936b3",
+      "date": "2026-10-11T23:58:50Z",
+      "timeAgo": "1h ago"
+    },
+    {
+      "sha": "bc9c721a57d0ab795287fd8b0a0ab1b7f3ad1865",
+      "shortSha": "bc9c721",
+      "message": "ci: pause stealth engagement cron and disable automated replies for account safety",
+      "repoName": "Daily-Motivation-",
+      "repoUrl": "https://github.com/ishaankor/Daily-Motivation-",
+      "commitUrl": "https://github.com/ishaankor/Daily-Motivation-/commit/bc9c721a57d0ab795287fd8b0a0ab1b7f3ad1865",
+      "date": "2026-10-11T23:48:27Z",
+      "timeAgo": "1h ago"
     }
   ],
   "contributionCalendar": {
