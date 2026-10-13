@@ -1,5 +1,19 @@
 [
   {
+    "file": "hooks/useGitHubData.ts",
+    "added": 1,
+    "deleted": 7,
+    "type": "ts",
+    "commit": "581b112",
+    "author": "Ishaan Kor",
+    "date": "2026-10-13",
+    "time": "01:00:07",
+    "timezone": "-07:00",
+    "datetime": "2026-10-13T01:00:07-07:00",
+    "depth": 1,
+    "message": "refactor: simplify fetch options by removing redundant cache control headers in useGitHubData hook"
+  },
+  {
     "file": "components/meta/GitHubMetaDashboard.tsx",
     "added": 12,
     "deleted": 3,
