@@ -135,13 +135,7 @@ async function fetchGitHubDataSingleton(force = false): Promise<GitHubTelemetryD
   inFlightPromise = (async () => {
     try {
       const fetchUrl = `${GITHUB_API_ENDPOINT}${GITHUB_API_ENDPOINT.includes('?') ? '&' : '?'}_t=${Date.now()}`;
-      const res = await fetch(fetchUrl, {
-        cache: 'no-store',
-        headers: {
-          'Cache-Control': 'no-cache, no-store, must-revalidate',
-          Pragma: 'no-cache',
-        },
-      });
+      const res = await fetch(fetchUrl, { cache: 'no-store' });
       if (res.ok) {
         const payload = await res.json();
 
