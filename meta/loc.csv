@@ -1,4 +1,5 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+hooks/useGitHubData.ts,7,1,ts,70a7ee2,Ishaan Kor,2026-10-14,10:46:44,-07:00,2026-10-14T10:46:44-07:00,1,"fix: add no-cache headers to GitHub API fetch request to prevent stale data"
 hooks/useGitHubData.ts,1,7,ts,581b112,Ishaan Kor,2026-10-13,01:00:07,-07:00,2026-10-13T01:00:07-07:00,1,"refactor: simplify fetch options by removing redundant cache control headers in useGitHubData hook"
 components/meta/GitHubMetaDashboard.tsx,12,3,tsx,7ffa604,Ishaan Kor,2026-10-12,16:29:23,-07:00,2026-10-12T16:29:23-07:00,2,"refactor: update build output files and GitHub data hook"
 hooks/useGitHubData.ts,38,5,ts,7ffa604,Ishaan Kor,2026-10-12,16:29:23,-07:00,2026-10-12T16:29:23-07:00,1,"refactor: update build output files and GitHub data hook"
