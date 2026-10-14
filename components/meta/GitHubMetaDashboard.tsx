@@ -186,7 +186,7 @@ export default function GitHubMetaDashboard() {
             <div className="flex items-center gap-6">
               {/* GitHub Avatar */}
               <div className="relative">
-                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full border border-line p-1 bg-ink">
+                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full border-2 sm:border-4 border-white p-1 bg-ink">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={user?.avatar_url || `https://github.com/${portfolioData.githubUsername}.png`}
