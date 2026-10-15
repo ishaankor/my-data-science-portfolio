@@ -1,4 +1,5 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+hooks/useGitHubData.ts,79,42,ts,7deb51a,Ishaan Kor,2026-10-15,10:58:25,-07:00,2026-10-15T10:58:25-07:00,1,"feat(telemetry): connect real-time commit stream to dedicated /api/commits endpoint"
 components/meta/GitHubMetaDashboard.tsx,1,1,tsx,3c9cba8,Ishaan Kor,2026-10-14,13:28:08,-07:00,2026-10-14T13:28:08-07:00,2,"refactor: update GitHubMetaDashboard component and type build info"
 tsconfig.tsbuildinfo,1,1,tsbuildinfo,3c9cba8,Ishaan Kor,2026-10-14,13:28:08,-07:00,2026-10-14T13:28:08-07:00,0,"refactor: update GitHubMetaDashboard component and type build info"
 hooks/useGitHubData.ts,7,1,ts,70a7ee2,Ishaan Kor,2026-10-14,10:46:44,-07:00,2026-10-14T10:46:44-07:00,1,"fix: add no-cache headers to GitHub API fetch request to prevent stale data"
