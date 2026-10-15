@@ -78,6 +78,10 @@ const GITHUB_API_ENDPOINT =
   process.env.NEXT_PUBLIC_GITHUB_FETCHER_URL ||
   'https://personal-meta-fetcher.vercel.app/api/github';
 
+const GITHUB_COMMITS_ENDPOINT =
+  process.env.NEXT_PUBLIC_GITHUB_COMMITS_URL ||
+  'https://personal-meta-fetcher.vercel.app/api/commits';
+
 export function formatTimeAgo(dateString?: string): string {
   if (!dateString) return 'recently';
   const date = new Date(dateString);
@@ -134,53 +138,86 @@ async function fetchGitHubDataSingleton(force = false): Promise<GitHubTelemetryD
 
   inFlightPromise = (async () => {
     try {
-      const fetchUrl = `${GITHUB_API_ENDPOINT}${GITHUB_API_ENDPOINT.includes('?') ? '&' : '?'}_t=${Date.now()}`;
-      const res = await fetch(fetchUrl, {
-        cache: 'no-store',
-        headers: {
-          'Cache-Control': 'no-cache, no-store, must-revalidate',
-          Pragma: 'no-cache',
-        },
-      });
-      if (res.ok) {
-        const payload = await res.json();
+      const fetchHeaders = {
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        Pragma: 'no-cache',
+      };
 
-        let hasChanges = false;
-        if (payload.user && JSON.stringify(payload.user) !== JSON.stringify(sharedData.user)) {
-          sharedData.user = payload.user;
-          hasChanges = true;
-        }
-        if (Array.isArray(payload.repos) && payload.repos.length > 0) {
-          sharedData.repos = payload.repos;
-          hasChanges = true;
-        }
-        if (Array.isArray(payload.commits) && payload.commits.length > 0) {
-          sharedData.commits = payload.commits.map((c: CommitItem) => ({
-            ...c,
-            timeAgo: formatTimeAgo(c.date) || c.timeAgo,
-          }));
-          hasChanges = true;
-        } else if (sharedData.commits.length > 0) {
-          // Re-evaluate relative time for existing commits
-          sharedData.commits = sharedData.commits.map((c: CommitItem) => ({
-            ...c,
-            timeAgo: formatTimeAgo(c.date) || c.timeAgo,
-          }));
-          hasChanges = true;
-        }
-        if (payload.contributionCalendar) {
-          sharedData.contributionCalendar = payload.contributionCalendar;
-          hasChanges = true;
-        }
+      const metaUrl = `${GITHUB_API_ENDPOINT}${GITHUB_API_ENDPOINT.includes('?') ? '&' : '?'}_t=${Date.now()}`;
+      const commitsUrl = `${GITHUB_COMMITS_ENDPOINT}${GITHUB_COMMITS_ENDPOINT.includes('?') ? '&' : '?'}_t=${Date.now()}`;
 
-        sharedData.lastPolledTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        lastFetchTimestamp = Date.now();
+      // Concurrently query metadata and the dedicated real-time commit stream
+      const [metaResult, commitsResult] = await Promise.allSettled([
+        fetch(metaUrl, { cache: 'no-store', headers: fetchHeaders }),
+        fetch(commitsUrl, { cache: 'no-store', headers: fetchHeaders }),
+      ]);
 
-        if (hasChanges) {
-          notifySubscribers();
+      let hasChanges = false;
+      let commitsLoadedFromDedicated = false;
+
+      // 1. Process dedicated fast commit stream
+      if (commitsResult.status === 'fulfilled' && commitsResult.value.ok) {
+        try {
+          const commitsPayload = await commitsResult.value.json();
+          if (Array.isArray(commitsPayload.commits) && commitsPayload.commits.length > 0) {
+            sharedData.commits = commitsPayload.commits.map((c: CommitItem) => ({
+              ...c,
+              timeAgo: formatTimeAgo(c.date) || c.timeAgo,
+            }));
+            hasChanges = true;
+            commitsLoadedFromDedicated = true;
+          }
+        } catch {
+          // commits payload parse error fallback
         }
-        return sharedData;
       }
+
+      // 2. Process primary GitHub metadata (user profile, repos, calendar)
+      if (metaResult.status === 'fulfilled' && metaResult.value.ok) {
+        try {
+          const payload = await metaResult.value.json();
+
+          if (payload.user && JSON.stringify(payload.user) !== JSON.stringify(sharedData.user)) {
+            sharedData.user = payload.user;
+            hasChanges = true;
+          }
+          if (Array.isArray(payload.repos) && payload.repos.length > 0) {
+            sharedData.repos = payload.repos;
+            hasChanges = true;
+          }
+          // Fallback to meta commits if dedicated commits endpoint was not available or empty
+          if (!commitsLoadedFromDedicated && Array.isArray(payload.commits) && payload.commits.length > 0) {
+            sharedData.commits = payload.commits.map((c: CommitItem) => ({
+              ...c,
+              timeAgo: formatTimeAgo(c.date) || c.timeAgo,
+            }));
+            hasChanges = true;
+          }
+          if (payload.contributionCalendar) {
+            sharedData.contributionCalendar = payload.contributionCalendar;
+            hasChanges = true;
+          }
+        } catch {
+          // meta payload parse error fallback
+        }
+      }
+
+      if (sharedData.commits.length > 0 && !hasChanges) {
+        // Re-evaluate relative time for existing commits
+        sharedData.commits = sharedData.commits.map((c: CommitItem) => ({
+          ...c,
+          timeAgo: formatTimeAgo(c.date) || c.timeAgo,
+        }));
+        hasChanges = true;
+      }
+
+      sharedData.lastPolledTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      lastFetchTimestamp = Date.now();
+
+      if (hasChanges) {
+        notifySubscribers();
+      }
+      return sharedData;
     } catch {
       // Retain graceful cache silently without failing UI
     } finally {
