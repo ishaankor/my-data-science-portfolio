@@ -11,45 +11,67 @@ const COMMITS_API_URL = 'https://personal-meta-fetcher.vercel.app/api/commits';
 async function generateGitHubCache() {
   console.log('📡 Prebuild GitHub cache script running via personal-meta-fetcher proxy...');
   try {
-    // 1. Fetch from proxy backend (try primary meta, fallback to fast stream)
-    let res = await fetch(COMMITS_API_URL, { cache: 'no-store' }).catch(() => null);
-    if (!res || !res.ok) {
-      res = await fetch(API_URL, { cache: 'no-store' }).catch(() => null);
+    let existingData = null;
+    try {
+      if (fs.existsSync(OUTPUT_PATH)) {
+        existingData = JSON.parse(fs.readFileSync(OUTPUT_PATH, 'utf8'));
+      }
+    } catch {}
+
+    const existingCalendar = existingData?.contributionCalendar || null;
+    const existingRepos = (Array.isArray(existingData?.repos) && existingData.repos.length > 0) ? existingData.repos : [];
+    const existingUser = existingData?.user || null;
+    const existingCommits = (Array.isArray(existingData?.commits) && existingData.commits.length > 0) ? existingData.commits : [];
+
+    // Concurrently query both proxy endpoints to guarantee fresh commits and contributionCalendar
+    let commitsData = null;
+    let metaData = null;
+
+    const [commitsRes, metaRes] = await Promise.allSettled([
+      fetch(COMMITS_API_URL, { cache: 'no-store' }),
+      fetch(API_URL, { cache: 'no-store' }),
+    ]);
+
+    if (commitsRes.status === 'fulfilled' && commitsRes.value?.ok) {
+      commitsData = await commitsRes.value.json().catch(() => null);
+    }
+    if (metaRes.status === 'fulfilled' && metaRes.value?.ok) {
+      metaData = await metaRes.value.json().catch(() => null);
     }
 
-    if (res && res.ok) {
-      const data = await res.json();
-      if (data && (data.repos || data.user || data.commits)) {
-        const repos = data.repos || [];
+    // Only update cache if at least one remote fetch succeeded and returned valid telemetry
+    if (commitsData || metaData) {
+      const user = commitsData?.user || metaData?.user || existingUser;
+      const repos = (commitsData?.repos && commitsData.repos.length > 0)
+        ? commitsData.repos
+        : ((metaData?.repos && metaData.repos.length > 0) ? metaData.repos : existingRepos);
+      const commits = (commitsData?.commits && commitsData.commits.length > 0)
+        ? commitsData.commits
+        : ((metaData?.commits && metaData.commits.length > 0) ? metaData.commits : existingCommits);
+      const contributionCalendar = commitsData?.contributionCalendar || metaData?.contributionCalendar || existingCalendar;
 
-        let existingCalendar = null;
-        try {
-          if (fs.existsSync(OUTPUT_PATH)) {
-            const old = JSON.parse(fs.readFileSync(OUTPUT_PATH, 'utf8'));
-            existingCalendar = old.contributionCalendar || null;
-          }
-        } catch {}
-
-        fs.mkdirSync(path.dirname(OUTPUT_PATH), { recursive: true });
-        fs.writeFileSync(
-          OUTPUT_PATH,
-          JSON.stringify(
-            {
-              updatedAt: new Date().toISOString(),
-              totalRepos: repos.length || data.user?.public_repos || 21,
-              user: data.user,
-              repos: repos,
-              commits: data.commits || [],
-              contributionCalendar: data.contributionCalendar || existingCalendar,
-            },
-            null,
-            2
-          ),
-          'utf8'
-        );
-        console.log(`✅ Successfully updated github-cache.json via proxy with ${repos.length} repositories!`);
-        return;
-      }
+      fs.mkdirSync(path.dirname(OUTPUT_PATH), { recursive: true });
+      fs.writeFileSync(
+        OUTPUT_PATH,
+        JSON.stringify(
+          {
+            updatedAt: new Date().toISOString(),
+            totalRepos: repos.length || user?.public_repos || 21,
+            user: user,
+            repos: repos,
+            commits: commits,
+            contributionCalendar: contributionCalendar,
+          },
+          null,
+          2
+        ),
+        'utf8'
+      );
+      console.log(`✅ Successfully updated github-cache.json via proxy (${repos.length} repos, ${commits.length} commits, calendar total: ${contributionCalendar?.totalContributions || 0})!`);
+      return;
+    } else {
+      console.log('ℹ️ Proxy unreachable or offline during prebuild, keeping existing cached telemetry.');
+      return;
     }
   } catch (err) {
     console.warn('⚠️ Network fetch failed during prebuild, retaining existing cache if available.', err.message);

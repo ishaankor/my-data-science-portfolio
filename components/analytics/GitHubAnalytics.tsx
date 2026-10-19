@@ -1,14 +1,22 @@
 'use client';
 
-import React from 'react';
-import { Github, Code2, Activity, ExternalLink, GitBranch, Terminal } from 'lucide-react';
+import React, { useMemo } from 'react';
+import { Github, Code2, Activity, ExternalLink, Calendar, GitBranch, Terminal } from 'lucide-react';
 import { portfolioData } from '@/data/portfolio';
-import { useGitHubData } from '@/hooks/useGitHubData';
+import { useGitHubData, calculateWeeklyContributions, calculateDevStatus } from '@/hooks/useGitHubData';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
 export default function GitHubAnalytics() {
-  const { user, repos } = useGitHubData();
-  const activeRepos = Array.isArray(repos) && repos.length > 0 ? repos : [];
+  const { user, repos, commits, contributionCalendar } = useGitHubData();
+  const activeRepos = useMemo(() => (Array.isArray(repos) && repos.length > 0 ? repos : []), [repos]);
+
+  const weeklyContributions = useMemo(() => {
+    return calculateWeeklyContributions(contributionCalendar, commits);
+  }, [contributionCalendar, commits]);
+
+  const devStatus = useMemo(() => {
+    return calculateDevStatus(commits, activeRepos);
+  }, [commits, activeRepos]);
 
   const languageMap = activeRepos.reduce((acc, repo) => {
     if (repo.language) {
@@ -109,7 +117,7 @@ export default function GitHubAnalytics() {
                 </div>
                 <div>
                   <p className="font-display text-3xl font-bold text-bone">
-                    {user?.public_repos ?? activeRepos.length ?? 23}
+                    {typeof user?.public_repos === 'number' ? user.public_repos : activeRepos.length}
                   </p>
                   <p className="font-mono text-xs text-muted mt-1">Public Repos</p>
                 </div>
@@ -137,15 +145,15 @@ export default function GitHubAnalytics() {
               <div className="rounded-xl border border-line bg-surface p-5 shadow-panel flex flex-col justify-between h-full hover:border-line/80 transition-colors">
                 <div className="flex items-center justify-between mb-2">
                   <div className="w-8 h-8 rounded-lg bg-ink border border-line flex items-center justify-center text-bone">
-                    <GitBranch className="w-4 h-4 text-bone-dim" />
+                    <Calendar className="w-4 h-4 text-bone-dim" />
                   </div>
-                  <span className="font-mono text-[0.65rem] text-muted uppercase tracking-wider">Active</span>
+                  <span className="font-mono text-[0.65rem] text-muted uppercase tracking-wider">Weekly</span>
                 </div>
                 <div>
                   <p className="font-display text-3xl font-bold text-bone">
-                    {activeRepos.length}
+                    {weeklyContributions}
                   </p>
-                  <p className="font-mono text-xs text-muted mt-1">Active Projects</p>
+                  <p className="font-mono text-xs text-muted mt-1">Weekly Contributions</p>
                 </div>
               </div>
             </ScrollReveal>
@@ -156,15 +164,17 @@ export default function GitHubAnalytics() {
                   <div className="w-8 h-8 rounded-lg bg-ink border border-line flex items-center justify-center text-emerald-400">
                     <Activity className="w-4 h-4 text-emerald-400" />
                   </div>
-                  <span className="font-mono text-[0.65rem] text-muted uppercase tracking-wider">Status</span>
+                  <span className="font-mono text-[0.65rem] text-muted uppercase tracking-wider">Dev Status</span>
                 </div>
                 <div>
-                  <p className="font-mono text-xs font-semibold text-bone flex items-center gap-1.5">
-                    <span className="h-2 w-2 rounded-full bg-emerald-400" />
-                    Active
-                  </p>
-                  <p className="font-mono text-[0.68rem] text-muted mt-1 truncate">
-                    Public Repositories
+                  <p className={`font-mono text-xs font-semibold ${devStatus.textColor} flex items-center gap-1.5`}>
+                    <span className="relative flex h-2 w-2">
+                      {devStatus.isPulsing && (
+                        <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${devStatus.bgColor} opacity-75`} />
+                      )}
+                      <span className={`relative inline-flex rounded-full h-2 w-2 ${devStatus.bgColor}`} />
+                    </span>
+                    {devStatus.label}
                   </p>
                 </div>
               </div>

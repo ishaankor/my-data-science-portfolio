@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo, useEffect } from 'react';
 import { portfolioData } from '@/data/portfolio';
-import { useGitHubData, formatTimeAgo } from '@/hooks/useGitHubData';
+import { useGitHubData, formatTimeAgo, calculateWeeklyContributions } from '@/hooks/useGitHubData';
 import CodebaseEvolutionSuite from './CodebaseEvolutionSuite';
 import RepositoryTimeline from './RepositoryTimeline';
 import {
@@ -247,44 +247,8 @@ export default function GitHubMetaDashboard() {
   }, [contributionCalendar, commits, activeRepos]);
 
   const weeklyContributions = useMemo(() => {
-    const now = Date.now();
-    const sevenDaysAgoMs = now - 7 * 24 * 60 * 60 * 1000;
-    const sevenDaysAgoStr = new Date(sevenDaysAgoMs).toISOString().split('T')[0];
-
-    let count = 0;
-
-    // 1. Sum up days within the last 7 days from activityWeeks
-    if (Array.isArray(activityWeeks) && activityWeeks.length > 0) {
-      const recentWeeks = activityWeeks.slice(-3);
-      recentWeeks.forEach((week) => {
-        week.forEach((day) => {
-          if (day.date >= sevenDaysAgoStr) {
-            count += day.count || 0;
-          }
-        });
-      });
-    }
-
-    // 2. Count distinct recent commits authored in the last 7 days
-    if (Array.isArray(commits) && commits.length > 0) {
-      const recentCommits = commits.filter((c) => {
-        if (!c.date) return false;
-        return new Date(c.date).getTime() >= sevenDaysAgoMs;
-      });
-      if (recentCommits.length > count) {
-        count = recentCommits.length;
-      }
-    }
-
-    // 3. Fallback to the latest week from the calendar if recent days are not populated
-    if (count === 0 && Array.isArray(activityWeeks) && activityWeeks.length > 0) {
-      const lastWeek = activityWeeks[activityWeeks.length - 1];
-      const weekSum = lastWeek.reduce((acc, d) => acc + (d.count || 0), 0);
-      if (weekSum > 0) return weekSum;
-    }
-
-    return count > 0 ? count : 16;
-  }, [activityWeeks, commits]);
+    return calculateWeeklyContributions(contributionCalendar, commits);
+  }, [contributionCalendar, commits]);
 
   return (
     <div className="space-y-16">

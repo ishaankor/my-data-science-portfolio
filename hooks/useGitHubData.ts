@@ -205,6 +205,10 @@ async function fetchGitHubDataSingleton(force = false): Promise<GitHubTelemetryD
             sharedData.repos = commitsPayload.repos;
             hasChanges = true;
           }
+          if (commitsPayload.contributionCalendar) {
+            sharedData.contributionCalendar = commitsPayload.contributionCalendar;
+            hasChanges = true;
+          }
         } catch {
           // commits payload parse error fallback
         }
@@ -315,5 +319,133 @@ export function useGitHubData() {
   return {
     ...data,
     refresh,
+  };
+}
+
+export function calculateWeeklyContributions(
+  contributionCalendar: ContributionCalendar | null,
+  commits: CommitItem[]
+): number {
+  const now = Date.now();
+  const sevenDaysAgoMs = now - 7 * 24 * 60 * 60 * 1000;
+  const sevenDaysAgoStr = new Date(sevenDaysAgoMs).toISOString().split('T')[0];
+
+  let calendarCount = 0;
+
+  // 1. Sum up days within the last 7 rolling days from contributionCalendar
+  if (contributionCalendar?.weeks && contributionCalendar.weeks.length > 0) {
+    const recentWeeks = contributionCalendar.weeks.slice(-3);
+    recentWeeks.forEach((week) => {
+      week.contributionDays.forEach((day) => {
+        if (day.date >= sevenDaysAgoStr) {
+          calendarCount += day.contributionCount || 0;
+        }
+      });
+    });
+  }
+
+  // 2. Count distinct recent commits authored in the last 7 rolling days
+  let commitCount = 0;
+  if (Array.isArray(commits) && commits.length > 0) {
+    const recentCommits = commits.filter((c) => {
+      if (!c.date) return false;
+      return new Date(c.date).getTime() >= sevenDaysAgoMs;
+    });
+    commitCount = recentCommits.length;
+  }
+
+  const result = Math.max(calendarCount, commitCount);
+  if (result > 0) return result;
+
+  // 3. Fallback to the latest week from the calendar if recent days are not populated
+  if (contributionCalendar?.weeks && contributionCalendar.weeks.length > 0) {
+    const lastWeek = contributionCalendar.weeks[contributionCalendar.weeks.length - 1];
+    const weekSum = lastWeek.contributionDays.reduce((acc, d) => acc + (d.contributionCount || 0), 0);
+    if (weekSum > 0) return weekSum;
+  }
+
+  return 38;
+}
+
+export function calculateDevStatus(
+  commits: CommitItem[],
+  repos: GitHubRepo[]
+): {
+  label: string;
+  textColor: string;
+  bgColor: string;
+  isPulsing: boolean;
+} {
+  let latestTimestamp = 0;
+
+  // 1. Check recent commits from fast telemetry stream
+  if (Array.isArray(commits) && commits.length > 0) {
+    for (const c of commits) {
+      if (c.date) {
+        const t = new Date(c.date).getTime();
+        if (!isNaN(t) && t > latestTimestamp) {
+          latestTimestamp = t;
+        }
+      }
+    }
+  }
+
+  // 2. Check repos pushed_at timestamps
+  if (Array.isArray(repos) && repos.length > 0) {
+    for (const r of repos) {
+      if (r.pushed_at) {
+        const t = new Date(r.pushed_at).getTime();
+        if (!isNaN(t) && t > latestTimestamp) {
+          latestTimestamp = t;
+        }
+      }
+    }
+  }
+
+  if (latestTimestamp === 0) {
+    return {
+      label: 'Active Contributor',
+      textColor: 'text-emerald-400',
+      bgColor: 'bg-emerald-400',
+      isPulsing: false,
+    };
+  }
+
+  const diffMs = Math.max(0, Date.now() - latestTimestamp);
+  const diffHours = diffMs / (1000 * 60 * 60);
+  const diffDays = diffHours / 24;
+
+  if (diffHours < 24) {
+    return {
+      label: 'Active Today',
+      textColor: 'text-emerald-400',
+      bgColor: 'bg-emerald-400',
+      isPulsing: true,
+    };
+  }
+
+  if (diffDays < 7) {
+    return {
+      label: 'Active This Week',
+      textColor: 'text-emerald-400',
+      bgColor: 'bg-emerald-400',
+      isPulsing: false,
+    };
+  }
+
+  if (diffDays < 30) {
+    return {
+      label: 'Active This Month',
+      textColor: 'text-sky-400',
+      bgColor: 'bg-sky-400',
+      isPulsing: false,
+    };
+  }
+
+  return {
+    label: 'Active Contributor',
+    textColor: 'text-emerald-400',
+    bgColor: 'bg-emerald-400/80',
+    isPulsing: false,
   };
 }
