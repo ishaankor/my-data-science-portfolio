@@ -1,5 +1,19 @@
 [
   {
+    "file": "components/meta/GitHubMetaDashboard.tsx",
+    "added": 46,
+    "deleted": 27,
+    "type": "tsx",
+    "commit": "551dbdf",
+    "author": "Ishaan Kor",
+    "date": "2026-10-18",
+    "time": "21:37:27",
+    "timezone": "-07:00",
+    "datetime": "2026-10-18T21:37:27-07:00",
+    "depth": 2,
+    "message": "refactor: simplify dev status layout and typography in GitHubMetaDashboard component"
+  },
+  {
     "file": ".github/workflows/daily-loc-update.yml",
     "added": 9,
     "deleted": 6,

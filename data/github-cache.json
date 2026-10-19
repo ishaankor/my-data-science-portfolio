@@ -1,16 +1,26 @@
 {
-  "updatedAt": "2026-10-19T04:25:19.644Z",
-  "totalRepos": 19,
+  "updatedAt": "2026-10-19T04:38:25.669Z",
+  "totalRepos": 20,
   "user": {
     "login": "ishaankor",
     "avatar_url": "https://avatars.githubusercontent.com/u/113160688?v=4",
     "html_url": "https://github.com/ishaankor",
     "name": "Ishaan",
     "bio": "An AI engineer who loves to automate the tedious works of life through programming and coding!",
-    "public_repos": 20,
+    "public_repos": 21,
     "created_at": "2022-09-09T04:43:15Z"
   },
   "repos": [
+    {
+      "id": 915475199,
+      "name": "my-data-science-portfolio",
+      "language": "HTML",
+      "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
+      "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
+      "created_at": "2025-01-11T23:48:23Z",
+      "pushed_at": "2026-10-19T04:37:29Z",
+      "updated_at": "2026-10-19T04:37:34Z"
+    },
     {
       "id": 1316668584,
       "name": "Personal-Meta-Fetcher",
@@ -20,16 +30,6 @@
       "created_at": "2026-07-30T00:16:14Z",
       "pushed_at": "2026-10-19T04:24:32Z",
       "updated_at": "2026-10-19T04:24:36Z"
-    },
-    {
-      "id": 915475199,
-      "name": "my-data-science-portfolio",
-      "language": "HTML",
-      "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
-      "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
-      "created_at": "2025-01-11T23:48:23Z",
-      "pushed_at": "2026-10-19T04:24:31Z",
-      "updated_at": "2026-10-19T04:24:34Z"
     },
     {
       "id": 1324783574,
@@ -90,6 +90,16 @@
       "created_at": "2026-06-17T04:36:46Z",
       "pushed_at": "2026-09-28T01:29:14Z",
       "updated_at": "2026-10-19T02:32:16Z"
+    },
+    {
+      "id": 1353930890,
+      "name": "TESTING",
+      "language": null,
+      "html_url": "https://github.com/ishaankor/TESTING",
+      "description": null,
+      "created_at": "2026-09-01T19:02:44Z",
+      "pushed_at": "2026-09-01T19:02:45Z",
+      "updated_at": "2026-10-19T04:27:59Z"
     },
     {
       "id": 911895420,
@@ -204,6 +214,102 @@
   ],
   "commits": [
     {
+      "sha": "551dbdfb20d7c6093a2d1448565650a25ec2b6e1",
+      "shortSha": "551dbdf",
+      "message": "refactor: simplify dev status layout and typography in GitHubMetaDashboard component",
+      "repoName": "my-data-science-portfolio",
+      "repoFullName": "ishaankor/my-data-science-portfolio",
+      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/551dbdfb20d7c6093a2d1448565650a25ec2b6e1",
+      "date": "2026-10-19T04:37:27Z",
+      "timeAgo": "just now",
+      "stats": {
+        "total": 136,
+        "additions": 85,
+        "deletions": 51
+      },
+      "linesChanged": 136,
+      "additions": 85,
+      "deletions": 51,
+      "filesCount": 23,
+      "files": [
+        {
+          "filename": "components/meta/GitHubMetaDashboard.tsx",
+          "status": "modified",
+          "additions": 46,
+          "deletions": 27,
+          "changes": 73
+        },
+        {
+          "filename": "out/404.html",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1,
+          "changes": 2
+        },
+        {
+          "filename": "out/_next/static/chunks/383-4114b1d9f402e9ab.js",
+          "status": "added",
+          "additions": 1,
+          "deletions": 0,
+          "changes": 1
+        },
+        {
+          "filename": "out/_next/static/chunks/383-d5fea6a73ee29005.js",
+          "status": "removed",
+          "additions": 0,
+          "deletions": 1,
+          "changes": 1
+        },
+        {
+          "filename": "out/_next/static/chunks/app/meta/page-40a1b9f2bea7d89b.js",
+          "status": "added",
+          "additions": 1,
+          "deletions": 0,
+          "changes": 1
+        },
+        {
+          "filename": "out/_next/static/chunks/app/meta/page-74e722565de3d965.js",
+          "status": "removed",
+          "additions": 0,
+          "deletions": 1,
+          "changes": 1
+        },
+        {
+          "filename": "out/_next/static/css/05c2874e3986e176.css",
+          "status": "added",
+          "additions": 3,
+          "deletions": 0,
+          "changes": 3
+        },
+        {
+          "filename": "out/_next/static/css/cac004c354df38e7.css",
+          "status": "removed",
+          "additions": 0,
+          "deletions": 3,
+          "changes": 3
+        },
+        {
+          "filename": "out/_next/static/oYil9Uzd9-5zB6jdcH-I4/_buildManifest.js",
+          "status": "renamed",
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0
+        },
+        {
+          "filename": "out/_next/static/oYil9Uzd9-5zB6jdcH-I4/_ssgManifest.js",
+          "status": "renamed",
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0
+        }
+      ],
+      "author": {
+        "name": "Ishaan Kor",
+        "date": "2026-10-19T04:37:27Z"
+      }
+    },
+    {
       "sha": "8aa764673d89b6c3f6e338ad1a838b9be8a7d873",
       "shortSha": "8aa7646",
       "message": "feat: fetch user profile and expanded repository list concurrently in commits API",
@@ -212,7 +318,7 @@
       "repoUrl": "https://github.com/ishaankor/Personal-Meta-Fetcher",
       "commitUrl": "https://github.com/ishaankor/Personal-Meta-Fetcher/commit/8aa764673d89b6c3f6e338ad1a838b9be8a7d873",
       "date": "2026-10-19T04:24:29Z",
-      "timeAgo": "just now",
+      "timeAgo": "13m ago",
       "stats": {
         "total": 54,
         "additions": 44,
@@ -245,7 +351,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/e30001a7367abff4d1509e34d4efcb40f0adf95a",
       "date": "2026-10-19T04:24:26Z",
-      "timeAgo": "just now",
+      "timeAgo": "13m ago",
       "stats": {
         "total": 254,
         "additions": 221,
@@ -470,40 +576,7 @@
       "repoUrl": "https://github.com/ishaankor/Daily-Motivation-",
       "commitUrl": "https://github.com/ishaankor/Daily-Motivation-/commit/626f955e7fc968b569ae6a6b08656fd7dacd4f01",
       "date": "2026-10-18T05:35:21Z",
-      "timeAgo": "22h ago",
-      "stats": {
-        "total": 6,
-        "additions": 0,
-        "deletions": 6
-      },
-      "linesChanged": 6,
-      "additions": 0,
-      "deletions": 6,
-      "filesCount": 1,
-      "files": [
-        {
-          "filename": "bot/reply_engine.py",
-          "status": "modified",
-          "additions": 0,
-          "deletions": 6,
-          "changes": 6
-        }
-      ],
-      "author": {
-        "name": "Ishaan Kor",
-        "date": "2026-10-18T05:35:21Z"
-      }
-    },
-    {
-      "sha": "3f67434056e7276cf24482e437b5c35c26ee50d6",
-      "shortSha": "3f67434",
-      "message": "refactor: remove category comment headers from NICHE_QUERIES list",
-      "repoName": "Daily-Motivation-",
-      "repoFullName": "ishaankor/Daily-Motivation-",
-      "repoUrl": "https://github.com/ishaankor/Daily-Motivation-",
-      "commitUrl": "https://github.com/ishaankor/Daily-Motivation-/commit/3f67434056e7276cf24482e437b5c35c26ee50d6",
-      "date": "2026-10-16T07:24:54Z",
-      "timeAgo": "2d ago",
+      "timeAgo": "23h ago",
       "stats": {
         "total": 0,
         "additions": 0,

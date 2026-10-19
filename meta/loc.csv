@@ -1,4 +1,5 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+components/meta/GitHubMetaDashboard.tsx,46,27,tsx,551dbdf,Ishaan Kor,2026-10-18,21:37:27,-07:00,2026-10-18T21:37:27-07:00,2,"refactor: simplify dev status layout and typography in GitHubMetaDashboard component"
 .github/workflows/daily-loc-update.yml,9,6,yml,e30001a,Ishaan Kor,2026-10-18,21:24:26,-07:00,2026-10-18T21:24:26-07:00,2,"feat: add dynamic developer status and session snapshot caching to GitHub dashboard"
 components/meta/GitHubMetaDashboard.tsx,124,9,tsx,e30001a,Ishaan Kor,2026-10-18,21:24:26,-07:00,2026-10-18T21:24:26-07:00,2,"feat: add dynamic developer status and session snapshot caching to GitHub dashboard"
 data/github-cache.json,1,1,json,e30001a,Ishaan Kor,2026-10-18,21:24:26,-07:00,2026-10-18T21:24:26-07:00,1,"feat: add dynamic developer status and session snapshot caching to GitHub dashboard"
