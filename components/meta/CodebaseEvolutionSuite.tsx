@@ -91,24 +91,14 @@ export default function CodebaseEvolutionSuite() {
     return staticRecords;
   }, [dynamicRecords]);
 
-  // Client-side telemetry rehydration from /api/loc, /loc-static.json, or /loc.csv
+  // Client-side telemetry rehydration from /loc-static.json or /loc.csv
   useEffect(() => {
     const loadTelemetry = async () => {
-      // 1. Try dynamic API route
-      try {
-        const res = await fetch('/api/loc', { cache: 'no-store' });
-        if (res.ok) {
-          const data = await res.json();
-          if (Array.isArray(data) && data.length > 5) {
-            setDynamicRecords(data);
-            return;
-          }
-        }
-      } catch {}
+      const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
-      // 2. Try static public JSON
+      // 1. Try static public JSON
       try {
-        const resStatic = await fetch('/loc-static.json', { cache: 'no-store' });
+        const resStatic = await fetch(`${basePath}/loc-static.json`, { cache: 'no-store' });
         if (resStatic.ok) {
           const data = await resStatic.json();
           if (Array.isArray(data) && data.length > 5) {
@@ -118,9 +108,9 @@ export default function CodebaseEvolutionSuite() {
         }
       } catch {}
 
-      // 3. Fallback to /loc.csv
+      // 2. Fallback to /loc.csv
       try {
-        const resCsv = await fetch('/loc.csv', { cache: 'no-store' });
+        const resCsv = await fetch(`${basePath}/loc.csv`, { cache: 'no-store' });
         if (resCsv.ok) {
           const csvText = await resCsv.text();
           const lines = csvText.split('\n').filter(Boolean);

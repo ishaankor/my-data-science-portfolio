@@ -128,8 +128,7 @@ function saveSessionSnapshot(data: GitHubTelemetryData) {
 }
 
 // Module-level singleton state to share across all mounting components
-const initialSessionSnapshot = loadSessionSnapshot();
-let sharedData: GitHubTelemetryData = initialSessionSnapshot || {
+let sharedData: GitHubTelemetryData = {
   user: FALLBACK_USER,
   repos: FALLBACK_REPOS,
   commits: FALLBACK_COMMITS,
@@ -139,7 +138,7 @@ let sharedData: GitHubTelemetryData = initialSessionSnapshot || {
 };
 
 let inFlightPromise: Promise<GitHubTelemetryData | null> | null = null;
-let lastFetchTimestamp = initialSessionSnapshot ? Date.now() : 0;
+let lastFetchTimestamp = 0;
 const subscribers = new Set<() => void>();
 let pollingTimer: NodeJS.Timeout | null = null;
 const CLIENT_CACHE_TTL_MS = 60 * 1000; // 1 minute live stream polling window
@@ -274,13 +273,11 @@ async function fetchGitHubDataSingleton(force = false): Promise<GitHubTelemetryD
 }
 
 export function useGitHubData() {
-  const [data, setData] = useState<GitHubTelemetryData>(() => {
-    return loadSessionSnapshot() || sharedData;
-  });
+  const [data, setData] = useState<GitHubTelemetryData>(sharedData);
 
   useEffect(() => {
     const sessionSnapshot = loadSessionSnapshot();
-    if (sessionSnapshot && !sharedData.lastPolledTime) {
+    if (sessionSnapshot) {
       sharedData = { ...sharedData, ...sessionSnapshot };
       setData({ ...sharedData });
     }

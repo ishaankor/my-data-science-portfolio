@@ -65,16 +65,31 @@ export default function DeveloperHabitsMatrix() {
     raw.forEach((r) => {
       if (!r || !r.commit) return;
       if (!uniqueCommits.has(r.commit)) {
-        let dt = new Date(r.datetime || `${r.date}T${r.time || '12:00:00'}`);
-        if (isNaN(dt.getTime())) dt = new Date();
+        // Determine day and hour deterministically to prevent client/server timezone hydration mismatches
+        let hour = 12;
+        if (r.time && r.time.length >= 2) {
+          hour = parseInt(r.time.slice(0, 2), 10);
+          if (isNaN(hour) || hour < 0 || hour > 23) hour = 12;
+        } else if (r.datetime) {
+          const dt = new Date(r.datetime);
+          hour = !isNaN(dt.getTime()) ? dt.getUTCHours() : 12;
+        }
 
-        // Convert getDay() (0=Sun, 1=Mon... 6=Sat) to Mon=0 ... Sun=6
-        const jsDay = dt.getDay();
-        const monIndexedDay = jsDay === 0 ? 6 : jsDay - 1;
-        const hour = dt.getHours();
+        let monIndexedDay = 0;
+        if (r.date && r.date.includes('-')) {
+          const [y, m, d] = r.date.split('-').map(Number);
+          const utcDay = new Date(Date.UTC(y, m - 1, d, 12, 0, 0)).getUTCDay();
+          monIndexedDay = utcDay === 0 ? 6 : utcDay - 1;
+        } else {
+          const dt = new Date(r.datetime || '2025-01-11T12:00:00Z');
+          const utcDay = !isNaN(dt.getTime()) ? dt.getUTCDay() : 1;
+          monIndexedDay = utcDay === 0 ? 6 : utcDay - 1;
+        }
+
+        const commitDate = new Date(r.datetime || `${r.date || '2025-01-11'}T${r.time || '12:00:00'}`);
 
         uniqueCommits.set(r.commit, {
-          datetime: dt,
+          datetime: isNaN(commitDate.getTime()) ? new Date('2025-01-11T12:00:00Z') : commitDate,
           message: r.message || '',
           lines: (r.added || 0) + (r.deleted || 0),
           hour,

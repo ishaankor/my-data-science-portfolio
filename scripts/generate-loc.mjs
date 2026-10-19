@@ -129,18 +129,28 @@ try {
   const metaCsvPath = path.join(process.cwd(), 'meta', 'loc.csv');
   const staticJsonPath = path.join(process.cwd(), 'data', 'loc-static.json');
 
-  let existingCount = 0;
+  let existingCommits = new Set();
   if (fs.existsSync(staticJsonPath)) {
     try {
       const existing = JSON.parse(fs.readFileSync(staticJsonPath, 'utf8'));
-      if (Array.isArray(existing)) existingCount = existing.length;
+      if (Array.isArray(existing)) {
+        existing.forEach((r) => {
+          if (r?.commit) existingCommits.add(r.commit);
+        });
+      }
     } catch (e) {}
   }
 
+  const generatedCommits = new Set(jsonRecords.map((r) => r.commit));
+
   // SAFEGUARD FOR CLOUDFLARE PAGES, CI SHALLOW CLONES (--depth 1), OR ISOLATED GIT HOOKS:
-  // If git log yields fewer than 50 records while existing dataset has 50+, preserve existing dataset!
-  if (existingCount >= 50 && jsonRecords.length < 50) {
-    console.log(`⚠️ Incomplete git log traversal detected (${jsonRecords.length} records generated, committed dataset has ${existingCount}). Preserving full committed loc-static.json!`);
+  // If git log yields fewer than 50 UNIQUE COMMITS while existing dataset has 50+, preserve existing dataset!
+  if (existingCommits.size >= 50 && generatedCommits.size < 50) {
+    console.log(`⚠️ Shallow clone / incomplete traversal detected (git log produced only ${generatedCommits.size} commits, committed dataset has ${existingCommits.size}). Preserving full committed loc-static.json!`);
+    const publicJsonPath = path.join(process.cwd(), 'public', 'loc-static.json');
+    if (fs.existsSync(staticJsonPath)) {
+      fs.copyFileSync(staticJsonPath, publicJsonPath);
+    }
   } else {
     const csvContent = csvRows.join('\n');
     fs.writeFileSync(publicCsvPath, csvContent, 'utf8');
