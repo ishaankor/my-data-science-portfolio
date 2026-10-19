@@ -1,16 +1,26 @@
 {
-  "updatedAt": "2026-10-19T04:59:22.544Z",
-  "totalRepos": 20,
+  "updatedAt": "2026-10-19T07:43:25.364Z",
+  "totalRepos": 19,
   "user": {
     "login": "ishaankor",
     "avatar_url": "https://avatars.githubusercontent.com/u/113160688?v=4",
     "html_url": "https://github.com/ishaankor",
     "name": "Ishaan",
     "bio": "An AI engineer who loves to automate the tedious works of life through programming and coding!",
-    "public_repos": 21,
+    "public_repos": 20,
     "created_at": "2022-09-09T04:43:15Z"
   },
   "repos": [
+    {
+      "id": 915475199,
+      "name": "my-data-science-portfolio",
+      "language": "HTML",
+      "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
+      "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
+      "created_at": "2025-01-11T23:48:23Z",
+      "pushed_at": "2026-10-19T07:42:37Z",
+      "updated_at": "2026-10-19T07:42:40Z"
+    },
     {
       "id": 1316668584,
       "name": "Personal-Meta-Fetcher",
@@ -19,16 +29,6 @@
       "description": null,
       "created_at": "2026-07-30T00:16:14Z",
       "pushed_at": "2026-10-19T04:58:37Z",
-      "updated_at": "2026-10-19T04:58:40Z"
-    },
-    {
-      "id": 915475199,
-      "name": "my-data-science-portfolio",
-      "language": "HTML",
-      "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
-      "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
-      "created_at": "2025-01-11T23:48:23Z",
-      "pushed_at": "2026-10-19T04:58:36Z",
       "updated_at": "2026-10-19T04:58:40Z"
     },
     {
@@ -90,16 +90,6 @@
       "created_at": "2026-06-17T04:36:46Z",
       "pushed_at": "2026-09-28T01:29:14Z",
       "updated_at": "2026-10-19T02:32:16Z"
-    },
-    {
-      "id": 1353930890,
-      "name": "TESTING",
-      "language": null,
-      "html_url": "https://github.com/ishaankor/TESTING",
-      "description": null,
-      "created_at": "2026-09-01T19:02:44Z",
-      "pushed_at": "2026-09-01T19:02:45Z",
-      "updated_at": "2026-10-19T04:27:59Z"
     },
     {
       "id": 911895420,
@@ -179,7 +169,7 @@
       "description": "Automation scripts that help me complete the annoying processes in a certain mobile video game! ",
       "created_at": "2025-01-07T02:50:22Z",
       "pushed_at": "2025-01-07T07:21:38Z",
-      "updated_at": "2025-01-07T07:14:13Z"
+      "updated_at": "2026-10-19T05:10:36Z"
     },
     {
       "id": 909492023,
@@ -189,7 +179,7 @@
       "description": "A Python script that allows you to be able to record audio and make useful notes of it so that it can be stored in your Google Drive!",
       "created_at": "2024-12-28T21:33:49Z",
       "pushed_at": "2024-12-29T00:08:11Z",
-      "updated_at": "2024-12-29T00:09:20Z"
+      "updated_at": "2026-10-19T05:10:33Z"
     },
     {
       "id": 908393333,
@@ -199,7 +189,7 @@
       "description": "A Python script to collect, organize, and merge files from Canvas into a single PDF file.",
       "created_at": "2024-12-26T00:54:16Z",
       "pushed_at": "2024-12-28T23:59:31Z",
-      "updated_at": "2024-12-28T23:59:34Z"
+      "updated_at": "2026-10-19T05:10:32Z"
     },
     {
       "id": 895882703,
@@ -209,10 +199,71 @@
       "description": "A deep analysis look into a dataset covering various recipes and their respective ratings through pandas!",
       "created_at": "2024-11-29T05:32:08Z",
       "pushed_at": "2024-12-11T04:21:07Z",
-      "updated_at": "2025-10-02T02:55:40Z"
+      "updated_at": "2026-10-19T05:10:41Z"
     }
   ],
   "commits": [
+    {
+      "sha": "3d965b4a0d08828d1f08f7684d6f136a6d940117",
+      "shortSha": "3d965b4",
+      "message": "refactor: exclude github-cache.json from static lines of code data generation and metrics",
+      "repoName": "my-data-science-portfolio",
+      "repoFullName": "ishaankor/my-data-science-portfolio",
+      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/3d965b4a0d08828d1f08f7684d6f136a6d940117",
+      "date": "2026-10-19T07:42:34Z",
+      "timeAgo": "just now",
+      "stats": {
+        "total": 846,
+        "additions": 91,
+        "deletions": 755
+      },
+      "linesChanged": 846,
+      "additions": 91,
+      "deletions": 755,
+      "filesCount": 5,
+      "files": [
+        {
+          "filename": "components/meta/CodebaseEvolutionSuite.tsx",
+          "status": "modified",
+          "additions": 52,
+          "deletions": 1,
+          "changes": 53
+        },
+        {
+          "filename": "data/loc-static.json",
+          "status": "modified",
+          "additions": 20,
+          "deletions": 650,
+          "changes": 670
+        },
+        {
+          "filename": "meta/loc.csv",
+          "status": "modified",
+          "additions": 4,
+          "deletions": 49,
+          "changes": 53
+        },
+        {
+          "filename": "public/loc.csv",
+          "status": "modified",
+          "additions": 4,
+          "deletions": 49,
+          "changes": 53
+        },
+        {
+          "filename": "scripts/generate-loc.mjs",
+          "status": "modified",
+          "additions": 11,
+          "deletions": 6,
+          "changes": 17
+        }
+      ],
+      "author": {
+        "name": "Ishaan Kor",
+        "date": "2026-10-19T07:42:34Z"
+      }
+    },
     {
       "sha": "40dfd0d47c8c8088f144a143fa213ba2fd8c05a6",
       "shortSha": "40dfd0d",
@@ -222,7 +273,7 @@
       "repoUrl": "https://github.com/ishaankor/Personal-Meta-Fetcher",
       "commitUrl": "https://github.com/ishaankor/Personal-Meta-Fetcher/commit/40dfd0d47c8c8088f144a143fa213ba2fd8c05a6",
       "date": "2026-10-19T04:58:34Z",
-      "timeAgo": "just now",
+      "timeAgo": "2h ago",
       "stats": {
         "total": 2,
         "additions": 1,
@@ -255,7 +306,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/874c2e847706baca5c3481419a33a3244e72a63b",
       "date": "2026-10-19T04:58:33Z",
-      "timeAgo": "just now",
+      "timeAgo": "2h ago",
       "stats": {
         "total": 2,
         "additions": 1,
@@ -288,7 +339,7 @@
       "repoUrl": "https://github.com/ishaankor/Personal-Meta-Fetcher",
       "commitUrl": "https://github.com/ishaankor/Personal-Meta-Fetcher/commit/77d31171e4e9d391227c94e09c3bbf061a32fed0",
       "date": "2026-10-19T04:54:09Z",
-      "timeAgo": "5m ago",
+      "timeAgo": "2h ago",
       "stats": {
         "total": 51,
         "additions": 46,
@@ -321,7 +372,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/1d61e5302295d1af22db144819614e5b1789a1ba",
       "date": "2026-10-19T04:53:55Z",
-      "timeAgo": "5m ago",
+      "timeAgo": "2h ago",
       "stats": {
         "total": 667,
         "additions": 383,
@@ -407,106 +458,10 @@
         "name": "Ishaan Kor",
         "date": "2026-10-19T04:53:55Z"
       }
-    },
-    {
-      "sha": "551dbdfb20d7c6093a2d1448565650a25ec2b6e1",
-      "shortSha": "551dbdf",
-      "message": "refactor: simplify dev status layout and typography in GitHubMetaDashboard component",
-      "repoName": "my-data-science-portfolio",
-      "repoFullName": "ishaankor/my-data-science-portfolio",
-      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
-      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/551dbdfb20d7c6093a2d1448565650a25ec2b6e1",
-      "date": "2026-10-19T04:37:27Z",
-      "timeAgo": "21m ago",
-      "stats": {
-        "total": 136,
-        "additions": 85,
-        "deletions": 51
-      },
-      "linesChanged": 136,
-      "additions": 85,
-      "deletions": 51,
-      "filesCount": 23,
-      "files": [
-        {
-          "filename": "components/meta/GitHubMetaDashboard.tsx",
-          "status": "modified",
-          "additions": 46,
-          "deletions": 27,
-          "changes": 73
-        },
-        {
-          "filename": "out/404.html",
-          "status": "modified",
-          "additions": 1,
-          "deletions": 1,
-          "changes": 2
-        },
-        {
-          "filename": "out/_next/static/chunks/383-4114b1d9f402e9ab.js",
-          "status": "added",
-          "additions": 1,
-          "deletions": 0,
-          "changes": 1
-        },
-        {
-          "filename": "out/_next/static/chunks/383-d5fea6a73ee29005.js",
-          "status": "removed",
-          "additions": 0,
-          "deletions": 1,
-          "changes": 1
-        },
-        {
-          "filename": "out/_next/static/chunks/app/meta/page-40a1b9f2bea7d89b.js",
-          "status": "added",
-          "additions": 1,
-          "deletions": 0,
-          "changes": 1
-        },
-        {
-          "filename": "out/_next/static/chunks/app/meta/page-74e722565de3d965.js",
-          "status": "removed",
-          "additions": 0,
-          "deletions": 1,
-          "changes": 1
-        },
-        {
-          "filename": "out/_next/static/css/05c2874e3986e176.css",
-          "status": "added",
-          "additions": 3,
-          "deletions": 0,
-          "changes": 3
-        },
-        {
-          "filename": "out/_next/static/css/cac004c354df38e7.css",
-          "status": "removed",
-          "additions": 0,
-          "deletions": 3,
-          "changes": 3
-        },
-        {
-          "filename": "out/_next/static/oYil9Uzd9-5zB6jdcH-I4/_buildManifest.js",
-          "status": "renamed",
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0
-        },
-        {
-          "filename": "out/_next/static/oYil9Uzd9-5zB6jdcH-I4/_ssgManifest.js",
-          "status": "renamed",
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0
-        }
-      ],
-      "author": {
-        "name": "Ishaan Kor",
-        "date": "2026-10-19T04:37:27Z"
-      }
     }
   ],
   "contributionCalendar": {
-    "totalContributions": 846,
+    "totalContributions": 847,
     "weeks": [
       {
         "contributionDays": [
@@ -2542,6 +2497,11 @@
             "date": "2026-10-18",
             "contributionCount": 9,
             "color": "#40c463"
+          },
+          {
+            "date": "2026-10-19",
+            "contributionCount": 1,
+            "color": "#9be9a8"
           }
         ]
       }
