@@ -380,7 +380,7 @@ export default function GitHubMetaDashboard() {
           {/* Commits List Feed */}
           {commits.length > 0 ? (
             <div className="space-y-3 font-mono text-xs">
-              {commits.map((commit, idx) => (
+              {commits.slice(0, 5).map((commit, idx) => (
                 <div
                   key={`${commit.sha}-${idx}`}
                   className="p-4 rounded-lg bg-ink/80 border border-line hover:border-ember/50 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-3 group"
