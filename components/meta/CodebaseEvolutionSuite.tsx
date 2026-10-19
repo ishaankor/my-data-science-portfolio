@@ -73,12 +73,57 @@ const rawRecords: LocRecord[] = Array.isArray(locStaticRecords)
 
 export default function CodebaseEvolutionSuite() {
   // Synchronous initial state from prebuilt static build JSON
-  const [records] = useState<LocRecord[]>(rawRecords);
+  const [records, setRecords] = useState<LocRecord[]>(rawRecords);
   // sliderIndex === null means "Show ALL commits" (default max position)
   const [sliderIndex, setSliderIndex] = useState<number | null>(null);
   const [selectedCommit, setSelectedCommit] = useState<string | null>(null);
   const [hoveredCommit, setHoveredCommit] = useState<CommitMeta | null>(null);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc'); // 'desc' = Reverse (newest first by default)
+
+  // Keep records in sync if rawRecords changes (e.g. Next.js HMR or rebuild)
+  useEffect(() => {
+    if (Array.isArray(rawRecords) && rawRecords.length > 0) {
+      setRecords((prev) => (rawRecords.length !== prev.length ? rawRecords : prev));
+    }
+  }, []);
+
+  // Resilience: If records has <= 1 commit, fetch /loc.csv runtime asset to guarantee full historical telemetry
+  useEffect(() => {
+    if (records.length <= 1) {
+      fetch('/loc.csv')
+        .then((res) => (res.ok ? res.text() : ''))
+        .then((csvText) => {
+          if (!csvText) return;
+          const lines = csvText.split('\n').filter(Boolean);
+          if (lines.length > 5) {
+            const parsed: LocRecord[] = [];
+            for (let i = 1; i < lines.length; i++) {
+              const cols = parseCsvLine(lines[i]);
+              if (cols.length >= 12) {
+                parsed.push({
+                  file: cols[0],
+                  added: parseInt(cols[1], 10) || 0,
+                  deleted: parseInt(cols[2], 10) || 0,
+                  type: cols[3],
+                  commit: cols[4],
+                  author: cols[5],
+                  date: cols[6],
+                  time: cols[7],
+                  timezone: cols[8],
+                  datetime: cols[9],
+                  depth: parseInt(cols[10], 10) || 0,
+                  message: cols[11],
+                });
+              }
+            }
+            if (parsed.length > records.length) {
+              setRecords(parsed);
+            }
+          }
+        })
+        .catch(() => {});
+    }
+  }, [records.length]);
 
   // Clear hover tooltip and selection states when switching tabs or window blurs
   useEffect(() => {
@@ -206,6 +251,12 @@ export default function CodebaseEvolutionSuite() {
   const fileLocCounts = useMemo(() => {
     const counts: Record<string, { loc: number; type: string }> = {};
     activeRecords.forEach((r) => {
+      if (
+        !r.file ||
+        r.file.includes('loc.csv') ||
+        r.file.includes('loc-static.json') ||
+        r.file.includes('github-cache.json')
+      ) return;
       if (!counts[r.file]) counts[r.file] = { loc: 0, type: r.type };
       counts[r.file].loc += (r.added || 0);
     });

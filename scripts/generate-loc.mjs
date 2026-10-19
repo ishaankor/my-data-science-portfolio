@@ -14,6 +14,7 @@ try {
   delete cleanEnv.GIT_OBJECT_DIRECTORY;
   delete cleanEnv.GIT_ALTERNATE_OBJECT_DIRECTORIES;
   delete cleanEnv.GIT_PREFIX;
+  delete cleanEnv.GIT_EXEC_PATH;
 
   const gitLogOutput = execSync(
     'git log --pretty=format:"COMMIT_HEADER|%h|%an|%ae|%ad|%s" --date=iso-strict --numstat',
@@ -99,9 +100,14 @@ try {
           filePath.includes('.next') ||
           filePath.includes('out/') ||
           filePath.includes('loc.csv') ||
+          filePath.includes('loc-static.json') ||
+          filePath.includes('github-cache.json') ||
           filePath.endsWith('.avif') ||
           filePath.endsWith('.png') ||
-          filePath.endsWith('.jpg')
+          filePath.endsWith('.jpg') ||
+          filePath.endsWith('.jpeg') ||
+          filePath.endsWith('.webp') ||
+          filePath.endsWith('.ico')
         ) {
           return;
         }
@@ -131,11 +137,10 @@ try {
     } catch (e) {}
   }
 
-  // SAFEGUARD FOR CLOUDFLARE PAGES & CI SHALLOW CLONES (--depth 1):
-  // Cloudflare Pages clones repositories with a shallow depth 1.
-  // If git log yields 0 or fewer records than the committed loc-static.json, preserve the full committed dataset!
-  if (existingCount > 0 && jsonRecords.length < Math.min(existingCount, 50)) {
-    console.log(`⚠️ Shallow clone detected on build server (git log produced ${jsonRecords.length} records, committed dataset has ${existingCount}). Preserving full committed loc-static.json!`);
+  // SAFEGUARD FOR CLOUDFLARE PAGES, CI SHALLOW CLONES (--depth 1), OR ISOLATED GIT HOOKS:
+  // If git log yields fewer than 50 records while existing dataset has 50+, preserve existing dataset!
+  if (existingCount >= 50 && jsonRecords.length < 50) {
+    console.log(`⚠️ Incomplete git log traversal detected (${jsonRecords.length} records generated, committed dataset has ${existingCount}). Preserving full committed loc-static.json!`);
   } else {
     const csvContent = csvRows.join('\n');
     fs.writeFileSync(publicCsvPath, csvContent, 'utf8');

@@ -42,20 +42,6 @@
     "message": "chore: update build assets and GitHub cache data"
   },
   {
-    "file": "data/github-cache.json",
-    "added": 140,
-    "deleted": 170,
-    "type": "json",
-    "commit": "1d61e53",
-    "author": "Ishaan Kor",
-    "date": "2026-10-18",
-    "time": "21:53:55",
-    "timezone": "-07:00",
-    "datetime": "2026-10-18T21:53:55-07:00",
-    "depth": 1,
-    "message": "chore: update build assets and GitHub cache data"
-  },
-  {
     "file": "hooks/useGitHubData.ts",
     "added": 132,
     "deleted": 0,
@@ -123,20 +109,6 @@
     "timezone": "-07:00",
     "datetime": "2026-10-18T21:24:26-07:00",
     "depth": 2,
-    "message": "feat: add dynamic developer status and session snapshot caching to GitHub dashboard"
-  },
-  {
-    "file": "data/github-cache.json",
-    "added": 1,
-    "deleted": 1,
-    "type": "json",
-    "commit": "e30001a",
-    "author": "Ishaan Kor",
-    "date": "2026-10-18",
-    "time": "21:24:26",
-    "timezone": "-07:00",
-    "datetime": "2026-10-18T21:24:26-07:00",
-    "depth": 1,
     "message": "feat: add dynamic developer status and session snapshot caching to GitHub dashboard"
   },
   {
@@ -350,20 +322,6 @@
     "message": "refactor: update GitHub API endpoint URL from github-meta-fetcher to personal-meta-fetcher"
   },
   {
-    "file": "data/github-cache.json",
-    "added": 48,
-    "deleted": 38,
-    "type": "json",
-    "commit": "c05157b",
-    "author": "Ishaan Kor",
-    "date": "2026-10-11",
-    "time": "18:13:54",
-    "timezone": "-07:00",
-    "datetime": "2026-10-11T18:13:54-07:00",
-    "depth": 1,
-    "message": "refactor: update GitHub API endpoint URL from github-meta-fetcher to personal-meta-fetcher"
-  },
-  {
     "file": "hooks/useGitHubData.ts",
     "added": 1,
     "deleted": 1,
@@ -501,20 +459,6 @@
     "timezone": "-07:00",
     "datetime": "2026-10-04T00:34:06-07:00",
     "depth": 2,
-    "message": "build: update static site output and assets"
-  },
-  {
-    "file": "data/github-cache.json",
-    "added": 2,
-    "deleted": 2,
-    "type": "json",
-    "commit": "56d5ccb",
-    "author": "Ishaan Kor",
-    "date": "2026-10-04",
-    "time": "00:34:06",
-    "timezone": "-07:00",
-    "datetime": "2026-10-04T00:34:06-07:00",
-    "depth": 1,
     "message": "build: update static site output and assets"
   },
   {
@@ -714,20 +658,6 @@
     "message": "feat: update portfolio components, data, and build output files"
   },
   {
-    "file": "data/github-cache.json",
-    "added": 79,
-    "deleted": 69,
-    "type": "json",
-    "commit": "03d17f2",
-    "author": "Ishaan Kor",
-    "date": "2026-10-03",
-    "time": "23:59:04",
-    "timezone": "-07:00",
-    "datetime": "2026-10-03T23:59:04-07:00",
-    "depth": 1,
-    "message": "feat: update portfolio components, data, and build output files"
-  },
-  {
     "file": "data/portfolio.ts",
     "added": 1,
     "deleted": 1,
@@ -823,20 +753,6 @@
     "timezone": "-07:00",
     "datetime": "2026-10-01T14:28:39-07:00",
     "depth": 1,
-    "message": "feat: add interactive avatar animations with synchronized ripples and update project favicons"
-  },
-  {
-    "file": "public/favicons/favicon.ico",
-    "added": 0,
-    "deleted": 0,
-    "type": "ico",
-    "commit": "8ba78ee",
-    "author": "Ishaan Kor",
-    "date": "2026-10-01",
-    "time": "14:28:39",
-    "timezone": "-07:00",
-    "datetime": "2026-10-01T14:28:39-07:00",
-    "depth": 2,
     "message": "feat: add interactive avatar animations with synchronized ripples and update project favicons"
   },
   {
@@ -1092,20 +1008,6 @@
     "message": "feat: add ProjectsHeroHUD component and update portfolio components and data"
   },
   {
-    "file": "data/github-cache.json",
-    "added": 73,
-    "deleted": 58,
-    "type": "json",
-    "commit": "9b3c1cd",
-    "author": "Ishaan Kor",
-    "date": "2026-10-01",
-    "time": "12:13:26",
-    "timezone": "-07:00",
-    "datetime": "2026-10-01T12:13:26-07:00",
-    "depth": 1,
-    "message": "feat: add ProjectsHeroHUD component and update portfolio components and data"
-  },
-  {
     "file": "data/portfolio.ts",
     "added": 1,
     "deleted": 1,
@@ -1288,34 +1190,6 @@
     "message": "feat: add project showcases, optimize assets, and update portfolio data"
   },
   {
-    "file": "data/github-cache.json",
-    "added": 73,
-    "deleted": 98,
-    "type": "json",
-    "commit": "1ff11ea",
-    "author": "Ishaan Kor",
-    "date": "2026-09-28",
-    "time": "20:05:28",
-    "timezone": "-07:00",
-    "datetime": "2026-09-28T20:05:28-07:00",
-    "depth": 1,
-    "message": "feat: add project showcases, optimize assets, and update portfolio data"
-  },
-  {
-    "file": "data/loc-static.json",
-    "added": 126,
-    "deleted": 0,
-    "type": "json",
-    "commit": "1ff11ea",
-    "author": "Ishaan Kor",
-    "date": "2026-09-28",
-    "time": "20:05:28",
-    "timezone": "-07:00",
-    "datetime": "2026-09-28T20:05:28-07:00",
-    "depth": 1,
-    "message": "feat: add project showcases, optimize assets, and update portfolio data"
-  },
-  {
     "file": "data/portfolio.ts",
     "added": 19,
     "deleted": 18,
@@ -1327,48 +1201,6 @@
     "timezone": "-07:00",
     "datetime": "2026-09-28T20:05:28-07:00",
     "depth": 1,
-    "message": "feat: add project showcases, optimize assets, and update portfolio data"
-  },
-  {
-    "file": "public/images/ishaanbot-animated-landing.webp",
-    "added": 0,
-    "deleted": 0,
-    "type": "webp",
-    "commit": "1ff11ea",
-    "author": "Ishaan Kor",
-    "date": "2026-09-28",
-    "time": "20:05:28",
-    "timezone": "-07:00",
-    "datetime": "2026-09-28T20:05:28-07:00",
-    "depth": 2,
-    "message": "feat: add project showcases, optimize assets, and update portfolio data"
-  },
-  {
-    "file": "public/images/ishaanbot-landing-animated.webp",
-    "added": 0,
-    "deleted": 0,
-    "type": "webp",
-    "commit": "1ff11ea",
-    "author": "Ishaan Kor",
-    "date": "2026-09-28",
-    "time": "20:05:28",
-    "timezone": "-07:00",
-    "datetime": "2026-09-28T20:05:28-07:00",
-    "depth": 2,
-    "message": "feat: add project showcases, optimize assets, and update portfolio data"
-  },
-  {
-    "file": "public/images/rigscouter-landing-animated.webp",
-    "added": 0,
-    "deleted": 0,
-    "type": "webp",
-    "commit": "1ff11ea",
-    "author": "Ishaan Kor",
-    "date": "2026-09-28",
-    "time": "20:05:28",
-    "timezone": "-07:00",
-    "datetime": "2026-09-28T20:05:28-07:00",
-    "depth": 2,
     "message": "feat: add project showcases, optimize assets, and update portfolio data"
   },
   {
@@ -1568,20 +1400,6 @@
     "message": "feat: add project assets and update portfolio components and data"
   },
   {
-    "file": "data/github-cache.json",
-    "added": 132,
-    "deleted": 112,
-    "type": "json",
-    "commit": "843ffa1",
-    "author": "Ishaan Kor",
-    "date": "2026-09-27",
-    "time": "03:19:16",
-    "timezone": "-07:00",
-    "datetime": "2026-09-27T03:19:16-07:00",
-    "depth": 1,
-    "message": "feat: add project assets and update portfolio components and data"
-  },
-  {
     "file": "data/portfolio.ts",
     "added": 59,
     "deleted": 32,
@@ -1656,20 +1474,6 @@
     "added": 3,
     "deleted": 0,
     "type": "svg",
-    "commit": "843ffa1",
-    "author": "Ishaan Kor",
-    "date": "2026-09-27",
-    "time": "03:19:16",
-    "timezone": "-07:00",
-    "datetime": "2026-09-27T03:19:16-07:00",
-    "depth": 2,
-    "message": "feat: add project assets and update portfolio components and data"
-  },
-  {
-    "file": "public/favicons/mcp-favicon.ico",
-    "added": 1,
-    "deleted": 0,
-    "type": "ico",
     "commit": "843ffa1",
     "author": "Ishaan Kor",
     "date": "2026-09-27",
@@ -1848,20 +1652,6 @@
     "message": "feat: update portfolio components, data, and configuration"
   },
   {
-    "file": "data/github-cache.json",
-    "added": 104,
-    "deleted": 129,
-    "type": "json",
-    "commit": "4001383",
-    "author": "Ishaan Kor",
-    "date": "2026-09-16",
-    "time": "12:47:01",
-    "timezone": "-07:00",
-    "datetime": "2026-09-16T12:47:01-07:00",
-    "depth": 1,
-    "message": "feat: update portfolio components, data, and configuration"
-  },
-  {
     "file": "data/portfolio.ts",
     "added": 6,
     "deleted": 0,
@@ -1894,20 +1684,6 @@
     "added": 0,
     "deleted": 0,
     "type": "code",
-    "commit": "4001383",
-    "author": "Ishaan Kor",
-    "date": "2026-09-16",
-    "time": "12:47:01",
-    "timezone": "-07:00",
-    "datetime": "2026-09-16T12:47:01-07:00",
-    "depth": 1,
-    "message": "feat: update portfolio components, data, and configuration"
-  },
-  {
-    "file": "public/favicon.ico",
-    "added": 0,
-    "deleted": 0,
-    "type": "ico",
     "commit": "4001383",
     "author": "Ishaan Kor",
     "date": "2026-09-16",
@@ -2016,20 +1792,6 @@
     "message": "feat: update experience components and portfolio data"
   },
   {
-    "file": "data/github-cache.json",
-    "added": 77,
-    "deleted": 47,
-    "type": "json",
-    "commit": "c7b105c",
-    "author": "Ishaan Kor",
-    "date": "2026-09-11",
-    "time": "16:28:16",
-    "timezone": "-07:00",
-    "datetime": "2026-09-11T16:28:16-07:00",
-    "depth": 1,
-    "message": "feat: update experience components and portfolio data"
-  },
-  {
     "file": "data/portfolio.ts",
     "added": 1,
     "deleted": 54,
@@ -2100,20 +1862,6 @@
     "message": "feat: add work page and update project layout with refreshed build artifacts"
   },
   {
-    "file": "data/github-cache.json",
-    "added": 18,
-    "deleted": 18,
-    "type": "json",
-    "commit": "ab3b8d7",
-    "author": "Ishaan Kor",
-    "date": "2026-09-07",
-    "time": "15:30:48",
-    "timezone": "-07:00",
-    "datetime": "2026-09-07T15:30:48-07:00",
-    "depth": 1,
-    "message": "feat: add work page and update project layout with refreshed build artifacts"
-  },
-  {
     "file": "components/meta/RepositoryTimeline.tsx",
     "added": 33,
     "deleted": 2,
@@ -2139,20 +1887,6 @@
     "timezone": "-07:00",
     "datetime": "2026-09-07T13:52:04-07:00",
     "depth": 2,
-    "message": "feat: update portfolio data and refresh static build artifacts for core pages"
-  },
-  {
-    "file": "data/github-cache.json",
-    "added": 26,
-    "deleted": 26,
-    "type": "json",
-    "commit": "326fa6e",
-    "author": "Ishaan Kor",
-    "date": "2026-09-07",
-    "time": "13:52:04",
-    "timezone": "-07:00",
-    "datetime": "2026-09-07T13:52:04-07:00",
-    "depth": 1,
     "message": "feat: update portfolio data and refresh static build artifacts for core pages"
   },
   {
@@ -2195,20 +1929,6 @@
     "timezone": "-07:00",
     "datetime": "2026-09-07T12:29:48-07:00",
     "depth": 2,
-    "message": "feat: implement GitHub data fetching hook and integrate enhanced analytics dashboard components"
-  },
-  {
-    "file": "data/github-cache.json",
-    "added": 96,
-    "deleted": 96,
-    "type": "json",
-    "commit": "4094fc5",
-    "author": "Ishaan Kor",
-    "date": "2026-09-07",
-    "time": "12:29:48",
-    "timezone": "-07:00",
-    "datetime": "2026-09-07T12:29:48-07:00",
-    "depth": 1,
     "message": "feat: implement GitHub data fetching hook and integrate enhanced analytics dashboard components"
   },
   {
@@ -2321,20 +2041,6 @@
     "timezone": "-07:00",
     "datetime": "2026-09-02T18:59:47-07:00",
     "depth": 2,
-    "message": "feat: implement GitHub data fetching hook and integrate enhanced analytics dashboard components"
-  },
-  {
-    "file": "data/github-cache.json",
-    "added": 19,
-    "deleted": 19,
-    "type": "json",
-    "commit": "dfed65e",
-    "author": "Ishaan Kor",
-    "date": "2026-09-02",
-    "time": "18:59:47",
-    "timezone": "-07:00",
-    "datetime": "2026-09-02T18:59:47-07:00",
-    "depth": 1,
     "message": "feat: implement GitHub data fetching hook and integrate enhanced analytics dashboard components"
   },
   {
@@ -2478,20 +2184,6 @@
     "message": "refactor: update project components and refresh static build assets for the portfolio site."
   },
   {
-    "file": "data/github-cache.json",
-    "added": 22,
-    "deleted": 17,
-    "type": "json",
-    "commit": "7d34cb0",
-    "author": "Ishaan Kor",
-    "date": "2026-09-02",
-    "time": "00:40:46",
-    "timezone": "-07:00",
-    "datetime": "2026-09-02T00:40:46-07:00",
-    "depth": 1,
-    "message": "refactor: update project components and refresh static build assets for the portfolio site."
-  },
-  {
     "file": "components/experience/WorkHeroHUD.tsx",
     "added": 2,
     "deleted": 2,
@@ -2562,20 +2254,6 @@
     "message": "refactor: update portfolio data, project components, and rebuild static assets"
   },
   {
-    "file": "data/github-cache.json",
-    "added": 24,
-    "deleted": 34,
-    "type": "json",
-    "commit": "6075617",
-    "author": "Ishaan Kor",
-    "date": "2026-09-01",
-    "time": "16:13:32",
-    "timezone": "-07:00",
-    "datetime": "2026-09-01T16:13:32-07:00",
-    "depth": 1,
-    "message": "refactor: update portfolio data, project components, and rebuild static assets"
-  },
-  {
     "file": "data/portfolio.ts",
     "added": 30,
     "deleted": 33,
@@ -2643,20 +2321,6 @@
     "timezone": "-07:00",
     "datetime": "2026-09-01T12:16:43-07:00",
     "depth": 2,
-    "message": "feat: add Datafy AI project details and update repository metadata dashboards"
-  },
-  {
-    "file": "data/github-cache.json",
-    "added": 72,
-    "deleted": 57,
-    "type": "json",
-    "commit": "fafa1b6",
-    "author": "Ishaan Kor",
-    "date": "2026-09-01",
-    "time": "12:16:43",
-    "timezone": "-07:00",
-    "datetime": "2026-09-01T12:16:43-07:00",
-    "depth": 1,
     "message": "feat: add Datafy AI project details and update repository metadata dashboards"
   },
   {
@@ -2856,20 +2520,6 @@
     "message": "feat: update portfolio components, refresh project assets, and optimize repository data visualization"
   },
   {
-    "file": "data/github-cache.json",
-    "added": 32,
-    "deleted": 27,
-    "type": "json",
-    "commit": "12fd5c6",
-    "author": "Ishaan Kor",
-    "date": "2026-08-31",
-    "time": "23:34:06",
-    "timezone": "-07:00",
-    "datetime": "2026-08-31T23:34:06-07:00",
-    "depth": 1,
-    "message": "feat: update portfolio components, refresh project assets, and optimize repository data visualization"
-  },
-  {
     "file": "data/portfolio.ts",
     "added": 8,
     "deleted": 8,
@@ -2881,20 +2531,6 @@
     "timezone": "-07:00",
     "datetime": "2026-08-31T23:34:06-07:00",
     "depth": 1,
-    "message": "feat: update portfolio components, refresh project assets, and optimize repository data visualization"
-  },
-  {
-    "file": "public/images/transformi-photo.jpeg",
-    "added": 0,
-    "deleted": 0,
-    "type": "jpeg",
-    "commit": "12fd5c6",
-    "author": "Ishaan Kor",
-    "date": "2026-08-31",
-    "time": "23:34:06",
-    "timezone": "-07:00",
-    "datetime": "2026-08-31T23:34:06-07:00",
-    "depth": 2,
     "message": "feat: update portfolio components, refresh project assets, and optimize repository data visualization"
   },
   {
@@ -2965,20 +2601,6 @@
     "timezone": "-07:00",
     "datetime": "2026-08-30T02:30:47-07:00",
     "depth": 2,
-    "message": "feat: add interactive Hero components and update portfolio data and assets"
-  },
-  {
-    "file": "data/github-cache.json",
-    "added": 28,
-    "deleted": 58,
-    "type": "json",
-    "commit": "828e7e8",
-    "author": "Ishaan Kor",
-    "date": "2026-08-30",
-    "time": "02:30:47",
-    "timezone": "-07:00",
-    "datetime": "2026-08-30T02:30:47-07:00",
-    "depth": 1,
     "message": "feat: add interactive Hero components and update portfolio data and assets"
   },
   {
@@ -3108,20 +2730,6 @@
     "message": "feat: add RepositoryConstellation and DeveloperHabitsMatrix components with associated build updates"
   },
   {
-    "file": "data/github-cache.json",
-    "added": 58,
-    "deleted": 58,
-    "type": "json",
-    "commit": "5f55c97",
-    "author": "Ishaan Kor",
-    "date": "2026-08-29",
-    "time": "22:24:38",
-    "timezone": "-07:00",
-    "datetime": "2026-08-29T22:24:38-07:00",
-    "depth": 1,
-    "message": "feat: add RepositoryConstellation and DeveloperHabitsMatrix components with associated build updates"
-  },
-  {
     "file": "components/meta/CodebaseEvolutionSuite.tsx",
     "added": 10,
     "deleted": 2,
@@ -3136,20 +2744,6 @@
     "message": "build: update Next.js production build assets and refresh cached project data"
   },
   {
-    "file": "data/github-cache.json",
-    "added": 15,
-    "deleted": 15,
-    "type": "json",
-    "commit": "daea783",
-    "author": "Ishaan Kor",
-    "date": "2026-08-29",
-    "time": "03:09:55",
-    "timezone": "-07:00",
-    "datetime": "2026-08-29T03:09:55-07:00",
-    "depth": 1,
-    "message": "build: update Next.js production build assets and refresh cached project data"
-  },
-  {
     "file": "components/meta/CodebaseEvolutionSuite.tsx",
     "added": 2,
     "deleted": 2,
@@ -3161,20 +2755,6 @@
     "timezone": "-07:00",
     "datetime": "2026-08-29T03:00:44-07:00",
     "depth": 2,
-    "message": "build: update Codebase Matrix and refresh build artifacts"
-  },
-  {
-    "file": "data/github-cache.json",
-    "added": 80,
-    "deleted": 80,
-    "type": "json",
-    "commit": "e2faff8",
-    "author": "Ishaan Kor",
-    "date": "2026-08-29",
-    "time": "03:00:44",
-    "timezone": "-07:00",
-    "datetime": "2026-08-29T03:00:44-07:00",
-    "depth": 1,
     "message": "build: update Codebase Matrix and refresh build artifacts"
   },
   {
@@ -3234,34 +2814,6 @@
     "message": "feat: group repository matrix and pie chart by created_at date"
   },
   {
-    "file": "data/github-cache.json",
-    "added": 51,
-    "deleted": 33,
-    "type": "json",
-    "commit": "803aeff",
-    "author": "Ishaan Kor",
-    "date": "2026-08-29",
-    "time": "01:23:47",
-    "timezone": "-07:00",
-    "datetime": "2026-08-29T01:23:47-07:00",
-    "depth": 1,
-    "message": "feat: group repository matrix and pie chart by created_at date"
-  },
-  {
-    "file": "data/loc-static.json",
-    "added": 42,
-    "deleted": 0,
-    "type": "json",
-    "commit": "803aeff",
-    "author": "Ishaan Kor",
-    "date": "2026-08-29",
-    "time": "01:23:47",
-    "timezone": "-07:00",
-    "datetime": "2026-08-29T01:23:47-07:00",
-    "depth": 1,
-    "message": "feat: group repository matrix and pie chart by created_at date"
-  },
-  {
     "file": "scripts/fetch-github-cache.mjs",
     "added": 27,
     "deleted": 3,
@@ -3287,20 +2839,6 @@
     "timezone": "-07:00",
     "datetime": "2026-08-29T01:18:40-07:00",
     "depth": 2,
-    "message": "feat: enable live GitHub sync and dynamic pie chart updates for projects"
-  },
-  {
-    "file": "data/github-cache.json",
-    "added": 2156,
-    "deleted": 129,
-    "type": "json",
-    "commit": "3c02778",
-    "author": "Ishaan Kor",
-    "date": "2026-08-29",
-    "time": "01:18:40",
-    "timezone": "-07:00",
-    "datetime": "2026-08-29T01:18:40-07:00",
-    "depth": 1,
     "message": "feat: enable live GitHub sync and dynamic pie chart updates for projects"
   },
   {
@@ -3542,20 +3080,6 @@
     "message": "feat: add RepositoryMatrix component and update projects showcase and meta dashboard"
   },
   {
-    "file": "data/loc-static.json",
-    "added": 112,
-    "deleted": 0,
-    "type": "json",
-    "commit": "d6257e9",
-    "author": "Ishaan Kor",
-    "date": "2026-07-31",
-    "time": "01:34:09",
-    "timezone": "-07:00",
-    "datetime": "2026-07-31T01:34:09-07:00",
-    "depth": 1,
-    "message": "debug: testing telementry bug"
-  },
-  {
     "file": "scripts/generate-loc.mjs",
     "added": 63,
     "deleted": 38,
@@ -3696,20 +3220,6 @@
     "message": "build: update portfolio build artifacts and sync daily lines of code data"
   },
   {
-    "file": "data/loc-static.json",
-    "added": 28,
-    "deleted": 0,
-    "type": "json",
-    "commit": "cb8d2ba",
-    "author": "Ishaan Kor",
-    "date": "2026-07-30",
-    "time": "19:55:11",
-    "timezone": "-07:00",
-    "datetime": "2026-07-30T19:55:11-07:00",
-    "depth": 1,
-    "message": "build: update portfolio build artifacts and sync daily lines of code data"
-  },
-  {
     "file": "components/meta/CodebaseEvolutionSuite.tsx",
     "added": 8,
     "deleted": 9,
@@ -3724,20 +3234,6 @@
     "message": "build: rebuild and update static assets for portfolio application"
   },
   {
-    "file": "data/loc-static.json",
-    "added": 42,
-    "deleted": 0,
-    "type": "json",
-    "commit": "9d50696",
-    "author": "Ishaan Kor",
-    "date": "2026-07-30",
-    "time": "19:43:58",
-    "timezone": "-07:00",
-    "datetime": "2026-07-30T19:43:58-07:00",
-    "depth": 1,
-    "message": "build: rebuild and update static assets for portfolio application"
-  },
-  {
     "file": "components/meta/CodebaseEvolutionSuite.tsx",
     "added": 8,
     "deleted": 4,
@@ -3749,20 +3245,6 @@
     "timezone": "-07:00",
     "datetime": "2026-07-30T16:32:12-07:00",
     "depth": 2,
-    "message": "refactor: update codebase evolution visualization and synchronize static data assets"
-  },
-  {
-    "file": "data/loc-static.json",
-    "added": 21,
-    "deleted": 7,
-    "type": "json",
-    "commit": "faebd44",
-    "author": "Ishaan Kor",
-    "date": "2026-07-30",
-    "time": "16:32:12",
-    "timezone": "-07:00",
-    "datetime": "2026-07-30T16:32:12-07:00",
-    "depth": 1,
     "message": "refactor: update codebase evolution visualization and synchronize static data assets"
   },
   {
@@ -3794,59 +3276,59 @@
     "message": "feat: update CodebaseEvolutionSuite and regenerate lines of code statistics"
   },
   {
-    "file": "data/loc-static.json",
-    "added": 14,
+    "file": "repository",
+    "added": 0,
     "deleted": 0,
-    "type": "json",
+    "type": "git",
     "commit": "8bd005f",
     "author": "Ishaan Kor",
     "date": "2026-07-30",
     "time": "16:19:28",
     "timezone": "-07:00",
     "datetime": "2026-07-30T16:19:28-07:00",
-    "depth": 1,
+    "depth": 0,
     "message": "sd"
   },
   {
-    "file": "data/loc-static.json",
-    "added": 14,
+    "file": "repository",
+    "added": 0,
     "deleted": 0,
-    "type": "json",
+    "type": "git",
     "commit": "424f501",
     "author": "Ishaan Kor",
     "date": "2026-07-30",
     "time": "16:19:23",
     "timezone": "-07:00",
     "datetime": "2026-07-30T16:19:23-07:00",
-    "depth": 1,
+    "depth": 0,
     "message": "feat: update line-of-code metadata with latest synchronization entry"
   },
   {
-    "file": "data/loc-static.json",
-    "added": 14,
+    "file": "repository",
+    "added": 0,
     "deleted": 0,
-    "type": "json",
+    "type": "git",
     "commit": "1c665ee",
     "author": "Ishaan Kor",
     "date": "2026-07-30",
     "time": "16:18:39",
     "timezone": "-07:00",
     "datetime": "2026-07-30T16:18:39-07:00",
-    "depth": 1,
+    "depth": 0,
     "message": "sync: uploading loc data"
   },
   {
-    "file": "data/loc-static.json",
-    "added": 56,
+    "file": "repository",
+    "added": 0,
     "deleted": 0,
-    "type": "json",
+    "type": "git",
     "commit": "cff19bd",
     "author": "Ishaan Kor",
     "date": "2026-07-30",
     "time": "16:18:36",
     "timezone": "-07:00",
     "datetime": "2026-07-30T16:18:36-07:00",
-    "depth": 1,
+    "depth": 0,
     "message": "feat: integrate LOC generation script and update codebase evolution metadata"
   },
   {
@@ -3875,20 +3357,6 @@
     "timezone": "-07:00",
     "datetime": "2026-07-30T16:14:53-07:00",
     "depth": 2,
-    "message": "feat: integrate LOC generation script and update static site assets"
-  },
-  {
-    "file": "data/loc-static.json",
-    "added": 3404,
-    "deleted": 0,
-    "type": "json",
-    "commit": "e428c5f",
-    "author": "Ishaan Kor",
-    "date": "2026-07-30",
-    "time": "16:14:53",
-    "timezone": "-07:00",
-    "datetime": "2026-07-30T16:14:53-07:00",
-    "depth": 1,
     "message": "feat: integrate LOC generation script and update static site assets"
   },
   {
@@ -4522,20 +3990,6 @@
     "message": "refactor: improving the visibility of the heatmap"
   },
   {
-    "file": "data/github-cache.json",
-    "added": 1,
-    "deleted": 1,
-    "type": "json",
-    "commit": "94bc7aa",
-    "author": "Ishaan Kor",
-    "date": "2026-07-29",
-    "time": "18:40:13",
-    "timezone": "-07:00",
-    "datetime": "2026-07-29T18:40:13-07:00",
-    "depth": 1,
-    "message": "refactor: improving the visibility of the heatmap"
-  },
-  {
     "file": "app/api/contact/route.ts",
     "added": 0,
     "deleted": 4,
@@ -4662,20 +4116,6 @@
     "message": "feat: update project pages and rewire meta fetch"
   },
   {
-    "file": "data/github-cache.json",
-    "added": 26,
-    "deleted": 17,
-    "type": "json",
-    "commit": "ac82808",
-    "author": "Ishaan Kor",
-    "date": "2026-07-29",
-    "time": "17:55:35",
-    "timezone": "-07:00",
-    "datetime": "2026-07-29T17:55:35-07:00",
-    "depth": 1,
-    "message": "feat: update project pages and rewire meta fetch"
-  },
-  {
     "file": "next.config.mjs",
     "added": 0,
     "deleted": 1,
@@ -4732,20 +4172,6 @@
     "message": "feat: update GitHub meta dashboard"
   },
   {
-    "file": "data/github-cache.json",
-    "added": 16,
-    "deleted": 16,
-    "type": "json",
-    "commit": "cd5df1b",
-    "author": "Ishaan Kor",
-    "date": "2026-07-29",
-    "time": "15:15:50",
-    "timezone": "-07:00",
-    "datetime": "2026-07-29T15:15:50-07:00",
-    "depth": 1,
-    "message": "feat: update GitHub meta dashboard"
-  },
-  {
     "file": "components/analytics/GitHubAnalytics.tsx",
     "added": 3,
     "deleted": 20,
@@ -4774,20 +4200,6 @@
     "message": "refactor: update analytics and metadata dashboard components"
   },
   {
-    "file": "data/github-cache.json",
-    "added": 15,
-    "deleted": 15,
-    "type": "json",
-    "commit": "a3a9e3a",
-    "author": "Ishaan Kor",
-    "date": "2026-07-29",
-    "time": "13:46:01",
-    "timezone": "-07:00",
-    "datetime": "2026-07-29T13:46:01-07:00",
-    "depth": 1,
-    "message": "refactor: update analytics and metadata dashboard components"
-  },
-  {
     "file": "components/meta/GitHubMetaDashboard.tsx",
     "added": 78,
     "deleted": 34,
@@ -4799,20 +4211,6 @@
     "timezone": "-07:00",
     "datetime": "2026-07-29T13:04:49-07:00",
     "depth": 2,
-    "message": "build: update metadata dashboard related to the heatmap"
-  },
-  {
-    "file": "data/github-cache.json",
-    "added": 14,
-    "deleted": 14,
-    "type": "json",
-    "commit": "992efa2",
-    "author": "Ishaan Kor",
-    "date": "2026-07-29",
-    "time": "13:04:49",
-    "timezone": "-07:00",
-    "datetime": "2026-07-29T13:04:49-07:00",
-    "depth": 1,
     "message": "build: update metadata dashboard related to the heatmap"
   },
   {
@@ -4872,20 +4270,6 @@
     "message": "feat: implement GitHub API route and update build configuration"
   },
   {
-    "file": "data/github-cache.json",
-    "added": 232,
-    "deleted": 45,
-    "type": "json",
-    "commit": "3832a79",
-    "author": "Ishaan Kor",
-    "date": "2026-07-29",
-    "time": "12:57:21",
-    "timezone": "-07:00",
-    "datetime": "2026-07-29T12:57:21-07:00",
-    "depth": 1,
-    "message": "feat: implement GitHub API route and update build configuration"
-  },
-  {
     "file": "scripts/fetch-github-cache.mjs",
     "added": 94,
     "deleted": 12,
@@ -4911,20 +4295,6 @@
     "timezone": "-07:00",
     "datetime": "2026-07-28T22:01:40-07:00",
     "depth": 2,
-    "message": "chore: rebuild  update Next.js production build"
-  },
-  {
-    "file": "data/github-cache.json",
-    "added": 78,
-    "deleted": 0,
-    "type": "json",
-    "commit": "2073195",
-    "author": "Ishaan Kor",
-    "date": "2026-07-28",
-    "time": "22:01:40",
-    "timezone": "-07:00",
-    "datetime": "2026-07-28T22:01:40-07:00",
-    "depth": 1,
     "message": "chore: rebuild  update Next.js production build"
   },
   {
