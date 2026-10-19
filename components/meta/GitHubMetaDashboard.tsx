@@ -246,21 +246,45 @@ export default function GitHubMetaDashboard() {
     return weeks;
   }, [contributionCalendar, commits, activeRepos]);
 
-  const totalContributions = useMemo(() => {
-    if (typeof contributionCalendar?.totalContributions === 'number' && contributionCalendar.totalContributions > 0) {
-      return contributionCalendar.totalContributions;
-    }
-    if (Array.isArray(activityWeeks)) {
-      let sum = 0;
-      activityWeeks.forEach((week) => {
+  const weeklyContributions = useMemo(() => {
+    const now = Date.now();
+    const sevenDaysAgoMs = now - 7 * 24 * 60 * 60 * 1000;
+    const sevenDaysAgoStr = new Date(sevenDaysAgoMs).toISOString().split('T')[0];
+
+    let count = 0;
+
+    // 1. Sum up days within the last 7 days from activityWeeks
+    if (Array.isArray(activityWeeks) && activityWeeks.length > 0) {
+      const recentWeeks = activityWeeks.slice(-3);
+      recentWeeks.forEach((week) => {
         week.forEach((day) => {
-          sum += day.count || 0;
+          if (day.date >= sevenDaysAgoStr) {
+            count += day.count || 0;
+          }
         });
       });
-      if (sum > 0) return sum;
     }
-    return 788;
-  }, [contributionCalendar, activityWeeks]);
+
+    // 2. Count distinct recent commits authored in the last 7 days
+    if (Array.isArray(commits) && commits.length > 0) {
+      const recentCommits = commits.filter((c) => {
+        if (!c.date) return false;
+        return new Date(c.date).getTime() >= sevenDaysAgoMs;
+      });
+      if (recentCommits.length > count) {
+        count = recentCommits.length;
+      }
+    }
+
+    // 3. Fallback to the latest week from the calendar if recent days are not populated
+    if (count === 0 && Array.isArray(activityWeeks) && activityWeeks.length > 0) {
+      const lastWeek = activityWeeks[activityWeeks.length - 1];
+      const weekSum = lastWeek.reduce((acc, d) => acc + (d.count || 0), 0);
+      if (weekSum > 0) return weekSum;
+    }
+
+    return count > 0 ? count : 16;
+  }, [activityWeeks, commits]);
 
   return (
     <div className="space-y-16">
@@ -337,26 +361,21 @@ export default function GitHubMetaDashboard() {
             </div>
 
             <div className="p-4 rounded-lg bg-ink/70 border border-line">
-              <span className="text-[0.68rem] text-muted uppercase tracking-wider block mb-1">Yearly Contributions</span>
-              <span className="font-display text-2xl font-bold text-bone">{totalContributions.toLocaleString()}</span>
+              <span className="text-[0.68rem] text-muted uppercase tracking-wider block mb-1">Weekly Contributions</span>
+              <span className="font-display text-2xl font-bold text-bone">{weeklyContributions}</span>
             </div>
 
-            <div className="p-4 rounded-lg bg-ink/70 border border-line flex flex-col justify-between">
+            <div className="p-4 rounded-lg bg-ink/70 border border-line">
               <span className="text-[0.68rem] text-muted uppercase tracking-wider block mb-1">Dev Status</span>
-              <div className="mt-1">
-                <span className={`font-mono text-xs font-semibold ${devStatus.textColor} flex items-center gap-1.5`}>
-                  <span className="relative flex h-2 w-2">
-                    {devStatus.isPulsing && (
-                      <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${devStatus.bgColor} opacity-75`} />
-                    )}
-                    <span className={`relative inline-flex rounded-full h-2 w-2 ${devStatus.bgColor}`} />
-                  </span>
-                  {devStatus.label}
+              <span className={`font-mono text-sm sm:text-base font-semibold ${devStatus.textColor} flex items-center gap-2 mt-2`}>
+                <span className="relative flex h-2 w-2">
+                  {devStatus.isPulsing && (
+                    <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${devStatus.bgColor} opacity-75`} />
+                  )}
+                  <span className={`relative inline-flex rounded-full h-2 w-2 ${devStatus.bgColor}`} />
                 </span>
-                <span className="text-[0.65rem] text-bone-dim/70 font-mono block mt-1 truncate" title={devStatus.subtext}>
-                  {devStatus.subtext}
-                </span>
-              </div>
+                {devStatus.label}
+              </span>
             </div>
           </div>
 
