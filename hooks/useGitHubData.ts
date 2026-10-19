@@ -66,7 +66,7 @@ const FALLBACK_USER: GitHubUser = (githubCache?.user || {
   html_url: `https://github.com/${portfolioData.githubUsername || 'ishaankor'}`,
   name: portfolioData.name || 'Ishaan Koradia',
   bio: portfolioData.bio || '',
-  public_repos: 23,
+  public_repos: 20,
   created_at: '2022-01-01T00:00:00Z',
 }) as unknown as GitHubUser;
 
@@ -98,8 +98,38 @@ export function formatTimeAgo(dateString?: string): string {
   return `${days}d ago`;
 }
 
+const SESSION_STORAGE_KEY = '__gh_live_telemetry_snapshot__';
+
+function loadSessionSnapshot(): GitHubTelemetryData | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    const raw = sessionStorage.getItem(SESSION_STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (parsed && parsed.data && typeof parsed.data === 'object') {
+      return parsed.data as GitHubTelemetryData;
+    }
+  } catch {
+    // Ignore storage parse error
+  }
+  return null;
+}
+
+function saveSessionSnapshot(data: GitHubTelemetryData) {
+  if (typeof window === 'undefined') return;
+  try {
+    sessionStorage.setItem(
+      SESSION_STORAGE_KEY,
+      JSON.stringify({ timestamp: Date.now(), data })
+    );
+  } catch {
+    // Ignore storage quota or access error
+  }
+}
+
 // Module-level singleton state to share across all mounting components
-let sharedData: GitHubTelemetryData = {
+const initialSessionSnapshot = loadSessionSnapshot();
+let sharedData: GitHubTelemetryData = initialSessionSnapshot || {
   user: FALLBACK_USER,
   repos: FALLBACK_REPOS,
   commits: FALLBACK_COMMITS,
@@ -109,7 +139,7 @@ let sharedData: GitHubTelemetryData = {
 };
 
 let inFlightPromise: Promise<GitHubTelemetryData | null> | null = null;
-let lastFetchTimestamp = 0;
+let lastFetchTimestamp = initialSessionSnapshot ? Date.now() : 0;
 const subscribers = new Set<() => void>();
 let pollingTimer: NodeJS.Timeout | null = null;
 const CLIENT_CACHE_TTL_MS = 60 * 1000; // 1 minute live stream polling window
@@ -155,7 +185,7 @@ async function fetchGitHubDataSingleton(force = false): Promise<GitHubTelemetryD
       let hasChanges = false;
       let commitsLoadedFromDedicated = false;
 
-      // 1. Process dedicated fast commit stream
+      // 1. Process dedicated fast commit stream (hydrates commits, user profile, and repos concurrently)
       if (commitsResult.status === 'fulfilled' && commitsResult.value.ok) {
         try {
           const commitsPayload = await commitsResult.value.json();
@@ -166,6 +196,14 @@ async function fetchGitHubDataSingleton(force = false): Promise<GitHubTelemetryD
             }));
             hasChanges = true;
             commitsLoadedFromDedicated = true;
+          }
+          if (commitsPayload.user && JSON.stringify(commitsPayload.user) !== JSON.stringify(sharedData.user)) {
+            sharedData.user = commitsPayload.user;
+            hasChanges = true;
+          }
+          if (Array.isArray(commitsPayload.repos) && commitsPayload.repos.length > 0) {
+            sharedData.repos = commitsPayload.repos;
+            hasChanges = true;
           }
         } catch {
           // commits payload parse error fallback
@@ -214,6 +252,8 @@ async function fetchGitHubDataSingleton(force = false): Promise<GitHubTelemetryD
       sharedData.lastPolledTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       lastFetchTimestamp = Date.now();
 
+      saveSessionSnapshot(sharedData);
+
       if (hasChanges) {
         notifySubscribers();
       }
@@ -230,9 +270,17 @@ async function fetchGitHubDataSingleton(force = false): Promise<GitHubTelemetryD
 }
 
 export function useGitHubData() {
-  const [data, setData] = useState<GitHubTelemetryData>(sharedData);
+  const [data, setData] = useState<GitHubTelemetryData>(() => {
+    return loadSessionSnapshot() || sharedData;
+  });
 
   useEffect(() => {
+    const sessionSnapshot = loadSessionSnapshot();
+    if (sessionSnapshot && !sharedData.lastPolledTime) {
+      sharedData = { ...sharedData, ...sessionSnapshot };
+      setData({ ...sharedData });
+    }
+
     const handleUpdate = () => {
       setData({ ...sharedData });
     };

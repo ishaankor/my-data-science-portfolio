@@ -1,4 +1,4 @@
-name: Codebase Telemetry (loc.csv) Auto-Update on Push
+name: Codebase Telemetry & GitHub Cache Auto-Update on Push
 
 on:
   push:
@@ -8,6 +8,7 @@ on:
       - 'public/loc.csv'
       - 'meta/loc.csv'
       - 'data/loc-static.json'
+      - 'data/github-cache.json'
   workflow_dispatch:
 
 jobs:
@@ -26,12 +27,14 @@ jobs:
         with:
           node-version: 20
 
-      - name: Regenerate loc.csv from git log
-        run: node scripts/generate-loc.mjs
+      - name: Regenerate Telemetry and Fetch Latest GitHub Cache
+        run: |
+          node scripts/generate-loc.mjs
+          node scripts/fetch-github-cache.mjs
 
-      - name: Commit and Push Updated loc.csv
+      - name: Commit and Push Updated Telemetry and Cache
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add public/loc.csv meta/loc.csv data/loc-static.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: auto-update telemetry loc data" && git push)
+          git add public/loc.csv meta/loc.csv data/loc-static.json data/github-cache.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: auto-update telemetry loc and github cache data [skip ci]" && git push)

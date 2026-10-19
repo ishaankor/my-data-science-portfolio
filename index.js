@@ -118,7 +118,10 @@ async function loadGitHubAnalytics(username) {
     const githubPanel = document.querySelector('#github-analytics');
     if (!githubPanel) return;
 
-    const backendData = await fetchJSON('https://personal-meta-fetcher.vercel.app/api/github');
+    let backendData = await fetchJSON('https://personal-meta-fetcher.vercel.app/api/commits');
+    if (!backendData || !backendData.repos || backendData.repos.length === 0) {
+        backendData = await fetchJSON('https://personal-meta-fetcher.vercel.app/api/github');
+    }
     const user = backendData?.user || {};
     const repos = Array.isArray(backendData?.repos) ? backendData.repos : [];
 

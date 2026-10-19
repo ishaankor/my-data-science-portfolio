@@ -35,8 +35,11 @@ const EXCLUDED_REPOS = new Set([
 async function syncLiveGitHubProjects() {
     try {
         let liveRepos = [];
-        const res = await fetch('https://personal-meta-fetcher.vercel.app/api/github');
-        if (res.ok) {
+        let res = await fetch('https://personal-meta-fetcher.vercel.app/api/commits').catch(() => null);
+        if (!res || !res.ok) {
+            res = await fetch('https://personal-meta-fetcher.vercel.app/api/github').catch(() => null);
+        }
+        if (res && res.ok) {
             const data = await res.json();
             if (Array.isArray(data.repos) && data.repos.length > 0) {
                 liveRepos = data.repos;
