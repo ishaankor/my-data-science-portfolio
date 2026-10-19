@@ -152,6 +152,8 @@ try {
       fs.mkdirSync(dataDir, { recursive: true });
     }
     fs.writeFileSync(staticJsonPath, JSON.stringify(jsonRecords, null, 2), 'utf8');
+    const publicJsonPath = path.join(process.cwd(), 'public', 'loc-static.json');
+    fs.writeFileSync(publicJsonPath, JSON.stringify(jsonRecords, null, 2), 'utf8');
     console.log(`✅ Generated loc.csv (${csvRows.length - 1} rows) and loc-static.json (${jsonRecords.length} records)!`);
   }
 } catch (err) {

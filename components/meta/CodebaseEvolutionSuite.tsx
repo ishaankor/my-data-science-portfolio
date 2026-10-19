@@ -65,35 +65,64 @@ function parseCsvLine(line: string): string[] {
   return result;
 }
 
-const rawRecords: LocRecord[] = Array.isArray(locStaticRecords)
+const staticRecords: LocRecord[] = Array.isArray(locStaticRecords)
   ? (locStaticRecords as LocRecord[])
   : (locStaticRecords as any)?.default && Array.isArray((locStaticRecords as any).default)
   ? ((locStaticRecords as any).default as LocRecord[])
   : [];
 
 export default function CodebaseEvolutionSuite() {
-  // Synchronous initial state from prebuilt static build JSON
-  const [records, setRecords] = useState<LocRecord[]>(rawRecords);
+  const [dynamicRecords, setDynamicRecords] = useState<LocRecord[] | null>(null);
   // sliderIndex === null means "Show ALL commits" (default max position)
   const [sliderIndex, setSliderIndex] = useState<number | null>(null);
   const [selectedCommit, setSelectedCommit] = useState<string | null>(null);
   const [hoveredCommit, setHoveredCommit] = useState<CommitMeta | null>(null);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc'); // 'desc' = Reverse (newest first by default)
 
-  // Keep records in sync if rawRecords changes (e.g. Next.js HMR or rebuild)
-  useEffect(() => {
-    if (Array.isArray(rawRecords) && rawRecords.length > 0) {
-      setRecords((prev) => (rawRecords.length !== prev.length ? rawRecords : prev));
+  // Prioritize dynamic records if it has at least as many unique commits as static records
+  const records = useMemo(() => {
+    if (dynamicRecords && dynamicRecords.length > 0) {
+      const dynamicCommits = new Set(dynamicRecords.map((r) => r.commit));
+      const staticCommits = new Set(staticRecords.map((r) => r.commit));
+      if (dynamicCommits.size >= staticCommits.size) {
+        return dynamicRecords;
+      }
     }
-  }, []);
+    return staticRecords;
+  }, [dynamicRecords]);
 
-  // Resilience: If records has <= 1 commit, fetch /loc.csv runtime asset to guarantee full historical telemetry
+  // Client-side telemetry rehydration from /api/loc, /loc-static.json, or /loc.csv
   useEffect(() => {
-    if (records.length <= 1) {
-      fetch('/loc.csv')
-        .then((res) => (res.ok ? res.text() : ''))
-        .then((csvText) => {
-          if (!csvText) return;
+    const loadTelemetry = async () => {
+      // 1. Try dynamic API route
+      try {
+        const res = await fetch('/api/loc', { cache: 'no-store' });
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data) && data.length > 5) {
+            setDynamicRecords(data);
+            return;
+          }
+        }
+      } catch {}
+
+      // 2. Try static public JSON
+      try {
+        const resStatic = await fetch('/loc-static.json', { cache: 'no-store' });
+        if (resStatic.ok) {
+          const data = await resStatic.json();
+          if (Array.isArray(data) && data.length > 5) {
+            setDynamicRecords(data);
+            return;
+          }
+        }
+      } catch {}
+
+      // 3. Fallback to /loc.csv
+      try {
+        const resCsv = await fetch('/loc.csv', { cache: 'no-store' });
+        if (resCsv.ok) {
+          const csvText = await resCsv.text();
           const lines = csvText.split('\n').filter(Boolean);
           if (lines.length > 5) {
             const parsed: LocRecord[] = [];
@@ -116,14 +145,16 @@ export default function CodebaseEvolutionSuite() {
                 });
               }
             }
-            if (parsed.length > records.length) {
-              setRecords(parsed);
+            if (parsed.length > 5) {
+              setDynamicRecords(parsed);
             }
           }
-        })
-        .catch(() => {});
-    }
-  }, [records.length]);
+        }
+      } catch {}
+    };
+
+    loadTelemetry();
+  }, []);
 
   // Clear hover tooltip and selection states when switching tabs or window blurs
   useEffect(() => {
@@ -207,6 +238,11 @@ export default function CodebaseEvolutionSuite() {
         return keyA.localeCompare(keyB);
       });
   }, [records]);
+
+  // Whenever commitList updates, default slider to showing ALL commits (max position)
+  useEffect(() => {
+    setSliderIndex(null);
+  }, [commitList.length]);
 
   const activeIndex = useMemo(() => {
     if (commitList.length === 0) return 0;
@@ -317,6 +353,15 @@ export default function CodebaseEvolutionSuite() {
                 <span className="text-ember font-bold px-2 py-0.5 rounded bg-ember/10 border border-ember/30">
                   {currentCommit?.date || '2025-01-11'}
                 </span>
+                {sliderIndex !== null && sliderIndex < commitList.length - 1 && (
+                  <button
+                    type="button"
+                    onClick={() => setSliderIndex(null)}
+                    className="text-[0.68rem] px-2 py-0.5 rounded bg-ember/20 hover:bg-ember/30 text-ember border border-ember/40 transition-colors cursor-pointer"
+                  >
+                    Show All ({commitList.length})
+                  </button>
+                )}
               </div>
             )}
           </div>
