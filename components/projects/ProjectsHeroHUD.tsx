@@ -5,8 +5,8 @@ import ScrollReveal from '@/components/ui/ScrollReveal';
 
 export default function ProjectsHeroHUD() {
   return (
-    <section className="relative pt-24 pb-14 overflow-hidden border-b border-line/60">
-      <div className="mx-auto w-full max-w-6xl px-6 sm:px-10 space-y-8">
+    <section className="relative pt-20 sm:pt-24 pb-10 sm:pb-14 overflow-hidden border-b border-line/60">
+      <div className="mx-auto w-full max-w-6xl px-6 sm:px-10 space-y-6 sm:space-y-8">
         
         {/* Top Telemetry Path */}
         <ScrollReveal direction="up" delay={0.05}>
@@ -21,11 +21,11 @@ export default function ProjectsHeroHUD() {
 
         {/* Main Title & Description */}
         <ScrollReveal direction="up" delay={0.1}>
-          <div className="space-y-4">
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-bone tracking-tight leading-[1.12]">
+          <div className="space-y-3 sm:space-y-4">
+            <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl font-black text-bone tracking-tight leading-[1.12]">
               Things I&apos;ve built, end to end.
             </h1>
-            <p className="text-bone-dim text-base sm:text-lg leading-relaxed max-w-2xl">
+            <p className="text-bone-dim text-sm sm:text-lg leading-relaxed max-w-2xl">
               Production AI applications, agentic platforms, and automation systems shipped and documented end-to-end.
             </p>
           </div>

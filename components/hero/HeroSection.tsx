@@ -38,43 +38,35 @@ export default function HeroSection() {
   }, [currentText, isDeleting, typingIndex]);
 
   return (
-    <section className="relative min-h-[92vh] pt-28 pb-16 flex items-center overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+    <section className="relative min-h-[85vh] lg:min-h-[92vh] pt-20 sm:pt-28 pb-12 sm:pb-16 flex items-center overflow-hidden">
+      <div className="max-w-6xl mx-auto px-6 sm:px-10 w-full relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* Left Column: Intro & Typewriter */}
-          <div className="lg:col-span-7 flex flex-col justify-center">
+          <div className="lg:col-span-7 flex flex-col justify-center text-center lg:text-left items-center lg:items-start">
             
-            {/* <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 font-mono text-xs text-emerald-400 w-fit mb-4 shadow-sm">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-              </span>
-              <span>Available for AI/ML Engineering</span>
-            </div> */}
-
-            <p className="font-mono text-base sm:text-lg lg:text-xl text-muted tracking-wide mb-3">
+            <p className="font-mono text-sm sm:text-lg lg:text-xl text-muted tracking-wide mb-2 sm:mb-3">
               Hi, I&apos;m <span className="text-bone font-bold">{portfolioData.name}</span>
             </p>
             
             {/* Typewriter Line */}
-            <h1 className="text-5xl sm:text-6xl lg:text-[4.25rem] xl:text-[4.75rem] font-extrabold tracking-tight text-bone leading-[1.08]">
-              <span>I am </span>
+            <h1 className="text-3xl sm:text-5xl lg:text-[4.25rem] xl:text-[4.75rem] font-extrabold tracking-tight text-bone leading-[1.12] sm:leading-[1.08] min-h-[2.4em] sm:min-h-[2.2em] lg:min-h-[1.15em] flex flex-wrap items-center justify-center lg:justify-start">
+              <span>I am&nbsp;</span>
               <span className="inline text-transparent bg-clip-text bg-gradient-to-r from-bone via-slate-200 to-sky-400">
                 {currentText}
               </span>
-              <span className="inline-block w-[5px] h-[0.8em] bg-sky-400 ml-2 animate-pulse align-middle" />
+              <span className="inline-block w-[3px] sm:w-[5px] h-[0.8em] bg-sky-400 ml-1.5 animate-pulse align-middle" />
             </h1>
 
-            <p className="text-xl sm:text-2xl lg:text-[1.55rem] text-bone-dim max-w-2xl leading-relaxed mt-5">
+            <p className="text-base sm:text-xl lg:text-[1.55rem] text-bone-dim max-w-2xl leading-relaxed mt-4 sm:mt-5 text-center lg:text-left">
               Building production AI models, autonomous agents, and interactive web tools.
             </p>
 
             {/* Action CTAs */}
-            <div className="mt-7 flex flex-wrap gap-4 items-center font-mono text-xs sm:text-sm">
+            <div className="mt-6 sm:mt-7 flex flex-wrap gap-3 sm:gap-4 items-center justify-center lg:justify-start font-mono text-xs sm:text-sm">
               <Link
                 href="/projects"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-sky-500/40 bg-sky-500/10 hover:bg-sky-500/20 text-bone font-semibold transition-colors shadow-sm"
+                className="inline-flex items-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl border border-sky-500/40 bg-sky-500/10 hover:bg-sky-500/20 text-bone font-semibold transition-colors shadow-sm"
               >
                 <span>Explore Projects</span>
                 <ArrowRight className="w-4 h-4 text-sky-400" />
@@ -82,7 +74,7 @@ export default function HeroSection() {
 
               <Link
                 href="/resume"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-line bg-surface hover:border-line/80 hover:text-bone text-bone-dim font-semibold transition-colors shadow-sm"
+                className="inline-flex items-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl border border-line bg-surface hover:border-line/80 hover:text-bone text-bone-dim font-semibold transition-colors shadow-sm"
               >
                 <FileText className="w-4 h-4 text-muted" />
                 <span>View Resume</span>
@@ -92,7 +84,7 @@ export default function HeroSection() {
           </div>
 
           {/* Right Column: Animated & Interactive Memoji Hero Card */}
-          <div className="lg:col-span-5 h-[480px] sm:h-[540px] w-full flex items-center justify-center relative">
+          <div className="lg:col-span-5 h-auto w-full flex items-center justify-center relative">
             <HeroMemojiInteractive />
           </div>
 

@@ -40,12 +40,12 @@ export default function ProjectsShowcase({ limit }: { limit?: number }) {
   };
 
   return (
-    <section className="border-t border-line/60 py-20 sm:py-28">
+    <section className="border-t border-line/60 py-14 sm:py-24">
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-10">
         
         {/* Section Header */}
         <ScrollReveal direction="up" delay={0.1}>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 sm:mb-12">
             <div>
               <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted">
                 <Sparkles className="w-3.5 h-3.5 text-ember" />
@@ -75,7 +75,7 @@ export default function ProjectsShowcase({ limit }: { limit?: number }) {
         </ScrollReveal>
 
         {/* Project Grid */}
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:gap-10 sm:grid-cols-2 lg:grid-cols-3">
           {displayedProjects.map((project, idx) => (
             <ScrollReveal key={project.id} direction="up" delay={0.15 + idx * 0.1}>
               <div className="group block">

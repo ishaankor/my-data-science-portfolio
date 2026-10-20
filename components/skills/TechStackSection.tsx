@@ -13,29 +13,29 @@ export default function TechStackSection() {
   ];
 
   return (
-    <section className="border-t border-line/60 py-20 sm:py-28 relative">
+    <section className="border-t border-line/60 py-14 sm:py-24 relative">
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-10">
         
         {/* Header */}
         <ScrollReveal direction="up" delay={0.1}>
-          <div className="mb-12">
+          <div className="mb-8 sm:mb-12">
             <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted">
               <Layers className="w-3.5 h-3.5 text-ember" />
               technical toolkit
             </span>
-            <h2 className="font-display text-[2rem] sm:text-[2.75rem] font-semibold leading-[1.04] tracking-[-0.02em] text-bone mt-4">
+            <h2 className="font-display text-2xl sm:text-[2.75rem] font-semibold leading-[1.08] tracking-[-0.02em] text-bone mt-3 sm:mt-4">
               Tech Stack &amp; Focus Areas
             </h2>
           </div>
         </ScrollReveal>
 
         {/* Categories Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           {portfolioData.skillCategories.map((category, idx) => {
             const icon = categoryIcons[idx % categoryIcons.length];
             return (
               <ScrollReveal key={category.title} direction="up" delay={0.15 + idx * 0.1}>
-                <div className="rounded-xl border border-line bg-surface p-7 shadow-panel flex flex-col justify-between h-full hover:border-line/80 transition-colors">
+                <div className="rounded-xl border border-line bg-surface p-5 sm:p-7 shadow-panel flex flex-col justify-between h-full hover:border-line/80 transition-colors">
                   <div>
                     <div className="w-10 h-10 rounded-lg border border-line bg-ink flex items-center justify-center mb-6 shadow-sm">
                       {icon}

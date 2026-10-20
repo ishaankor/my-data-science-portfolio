@@ -28,14 +28,14 @@ export default function AboutMeSection() {
   ];
 
   return (
-    <section className="border-t border-line/60 py-20 sm:py-28 relative">
-      <div className="mx-auto w-full max-w-6xl px-6 sm:px-10 space-y-20">
+    <section className="border-t border-line/60 py-14 sm:py-24 relative">
+      <div className="mx-auto w-full max-w-6xl px-6 sm:px-10 space-y-14 sm:space-y-20">
         
         {/* 1. WHAT I DO Section */}
         <ScrollReveal direction="up" delay={0.1}>
           <div>
             {/* Section Eyebrow */}
-            <div className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted mb-8">
+            <div className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted mb-6 sm:mb-8">
               <Code2 className="w-3.5 h-3.5 text-ember" />
               <span>WHAT I DO</span>
             </div>
@@ -45,7 +45,7 @@ export default function AboutMeSection() {
               {whatIDoItems.map((item) => (
                 <div
                   key={item.number}
-                  className="py-7 sm:py-9 grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-8 items-baseline group"
+                  className="py-5 sm:py-9 grid grid-cols-1 md:grid-cols-12 gap-2 sm:gap-3 md:gap-8 items-baseline group"
                 >
                   {/* Left Column: Number & Title */}
                   <div className="md:col-span-5 flex items-baseline gap-3">
@@ -81,7 +81,7 @@ export default function AboutMeSection() {
             {/* Headline & Link Row */}
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pt-1">
               <div className="space-y-2 max-w-2xl">
-                <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-bone tracking-tight">
+                <h3 className="font-display text-xl sm:text-3xl lg:text-4xl font-extrabold text-bone tracking-tight">
                   AI Engineer at Handshake AI.
                 </h3>
                 <p className="text-bone-dim text-xs sm:text-sm leading-relaxed">

@@ -58,7 +58,7 @@ export default function HeroMemojiInteractive() {
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
-      className="w-full h-full min-h-[440px] sm:min-h-[480px] flex items-center justify-center p-2 sm:p-4 relative select-none [perspective:1200px]"
+      className="w-full h-full min-h-[380px] sm:min-h-[460px] flex items-center justify-center p-1 sm:p-4 relative select-none [perspective:1200px]"
     >
       {/* 3D Tilted Card Container */}
       <div
@@ -72,7 +72,7 @@ export default function HeroMemojiInteractive() {
             ? 'Avatar card showing personal website link. Click or press Enter to flip front.'
             : 'Interactive 3D avatar card. Click or press Enter to flip.'
         }
-        className="w-full max-w-[440px] h-[430px] sm:h-[460px] relative transition-transform duration-200 ease-out cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ember/50 rounded-3xl"
+        className="w-full max-w-[420px] h-[390px] sm:h-[460px] relative transition-transform duration-200 ease-out cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ember/50 rounded-3xl"
         style={{
           transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg) ${
             isHovered ? 'scale3d(1.02, 1.02, 1.02)' : 'scale3d(1, 1, 1)'
@@ -91,7 +91,7 @@ export default function HeroMemojiInteractive() {
         >
           {/* ================= FRONT FACE ================= */}
           <div
-            className="absolute inset-0 w-full h-full rounded-3xl border border-line bg-[#080c16]/95 backdrop-blur-2xl shadow-float flex flex-col items-center justify-between p-6 sm:p-8 overflow-hidden"
+            className="absolute inset-0 w-full h-full rounded-3xl border border-line bg-[#080c16]/95 backdrop-blur-2xl shadow-float flex flex-col items-center justify-between p-5 sm:p-8 overflow-hidden"
             style={{
               backfaceVisibility: 'hidden',
               WebkitBackfaceVisibility: 'hidden',
@@ -100,18 +100,18 @@ export default function HeroMemojiInteractive() {
           >
             {/* Top Header Row: Status Bar */}
             <div
-              className="w-full flex items-center justify-between z-10 font-mono text-xs border-b border-line/70 pb-3.5"
+              className="w-full flex items-center justify-between z-10 font-mono text-xs border-b border-line/70 pb-3 sm:pb-3.5"
               style={{ transform: 'translateZ(30px)' }}
             >
-              <div className="flex items-center gap-2" aria-hidden="true">
-                <span className="w-3 h-3 rounded-full bg-rose-500/80" />
-                <span className="w-3 h-3 rounded-full bg-amber-500/80" />
-                <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
+              <div className="flex items-center gap-1.5 sm:gap-2" aria-hidden="true">
+                <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-rose-500/80" />
+                <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-amber-500/80" />
+                <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-emerald-500/80" />
                 <span className="text-xs text-muted ml-1 font-bold">ishaan.avatar</span>
               </div>
 
               {/* Click to flip affordance badge */}
-              <div className="flex items-center gap-1.5 text-[11px] font-mono text-bone-dim/90 bg-white/5 hover:bg-white/10 px-2.5 py-1 rounded-full border border-line/60 transition-colors shadow-sm">
+              <div className="flex items-center gap-1.5 text-[10px] sm:text-[11px] font-mono text-bone-dim/90 bg-white/5 hover:bg-white/10 px-2 sm:px-2.5 py-1 rounded-full border border-line/60 transition-colors shadow-sm">
                 <RotateCw className="w-3 h-3 text-sky-400" />
                 <span>Click to flip</span>
               </div>
@@ -155,7 +155,7 @@ export default function HeroMemojiInteractive() {
                 <div className="absolute -inset-2 rounded-full bg-gradient-to-tr from-emerald-500/25 via-teal-500/20 to-cyan-500/25 blur-lg opacity-70 group-hover:opacity-100 transition-opacity pointer-events-none" />
 
                 {/* Avatar Image Container with Natural Contact Depth Shadow */}
-                <div className="relative w-36 h-36 sm:w-40 sm:h-40 rounded-full overflow-hidden border-2 border-line/90 bg-ink shadow-[0_14px_40px_-8px_rgba(0,0,0,0.7),0_0_25px_rgba(16,185,129,0.25)] transition-all duration-300 hover:border-emerald-400/80 hover:shadow-[0_16px_50px_-6px_rgba(0,0,0,0.8),0_0_35px_rgba(16,185,129,0.45)]">
+                <div className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden border-2 border-line/90 bg-ink shadow-[0_14px_40px_-8px_rgba(0,0,0,0.7),0_0_25px_rgba(16,185,129,0.25)] transition-all duration-300 hover:border-emerald-400/80 hover:shadow-[0_16px_50px_-6px_rgba(0,0,0,0.8),0_0_35px_rgba(16,185,129,0.45)]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="/images/personal-picture.avif"
@@ -168,23 +168,23 @@ export default function HeroMemojiInteractive() {
 
             {/* Bottom Status Row */}
             <div
-              className="w-full pt-3.5 border-t border-line/70 flex items-center justify-between font-mono text-xs text-muted z-10"
+              className="w-full pt-3 sm:pt-3.5 border-t border-line/70 flex flex-wrap items-center justify-between gap-2 font-mono text-[11px] sm:text-xs text-muted z-10"
               style={{ transform: 'translateZ(20px)' }}
             >
-              <span className="flex items-center gap-2 text-emerald-400">
+              <span className="flex items-center gap-1.5 sm:gap-2 text-emerald-400 shrink-0">
                 <span className="relative flex h-2 w-2">
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
                 </span>
                 <span className="font-bold">Building AI &amp; Agents</span>
               </span>
 
-              <span className="text-bone-dim">San Jose / San Diego, CA</span>
+              <span className="text-bone-dim text-[11px] sm:text-xs">San Jose / San Diego, CA</span>
             </div>
           </div>
 
           {/* ================= BACK FACE ================= */}
           <div
-            className="absolute inset-0 w-full h-full rounded-3xl border border-line bg-[#080c16]/95 backdrop-blur-2xl shadow-float flex flex-col items-center justify-between p-6 sm:p-7 overflow-hidden"
+            className="absolute inset-0 w-full h-full rounded-3xl border border-line bg-[#080c16]/95 backdrop-blur-2xl shadow-float flex flex-col items-center justify-between p-5 sm:p-7 overflow-hidden"
             style={{
               backfaceVisibility: 'hidden',
               WebkitBackfaceVisibility: 'hidden',
@@ -196,10 +196,10 @@ export default function HeroMemojiInteractive() {
               className="w-full flex items-center justify-between z-10 font-mono text-xs border-b border-line/70 pb-3"
               style={{ transform: 'translateZ(30px)' }}
             >
-              <div className="flex items-center gap-2" aria-hidden="true">
-                <span className="w-3 h-3 rounded-full bg-rose-500/80" />
-                <span className="w-3 h-3 rounded-full bg-amber-500/80" />
-                <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
+              <div className="flex items-center gap-1.5 sm:gap-2" aria-hidden="true">
+                <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-rose-500/80" />
+                <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-amber-500/80" />
+                <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-emerald-500/80" />
                 <span className="text-xs text-muted ml-1 font-bold">ishaan.personal_site</span>
               </div>
 
@@ -210,7 +210,7 @@ export default function HeroMemojiInteractive() {
                   e.stopPropagation();
                   setIsFlipped(false);
                 }}
-                className="flex items-center gap-1.5 text-[11px] font-mono text-bone-dim hover:text-bone bg-white/5 hover:bg-white/10 border border-line/60 rounded-full px-2.5 py-1 transition-colors shadow-sm"
+                className="flex items-center gap-1.5 text-[10px] sm:text-[11px] font-mono text-bone-dim hover:text-bone bg-white/5 hover:bg-white/10 border border-line/60 rounded-full px-2 sm:px-2.5 py-1 transition-colors shadow-sm"
                 aria-label="Flip back to front"
               >
                 <RotateCcw className="w-3 h-3 text-sky-400" />
@@ -220,20 +220,15 @@ export default function HeroMemojiInteractive() {
 
             {/* Center Area: Speech Bubble from Avatar */}
             <div
-              className="w-full my-auto flex flex-col items-center justify-center gap-3 relative z-10"
+              className="w-full my-auto flex flex-col items-center justify-center gap-2.5 sm:gap-3 relative z-10"
               style={{ transform: 'translateZ(45px)' }}
             >
               {/* Sleek Modern Speech Bubble */}
-              <div className="relative w-full max-w-[340px] bg-surface border border-line rounded-2xl p-4 sm:p-5 shadow-panel text-center">
+              <div className="relative w-full max-w-[340px] bg-surface border border-line rounded-2xl p-3.5 sm:p-5 shadow-panel text-center">
                 {/* Speech Bubble Tail pointing down to avatar */}
                 <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-surface border-r border-b border-line rotate-45 transform" />
 
-                {/* <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-ink border border-line font-mono text-[11px] text-bone-dim mb-2 font-medium">
-                  <Sparkles className="w-3 h-3 text-sky-400" />
-                  <span>Hey there!</span>
-                </div> */}
-
-                <p className="text-xs sm:text-[13px] text-bone leading-relaxed mb-3.5 font-sans">
+                <p className="text-xs sm:text-[13px] text-bone leading-relaxed mb-3 font-sans">
                   Looking for my full personal hub, writings, and interactive projects?
                 </p>
 
@@ -243,17 +238,17 @@ export default function HeroMemojiInteractive() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="group/btn relative inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-bone hover:bg-white text-ink font-mono text-xs sm:text-sm font-bold shadow-sm transition-all duration-200 border border-bone"
+                  className="group/btn relative inline-flex items-center justify-center gap-2 w-full py-2.5 px-3.5 sm:px-4 rounded-xl bg-bone hover:bg-white text-ink font-mono text-xs sm:text-sm font-bold shadow-sm transition-all duration-200 border border-bone"
                 >
-                  <Globe className="w-4 h-4 text-ink group-hover/btn:rotate-12 transition-transform duration-300" />
+                  <Globe className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-ink group-hover/btn:rotate-12 transition-transform duration-300" />
                   <span>ishaankoradia.com</span>
-                  <ExternalLink className="w-3.5 h-3.5 text-ink/80 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-200" />
+                  <ExternalLink className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-ink/80 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-200" />
                 </a>
               </div>
 
               {/* Avatar Mini Circle */}
               <div className="flex items-center gap-3 mt-1">
-                <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full p-0.5 border border-line bg-surface shadow-sm">
+                <div className="relative w-12 h-12 sm:w-16 sm:h-16 rounded-full p-0.5 border border-line bg-surface shadow-sm">
                   {/* Subtle ripple ping */}
                   <div className="absolute -inset-1 rounded-full border border-emerald-400/40 animate-ping opacity-25 pointer-events-none" />
                   <div className="w-full h-full rounded-full overflow-hidden bg-ink/90 border border-line flex items-center justify-center">
@@ -265,20 +260,12 @@ export default function HeroMemojiInteractive() {
                     />
                   </div>
                   <span
-                    className="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-[#080c16] flex items-center justify-center"
+                    className="absolute bottom-0 right-0 w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-emerald-500 border-2 border-[#080c16] flex items-center justify-center"
                     title="Online"
                   >
                     <span className="w-1 h-1 rounded-full bg-white" />
                   </span>
                 </div>
-
-                {/* <div className="text-left font-mono">
-                  <div className="text-xs font-bold text-bone">Ishaan Koradia</div>
-                  {/* <div className="text-[10px] text-emerald-400 flex items-center gap-1.5 mt-0.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                    Always exploring &amp; building
-                  </div> */}
-                {/* </div> */}
               </div>
             </div>
 
