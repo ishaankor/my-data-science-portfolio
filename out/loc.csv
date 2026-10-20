@@ -1,4 +1,10 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+components/meta/CodebaseEvolutionSuite.tsx,68,10,tsx,429e826,Ishaan Kor,2026-10-20,10:57:03,-07:00,2026-10-20T10:57:03-07:00,2,"refactor: update build output and component assets for portfolio pages"
+components/meta/GitHubMetaDashboard.tsx,1,1,tsx,429e826,Ishaan Kor,2026-10-20,10:57:03,-07:00,2026-10-20T10:57:03-07:00,2,"refactor: update build output and component assets for portfolio pages"
+meta/index.html,1,1,html,429e826,Ishaan Kor,2026-10-20,10:57:03,-07:00,2026-10-20T10:57:03-07:00,1,"refactor: update build output and component assets for portfolio pages"
+meta/main.js,226,165,js,429e826,Ishaan Kor,2026-10-20,10:57:03,-07:00,2026-10-20T10:57:03-07:00,1,"refactor: update build output and component assets for portfolio pages"
+style.css,310,2,css,429e826,Ishaan Kor,2026-10-20,10:57:03,-07:00,2026-10-20T10:57:03-07:00,0,"refactor: update build output and component assets for portfolio pages"
+tsconfig.tsbuildinfo,1,1,tsbuildinfo,429e826,Ishaan Kor,2026-10-20,10:57:03,-07:00,2026-10-20T10:57:03-07:00,0,"refactor: update build output and component assets for portfolio pages"
 components/analytics/GitHubAnalytics.tsx,2,2,tsx,8f3789e,Ishaan Kor,2026-10-20,01:38:47,-07:00,2026-10-20T01:38:47-07:00,2,"feat: add company and certification logo assets and update experience components"
 components/experience/CertificationsSection.tsx,34,9,tsx,8f3789e,Ishaan Kor,2026-10-20,01:38:47,-07:00,2026-10-20T01:38:47-07:00,2,"feat: add company and certification logo assets and update experience components"
 components/experience/ExperienceMatrix.tsx,41,2,tsx,8f3789e,Ishaan Kor,2026-10-20,01:38:47,-07:00,2026-10-20T01:38:47-07:00,2,"feat: add company and certification logo assets and update experience components"

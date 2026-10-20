@@ -330,19 +330,6 @@ export default function CodebaseEvolutionSuite({ liveCommits }: CodebaseEvolutio
 
   const currentCommit = commitList[activeIndex] || commitList[commitList.length - 1];
 
-  // Fixed chronological time extent across the entire commitList so scatterplot dots never shift horizontally
-  const timelineExtent = useMemo(() => {
-    if (commitList.length === 0) return { min: 0, max: 1 };
-    const getTimestamp = (c: CommitMeta) => {
-      const d = new Date(c.datetime || `${c.date}T${c.time || '12:00:00'}`);
-      const t = d.getTime();
-      return isNaN(t) ? 0 : t;
-    };
-    const min = getTimestamp(commitList[0]);
-    const max = getTimestamp(commitList[commitList.length - 1]);
-    return { min: isNaN(min) ? 0 : min, max: isNaN(max) ? 1 : (max > min ? max : min + 1) };
-  }, [commitList]);
-
   // Synchronize scrollytelling feed to scroll into view when slider moves
   useEffect(() => {
     if (sliderIndex !== null && currentCommit) {
@@ -393,15 +380,6 @@ export default function CodebaseEvolutionSuite({ liveCommits }: CodebaseEvolutio
                 <span className="text-ember font-bold px-2 py-0.5 rounded bg-ember/10 border border-ember/30">
                   {currentCommit?.date || '2025-01-11'}
                 </span>
-                {sliderIndex !== null && sliderIndex < commitList.length - 1 && (
-                  <button
-                    type="button"
-                    onClick={() => setSliderIndex(null)}
-                    className="text-[0.68rem] px-2 py-0.5 rounded bg-ember/20 hover:bg-ember/30 text-ember border border-ember/40 transition-colors cursor-pointer"
-                  >
-                    Show All ({commitList.length})
-                  </button>
-                )}
               </div>
             )}
           </div>
@@ -534,24 +512,22 @@ export default function CodebaseEvolutionSuite({ liveCommits }: CodebaseEvolutio
                   <div className="border-b border-line/30 w-full pb-1 flex items-center justify-between"><span>00:00</span></div>
                 </div>
 
-                {/* Plot Commit Bubbles with bounded margins and fixed timeline positioning */}
-                {filteredCommits.map((c) => {
+                {/* Plot Commit Bubbles with bounded margins */}
+                {filteredCommits.map((c, i) => {
                   const parts = (c.time || '12:00:00').split(':').map(Number);
                   const timeInHours = (parts[0] || 12) + (parts[1] || 0) / 60;
                   const yPercent = 10 + (timeInHours / 24) * 78;
-                  const cTime = new Date(c.datetime || `${c.date}T${c.time || '12:00:00'}`).getTime();
-                  const timeSpan = timelineExtent.max - timelineExtent.min || 1;
-                  const timeRatio = Math.max(0, Math.min(1, (cTime - timelineExtent.min) / timeSpan));
-                  const xPercent = timeRatio * 88 + 6;
+                  const xPercent = (i / (filteredCommits.length - 1 || 1)) * 88 + 6;
                   const sizePx = Math.max(8, Math.min(22, Math.round(Math.log2((c.linesEdited || 0) + 1) * 2.8)));
                   const isSelected = selectedCommit === c.commit;
                   const isHovered = hoveredCommit?.commit === c.commit;
 
                   return (
-                    <div
+                    <a
                       key={c.commit}
-                      role="button"
-                      tabIndex={0}
+                      href={`https://github.com/ishaankor/my-data-science-portfolio/commit/${c.commit}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       onClick={() => {
                         setSelectedCommit(isSelected ? null : c.commit);
                         setHoveredCommit(null);
@@ -563,7 +539,7 @@ export default function CodebaseEvolutionSuite({ liveCommits }: CodebaseEvolutio
                       onMouseEnter={() => setHoveredCommit(c)}
                       onMouseLeave={() => setHoveredCommit(null)}
                       aria-label={`Commit ${c.commit.substring(0, 7)}: ${c.message}`}
-                      className={`absolute rounded-full transition-all duration-150 cursor-pointer transform -translate-x-1/2 -translate-y-1/2 outline-none focus:outline-none focus:ring-0 select-none ${isSelected
+                      className={`absolute rounded-full transition-all duration-200 cursor-pointer transform -translate-x-1/2 -translate-y-1/2 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none ${isSelected
                           ? 'bg-ember scale-125 z-30 shadow-lg shadow-ember/50 border-2 border-white'
                           : isHovered
                             ? 'bg-rose-400 scale-125 z-20 shadow-md shadow-rose-500/50 border border-white'
@@ -600,8 +576,8 @@ export default function CodebaseEvolutionSuite({ liveCommits }: CodebaseEvolutio
               </div>
 
               <div className="flex items-center justify-between text-[0.68rem] font-mono text-muted pt-1">
-                <span>Earliest ({commitList[0]?.date || '2025-01-11'})</span>
-                <span>Latest ({commitList[commitList.length - 1]?.date || 'Today'})</span>
+                <span>Earliest ({filteredCommits[0]?.date || '2025-01-11'})</span>
+                <span>Latest ({filteredCommits[filteredCommits.length - 1]?.date || 'Today'})</span>
               </div>
             </div>
           </div>
