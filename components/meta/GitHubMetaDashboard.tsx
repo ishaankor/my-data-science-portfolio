@@ -31,7 +31,12 @@ export default function GitHubMetaDashboard() {
   } = useGitHubData();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedLanguage, setSelectedLanguage] = useState('All');
+  const [mounted, setMounted] = useState(false);
   const [, setTick] = useState(0);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Periodic 30s re-render to keep relative timeAgo labels ("just now", "1m ago") live
   useEffect(() => {
@@ -285,7 +290,7 @@ export default function GitHubMetaDashboard() {
                     className="w-full h-full rounded-full object-cover"
                   />
                 </div>
-                <span className={`absolute bottom-1 right-1 w-3.5 h-3.5 rounded-full ${devStatus.bgColor} border-2 border-ink`} title={devStatus.label} />
+                <span suppressHydrationWarning className={`absolute bottom-1 right-1 w-3.5 h-3.5 rounded-full ${devStatus.bgColor} border-2 border-ink`} title={devStatus.label} />
               </div>
 
               <div>
@@ -331,7 +336,7 @@ export default function GitHubMetaDashboard() {
 
             <div className="p-4 rounded-lg bg-ink/70 border border-line">
               <span className="text-[0.68rem] text-muted uppercase tracking-wider block mb-1">Dev Status</span>
-              <span className={`font-mono text-sm sm:text-base font-semibold ${devStatus.textColor} flex items-center gap-2 mt-2`}>
+              <span suppressHydrationWarning className={`font-mono text-sm sm:text-base font-semibold ${devStatus.textColor} flex items-center gap-2 mt-2`}>
                 <span className="relative flex h-2 w-2">
                   {devStatus.isPulsing && (
                     <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${devStatus.bgColor} opacity-75`} />
@@ -415,9 +420,9 @@ export default function GitHubMetaDashboard() {
 
                   {/* Date & Link */}
                   <div className="flex items-center gap-3 text-muted shrink-0 text-[0.7rem] self-end sm:self-auto">
-                    <span className="flex items-center gap-1 text-bone-dim">
+                    <span suppressHydrationWarning className="flex items-center gap-1 text-bone-dim">
                       <Clock className="w-3 h-3 text-ember" />
-                      {formatTimeAgo(commit.date) || commit.timeAgo}
+                      {mounted ? (formatTimeAgo(commit.date) || commit.timeAgo) : (commit.timeAgo || 'recently')}
                     </span>
                     <a
                       href={commit.commitUrl}
@@ -439,7 +444,7 @@ export default function GitHubMetaDashboard() {
             </div>
           )}
 
-          {lastPolledTime && (
+          {mounted && lastPolledTime && (
             <div className="mt-4 pt-3 border-t border-line/60 flex items-center justify-between font-mono text-[0.68rem] text-muted">
               <span>Live commits stream updates every 1 minute</span>
               <span>Last checked: {lastPolledTime}</span>

@@ -18,8 +18,47 @@ export default function ExperienceMatrix() {
   const items = portfolioData.experience;
 
   const getIconForType = (item: ExperienceItem) => {
-    if (item.type === 'education') return <GraduationCap className="w-5 h-5 text-bone-dim" />;
-    if (item.id === 'exp-handshake-ai') return <Cpu className="w-5 h-5 text-bone-dim" />;
+    if (
+      item.id === 'exp-ucsd-degree' ||
+      item.type === 'education' ||
+      item.organization?.toLowerCase().includes('ucsd') ||
+      item.organization?.toLowerCase().includes('san diego')
+    ) {
+      return (
+        <div className="w-6 h-6 flex items-center justify-center overflow-hidden rounded bg-white p-0.5">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/ucsd-logo copy.png"
+            alt="UC San Diego"
+            className="w-full h-full object-contain scale-100"
+          />
+        </div>
+      );
+    }
+    if (item.id === 'exp-handshake-ai' || item.organization?.toLowerCase().includes('handshake')) {
+      return (
+        <div className="w-5 h-5 flex items-center justify-center overflow-hidden rounded">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/handshake-ai.jpg"
+            alt="Handshake AI"
+            className="w-full h-full object-cover"
+          />
+        </div>
+      );
+    }
+    if (item.organization?.toLowerCase().includes('verizon')) {
+      return (
+        <div className="w-5 h-5 flex items-center justify-center overflow-hidden">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/Verizon.svg"
+            alt="Verizon"
+            className="w-full h-full object-contain"
+          />
+        </div>
+      );
+    }
     return <Briefcase className="w-5 h-5 text-bone-dim" />;
   };
 

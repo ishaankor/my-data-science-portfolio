@@ -74,13 +74,21 @@ const FALLBACK_REPOS: GitHubRepo[] = (githubCache?.repos || []) as unknown as Gi
 const FALLBACK_COMMITS: CommitItem[] = (githubCache?.commits || []) as unknown as CommitItem[];
 const FALLBACK_CALENDAR: ContributionCalendar | null = ((githubCache as any)?.contributionCalendar || null) as unknown as (ContributionCalendar | null);
 
-const GITHUB_API_ENDPOINT =
+const rawFetcherUrl =
   process.env.NEXT_PUBLIC_GITHUB_FETCHER_URL ||
   'https://personal-meta-fetcher.vercel.app/api/github';
+const GITHUB_API_ENDPOINT = rawFetcherUrl.replace(
+  'github-meta-fetcher.vercel.app',
+  'personal-meta-fetcher.vercel.app'
+);
 
-const GITHUB_COMMITS_ENDPOINT =
+const rawCommitsUrl =
   process.env.NEXT_PUBLIC_GITHUB_COMMITS_URL ||
   'https://personal-meta-fetcher.vercel.app/api/commits';
+const GITHUB_COMMITS_ENDPOINT = rawCommitsUrl.replace(
+  'github-meta-fetcher.vercel.app',
+  'personal-meta-fetcher.vercel.app'
+);
 
 export function formatTimeAgo(dateString?: string): string {
   if (!dateString) return 'recently';
@@ -167,18 +175,13 @@ async function fetchGitHubDataSingleton(force = false): Promise<GitHubTelemetryD
 
   inFlightPromise = (async () => {
     try {
-      const fetchHeaders = {
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        Pragma: 'no-cache',
-      };
-
       const metaUrl = `${GITHUB_API_ENDPOINT}${GITHUB_API_ENDPOINT.includes('?') ? '&' : '?'}_t=${Date.now()}`;
       const commitsUrl = `${GITHUB_COMMITS_ENDPOINT}${GITHUB_COMMITS_ENDPOINT.includes('?') ? '&' : '?'}_t=${Date.now()}`;
 
-      // Concurrently query metadata and the dedicated real-time commit stream
+      // Concurrently query metadata and the dedicated real-time commit stream (simple GET, no preflight required)
       const [metaResult, commitsResult] = await Promise.allSettled([
-        fetch(metaUrl, { cache: 'no-store', headers: fetchHeaders }),
-        fetch(commitsUrl, { cache: 'no-store', headers: fetchHeaders }),
+        fetch(metaUrl, { cache: 'no-store' }),
+        fetch(commitsUrl, { cache: 'no-store' }),
       ]);
 
       let hasChanges = false;

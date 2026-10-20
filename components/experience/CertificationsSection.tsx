@@ -2,18 +2,43 @@
 
 import React from 'react';
 import { portfolioData } from '@/data/portfolio';
-import { Award, ShieldCheck, CheckCircle2, Cpu, Terminal, Sparkles } from 'lucide-react';
+import { Award, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
 export default function CertificationsSection() {
-  const certIcons = [
-    <Cpu key="1" className="w-5 h-5 text-cyan-400" />,
-    <Sparkles key="2" className="w-5 h-5 text-purple-400" />,
-    <Terminal key="3" className="w-5 h-5 text-sky-400" />,
-  ];
+  const getCertIcon = (certId: string) => {
+    if (certId === 'cert-ai-engineer' || certId.includes('datacamp')) {
+      return (
+        <img
+          src="/images/datacamp.jpg"
+          alt="DataCamp"
+          className="w-full h-full object-cover rounded-md"
+        />
+      );
+    }
+    if (certId === 'cert-mcp-advanced' || certId.includes('anthropic') || certId.includes('mcp')) {
+      return (
+        <img
+          src="/images/anthropic-icon-tdvkiqisswbrmtkiygb0ia.webp"
+          alt="Anthropic"
+          className="w-full h-full object-contain filter invert"
+        />
+      );
+    }
+    if (certId === 'cert-google-it-python' || certId.includes('google')) {
+      return (
+        <img
+          src="/images/google.png"
+          alt="Google"
+          className="w-full h-full object-contain"
+        />
+      );
+    }
+    return <Award className="w-5 h-5 text-ember" />;
+  };
 
   const certGradients = [
-    'from-cyan-500/10 via-sky-500/5 to-transparent border-cyan-500/30',
+    'from-emerald-500/10 via-teal-500/5 to-transparent border-emerald-500/30',
     'from-purple-500/10 via-indigo-500/5 to-transparent border-purple-500/30',
     'from-sky-500/10 via-blue-500/5 to-transparent border-sky-500/30',
   ];
@@ -47,8 +72,8 @@ export default function CertificationsSection() {
                 <div>
                   {/* Top Icon */}
                   <div className="flex items-center justify-between mb-5">
-                    <div className="w-10 h-10 rounded-xl bg-ink border border-line flex items-center justify-center shadow-sm">
-                      {certIcons[idx]}
+                    <div className="w-10 h-10 rounded-xl bg-ink border border-line flex items-center justify-center shadow-sm overflow-hidden p-1.5">
+                      {getCertIcon(cert.id)}
                     </div>
                   </div>
 

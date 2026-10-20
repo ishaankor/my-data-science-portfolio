@@ -150,7 +150,7 @@ export default function GitHubAnalytics() {
                   <span className="font-mono text-[0.65rem] text-muted uppercase tracking-wider">Weekly</span>
                 </div>
                 <div>
-                  <p className="font-display text-3xl font-bold text-bone">
+                  <p suppressHydrationWarning className="font-display text-3xl font-bold text-bone">
                     {weeklyContributions}
                   </p>
                   <p className="font-mono text-xs text-muted mt-1">Weekly Contributions</p>
@@ -167,7 +167,7 @@ export default function GitHubAnalytics() {
                   <span className="font-mono text-[0.65rem] text-muted uppercase tracking-wider">Dev Status</span>
                 </div>
                 <div>
-                  <p className={`font-mono text-xs font-semibold ${devStatus.textColor} flex items-center gap-1.5`}>
+                  <p suppressHydrationWarning className={`font-mono text-xs font-semibold ${devStatus.textColor} flex items-center gap-1.5`}>
                     <span className="relative flex h-2 w-2">
                       {devStatus.isPulsing && (
                         <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${devStatus.bgColor} opacity-75`} />

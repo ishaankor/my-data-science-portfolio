@@ -1,13 +1,66 @@
 'use client';
 
-import React from 'react';
-import {
-  Cpu,
-  GraduationCap,
-  Briefcase,
-  ShieldCheck,
-} from 'lucide-react';
+import React, { useState, useEffect } from 'react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const certLogos = [
+  {
+    name: 'Anthropic',
+    src: '/images/anthropic-icon-tdvkiqisswbrmtkiygb0ia.webp',
+    className: 'object-contain filter invert p-0.5',
+    bg: 'bg-purple-950/40 border-purple-500/30',
+  },
+  {
+    name: 'Google',
+    src: '/images/google.png',
+    className: 'object-contain p-0.5',
+    bg: 'bg-white border-white/20',
+  },
+  {
+    name: 'DataCamp',
+    src: '/images/datacamp.jpg',
+    className: 'object-cover rounded',
+    bg: 'bg-emerald-950/40 border-emerald-500/30',
+  },
+];
+
+function CertRotatingIconSlider() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % certLogos.length);
+    }, 2600);
+    return () => clearInterval(timer);
+  }, []);
+
+  const current = certLogos[index];
+
+  return (
+    <div
+      className={`w-8 h-8 rounded-lg border flex items-center justify-center p-1 overflow-hidden transition-colors duration-500 relative ${current.bg}`}
+    >
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={current.name}
+          initial={{ opacity: 0, y: 6, scale: 0.85 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -6, scale: 0.85 }}
+          transition={{ duration: 0.3, ease: 'easeInOut' }}
+          className="w-full h-full flex items-center justify-center"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={current.src}
+            alt={current.name}
+            className={`w-full h-full ${current.className}`}
+          />
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
+}
 
 export default function WorkHeroHUD() {
   return (
@@ -22,11 +75,6 @@ export default function WorkHeroHUD() {
               <span className="text-line">/</span>
               <span className="text-ember">EXPERIENCE PATHWAY</span>
             </div>
-
-            {/* <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface border border-line font-mono text-xs text-bone-dim">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              <span>AI &amp; Machine Learning Engineering</span>
-            </div> */}
           </div>
         </ScrollReveal>
 
@@ -49,8 +97,13 @@ export default function WorkHeroHUD() {
             {/* Card 1: Handshake AI */}
             <div className="rounded-xl border border-line bg-surface p-5 shadow-panel flex flex-col justify-between hover:border-line/80 transition-colors">
               <div className="flex items-center justify-between mb-3">
-                <div className="w-8 h-8 rounded-lg bg-ink border border-line flex items-center justify-center text-bone">
-                  <Cpu className="w-4 h-4 text-bone-dim" />
+                <div className="w-8 h-8 rounded-lg bg-lime-950/30 border border-lime-400/20 flex items-center justify-center p-1 overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/handshake-ai.jpg"
+                    alt="Handshake AI"
+                    className="w-full h-full object-cover rounded"
+                  />
                 </div>
                 <span className="font-mono text-[0.65rem] text-muted uppercase font-semibold">AI Engineering</span>
               </div>
@@ -63,8 +116,13 @@ export default function WorkHeroHUD() {
             {/* Card 2: Verizon */}
             <div className="rounded-xl border border-line bg-surface p-5 shadow-panel flex flex-col justify-between hover:border-line/80 transition-colors">
               <div className="flex items-center justify-between mb-3">
-                <div className="w-8 h-8 rounded-lg bg-ink border border-line flex items-center justify-center text-bone">
-                  <Briefcase className="w-4 h-4 text-bone-dim" />
+                <div className="w-8 h-8 rounded-lg bg-red-950/30 border border-red-500/20 flex items-center justify-center p-1.5 overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/Verizon.svg"
+                    alt="Verizon"
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <span className="font-mono text-[0.65rem] text-muted uppercase font-semibold">Project Engineering</span>
               </div>
@@ -77,8 +135,13 @@ export default function WorkHeroHUD() {
             {/* Card 3: UC San Diego */}
             <div className="rounded-xl border border-line bg-surface p-5 shadow-panel flex flex-col justify-between hover:border-line/80 transition-colors">
               <div className="flex items-center justify-between mb-3">
-                <div className="w-8 h-8 rounded-lg bg-ink border border-line flex items-center justify-center text-bone">
-                  <GraduationCap className="w-4 h-4 text-bone-dim" />
+                <div className="w-8 h-8 rounded-lg bg-white border border-white/20 flex items-center justify-center p-1 overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/ucsd-logo copy.png"
+                    alt="UC San Diego"
+                    className="w-full h-full object-contain scale-105"
+                  />
                 </div>
                 <span className="font-mono text-[0.65rem] text-muted uppercase font-semibold">Academic Foundation</span>
               </div>
@@ -91,14 +154,12 @@ export default function WorkHeroHUD() {
             {/* Card 4: Technical Credentials */}
             <div className="rounded-xl border border-line bg-surface p-5 shadow-panel flex flex-col justify-between hover:border-line/80 transition-colors">
               <div className="flex items-center justify-between mb-3">
-                <div className="w-8 h-8 rounded-lg bg-ink border border-line flex items-center justify-center text-emerald-400">
-                  <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                </div>
+                <CertRotatingIconSlider />
                 <span className="font-mono text-[0.65rem] text-muted uppercase font-semibold">Specializations</span>
               </div>
               <div>
                 <p className="font-display text-lg font-bold text-bone">Certifications</p>
-                <p className="font-mono text-xs text-muted mt-1">MCP, MLOps &amp; Python</p>
+                <p className="font-mono text-xs text-muted mt-1">Anthropic • Google • DataCamp</p>
               </div>
             </div>
 

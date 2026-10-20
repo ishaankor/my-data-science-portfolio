@@ -12,6 +12,39 @@ export default function ExperienceTimeline() {
     work: <Briefcase className="w-5 h-5 text-ember" />,
   };
 
+  const getTimelineIcon = (item: (typeof portfolioData.experience)[number]) => {
+    if (item.id === 'exp-ucsd-degree' || item.type === 'education' || item.organization?.toLowerCase().includes('ucsd') || item.organization?.toLowerCase().includes('san diego')) {
+      return (
+        <div className="w-6 h-6 flex items-center justify-center overflow-hidden rounded bg-white p-0.5">
+          <img
+            src="/images/ucsd-logo copy.png"
+            alt="UC San Diego"
+            className="w-full h-full object-contain scale-100"
+          />
+        </div>
+      );
+    }
+    if (item.id === 'exp-handshake-ai' || item.organization?.toLowerCase().includes('handshake')) {
+      return (
+        <img
+          src="/images/handshake-ai.jpg"
+          alt="Handshake AI"
+          className="w-5 h-5 object-cover rounded-full"
+        />
+      );
+    }
+    if (item.organization?.toLowerCase().includes('verizon')) {
+      return (
+        <img
+          src="/images/Verizon.svg"
+          alt="Verizon"
+          className="w-5 h-5 object-contain"
+        />
+      );
+    }
+    return iconMap[item.type];
+  };
+
   return (
     <section className="border-t border-line/60 py-20 sm:py-28 relative" id="experience">
       <div className="mx-auto w-full max-w-5xl px-6 sm:px-10">
@@ -36,7 +69,7 @@ export default function ExperienceTimeline() {
               
               {/* Timeline Icon Node */}
               <div className="absolute -left-[17px] top-1 w-8 h-8 rounded-full bg-ink border border-line group-hover:border-ember flex items-center justify-center transition-colors">
-                {iconMap[item.type]}
+                {getTimelineIcon(item)}
               </div>
 
               {/* Date Badge on Desktop Left */}
