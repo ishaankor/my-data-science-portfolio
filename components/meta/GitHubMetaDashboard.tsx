@@ -455,7 +455,7 @@ export default function GitHubMetaDashboard() {
       </ScrollReveal>
 
       {/* 4. CODEBASE EVOLUTION & SCROLLYTELLING SUITE (MIDDLE 2) */}
-      <CodebaseEvolutionSuite />
+      <CodebaseEvolutionSuite liveCommits={commits} />
 
     </div>
   );

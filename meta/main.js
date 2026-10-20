@@ -2,51 +2,58 @@ import { fetchJSON } from '../global.js';
 
 let data = [];
 let xScale, yScale;
-let selectedCommits = processCommits();
+let selectedCommits = [];
 let filteredCommits = [];
 let commitProgress = 100;
 let commitMaxTime = new Date();
 let processedFiles = new Set();
-let NUM_ITEMS = 27;
 let ITEM_HEIGHT = 100;
 let VISIBLE_COUNT = 10;
-let totalHeight = 10;
-let story_commits = processCommits();
+let totalHeight = 300;
 let scrollContainer;
 let spacer;
 let itemsContainer;
-let fileData = selectedCommits;
+let fileData = [];
 let fileSizeProgress = 100;
-let fileMaxTime = new Date();
-let fileSizeNumItems = 27;
 let fileSizeItemHeight = 100;
 let fileSizeVisibleCount = 10;
-let totalFileSizeHeight = 10;
+let totalFileSizeHeight = 300;
 let fileSizeScrollContainer;
 let fileSizeSpacer;
 let fileSizeItemsContainer;
 
-function bindScrollEvents() {
-  if (scrollContainer.node()) {
+function updateScrollDimensions() {
+  const commitCount = selectedCommits.length;
+  totalHeight = Math.max(commitCount * ITEM_HEIGHT, 300);
+  if (spacer && spacer.node()) {
     spacer.style('height', `${totalHeight}px`);
+  }
+
+  totalFileSizeHeight = Math.max(commitCount * fileSizeItemHeight, 300);
+  if (fileSizeSpacer && fileSizeSpacer.node()) {
+    fileSizeSpacer.style('height', `${totalFileSizeHeight}px`);
+  }
+}
+
+function bindScrollEvents() {
+  if (scrollContainer && scrollContainer.node()) {
     scrollContainer.on('scroll', () => {
       const scrollTop = scrollContainer.property('scrollTop');
       let startIndex = Math.floor(scrollTop / ITEM_HEIGHT);
-      startIndex = Math.max(0, Math.min(startIndex, selectedCommits.length - VISIBLE_COUNT));
+      const maxStartIndex = Math.max(0, selectedCommits.length - VISIBLE_COUNT);
+      startIndex = Math.max(0, Math.min(startIndex, maxStartIndex));
       processedFiles = new Set();
       renderItems(startIndex);
     });
   }
 
-  if (fileSizeItemsContainer.node()) {
-    fileSizeSpacer.style('height', `${totalFileSizeHeight}px`);
-    fileSizeItemsContainer.on('scroll', () => {
-      const scrollTop = fileSizeItemsContainer.property('scrollTop');
+  if (fileSizeScrollContainer && fileSizeScrollContainer.node()) {
+    fileSizeScrollContainer.on('scroll', () => {
+      const scrollTop = fileSizeScrollContainer.property('scrollTop');
       let startIndex = Math.floor(scrollTop / fileSizeItemHeight);
-      startIndex = Math.max(0, Math.min(startIndex, selectedCommits.length - fileSizeVisibleCount));
-      const filteredFileData = selectedCommits.slice(startIndex, startIndex + fileSizeVisibleCount);
+      const maxStartIndex = Math.max(0, selectedCommits.length - fileSizeVisibleCount);
+      startIndex = Math.max(0, Math.min(startIndex, maxStartIndex));
       renderFileSizeItems(startIndex);
-      updateFileDetails(filteredFileData);
     });
   }
 }
@@ -56,124 +63,143 @@ async function loadGitHubMeta(username) {
   const githubActivity = document.getElementById('github-activity');
   if (!githubMeta || !githubActivity) return;
 
-  let backendData = await fetchJSON('https://personal-meta-fetcher.vercel.app/api/commits');
-  if (!backendData || !backendData.repos || backendData.repos.length === 0) {
-    backendData = await fetchJSON('https://personal-meta-fetcher.vercel.app/api/github');
-  }
-  const user = backendData?.user || {};
-  const repos = Array.isArray(backendData?.repos) ? backendData.repos : [];
-  const events = Array.isArray(backendData?.commits) ? backendData.commits : [];
-
-  const totalStars = repos.reduce((sum, repo) => sum + (repo.stargazers_count || 0), 0);
-  const languageCounts = repos.reduce((map, repo) => {
-    if (!repo.language) return map;
-    map.set(repo.language, (map.get(repo.language) || 0) + 1);
-    return map;
-  }, new Map());
-
-  const topLanguages = [...languageCounts.entries()]
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 4)
-    .map(([language]) => language);
-
-  const latestRepo = repos.reduce((latest, repo) => {
-    if (!repo.pushed_at) return latest;
-    if (!latest || new Date(repo.pushed_at) > new Date(latest.pushed_at)) {
-      return repo;
+  try {
+    let backendData = await fetchJSON('https://personal-meta-fetcher.vercel.app/api/commits');
+    if (!backendData || !backendData.repos || backendData.repos.length === 0) {
+      backendData = await fetchJSON('https://personal-meta-fetcher.vercel.app/api/github');
     }
-    return latest;
-  }, null);
+    const user = backendData?.user || {};
+    const repos = Array.isArray(backendData?.repos) ? backendData.repos : [];
+    const events = Array.isArray(backendData?.commits) ? backendData.commits : [];
 
-  const activities = events.slice(0, 5);
-  const eventTypes = [...events.reduce((map, event) => {
-    map.set(event.type, (map.get(event.type) || 0) + 1);
-    return map;
-  }, new Map()).entries()].sort((a, b) => b[1] - a[1]);
+    const totalStars = repos.reduce((sum, repo) => sum + (repo.stargazers_count || 0), 0);
+    const languageCounts = repos.reduce((map, repo) => {
+      if (!repo.language) return map;
+      map.set(repo.language, (map.get(repo.language) || 0) + 1);
+      return map;
+    }, new Map());
 
-  githubMeta.innerHTML = `
-    <div class="panel-header">
-      <p class="panel-label">GitHub summary</p>
-      <h2>Live repo analytics</h2>
-    </div>
-    <div class="stats-grid">
-      <div class="stat-block">
-        <span class="stat-title">Repos</span>
-        <span class="stat-value">${user.public_repos ?? '—'}</span>
-      </div>
-      <div class="stat-block">
-        <span class="stat-title">Followers</span>
-        <span class="stat-value">${user.followers ?? '—'}</span>
-      </div>
-      <div class="stat-block">
-        <span class="stat-title">Stars</span>
-        <span class="stat-value">${totalStars}</span>
-      </div>
-      <div class="stat-block">
-        <span class="stat-title">Top languages</span>
-        <span class="stat-value">${topLanguages.join(', ') || 'None'}</span>
-      </div>
-      <div class="stat-block">
-        <span class="stat-title">Latest push</span>
-        <span class="stat-value">${latestRepo ? new Date(latestRepo.pushed_at).toLocaleDateString() : 'No push yet'}</span>
-      </div>
-      <div class="stat-block">
-        <span class="stat-title">Latest repo</span>
-        <span class="stat-value">${latestRepo ? `<a href="${latestRepo.html_url}" target="_blank">${latestRepo.name}</a>` : 'No repo yet'}</span>
-      </div>
-    </div>
-    <p class="panel-description">${activities.length ? `Most recent public event: ${activities[0].type.replace(/Event$/, '')} on ${new Date(activities[0].created_at).toLocaleDateString()}` : 'No recent public events available.'}</p>
-  `;
+    const topLanguages = [...languageCounts.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 4)
+      .map(([language]) => language);
 
-  githubActivity.innerHTML = `
-    <div class="panel-header">
-      <p class="panel-label">GitHub activity</p>
-      <h2>Recent public events</h2>
-    </div>
-    <div class="activity-list">
-      ${activities.length
-      ? activities.map(event => `<div class="activity-item">${event.type.replace(/Event$/, '')} on <strong>${event.repo?.name || 'unknown repo'}</strong> — ${new Date(event.created_at).toLocaleDateString()}</div>`).join('')
-      : '<div class="activity-item">No recent public events to display.</div>'}
-    </div>
-    <div class="stats-grid">
-      <div class="stat-block">
-        <span class="stat-title">Events loaded</span>
-        <span class="stat-value">${events.length}</span>
+    const latestRepo = repos.reduce((latest, repo) => {
+      if (!repo.pushed_at) return latest;
+      if (!latest || new Date(repo.pushed_at) > new Date(latest.pushed_at)) {
+        return repo;
+      }
+      return latest;
+    }, null);
+
+    const normalizedEvents = events.map((e) => {
+      const type = e.type ? e.type.replace(/Event$/, '') : 'Commit';
+      const dateStr = e.created_at || e.date || new Date().toISOString();
+      const repoName = e.repo?.name || e.repoName || 'portfolio';
+      const message = e.message || e.payload?.commits?.[0]?.message || 'codebase update';
+      return { type, date: new Date(dateStr), repoName, message };
+    });
+
+    const activities = normalizedEvents.slice(0, 5);
+    const eventTypes = [...normalizedEvents.reduce((map, event) => {
+      map.set(event.type, (map.get(event.type) || 0) + 1);
+      return map;
+    }, new Map()).entries()].sort((a, b) => b[1] - a[1]);
+
+    githubMeta.innerHTML = `
+      <div class="panel-header">
+        <p class="panel-label">GitHub summary</p>
+        <h2>Live repo analytics</h2>
       </div>
-      <div class="stat-block">
-        <span class="stat-title">Event types</span>
-        <span class="stat-value">${eventTypes.length}</span>
+      <div class="stats-grid">
+        <div class="stat-block">
+          <span class="stat-title">Repos</span>
+          <span class="stat-value">${user.public_repos ?? repos.length ?? '—'}</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-title">Followers</span>
+          <span class="stat-value">${user.followers ?? '—'}</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-title">Stars</span>
+          <span class="stat-value">${totalStars}</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-title">Top languages</span>
+          <span class="stat-value">${topLanguages.join(', ') || 'None'}</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-title">Latest push</span>
+          <span class="stat-value">${latestRepo ? new Date(latestRepo.pushed_at).toLocaleDateString() : 'Active Today'}</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-title">Latest repo</span>
+          <span class="stat-value">${latestRepo ? `<a href="${latestRepo.html_url}" target="_blank">${latestRepo.name}</a>` : 'my-data-science-portfolio'}</span>
+        </div>
       </div>
-    </div>
-  `;
+      <p class="panel-description">${activities.length ? `Most recent activity: ${activities[0].type} (${activities[0].message}) on ${activities[0].date.toLocaleDateString()}` : 'Live telemetry stream connected.'}</p>
+    `;
+
+    githubActivity.innerHTML = `
+      <div class="panel-header">
+        <p class="panel-label">GitHub activity</p>
+        <h2>Recent public events</h2>
+      </div>
+      <div class="activity-list">
+        ${activities.length
+        ? activities.map(event => `<div class="activity-item">${event.type}: <strong>${event.message}</strong> in <em>${event.repoName}</em> — ${event.date.toLocaleDateString()}</div>`).join('')
+        : '<div class="activity-item">Live repository activity active.</div>'}
+      </div>
+      <div class="stats-grid">
+        <div class="stat-block">
+          <span class="stat-title">Events loaded</span>
+          <span class="stat-value">${events.length}</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-title">Event types</span>
+          <span class="stat-value">${eventTypes.length || 1}</span>
+        </div>
+      </div>
+    `;
+  } catch (err) {
+    console.warn('Could not load GitHub live metadata:', err);
+  }
 }
 
 function processFileData() {
   return d3.groups(data, (d) => d.file).map(([file, lines]) => {
     const firstLine = lines[0];
     let { author, date, time, timezone, datetime } = firstLine;
+    const totalLines = lines.reduce((sum, d) => sum + (Number(d.added) || 0) + (Number(d.deleted) || 0), 0) || lines.length;
     return {
-      file: file.name,
-      totalLines: lines.length,
+      file: typeof file === 'object' && file?.name ? file.name : file,
+      totalLines,
       lines,
     };
   });
 }
 
 function renderFileSizeItems(startIndex) {
+  if (!fileSizeItemsContainer || !fileSizeItemsContainer.node()) return;
+  let commits = selectedCommits.length > 0 ? selectedCommits : processCommits();
+  if (commits.length === 0) return;
+
   fileSizeItemsContainer.selectAll('div').remove();
 
-  let newFileSizeSlice = selectedCommits.slice(startIndex, startIndex + fileSizeVisibleCount);
+  const endIndex = Math.min(startIndex + fileSizeVisibleCount, commits.length);
+  let newFileSizeSlice = commits.slice(startIndex, endIndex);
 
   fileSizeItemsContainer.selectAll('div')
     .data(newFileSizeSlice)
     .enter()
     .append('div')
     .attr('class', 'file-size-item')
-    .html((d, idx) => generateFileSizeNarrative(d, idx))
+    .html((d, idx) => generateFileSizeNarrative(d, startIndex + idx))
     .style('position', 'absolute')
-    .style('top', (_, idx) => `${idx * fileSizeItemHeight}px`);
+    .style('top', (_, idx) => `${(startIndex + idx) * fileSizeItemHeight}px`);
 
-  updateFileDetails(newFileSizeSlice);
+  const commitsUpTo = commits.slice(0, endIndex);
+  updateFileDetails(commitsUpTo);
 }
 
 function generateFileSizeNarrative(commit, index) {
@@ -187,7 +213,6 @@ function generateFileSizeNarrative(commit, index) {
     </p>
     `;
 }
-
 
 function updateFileSizeDetails(filteredFileData) {
   let fileDetailsContainer = d3.select('.file-size-details').selectAll('div').data(filteredFileData).enter().append('div');
@@ -203,19 +228,21 @@ async function loadFileData() {
 }
 
 function processCommits() {
+  if (!data || data.length === 0) return [];
   let commits = d3.groups(data, (d) => d.commit).map(([commit, lines]) => {
     let first = lines[0];
     let { author, date, time, timezone, datetime } = first;
+    const totalLines = lines.reduce((sum, d) => sum + (Number(d.added) || 0) + (Number(d.deleted) || 0), 0) || lines.length;
     let ret = {
       id: commit,
-      url: 'https://github.com/vis-society/lab-7/commit/' + commit,
+      url: 'https://github.com/ishaankor/my-data-science-portfolio/commit/' + commit,
       author,
       date,
       time,
       timezone,
       datetime,
       hourFrac: datetime.getHours() + datetime.getMinutes() / 60,
-      totalLines: lines.length,
+      totalLines,
     };
 
     Object.defineProperty(ret, 'lines', {
@@ -228,36 +255,51 @@ function processCommits() {
     return ret;
   });
 
+  // Sort chronologically (oldest to newest):
+  // commit[0] = first commit ("my first commit, and it was glorious")
+  // commit[last] = latest git commit
+  commits.sort((a, b) => a.datetime - b.datetime);
+
   return commits;
 }
 
 async function loadData() {
   data = await d3.csv('loc.csv', (row) => ({
     ...row,
-    line: Number(row.line), // or just +row.line
-    depth: Number(row.depth),
-    length: Number(row.length),
-    date: new Date(row.date + 'T00:00' + row.timezone),
-    datetime: new Date(row.datetime),
+    line: Number(row.line) || 0,
+    added: Number(row.added) || 0,
+    deleted: Number(row.deleted) || 0,
+    depth: Number(row.depth) || 0,
+    length: Number(row.length) || Number(row.added) || 0,
+    date: new Date(row.date + 'T00:00' + (row.timezone || '-07:00')),
+    datetime: new Date(row.datetime || (row.date + 'T' + (row.time || '12:00:00') + (row.timezone || '-07:00'))),
   }));
 
+  selectedCommits = processCommits();
   displayStats();
 }
 
 function filterCommitsByTime() {
-  let commits = processCommits();
+  let commits = selectedCommits.length > 0 ? selectedCommits : processCommits();
   return commits.filter((commit) => commit.datetime <= commitMaxTime);
 }
 
 function displayStats() {
   let commits = filterCommitsByTime();
+  if (!commits || commits.length === 0) {
+    commits = selectedCommits.length > 0 ? selectedCommits : processCommits();
+  }
 
-  let numFiles = d3.group(data, (d) => d.file).size;
-  let maxDepth = d3.max(data, (d) => d.depth);
-  let longestLineLength = d3.max(data, (d) => d.length);
-  let maxLinesInCommit = d3.max(commits, (d) => d.totalLines);
+  const allLines = commits.flatMap((c) => c.lines || []);
+  let numFiles = d3.group(allLines, (d) => d.file).size;
+  let maxDepth = d3.max(allLines, (d) => Number(d.depth) || 0) || 0;
+  let longestLineLength = d3.max(allLines, (d) => Number(d.length) || Number(d.added) || 0) || 0;
+  let maxLinesInCommit = d3.max(commits, (d) => d.totalLines) || 0;
+  let totalLoc = allLines.reduce((sum, d) => sum + (Number(d.added) || 0), 0) || commits.length;
 
-  const statsContainer = d3.select('#stats').attr('class', 'stats-summary');
+  const statsContainer = d3.select('#stats');
+  statsContainer.selectAll('*').remove();
+  statsContainer.attr('class', 'stats-summary');
   statsContainer.append('h2').attr('class', 'summary-title').text('Summary');
   const summaryGrid = statsContainer.append('div').attr('class', 'summary-grid');
 
@@ -269,28 +311,35 @@ function displayStats() {
 
   addStat('COMMITS', commits.length);
   addStat('FILES', numFiles);
-  addStat('TOTAL LOC', data.length);
+  addStat('TOTAL LOC', totalLoc.toLocaleString());
   addStat('MAX DEPTH', maxDepth);
   addStat('LONGEST LINE', longestLineLength);
-  addStat('MAX LINES', maxLinesInCommit);
+  addStat('MAX LINES', maxLinesInCommit.toLocaleString());
 }
 
 function updateScatterplot(filteredCommits) {
-  d3.select('svg').remove();
+  d3.select('#chart svg').remove();
 
   const width = 1000;
   const height = 600;
-  const margin = { top: 10, right: 10, bottom: 30, left: 40 };
+  const margin = { top: 20, right: 20, bottom: 40, left: 50 };
 
   const svg = d3
     .select('#chart')
     .append('svg')
     .attr('viewBox', `0 0 ${width} ${height}`)
-    .style('overflow', 'visible');
+    .style('overflow', 'visible')
+    .style('width', '100%')
+    .style('height', 'auto');
+
+  // ALWAYS anchor xScale across the FULL commit history range so the slider never glitches or shifts dots
+  const baseCommits = (selectedCommits && selectedCommits.length > 0) ? selectedCommits : filteredCommits;
+  const minDate = d3.min(baseCommits, (d) => d.datetime) || new Date('2025-01-11');
+  const maxDate = d3.max(baseCommits, (d) => d.datetime) || new Date();
 
   xScale = d3
     .scaleTime()
-    .domain(d3.extent(filteredCommits, (d) => d.datetime))
+    .domain([minDate, maxDate])
     .range([margin.left, width - margin.right])
     .nice();
 
@@ -308,12 +357,12 @@ function updateScatterplot(filteredCommits) {
     height: height - margin.top - margin.bottom,
   };
 
-  const timeFormat = d3.timeFormat("%H:%M"); // Format as HH:MM
+  const timeFormat = d3.timeFormat("%H:%M");
 
   function formatTime(d) {
     const hours = Math.floor(d);
-    const minutes = Math.round((d - hours) * 60); // Convert fraction to minutes
-    return timeFormat(new Date(2000, 0, 1, hours, minutes)); // Use dummy date
+    const minutes = Math.round((d - hours) * 60);
+    return timeFormat(new Date(2000, 0, 1, hours, minutes));
   }
 
   const gridlines = svg
@@ -327,10 +376,10 @@ function updateScatterplot(filteredCommits) {
     );
 
   gridlines.selectAll('line')
-    .attr('stroke', 'lightgray')
-    .attr('stroke-opacity', 0.3)
+    .attr('stroke', '#cbd5e1')
+    .attr('stroke-opacity', 0.25);
 
-  const xAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat('%a %d'));
+  const xAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat('%b %d'));
   const yAxis = d3.axisLeft(yScale).tickFormat(formatTime);
 
   svg.append('g')
@@ -341,22 +390,22 @@ function updateScatterplot(filteredCommits) {
     .attr('transform', `translate(${margin.left}, 0)`)
     .call(yAxis);
 
-  const [minLines, maxLines] = d3.extent(filteredCommits, (d) => d.totalLines);
+  const [minLines, maxLines] = d3.extent(baseCommits, (d) => d.totalLines);
   const rScale = d3
     .scaleSqrt()
-    .domain([minLines, maxLines])
-    .range([2, 30]);
+    .domain([minLines || 1, maxLines || 100])
+    .range([3, 26]);
 
-  svg.append('g')
-    .attr('class', 'dots')
-    .selectAll('circle')
-    .data(filteredCommits)
+  const dots = svg.append('g').attr('class', 'dots');
+
+  dots.selectAll('circle')
+    .data(filteredCommits, (d) => d.id)
     .join('circle')
     .attr('cx', (d) => xScale(d.datetime))
     .attr('cy', (d) => yScale(d.hourFrac))
     .attr('r', (d) => rScale(d.totalLines))
-    .style('fill-opacity', 0.7)
-    .attr('fill', 'steelblue')
+    .style('fill-opacity', 0.75)
+    .attr('fill', '#4f46e5')
     .on('mouseenter', function (event, d) {
       d3.select(event.currentTarget)
         .classed('selected', true)
@@ -365,15 +414,14 @@ function updateScatterplot(filteredCommits) {
       updateTooltipVisibility(true);
       updateTooltipPosition(event);
     })
-    .on('mouseleave', function () {
+    .on('mouseleave', function (event) {
       d3.select(event.currentTarget)
         .classed('selected', false)
-        .style('fill-opacity', 0.7);
+        .style('fill-opacity', 0.75);
       updateTooltipVisibility(false);
     });
 
   brushSelector();
-
 }
 
 function updateTooltipContent(commit) {
@@ -484,13 +532,14 @@ function updateLanguageBreakdown() {
 let fileTypeColors = d3.scaleOrdinal(d3.schemeTableau10);
 
 function updateFileDetails(filteredCommits) {
-  let lines = filteredCommits.flatMap((d) => d.lines);
+  let lines = filteredCommits.flatMap((d) => d.lines || []);
   let files = d3
     .groups(lines, (d) => d.file)
     .map(([name, lines]) => {
-      return { name, lines };
+      const lineCount = lines.reduce((sum, l) => sum + (Number(l.added) || 0) + (Number(l.deleted) || 0), 0) || lines.length;
+      return { name: typeof name === 'object' && name?.name ? name.name : name, lines, lineCount };
     });
-  files = d3.sort(files, (d) => -d.lines.length);
+  files = d3.sort(files, (d) => -d.lineCount);
 
   d3.select('.files').selectAll('div').remove();
 
@@ -501,7 +550,7 @@ function updateFileDetails(filteredCommits) {
   filesContainer
     .append('dt')
     .append('small')
-    .html(d => `${d.lines.length} lines`);
+    .html(d => `${d.lineCount} lines`);
 
   filesContainer.append('dd')
     .selectAll('div')
@@ -515,42 +564,47 @@ function updateFileDetails(filteredCommits) {
 function updateTimeDisplay(timeSlider, timeDisplay) {
   if (!timeSlider || !timeDisplay) return;
 
-  let commits = processCommits();
-  selectedCommits = commits;
+  if (!selectedCommits || selectedCommits.length === 0) {
+    selectedCommits = processCommits();
+  }
+  if (selectedCommits.length === 0) return;
 
   commitProgress = Number(timeSlider.value);
-  const timeScale = d3.scaleTime([d3.min(selectedCommits, d => d.datetime), d3.max(selectedCommits, d => d.datetime)], [0, 100]);
+  const minDate = d3.min(selectedCommits, d => d.datetime);
+  const maxDate = d3.max(selectedCommits, d => d.datetime);
+  const timeScale = d3.scaleTime([minDate, maxDate], [0, 100]);
   commitMaxTime = timeScale.invert(commitProgress);
 
   timeDisplay.textContent = commitMaxTime.toLocaleString("en", { dateStyle: 'full', timeStyle: 'short' });
 
   const filteredCommits = filterCommitsByTime();
   updateScatterplot(filteredCommits);
-
   updateFileDetails(filteredCommits);
+  displayStats();
 }
 
 function renderItems(startIndex) {
-  let commits = processCommits();
+  if (!itemsContainer || !itemsContainer.node()) return;
+  let commits = selectedCommits.length > 0 ? selectedCommits : processCommits();
+  if (commits.length === 0) return;
+
   itemsContainer.selectAll('div').remove();
 
   const endIndex = Math.min(startIndex + VISIBLE_COUNT, commits.length);
-
   let newCommitSlice = commits.slice(startIndex, endIndex);
 
-  updateScatterplot(newCommitSlice);
+  // Progressive scrollytelling: display commits up to the currently visible position
+  const commitsUpToVisible = commits.slice(0, endIndex);
+  updateScatterplot(commitsUpToVisible);
 
   itemsContainer.selectAll('div')
     .data(newCommitSlice)
     .enter()
     .append('div')
     .attr('class', 'item')
-    .html((d, idx) => {
-      return generateNarrative(d, idx);
-    })
+    .html((d, idx) => generateNarrative(d, startIndex + idx))
     .style('position', 'absolute')
-    .style('top', (_, idx) => `${idx * ITEM_HEIGHT}px`);
-
+    .style('top', (_, idx) => `${(startIndex + idx) * ITEM_HEIGHT}px`);
 }
 
 function generateNarrative(commit, index) {
@@ -573,18 +627,25 @@ document.addEventListener('DOMContentLoaded', async () => {
   fileSizeSpacer = d3.select('#file-size-spacer');
   fileSizeItemsContainer = d3.select('#file-size-items');
 
-  bindScrollEvents();
-
   const timeSlider = document.getElementById('time-slider');
   const timeDisplay = document.getElementById('time-display');
+  if (timeSlider) {
+    timeSlider.value = '100';
+  }
+
+  await loadData();
+  await loadFileData();
+  selectedCommits = processCommits();
+
+  updateScrollDimensions();
+  bindScrollEvents();
+
   if (timeSlider && timeDisplay) {
     timeSlider.addEventListener('input', function () {
       updateTimeDisplay(timeSlider, timeDisplay);
     });
   }
 
-  await loadData();
-  await loadFileData();
   await loadGitHubMeta('ishaankor');
   updateScatterplot(selectedCommits);
   updateTimeDisplay(timeSlider, timeDisplay);

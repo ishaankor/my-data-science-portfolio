@@ -71,7 +71,11 @@ const staticRecords: LocRecord[] = Array.isArray(locStaticRecords)
   ? ((locStaticRecords as any).default as LocRecord[])
   : [];
 
-export default function CodebaseEvolutionSuite() {
+interface CodebaseEvolutionSuiteProps {
+  liveCommits?: any[];
+}
+
+export default function CodebaseEvolutionSuite({ liveCommits }: CodebaseEvolutionSuiteProps = {}) {
   const [dynamicRecords, setDynamicRecords] = useState<LocRecord[] | null>(null);
   // sliderIndex === null means "Show ALL commits" (default max position)
   const [sliderIndex, setSliderIndex] = useState<number | null>(null);
@@ -198,6 +202,29 @@ export default function CodebaseEvolutionSuite() {
       if (r.file) item.files.add(r.file);
     });
 
+    // Merge any live commits fetched from GitHub API if not already present
+    if (Array.isArray(liveCommits) && liveCommits.length > 0) {
+      liveCommits.forEach((lc) => {
+        if (!lc) return;
+        const hash = lc.shortSha || (lc.sha ? lc.sha.slice(0, 7) : null);
+        if (hash && !commitMap.has(hash)) {
+          const d = lc.date ? new Date(lc.date) : new Date();
+          const isoDate = !isNaN(d.getTime()) ? d.toISOString() : new Date().toISOString();
+          commitMap.set(hash, {
+            author: 'Ishaan Kor',
+            date: isoDate.slice(0, 10),
+            time: isoDate.slice(11, 19),
+            datetime: isoDate,
+            message: lc.message || 'codebase update',
+            added: 1,
+            deleted: 0,
+            lines: 1,
+            files: new Set([lc.repoName || 'portfolio']),
+          });
+        }
+      });
+    }
+
     return Array.from(commitMap.entries())
       .map(([commit, data]) => ({
         commit,
@@ -227,7 +254,7 @@ export default function CodebaseEvolutionSuite() {
         const keyB = `${dateB}T${timeB}`;
         return keyA.localeCompare(keyB);
       });
-  }, [records]);
+  }, [records, liveCommits]);
 
   // Whenever commitList updates, default slider to showing ALL commits (max position)
   useEffect(() => {
@@ -302,6 +329,29 @@ export default function CodebaseEvolutionSuite() {
   }, [filteredCommits, sortOrder]);
 
   const currentCommit = commitList[activeIndex] || commitList[commitList.length - 1];
+
+  // Fixed chronological time extent across the entire commitList so scatterplot dots never shift horizontally
+  const timelineExtent = useMemo(() => {
+    if (commitList.length === 0) return { min: 0, max: 1 };
+    const getTimestamp = (c: CommitMeta) => {
+      const d = new Date(c.datetime || `${c.date}T${c.time || '12:00:00'}`);
+      const t = d.getTime();
+      return isNaN(t) ? 0 : t;
+    };
+    const min = getTimestamp(commitList[0]);
+    const max = getTimestamp(commitList[commitList.length - 1]);
+    return { min: isNaN(min) ? 0 : min, max: isNaN(max) ? 1 : (max > min ? max : min + 1) };
+  }, [commitList]);
+
+  // Synchronize scrollytelling feed to scroll into view when slider moves
+  useEffect(() => {
+    if (sliderIndex !== null && currentCommit) {
+      const el = document.getElementById(`commit-card-${currentCommit.commit}`);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+  }, [sliderIndex, currentCommit]);
 
   return (
     <div className="space-y-12">
@@ -435,6 +485,7 @@ export default function CodebaseEvolutionSuite() {
                 return (
                   <div
                     key={c.commit}
+                    id={`commit-card-${c.commit}`}
                     onClick={() => setSelectedCommit(isSelected ? null : c.commit)}
                     className={`p-4 rounded-lg border transition-all cursor-pointer ${isSelected
                         ? 'bg-ember/10 border-ember text-bone shadow-md'
@@ -483,29 +534,36 @@ export default function CodebaseEvolutionSuite() {
                   <div className="border-b border-line/30 w-full pb-1 flex items-center justify-between"><span>00:00</span></div>
                 </div>
 
-                {/* Plot Commit Bubbles with bounded margins */}
-                {filteredCommits.map((c, i) => {
+                {/* Plot Commit Bubbles with bounded margins and fixed timeline positioning */}
+                {filteredCommits.map((c) => {
                   const parts = (c.time || '12:00:00').split(':').map(Number);
                   const timeInHours = (parts[0] || 12) + (parts[1] || 0) / 60;
                   const yPercent = 10 + (timeInHours / 24) * 78;
-                  const xPercent = (i / (filteredCommits.length - 1 || 1)) * 88 + 6;
+                  const cTime = new Date(c.datetime || `${c.date}T${c.time || '12:00:00'}`).getTime();
+                  const timeSpan = timelineExtent.max - timelineExtent.min || 1;
+                  const timeRatio = Math.max(0, Math.min(1, (cTime - timelineExtent.min) / timeSpan));
+                  const xPercent = timeRatio * 88 + 6;
                   const sizePx = Math.max(8, Math.min(22, Math.round(Math.log2((c.linesEdited || 0) + 1) * 2.8)));
                   const isSelected = selectedCommit === c.commit;
                   const isHovered = hoveredCommit?.commit === c.commit;
 
                   return (
-                    <a
+                    <div
                       key={c.commit}
-                      href={`https://github.com/ishaankor/my-data-science-portfolio/commit/${c.commit}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      role="button"
+                      tabIndex={0}
                       onClick={() => {
+                        setSelectedCommit(isSelected ? null : c.commit);
                         setHoveredCommit(null);
+                        const cardEl = document.getElementById(`commit-card-${c.commit}`);
+                        if (cardEl) {
+                          cardEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        }
                       }}
                       onMouseEnter={() => setHoveredCommit(c)}
                       onMouseLeave={() => setHoveredCommit(null)}
                       aria-label={`Commit ${c.commit.substring(0, 7)}: ${c.message}`}
-                      className={`absolute rounded-full transition-all duration-200 cursor-pointer transform -translate-x-1/2 -translate-y-1/2 outline-none focus:outline-none focus:ring-0 focus-visible:outline-none select-none ${isSelected
+                      className={`absolute rounded-full transition-all duration-150 cursor-pointer transform -translate-x-1/2 -translate-y-1/2 outline-none focus:outline-none focus:ring-0 select-none ${isSelected
                           ? 'bg-ember scale-125 z-30 shadow-lg shadow-ember/50 border-2 border-white'
                           : isHovered
                             ? 'bg-rose-400 scale-125 z-20 shadow-md shadow-rose-500/50 border border-white'
