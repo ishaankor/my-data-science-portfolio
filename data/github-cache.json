@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-20T08:39:43.372Z",
+  "updatedAt": "2026-10-20T17:57:56.344Z",
   "totalRepos": 19,
   "user": {
     "login": "ishaankor",
@@ -18,8 +18,8 @@
       "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
       "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
       "created_at": "2025-01-11T23:48:23Z",
-      "pushed_at": "2026-10-20T08:38:50Z",
-      "updated_at": "2026-10-20T08:38:54Z"
+      "pushed_at": "2026-10-20T17:57:06Z",
+      "updated_at": "2026-10-20T17:57:11Z"
     },
     {
       "id": 1316668584,
@@ -28,8 +28,8 @@
       "html_url": "https://github.com/ishaankor/Personal-Meta-Fetcher",
       "description": null,
       "created_at": "2026-07-30T00:16:14Z",
-      "pushed_at": "2026-10-19T04:58:37Z",
-      "updated_at": "2026-10-19T04:58:40Z"
+      "pushed_at": "2026-10-20T08:42:03Z",
+      "updated_at": "2026-10-20T08:42:08Z"
     },
     {
       "id": 1324783574,
@@ -204,6 +204,135 @@
   ],
   "commits": [
     {
+      "sha": "429e826e2165a62604aa9f397b52f9b2100bd1ab",
+      "shortSha": "429e826",
+      "message": "refactor: update build output and component assets for portfolio pages",
+      "repoName": "my-data-science-portfolio",
+      "repoFullName": "ishaankor/my-data-science-portfolio",
+      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/429e826e2165a62604aa9f397b52f9b2100bd1ab",
+      "date": "2026-10-20T17:57:03Z",
+      "timeAgo": "just now",
+      "stats": {
+        "total": 1142,
+        "additions": 915,
+        "deletions": 227
+      },
+      "linesChanged": 1142,
+      "additions": 915,
+      "deletions": 227,
+      "filesCount": 45,
+      "files": [
+        {
+          "filename": "components/meta/CodebaseEvolutionSuite.tsx",
+          "status": "modified",
+          "additions": 68,
+          "deletions": 10,
+          "changes": 78
+        },
+        {
+          "filename": "components/meta/GitHubMetaDashboard.tsx",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1,
+          "changes": 2
+        },
+        {
+          "filename": "meta/index.html",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1,
+          "changes": 2
+        },
+        {
+          "filename": "meta/main.js",
+          "status": "modified",
+          "additions": 226,
+          "deletions": 165,
+          "changes": 391
+        },
+        {
+          "filename": "out/404.html",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1,
+          "changes": 2
+        },
+        {
+          "filename": "out/_next/static/YUhPV-Cq2hRy5SOfwTSNb/_buildManifest.js",
+          "status": "renamed",
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0
+        },
+        {
+          "filename": "out/_next/static/YUhPV-Cq2hRy5SOfwTSNb/_ssgManifest.js",
+          "status": "renamed",
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0
+        },
+        {
+          "filename": "out/_next/static/chunks/117-90ce46450edbeee7.js",
+          "status": "renamed",
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0
+        },
+        {
+          "filename": "out/_next/static/chunks/136-879e06ab99c498f2.js",
+          "status": "added",
+          "additions": 1,
+          "deletions": 0,
+          "changes": 1
+        },
+        {
+          "filename": "out/_next/static/chunks/357-b540a16359843c31.js",
+          "status": "removed",
+          "additions": 0,
+          "deletions": 1,
+          "changes": 1
+        }
+      ],
+      "author": {
+        "name": "Ishaan Kor",
+        "date": "2026-10-20T17:57:03Z"
+      }
+    },
+    {
+      "sha": "b8e4badfc22688e7d41c43eb503b776a1c98561f",
+      "shortSha": "b8e4bad",
+      "message": "fix: support full ISO datetime strings in date parsing regex by extracting date components",
+      "repoName": "Personal-Meta-Fetcher",
+      "repoFullName": "ishaankor/Personal-Meta-Fetcher",
+      "repoUrl": "https://github.com/ishaankor/Personal-Meta-Fetcher",
+      "commitUrl": "https://github.com/ishaankor/Personal-Meta-Fetcher/commit/b8e4badfc22688e7d41c43eb503b776a1c98561f",
+      "date": "2026-10-20T08:42:00Z",
+      "timeAgo": "9h ago",
+      "stats": {
+        "total": 34,
+        "additions": 21,
+        "deletions": 13
+      },
+      "linesChanged": 34,
+      "additions": 21,
+      "deletions": 13,
+      "filesCount": 1,
+      "files": [
+        {
+          "filename": "api/github.js",
+          "status": "modified",
+          "additions": 21,
+          "deletions": 13,
+          "changes": 34
+        }
+      ],
+      "author": {
+        "name": "Ishaan Kor",
+        "date": "2026-10-20T08:42:00Z"
+      }
+    },
+    {
       "sha": "8f3789e88e17026477d99aa341d939494eb53308",
       "shortSha": "8f3789e",
       "message": "feat: add company and certification logo assets and update experience components",
@@ -212,7 +341,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/8f3789e88e17026477d99aa341d939494eb53308",
       "date": "2026-10-20T08:38:47Z",
-      "timeAgo": "just now",
+      "timeAgo": "9h ago",
       "stats": {
         "total": 523,
         "additions": 444,
@@ -448,104 +577,10 @@
         "name": "Ishaan Kor",
         "date": "2026-10-19T08:09:15Z"
       }
-    },
-    {
-      "sha": "3d965b4a0d08828d1f08f7684d6f136a6d940117",
-      "shortSha": "3d965b4",
-      "message": "refactor: exclude github-cache.json from static lines of code data generation and metrics",
-      "repoName": "my-data-science-portfolio",
-      "repoFullName": "ishaankor/my-data-science-portfolio",
-      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
-      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/3d965b4a0d08828d1f08f7684d6f136a6d940117",
-      "date": "2026-10-19T07:42:34Z",
-      "timeAgo": "1d ago",
-      "stats": {
-        "total": 846,
-        "additions": 91,
-        "deletions": 755
-      },
-      "linesChanged": 846,
-      "additions": 91,
-      "deletions": 755,
-      "filesCount": 5,
-      "files": [
-        {
-          "filename": "components/meta/CodebaseEvolutionSuite.tsx",
-          "status": "modified",
-          "additions": 52,
-          "deletions": 1,
-          "changes": 53
-        },
-        {
-          "filename": "data/loc-static.json",
-          "status": "modified",
-          "additions": 20,
-          "deletions": 650,
-          "changes": 670
-        },
-        {
-          "filename": "meta/loc.csv",
-          "status": "modified",
-          "additions": 4,
-          "deletions": 49,
-          "changes": 53
-        },
-        {
-          "filename": "public/loc.csv",
-          "status": "modified",
-          "additions": 4,
-          "deletions": 49,
-          "changes": 53
-        },
-        {
-          "filename": "scripts/generate-loc.mjs",
-          "status": "modified",
-          "additions": 11,
-          "deletions": 6,
-          "changes": 17
-        }
-      ],
-      "author": {
-        "name": "Ishaan Kor",
-        "date": "2026-10-19T07:42:34Z"
-      }
-    },
-    {
-      "sha": "40dfd0d47c8c8088f144a143fa213ba2fd8c05a6",
-      "shortSha": "40dfd0d",
-      "message": "fix: update default and maximum limits for commit fetching in API",
-      "repoName": "Personal-Meta-Fetcher",
-      "repoFullName": "ishaankor/Personal-Meta-Fetcher",
-      "repoUrl": "https://github.com/ishaankor/Personal-Meta-Fetcher",
-      "commitUrl": "https://github.com/ishaankor/Personal-Meta-Fetcher/commit/40dfd0d47c8c8088f144a143fa213ba2fd8c05a6",
-      "date": "2026-10-19T04:58:34Z",
-      "timeAgo": "1d ago",
-      "stats": {
-        "total": 2,
-        "additions": 1,
-        "deletions": 1
-      },
-      "linesChanged": 2,
-      "additions": 1,
-      "deletions": 1,
-      "filesCount": 1,
-      "files": [
-        {
-          "filename": "api/commits.js",
-          "status": "modified",
-          "additions": 1,
-          "deletions": 1,
-          "changes": 2
-        }
-      ],
-      "author": {
-        "name": "Ishaan Kor",
-        "date": "2026-10-19T04:58:34Z"
-      }
     }
   ],
   "contributionCalendar": {
-    "totalContributions": 850,
+    "totalContributions": 851,
     "weeks": [
       {
         "contributionDays": [
@@ -2589,7 +2624,7 @@
           },
           {
             "date": "2026-10-20",
-            "contributionCount": 1,
+            "contributionCount": 2,
             "color": "#9be9a8"
           }
         ]
