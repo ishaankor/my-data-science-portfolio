@@ -1,4 +1,13 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+components/analytics/GitHubAnalytics.tsx,2,2,tsx,8f3789e,Ishaan Kor,2026-10-20,01:38:47,-07:00,2026-10-20T01:38:47-07:00,2,"feat: add company and certification logo assets and update experience components"
+components/experience/CertificationsSection.tsx,34,9,tsx,8f3789e,Ishaan Kor,2026-10-20,01:38:47,-07:00,2026-10-20T01:38:47-07:00,2,"feat: add company and certification logo assets and update experience components"
+components/experience/ExperienceMatrix.tsx,41,2,tsx,8f3789e,Ishaan Kor,2026-10-20,01:38:47,-07:00,2026-10-20T01:38:47-07:00,2,"feat: add company and certification logo assets and update experience components"
+components/experience/ExperienceTimeline.tsx,34,1,tsx,8f3789e,Ishaan Kor,2026-10-20,01:38:47,-07:00,2026-10-20T01:38:47-07:00,2,"feat: add company and certification logo assets and update experience components"
+components/experience/WorkHeroHUD.tsx,83,22,tsx,8f3789e,Ishaan Kor,2026-10-20,01:38:47,-07:00,2026-10-20T01:38:47-07:00,2,"feat: add company and certification logo assets and update experience components"
+components/meta/GitHubMetaDashboard.tsx,10,5,tsx,8f3789e,Ishaan Kor,2026-10-20,01:38:47,-07:00,2026-10-20T01:38:47-07:00,2,"feat: add company and certification logo assets and update experience components"
+hooks/useGitHubData.ts,13,10,ts,8f3789e,Ishaan Kor,2026-10-20,01:38:47,-07:00,2026-10-20T01:38:47-07:00,1,"feat: add company and certification logo assets and update experience components"
+public/images/Verizon.svg,27,0,svg,8f3789e,Ishaan Kor,2026-10-20,01:38:47,-07:00,2026-10-20T01:38:47-07:00,2,"feat: add company and certification logo assets and update experience components"
+public/images/ucsd-logo,0,0,code,8f3789e,Ishaan Kor,2026-10-20,01:38:47,-07:00,2026-10-20T01:38:47-07:00,2,"feat: add company and certification logo assets and update experience components"
 app/api/loc/route.ts,0,23,ts,41342c3,Ishaan Kor,2026-10-19,01:22:21,-07:00,2026-10-19T01:22:21-07:00,3,"refactor: improve shallow clone safeguarding in loc generation script and remove api route"
 components/meta/CodebaseEvolutionSuite.tsx,6,16,tsx,41342c3,Ishaan Kor,2026-10-19,01:22:21,-07:00,2026-10-19T01:22:21-07:00,2,"refactor: improve shallow clone safeguarding in loc generation script and remove api route"
 components/meta/DeveloperHabitsMatrix.tsx,23,8,tsx,41342c3,Ishaan Kor,2026-10-19,01:22:21,-07:00,2026-10-19T01:22:21-07:00,2,"refactor: improve shallow clone safeguarding in loc generation script and remove api route"

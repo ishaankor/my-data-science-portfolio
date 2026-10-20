@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-19T08:23:10.041Z",
+  "updatedAt": "2026-10-20T08:39:43.372Z",
   "totalRepos": 19,
   "user": {
     "login": "ishaankor",
@@ -18,8 +18,8 @@
       "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
       "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
       "created_at": "2025-01-11T23:48:23Z",
-      "pushed_at": "2026-10-19T08:22:23Z",
-      "updated_at": "2026-10-19T08:22:27Z"
+      "pushed_at": "2026-10-20T08:38:50Z",
+      "updated_at": "2026-10-20T08:38:54Z"
     },
     {
       "id": 1316668584,
@@ -204,6 +204,102 @@
   ],
   "commits": [
     {
+      "sha": "8f3789e88e17026477d99aa341d939494eb53308",
+      "shortSha": "8f3789e",
+      "message": "feat: add company and certification logo assets and update experience components",
+      "repoName": "my-data-science-portfolio",
+      "repoFullName": "ishaankor/my-data-science-portfolio",
+      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/8f3789e88e17026477d99aa341d939494eb53308",
+      "date": "2026-10-20T08:38:47Z",
+      "timeAgo": "just now",
+      "stats": {
+        "total": 523,
+        "additions": 444,
+        "deletions": 79
+      },
+      "linesChanged": 523,
+      "additions": 444,
+      "deletions": 79,
+      "filesCount": 49,
+      "files": [
+        {
+          "filename": "components/analytics/GitHubAnalytics.tsx",
+          "status": "modified",
+          "additions": 2,
+          "deletions": 2,
+          "changes": 4
+        },
+        {
+          "filename": "components/experience/CertificationsSection.tsx",
+          "status": "modified",
+          "additions": 34,
+          "deletions": 9,
+          "changes": 43
+        },
+        {
+          "filename": "components/experience/ExperienceMatrix.tsx",
+          "status": "modified",
+          "additions": 41,
+          "deletions": 2,
+          "changes": 43
+        },
+        {
+          "filename": "components/experience/ExperienceTimeline.tsx",
+          "status": "modified",
+          "additions": 34,
+          "deletions": 1,
+          "changes": 35
+        },
+        {
+          "filename": "components/experience/WorkHeroHUD.tsx",
+          "status": "modified",
+          "additions": 83,
+          "deletions": 22,
+          "changes": 105
+        },
+        {
+          "filename": "components/meta/GitHubMetaDashboard.tsx",
+          "status": "modified",
+          "additions": 10,
+          "deletions": 5,
+          "changes": 15
+        },
+        {
+          "filename": "hooks/useGitHubData.ts",
+          "status": "modified",
+          "additions": 13,
+          "deletions": 10,
+          "changes": 23
+        },
+        {
+          "filename": "out/404.html",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1,
+          "changes": 2
+        },
+        {
+          "filename": "out/_next/static/chunks/357-15a7876151f76eee.js",
+          "status": "removed",
+          "additions": 0,
+          "deletions": 1,
+          "changes": 1
+        },
+        {
+          "filename": "out/_next/static/chunks/357-b540a16359843c31.js",
+          "status": "added",
+          "additions": 1,
+          "deletions": 0,
+          "changes": 1
+        }
+      ],
+      "author": {
+        "name": "Ishaan Kor",
+        "date": "2026-10-20T08:38:47Z"
+      }
+    },
+    {
       "sha": "41342c39f062c553dfe0fcca6b9226687c996c7e",
       "shortSha": "41342c3",
       "message": "refactor: improve shallow clone safeguarding in loc generation script and remove api route",
@@ -212,7 +308,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/41342c39f062c553dfe0fcca6b9226687c996c7e",
       "date": "2026-10-19T08:22:21Z",
-      "timeAgo": "just now",
+      "timeAgo": "1d ago",
       "stats": {
         "total": 7077,
         "additions": 6947,
@@ -308,7 +404,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/8338e94c514495299fc5817557a50f1a8c9d6998",
       "date": "2026-10-19T08:09:15Z",
-      "timeAgo": "13m ago",
+      "timeAgo": "1d ago",
       "stats": {
         "total": 6888,
         "additions": 6868,
@@ -362,7 +458,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/3d965b4a0d08828d1f08f7684d6f136a6d940117",
       "date": "2026-10-19T07:42:34Z",
-      "timeAgo": "40m ago",
+      "timeAgo": "1d ago",
       "stats": {
         "total": 846,
         "additions": 91,
@@ -423,7 +519,7 @@
       "repoUrl": "https://github.com/ishaankor/Personal-Meta-Fetcher",
       "commitUrl": "https://github.com/ishaankor/Personal-Meta-Fetcher/commit/40dfd0d47c8c8088f144a143fa213ba2fd8c05a6",
       "date": "2026-10-19T04:58:34Z",
-      "timeAgo": "3h ago",
+      "timeAgo": "1d ago",
       "stats": {
         "total": 2,
         "additions": 1,
@@ -446,43 +542,10 @@
         "name": "Ishaan Kor",
         "date": "2026-10-19T04:58:34Z"
       }
-    },
-    {
-      "sha": "874c2e847706baca5c3481419a33a3244e72a63b",
-      "shortSha": "874c2e8",
-      "message": "feat: limit GitHub commits feed display to the most recent five items",
-      "repoName": "my-data-science-portfolio",
-      "repoFullName": "ishaankor/my-data-science-portfolio",
-      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
-      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/874c2e847706baca5c3481419a33a3244e72a63b",
-      "date": "2026-10-19T04:58:33Z",
-      "timeAgo": "3h ago",
-      "stats": {
-        "total": 2,
-        "additions": 1,
-        "deletions": 1
-      },
-      "linesChanged": 2,
-      "additions": 1,
-      "deletions": 1,
-      "filesCount": 1,
-      "files": [
-        {
-          "filename": "components/meta/GitHubMetaDashboard.tsx",
-          "status": "modified",
-          "additions": 1,
-          "deletions": 1,
-          "changes": 2
-        }
-      ],
-      "author": {
-        "name": "Ishaan Kor",
-        "date": "2026-10-19T04:58:33Z"
-      }
     }
   ],
   "contributionCalendar": {
-    "totalContributions": 849,
+    "totalContributions": 850,
     "weeks": [
       {
         "contributionDays": [
@@ -2522,6 +2585,11 @@
           {
             "date": "2026-10-19",
             "contributionCount": 3,
+            "color": "#9be9a8"
+          },
+          {
+            "date": "2026-10-20",
+            "contributionCount": 1,
             "color": "#9be9a8"
           }
         ]
