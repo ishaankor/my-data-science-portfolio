@@ -1,4 +1,13 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+components/analytics/GitHubAnalytics.tsx,19,19,tsx,f91c8f9,Ishaan Kor,2026-10-20,14:43:34,-07:00,2026-10-20T14:43:34-07:00,2,"refactor: update spacing and responsive typography across components and static output"
+components/experience/WorkHeroHUD.tsx,5,5,tsx,f91c8f9,Ishaan Kor,2026-10-20,14:43:34,-07:00,2026-10-20T14:43:34-07:00,2,"refactor: update spacing and responsive typography across components and static output"
+components/hero/HeroMemojiInteractive.tsx,27,40,tsx,f91c8f9,Ishaan Kor,2026-10-20,14:43:34,-07:00,2026-10-20T14:43:34-07:00,2,"refactor: update spacing and responsive typography across components and static output"
+components/hero/HeroSection.tsx,13,21,tsx,f91c8f9,Ishaan Kor,2026-10-20,14:43:34,-07:00,2026-10-20T14:43:34-07:00,2,"refactor: update spacing and responsive typography across components and static output"
+components/projects/ProjectsHeroHUD.tsx,5,5,tsx,f91c8f9,Ishaan Kor,2026-10-20,14:43:34,-07:00,2026-10-20T14:43:34-07:00,2,"refactor: update spacing and responsive typography across components and static output"
+components/projects/ProjectsShowcase.tsx,3,3,tsx,f91c8f9,Ishaan Kor,2026-10-20,14:43:34,-07:00,2026-10-20T14:43:34-07:00,2,"refactor: update spacing and responsive typography across components and static output"
+components/sections/AboutMeSection.tsx,5,5,tsx,f91c8f9,Ishaan Kor,2026-10-20,14:43:34,-07:00,2026-10-20T14:43:34-07:00,2,"refactor: update spacing and responsive typography across components and static output"
+components/skills/TechStackSection.tsx,5,5,tsx,f91c8f9,Ishaan Kor,2026-10-20,14:43:34,-07:00,2026-10-20T14:43:34-07:00,2,"refactor: update spacing and responsive typography across components and static output"
+tsconfig.tsbuildinfo,1,1,tsbuildinfo,f91c8f9,Ishaan Kor,2026-10-20,14:43:34,-07:00,2026-10-20T14:43:34-07:00,0,"refactor: update spacing and responsive typography across components and static output"
 components/meta/CodebaseEvolutionSuite.tsx,10,34,tsx,a2d51aa,Ishaan Kor,2026-10-20,11:16:10,-07:00,2026-10-20T11:16:10-07:00,2,"style: update CSS bundle reference and rebuild static assets"
 tsconfig.tsbuildinfo,1,1,tsbuildinfo,a2d51aa,Ishaan Kor,2026-10-20,11:16:10,-07:00,2026-10-20T11:16:10-07:00,0,"style: update CSS bundle reference and rebuild static assets"
 components/meta/CodebaseEvolutionSuite.tsx,68,10,tsx,429e826,Ishaan Kor,2026-10-20,10:57:03,-07:00,2026-10-20T10:57:03-07:00,2,"refactor: update build output and component assets for portfolio pages"

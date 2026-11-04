@@ -114,10 +114,12 @@ export const portfolioData: PortfolioData = {
   twitter: "https://twitter.com/ishaankoradia",
 
   typingStrings: [
-    "an AI Engineer.",
-    "a Frontier LLM Evaluator.",
+    // "Ishaan Koradia.",
     "an Agentic Systems Builder.",
-    "a UCSD ML Graduate."
+    "a Frontier LLM Evaluator.",
+    "an AI Engineer.",
+    "a UCSD ML Undergraduate.",
+    "an Automation Enthusiast."
   ],
 
   stats: [

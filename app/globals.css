@@ -192,3 +192,31 @@ body {
 .animate-avatar-shockwave {
   animation: avatarShockwave 0.65s cubic-bezier(0.15, 0.85, 0.35, 1) forwards;
 }
+
+/* =========================================================================
+   Refined 3D Card Specular Sheen Animation (Clean, Subtle Luxury Foil)
+   ========================================================================= */
+
+@keyframes specularSweep {
+  0% {
+    transform: translateX(-150%) translateY(-150%) rotate(25deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.85;
+  }
+  38% {
+    transform: translateX(150%) translateY(150%) rotate(25deg);
+    opacity: 0.85;
+  }
+  48%, 100% {
+    transform: translateX(150%) translateY(150%) rotate(25deg);
+    opacity: 0;
+  }
+}
+
+.animate-specular-sweep {
+  animation: specularSweep 5.5s cubic-bezier(0.22, 0.8, 0.22, 1) infinite;
+}
+
+
