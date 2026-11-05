@@ -1,5 +1,33 @@
 [
   {
+    "file": "components/hero/HeroMemojiInteractive.tsx",
+    "added": 24,
+    "deleted": 2,
+    "type": "tsx",
+    "commit": "ddf3549",
+    "author": "Ishaan Kor",
+    "date": "2026-11-05",
+    "time": "11:46:33",
+    "timezone": "-08:00",
+    "datetime": "2026-11-05T11:46:33-08:00",
+    "depth": 2,
+    "message": "feat: add dynamic 3D levitation shadows and cyan underglow to interactive memoji card"
+  },
+  {
+    "file": "data/portfolio.ts",
+    "added": 2,
+    "deleted": 3,
+    "type": "ts",
+    "commit": "ddf3549",
+    "author": "Ishaan Kor",
+    "date": "2026-11-05",
+    "time": "11:46:33",
+    "timezone": "-08:00",
+    "datetime": "2026-11-05T11:46:33-08:00",
+    "depth": 1,
+    "message": "feat: add dynamic 3D levitation shadows and cyan underglow to interactive memoji card"
+  },
+  {
     "file": "app/globals.css",
     "added": 23,
     "deleted": 63,

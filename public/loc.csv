@@ -1,4 +1,6 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+components/hero/HeroMemojiInteractive.tsx,24,2,tsx,ddf3549,Ishaan Kor,2026-11-05,11:46:33,-08:00,2026-11-05T11:46:33-08:00,2,"feat: add dynamic 3D levitation shadows and cyan underglow to interactive memoji card"
+data/portfolio.ts,2,3,ts,ddf3549,Ishaan Kor,2026-11-05,11:46:33,-08:00,2026-11-05T11:46:33-08:00,1,"feat: add dynamic 3D levitation shadows and cyan underglow to interactive memoji card"
 app/globals.css,23,63,css,f2704a0,Ishaan Kor,2026-11-05,11:39:16,-08:00,2026-11-05T11:39:16-08:00,1,"refactor: update retro arcade animations and styles in globals and components"
 components/hero/HeroMemojiInteractive.tsx,69,91,tsx,f2704a0,Ishaan Kor,2026-11-05,11:39:16,-08:00,2026-11-05T11:39:16-08:00,2,"refactor: update retro arcade animations and styles in globals and components"
 data/portfolio.ts,3,3,ts,f2704a0,Ishaan Kor,2026-11-05,11:39:16,-08:00,2026-11-05T11:39:16-08:00,1,"refactor: update retro arcade animations and styles in globals and components"

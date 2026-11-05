@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-05T19:40:00.227Z",
+  "updatedAt": "2026-11-05T19:47:26.613Z",
   "totalRepos": 19,
   "user": {
     "login": "ishaankor",
@@ -18,8 +18,8 @@
       "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
       "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
       "created_at": "2025-01-11T23:48:23Z",
-      "pushed_at": "2026-11-05T19:39:20Z",
-      "updated_at": "2026-11-05T19:39:25Z",
+      "pushed_at": "2026-11-05T19:46:36Z",
+      "updated_at": "2026-11-05T19:46:41Z",
       "fork": false,
       "is_fork": false
     },
@@ -242,6 +242,102 @@
   ],
   "commits": [
     {
+      "sha": "ddf3549152608c6485793ed5711a8ea80d5dbe74",
+      "shortSha": "ddf3549",
+      "message": "feat: add dynamic 3D levitation shadows and cyan underglow to interactive memoji card",
+      "repoName": "my-data-science-portfolio",
+      "repoFullName": "ishaankor/my-data-science-portfolio",
+      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/ddf3549152608c6485793ed5711a8ea80d5dbe74",
+      "date": "2026-11-05T19:46:33Z",
+      "timeAgo": "just now",
+      "stats": {
+        "total": 3814,
+        "additions": 154,
+        "deletions": 3660
+      },
+      "linesChanged": 3814,
+      "additions": 154,
+      "deletions": 3660,
+      "filesCount": 43,
+      "files": [
+        {
+          "filename": "components/hero/HeroMemojiInteractive.tsx",
+          "status": "modified",
+          "additions": 24,
+          "deletions": 2,
+          "changes": 26
+        },
+        {
+          "filename": "data/portfolio.ts",
+          "status": "modified",
+          "additions": 2,
+          "deletions": 3,
+          "changes": 5
+        },
+        {
+          "filename": "out/404.html",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1,
+          "changes": 2
+        },
+        {
+          "filename": "out/_next/static/UlH8hGyFVC1pOm6Xf7mij/_buildManifest.js",
+          "status": "renamed",
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0
+        },
+        {
+          "filename": "out/_next/static/UlH8hGyFVC1pOm6Xf7mij/_ssgManifest.js",
+          "status": "renamed",
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0
+        },
+        {
+          "filename": "out/_next/static/chunks/357-6d021b0c722e14cb.js",
+          "status": "added",
+          "additions": 1,
+          "deletions": 0,
+          "changes": 1
+        },
+        {
+          "filename": "out/_next/static/chunks/357-beda441a2b6cdd49.js",
+          "status": "removed",
+          "additions": 0,
+          "deletions": 1,
+          "changes": 1
+        },
+        {
+          "filename": "out/_next/static/chunks/632-573935b77c25cc15.js",
+          "status": "removed",
+          "additions": 0,
+          "deletions": 1,
+          "changes": 1
+        },
+        {
+          "filename": "out/_next/static/chunks/632-a4c13318f2d55e78.js",
+          "status": "added",
+          "additions": 1,
+          "deletions": 0,
+          "changes": 1
+        },
+        {
+          "filename": "out/_next/static/chunks/_error.js",
+          "status": "removed",
+          "additions": 0,
+          "deletions": 28,
+          "changes": 28
+        }
+      ],
+      "author": {
+        "name": "Ishaan Kor",
+        "date": "2026-11-05T19:46:33Z"
+      }
+    },
+    {
       "sha": "f2704a05ee624bd375b3a007569b013823711b4f",
       "shortSha": "f2704a0",
       "message": "refactor: update retro arcade animations and styles in globals and components",
@@ -250,7 +346,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/f2704a05ee624bd375b3a007569b013823711b4f",
       "date": "2026-11-05T19:39:18Z",
-      "timeAgo": "just now",
+      "timeAgo": "8m ago",
       "stats": {
         "total": 4033,
         "additions": 3836,
@@ -624,50 +720,10 @@
         "name": "Ishaan Kor",
         "date": "2026-11-04T22:56:37Z"
       }
-    },
-    {
-      "sha": "7c92a22d709cc4ef77733a6998f2b229673dbc64",
-      "shortSha": "7c92a22",
-      "message": "feat: include fork repositories and repository counts in API response metadata",
-      "repoName": "Personal-Meta-Fetcher",
-      "repoFullName": "ishaankor/Personal-Meta-Fetcher",
-      "repoUrl": "https://github.com/ishaankor/Personal-Meta-Fetcher",
-      "commitUrl": "https://github.com/ishaankor/Personal-Meta-Fetcher/commit/7c92a22d709cc4ef77733a6998f2b229673dbc64",
-      "date": "2026-11-04T21:42:17Z",
-      "timeAgo": "21h ago",
-      "stats": {
-        "total": 13,
-        "additions": 11,
-        "deletions": 2
-      },
-      "linesChanged": 13,
-      "additions": 11,
-      "deletions": 2,
-      "filesCount": 2,
-      "files": [
-        {
-          "filename": "api/commits.js",
-          "status": "modified",
-          "additions": 3,
-          "deletions": 1,
-          "changes": 4
-        },
-        {
-          "filename": "api/github.js",
-          "status": "modified",
-          "additions": 8,
-          "deletions": 1,
-          "changes": 9
-        }
-      ],
-      "author": {
-        "name": "Ishaan Kor",
-        "date": "2026-11-04T21:42:17Z"
-      }
     }
   ],
   "contributionCalendar": {
-    "totalContributions": 668,
+    "totalContributions": 669,
     "weeks": [
       {
         "contributionDays": [
@@ -2721,7 +2777,7 @@
           },
           {
             "date": "2026-11-05",
-            "contributionCount": 2,
+            "contributionCount": 3,
             "color": "#9be9a8"
           }
         ]
