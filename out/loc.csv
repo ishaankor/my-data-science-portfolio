@@ -1,4 +1,9 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+app/globals.css,29,1,css,dc1ff69,Ishaan Kor,2026-11-04,14:56:37,-08:00,2026-11-04T14:56:37-08:00,1,"feat: add specular sheen animation and idle breathing effect to interactive hero memoji card"
+components/hero/HeroMemojiInteractive.tsx,152,75,tsx,dc1ff69,Ishaan Kor,2026-11-04,14:56:37,-08:00,2026-11-04T14:56:37-08:00,2,"feat: add specular sheen animation and idle breathing effect to interactive hero memoji card"
+components/hero/HeroSection.tsx,16,16,tsx,dc1ff69,Ishaan Kor,2026-11-04,14:56:37,-08:00,2026-11-04T14:56:37-08:00,2,"feat: add specular sheen animation and idle breathing effect to interactive hero memoji card"
+data/portfolio.ts,5,3,ts,dc1ff69,Ishaan Kor,2026-11-04,14:56:37,-08:00,2026-11-04T14:56:37-08:00,1,"feat: add specular sheen animation and idle breathing effect to interactive hero memoji card"
+tsconfig.tsbuildinfo,1,1,tsbuildinfo,dc1ff69,Ishaan Kor,2026-11-04,14:56:37,-08:00,2026-11-04T14:56:37-08:00,0,"feat: add specular sheen animation and idle breathing effect to interactive hero memoji card"
 components/analytics/GitHubAnalytics.tsx,19,19,tsx,f91c8f9,Ishaan Kor,2026-10-20,14:43:34,-07:00,2026-10-20T14:43:34-07:00,2,"refactor: update spacing and responsive typography across components and static output"
 components/experience/WorkHeroHUD.tsx,5,5,tsx,f91c8f9,Ishaan Kor,2026-10-20,14:43:34,-07:00,2026-10-20T14:43:34-07:00,2,"refactor: update spacing and responsive typography across components and static output"
 components/hero/HeroMemojiInteractive.tsx,27,40,tsx,f91c8f9,Ishaan Kor,2026-10-20,14:43:34,-07:00,2026-10-20T14:43:34-07:00,2,"refactor: update spacing and responsive typography across components and static output"
