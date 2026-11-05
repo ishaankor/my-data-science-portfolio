@@ -51,10 +51,10 @@ export default function HeroSection() {
       />
 
       <div className="max-w-7xl mx-auto px-5 sm:px-10 w-full relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
-          {/* Left Column: Intro & Typewriter (Grand Entrance - 8 columns for huge text) */}
-          <div className="lg:col-span-8 flex flex-col justify-center text-left items-start relative w-full max-w-full">
+          {/* Left Column: Intro & Typewriter (Grand Entrance) */}
+          <div className="lg:col-span-7 flex flex-col justify-center text-left items-start relative w-full max-w-full">
             {/* Luminous White Core Underglow directly behind the hero headline */}
             <div
               className="absolute -top-16 -left-12 sm:-top-24 sm:-left-20 w-[360px] xs:w-[440px] sm:w-[640px] lg:w-[760px] h-[280px] xs:h-[340px] sm:h-[460px] pointer-events-none -z-10 select-none"
@@ -112,8 +112,8 @@ export default function HeroSection() {
 
           </div>
 
-          {/* Right Column: Animated & Interactive Memoji Hero Card (4 columns) */}
-          <div className="lg:col-span-4 h-auto w-full flex items-center justify-center relative">
+          {/* Right Column: Animated & Interactive Memoji Hero Card (Spacious 5 columns) */}
+          <div className="lg:col-span-5 h-auto w-full flex items-center justify-center relative">
             <HeroMemojiInteractive />
           </div>
 
