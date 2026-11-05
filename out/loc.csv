@@ -1,4 +1,7 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+app/globals.css,23,63,css,f2704a0,Ishaan Kor,2026-11-05,11:39:16,-08:00,2026-11-05T11:39:16-08:00,1,"refactor: update retro arcade animations and styles in globals and components"
+components/hero/HeroMemojiInteractive.tsx,69,91,tsx,f2704a0,Ishaan Kor,2026-11-05,11:39:16,-08:00,2026-11-05T11:39:16-08:00,2,"refactor: update retro arcade animations and styles in globals and components"
+data/portfolio.ts,3,3,ts,f2704a0,Ishaan Kor,2026-11-05,11:39:16,-08:00,2026-11-05T11:39:16-08:00,1,"refactor: update retro arcade animations and styles in globals and components"
 app/globals.css,74,10,css,f7b579e,Ishaan Kor,2026-11-05,03:27:27,-08:00,2026-11-05T03:27:27-08:00,1,"refactor: upgrade hero interactive memoji card with pixelated retro arcade sheen and expanded proportions"
 components/hero/HeroMemojiInteractive.tsx,104,40,tsx,f7b579e,Ishaan Kor,2026-11-05,03:27:27,-08:00,2026-11-05T03:27:27-08:00,2,"refactor: upgrade hero interactive memoji card with pixelated retro arcade sheen and expanded proportions"
 components/hero/HeroSection.tsx,5,5,tsx,f7b579e,Ishaan Kor,2026-11-05,03:27:27,-08:00,2026-11-05T03:27:27-08:00,2,"refactor: upgrade hero interactive memoji card with pixelated retro arcade sheen and expanded proportions"

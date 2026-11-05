@@ -99,6 +99,15 @@ export default function HeroMemojiInteractive() {
     }
   };
 
+  // Dynamic 3D levitation shadow & cyan underglow that shift opposite to the card's 3D tilt
+  const shadowX = Math.round(-rotateY * 2.2);
+  const shadowY = Math.round(rotateX * 2.2 + 24);
+  const glowX = Math.round(rotateY * 1.5);
+  const glowY = Math.round(-rotateX * 1.5);
+  const dynamicCardShadow = isHovered
+    ? `${shadowX}px ${shadowY}px 55px -8px rgba(0, 0, 0, 0.88), ${glowX}px ${glowY}px 38px -4px rgba(56, 189, 248, 0.22), 0 0 22px rgba(255, 255, 255, 0.05)`
+    : `${shadowX}px ${shadowY}px 45px -10px rgba(0, 0, 0, 0.82), ${glowX}px ${glowY}px 28px -6px rgba(56, 189, 248, 0.13)`;
+
   return (
     <div
       ref={containerRef}
@@ -129,6 +138,17 @@ export default function HeroMemojiInteractive() {
           transformStyle: 'preserve-3d',
         }}
       >
+        {/* Levitating 3D Underglow Halo (shifts opposite to tilt on a deeper Z plane) */}
+        <div
+          className="absolute -inset-3 rounded-[2rem] pointer-events-none transition-opacity duration-300 blur-2xl"
+          style={{
+            opacity: isHovered ? 0.85 : 0.5,
+            transform: `translate3d(${-rotateY * 1.8}px, ${rotateX * 1.8 + 10}px, -28px)`,
+            background: `radial-gradient(circle 280px at ${glarePos.x}% ${glarePos.y}%, rgba(56, 189, 248, 0.28) 0%, rgba(129, 140, 248, 0.14) 45%, transparent 78%)`,
+          }}
+          aria-hidden="true"
+        />
+
         {/* Flip Inner Container: handles 180-degree flip */}
         <div
           className="w-full h-full relative"
@@ -140,11 +160,12 @@ export default function HeroMemojiInteractive() {
         >
           {/* ================= FRONT FACE ================= */}
           <div
-            className="absolute inset-0 w-full h-full rounded-3xl border border-white/10 bg-[#0b1429]/95 backdrop-blur-2xl shadow-[0_20px_50px_-10px_rgba(0,0,0,0.8),0_0_25px_rgba(56,189,248,0.08)] flex flex-col items-center justify-between p-4 sm:p-6 lg:p-7 overflow-hidden"
+            className="absolute inset-0 w-full h-full rounded-3xl border border-white/10 bg-[#0b1429]/95 backdrop-blur-2xl flex flex-col items-center justify-between p-4 sm:p-6 lg:p-7 overflow-hidden"
             style={{
               backfaceVisibility: 'hidden',
               WebkitBackfaceVisibility: 'hidden',
               transform: 'rotateY(0deg)',
+              boxShadow: dynamicCardShadow,
             }}
           >
             {/* Tilt-Reactive Holographic Foil Sheen (Balatro / TCG Style — coupled to 3D tilt & breathing) */}
@@ -280,11 +301,12 @@ export default function HeroMemojiInteractive() {
 
           {/* ================= BACK FACE ================= */}
           <div
-            className="absolute inset-0 w-full h-full rounded-3xl border border-white/10 bg-[#0b1429]/95 backdrop-blur-2xl shadow-[0_20px_50px_-10px_rgba(0,0,0,0.8),0_0_25px_rgba(56,189,248,0.08)] flex flex-col items-center justify-between p-4 sm:p-6 lg:p-7 overflow-hidden"
+            className="absolute inset-0 w-full h-full rounded-3xl border border-white/10 bg-[#0b1429]/95 backdrop-blur-2xl flex flex-col items-center justify-between p-4 sm:p-6 lg:p-7 overflow-hidden"
             style={{
               backfaceVisibility: 'hidden',
               WebkitBackfaceVisibility: 'hidden',
               transform: 'rotateY(180deg)',
+              boxShadow: dynamicCardShadow,
             }}
           >
             {/* Tilt-Reactive Holographic Foil Sheen on Back (Balatro / TCG Style) */}

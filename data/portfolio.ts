@@ -68,7 +68,7 @@ export interface PortfolioData {
   name: string;
   title: string;
   location: string;
-  phone: string;
+  phone?: string;
   bio: string;
   avatarUrl: string;
   githubUsername: string;
@@ -104,8 +104,7 @@ export interface PortfolioData {
 export const portfolioData: PortfolioData = {
   name: "Ishaan Koradia",
   title: "AI Engineer & Data Science Developer",
-  location: "San Jose / San Diego, CA (Remote Ready)",
-  phone: "669-203-9160",
+  location: "San Jose, CA (Remote Ready)",
   bio: "AI Engineer specializing in LLM evaluation, agentic pipelines, Model Context Protocol (MCP), and production machine learning systems. B.S. in Cognitive Science (ML & Neural Computation) from UC San Diego.",
   avatarUrl: "./images/personal-picture.avif",
   githubUsername: "ishaankor",

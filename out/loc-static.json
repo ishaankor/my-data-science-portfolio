@@ -1,6 +1,48 @@
 [
   {
     "file": "app/globals.css",
+    "added": 23,
+    "deleted": 63,
+    "type": "css",
+    "commit": "f2704a0",
+    "author": "Ishaan Kor",
+    "date": "2026-11-05",
+    "time": "11:39:16",
+    "timezone": "-08:00",
+    "datetime": "2026-11-05T11:39:16-08:00",
+    "depth": 1,
+    "message": "refactor: update retro arcade animations and styles in globals and components"
+  },
+  {
+    "file": "components/hero/HeroMemojiInteractive.tsx",
+    "added": 69,
+    "deleted": 91,
+    "type": "tsx",
+    "commit": "f2704a0",
+    "author": "Ishaan Kor",
+    "date": "2026-11-05",
+    "time": "11:39:16",
+    "timezone": "-08:00",
+    "datetime": "2026-11-05T11:39:16-08:00",
+    "depth": 2,
+    "message": "refactor: update retro arcade animations and styles in globals and components"
+  },
+  {
+    "file": "data/portfolio.ts",
+    "added": 3,
+    "deleted": 3,
+    "type": "ts",
+    "commit": "f2704a0",
+    "author": "Ishaan Kor",
+    "date": "2026-11-05",
+    "time": "11:39:16",
+    "timezone": "-08:00",
+    "datetime": "2026-11-05T11:39:16-08:00",
+    "depth": 1,
+    "message": "refactor: update retro arcade animations and styles in globals and components"
+  },
+  {
+    "file": "app/globals.css",
     "added": 74,
     "deleted": 10,
     "type": "css",
