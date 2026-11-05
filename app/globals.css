@@ -194,93 +194,53 @@ body {
 }
 
 /* =========================================================================
-   Pixelated Retro Arcade Holographic Sheen & 8-Bit Sprite Glints
+   Clean Retro/Arcade-Inspired Glossy Sheen (Twin-Bevel Sweep to Top-Right)
    ========================================================================= */
 
-@keyframes retroArcadeSheen {
+/* Brisk ~1.0s glossy twin-bevel sweep from bottom-left to top-right, followed by a calm pause */
+@keyframes arcadeCleanSheen {
   0% {
-    transform: translateX(-160%) translateY(-160%) rotate(25deg);
+    transform: translate3d(-90%, 90%, 0);
     opacity: 0;
   }
-  8% {
-    opacity: 0.95;
-  }
-  40% {
-    transform: translateX(160%) translateY(160%) rotate(25deg);
-    opacity: 0.95;
-  }
-  48%, 100% {
-    transform: translateX(160%) translateY(160%) rotate(25deg);
-    opacity: 0;
-  }
-}
-
-/* Stepped 8-bit sprite frame glints (instantaneous frame shifts) */
-@keyframes pixelArcadeGlintA {
-  0%, 14% {
-    opacity: 0;
-    transform: scale(0);
-  }
-  15% {
-    opacity: 0.8;
-    transform: scale(0.65);
-  }
-  19% {
+  4% {
     opacity: 1;
-    transform: scale(1.3);
   }
-  25% {
-    opacity: 0.9;
-    transform: scale(0.7);
+  24% {
+    transform: translate3d(90%, -90%, 0);
+    opacity: 1;
   }
-  30%, 100% {
+  28%, 100% {
+    transform: translate3d(90%, -90%, 0);
     opacity: 0;
-    transform: scale(0);
   }
 }
 
-@keyframes pixelArcadeGlintB {
-  0%, 22% {
+/* Synchronized lens gleam on the raised 3D avatar / speech bubble */
+@keyframes arcadeLensSheen {
+  0%, 4% {
+    transform: translate3d(-95%, 95%, 0);
     opacity: 0;
-    transform: scale(0);
+  }
+  7% {
+    opacity: 1;
   }
   23% {
-    opacity: 0.85;
-    transform: scale(0.65);
-  }
-  28% {
+    transform: translate3d(95%, -95%, 0);
     opacity: 1;
-    transform: scale(1.35);
   }
-  34% {
-    opacity: 0.8;
-    transform: scale(0.75);
-  }
-  39%, 100% {
+  27%, 100% {
+    transform: translate3d(95%, -95%, 0);
     opacity: 0;
-    transform: scale(0);
   }
 }
 
-.animate-retro-arcade-sheen {
-  animation: retroArcadeSheen 4.4s steps(28) infinite;
+.animate-arcade-clean-sheen {
+  animation: arcadeCleanSheen 4.6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 }
 
-.animate-pixel-glint-a {
-  animation: pixelArcadeGlintA 4.4s steps(1) infinite;
-}
-
-.animate-pixel-glint-b {
-  animation: pixelArcadeGlintB 4.4s steps(1) infinite;
-}
-
-/* Retro CRT Micro-Pixel Dot Matrix */
-.retro-pixel-grid {
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 6px 6px;
-  image-rendering: pixelated;
+.animate-arcade-lens-sheen {
+  animation: arcadeLensSheen 4.6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 }
 
 

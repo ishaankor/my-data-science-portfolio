@@ -1,5 +1,47 @@
 [
   {
+    "file": "app/globals.css",
+    "added": 74,
+    "deleted": 10,
+    "type": "css",
+    "commit": "f7b579e",
+    "author": "Ishaan Kor",
+    "date": "2026-11-05",
+    "time": "03:27:27",
+    "timezone": "-08:00",
+    "datetime": "2026-11-05T03:27:27-08:00",
+    "depth": 1,
+    "message": "refactor: upgrade hero interactive memoji card with pixelated retro arcade sheen and expanded proportions"
+  },
+  {
+    "file": "components/hero/HeroMemojiInteractive.tsx",
+    "added": 104,
+    "deleted": 40,
+    "type": "tsx",
+    "commit": "f7b579e",
+    "author": "Ishaan Kor",
+    "date": "2026-11-05",
+    "time": "03:27:27",
+    "timezone": "-08:00",
+    "datetime": "2026-11-05T03:27:27-08:00",
+    "depth": 2,
+    "message": "refactor: upgrade hero interactive memoji card with pixelated retro arcade sheen and expanded proportions"
+  },
+  {
+    "file": "components/hero/HeroSection.tsx",
+    "added": 5,
+    "deleted": 5,
+    "type": "tsx",
+    "commit": "f7b579e",
+    "author": "Ishaan Kor",
+    "date": "2026-11-05",
+    "time": "03:27:27",
+    "timezone": "-08:00",
+    "datetime": "2026-11-05T03:27:27-08:00",
+    "depth": 2,
+    "message": "refactor: upgrade hero interactive memoji card with pixelated retro arcade sheen and expanded proportions"
+  },
+  {
     "file": "components/hero/HeroMemojiInteractive.tsx",
     "added": 45,
     "deleted": 45,

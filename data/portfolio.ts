@@ -115,11 +115,11 @@ export const portfolioData: PortfolioData = {
 
   typingStrings: [
     // "Ishaan Koradia.",
+    "an AI Engineer.",
     "an Agentic Systems Builder.",
     "a Frontier LLM Evaluator.",
-    "an AI Engineer.",
-    "a UCSD ML Undergraduate.",
-    "an Automation Enthusiast."
+    "a UCSD ML Undergrad.",
+    "an Automation Specialist."
   ],
 
   stats: [

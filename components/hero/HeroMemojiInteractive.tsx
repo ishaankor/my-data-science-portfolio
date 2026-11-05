@@ -21,15 +21,15 @@ export default function HeroMemojiInteractive() {
     const loop = (currentTime: number) => {
       if (!isHovered) {
         const elapsed = (currentTime - startTime) / 1000;
-        const idleRotX = Math.sin(elapsed * 0.9) * 2.2;
-        const idleRotY = Math.cos(elapsed * 0.7) * (isFlipped ? -2.8 : 2.8);
+        const idleRotX = Math.sin(elapsed * 0.85) * 3.2;
+        const idleRotY = Math.cos(elapsed * 0.65) * (isFlipped ? -3.8 : 3.8);
 
         setRotateX(idleRotX);
         setRotateY(idleRotY);
 
         setGlarePos({
-          x: 50 + Math.sin(elapsed * 0.7) * 22,
-          y: 50 + Math.cos(elapsed * 0.9) * 18,
+          x: 50 + Math.sin(elapsed * 0.65) * 34,
+          y: 50 - Math.cos(elapsed * 0.85) * 30,
         });
       }
       animId = requestAnimationFrame(loop);
@@ -147,56 +147,40 @@ export default function HeroMemojiInteractive() {
               transform: 'rotateY(0deg)',
             }}
           >
-            {/* Retro Pixel Arcade Holographic Foil Sheen */}
-            <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl z-20" aria-hidden="true">
-              {/* Retro CRT Micro-Pixel Matrix Grid */}
-              <div className="absolute inset-0 retro-pixel-grid opacity-35 mix-blend-overlay pointer-events-none" />
+            {/* Tilt-Reactive Holographic Foil Sheen (Balatro / TCG Style — coupled to 3D tilt & breathing) */}
+            <div
+              className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl z-[1] transition-opacity duration-300"
+              style={{
+                opacity: isHovered ? 1 : 0.75,
+                backgroundImage: `linear-gradient(${115 + rotateY * 2.2 - rotateX * 1.6}deg, transparent 20%, rgba(56, 189, 248, 0.06) 36%, rgba(165, 243, 252, 0.14) 43%, rgba(255, 255, 255, 0.2) 47%, rgba(192, 132, 252, 0.11) 51%, rgba(56, 189, 248, 0.12) 56%, transparent 72%)`,
+                backgroundSize: '260% 260%',
+                backgroundPosition: `${100 - glarePos.x}% ${100 - glarePos.y}%`,
+                maskImage: `radial-gradient(circle 310px at ${glarePos.x}% ${glarePos.y}%, black 0%, rgba(0,0,0,0.55) 45%, transparent 82%)`,
+                WebkitMaskImage: `radial-gradient(circle 310px at ${glarePos.x}% ${glarePos.y}%, black 0%, rgba(0,0,0,0.55) 45%, transparent 82%)`,
+              }}
+              aria-hidden="true"
+            />
 
-              {/* Stepped Pixel Holographic Sweep Beam with Arcade Color Bands */}
-              <div
-                className="absolute -inset-[150%] w-[400%] h-[400%] animate-retro-arcade-sheen pointer-events-none"
-                style={{
-                  background:
-                    'repeating-linear-gradient(110deg, transparent 0px, transparent 16px, rgba(56, 189, 248, 0.08) 16px, rgba(56, 189, 248, 0.08) 22px, rgba(192, 132, 252, 0.22) 22px, rgba(192, 132, 252, 0.22) 30px, rgba(56, 189, 248, 0.35) 30px, rgba(56, 189, 248, 0.35) 38px, rgba(255, 255, 255, 0.65) 38px, rgba(255, 255, 255, 0.65) 46px, rgba(56, 189, 248, 0.35) 46px, rgba(56, 189, 248, 0.35) 54px, rgba(192, 132, 252, 0.2) 54px, rgba(192, 132, 252, 0.2) 62px, transparent 62px, transparent 88px)',
-                  mixBlendMode: 'color-dodge',
-                }}
-              />
-
-              {/* 8-Bit Pixelated Sprite Glint Crosses */}
-              <div className="absolute top-[18%] left-[22%] w-4 h-4 animate-pixel-glint-a pointer-events-none opacity-0">
-                <svg viewBox="0 0 11 11" className="w-full h-full drop-shadow-[0_0_8px_rgba(56,189,248,0.9)]" style={{ imageRendering: 'pixelated', shapeRendering: 'crispEdges' }}>
-                  <rect x="4" y="4" width="3" height="3" fill="#ffffff" />
-                  <rect x="5" y="1" width="1" height="3" fill="#ffffff" />
-                  <rect x="5" y="7" width="1" height="3" fill="#ffffff" />
-                  <rect x="1" y="5" width="3" height="1" fill="#ffffff" />
-                  <rect x="7" y="5" width="3" height="1" fill="#ffffff" />
-                  <rect x="5" y="0" width="1" height="1" fill="#38bdf8" />
-                  <rect x="5" y="10" width="1" height="1" fill="#38bdf8" />
-                  <rect x="0" y="5" width="1" height="1" fill="#38bdf8" />
-                  <rect x="10" y="5" width="1" height="1" fill="#38bdf8" />
-                </svg>
-              </div>
-              <div className="absolute bottom-[24%] right-[20%] w-4 h-4 animate-pixel-glint-b pointer-events-none opacity-0">
-                <svg viewBox="0 0 11 11" className="w-full h-full drop-shadow-[0_0_10px_rgba(192,132,252,0.95)]" style={{ imageRendering: 'pixelated', shapeRendering: 'crispEdges' }}>
-                  <rect x="4" y="4" width="3" height="3" fill="#ffffff" />
-                  <rect x="5" y="1" width="1" height="3" fill="#ffffff" />
-                  <rect x="5" y="7" width="1" height="3" fill="#ffffff" />
-                  <rect x="1" y="5" width="3" height="1" fill="#ffffff" />
-                  <rect x="7" y="5" width="3" height="1" fill="#ffffff" />
-                  <rect x="5" y="0" width="1" height="1" fill="#c084fc" />
-                  <rect x="5" y="10" width="1" height="1" fill="#c084fc" />
-                  <rect x="0" y="5" width="1" height="1" fill="#c084fc" />
-                  <rect x="10" y="5" width="1" height="1" fill="#c084fc" />
-                </svg>
-              </div>
-            </div>
+            {/* Tilt-Reactive 1.5px Fresnel Perimeter Rim Highlight */}
+            <div
+              className="absolute inset-0 rounded-3xl p-[1.5px] pointer-events-none overflow-hidden z-20 transition-opacity duration-300"
+              style={{
+                opacity: isHovered ? 1 : 0.7,
+                background: `radial-gradient(circle 280px at ${glarePos.x}% ${glarePos.y}%, rgba(255, 255, 255, 0.85) 0%, rgba(56, 189, 248, 0.55) 35%, rgba(192, 132, 252, 0.28) 60%, transparent 85%)`,
+                mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                maskComposite: 'exclude',
+                WebkitMaskComposite: 'xor',
+              }}
+              aria-hidden="true"
+            />
 
             {/* Cursor-Tracking Soft Specular Glare */}
             <div
-              className="absolute inset-0 rounded-2xl sm:rounded-3xl pointer-events-none overflow-hidden z-10 transition-opacity duration-300"
+              className="absolute inset-0 rounded-2xl sm:rounded-3xl pointer-events-none overflow-hidden z-[2] transition-opacity duration-300"
               style={{
-                opacity: isHovered ? 1 : 0.35,
-                background: `radial-gradient(circle 340px at ${glarePos.x}% ${glarePos.y}%, rgba(255, 255, 255, 0.12) 0%, rgba(56, 189, 248, 0.08) 35%, transparent 70%)`,
+                opacity: isHovered ? 0.9 : 0.4,
+                background: `radial-gradient(circle 320px at ${glarePos.x}% ${glarePos.y}%, rgba(255, 255, 255, 0.09) 0%, rgba(56, 189, 248, 0.06) 35%, transparent 70%)`,
               }}
               aria-hidden="true"
             />
@@ -263,6 +247,16 @@ export default function HeroMemojiInteractive() {
                     alt="Ishaan Koradia"
                     className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                   />
+
+                  {/* Tilt-Reactive Medallion Lens Reflection */}
+                  <div
+                    className="absolute inset-0 rounded-full pointer-events-none overflow-hidden z-10 transition-opacity duration-300"
+                    style={{
+                      opacity: isHovered ? 0.95 : 0.65,
+                      background: `radial-gradient(circle 150px at ${100 - glarePos.x * 0.75}% ${100 - glarePos.y * 0.75}%, rgba(255, 255, 255, 0.22) 0%, rgba(56, 189, 248, 0.1) 40%, transparent 72%)`,
+                    }}
+                    aria-hidden="true"
+                  />
                 </div>
               </div>
             </div>
@@ -293,49 +287,33 @@ export default function HeroMemojiInteractive() {
               transform: 'rotateY(180deg)',
             }}
           >
-            {/* Retro Pixel Arcade Holographic Foil Sheen on Back */}
-            <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl z-20" aria-hidden="true">
-              {/* Retro CRT Micro-Pixel Matrix Grid */}
-              <div className="absolute inset-0 retro-pixel-grid opacity-35 mix-blend-overlay pointer-events-none" />
+            {/* Tilt-Reactive Holographic Foil Sheen on Back (Balatro / TCG Style) */}
+            <div
+              className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl z-[1] transition-opacity duration-300"
+              style={{
+                opacity: isHovered ? 1 : 0.75,
+                backgroundImage: `linear-gradient(${115 + rotateY * 2.2 - rotateX * 1.6}deg, transparent 20%, rgba(56, 189, 248, 0.06) 36%, rgba(165, 243, 252, 0.14) 43%, rgba(255, 255, 255, 0.2) 47%, rgba(192, 132, 252, 0.11) 51%, rgba(56, 189, 248, 0.12) 56%, transparent 72%)`,
+                backgroundSize: '260% 260%',
+                backgroundPosition: `${100 - glarePos.x}% ${100 - glarePos.y}%`,
+                maskImage: `radial-gradient(circle 310px at ${glarePos.x}% ${glarePos.y}%, black 0%, rgba(0,0,0,0.55) 45%, transparent 82%)`,
+                WebkitMaskImage: `radial-gradient(circle 310px at ${glarePos.x}% ${glarePos.y}%, black 0%, rgba(0,0,0,0.55) 45%, transparent 82%)`,
+              }}
+              aria-hidden="true"
+            />
 
-              {/* Stepped Pixel Holographic Sweep Beam with Arcade Color Bands */}
-              <div
-                className="absolute -inset-[150%] w-[400%] h-[400%] animate-retro-arcade-sheen pointer-events-none"
-                style={{
-                  background:
-                    'repeating-linear-gradient(110deg, transparent 0px, transparent 16px, rgba(56, 189, 248, 0.08) 16px, rgba(56, 189, 248, 0.08) 22px, rgba(192, 132, 252, 0.22) 22px, rgba(192, 132, 252, 0.22) 30px, rgba(56, 189, 248, 0.35) 30px, rgba(56, 189, 248, 0.35) 38px, rgba(255, 255, 255, 0.65) 38px, rgba(255, 255, 255, 0.65) 46px, rgba(56, 189, 248, 0.35) 46px, rgba(56, 189, 248, 0.35) 54px, rgba(192, 132, 252, 0.2) 54px, rgba(192, 132, 252, 0.2) 62px, transparent 62px, transparent 88px)',
-                  mixBlendMode: 'color-dodge',
-                }}
-              />
-
-              {/* 8-Bit Pixelated Sprite Glint Crosses */}
-              <div className="absolute top-[22%] right-[22%] w-4 h-4 animate-pixel-glint-a pointer-events-none opacity-0">
-                <svg viewBox="0 0 11 11" className="w-full h-full drop-shadow-[0_0_8px_rgba(56,189,248,0.9)]" style={{ imageRendering: 'pixelated', shapeRendering: 'crispEdges' }}>
-                  <rect x="4" y="4" width="3" height="3" fill="#ffffff" />
-                  <rect x="5" y="1" width="1" height="3" fill="#ffffff" />
-                  <rect x="5" y="7" width="1" height="3" fill="#ffffff" />
-                  <rect x="1" y="5" width="3" height="1" fill="#ffffff" />
-                  <rect x="7" y="5" width="3" height="1" fill="#ffffff" />
-                  <rect x="5" y="0" width="1" height="1" fill="#38bdf8" />
-                  <rect x="5" y="10" width="1" height="1" fill="#38bdf8" />
-                  <rect x="0" y="5" width="1" height="1" fill="#38bdf8" />
-                  <rect x="10" y="5" width="1" height="1" fill="#38bdf8" />
-                </svg>
-              </div>
-              <div className="absolute bottom-[20%] left-[20%] w-4 h-4 animate-pixel-glint-b pointer-events-none opacity-0">
-                <svg viewBox="0 0 11 11" className="w-full h-full drop-shadow-[0_0_10px_rgba(192,132,252,0.95)]" style={{ imageRendering: 'pixelated', shapeRendering: 'crispEdges' }}>
-                  <rect x="4" y="4" width="3" height="3" fill="#ffffff" />
-                  <rect x="5" y="1" width="1" height="3" fill="#ffffff" />
-                  <rect x="5" y="7" width="1" height="3" fill="#ffffff" />
-                  <rect x="1" y="5" width="3" height="1" fill="#ffffff" />
-                  <rect x="7" y="5" width="3" height="1" fill="#ffffff" />
-                  <rect x="5" y="0" width="1" height="1" fill="#c084fc" />
-                  <rect x="5" y="10" width="1" height="1" fill="#c084fc" />
-                  <rect x="0" y="5" width="1" height="1" fill="#c084fc" />
-                  <rect x="10" y="5" width="1" height="1" fill="#c084fc" />
-                </svg>
-              </div>
-            </div>
+            {/* Tilt-Reactive 1.5px Fresnel Perimeter Rim Highlight on Back */}
+            <div
+              className="absolute inset-0 rounded-3xl p-[1.5px] pointer-events-none overflow-hidden z-20 transition-opacity duration-300"
+              style={{
+                opacity: isHovered ? 1 : 0.7,
+                background: `radial-gradient(circle 280px at ${glarePos.x}% ${glarePos.y}%, rgba(255, 255, 255, 0.85) 0%, rgba(56, 189, 248, 0.55) 35%, rgba(192, 132, 252, 0.28) 60%, transparent 85%)`,
+                mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                maskComposite: 'exclude',
+                WebkitMaskComposite: 'xor',
+              }}
+              aria-hidden="true"
+            />
 
             {/* Top Header Row */}
             <div

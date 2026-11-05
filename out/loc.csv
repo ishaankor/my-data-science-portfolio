@@ -1,4 +1,7 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+app/globals.css,74,10,css,f7b579e,Ishaan Kor,2026-11-05,03:27:27,-08:00,2026-11-05T03:27:27-08:00,1,"refactor: upgrade hero interactive memoji card with pixelated retro arcade sheen and expanded proportions"
+components/hero/HeroMemojiInteractive.tsx,104,40,tsx,f7b579e,Ishaan Kor,2026-11-05,03:27:27,-08:00,2026-11-05T03:27:27-08:00,2,"refactor: upgrade hero interactive memoji card with pixelated retro arcade sheen and expanded proportions"
+components/hero/HeroSection.tsx,5,5,tsx,f7b579e,Ishaan Kor,2026-11-05,03:27:27,-08:00,2026-11-05T03:27:27-08:00,2,"refactor: upgrade hero interactive memoji card with pixelated retro arcade sheen and expanded proportions"
 components/hero/HeroMemojiInteractive.tsx,45,45,tsx,419f628,Ishaan Kor,2026-11-04,20:26:05,-08:00,2026-11-04T20:26:05-08:00,2,"style: make hero memoji card fully responsive and adjust dimensions"
 components/hero/HeroSection.tsx,49,20,tsx,419f628,Ishaan Kor,2026-11-04,20:26:05,-08:00,2026-11-04T20:26:05-08:00,2,"style: make hero memoji card fully responsive and adjust dimensions"
 app/globals.css,29,1,css,dc1ff69,Ishaan Kor,2026-11-04,14:56:37,-08:00,2026-11-04T14:56:37-08:00,1,"feat: add specular sheen animation and idle breathing effect to interactive hero memoji card"
