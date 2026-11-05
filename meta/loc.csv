@@ -1,4 +1,6 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+components/hero/HeroMemojiInteractive.tsx,45,45,tsx,419f628,Ishaan Kor,2026-11-04,20:26:05,-08:00,2026-11-04T20:26:05-08:00,2,"style: make hero memoji card fully responsive and adjust dimensions"
+components/hero/HeroSection.tsx,49,20,tsx,419f628,Ishaan Kor,2026-11-04,20:26:05,-08:00,2026-11-04T20:26:05-08:00,2,"style: make hero memoji card fully responsive and adjust dimensions"
 app/globals.css,29,1,css,dc1ff69,Ishaan Kor,2026-11-04,14:56:37,-08:00,2026-11-04T14:56:37-08:00,1,"feat: add specular sheen animation and idle breathing effect to interactive hero memoji card"
 components/hero/HeroMemojiInteractive.tsx,152,75,tsx,dc1ff69,Ishaan Kor,2026-11-04,14:56:37,-08:00,2026-11-04T14:56:37-08:00,2,"feat: add specular sheen animation and idle breathing effect to interactive hero memoji card"
 components/hero/HeroSection.tsx,16,16,tsx,dc1ff69,Ishaan Kor,2026-11-04,14:56:37,-08:00,2026-11-04T14:56:37-08:00,2,"feat: add specular sheen animation and idle breathing effect to interactive hero memoji card"

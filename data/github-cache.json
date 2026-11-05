@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-04T22:57:33.651Z",
+  "updatedAt": "2026-11-05T04:26:48.751Z",
   "totalRepos": 20,
   "user": {
     "login": "ishaankor",
@@ -18,8 +18,8 @@
       "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
       "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
       "created_at": "2025-01-11T23:48:23Z",
-      "pushed_at": "2026-11-04T22:56:40Z",
-      "updated_at": "2026-11-04T22:56:44Z",
+      "pushed_at": "2026-11-05T04:26:08Z",
+      "updated_at": "2026-11-05T04:26:12Z",
       "fork": false,
       "is_fork": false
     },
@@ -254,6 +254,102 @@
   ],
   "commits": [
     {
+      "sha": "419f6281e5eabbce050d400064e0d1d41cfcf1a3",
+      "shortSha": "419f628",
+      "message": "style: make hero memoji card fully responsive and adjust dimensions",
+      "repoName": "my-data-science-portfolio",
+      "repoFullName": "ishaankor/my-data-science-portfolio",
+      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/419f6281e5eabbce050d400064e0d1d41cfcf1a3",
+      "date": "2026-11-05T04:26:05Z",
+      "timeAgo": "just now",
+      "stats": {
+        "total": 386,
+        "additions": 280,
+        "deletions": 106
+      },
+      "linesChanged": 386,
+      "additions": 280,
+      "deletions": 106,
+      "filesCount": 30,
+      "files": [
+        {
+          "filename": "components/hero/HeroMemojiInteractive.tsx",
+          "status": "modified",
+          "additions": 45,
+          "deletions": 45,
+          "changes": 90
+        },
+        {
+          "filename": "components/hero/HeroSection.tsx",
+          "status": "modified",
+          "additions": 49,
+          "deletions": 20,
+          "changes": 69
+        },
+        {
+          "filename": "out/404.html",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1,
+          "changes": 2
+        },
+        {
+          "filename": "out/_next/static/Z3tWfIZSQO7Ar4ubPlwVf/_buildManifest.js",
+          "status": "renamed",
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0
+        },
+        {
+          "filename": "out/_next/static/Z3tWfIZSQO7Ar4ubPlwVf/_ssgManifest.js",
+          "status": "renamed",
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0
+        },
+        {
+          "filename": "out/_next/static/chunks/357-03d951ff3ffa3ec5.js",
+          "status": "added",
+          "additions": 1,
+          "deletions": 0,
+          "changes": 1
+        },
+        {
+          "filename": "out/_next/static/chunks/357-0a89ff13c36b7b48.js",
+          "status": "removed",
+          "additions": 0,
+          "deletions": 1,
+          "changes": 1
+        },
+        {
+          "filename": "out/_next/static/chunks/632-41588636b051d672.js",
+          "status": "added",
+          "additions": 1,
+          "deletions": 0,
+          "changes": 1
+        },
+        {
+          "filename": "out/_next/static/chunks/632-7088afa5d3254e17.js",
+          "status": "removed",
+          "additions": 0,
+          "deletions": 1,
+          "changes": 1
+        },
+        {
+          "filename": "out/_next/static/chunks/app/meta/page-bb97a3eefd9c124a.js",
+          "status": "added",
+          "additions": 1,
+          "deletions": 0,
+          "changes": 1
+        }
+      ],
+      "author": {
+        "name": "Ishaan Kor",
+        "date": "2026-11-05T04:26:05Z"
+      }
+    },
+    {
       "sha": "dc1ff6965ecd4706900d0c6d925ea51e5c2440f4",
       "shortSha": "dc1ff69",
       "message": "feat: add specular sheen animation and idle breathing effect to interactive hero memoji card",
@@ -262,7 +358,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/dc1ff6965ecd4706900d0c6d925ea51e5c2440f4",
       "date": "2026-11-04T22:56:37Z",
-      "timeAgo": "just now",
+      "timeAgo": "5h ago",
       "stats": {
         "total": 642,
         "additions": 505,
@@ -358,7 +454,7 @@
       "repoUrl": "https://github.com/ishaankor/Personal-Meta-Fetcher",
       "commitUrl": "https://github.com/ishaankor/Personal-Meta-Fetcher/commit/7c92a22d709cc4ef77733a6998f2b229673dbc64",
       "date": "2026-11-04T21:42:17Z",
-      "timeAgo": "1h ago",
+      "timeAgo": "6h ago",
       "stats": {
         "total": 13,
         "additions": 11,
@@ -398,7 +494,7 @@
       "repoUrl": "https://github.com/ishaankor/my-personal-website",
       "commitUrl": "https://github.com/ishaankor/my-personal-website/commit/ba328e4ff1930098246d0d69e1ed3d0e10b3e21c",
       "date": "2026-11-04T21:40:39Z",
-      "timeAgo": "1h ago",
+      "timeAgo": "6h ago",
       "stats": {
         "total": 12,
         "additions": 8,
@@ -438,7 +534,7 @@
       "repoUrl": "https://github.com/ishaankor/my-personal-website",
       "commitUrl": "https://github.com/ishaankor/my-personal-website/commit/d8714323a41d19dcfe6d827df24fe55b7da68401",
       "date": "2026-11-04T03:42:05Z",
-      "timeAgo": "19h ago",
+      "timeAgo": "1d ago",
       "stats": {
         "total": 19,
         "additions": 6,
@@ -468,92 +564,10 @@
         "name": "Ishaan Kor",
         "date": "2026-11-04T03:42:05Z"
       }
-    },
-    {
-      "sha": "069d6e86ba2f3e809bc6183e66e0e8ada230e660",
-      "shortSha": "069d6e8",
-      "message": "feat: add backend authentication and authorization checks to API routes",
-      "repoName": "RigScouter-AI",
-      "repoFullName": "ishaankor/RigScouter-AI",
-      "repoUrl": "https://github.com/ishaankor/RigScouter-AI",
-      "commitUrl": "https://github.com/ishaankor/RigScouter-AI/commit/069d6e86ba2f3e809bc6183e66e0e8ada230e660",
-      "date": "2026-11-04T00:25:06Z",
-      "timeAgo": "22h ago",
-      "stats": {
-        "total": 469,
-        "additions": 188,
-        "deletions": 281
-      },
-      "linesChanged": 469,
-      "additions": 188,
-      "deletions": 281,
-      "filesCount": 8,
-      "files": [
-        {
-          "filename": "src/app/api/digests/route.ts",
-          "status": "modified",
-          "additions": 27,
-          "deletions": 11,
-          "changes": 38
-        },
-        {
-          "filename": "src/app/api/notifications/target-met/route.ts",
-          "status": "modified",
-          "additions": 11,
-          "deletions": 1,
-          "changes": 12
-        },
-        {
-          "filename": "src/app/api/notifications/test-discord/route.ts",
-          "status": "modified",
-          "additions": 9,
-          "deletions": 0,
-          "changes": 9
-        },
-        {
-          "filename": "src/app/api/watchlist/route.ts",
-          "status": "modified",
-          "additions": 51,
-          "deletions": 5,
-          "changes": 56
-        },
-        {
-          "filename": "src/components/DailyDigestPreview.tsx",
-          "status": "modified",
-          "additions": 8,
-          "deletions": 250,
-          "changes": 258
-        },
-        {
-          "filename": "src/components/WatchlistManager.tsx",
-          "status": "modified",
-          "additions": 21,
-          "deletions": 14,
-          "changes": 35
-        },
-        {
-          "filename": "src/lib/auth/client-auth.ts",
-          "status": "added",
-          "additions": 20,
-          "deletions": 0,
-          "changes": 20
-        },
-        {
-          "filename": "src/lib/auth/server-auth.ts",
-          "status": "added",
-          "additions": 41,
-          "deletions": 0,
-          "changes": 41
-        }
-      ],
-      "author": {
-        "name": "Ishaan Kor",
-        "date": "2026-11-04T00:25:06Z"
-      }
     }
   ],
   "contributionCalendar": {
-    "totalContributions": 812,
+    "totalContributions": 813,
     "weeks": [
       {
         "contributionDays": [
@@ -2602,8 +2616,8 @@
           },
           {
             "date": "2026-11-04",
-            "contributionCount": 3,
-            "color": "#9be9a8"
+            "contributionCount": 4,
+            "color": "#40c463"
           }
         ]
       }
