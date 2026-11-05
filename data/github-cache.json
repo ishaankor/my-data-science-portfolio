@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-11-05T04:26:48.751Z",
-  "totalRepos": 20,
+  "updatedAt": "2026-11-05T11:28:25.403Z",
+  "totalRepos": 19,
   "user": {
     "login": "ishaankor",
     "avatar_url": "https://avatars.githubusercontent.com/u/113160688?v=4",
     "html_url": "https://github.com/ishaankor",
     "name": "Ishaan",
     "bio": "An AI engineer who loves to automate the tedious works of life through programming and coding!",
-    "public_repos": 20,
+    "public_repos": 19,
     "created_at": "2022-09-09T04:43:15Z"
   },
   "repos": [
@@ -18,8 +18,8 @@
       "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
       "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
       "created_at": "2025-01-11T23:48:23Z",
-      "pushed_at": "2026-11-05T04:26:08Z",
-      "updated_at": "2026-11-05T04:26:12Z",
+      "pushed_at": "2026-11-05T11:27:30Z",
+      "updated_at": "2026-11-05T11:27:36Z",
       "fork": false,
       "is_fork": false
     },
@@ -56,18 +56,6 @@
       "created_at": "2026-08-05T05:50:28Z",
       "pushed_at": "2026-11-04T00:57:40Z",
       "updated_at": "2026-11-04T00:57:44Z",
-      "fork": false,
-      "is_fork": false
-    },
-    {
-      "id": 1324783574,
-      "name": "RigScouter-AI-DataBase-",
-      "language": "Python",
-      "html_url": "https://github.com/ishaankor/RigScouter-AI-DataBase-",
-      "description": null,
-      "created_at": "2026-08-06T05:39:59Z",
-      "pushed_at": "2026-11-04T00:25:04Z",
-      "updated_at": "2026-11-04T00:25:09Z",
       "fork": false,
       "is_fork": false
     },
@@ -254,6 +242,102 @@
   ],
   "commits": [
     {
+      "sha": "f7b579eb44b515e58a0d0ff7473d2c3eb73fe976",
+      "shortSha": "f7b579e",
+      "message": "refactor: upgrade hero interactive memoji card with pixelated retro arcade sheen and expanded proportions",
+      "repoName": "my-data-science-portfolio",
+      "repoFullName": "ishaankor/my-data-science-portfolio",
+      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/f7b579eb44b515e58a0d0ff7473d2c3eb73fe976",
+      "date": "2026-11-05T11:27:27Z",
+      "timeAgo": "just now",
+      "stats": {
+        "total": 346,
+        "additions": 266,
+        "deletions": 80
+      },
+      "linesChanged": 346,
+      "additions": 266,
+      "deletions": 80,
+      "filesCount": 29,
+      "files": [
+        {
+          "filename": "app/globals.css",
+          "status": "modified",
+          "additions": 74,
+          "deletions": 10,
+          "changes": 84
+        },
+        {
+          "filename": "components/hero/HeroMemojiInteractive.tsx",
+          "status": "modified",
+          "additions": 104,
+          "deletions": 40,
+          "changes": 144
+        },
+        {
+          "filename": "components/hero/HeroSection.tsx",
+          "status": "modified",
+          "additions": 5,
+          "deletions": 5,
+          "changes": 10
+        },
+        {
+          "filename": "out/404.html",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1,
+          "changes": 2
+        },
+        {
+          "filename": "out/_next/static/chunks/357-03d951ff3ffa3ec5.js",
+          "status": "removed",
+          "additions": 0,
+          "deletions": 1,
+          "changes": 1
+        },
+        {
+          "filename": "out/_next/static/chunks/357-beda441a2b6cdd49.js",
+          "status": "added",
+          "additions": 1,
+          "deletions": 0,
+          "changes": 1
+        },
+        {
+          "filename": "out/_next/static/chunks/app/meta/page-5316d82594a513b7.js",
+          "status": "added",
+          "additions": 1,
+          "deletions": 0,
+          "changes": 1
+        },
+        {
+          "filename": "out/_next/static/chunks/app/meta/page-bb97a3eefd9c124a.js",
+          "status": "removed",
+          "additions": 0,
+          "deletions": 1,
+          "changes": 1
+        },
+        {
+          "filename": "out/_next/static/chunks/app/page-40d335890ddbfacf.js",
+          "status": "added",
+          "additions": 1,
+          "deletions": 0,
+          "changes": 1
+        },
+        {
+          "filename": "out/_next/static/chunks/app/page-b0a3c3a2e6662483.js",
+          "status": "removed",
+          "additions": 0,
+          "deletions": 1,
+          "changes": 1
+        }
+      ],
+      "author": {
+        "name": "Ishaan Kor",
+        "date": "2026-11-05T11:27:27Z"
+      }
+    },
+    {
       "sha": "419f6281e5eabbce050d400064e0d1d41cfcf1a3",
       "shortSha": "419f628",
       "message": "style: make hero memoji card fully responsive and adjust dimensions",
@@ -262,7 +346,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/419f6281e5eabbce050d400064e0d1d41cfcf1a3",
       "date": "2026-11-05T04:26:05Z",
-      "timeAgo": "just now",
+      "timeAgo": "7h ago",
       "stats": {
         "total": 386,
         "additions": 280,
@@ -358,7 +442,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/dc1ff6965ecd4706900d0c6d925ea51e5c2440f4",
       "date": "2026-11-04T22:56:37Z",
-      "timeAgo": "5h ago",
+      "timeAgo": "12h ago",
       "stats": {
         "total": 642,
         "additions": 505,
@@ -454,7 +538,7 @@
       "repoUrl": "https://github.com/ishaankor/Personal-Meta-Fetcher",
       "commitUrl": "https://github.com/ishaankor/Personal-Meta-Fetcher/commit/7c92a22d709cc4ef77733a6998f2b229673dbc64",
       "date": "2026-11-04T21:42:17Z",
-      "timeAgo": "6h ago",
+      "timeAgo": "13h ago",
       "stats": {
         "total": 13,
         "additions": 11,
@@ -494,7 +578,7 @@
       "repoUrl": "https://github.com/ishaankor/my-personal-website",
       "commitUrl": "https://github.com/ishaankor/my-personal-website/commit/ba328e4ff1930098246d0d69e1ed3d0e10b3e21c",
       "date": "2026-11-04T21:40:39Z",
-      "timeAgo": "6h ago",
+      "timeAgo": "13h ago",
       "stats": {
         "total": 12,
         "additions": 8,
@@ -524,50 +608,10 @@
         "name": "Ishaan Kor",
         "date": "2026-11-04T21:40:39Z"
       }
-    },
-    {
-      "sha": "d8714323a41d19dcfe6d827df24fe55b7da68401",
-      "shortSha": "d871432",
-      "message": "refactor: remove public repositories count from github pulse card",
-      "repoName": "my-personal-website",
-      "repoFullName": "ishaankor/my-personal-website",
-      "repoUrl": "https://github.com/ishaankor/my-personal-website",
-      "commitUrl": "https://github.com/ishaankor/my-personal-website/commit/d8714323a41d19dcfe6d827df24fe55b7da68401",
-      "date": "2026-11-04T03:42:05Z",
-      "timeAgo": "1d ago",
-      "stats": {
-        "total": 19,
-        "additions": 6,
-        "deletions": 13
-      },
-      "linesChanged": 19,
-      "additions": 6,
-      "deletions": 13,
-      "filesCount": 2,
-      "files": [
-        {
-          "filename": "index.html",
-          "status": "modified",
-          "additions": 2,
-          "deletions": 13,
-          "changes": 15
-        },
-        {
-          "filename": "style.css",
-          "status": "modified",
-          "additions": 4,
-          "deletions": 0,
-          "changes": 4
-        }
-      ],
-      "author": {
-        "name": "Ishaan Kor",
-        "date": "2026-11-04T03:42:05Z"
-      }
     }
   ],
   "contributionCalendar": {
-    "totalContributions": 813,
+    "totalContributions": 667,
     "weeks": [
       {
         "contributionDays": [
@@ -2114,17 +2158,17 @@
           },
           {
             "date": "2026-08-06",
-            "contributionCount": 24,
-            "color": "#216e39"
-          },
-          {
-            "date": "2026-08-07",
             "contributionCount": 14,
             "color": "#216e39"
           },
           {
+            "date": "2026-08-07",
+            "contributionCount": 6,
+            "color": "#40c463"
+          },
+          {
             "date": "2026-08-08",
-            "contributionCount": 2,
+            "contributionCount": 1,
             "color": "#9be9a8"
           }
         ]
@@ -2133,7 +2177,7 @@
         "contributionDays": [
           {
             "date": "2026-08-09",
-            "contributionCount": 3,
+            "contributionCount": 1,
             "color": "#9be9a8"
           },
           {
@@ -2143,28 +2187,28 @@
           },
           {
             "date": "2026-08-11",
-            "contributionCount": 2,
+            "contributionCount": 1,
             "color": "#9be9a8"
           },
           {
             "date": "2026-08-12",
-            "contributionCount": 12,
-            "color": "#216e39"
+            "contributionCount": 1,
+            "color": "#9be9a8"
           },
           {
             "date": "2026-08-13",
-            "contributionCount": 12,
-            "color": "#216e39"
+            "contributionCount": 5,
+            "color": "#40c463"
           },
           {
             "date": "2026-08-14",
-            "contributionCount": 9,
-            "color": "#30a14e"
+            "contributionCount": 5,
+            "color": "#40c463"
           },
           {
             "date": "2026-08-15",
-            "contributionCount": 1,
-            "color": "#9be9a8"
+            "contributionCount": 0,
+            "color": "#ebedf0"
           }
         ]
       },
@@ -2177,33 +2221,33 @@
           },
           {
             "date": "2026-08-17",
-            "contributionCount": 13,
-            "color": "#216e39"
-          },
-          {
-            "date": "2026-08-18",
             "contributionCount": 5,
             "color": "#40c463"
           },
           {
+            "date": "2026-08-18",
+            "contributionCount": 2,
+            "color": "#9be9a8"
+          },
+          {
             "date": "2026-08-19",
-            "contributionCount": 18,
-            "color": "#216e39"
+            "contributionCount": 8,
+            "color": "#30a14e"
           },
           {
             "date": "2026-08-20",
-            "contributionCount": 4,
-            "color": "#40c463"
+            "contributionCount": 2,
+            "color": "#9be9a8"
           },
           {
             "date": "2026-08-21",
-            "contributionCount": 12,
-            "color": "#216e39"
+            "contributionCount": 8,
+            "color": "#30a14e"
           },
           {
             "date": "2026-08-22",
-            "contributionCount": 8,
-            "color": "#30a14e"
+            "contributionCount": 2,
+            "color": "#9be9a8"
           }
         ]
       },
@@ -2211,23 +2255,23 @@
         "contributionDays": [
           {
             "date": "2026-08-23",
-            "contributionCount": 4,
-            "color": "#40c463"
+            "contributionCount": 1,
+            "color": "#9be9a8"
           },
           {
             "date": "2026-08-24",
-            "contributionCount": 10,
-            "color": "#216e39"
+            "contributionCount": 6,
+            "color": "#40c463"
           },
           {
             "date": "2026-08-25",
-            "contributionCount": 7,
-            "color": "#30a14e"
+            "contributionCount": 3,
+            "color": "#9be9a8"
           },
           {
             "date": "2026-08-26",
-            "contributionCount": 5,
-            "color": "#40c463"
+            "contributionCount": 1,
+            "color": "#9be9a8"
           },
           {
             "date": "2026-08-27",
@@ -2236,8 +2280,8 @@
           },
           {
             "date": "2026-08-28",
-            "contributionCount": 4,
-            "color": "#40c463"
+            "contributionCount": 3,
+            "color": "#9be9a8"
           },
           {
             "date": "2026-08-29",
@@ -2260,17 +2304,17 @@
           },
           {
             "date": "2026-09-01",
+            "contributionCount": 3,
+            "color": "#9be9a8"
+          },
+          {
+            "date": "2026-09-02",
             "contributionCount": 4,
             "color": "#40c463"
           },
           {
-            "date": "2026-09-02",
-            "contributionCount": 5,
-            "color": "#40c463"
-          },
-          {
             "date": "2026-09-03",
-            "contributionCount": 3,
+            "contributionCount": 1,
             "color": "#9be9a8"
           },
           {
@@ -2280,8 +2324,8 @@
           },
           {
             "date": "2026-09-05",
-            "contributionCount": 5,
-            "color": "#40c463"
+            "contributionCount": 2,
+            "color": "#9be9a8"
           }
         ]
       },
@@ -2289,7 +2333,7 @@
         "contributionDays": [
           {
             "date": "2026-09-06",
-            "contributionCount": 3,
+            "contributionCount": 1,
             "color": "#9be9a8"
           },
           {
@@ -2319,8 +2363,8 @@
           },
           {
             "date": "2026-09-12",
-            "contributionCount": 2,
-            "color": "#9be9a8"
+            "contributionCount": 0,
+            "color": "#ebedf0"
           }
         ]
       },
@@ -2353,13 +2397,13 @@
           },
           {
             "date": "2026-09-18",
-            "contributionCount": 3,
+            "contributionCount": 2,
             "color": "#9be9a8"
           },
           {
             "date": "2026-09-19",
-            "contributionCount": 7,
-            "color": "#30a14e"
+            "contributionCount": 3,
+            "color": "#9be9a8"
           }
         ]
       },
@@ -2367,23 +2411,23 @@
         "contributionDays": [
           {
             "date": "2026-09-20",
-            "contributionCount": 7,
-            "color": "#30a14e"
+            "contributionCount": 6,
+            "color": "#40c463"
           },
           {
             "date": "2026-09-21",
-            "contributionCount": 3,
+            "contributionCount": 2,
             "color": "#9be9a8"
           },
           {
             "date": "2026-09-22",
-            "contributionCount": 8,
-            "color": "#30a14e"
+            "contributionCount": 4,
+            "color": "#40c463"
           },
           {
             "date": "2026-09-23",
-            "contributionCount": 4,
-            "color": "#40c463"
+            "contributionCount": 2,
+            "color": "#9be9a8"
           },
           {
             "date": "2026-09-24",
@@ -2392,8 +2436,8 @@
           },
           {
             "date": "2026-09-25",
-            "contributionCount": 4,
-            "color": "#40c463"
+            "contributionCount": 2,
+            "color": "#9be9a8"
           },
           {
             "date": "2026-09-26",
@@ -2416,13 +2460,13 @@
           },
           {
             "date": "2026-09-29",
-            "contributionCount": 1,
-            "color": "#9be9a8"
+            "contributionCount": 0,
+            "color": "#ebedf0"
           },
           {
             "date": "2026-09-30",
-            "contributionCount": 3,
-            "color": "#9be9a8"
+            "contributionCount": 0,
+            "color": "#ebedf0"
           },
           {
             "date": "2026-10-01",
@@ -2445,13 +2489,13 @@
         "contributionDays": [
           {
             "date": "2026-10-04",
-            "contributionCount": 2,
+            "contributionCount": 1,
             "color": "#9be9a8"
           },
           {
             "date": "2026-10-05",
-            "contributionCount": 1,
-            "color": "#9be9a8"
+            "contributionCount": 0,
+            "color": "#ebedf0"
           },
           {
             "date": "2026-10-06",
@@ -2489,18 +2533,18 @@
           },
           {
             "date": "2026-10-12",
-            "contributionCount": 15,
-            "color": "#216e39"
+            "contributionCount": 9,
+            "color": "#30a14e"
           },
           {
             "date": "2026-10-13",
-            "contributionCount": 4,
-            "color": "#40c463"
+            "contributionCount": 2,
+            "color": "#9be9a8"
           },
           {
             "date": "2026-10-14",
-            "contributionCount": 8,
-            "color": "#30a14e"
+            "contributionCount": 4,
+            "color": "#40c463"
           },
           {
             "date": "2026-10-15",
@@ -2523,7 +2567,7 @@
         "contributionDays": [
           {
             "date": "2026-10-18",
-            "contributionCount": 9,
+            "contributionCount": 8,
             "color": "#30a14e"
           },
           {
@@ -2543,13 +2587,13 @@
           },
           {
             "date": "2026-10-22",
-            "contributionCount": 9,
+            "contributionCount": 8,
             "color": "#30a14e"
           },
           {
             "date": "2026-10-23",
-            "contributionCount": 5,
-            "color": "#40c463"
+            "contributionCount": 3,
+            "color": "#9be9a8"
           },
           {
             "date": "2026-10-24",
@@ -2567,8 +2611,8 @@
           },
           {
             "date": "2026-10-26",
-            "contributionCount": 1,
-            "color": "#9be9a8"
+            "contributionCount": 0,
+            "color": "#ebedf0"
           },
           {
             "date": "2026-10-27",
@@ -2606,18 +2650,23 @@
           },
           {
             "date": "2026-11-02",
-            "contributionCount": 3,
+            "contributionCount": 2,
             "color": "#9be9a8"
           },
           {
             "date": "2026-11-03",
-            "contributionCount": 6,
-            "color": "#40c463"
+            "contributionCount": 3,
+            "color": "#9be9a8"
           },
           {
             "date": "2026-11-04",
             "contributionCount": 4,
             "color": "#40c463"
+          },
+          {
+            "date": "2026-11-05",
+            "contributionCount": 1,
+            "color": "#9be9a8"
           }
         ]
       }
