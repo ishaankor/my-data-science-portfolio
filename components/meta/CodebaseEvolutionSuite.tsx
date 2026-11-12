@@ -202,10 +202,14 @@ export default function CodebaseEvolutionSuite({ liveCommits }: CodebaseEvolutio
       if (r.file) item.files.add(r.file);
     });
 
-    // Merge any live commits fetched from GitHub API if not already present
+    // Merge any live commits fetched from GitHub API if not already present (filtered strictly to this portfolio repository)
     if (Array.isArray(liveCommits) && liveCommits.length > 0) {
       liveCommits.forEach((lc) => {
         if (!lc) return;
+        // Only merge commits that belong to this portfolio repository
+        if (lc.repoName && lc.repoName !== 'my-data-science-portfolio') return;
+        if (lc.repoFullName && !lc.repoFullName.endsWith('/my-data-science-portfolio')) return;
+
         const hash = lc.shortSha || (lc.sha ? lc.sha.slice(0, 7) : null);
         if (hash && !commitMap.has(hash)) {
           const d = lc.date ? new Date(lc.date) : new Date();
@@ -219,7 +223,7 @@ export default function CodebaseEvolutionSuite({ liveCommits }: CodebaseEvolutio
             added: 1,
             deleted: 0,
             lines: 1,
-            files: new Set([lc.repoName || 'portfolio']),
+            files: new Set([lc.repoName || 'my-data-science-portfolio']),
           });
         }
       });
