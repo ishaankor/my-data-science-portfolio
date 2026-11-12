@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-12T07:30:32.714Z",
+  "updatedAt": "2026-11-12T08:19:47.454Z",
   "totalRepos": 19,
   "user": {
     "login": "ishaankor",
@@ -12,6 +12,18 @@
   },
   "repos": [
     {
+      "id": 915475199,
+      "name": "my-data-science-portfolio",
+      "language": "HTML",
+      "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
+      "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
+      "created_at": "2025-01-11T23:48:23Z",
+      "pushed_at": "2026-11-12T08:19:01Z",
+      "updated_at": "2026-11-05T19:47:32Z",
+      "fork": false,
+      "is_fork": false
+    },
+    {
       "id": 1360924158,
       "name": "Claimr-",
       "language": "JavaScript",
@@ -19,7 +31,7 @@
       "description": "The modern, multi-store desktop app that automatically claims free games from Epic Games Store and GOG.com.",
       "created_at": "2026-09-08T04:35:15Z",
       "pushed_at": "2026-11-12T07:06:52Z",
-      "updated_at": "2026-11-07T00:15:17Z",
+      "updated_at": "2026-11-12T08:06:54Z",
       "fork": false,
       "is_fork": false
     },
@@ -44,18 +56,6 @@
       "created_at": "2022-09-09T05:41:44Z",
       "pushed_at": "2026-11-08T07:17:55Z",
       "updated_at": "2026-11-08T07:17:59Z",
-      "fork": false,
-      "is_fork": false
-    },
-    {
-      "id": 915475199,
-      "name": "my-data-science-portfolio",
-      "language": "HTML",
-      "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
-      "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
-      "created_at": "2025-01-11T23:48:23Z",
-      "pushed_at": "2026-11-05T19:47:27Z",
-      "updated_at": "2026-11-05T19:47:32Z",
       "fork": false,
       "is_fork": false
     },
@@ -242,6 +242,102 @@
   ],
   "commits": [
     {
+      "sha": "6398fa3cda18bcf14a1aac755199638372fb08e6",
+      "shortSha": "6398fa3",
+      "message": "refactor: filter live commits strictly to portfolio repository and update build output",
+      "repoName": "my-data-science-portfolio",
+      "repoFullName": "ishaankor/my-data-science-portfolio",
+      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/6398fa3cda18bcf14a1aac755199638372fb08e6",
+      "date": "2026-11-12T08:18:58Z",
+      "timeAgo": "just now",
+      "stats": {
+        "total": 831,
+        "additions": 372,
+        "deletions": 459
+      },
+      "linesChanged": 831,
+      "additions": 372,
+      "deletions": 459,
+      "filesCount": 45,
+      "files": [
+        {
+          "filename": "components/meta/CodebaseEvolutionSuite.tsx",
+          "status": "modified",
+          "additions": 6,
+          "deletions": 2,
+          "changes": 8
+        },
+        {
+          "filename": "data/github-cache.json",
+          "status": "modified",
+          "additions": 263,
+          "deletions": 436,
+          "changes": 699
+        },
+        {
+          "filename": "out/404.html",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1,
+          "changes": 2
+        },
+        {
+          "filename": "out/_next/static/O2keMpFXsczvdO-VkTdlZ/_buildManifest.js",
+          "status": "renamed",
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0
+        },
+        {
+          "filename": "out/_next/static/O2keMpFXsczvdO-VkTdlZ/_ssgManifest.js",
+          "status": "renamed",
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0
+        },
+        {
+          "filename": "out/_next/static/chunks/117-90ce46450edbeee7 2.js",
+          "status": "added",
+          "additions": 2,
+          "deletions": 0,
+          "changes": 2
+        },
+        {
+          "filename": "out/_next/static/chunks/136-879e06ab99c498f2 2.js",
+          "status": "added",
+          "additions": 1,
+          "deletions": 0,
+          "changes": 1
+        },
+        {
+          "filename": "out/_next/static/chunks/357-2a8c04f973068f61.js",
+          "status": "added",
+          "additions": 1,
+          "deletions": 0,
+          "changes": 1
+        },
+        {
+          "filename": "out/_next/static/chunks/357-6d021b0c722e14cb.js",
+          "status": "removed",
+          "additions": 0,
+          "deletions": 1,
+          "changes": 1
+        },
+        {
+          "filename": "out/_next/static/chunks/632-a4c13318f2d55e78 2.js",
+          "status": "added",
+          "additions": 1,
+          "deletions": 0,
+          "changes": 1
+        }
+      ],
+      "author": {
+        "name": "Ishaan Kor",
+        "date": "2026-11-12T08:18:58Z"
+      }
+    },
+    {
       "sha": "f73630f64d049a5d53ddc60743abac30df9d685f",
       "shortSha": "f73630f",
       "message": "release: v2.0.0 - native Electron claim engine and anti-bot hardening",
@@ -250,7 +346,7 @@
       "repoUrl": "https://github.com/ishaankor/Claimr-",
       "commitUrl": "https://github.com/ishaankor/Claimr-/commit/f73630f64d049a5d53ddc60743abac30df9d685f",
       "date": "2026-11-12T07:06:32Z",
-      "timeAgo": "23m ago",
+      "timeAgo": "1h ago",
       "stats": {
         "total": 1178,
         "additions": 902,
@@ -519,43 +615,10 @@
         "name": "Ishaan Kor",
         "date": "2026-11-10T19:55:15Z"
       }
-    },
-    {
-      "sha": "7e798a06c7c1e28734f648dd24a69dc4d99bec2a",
-      "shortSha": "7e798a0",
-      "message": "chore: update wrangler config with custom domain route and publishable key",
-      "repoName": "RigScouter-AI",
-      "repoFullName": "ishaankor/RigScouter-AI",
-      "repoUrl": "https://github.com/ishaankor/RigScouter-AI",
-      "commitUrl": "https://github.com/ishaankor/RigScouter-AI/commit/7e798a06c7c1e28734f648dd24a69dc4d99bec2a",
-      "date": "2026-11-10T19:44:51Z",
-      "timeAgo": "1d ago",
-      "stats": {
-        "total": 48,
-        "additions": 33,
-        "deletions": 15
-      },
-      "linesChanged": 48,
-      "additions": 33,
-      "deletions": 15,
-      "filesCount": 1,
-      "files": [
-        {
-          "filename": "wrangler.jsonc",
-          "status": "modified",
-          "additions": 33,
-          "deletions": 15,
-          "changes": 48
-        }
-      ],
-      "author": {
-        "name": "Ishaan Kor",
-        "date": "2026-11-10T19:44:51Z"
-      }
     }
   ],
   "contributionCalendar": {
-    "totalContributions": 686,
+    "totalContributions": 687,
     "weeks": [
       {
         "contributionDays": [
@@ -2604,6 +2667,11 @@
           },
           {
             "date": "2026-11-11",
+            "contributionCount": 1,
+            "color": "#9be9a8"
+          },
+          {
+            "date": "2026-11-12",
             "contributionCount": 1,
             "color": "#9be9a8"
           }
