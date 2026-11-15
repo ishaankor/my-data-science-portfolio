@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-15T08:14:23.547Z",
+  "updatedAt": "2026-11-15T08:19:16.527Z",
   "totalRepos": 20,
   "user": {
     "login": "ishaankor",
@@ -18,7 +18,7 @@
       "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
       "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
       "created_at": "2025-01-11T23:48:23Z",
-      "pushed_at": "2026-11-15T07:13:47Z",
+      "pushed_at": "2026-11-15T08:18:28Z",
       "updated_at": "2026-11-12T09:19:05Z",
       "fork": false,
       "is_fork": false
@@ -253,6 +253,102 @@
     }
   ],
   "commits": [
+    {
+      "sha": "6486c9de1a39f6f9f5eec61579c4ee086556cea0",
+      "shortSha": "6486c9d",
+      "message": "refactor: update design system tokens and layout components",
+      "repoName": "my-data-science-portfolio",
+      "repoFullName": "ishaankor/my-data-science-portfolio",
+      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/6486c9de1a39f6f9f5eec61579c4ee086556cea0",
+      "date": "2026-11-15T08:18:25Z",
+      "timeAgo": "just now",
+      "stats": {
+        "total": 2491,
+        "additions": 1946,
+        "deletions": 545
+      },
+      "linesChanged": 2491,
+      "additions": 1946,
+      "deletions": 545,
+      "filesCount": 45,
+      "files": [
+        {
+          "filename": "app/globals.css",
+          "status": "modified",
+          "additions": 646,
+          "deletions": 8,
+          "changes": 654
+        },
+        {
+          "filename": "app/layout.tsx",
+          "status": "modified",
+          "additions": 39,
+          "deletions": 2,
+          "changes": 41
+        },
+        {
+          "filename": "app/page.tsx",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1,
+          "changes": 2
+        },
+        {
+          "filename": "components/analytics/GitHubAnalytics.tsx",
+          "status": "modified",
+          "additions": 101,
+          "deletions": 110,
+          "changes": 211
+        },
+        {
+          "filename": "components/hero/HeroMemojiInteractive.tsx",
+          "status": "modified",
+          "additions": 73,
+          "deletions": 78,
+          "changes": 151
+        },
+        {
+          "filename": "components/hero/HeroSection.tsx",
+          "status": "modified",
+          "additions": 23,
+          "deletions": 23,
+          "changes": 46
+        },
+        {
+          "filename": "components/layout/Footer.tsx",
+          "status": "modified",
+          "additions": 24,
+          "deletions": 22,
+          "changes": 46
+        },
+        {
+          "filename": "components/layout/Navbar.tsx",
+          "status": "modified",
+          "additions": 55,
+          "deletions": 53,
+          "changes": 108
+        },
+        {
+          "filename": "components/projects/ProjectsShowcase.tsx",
+          "status": "modified",
+          "additions": 83,
+          "deletions": 90,
+          "changes": 173
+        },
+        {
+          "filename": "components/sections/AboutMeSection.tsx",
+          "status": "modified",
+          "additions": 27,
+          "deletions": 29,
+          "changes": 56
+        }
+      ],
+      "author": {
+        "name": "Ishaan Kor",
+        "date": "2026-11-15T08:17:52Z"
+      }
+    },
     {
       "sha": "ffd4367e89ff8aaa1c459cfdbcc0f8c9c54fc22a",
       "shortSha": "ffd4367",
@@ -608,107 +704,10 @@
         "name": "Ishaan Kor",
         "date": "2026-11-14T10:25:52Z"
       }
-    },
-    {
-      "sha": "e3689b3f1a71efab1425e6e6febb5c9ecf25415c",
-      "shortSha": "e3689b3",
-      "message": "refactor: update UI styling and component text across application components and routes",
-      "repoName": "Datafy",
-      "repoFullName": "ishaankor/Datafy",
-      "repoUrl": "https://github.com/ishaankor/Datafy",
-      "commitUrl": "https://github.com/ishaankor/Datafy/commit/e3689b3f1a71efab1425e6e6febb5c9ecf25415c",
-      "date": "2026-11-14T09:41:07Z",
-      "timeAgo": "22h ago",
-      "stats": {
-        "total": 2779,
-        "additions": 1748,
-        "deletions": 1031
-      },
-      "linesChanged": 2779,
-      "additions": 1748,
-      "deletions": 1031,
-      "filesCount": 16,
-      "files": [
-        {
-          "filename": "src/components/AIChat.tsx",
-          "status": "modified",
-          "additions": 26,
-          "deletions": 26,
-          "changes": 52
-        },
-        {
-          "filename": "src/components/AuthModal.tsx",
-          "status": "modified",
-          "additions": 7,
-          "deletions": 13,
-          "changes": 20
-        },
-        {
-          "filename": "src/components/ChartRenderer.tsx",
-          "status": "modified",
-          "additions": 6,
-          "deletions": 6,
-          "changes": 12
-        },
-        {
-          "filename": "src/components/DataInput.tsx",
-          "status": "modified",
-          "additions": 3,
-          "deletions": 4,
-          "changes": 7
-        },
-        {
-          "filename": "src/components/Footer.tsx",
-          "status": "modified",
-          "additions": 22,
-          "deletions": 94,
-          "changes": 116
-        },
-        {
-          "filename": "src/components/HomeDemo.tsx",
-          "status": "modified",
-          "additions": 185,
-          "deletions": 297,
-          "changes": 482
-        },
-        {
-          "filename": "src/components/HomeGuidedTour.tsx",
-          "status": "modified",
-          "additions": 187,
-          "deletions": 222,
-          "changes": 409
-        },
-        {
-          "filename": "src/components/Navbar.tsx",
-          "status": "modified",
-          "additions": 28,
-          "deletions": 56,
-          "changes": 84
-        },
-        {
-          "filename": "src/components/UserMenu.tsx",
-          "status": "modified",
-          "additions": 7,
-          "deletions": 9,
-          "changes": 16
-        },
-        {
-          "filename": "src/components/WorkspaceSidebar.tsx",
-          "status": "modified",
-          "additions": 1,
-          "deletions": 1,
-          "changes": 2
-        }
-      ],
-      "author": {
-        "name": "Ishaan Kor",
-        "date": "2026-11-14T09:41:07Z"
-      }
     }
   ],
   "contributionCalendar": {
-    "totalContributions": 783,
-    "totalContributions": 783,
+    "totalContributions": 784,
     "weeks": [
       {
         "contributionDays": [
@@ -2734,7 +2733,6 @@
           {
             "date": "2026-11-14",
             "contributionCount": 5,
-            "contributionCount": 5,
             "color": "#40c463"
           }
         ]
@@ -2743,8 +2741,8 @@
         "contributionDays": [
           {
             "date": "2026-11-15",
-            "contributionCount": 0,
-            "color": "#ebedf0"
+            "contributionCount": 1,
+            "color": "#9be9a8"
           }
         ]
       }
