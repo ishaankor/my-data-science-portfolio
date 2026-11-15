@@ -8,8 +8,8 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   return (
-    <main className="min-h-dvh">
+    <div className="min-h-dvh">
       <RepositoryMatrix />
-    </main>
+    </div>
   );
 }

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ishaankor.github.io/my-data-science-portfolio/sitemap.xml

@@ -40,23 +40,23 @@ export default function ProjectsShowcase({ limit }: { limit?: number }) {
   };
 
   return (
-    <section className="border-t border-line/60 py-14 sm:py-24">
-      <div className="mx-auto w-full max-w-6xl px-6 sm:px-10">
+    <section aria-labelledby="heading-projects" className="section-boundary">
+      <div className="section-container">
         
         {/* Section Header */}
         <ScrollReveal direction="up" delay={0.1}>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 sm:mb-12">
             <div>
-              <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted">
-                <Sparkles className="w-3.5 h-3.5 text-ember" />
-                selected work
+              <span className="section-eyebrow">
+                <Sparkles className="w-3.5 h-3.5 text-ember" aria-hidden="true" />
+                <span>selected work</span>
               </span>
-              <h2 className="font-display text-2xl sm:text-3xl lg:text-[2.15rem] font-semibold leading-tight tracking-[-0.02em] text-bone mt-3 sm:whitespace-nowrap">
+              <h2 id="heading-projects" className="section-headline mt-2 sm:whitespace-nowrap">
                 Built for real-world impact.
               </h2>
             </div>
 
-            <div className="flex flex-wrap gap-2 font-mono shrink-0">
+            <div className="flex flex-wrap gap-2 font-mono shrink-0" role="toolbar" aria-label="Project category filters">
               {categories.map((cat) => (
                 <button
                   key={cat}
@@ -78,33 +78,29 @@ export default function ProjectsShowcase({ limit }: { limit?: number }) {
         <div className="grid gap-6 sm:gap-10 sm:grid-cols-2 lg:grid-cols-3">
           {displayedProjects.map((project, idx) => (
             <ScrollReveal key={project.id} direction="up" delay={0.15 + idx * 0.1}>
-              <div className="group block">
-                  {/* Browser Window Mockup Container */}
+              <article aria-label={project.title} className="group block">
+                  {/* Clean Editorial Card Container */}
                   <a
                     href={project.liveUrl || project.githubUrl || '#'}
                     target={project.liveUrl || project.githubUrl ? '_blank' : undefined}
                     rel="noopener noreferrer"
-                    className="block overflow-hidden rounded-xl border border-line bg-surface shadow-float transition-all duration-300 group-hover:border-ember/60"
+                    className="block overflow-hidden rounded-xl border border-line bg-surface shadow-panel transition-all duration-300 group-hover:border-ember/60 group-hover:shadow-float"
                   >
-                    {/* Browser Header Bar */}
-                    <div className="flex items-center justify-between border-b border-line bg-ink/70 px-3.5 py-2.5">
+                    {/* Header Bar */}
+                    <div className="window-chrome">
                       <div className="flex items-center gap-2">
-                        <span aria-hidden="true" className="flex items-center gap-1.5">
-                          <span className="h-2.5 w-2.5 rounded-full bg-rose-500/80" />
-                          <span className="h-2.5 w-2.5 rounded-full bg-amber-500/80" />
-                          <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/80" />
-                        </span>
-                        <span className="truncate font-mono text-[0.68rem] text-muted group-hover:text-bone transition-colors ml-1">
-                          {project.id}.app
+                        <span className="w-1.5 h-1.5 rounded-full bg-ember/60 group-hover:bg-ember transition-colors" aria-hidden="true" />
+                        <span className="truncate font-mono text-[0.68rem] text-muted group-hover:text-bone transition-colors">
+                          projects/{project.id}
                         </span>
                       </div>
                       {(project.liveUrl || project.githubUrl) && (
-                        <ExternalLink className="w-3 h-3 text-muted/60 group-hover:text-ember transition-colors" />
+                        <ExternalLink className="w-3 h-3 text-muted/60 group-hover:text-ember transition-colors" aria-hidden="true" />
                       )}
                     </div>
 
                     {/* Card Content & Thumbnail area - Expanded Favicon Cover */}
-                    <div className="relative aspect-[16/10] overflow-hidden bg-ink/90 flex items-center justify-center">
+                    <figure className="relative aspect-[16/10] overflow-hidden bg-ink/90 flex items-center justify-center m-0">
                       {project.id === 'ishaanbot' ? (
                         <div className="w-full h-full flex items-center justify-center relative overflow-hidden bg-[#080c16]">
                           {/* Ambient radial glow */}
@@ -144,7 +140,8 @@ export default function ProjectsShowcase({ limit }: { limit?: number }) {
                           {getProjectFallbackIcon(project.id)}
                         </div>
                       )}
-                    </div>
+                      <figcaption className="sr-only">{project.title}</figcaption>
+                    </figure>
 
                   </a>
 
@@ -158,15 +155,15 @@ export default function ProjectsShowcase({ limit }: { limit?: number }) {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-muted hover:text-ember transition-colors"
-                        aria-label="GitHub Repo"
+                        aria-label={`${project.title} GitHub repository`}
                         onClick={(e) => e.stopPropagation()}
                       >
-                        <Github className="w-4 h-4 inline" />
+                        <Github className="w-4 h-4 inline" aria-hidden="true" />
                       </a>
                     )}
                   </h3>
                   <div className="flex items-center gap-2 shrink-0 font-mono text-xs">
-                    <span className="text-muted">{project.year}</span>
+                    <time dateTime={project.year} className="text-muted">{project.year}</time>
                     {project.liveUrl && (
                       <>
                         <span className="text-muted/40">•</span>
@@ -178,7 +175,7 @@ export default function ProjectsShowcase({ limit }: { limit?: number }) {
                           onClick={(e) => e.stopPropagation()}
                         >
                           <span>Live</span>
-                          <ExternalLink className="w-3 h-3 text-ember" />
+                          <ExternalLink className="w-3 h-3 text-ember" aria-hidden="true" />
                         </a>
                       </>
                     )}
@@ -189,7 +186,7 @@ export default function ProjectsShowcase({ limit }: { limit?: number }) {
                 <p className="mt-2 text-xs text-bone-dim leading-relaxed">
                   {project.description}
                 </p>
-              </div>
+              </article>
             </ScrollReveal>
           ))}
         </div>

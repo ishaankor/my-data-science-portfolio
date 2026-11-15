@@ -9,6 +9,52 @@
   }
 }
 
+@layer components {
+  /* =========================================================================
+     Design System Tokens: Structural Surfaces & Editorial Architecture
+     ========================================================================= */
+
+  /* Section Framing */
+  .section-boundary {
+    @apply border-t border-line/60 py-14 sm:py-24 relative;
+  }
+  .section-container {
+    @apply mx-auto w-full max-w-6xl px-6 sm:px-10;
+  }
+
+  /* Editorial Section Headers */
+  .section-eyebrow {
+    @apply inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted mb-3;
+  }
+  .section-headline {
+    @apply font-display text-2xl sm:text-3xl lg:text-[2.25rem] font-semibold leading-tight tracking-[-0.02em] text-bone;
+  }
+
+  /* Architectural Cards */
+  .surface-panel {
+    @apply rounded-xl border border-line bg-surface p-5 sm:p-7 shadow-panel flex flex-col justify-between h-full transition-all duration-300;
+  }
+  .surface-panel-interactive {
+    @apply surface-panel hover:border-line/80 hover:shadow-float;
+  }
+
+  /* Chips, Badges & Labels */
+  .badge-chip {
+    @apply px-2 py-0.5 rounded text-[10px] font-mono bg-surface border border-line text-muted;
+  }
+  .badge-chip-accent {
+    @apply px-2.5 py-1 rounded-md text-xs font-mono bg-ember/10 border border-ember/30 text-bone font-medium;
+  }
+
+  /* Window / Terminal Chrome */
+  .window-chrome {
+    @apply flex items-center justify-between border-b border-line bg-ink/70 px-3.5 py-2.5;
+  }
+  .window-traffic-lights {
+    @apply flex items-center gap-1.5;
+  }
+}
+
 html,
 body {
   background-color: #090d16;

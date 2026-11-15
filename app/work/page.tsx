@@ -9,8 +9,8 @@ export const metadata: Metadata = {
 
 export default function WorkPage() {
   return (
-    <main className="min-h-dvh">
+    <div className="min-h-dvh">
       <ResumeClient />
-    </main>
+    </div>
   );
 }

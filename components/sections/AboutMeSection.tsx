@@ -28,22 +28,27 @@ export default function AboutMeSection() {
   ];
 
   return (
-    <section className="border-t border-line/60 py-14 sm:py-24 relative">
-      <div className="mx-auto w-full max-w-6xl px-6 sm:px-10 space-y-14 sm:space-y-20">
+    <section aria-labelledby="heading-about" className="section-boundary">
+      <div className="section-container space-y-14 sm:space-y-20">
         
         {/* 1. WHAT I DO Section */}
         <ScrollReveal direction="up" delay={0.1}>
           <div>
-            {/* Section Eyebrow */}
-            <div className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted mb-6 sm:mb-8">
-              <Code2 className="w-3.5 h-3.5 text-ember" />
-              <span>WHAT I DO</span>
+            {/* Section Eyebrow & Proper H2 Landmark */}
+            <div className="mb-6 sm:mb-8">
+              <span className="section-eyebrow">
+                <Code2 className="w-3.5 h-3.5 text-ember" aria-hidden="true" />
+                <span>WHAT I DO</span>
+              </span>
+              <h2 id="heading-about" className="section-headline mt-2">
+                Engineering Philosophy &amp; Core Disciplines
+              </h2>
             </div>
 
             {/* Numbered Row List */}
             <div className="divide-y divide-line/60 border-t border-b border-line/60">
               {whatIDoItems.map((item) => (
-                <div
+                <article
                   key={item.number}
                   className="py-5 sm:py-9 grid grid-cols-1 md:grid-cols-12 gap-2 sm:gap-3 md:gap-8 items-baseline group"
                 >
@@ -63,7 +68,7 @@ export default function AboutMeSection() {
                       {item.description}
                     </p>
                   </div>
-                </div>
+                </article>
               ))}
             </div>
           </div>
@@ -73,8 +78,8 @@ export default function AboutMeSection() {
         <ScrollReveal direction="up" delay={0.2}>
           <div className="space-y-4">
             {/* Section Eyebrow */}
-            <div className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted">
-              <Briefcase className="w-3.5 h-3.5 text-ember" />
+            <div className="section-eyebrow">
+              <Briefcase className="w-3.5 h-3.5 text-ember" aria-hidden="true" />
               <span>CURRENTLY</span>
             </div>
 

@@ -13,17 +13,17 @@ export default function TechStackSection() {
   ];
 
   return (
-    <section className="border-t border-line/60 py-14 sm:py-24 relative">
-      <div className="mx-auto w-full max-w-6xl px-6 sm:px-10">
+    <section aria-labelledby="heading-tech-stack" className="section-boundary">
+      <div className="section-container">
         
         {/* Header */}
         <ScrollReveal direction="up" delay={0.1}>
           <div className="mb-8 sm:mb-12">
-            <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted">
-              <Layers className="w-3.5 h-3.5 text-ember" />
-              technical toolkit
+            <span className="section-eyebrow">
+              <Layers className="w-3.5 h-3.5 text-ember" aria-hidden="true" />
+              <span>technical toolkit</span>
             </span>
-            <h2 className="font-display text-2xl sm:text-[2.75rem] font-semibold leading-[1.08] tracking-[-0.02em] text-bone mt-3 sm:mt-4">
+            <h2 id="heading-tech-stack" className="section-headline mt-2">
               Tech Stack &amp; Focus Areas
             </h2>
           </div>
@@ -35,7 +35,7 @@ export default function TechStackSection() {
             const icon = categoryIcons[idx % categoryIcons.length];
             return (
               <ScrollReveal key={category.title} direction="up" delay={0.15 + idx * 0.1}>
-                <div className="rounded-xl border border-line bg-surface p-5 sm:p-7 shadow-panel flex flex-col justify-between h-full hover:border-line/80 transition-colors">
+                <article className="surface-panel-interactive">
                   <div>
                     <div className="w-10 h-10 rounded-lg border border-line bg-ink flex items-center justify-center mb-6 shadow-sm">
                       {icon}
@@ -57,14 +57,14 @@ export default function TechStackSection() {
                           className="flex items-center justify-between p-2.5 rounded-lg bg-ink/70 border border-line/70 hover:border-line transition-colors"
                         >
                           <span className="text-bone font-medium text-xs">{skill.name}</span>
-                          <span className="px-2 py-0.5 rounded text-[10px] bg-surface border border-line text-muted">
+                          <span className="badge-chip">
                             {skill.tag}
                           </span>
                         </div>
                       ))}
                     </div>
                   </div>
-                </div>
+                </article>
               </ScrollReveal>
             );
           })}

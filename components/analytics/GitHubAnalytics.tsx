@@ -73,18 +73,18 @@ export default function GitHubAnalytics() {
   ];
 
   return (
-    <section className="border-t border-line/60 py-14 sm:py-24 relative">
-      <div className="mx-auto w-full max-w-6xl px-6 sm:px-10">
+    <section aria-labelledby="heading-github-analytics" className="section-boundary">
+      <div className="section-container">
         
         {/* Section Header */}
         <ScrollReveal direction="up" delay={0.1}>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-8 sm:mb-12">
             <div>
-              <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted">
-                <Github className="w-3.5 h-3.5 text-ember" />
-                github activity
+              <span className="section-eyebrow">
+                <Github className="w-3.5 h-3.5 text-ember" aria-hidden="true" />
+                <span>github activity</span>
               </span>
-              <h2 className="font-display text-2xl sm:text-[2.75rem] font-semibold leading-[1.08] tracking-[-0.02em] text-bone mt-3 sm:mt-4">
+              <h2 id="heading-github-analytics" className="section-headline mt-2">
                 Real-time API metadata.
               </h2>
             </div>
@@ -95,9 +95,9 @@ export default function GitHubAnalytics() {
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-2 rounded-md border border-line bg-surface/60 px-4 py-2 font-mono text-xs text-bone transition-colors hover:border-ember hover:text-ember self-start sm:self-auto"
             >
-              <Github className="w-4 h-4 text-ember" />
+              <Github className="w-4 h-4 text-ember" aria-hidden="true" />
               <span>@{portfolioData.githubUsername}</span>
-              <ExternalLink className="w-3.5 h-3.5 text-muted group-hover:text-ember" />
+              <ExternalLink className="w-3.5 h-3.5 text-muted group-hover:text-ember" aria-hidden="true" />
             </a>
           </div>
         </ScrollReveal>
@@ -108,10 +108,10 @@ export default function GitHubAnalytics() {
           {/* Key Metrics Cards */}
           <div className="lg:col-span-4 grid grid-cols-2 gap-3 sm:gap-4">
             <ScrollReveal direction="up" delay={0.15}>
-              <div className="rounded-xl border border-line bg-surface p-3.5 sm:p-5 shadow-panel flex flex-col justify-between h-full hover:border-line/80 transition-colors">
+              <article className="surface-panel-interactive p-3.5 sm:p-5">
                 <div className="flex items-center justify-between mb-2">
                   <div className="w-8 h-8 rounded-lg bg-ink border border-line flex items-center justify-center text-bone">
-                    <Code2 className="w-4 h-4 text-bone-dim" />
+                    <Code2 className="w-4 h-4 text-bone-dim" aria-hidden="true" />
                   </div>
                   <span className="font-mono text-[0.65rem] text-muted uppercase tracking-wider">Live API</span>
                 </div>
@@ -121,14 +121,14 @@ export default function GitHubAnalytics() {
                   </p>
                   <p className="font-mono text-[11px] sm:text-xs text-muted mt-1">Public Repos</p>
                 </div>
-              </div>
+              </article>
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.2}>
-              <div className="rounded-xl border border-line bg-surface p-3.5 sm:p-5 shadow-panel flex flex-col justify-between h-full hover:border-line/80 transition-colors">
+              <article className="surface-panel-interactive p-3.5 sm:p-5">
                 <div className="flex items-center justify-between mb-2">
                   <div className="w-8 h-8 rounded-lg bg-ink border border-line flex items-center justify-center text-bone">
-                    <Terminal className="w-4 h-4 text-bone-dim" />
+                    <Terminal className="w-4 h-4 text-bone-dim" aria-hidden="true" />
                   </div>
                   <span className="font-mono text-[0.65rem] text-muted uppercase tracking-wider">Primary</span>
                 </div>
@@ -138,14 +138,14 @@ export default function GitHubAnalytics() {
                   </p>
                   <p className="font-mono text-[11px] sm:text-xs text-muted mt-1">Top Stack</p>
                 </div>
-              </div>
+              </article>
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.25}>
-              <div className="rounded-xl border border-line bg-surface p-3.5 sm:p-5 shadow-panel flex flex-col justify-between h-full hover:border-line/80 transition-colors">
+              <article className="surface-panel-interactive p-3.5 sm:p-5">
                 <div className="flex items-center justify-between mb-2">
                   <div className="w-8 h-8 rounded-lg bg-ink border border-line flex items-center justify-center text-bone">
-                    <Calendar className="w-4 h-4 text-bone-dim" />
+                    <Calendar className="w-4 h-4 text-bone-dim" aria-hidden="true" />
                   </div>
                   <span className="font-mono text-[0.65rem] text-muted uppercase tracking-wider">Weekly</span>
                 </div>
@@ -155,14 +155,14 @@ export default function GitHubAnalytics() {
                   </p>
                   <p className="font-mono text-[11px] sm:text-xs text-muted mt-1">Weekly Commits</p>
                 </div>
-              </div>
+              </article>
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.3}>
-              <div className="rounded-xl border border-line bg-surface p-3.5 sm:p-5 shadow-panel flex flex-col justify-between h-full hover:border-line/80 transition-colors">
+              <article className="surface-panel-interactive p-3.5 sm:p-5">
                 <div className="flex items-center justify-between mb-2">
                   <div className="w-8 h-8 rounded-lg bg-ink border border-line flex items-center justify-center text-emerald-400">
-                    <Activity className="w-4 h-4 text-emerald-400" />
+                    <Activity className="w-4 h-4 text-emerald-400" aria-hidden="true" />
                   </div>
                   <span className="font-mono text-[0.65rem] text-muted uppercase tracking-wider">Dev Status</span>
                 </div>
@@ -176,8 +176,9 @@ export default function GitHubAnalytics() {
                     </span>
                     <span className="truncate">{devStatus.label}</span>
                   </p>
+                  <p className="font-mono text-[11px] sm:text-xs text-muted mt-1">GitHub Stream</p>
                 </div>
-              </div>
+              </article>
             </ScrollReveal>
           </div>
 
