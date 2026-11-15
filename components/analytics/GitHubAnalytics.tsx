@@ -73,18 +73,18 @@ export default function GitHubAnalytics() {
   ];
 
   return (
-    <section aria-labelledby="heading-github-analytics" className="section-boundary">
-      <div className="section-container">
+    <section aria-labelledby="heading-github-analytics" className="telemetry-section">
+      <div className="telemetry-container">
         
         {/* Section Header */}
         <ScrollReveal direction="up" delay={0.1}>
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-8 sm:mb-12">
+          <header className="telemetry-header-row">
             <div>
               <span className="section-eyebrow">
-                <Github className="w-3.5 h-3.5 text-ember" aria-hidden="true" />
+                <Github className="icon-xs-accent" aria-hidden="true" />
                 <span>github activity</span>
               </span>
-              <h2 id="heading-github-analytics" className="section-headline mt-2">
+              <h2 id="heading-github-analytics" className="section-headline">
                 Real-time API metadata.
               </h2>
             </div>
@@ -93,114 +93,114 @@ export default function GitHubAnalytics() {
               href={`https://github.com/${portfolioData.githubUsername}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 rounded-md border border-line bg-surface/60 px-4 py-2 font-mono text-xs text-bone transition-colors hover:border-ember hover:text-ember self-start sm:self-auto"
+              className="telemetry-profile-btn"
             >
-              <Github className="w-4 h-4 text-ember" aria-hidden="true" />
+              <Github className="icon-sm-accent" aria-hidden="true" />
               <span>@{portfolioData.githubUsername}</span>
-              <ExternalLink className="w-3.5 h-3.5 text-muted group-hover:text-ember" aria-hidden="true" />
+              <ExternalLink className="icon-xs" aria-hidden="true" />
             </a>
-          </div>
+          </header>
         </ScrollReveal>
 
         {/* Analytics Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
+        <div className="telemetry-bento-grid">
           
           {/* Key Metrics Cards */}
-          <div className="lg:col-span-4 grid grid-cols-2 gap-3 sm:gap-4">
+          <div className="telemetry-kpi-grid">
             <ScrollReveal direction="up" delay={0.15}>
-              <article className="surface-panel-interactive p-3.5 sm:p-5">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="w-8 h-8 rounded-lg bg-ink border border-line flex items-center justify-center text-bone">
-                    <Code2 className="w-4 h-4 text-bone-dim" aria-hidden="true" />
+              <article className="kpi-card">
+                <div className="kpi-header">
+                  <div className="kpi-icon-well">
+                    <Code2 className="icon-sm" aria-hidden="true" />
                   </div>
-                  <span className="font-mono text-[0.65rem] text-muted uppercase tracking-wider">Live API</span>
+                  <span className="kpi-tag">Live API</span>
                 </div>
                 <div>
-                  <p className="font-display text-2xl sm:text-3xl font-bold text-bone">
+                  <p className="kpi-metric-lg">
                     {typeof user?.public_repos === 'number' ? user.public_repos : activeRepos.length}
                   </p>
-                  <p className="font-mono text-[11px] sm:text-xs text-muted mt-1">Public Repos</p>
+                  <p className="kpi-caption">Public Repos</p>
                 </div>
               </article>
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.2}>
-              <article className="surface-panel-interactive p-3.5 sm:p-5">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="w-8 h-8 rounded-lg bg-ink border border-line flex items-center justify-center text-bone">
-                    <Terminal className="w-4 h-4 text-bone-dim" aria-hidden="true" />
+              <article className="kpi-card">
+                <div className="kpi-header">
+                  <div className="kpi-icon-well">
+                    <Terminal className="icon-sm" aria-hidden="true" />
                   </div>
-                  <span className="font-mono text-[0.65rem] text-muted uppercase tracking-wider">Primary</span>
+                  <span className="kpi-tag">Primary</span>
                 </div>
                 <div>
-                  <p className="font-display text-xl sm:text-2xl font-bold text-bone truncate">
+                  <p className="kpi-metric-md">
                     {primaryLang}
                   </p>
-                  <p className="font-mono text-[11px] sm:text-xs text-muted mt-1">Top Stack</p>
+                  <p className="kpi-caption">Top Stack</p>
                 </div>
               </article>
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.25}>
-              <article className="surface-panel-interactive p-3.5 sm:p-5">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="w-8 h-8 rounded-lg bg-ink border border-line flex items-center justify-center text-bone">
-                    <Calendar className="w-4 h-4 text-bone-dim" aria-hidden="true" />
+              <article className="kpi-card">
+                <div className="kpi-header">
+                  <div className="kpi-icon-well">
+                    <Calendar className="icon-sm" aria-hidden="true" />
                   </div>
-                  <span className="font-mono text-[0.65rem] text-muted uppercase tracking-wider">Weekly</span>
+                  <span className="kpi-tag">Weekly</span>
                 </div>
                 <div>
-                  <p suppressHydrationWarning className="font-display text-2xl sm:text-3xl font-bold text-bone">
+                  <p suppressHydrationWarning className="kpi-metric-lg">
                     {weeklyContributions}
                   </p>
-                  <p className="font-mono text-[11px] sm:text-xs text-muted mt-1">Weekly Commits</p>
+                  <p className="kpi-caption">Weekly Commits</p>
                 </div>
               </article>
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.3}>
-              <article className="surface-panel-interactive p-3.5 sm:p-5">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="w-8 h-8 rounded-lg bg-ink border border-line flex items-center justify-center text-emerald-400">
-                    <Activity className="w-4 h-4 text-emerald-400" aria-hidden="true" />
+              <article className="kpi-card">
+                <div className="kpi-header">
+                  <div className="kpi-icon-well">
+                    <Activity className="icon-sm" aria-hidden="true" />
                   </div>
-                  <span className="font-mono text-[0.65rem] text-muted uppercase tracking-wider">Dev Status</span>
+                  <span className="kpi-tag">Dev Status</span>
                 </div>
                 <div>
-                  <p suppressHydrationWarning className={`font-mono text-[11px] sm:text-xs font-semibold ${devStatus.textColor} flex items-center gap-1.5 truncate`}>
-                    <span className="relative flex h-2 w-2 shrink-0">
+                  <p suppressHydrationWarning className={`kpi-caption ${devStatus.textColor}`}>
+                    <span className="memoji-status-indicator" style={{ marginRight: '0.375rem', verticalAlign: 'middle' }}>
                       {devStatus.isPulsing && (
-                        <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${devStatus.bgColor} opacity-75`} />
+                        <span className={`memoji-status-ping ${devStatus.bgColor}`} />
                       )}
-                      <span className={`relative inline-flex rounded-full h-2 w-2 ${devStatus.bgColor}`} />
+                      <span className={`memoji-status-dot ${devStatus.bgColor}`} />
                     </span>
-                    <span className="truncate">{devStatus.label}</span>
+                    <span>{devStatus.label}</span>
                   </p>
-                  <p className="font-mono text-[11px] sm:text-xs text-muted mt-1">GitHub Stream</p>
+                  <p className="kpi-caption">GitHub Stream</p>
                 </div>
               </article>
             </ScrollReveal>
           </div>
 
           {/* Languages Breakdown */}
-          <div className="lg:col-span-4">
+          <div className="telemetry-col">
             <ScrollReveal direction="up" delay={0.25}>
-              <div className="rounded-xl border border-line bg-surface p-6 shadow-panel flex flex-col justify-between h-full">
+              <article className="surface-panel">
                 <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="font-display text-lg font-semibold text-bone flex items-center gap-2">
-                      <Code2 className="w-4 h-4 text-ember" />
+                  <div className="panel-header-row">
+                    <h3 className="panel-heading">
+                      <Code2 className="icon-sm-accent" aria-hidden="true" />
                       <span>Code Languages Breakdown</span>
                     </h3>
-                    <span className="font-mono text-[10px] text-muted uppercase tracking-wider">
+                    <span className="kpi-tag">
                       {activeRepos.length} Repos
                     </span>
                   </div>
 
                   {languagesList.length > 0 ? (
-                    <div className="space-y-4">
+                    <div>
                       {/* GitHub-style Multi-Segmented Language Distribution Bar */}
-                      <div className="w-full h-2 rounded-full overflow-hidden flex bg-ink border border-line/60 p-0.5 gap-0.5">
+                      <div className="lang-segmented-bar">
                         {languagesList.map((item) => (
                           <div
                             key={item.lang}
@@ -209,31 +209,26 @@ export default function GitHubAnalytics() {
                               backgroundColor: item.color,
                             }}
                             title={`${item.lang}: ${item.percent}% (${item.count} repos)`}
-                            className="h-full rounded-full transition-all duration-500"
                           />
                         ))}
                       </div>
 
                       {/* Individual Language Bars */}
-                      <div className="space-y-3 font-mono">
+                      <ul className="lang-breakdown-list">
                         {languagesList.map((item) => (
-                          <div key={item.lang} className="space-y-1.5">
-                            <div className="flex justify-between items-center text-xs text-bone-dim">
-                              <span className="flex items-center gap-2">
-                                <span
-                                  className="w-2 h-2 rounded-full shadow-xs shrink-0"
-                                  style={{ backgroundColor: item.color }}
-                                />
-                                <span className="font-medium text-bone">{item.lang}</span>
+                          <li key={item.lang}>
+                            <div>
+                              <span>
+                                <i style={{ backgroundColor: item.color }} aria-hidden="true" />
+                                <strong>{item.lang}</strong>
                               </span>
-                              <span className="text-muted text-[11px] tabular-nums flex items-center gap-2">
-                                <span className="text-muted/80">{item.count} {item.count === 1 ? 'repo' : 'repos'}</span>
-                                <span className="text-bone font-semibold">{item.percent}%</span>
-                              </span>
+                              <small>
+                                <span>{item.count} {item.count === 1 ? 'repo' : 'repos'}</span>
+                                <strong>{item.percent}%</strong>
+                              </small>
                             </div>
-                            <div className="w-full h-1.5 rounded-full bg-ink overflow-hidden border border-line/50">
-                              <div
-                                className="h-full rounded-full transition-all duration-700"
+                            <div role="progressbar" aria-valuenow={item.percent} aria-valuemin={0} aria-valuemax={100} aria-label={`${item.lang} repository share`}>
+                              <span
                                 style={{
                                   width: `${Math.max(item.percent, 4)}%`,
                                   backgroundColor: item.color,
@@ -241,79 +236,75 @@ export default function GitHubAnalytics() {
                                 }}
                               />
                             </div>
-                          </div>
+                          </li>
                         ))}
-                      </div>
+                      </ul>
                     </div>
                   ) : (
-                    <p className="font-mono text-xs text-muted">Python, TypeScript, SQL, C++, HTML/CSS</p>
+                    <p className="kpi-caption">Python, TypeScript, SQL, C++, HTML/CSS</p>
                   )}
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-line flex items-center justify-between text-[0.68rem] font-mono text-muted">
+                <footer className="panel-footer-row">
                   <span>Stack Distribution</span>
                   <span>Updated in real-time</span>
-                </div>
-              </div>
+                </footer>
+              </article>
             </ScrollReveal>
           </div>
 
           {/* Recent Repositories List */}
-          <div className="lg:col-span-4">
+          <div className="telemetry-col">
             <ScrollReveal direction="up" delay={0.35}>
-              <div className="rounded-xl border border-line bg-surface p-6 shadow-panel flex flex-col justify-between h-full">
+              <article className="surface-panel">
                 <div>
-                  <h3 className="font-display text-lg font-semibold text-bone mb-4 flex items-center gap-2">
-                    <GitBranch className="w-4 h-4 text-ember" />
-                    <span>Recent Repositories</span>
-                  </h3>
+                  <div className="panel-header-row">
+                    <h3 className="panel-heading">
+                      <GitBranch className="icon-sm-accent" aria-hidden="true" />
+                      <span>Recent Repositories</span>
+                    </h3>
+                  </div>
 
                   {recentRepos.length > 0 ? (
-                    <div className="space-y-3">
+                    <ul className="recent-repos-list">
                       {recentRepos.map((repo) => (
-                        <a
-                          key={repo.name}
-                          href={repo.html_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="group p-3 rounded-lg bg-ink/70 border border-line hover:border-ember/40 flex items-center justify-between transition-colors"
-                        >
-                          <div className="overflow-hidden pr-2">
-                            <p className="font-mono text-xs font-semibold text-bone group-hover:text-ember truncate">
-                              {repo.name}
-                            </p>
-                            <p className="text-[0.72rem] text-muted truncate mt-0.5">
-                              {repo.description || 'Data science & AI project repository'}
-                            </p>
-                          </div>
-                          <div className="flex items-center gap-1 font-mono text-xs text-muted shrink-0">
+                        <li key={repo.name}>
+                          <a
+                            href={repo.html_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <div>
+                              <strong>{repo.name}</strong>
+                              <p>{repo.description || 'Data science & AI project repository'}</p>
+                            </div>
                             <span>{repo.language || 'Code'}</span>
-                          </div>
-                        </a>
+                          </a>
+                        </li>
                       ))}
-                    </div>
+                    </ul>
                   ) : (
-                    <div className="font-mono text-xs text-muted space-y-2">
-                      <p>• transformi</p>
-                      <p>• daily-motivation</p>
-                      <p>• twitter-scraping-ai</p>
-                    </div>
+                    <ul className="recent-repos-list">
+                      <li className="kpi-caption">transformi</li>
+                      <li className="kpi-caption">daily-motivation</li>
+                      <li className="kpi-caption">twitter-scraping-ai</li>
+                    </ul>
                   )}
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-line flex items-center justify-between font-mono text-[0.68rem] text-muted">
+                <footer className="panel-footer-row">
                   <span>GitHub API v3</span>
                   <a
                     href={`https://github.com/${portfolioData.githubUsername}?tab=repositories`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-ember inline-flex items-center gap-1"
+                    className="project-action-secondary"
                   >
                     <span>View all</span>
-                    <ExternalLink className="w-3 h-3 text-ember" />
+                    <ExternalLink className="icon-xs-accent" aria-hidden="true" />
                   </a>
-                </div>
-              </div>
+                </footer>
+              </article>
             </ScrollReveal>
           </div>
 

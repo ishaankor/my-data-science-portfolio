@@ -16,14 +16,12 @@ export default function HazeWaveText({
   const rest = parts.length > 1 ? parts.slice(1).join('.') : '';
 
   return (
-    <span
-      className={`inline-flex items-center font-mono font-bold tracking-tight text-bone hover:text-white transition-colors cursor-pointer select-none ${className}`}
-    >
+    <span className={`brand-wordmark ${className}`.trim()}>
       <span>{first}</span>
       {parts.length > 1 && (
         <>
-          <span className="text-sky-400 mx-[1px]">.</span>
-          <span className="text-bone-dim hover:text-bone">{rest}</span>
+          <span className="brand-dot">.</span>
+          <span className="brand-suffix">{rest}</span>
         </>
       )}
     </span>

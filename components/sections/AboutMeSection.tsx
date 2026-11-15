@@ -28,81 +28,79 @@ export default function AboutMeSection() {
   ];
 
   return (
-    <section aria-labelledby="heading-about" className="section-boundary">
-      <div className="section-container space-y-14 sm:space-y-20">
+    <section aria-labelledby="heading-about" className="about-section">
+      <div className="about-container">
         
         {/* 1. WHAT I DO Section */}
         <ScrollReveal direction="up" delay={0.1}>
           <div>
             {/* Section Eyebrow & Proper H2 Landmark */}
-            <div className="mb-6 sm:mb-8">
+            <header className="toolkit-header">
               <span className="section-eyebrow">
-                <Code2 className="w-3.5 h-3.5 text-ember" aria-hidden="true" />
+                <Code2 className="eyebrow-icon" aria-hidden="true" />
                 <span>WHAT I DO</span>
               </span>
-              <h2 id="heading-about" className="section-headline mt-2">
+              <h2 id="heading-about" className="section-headline">
                 Engineering Philosophy &amp; Core Disciplines
               </h2>
-            </div>
+            </header>
 
             {/* Numbered Row List */}
-            <div className="divide-y divide-line/60 border-t border-b border-line/60">
+            <dl className="discipline-ledger">
               {whatIDoItems.map((item) => (
-                <article
+                <div
                   key={item.number}
-                  className="py-5 sm:py-9 grid grid-cols-1 md:grid-cols-12 gap-2 sm:gap-3 md:gap-8 items-baseline group"
+                  className="discipline-row"
                 >
                   {/* Left Column: Number & Title */}
-                  <div className="md:col-span-5 flex items-baseline gap-3">
-                    <span className="font-mono text-xs font-bold text-ember">
+                  <dt className="discipline-title-col">
+                    <span className="discipline-index">
                       {item.number}
                     </span>
-                    <h3 className="font-display text-base sm:text-lg font-bold text-bone group-hover:text-ember transition-colors">
+                    <h3 className="discipline-name">
                       {item.title}
                     </h3>
-                  </div>
+                  </dt>
 
                   {/* Right Column: Description */}
-                  <div className="md:col-span-7">
-                    <p className="text-bone-dim text-xs sm:text-sm leading-relaxed">
-                      {item.description}
-                    </p>
-                  </div>
-                </article>
+                  <dd className="discipline-desc-col">
+                    {item.description}
+                  </dd>
+                </div>
               ))}
-            </div>
+            </dl>
           </div>
         </ScrollReveal>
 
         {/* 2. CURRENTLY Section */}
         <ScrollReveal direction="up" delay={0.2}>
-          <div className="space-y-4">
+          <aside aria-label="Current Role" className="currently-callout">
             {/* Section Eyebrow */}
             <div className="section-eyebrow">
-              <Briefcase className="w-3.5 h-3.5 text-ember" aria-hidden="true" />
+              <Briefcase className="eyebrow-icon" aria-hidden="true" />
               <span>CURRENTLY</span>
             </div>
 
             {/* Headline & Link Row */}
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pt-1">
-              <div className="space-y-2 max-w-2xl">
-                <h3 className="font-display text-xl sm:text-3xl lg:text-4xl font-extrabold text-bone tracking-tight">
+            <div className="currently-content-row">
+              <div>
+                <h3 className="currently-headline">
                   AI Engineer at Handshake AI.
                 </h3>
-                <p className="text-bone-dim text-xs sm:text-sm leading-relaxed">
+                <p className="currently-description">
                   Frontier LLM evaluation, golden benchmark datasets, and instruction-tuning on NVIDIA Nemotron-12B.
                 </p>
               </div>
 
               <Link
                 href="/work"
-                className="inline-flex items-center gap-1.5 font-mono text-xs text-bone-dim hover:text-ember transition-colors shrink-0 group self-start sm:self-auto"
+                className="editorial-arrow-link"
               >
                 <span>See the full path</span>
-                <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <ArrowUpRight className="eyebrow-icon" aria-hidden="true" />
               </Link>
             </div>
-          </div>
+          </aside>
         </ScrollReveal>
 
       </div>

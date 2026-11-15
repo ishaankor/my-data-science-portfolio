@@ -6,6 +6,34 @@
   :root {
     --background: #090d16;
     --foreground: #f8fafc;
+    --color-ink: #0b0d0f;
+    --color-surface: #121518;
+    --color-surface-elevated: #161b22;
+    --color-line: #1e242b;
+    --color-bone: #f1f5f9;
+    --color-bone-dim: #cbd5e1;
+    --color-muted: #64748b;
+    --color-ember: #38bdf8;
+    --color-ember-light: #7dd3fc;
+    --color-emerald: #34d399;
+    --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-display: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2.5rem;
+    --space-2xl: 4rem;
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-2xl: 1.5rem;
+    --shadow-panel: 0 4px 20px rgba(0, 0, 0, 0.3);
+    --shadow-float: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
@@ -14,25 +42,82 @@
      Design System Tokens: Structural Surfaces & Editorial Architecture
      ========================================================================= */
 
-  /* Section Framing */
-  .section-boundary {
-    @apply border-t border-line/60 py-14 sm:py-24 relative;
+  .app-shell {
+    background-color: var(--background);
+    color: var(--foreground);
+    @apply min-h-screen flex flex-col antialiased selection:bg-ember selection:text-white;
   }
-  .section-container {
+  .app-main {
+    @apply flex-grow;
+  }
+  .home-stack {
+    @apply space-y-4;
+  }
+
+  /* Section Framing */
+  .section-boundary,
+  .about-section,
+  .projects-section,
+  .telemetry-section,
+  .toolkit-section {
+    border-top: 1px solid rgba(30, 36, 43, 0.6);
+    @apply py-14 sm:py-24 relative;
+  }
+  .section-container,
+  .about-container,
+  .projects-container,
+  .telemetry-container,
+  .toolkit-container {
     @apply mx-auto w-full max-w-6xl px-6 sm:px-10;
   }
 
   /* Editorial Section Headers */
   .section-eyebrow {
-    @apply inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted mb-3;
+    font-family: var(--font-mono);
+    color: var(--color-muted);
+    @apply inline-flex items-center gap-2 text-xs uppercase tracking-wider mb-3;
   }
   .section-headline {
-    @apply font-display text-2xl sm:text-3xl lg:text-[2.25rem] font-semibold leading-tight tracking-[-0.02em] text-bone;
+    font-family: var(--font-display);
+    color: var(--color-bone);
+    @apply text-2xl sm:text-3xl lg:text-[2.25rem] font-semibold leading-tight tracking-[-0.02em] mt-2;
+  }
+  .eyebrow-icon,
+  .icon-xs-accent {
+    color: var(--color-ember);
+    @apply w-3.5 h-3.5 shrink-0;
+  }
+  .icon-xs {
+    color: var(--color-muted);
+    @apply w-3.5 h-3.5 shrink-0 transition-colors;
+  }
+  .icon-sm {
+    color: var(--color-bone-dim);
+    @apply w-4 h-4 shrink-0;
+  }
+  .icon-sm-accent {
+    color: var(--color-ember);
+    @apply w-4 h-4 shrink-0;
+  }
+  .icon-md {
+    @apply w-5 h-5 shrink-0;
+  }
+  .icon-md-accent {
+    color: var(--color-ember);
+    @apply w-5 h-5 shrink-0;
+  }
+  .icon-lg {
+    color: var(--color-bone-dim);
+    @apply w-10 h-10 shrink-0 transition-colors;
   }
 
   /* Architectural Cards */
   .surface-panel {
-    @apply rounded-xl border border-line bg-surface p-5 sm:p-7 shadow-panel flex flex-col justify-between h-full transition-all duration-300;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-line);
+    box-shadow: var(--shadow-panel);
+    border-radius: var(--radius-lg);
+    @apply p-5 sm:p-7 flex flex-col justify-between h-full transition-all duration-300;
   }
   .surface-panel-interactive {
     @apply surface-panel hover:border-line/80 hover:shadow-float;
@@ -40,7 +125,11 @@
 
   /* Chips, Badges & Labels */
   .badge-chip {
-    @apply px-2 py-0.5 rounded text-[10px] font-mono bg-surface border border-line text-muted;
+    font-family: var(--font-mono);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-line);
+    color: var(--color-muted);
+    @apply px-2 py-0.5 rounded text-[10px];
   }
   .badge-chip-accent {
     @apply px-2.5 py-1 rounded-md text-xs font-mono bg-ember/10 border border-ember/30 text-bone font-medium;
@@ -52,6 +141,555 @@
   }
   .window-traffic-lights {
     @apply flex items-center gap-1.5;
+  }
+
+  /* =========================================================================
+     Site Header & Navigation
+     ========================================================================= */
+  .site-header {
+    @apply fixed inset-x-0 top-0 z-40 border-b border-line/40 bg-ink/80 backdrop-blur-md transition-colors duration-300;
+  }
+  .site-nav {
+    @apply mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6 sm:px-10;
+  }
+  .site-brand-link {
+    @apply text-sm transition-transform hover:scale-105;
+  }
+  .brand-wordmark {
+    @apply inline-flex items-center font-mono font-bold tracking-tight text-bone hover:text-white transition-colors cursor-pointer select-none text-sm;
+  }
+  .brand-dot {
+    @apply text-sky-400 mx-[1px];
+  }
+  .brand-suffix {
+    @apply text-bone-dim hover:text-bone;
+  }
+  .site-nav-list {
+    @apply hidden items-center gap-8 md:flex list-none m-0 p-0;
+  }
+  .site-nav-item {
+    @apply relative flex items-center gap-1.5 py-1 font-mono text-[0.8rem] transition-colors text-muted hover:text-bone;
+  }
+  .site-nav-item-active {
+    @apply relative flex items-center gap-1.5 py-1 font-mono text-[0.8rem] transition-colors text-bone font-semibold;
+  }
+  .site-nav-item > small,
+  .site-nav-item-active > small {
+    @apply text-[0.62rem] tabular-nums text-muted transition-colors;
+  }
+  .site-nav-item:hover > small,
+  .site-nav-item-active > small {
+    color: var(--color-ember);
+  }
+  .site-nav-indicator {
+    @apply absolute -bottom-0.5 left-0 h-px w-full bg-ember transition-transform duration-300 scale-x-0;
+  }
+  .site-nav-item:hover .site-nav-indicator,
+  .site-nav-indicator-active {
+    @apply absolute -bottom-0.5 left-0 h-px w-full bg-ember transition-transform duration-300 scale-x-100;
+  }
+  .site-nav-actions {
+    @apply flex items-center gap-4;
+  }
+  .site-contact-btn {
+    @apply hidden md:inline-block rounded-md border border-line px-4 py-2 font-mono text-[0.8rem] text-bone transition-colors duration-300 hover:border-ember hover:text-ember;
+  }
+  .site-menu-toggle {
+    @apply inline-flex h-10 w-10 items-center justify-center text-bone hover:text-ember md:hidden;
+  }
+  .site-menu-toggle > svg {
+    @apply w-5 h-5 shrink-0;
+  }
+  .mobile-drawer {
+    @apply border-t border-line bg-ink/95 px-6 py-4 md:hidden;
+  }
+  .mobile-drawer-list {
+    @apply flex flex-col space-y-3 font-mono text-sm list-none m-0 p-0;
+  }
+  .mobile-drawer-link {
+    @apply flex items-center gap-3 py-2 text-muted hover:text-bone;
+  }
+  .mobile-drawer-link-active {
+    @apply flex items-center gap-3 py-2 text-bone font-bold;
+  }
+  .mobile-drawer-cta {
+    @apply mt-2 block rounded-md border border-ember/50 bg-ember/10 px-4 py-3 text-center text-bone hover:bg-ember/20;
+  }
+
+  /* =========================================================================
+     Hero Section & Typewriter
+     ========================================================================= */
+  .hero-banner {
+    @apply relative min-h-[85vh] lg:min-h-[92vh] pt-16 sm:pt-24 lg:pt-28 pb-10 sm:pb-16 flex items-center overflow-hidden;
+  }
+  .hero-ambient-glow {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] sm:w-[1200px] lg:w-[1500px] h-[550px] sm:h-[750px] pointer-events-none -z-10 select-none;
+  }
+  .hero-container {
+    @apply max-w-7xl mx-auto px-5 sm:px-10 w-full relative z-10;
+  }
+  .hero-grid {
+    @apply grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center;
+  }
+  .hero-copy-col {
+    @apply lg:col-span-7 flex flex-col justify-center text-left items-start relative w-full max-w-full;
+  }
+  .hero-core-glow {
+    @apply absolute -top-16 -left-12 sm:-top-24 sm:-left-20 w-[360px] sm:w-[640px] lg:w-[760px] h-[280px] sm:h-[460px] pointer-events-none -z-10 select-none;
+  }
+  .hero-title {
+    @apply w-full mb-5 sm:mb-6 text-left;
+  }
+  .hero-greeting {
+    @apply block text-bone/90 mb-1 sm:mb-2 text-2xl sm:text-3xl md:text-4xl lg:text-[3rem] xl:text-[3.5rem] font-bold tracking-tight leading-[1.06] text-left;
+  }
+  .hero-typewriter-wrap {
+    @apply block min-h-[1.12em] text-left text-4xl sm:text-6xl md:text-7xl lg:text-[4.75rem] xl:text-[5.5rem] 2xl:text-[6.25rem] font-black tracking-[-0.035em] leading-[1.14];
+  }
+  .hero-typewriter-text {
+    @apply bg-gradient-to-r from-white via-sky-100 to-sky-400 bg-clip-text text-transparent pb-[0.18em] [box-decoration-break:clone] [-webkit-box-decoration-break:clone];
+  }
+  .hero-cursor {
+    @apply inline-block w-[5px] sm:w-[7px] lg:w-[8px] xl:w-[10px] h-[0.84em] bg-sky-400 ml-1.5 sm:ml-2.5 animate-pulse align-baseline shadow-[0_0_12px_rgba(56,189,248,0.7)];
+  }
+  .hero-lead {
+    @apply text-base sm:text-xl lg:text-[1.35rem] xl:text-[1.5rem] text-bone-dim max-w-2xl leading-relaxed mt-4 sm:mt-5 text-left;
+  }
+  .hero-cta-group {
+    @apply mt-6 sm:mt-8 flex flex-wrap gap-3 sm:gap-4 items-center justify-start font-mono text-xs sm:text-sm;
+  }
+  .btn-primary-cta {
+    @apply inline-flex items-center gap-2 px-5 sm:px-7 py-3 sm:py-4 rounded-xl border border-sky-500/40 bg-sky-500/10 hover:bg-sky-500/20 text-bone font-semibold transition-all hover:scale-[1.02] shadow-sm text-xs sm:text-sm;
+  }
+  .btn-primary-cta > svg {
+    @apply w-4 h-4 text-sky-400 shrink-0;
+  }
+  .btn-secondary-cta {
+    @apply inline-flex items-center gap-2 px-5 sm:px-7 py-3 sm:py-4 rounded-xl border border-line bg-surface hover:border-line/80 hover:text-bone text-bone-dim font-semibold transition-all hover:scale-[1.02] shadow-sm text-xs sm:text-sm;
+  }
+  .btn-secondary-cta > svg {
+    @apply w-4 h-4 text-muted shrink-0;
+  }
+  .hero-visual-col {
+    @apply lg:col-span-5 h-auto w-full flex items-center justify-center relative;
+  }
+
+  /* =========================================================================
+     Interactive 3D Memoji Card
+     ========================================================================= */
+  .memoji-scene {
+    @apply w-full h-full min-h-[420px] sm:min-h-[490px] lg:min-h-[530px] flex items-center justify-center p-2 sm:p-4 relative select-none [perspective:1200px];
+  }
+  .memoji-card-stage {
+    @apply w-full max-w-[360px] sm:max-w-[450px] lg:max-w-[500px] xl:max-w-[530px] h-[380px] sm:h-[460px] lg:h-[510px] xl:h-[540px] relative transition-transform duration-200 ease-out cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-sky-400/50 rounded-3xl;
+  }
+  .memoji-underglow {
+    @apply absolute -inset-3 rounded-[2rem] pointer-events-none transition-opacity duration-300 blur-2xl;
+  }
+  .memoji-flipper {
+    @apply w-full h-full relative;
+  }
+  .memoji-face {
+    @apply absolute inset-0 w-full h-full rounded-3xl border border-white/10 bg-[#0b1429]/95 backdrop-blur-2xl flex flex-col items-center justify-between p-4 sm:p-6 lg:p-7 overflow-hidden;
+  }
+  .memoji-foil-layer {
+    @apply absolute inset-0 pointer-events-none overflow-hidden rounded-3xl z-[1] transition-opacity duration-300;
+  }
+  .memoji-rim-layer {
+    @apply absolute inset-0 rounded-3xl p-[1.5px] pointer-events-none overflow-hidden z-20 transition-opacity duration-300;
+  }
+  .memoji-glare-layer {
+    @apply absolute inset-0 rounded-2xl sm:rounded-3xl pointer-events-none overflow-hidden z-[2] transition-opacity duration-300;
+  }
+  .memoji-topbar {
+    @apply w-full flex items-center justify-between z-10 font-mono text-[10px] sm:text-xs border-b border-white/[0.08] pb-2 sm:pb-3;
+  }
+  .memoji-dots-group {
+    @apply flex items-center gap-1.5 sm:gap-2 shrink-0;
+  }
+  .memoji-dot-red {
+    @apply w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-rose-500/80;
+  }
+  .memoji-dot-amber {
+    @apply w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-amber-500/80;
+  }
+  .memoji-dot-green {
+    @apply w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-500/80;
+  }
+  .memoji-window-label {
+    @apply text-[10px] sm:text-xs text-slate-300 font-medium ml-0.5 sm:ml-1;
+  }
+  .memoji-flip-pill {
+    @apply flex items-center gap-1 sm:gap-1.5 text-[9px] sm:text-[11px] font-mono text-slate-300 bg-white/[0.04] hover:bg-white/[0.08] px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full border border-white/10 transition-colors shadow-sm whitespace-nowrap shrink-0;
+  }
+  .memoji-portrait-stage {
+    @apply relative my-auto flex items-center justify-center select-none z-10;
+  }
+  .memoji-ripple-group {
+    @apply absolute inset-0 rounded-full pointer-events-none;
+  }
+  .memoji-ripple-inner {
+    @apply absolute inset-0 rounded-full border border-sky-400/30 bg-sky-500/5 animate-avatar-sync-ripple-1 shadow-[0_0_20px_rgba(56,189,248,0.2)];
+  }
+  .memoji-ripple-outer {
+    @apply absolute inset-0 rounded-full border border-sky-400/20 bg-sky-500/5 animate-avatar-sync-ripple-2 shadow-[0_0_15px_rgba(56,189,248,0.15)];
+  }
+  .memoji-shockwave-ring {
+    @apply absolute inset-0 rounded-full border-2 border-[#38bdf8] animate-avatar-shockwave bg-sky-500/20;
+  }
+  .memoji-core-aura {
+    @apply absolute -inset-2 rounded-full bg-gradient-to-tr from-sky-500/20 via-sky-400/15 to-indigo-500/20 blur-lg opacity-70 transition-opacity pointer-events-none;
+  }
+  .memoji-medallion {
+    @apply relative w-36 h-36 sm:w-44 sm:h-44 lg:w-48 lg:h-48 xl:w-52 xl:h-52 rounded-full overflow-hidden border-2 border-white/20 bg-[#060a14] shadow-[0_14px_40px_-8px_rgba(0,0,0,0.8),0_0_20px_rgba(56,189,248,0.25)] transition-all duration-300 hover:border-sky-400/80 hover:shadow-[0_16px_45px_-6px_rgba(0,0,0,0.85),0_0_30px_rgba(56,189,248,0.4)];
+  }
+  .memoji-portrait-img {
+    @apply w-full h-full object-cover transition-transform duration-300 hover:scale-105;
+  }
+  .memoji-lens-glare {
+    @apply absolute inset-0 rounded-full pointer-events-none overflow-hidden z-10 transition-opacity duration-300;
+  }
+  .memoji-bottombar {
+    @apply w-full pt-2 sm:pt-3 border-t border-white/[0.08] flex items-center justify-between font-mono text-[10px] sm:text-xs z-10;
+  }
+  .memoji-status-badge {
+    @apply flex items-center gap-1.5 sm:gap-2 text-emerald-400;
+  }
+  .memoji-ping-wrap,
+  .memoji-status-indicator {
+    @apply relative inline-flex h-2 w-2 shrink-0;
+  }
+  .memoji-ping-ring,
+  .memoji-status-ping {
+    @apply animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75;
+  }
+  .memoji-ping-dot,
+  .memoji-status-dot {
+    @apply relative inline-flex h-2 w-2 rounded-full bg-emerald-400;
+  }
+  .memoji-status-label {
+    @apply font-semibold truncate;
+  }
+  .memoji-location-label {
+    @apply text-slate-400 text-[10px] sm:text-[11px] truncate;
+  }
+  .memoji-back-center {
+    @apply w-full my-auto flex flex-col items-center justify-center gap-3 sm:gap-4 relative z-10;
+  }
+  .memoji-speech-card {
+    @apply relative w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[410px] bg-[#0f1b36] border border-white/10 rounded-2xl p-4 sm:p-5 lg:p-6 shadow-xl text-center;
+  }
+  .memoji-speech-pointer {
+    @apply absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#0f1b36] border-r border-b border-white/10 rotate-45 transform;
+  }
+  .memoji-speech-copy {
+    @apply text-xs sm:text-sm lg:text-[15px] text-slate-200 leading-relaxed mb-3 sm:mb-4 font-sans;
+  }
+  .memoji-site-cta {
+    @apply relative inline-flex items-center justify-center gap-2 w-full py-2.5 sm:py-3 px-4 rounded-xl bg-white hover:bg-sky-50 text-slate-900 font-mono text-xs sm:text-sm font-semibold shadow-md transition-all duration-200 border border-white;
+  }
+  .memoji-mini-avatar-wrap {
+    @apply relative w-10 h-10 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-full p-0.5 border border-white/15 bg-[#0f1b36] shadow-md mt-1;
+  }
+  .memoji-mini-avatar-inner {
+    @apply w-full h-full rounded-full overflow-hidden bg-[#060a14] flex items-center justify-center;
+  }
+  .memoji-online-badge {
+    @apply absolute bottom-0 right-0 w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 rounded-full bg-emerald-500 border-2 border-[#0b1429] flex items-center justify-center;
+  }
+
+  /* =========================================================================
+     About Me & Engineering Disciplines
+     ========================================================================= */
+  .about-container {
+    @apply space-y-14 sm:space-y-20;
+  }
+  .discipline-ledger {
+    @apply divide-y divide-line/60 border-t border-b border-line/60;
+  }
+  .discipline-row {
+    @apply py-5 sm:py-9 grid grid-cols-1 md:grid-cols-12 gap-2 sm:gap-3 md:gap-8 items-baseline;
+  }
+  .discipline-title-col {
+    @apply md:col-span-5 flex items-baseline gap-3;
+  }
+  .discipline-index {
+    @apply font-mono text-xs font-bold text-ember;
+  }
+  .discipline-name {
+    @apply font-display text-base sm:text-lg font-bold text-bone transition-colors;
+  }
+  .discipline-row:hover .discipline-name {
+    color: var(--color-ember);
+  }
+  .discipline-desc-col {
+    @apply md:col-span-7 text-bone-dim text-xs sm:text-sm leading-relaxed m-0;
+  }
+  .currently-callout {
+    @apply space-y-4;
+  }
+  .currently-content-row {
+    @apply flex flex-col sm:flex-row sm:items-end justify-between gap-6 pt-1;
+  }
+  .currently-headline {
+    @apply font-display text-xl sm:text-3xl lg:text-4xl font-extrabold text-bone tracking-tight;
+  }
+  .currently-description {
+    @apply text-bone-dim text-xs sm:text-sm leading-relaxed mt-2 max-w-2xl;
+  }
+  .editorial-arrow-link {
+    @apply inline-flex items-center gap-1.5 font-mono text-xs text-bone-dim hover:text-ember transition-colors shrink-0 self-start sm:self-auto;
+  }
+
+  /* =========================================================================
+     Projects Showcase
+     ========================================================================= */
+  .projects-header-row {
+    @apply flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 sm:mb-12;
+  }
+  .projects-filter-bar {
+    @apply flex flex-wrap gap-2 font-mono shrink-0;
+  }
+  .filter-pill {
+    @apply px-3 py-1.5 rounded-md text-xs transition-colors bg-surface/60 border border-line text-muted hover:text-bone hover:border-line/80;
+  }
+  .filter-pill-active {
+    @apply px-3 py-1.5 rounded-md text-xs transition-colors bg-ember text-ink font-semibold shadow-sm;
+  }
+  .projects-grid {
+    @apply grid gap-6 sm:gap-10 sm:grid-cols-2 lg:grid-cols-3;
+  }
+  .project-card {
+    @apply block;
+  }
+  .project-preview-frame {
+    @apply block overflow-hidden rounded-xl border border-line bg-surface shadow-panel transition-all duration-300 hover:border-ember/60 hover:shadow-float;
+  }
+  .project-chrome-path {
+    @apply flex items-center gap-2;
+  }
+  .project-chrome-dot {
+    @apply w-1.5 h-1.5 rounded-full bg-ember/60 transition-colors;
+  }
+  .project-card:hover .project-chrome-dot {
+    background-color: var(--color-ember);
+  }
+  .project-chrome-label {
+    @apply truncate font-mono text-[0.68rem] text-muted transition-colors;
+  }
+  .project-card:hover .project-chrome-label {
+    color: var(--color-bone);
+  }
+  .project-figure {
+    @apply relative aspect-[16/10] overflow-hidden bg-ink/90 flex items-center justify-center m-0;
+  }
+  .project-cover-img {
+    @apply w-full h-full object-cover object-center transform transition-transform duration-500;
+  }
+  .project-card:hover .project-cover-img {
+    @apply scale-105;
+  }
+  .project-ishaanbot-stage {
+    @apply w-full h-full flex items-center justify-center relative overflow-hidden bg-[#080c16];
+  }
+  .project-ishaanbot-avatar {
+    @apply relative w-28 h-28 sm:w-32 sm:h-32 transform transition-transform duration-500;
+  }
+  .project-card:hover .project-ishaanbot-avatar {
+    @apply scale-105;
+  }
+  .project-ishaanbot-img {
+    @apply w-full h-full rounded-full object-cover border-2 border-line/90 p-1 bg-surface shadow-2xl;
+  }
+  .project-ishaanbot-badge {
+    @apply absolute -top-1.5 -right-1.5 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#0a0e18] border-2 border-line/90 flex items-center justify-center p-1.5 shadow-lg;
+  }
+  .project-meta-row {
+    @apply mt-4 flex items-baseline justify-between gap-3;
+  }
+  .project-title-heading {
+    @apply font-display text-xl font-semibold text-bone transition-colors flex items-center gap-2 flex-wrap;
+  }
+  .project-card:hover .project-title-heading {
+    color: var(--color-ember);
+  }
+  .project-year-group {
+    @apply flex items-center gap-2 shrink-0 font-mono text-xs text-muted;
+  }
+  .project-live-link {
+    @apply text-ember hover:underline inline-flex items-center gap-1 font-semibold;
+  }
+  .project-summary {
+    @apply mt-2 text-xs text-bone-dim leading-relaxed;
+  }
+  .project-tag-list {
+    @apply mt-3 flex flex-wrap gap-1.5 list-none p-0;
+  }
+  .project-tag-list > li {
+    @apply px-2 py-0.5 rounded text-[10px] font-mono bg-surface border border-line text-muted;
+  }
+  .projects-footer {
+    @apply mt-12 text-center;
+  }
+  .project-action-secondary {
+    @apply hover:text-ember inline-flex items-center gap-1 transition-colors;
+  }
+
+  /* =========================================================================
+     GitHub Telemetry & Analytics
+     ========================================================================= */
+  .telemetry-header-row {
+    @apply flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-8 sm:mb-12;
+  }
+  .telemetry-profile-btn {
+    @apply inline-flex items-center gap-2 rounded-md border border-line bg-surface/60 px-4 py-2 font-mono text-xs text-bone transition-colors hover:border-ember hover:text-ember self-start sm:self-auto;
+  }
+  .telemetry-bento-grid {
+    @apply grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8;
+  }
+  .telemetry-kpi-grid {
+    @apply lg:col-span-4 grid grid-cols-2 gap-3 sm:gap-4;
+  }
+  .kpi-card {
+    @apply surface-panel-interactive p-3.5 sm:p-5;
+  }
+  .kpi-header {
+    @apply flex items-center justify-between mb-2;
+  }
+  .kpi-icon-well {
+    @apply w-8 h-8 rounded-lg bg-ink border border-line flex items-center justify-center text-bone-dim;
+  }
+  .kpi-tag {
+    @apply font-mono text-[0.65rem] text-muted uppercase tracking-wider;
+  }
+  .kpi-metric-lg {
+    @apply font-display text-2xl sm:text-3xl font-bold text-bone;
+  }
+  .kpi-metric-md {
+    @apply font-display text-xl sm:text-2xl font-bold text-bone truncate;
+  }
+  .kpi-caption {
+    @apply font-mono text-[11px] sm:text-xs text-muted mt-1;
+  }
+  .telemetry-col {
+    @apply lg:col-span-4;
+  }
+  .panel-header-row {
+    @apply flex items-center justify-between mb-4;
+  }
+  .panel-heading {
+    @apply font-display text-lg font-semibold text-bone flex items-center gap-2;
+  }
+  .lang-segmented-bar {
+    @apply w-full h-2 rounded-full overflow-hidden flex bg-ink border border-line/60 p-0.5 gap-0.5 mb-4;
+  }
+  .lang-segmented-bar > span,
+  .lang-segmented-bar > div {
+    @apply h-full rounded-full transition-all duration-500 block;
+  }
+  .lang-breakdown-list {
+    @apply space-y-3 font-mono list-none m-0 p-0;
+  }
+  .lang-breakdown-list > li {
+    @apply space-y-1.5;
+  }
+  .lang-breakdown-list > li > div:first-child {
+    @apply flex justify-between items-center text-xs text-bone-dim;
+  }
+  .lang-breakdown-list > li > div:first-child > span {
+    @apply flex items-center gap-2 font-medium text-bone;
+  }
+  .lang-breakdown-list > li > div:first-child > span > i {
+    @apply w-2 h-2 rounded-full shrink-0 inline-block;
+  }
+  .lang-breakdown-list > li > div:first-child > small {
+    @apply text-muted text-[11px] tabular-nums flex items-center gap-2;
+  }
+  .lang-breakdown-list > li > div:first-child > small > strong {
+    @apply text-bone font-semibold;
+  }
+  .lang-breakdown-list > li > div:last-child {
+    @apply w-full h-1.5 rounded-full bg-ink overflow-hidden border border-line/50;
+  }
+  .lang-breakdown-list > li > div:last-child > span {
+    @apply h-full rounded-full transition-all duration-700 block;
+  }
+  .panel-footer-row {
+    @apply mt-6 pt-4 border-t border-line flex items-center justify-between text-[0.68rem] font-mono text-muted;
+  }
+  .recent-repos-list {
+    @apply space-y-3 list-none m-0 p-0;
+  }
+  .recent-repos-list > li > a {
+    @apply p-3 rounded-lg bg-ink/70 border border-line hover:border-ember/40 flex items-center justify-between transition-colors;
+  }
+  .recent-repos-list > li > a > div {
+    @apply overflow-hidden pr-2;
+  }
+  .recent-repos-list > li > a > div > strong {
+    @apply block font-mono text-xs font-semibold text-bone truncate transition-colors;
+  }
+  .recent-repos-list > li > a:hover > div > strong {
+    color: var(--color-ember);
+  }
+  .recent-repos-list > li > a > div > p {
+    @apply text-[0.72rem] text-muted truncate mt-0.5 m-0;
+  }
+  .recent-repos-list > li > a > span {
+    @apply font-mono text-xs text-muted shrink-0 ml-2;
+  }
+
+  /* =========================================================================
+     Tech Stack & Focus Areas
+     ========================================================================= */
+  .toolkit-header {
+    @apply mb-8 sm:mb-12;
+  }
+  .toolkit-grid {
+    @apply grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8;
+  }
+  .toolkit-icon-well {
+    @apply w-10 h-10 rounded-lg border border-line bg-ink flex items-center justify-center mb-6 shadow-sm;
+  }
+  .toolkit-category-title {
+    @apply font-display text-lg font-bold text-bone mb-2;
+  }
+  .toolkit-category-desc {
+    @apply text-bone-dim text-xs leading-relaxed mb-6;
+  }
+  .toolkit-skill-list {
+    @apply space-y-2 font-mono list-none m-0 p-0;
+  }
+  .toolkit-skill-list > li {
+    @apply flex items-center justify-between p-2.5 rounded-lg bg-ink/70 border border-line/70 hover:border-line transition-colors;
+  }
+  .toolkit-skill-list > li > strong {
+    @apply text-bone font-medium text-xs;
+  }
+  .toolkit-skill-list > li > span {
+    @apply px-2 py-0.5 rounded text-[10px] bg-surface border border-line text-muted;
+  }
+
+  /* =========================================================================
+     Site Footer
+     ========================================================================= */
+  .site-footer {
+    @apply border-t border-line py-12 bg-ink;
+  }
+  .footer-top-row {
+    @apply flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between;
+  }
+  .footer-tagline {
+    @apply mt-2 font-mono text-xs text-muted;
+  }
+  .footer-nav-list {
+    @apply flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs text-muted list-none m-0 p-0;
+  }
+  .footer-nav-list a {
+    @apply transition-colors hover:text-bone;
+  }
+  .footer-bottom-row {
+    @apply mt-10 flex flex-col gap-2 border-t border-line pt-6 font-mono text-[0.7rem] text-muted sm:flex-row sm:items-center sm:justify-between;
   }
 }
 

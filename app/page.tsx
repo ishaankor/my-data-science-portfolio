@@ -6,7 +6,7 @@ import TechStackSection from '@/components/skills/TechStackSection';
 
 export default function HomePage() {
   return (
-    <div className="space-y-4">
+    <div className="home-stack">
       <HeroSection />
       <AboutMeSection />
       <ProjectsShowcase limit={3} />

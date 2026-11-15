@@ -7,38 +7,40 @@ import { portfolioData } from '@/data/portfolio';
 
 export default function Footer() {
   return (
-    <footer className="border-t border-line py-12 bg-ink">
-      <div className="mx-auto w-full max-w-6xl px-6 sm:px-10">
+    <footer className="site-footer">
+      <div className="section-container">
         
-        <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
+        <div className="footer-top-row">
           <div>
-            <Link href="/" className="inline-block text-sm">
-              <HazeWaveText text="ishaan.koradia" className="text-sm" />
+            <Link href="/" className="site-brand-link">
+              <HazeWaveText text="ishaan.koradia" />
             </Link>
-            <p className="mt-2 font-mono text-xs text-muted">
-              Data Science & Analytics Engineer, {portfolioData.location}
+            <p className="footer-tagline">
+              Data Science &amp; Analytics Engineer, {portfolioData.location}
             </p>
           </div>
 
-          <nav aria-label="Footer" className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs text-muted">
-            <Link href="/projects" className="transition-colors hover:text-bone">
-              Projects
-            </Link>
-            <Link href="/work" className="transition-colors hover:text-bone">
-              Work
-            </Link>
-            <Link href="/meta" className="transition-colors hover:text-bone">
-              Meta
-            </Link>
-            <Link href="/contact" className="transition-colors hover:text-bone">
-              Contact
-            </Link>
+          <nav aria-label="Footer Navigation">
+            <ul className="footer-nav-list">
+              <li>
+                <Link href="/projects">Projects</Link>
+              </li>
+              <li>
+                <Link href="/work">Work</Link>
+              </li>
+              <li>
+                <Link href="/meta">Meta</Link>
+              </li>
+              <li>
+                <Link href="/contact">Contact</Link>
+              </li>
+            </ul>
           </nav>
         </div>
 
-        <div className="mt-10 flex flex-col gap-2 border-t border-line pt-6 font-mono text-[0.7rem] text-muted sm:flex-row sm:items-center sm:justify-between">
+        <div className="footer-bottom-row">
           <span>© {new Date().getFullYear()} {portfolioData.name}</span>
-          <span>Designed and built from scratch with Next.js, React, TypeScript & Three.js.</span>
+          <span>Designed and built from scratch with Next.js, React, TypeScript &amp; Three.js.</span>
         </div>
 
       </div>

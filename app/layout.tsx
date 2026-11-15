@@ -95,6 +95,39 @@ const jsonLd = {
   },
 };
 
+const designSystemCss = `
+:root {
+  --color-ink: #0b0d0f;
+  --color-surface: #121518;
+  --color-surface-elevated: #161b22;
+  --color-line: #1e242b;
+  --color-bone: #f1f5f9;
+  --color-bone-dim: #cbd5e1;
+  --color-muted: #64748b;
+  --color-ember: #38bdf8;
+  --color-ember-light: #7dd3fc;
+  --color-emerald: #34d399;
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.5rem;
+  --space-2xl: 4rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --shadow-panel: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --shadow-float: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+`;
+
 export default function RootLayout({
   children,
 }: {
@@ -103,14 +136,18 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
+        <style
+          id="design-system-tokens"
+          dangerouslySetInnerHTML={{ __html: designSystemCss }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="bg-[#090d16] text-slate-100 min-h-screen flex flex-col antialiased selection:bg-ember selection:text-white">
+      <body className="app-shell">
         <Navbar />
-        <main id="main-content" className="flex-grow">
+        <main id="main-content" className="app-main">
           {children}
         </main>
         <Footer />

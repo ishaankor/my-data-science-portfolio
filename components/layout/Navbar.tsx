@@ -22,50 +22,45 @@ export default function Navbar() {
         Skip to content
       </a>
 
-      <header className="fixed inset-x-0 top-0 z-40 border-b border-line/40 bg-ink/80 backdrop-blur-md transition-colors duration-300">
-        <nav className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6 sm:px-10">
+      <header className="site-header">
+        <nav aria-label="Primary Navigation" className="site-nav">
           
           {/* Logo Brand */}
           <Link
             href="/"
-            className="text-sm transition-transform hover:scale-105"
+            className="site-brand-link"
             aria-label="Home"
           >
-            <HazeWaveText text="ishaan.koradia" className="text-sm" />
+            <HazeWaveText text="ishaan.koradia" />
           </Link>
 
           {/* Desktop Nav Links */}
-          <div className="hidden items-center gap-8 md:flex">
+          <ul className="site-nav-list">
             {navLinks.map((link) => {
               const isActive = pathname === link.href || (link.href === '/work' && pathname === '/resume');
               return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`group relative flex items-center gap-1.5 py-1 font-mono text-[0.8rem] transition-colors ${
-                    isActive ? 'text-bone font-semibold' : 'text-muted hover:text-bone'
-                  }`}
-                >
-                  <span className="text-[0.62rem] tabular-nums text-muted group-hover:text-ember transition-colors">
-                    {link.number}
-                  </span>
-                  <span>{link.label}</span>
-                  <span
-                    aria-hidden="true"
-                    className={`absolute -bottom-0.5 left-0 h-px w-full bg-ember transition-transform duration-300 ${
-                      isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-                    }`}
-                  />
-                </Link>
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className={isActive ? 'site-nav-item-active' : 'site-nav-item'}
+                  >
+                    <small>{link.number}</small>
+                    <span>{link.label}</span>
+                    <span
+                      aria-hidden="true"
+                      className={isActive ? 'site-nav-indicator-active' : 'site-nav-indicator'}
+                    />
+                  </Link>
+                </li>
               );
             })}
-          </div>
+          </ul>
 
           {/* Right Action Button */}
-          <div className="flex items-center gap-4">
+          <div className="site-nav-actions">
             <Link
               href="/contact"
-              className="hidden md:inline-block rounded-md border border-line px-4 py-2 font-mono text-[0.8rem] text-bone transition-colors duration-300 hover:border-ember hover:text-ember"
+              className="site-contact-btn"
             >
               Get in touch
             </Link>
@@ -74,46 +69,53 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="inline-flex h-10 w-10 items-center justify-center text-bone hover:text-ember md:hidden"
+              className="site-menu-toggle"
               aria-label="Toggle Navigation Menu"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
             </button>
           </div>
         </nav>
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="border-t border-line bg-ink/95 px-6 py-4 md:hidden">
-            <div className="flex flex-col space-y-3 font-mono text-sm">
-              <Link
-                href="/"
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-3 py-2 text-muted hover:text-bone"
-              >
-                <span className="text-[0.62rem] text-ember">00</span>Home
-              </Link>
-              {navLinks.map((link) => (
+          <div className="mobile-drawer">
+            <ul className="mobile-drawer-list">
+              <li>
                 <Link
-                  key={link.href}
-                  href={link.href}
+                  href="/"
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`flex items-center gap-3 py-2 ${
-                    pathname === link.href || (link.href === '/work' && pathname === '/resume') ? 'text-bone font-bold' : 'text-muted hover:text-bone'
-                  }`}
+                  className="mobile-drawer-link"
                 >
-                  <span className="text-[0.62rem] text-ember">{link.number}</span>
-                  {link.label}
+                  <small className="text-ember">00</small>Home
                 </Link>
+              </li>
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={
+                      pathname === link.href || (link.href === '/work' && pathname === '/resume')
+                        ? 'mobile-drawer-link-active'
+                        : 'mobile-drawer-link'
+                    }
+                  >
+                    <small className="text-ember">{link.number}</small>
+                    {link.label}
+                  </Link>
+                </li>
               ))}
-              <Link
-                href="/contact"
-                onClick={() => setMobileMenuOpen(false)}
-                className="mt-2 rounded-md border border-ember/50 bg-ember/10 px-4 py-3 text-center text-bone hover:bg-ember/20"
-              >
-                Get in touch
-              </Link>
-            </div>
+              <li>
+                <Link
+                  href="/contact"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="mobile-drawer-cta"
+                >
+                  Get in touch
+                </Link>
+              </li>
+            </ul>
           </div>
         )}
       </header>

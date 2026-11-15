@@ -40,7 +40,7 @@ export default function ScrollReveal({
       whileInView={{ opacity: 1, x: 0, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.6, delay, ease: [0.215, 0.61, 0.355, 1] }}
-      className={className}
+      className={className || undefined}
     >
       {children}
     </motion.div>

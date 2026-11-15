@@ -10,7 +10,7 @@ import HeroMemojiInteractive from './HeroMemojiInteractive';
 
 export default function HeroSection() {
   const [typingIndex, setTypingIndex] = useState(0);
-  const [currentText, setCurrentText] = useState('');
+  const [currentText, setCurrentText] = useState(portfolioData.typingStrings[0] || 'an AI Engineer.');
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
@@ -38,10 +38,10 @@ export default function HeroSection() {
   }, [currentText, isDeleting, typingIndex]);
 
   return (
-    <section className="relative min-h-[85vh] lg:min-h-[92vh] pt-16 sm:pt-24 lg:pt-28 pb-10 sm:pb-16 flex items-center overflow-hidden">
+    <section aria-label="Introduction" className="hero-banner">
       {/* Apparent Section-Wide Ambient White Underglow */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] sm:w-[1200px] lg:w-[1500px] h-[550px] sm:h-[750px] pointer-events-none -z-10 select-none"
+        className="hero-ambient-glow"
         style={{
           background:
             'radial-gradient(ellipse 70% 55% at 50% 50%, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(226, 232, 240, 0.015) 65%, transparent 80%)',
@@ -50,14 +50,14 @@ export default function HeroSection() {
         aria-hidden="true"
       />
 
-      <div className="max-w-7xl mx-auto px-5 sm:px-10 w-full relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      <div className="hero-container">
+        <div className="hero-grid">
           
           {/* Left Column: Intro & Typewriter (Grand Entrance) */}
-          <div className="lg:col-span-7 flex flex-col justify-center text-left items-start relative w-full max-w-full">
+          <header className="hero-copy-col">
             {/* Luminous White Core Underglow directly behind the hero headline */}
             <div
-              className="absolute -top-16 -left-12 sm:-top-24 sm:-left-20 w-[360px] xs:w-[440px] sm:w-[640px] lg:w-[760px] h-[280px] xs:h-[340px] sm:h-[460px] pointer-events-none -z-10 select-none"
+              className="hero-core-glow"
               style={{
                 background:
                   'radial-gradient(ellipse 65% 55% at 42% 48%, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.09) 35%, rgba(241, 245, 249, 0.02) 60%, transparent 80%)',
@@ -66,56 +66,56 @@ export default function HeroSection() {
               aria-hidden="true"
             />
 
-            {/* Grand Entrance Headline: HUGE, High-impact typography strictly left-justified */}
-            <h1 className="w-full mb-5 sm:mb-6 text-left">
-              <span className="block text-bone/90 mb-1 sm:mb-2 text-2xl sm:text-3xl md:text-4xl lg:text-[3rem] xl:text-[3.5rem] font-bold tracking-tight leading-[1.06] text-left">
+            {/* Grand Entrance Headline */}
+            <h1 className="hero-title">
+              <span className="hero-greeting">
                 I am
               </span>
               
               {/* Massive typewriter role: unified text stream, zero letter shifting, no orphaned cursor */}
-              <span className="block min-h-[1.12em] text-left text-4xl sm:text-6xl md:text-7xl lg:text-[4.75rem] xl:text-[5.5rem] 2xl:text-[6.25rem] font-black tracking-[-0.035em] leading-[1.14]">
+              <span className="hero-typewriter-wrap">
                 <span 
-                  className="bg-gradient-to-r from-white via-sky-100 to-sky-400 bg-clip-text text-transparent pb-[0.18em] [box-decoration-break:clone] [-webkit-box-decoration-break:clone]"
+                  className="hero-typewriter-text"
                   style={{
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                   }}
                 >{currentText}</span><span 
-                  className="inline-block w-[5px] sm:w-[7px] lg:w-[8px] xl:w-[10px] h-[0.84em] bg-sky-400 ml-1.5 sm:ml-2.5 animate-pulse align-baseline shadow-[0_0_12px_rgba(56,189,248,0.7)]" 
+                  className="hero-cursor" 
                   aria-hidden="true"
                 />
               </span>
             </h1>
 
-            <p className="text-base sm:text-xl lg:text-[1.35rem] xl:text-[1.5rem] text-bone-dim max-w-2xl leading-relaxed mt-4 sm:mt-5 text-left">
+            <p className="hero-lead">
               Building production AI models, autonomous agents, and interactive web tools.
             </p>
 
             {/* Action CTAs */}
-            <div className="mt-6 sm:mt-8 flex flex-wrap gap-3 sm:gap-4 items-center justify-start font-mono text-xs sm:text-sm">
+            <div className="hero-cta-group">
               <Link
                 href="/projects"
-                className="inline-flex items-center gap-2 px-5 sm:px-7 py-3 sm:py-4 rounded-xl border border-sky-500/40 bg-sky-500/10 hover:bg-sky-500/20 text-bone font-semibold transition-all hover:scale-[1.02] shadow-sm text-xs sm:text-sm"
+                className="btn-primary-cta"
               >
                 <span>Explore Projects</span>
-                <ArrowRight className="w-4 h-4 text-sky-400" />
+                <ArrowRight aria-hidden="true" />
               </Link>
 
               <Link
                 href="/resume"
-                className="inline-flex items-center gap-2 px-5 sm:px-7 py-3 sm:py-4 rounded-xl border border-line bg-surface hover:border-line/80 hover:text-bone text-bone-dim font-semibold transition-all hover:scale-[1.02] shadow-sm text-xs sm:text-sm"
+                className="btn-secondary-cta"
               >
-                <FileText className="w-4 h-4 text-muted" />
+                <FileText aria-hidden="true" />
                 <span>View Resume</span>
               </Link>
             </div>
 
-          </div>
+          </header>
 
-          {/* Right Column: Animated & Interactive Memoji Hero Card (Spacious 5 columns) */}
-          <div className="lg:col-span-5 h-auto w-full flex items-center justify-center relative">
+          {/* Right Column: Animated & Interactive Memoji Hero Card */}
+          <aside className="hero-visual-col" aria-label="Interactive Profile Card">
             <HeroMemojiInteractive />
-          </div>
+          </aside>
 
         </div>
       </div>
