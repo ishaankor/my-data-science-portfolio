@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-15T08:19:16.527Z",
+  "updatedAt": "2026-11-15T09:19:37.284Z",
   "totalRepos": 20,
   "user": {
     "login": "ishaankor",
@@ -18,7 +18,7 @@
       "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
       "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
       "created_at": "2025-01-11T23:48:23Z",
-      "pushed_at": "2026-11-15T08:18:28Z",
+      "pushed_at": "2026-11-15T09:18:45Z",
       "updated_at": "2026-11-12T09:19:05Z",
       "fork": false,
       "is_fork": false
@@ -30,7 +30,7 @@
       "html_url": "https://github.com/ishaankor/RigScouter-AI",
       "description": "An autonomous PC hardware deal intelligence platform engineered to eliminate manual price searching, deceptive retailer \"sales\", and missed flash drops.",
       "created_at": "2026-08-05T05:50:28Z",
-      "pushed_at": "2026-11-15T06:58:16Z",
+      "pushed_at": "2026-11-15T09:02:14Z",
       "updated_at": "2026-11-10T21:56:29Z",
       "fork": false,
       "is_fork": false
@@ -254,6 +254,168 @@
   ],
   "commits": [
     {
+      "sha": "f736910df2d304681b8f18bcb3d2a38b528cf637",
+      "shortSha": "f736910",
+      "message": "fix: update logo image path in README.md",
+      "repoName": "my-data-science-portfolio",
+      "repoFullName": "ishaankor/my-data-science-portfolio",
+      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/f736910df2d304681b8f18bcb3d2a38b528cf637",
+      "date": "2026-11-15T09:18:44Z",
+      "timeAgo": "just now",
+      "stats": {
+        "total": 2,
+        "additions": 1,
+        "deletions": 1
+      },
+      "linesChanged": 2,
+      "additions": 1,
+      "deletions": 1,
+      "filesCount": 1,
+      "files": [
+        {
+          "filename": "README.md",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1,
+          "changes": 2
+        }
+      ],
+      "author": {
+        "name": "Ishaan",
+        "date": "2026-11-15T09:18:44Z"
+      }
+    },
+    {
+      "sha": "7b9126cd06ff2098cc6d122997c56a116046d31f",
+      "shortSha": "7b9126c",
+      "message": "refactor: update landing page layout, security headers, and site metadata",
+      "repoName": "RigScouter-AI",
+      "repoFullName": "ishaankor/RigScouter-AI",
+      "repoUrl": "https://github.com/ishaankor/RigScouter-AI",
+      "commitUrl": "https://github.com/ishaankor/RigScouter-AI/commit/7b9126cd06ff2098cc6d122997c56a116046d31f",
+      "date": "2026-11-15T09:02:11Z",
+      "timeAgo": "17m ago",
+      "stats": {
+        "total": 176,
+        "additions": 86,
+        "deletions": 90
+      },
+      "linesChanged": 176,
+      "additions": 86,
+      "deletions": 90,
+      "filesCount": 6,
+      "files": [
+        {
+          "filename": "next.config.mjs",
+          "status": "modified",
+          "additions": 3,
+          "deletions": 1,
+          "changes": 4
+        },
+        {
+          "filename": "src/app/layout.tsx",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1,
+          "changes": 2
+        },
+        {
+          "filename": "src/app/page.tsx",
+          "status": "modified",
+          "additions": 78,
+          "deletions": 84,
+          "changes": 162
+        },
+        {
+          "filename": "src/app/robots.ts",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1,
+          "changes": 2
+        },
+        {
+          "filename": "src/app/sitemap.ts",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1,
+          "changes": 2
+        },
+        {
+          "filename": "tailwind.config.js",
+          "status": "modified",
+          "additions": 2,
+          "deletions": 2,
+          "changes": 4
+        }
+      ],
+      "author": {
+        "name": "Ishaan Kor",
+        "date": "2026-11-15T09:02:11Z"
+      }
+    },
+    {
+      "sha": "dce367b03099251edf2fad42cb275849badbebbe",
+      "shortSha": "dce367b",
+      "message": "refactor: update design system and typography with Inter font and refined color tokens",
+      "repoName": "RigScouter-AI",
+      "repoFullName": "ishaankor/RigScouter-AI",
+      "repoUrl": "https://github.com/ishaankor/RigScouter-AI",
+      "commitUrl": "https://github.com/ishaankor/RigScouter-AI/commit/dce367b03099251edf2fad42cb275849badbebbe",
+      "date": "2026-11-15T08:53:09Z",
+      "timeAgo": "26m ago",
+      "stats": {
+        "total": 1610,
+        "additions": 825,
+        "deletions": 785
+      },
+      "linesChanged": 1610,
+      "additions": 825,
+      "deletions": 785,
+      "filesCount": 5,
+      "files": [
+        {
+          "filename": "src/app/globals.css",
+          "status": "modified",
+          "additions": 469,
+          "deletions": 309,
+          "changes": 778
+        },
+        {
+          "filename": "src/app/layout.tsx",
+          "status": "modified",
+          "additions": 2,
+          "deletions": 32,
+          "changes": 34
+        },
+        {
+          "filename": "src/app/page.tsx",
+          "status": "modified",
+          "additions": 326,
+          "deletions": 438,
+          "changes": 764
+        },
+        {
+          "filename": "src/app/robots.ts",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 2,
+          "changes": 3
+        },
+        {
+          "filename": "src/lib/scrapers/tavily-scraper.ts",
+          "status": "modified",
+          "additions": 27,
+          "deletions": 4,
+          "changes": 31
+        }
+      ],
+      "author": {
+        "name": "Ishaan Kor",
+        "date": "2026-11-15T08:53:09Z"
+      }
+    },
+    {
       "sha": "6486c9de1a39f6f9f5eec61579c4ee086556cea0",
       "shortSha": "6486c9d",
       "message": "refactor: update design system tokens and layout components",
@@ -262,7 +424,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/6486c9de1a39f6f9f5eec61579c4ee086556cea0",
       "date": "2026-11-15T08:18:25Z",
-      "timeAgo": "just now",
+      "timeAgo": "1h ago",
       "stats": {
         "total": 2491,
         "additions": 1946,
@@ -358,7 +520,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/ffd4367e89ff8aaa1c459cfdbcc0f8c9c54fc22a",
       "date": "2026-11-15T07:13:05Z",
-      "timeAgo": "1h ago",
+      "timeAgo": "2h ago",
       "stats": {
         "total": 1105,
         "additions": 670,
@@ -444,270 +606,10 @@
         "name": "Ishaan Kor",
         "date": "2026-11-15T07:13:05Z"
       }
-    },
-    {
-      "sha": "72fa7717676a17f446a5f6860dad62f41f832c79",
-      "shortSha": "72fa771",
-      "message": "feat: add privacy and terms pages, site metadata, security headers, and styling components",
-      "repoName": "RigScouter-AI",
-      "repoFullName": "ishaankor/RigScouter-AI",
-      "repoUrl": "https://github.com/ishaankor/RigScouter-AI",
-      "commitUrl": "https://github.com/ishaankor/RigScouter-AI/commit/72fa7717676a17f446a5f6860dad62f41f832c79",
-      "date": "2026-11-15T06:58:13Z",
-      "timeAgo": "1h ago",
-      "stats": {
-        "total": 706,
-        "additions": 597,
-        "deletions": 109
-      },
-      "linesChanged": 706,
-      "additions": 597,
-      "deletions": 109,
-      "filesCount": 10,
-      "files": [
-        {
-          "filename": "next.config.mjs",
-          "status": "modified",
-          "additions": 14,
-          "deletions": 0,
-          "changes": 14
-        },
-        {
-          "filename": "public/apple-icon.png",
-          "status": "added",
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0
-        },
-        {
-          "filename": "public/favicon.ico",
-          "status": "added",
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0
-        },
-        {
-          "filename": "public/icon.png",
-          "status": "added",
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0
-        },
-        {
-          "filename": "public/manifest.json",
-          "status": "added",
-          "additions": 21,
-          "deletions": 0,
-          "changes": 21
-        },
-        {
-          "filename": "src/app/globals.css",
-          "status": "modified",
-          "additions": 358,
-          "deletions": 0,
-          "changes": 358
-        },
-        {
-          "filename": "src/app/page.tsx",
-          "status": "modified",
-          "additions": 75,
-          "deletions": 109,
-          "changes": 184
-        },
-        {
-          "filename": "src/app/privacy/page.tsx",
-          "status": "added",
-          "additions": 61,
-          "deletions": 0,
-          "changes": 61
-        },
-        {
-          "filename": "src/app/sitemap.ts",
-          "status": "modified",
-          "additions": 12,
-          "deletions": 0,
-          "changes": 12
-        },
-        {
-          "filename": "src/app/terms/page.tsx",
-          "status": "added",
-          "additions": 56,
-          "deletions": 0,
-          "changes": 56
-        }
-      ],
-      "author": {
-        "name": "Ishaan Kor",
-        "date": "2026-11-15T06:58:13Z"
-      }
-    },
-    {
-      "sha": "afa16569dcd0c123908d709acc67a6b2e0b907dc",
-      "shortSha": "afa1656",
-      "message": "feat: implement deal scoring methodology page and enhance stock fallback logic",
-      "repoName": "RigScouter-AI",
-      "repoFullName": "ishaankor/RigScouter-AI",
-      "repoUrl": "https://github.com/ishaankor/RigScouter-AI",
-      "commitUrl": "https://github.com/ishaankor/RigScouter-AI/commit/afa16569dcd0c123908d709acc67a6b2e0b907dc",
-      "date": "2026-11-15T01:32:40Z",
-      "timeAgo": "6h ago",
-      "stats": {
-        "total": 1013,
-        "additions": 760,
-        "deletions": 253
-      },
-      "linesChanged": 1013,
-      "additions": 760,
-      "deletions": 253,
-      "filesCount": 6,
-      "files": [
-        {
-          "filename": "src/app/api/watchlist/route.ts",
-          "status": "modified",
-          "additions": 24,
-          "deletions": 6,
-          "changes": 30
-        },
-        {
-          "filename": "src/app/deal-scoring/page.tsx",
-          "status": "added",
-          "additions": 146,
-          "deletions": 0,
-          "changes": 146
-        },
-        {
-          "filename": "src/app/globals.css",
-          "status": "modified",
-          "additions": 210,
-          "deletions": 0,
-          "changes": 210
-        },
-        {
-          "filename": "src/app/layout.tsx",
-          "status": "modified",
-          "additions": 53,
-          "deletions": 21,
-          "changes": 74
-        },
-        {
-          "filename": "src/app/page.tsx",
-          "status": "modified",
-          "additions": 321,
-          "deletions": 226,
-          "changes": 547
-        },
-        {
-          "filename": "src/app/sitemap.ts",
-          "status": "modified",
-          "additions": 6,
-          "deletions": 0,
-          "changes": 6
-        }
-      ],
-      "author": {
-        "name": "Ishaan Kor",
-        "date": "2026-11-15T01:32:40Z"
-      }
-    },
-    {
-      "sha": "58cfbcc20dd0e9e0fce6ce35a059670498c7488c",
-      "shortSha": "58cfbcc",
-      "message": "feat: enhance market preview API with robust data filtering and add site infrastructure files",
-      "repoName": "RigScouter-AI",
-      "repoFullName": "ishaankor/RigScouter-AI",
-      "repoUrl": "https://github.com/ishaankor/RigScouter-AI",
-      "commitUrl": "https://github.com/ishaankor/RigScouter-AI/commit/58cfbcc20dd0e9e0fce6ce35a059670498c7488c",
-      "date": "2026-11-14T10:25:52Z",
-      "timeAgo": "21h ago",
-      "stats": {
-        "total": 981,
-        "additions": 837,
-        "deletions": 144
-      },
-      "linesChanged": 981,
-      "additions": 837,
-      "deletions": 144,
-      "filesCount": 10,
-      "files": [
-        {
-          "filename": "src/app/api/market-preview/route.ts",
-          "status": "modified",
-          "additions": 123,
-          "deletions": 79,
-          "changes": 202
-        },
-        {
-          "filename": "src/app/error.tsx",
-          "status": "added",
-          "additions": 55,
-          "deletions": 0,
-          "changes": 55
-        },
-        {
-          "filename": "src/app/globals.css",
-          "status": "modified",
-          "additions": 144,
-          "deletions": 2,
-          "changes": 146
-        },
-        {
-          "filename": "src/app/layout.tsx",
-          "status": "modified",
-          "additions": 111,
-          "deletions": 6,
-          "changes": 117
-        },
-        {
-          "filename": "src/app/manifest.ts",
-          "status": "added",
-          "additions": 26,
-          "deletions": 0,
-          "changes": 26
-        },
-        {
-          "filename": "src/app/methodology/page.tsx",
-          "status": "added",
-          "additions": 184,
-          "deletions": 0,
-          "changes": 184
-        },
-        {
-          "filename": "src/app/not-found.tsx",
-          "status": "added",
-          "additions": 41,
-          "deletions": 0,
-          "changes": 41
-        },
-        {
-          "filename": "src/app/page.tsx",
-          "status": "modified",
-          "additions": 102,
-          "deletions": 57,
-          "changes": 159
-        },
-        {
-          "filename": "src/app/robots.ts",
-          "status": "added",
-          "additions": 17,
-          "deletions": 0,
-          "changes": 17
-        },
-        {
-          "filename": "src/app/sitemap.ts",
-          "status": "added",
-          "additions": 34,
-          "deletions": 0,
-          "changes": 34
-        }
-      ],
-      "author": {
-        "name": "Ishaan Kor",
-        "date": "2026-11-14T10:25:52Z"
-      }
     }
   ],
   "contributionCalendar": {
-    "totalContributions": 784,
+    "totalContributions": 787,
     "weeks": [
       {
         "contributionDays": [
@@ -2741,8 +2643,8 @@
         "contributionDays": [
           {
             "date": "2026-11-15",
-            "contributionCount": 1,
-            "color": "#9be9a8"
+            "contributionCount": 4,
+            "color": "#40c463"
           }
         ]
       }
