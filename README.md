@@ -1,6 +1,6 @@
 <div align="center">
 
-  <img src="./public/logo.png" alt="Ishaan Koradia Portfolio Logo" width="360" />
+  <img src="./public/favicons/portfolio.png" alt="Ishaan Koradia Portfolio Logo" width="360" />
 
   # Ishaan Koradia — AI & Data Science Portfolio
 
