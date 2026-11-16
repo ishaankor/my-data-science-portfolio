@@ -232,13 +232,13 @@
     @apply grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center;
   }
   .hero-copy-col {
-    @apply lg:col-span-7 flex flex-col justify-center text-left items-start relative w-full max-w-full;
+    @apply lg:col-span-7 flex flex-col justify-center text-center items-center lg:text-left lg:items-start relative w-full max-w-full;
   }
   .hero-core-glow {
-    @apply absolute -top-16 -left-12 sm:-top-24 sm:-left-20 w-[360px] sm:w-[640px] lg:w-[760px] h-[280px] sm:h-[460px] pointer-events-none -z-10 select-none;
+    @apply absolute -top-16 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 sm:-top-24 w-[360px] sm:w-[640px] lg:w-[760px] h-[280px] sm:h-[460px] pointer-events-none -z-10 select-none;
   }
   .hero-title {
-    @apply w-full mb-4 sm:mb-6 text-left text-3xl sm:text-5xl md:text-6xl lg:text-[4.25rem] xl:text-[5rem] font-black tracking-[-0.035em] leading-[1.12] min-h-[2.4em] sm:min-h-[2.3em] lg:min-h-[1.18em];
+    @apply w-full mb-4 sm:mb-6 text-center lg:text-left text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] xl:text-[5.25rem] font-black tracking-[-0.035em] leading-[1.08] min-h-[2.4em] sm:min-h-[2.3em] lg:min-h-[1.18em];
   }
   .hero-greeting {
     @apply text-bone inline mr-2 sm:mr-3;
@@ -247,16 +247,16 @@
     @apply inline;
   }
   .hero-typewriter-text {
-    @apply bg-gradient-to-r from-bone via-slate-100 to-sky-400 bg-clip-text text-transparent pb-[0.08em] [box-decoration-break:clone] [-webkit-box-decoration-break:clone];
+    @apply bg-gradient-to-r from-white via-sky-200 to-sky-400 bg-clip-text text-transparent pb-[0.08em] [box-decoration-break:clone] [-webkit-box-decoration-break:clone] drop-shadow-[0_0_24px_rgba(56,189,248,0.35)];
   }
   .hero-cursor {
-    @apply inline-block w-[3px] sm:w-[5px] lg:w-[6px] xl:w-[8px] h-[0.82em] bg-sky-400 ml-1.5 sm:ml-2.5 animate-pulse align-baseline shadow-[0_0_10px_rgba(56,189,248,0.7)];
+    @apply inline-block w-[3.5px] sm:w-[5px] lg:w-[6px] xl:w-[8px] h-[0.82em] bg-sky-400 ml-1.5 sm:ml-2.5 animate-pulse align-baseline shadow-[0_0_12px_rgba(56,189,248,0.9)];
   }
   .hero-lead {
-    @apply text-base sm:text-xl lg:text-[1.35rem] xl:text-[1.5rem] text-bone-dim max-w-2xl leading-relaxed mt-3 sm:mt-5 text-left;
+    @apply text-base sm:text-xl lg:text-[1.35rem] xl:text-[1.5rem] text-bone-dim max-w-2xl leading-relaxed mt-3 sm:mt-5 text-center lg:text-left mx-auto lg:mx-0;
   }
   .hero-cta-group {
-    @apply mt-6 sm:mt-8 flex flex-wrap gap-3 sm:gap-4 items-center justify-start font-mono text-xs sm:text-sm;
+    @apply mt-6 sm:mt-8 flex flex-wrap gap-3.5 sm:gap-4 items-center justify-center lg:justify-start mx-auto lg:mx-0 font-mono text-xs sm:text-sm;
   }
   .btn-primary-cta {
     @apply inline-flex items-center gap-2 px-5 sm:px-7 py-3 sm:py-4 rounded-xl border border-sky-500/40 bg-sky-500/10 hover:bg-sky-500/20 text-bone font-semibold transition-all hover:scale-[1.02] shadow-sm text-xs sm:text-sm;
@@ -271,17 +271,17 @@
     @apply w-4 h-4 text-muted shrink-0;
   }
   .hero-visual-col {
-    @apply lg:col-span-5 h-auto w-full flex items-center justify-center relative mt-2 sm:mt-0;
+    @apply lg:col-span-5 h-auto w-full flex items-center justify-center relative mt-6 lg:mt-0;
   }
 
   /* =========================================================================
      Interactive 3D Memoji Card
      ========================================================================= */
   .memoji-scene {
-    @apply w-full h-auto min-h-[270px] sm:min-h-[420px] lg:min-h-[500px] flex items-center justify-center p-2 sm:p-4 relative select-none [perspective:1200px];
+    @apply w-full h-auto min-h-[220px] sm:min-h-[380px] lg:min-h-[480px] flex items-center justify-center p-2 sm:p-4 relative select-none [perspective:1200px];
   }
   .memoji-card-stage {
-    @apply w-full max-w-[270px] sm:max-w-[380px] lg:max-w-[460px] xl:max-w-[500px] h-[285px] sm:h-[390px] lg:h-[480px] xl:h-[510px] relative transition-transform duration-200 ease-out cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-sky-400/50 rounded-2xl sm:rounded-3xl;
+    @apply w-full max-w-[240px] sm:max-w-[340px] lg:max-w-[440px] xl:max-w-[480px] h-[250px] sm:h-[350px] lg:h-[450px] xl:h-[480px] relative transition-transform duration-200 ease-out cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-sky-400/50 rounded-2xl sm:rounded-3xl;
   }
   .memoji-underglow {
     @apply absolute -inset-3 rounded-[2rem] pointer-events-none transition-opacity duration-300 blur-2xl;
@@ -341,7 +341,7 @@
     @apply absolute -inset-2 rounded-full bg-gradient-to-tr from-sky-500/20 via-sky-400/15 to-indigo-500/20 blur-lg opacity-70 transition-opacity pointer-events-none;
   }
   .memoji-medallion {
-    @apply relative w-28 h-28 sm:w-40 sm:h-40 lg:w-48 lg:h-48 xl:w-52 xl:h-52 rounded-full overflow-hidden border-2 border-white/20 bg-[#060a14] shadow-[0_14px_40px_-8px_rgba(0,0,0,0.8),0_0_20px_rgba(56,189,248,0.25)] transition-all duration-300 hover:border-sky-400/80 hover:shadow-[0_16px_45px_-6px_rgba(0,0,0,0.85),0_0_30px_rgba(56,189,248,0.4)];
+    @apply relative w-24 h-24 sm:w-36 sm:h-36 lg:w-44 lg:h-44 xl:w-48 xl:h-48 rounded-full overflow-hidden border-2 border-white/20 bg-[#060a14] shadow-[0_10px_30px_-6px_rgba(0,0,0,0.8),0_0_16px_rgba(56,189,248,0.25)] transition-all duration-300 hover:border-sky-400/80 hover:shadow-[0_14px_35px_-6px_rgba(0,0,0,0.85),0_0_24px_rgba(56,189,248,0.4)];
   }
   .memoji-portrait-img {
     @apply w-full h-full object-cover transition-transform duration-300 hover:scale-105;
