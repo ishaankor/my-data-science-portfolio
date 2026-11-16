@@ -238,7 +238,7 @@
     @apply absolute -top-16 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 sm:-top-24 w-[360px] sm:w-[640px] lg:w-[760px] h-[280px] sm:h-[460px] pointer-events-none -z-10 select-none;
   }
   .hero-title {
-    @apply w-full mb-4 sm:mb-6 text-center lg:text-left text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] xl:text-[5.25rem] font-black tracking-[-0.035em] leading-[1.08] min-h-[2.4em] sm:min-h-[2.3em] lg:min-h-[1.18em];
+    @apply w-full mb-4 sm:mb-6 text-center lg:text-left text-[2.65rem] sm:text-[3.5rem] md:text-6xl lg:text-[4.75rem] xl:text-[5.5rem] 2xl:text-[6rem] font-black tracking-[-0.035em] leading-[1.08] min-h-[2.4em] sm:min-h-[2.3em] lg:min-h-[1.18em];
   }
   .hero-greeting {
     @apply text-bone inline mr-2 sm:mr-3;
@@ -278,10 +278,10 @@
      Interactive 3D Memoji Card
      ========================================================================= */
   .memoji-scene {
-    @apply w-full h-auto min-h-[220px] sm:min-h-[380px] lg:min-h-[480px] flex items-center justify-center p-2 sm:p-4 relative select-none [perspective:1200px];
+    @apply w-full h-auto min-h-[330px] sm:min-h-[390px] lg:min-h-[470px] flex items-center justify-center p-2 sm:p-4 relative select-none [perspective:1200px];
   }
   .memoji-card-stage {
-    @apply w-full max-w-[240px] sm:max-w-[340px] lg:max-w-[440px] xl:max-w-[480px] h-[250px] sm:h-[350px] lg:h-[450px] xl:h-[480px] relative transition-transform duration-200 ease-out cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-sky-400/50 rounded-2xl sm:rounded-3xl;
+    @apply w-full max-w-[325px] sm:max-w-[380px] lg:max-w-[450px] xl:max-w-[490px] h-[330px] sm:h-[390px] lg:h-[460px] xl:h-[490px] relative transition-transform duration-200 ease-out cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-sky-400/50 rounded-2xl sm:rounded-3xl;
   }
   .memoji-underglow {
     @apply absolute -inset-3 rounded-[2rem] pointer-events-none transition-opacity duration-300 blur-2xl;
@@ -341,7 +341,7 @@
     @apply absolute -inset-2 rounded-full bg-gradient-to-tr from-sky-500/20 via-sky-400/15 to-indigo-500/20 blur-lg opacity-70 transition-opacity pointer-events-none;
   }
   .memoji-medallion {
-    @apply relative w-24 h-24 sm:w-36 sm:h-36 lg:w-44 lg:h-44 xl:w-48 xl:h-48 rounded-full overflow-hidden border-2 border-white/20 bg-[#060a14] shadow-[0_10px_30px_-6px_rgba(0,0,0,0.8),0_0_16px_rgba(56,189,248,0.25)] transition-all duration-300 hover:border-sky-400/80 hover:shadow-[0_14px_35px_-6px_rgba(0,0,0,0.85),0_0_24px_rgba(56,189,248,0.4)];
+    @apply relative w-32 h-32 sm:w-38 sm:h-38 lg:w-44 lg:h-44 xl:w-48 xl:h-48 rounded-full overflow-hidden border-2 border-white/20 bg-[#060a14] shadow-[0_12px_35px_-6px_rgba(0,0,0,0.8),0_0_18px_rgba(56,189,248,0.25)] transition-all duration-300 hover:border-sky-400/80 hover:shadow-[0_16px_40px_-6px_rgba(0,0,0,0.85),0_0_26px_rgba(56,189,248,0.4)];
   }
   .memoji-portrait-img {
     @apply w-full h-full object-cover transition-transform duration-300 hover:scale-105;
