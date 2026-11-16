@@ -1,4 +1,11 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+components/projects/LiveProjectPreview.tsx,2,48,tsx,787d18f,Ishaan Kor,2026-11-15,18:01:57,-08:00,2026-11-15T18:01:57-08:00,2,"refactor: remove mirrored live preview fallbacks and proxy fetching in LiveProjectPreview"
+components/projects/ProjectsDeepDiveShowcase.tsx,1,1,tsx,787d18f,Ishaan Kor,2026-11-15,18:01:57,-08:00,2026-11-15T18:01:57-08:00,2,"refactor: remove mirrored live preview fallbacks and proxy fetching in LiveProjectPreview"
+components/projects/ProjectsShowcase.tsx,0,1,tsx,787d18f,Ishaan Kor,2026-11-15,18:01:57,-08:00,2026-11-15T18:01:57-08:00,2,"refactor: remove mirrored live preview fallbacks and proxy fetching in LiveProjectPreview"
+public/previews/datafy.html,0,2,html,787d18f,Ishaan Kor,2026-11-15,18:01:57,-08:00,2026-11-15T18:01:57-08:00,2,"refactor: remove mirrored live preview fallbacks and proxy fetching in LiveProjectPreview"
+public/previews/ishaanbot.html,0,731,html,787d18f,Ishaan Kor,2026-11-15,18:01:57,-08:00,2026-11-15T18:01:57-08:00,2,"refactor: remove mirrored live preview fallbacks and proxy fetching in LiveProjectPreview"
+public/previews/rigscouter.html,0,1,html,787d18f,Ishaan Kor,2026-11-15,18:01:57,-08:00,2026-11-15T18:01:57-08:00,2,"refactor: remove mirrored live preview fallbacks and proxy fetching in LiveProjectPreview"
+scripts/fetch-github-cache.mjs,0,34,mjs,787d18f,Ishaan Kor,2026-11-15,18:01:57,-08:00,2026-11-15T18:01:57-08:00,1,"refactor: remove mirrored live preview fallbacks and proxy fetching in LiveProjectPreview"
 public/previews/ishaanbot.html,2,2,html,7e308dc,Ishaan Kor,2026-11-15,16:33:28,-08:00,2026-11-15T16:33:28-08:00,2,"build: update static export output and telemetry data"
 app/globals.css,31,0,css,13020f5,Ishaan Kor,2026-11-15,16:21:03,-08:00,2026-11-15T16:21:03-08:00,1,"feat: add live project preview component and styles"
 components/projects/LiveProjectPreview.tsx,117,0,tsx,13020f5,Ishaan Kor,2026-11-15,16:21:03,-08:00,2026-11-15T16:21:03-08:00,2,"feat: add live project preview component and styles"

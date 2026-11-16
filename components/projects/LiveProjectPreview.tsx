@@ -20,6 +20,7 @@ export default function LiveProjectPreview({
   const [scale, setScale] = useState(0.36);
   const [virtualHeight, setVirtualHeight] = useState(defaultHeight);
   const [isTopWindow, setIsTopWindow] = useState(true);
+  const [shouldMount, setShouldMount] = useState(false);
 
   useEffect(() => {
     // Prevent recursive nesting if portfolio is ever viewed inside an iframe
@@ -30,6 +31,26 @@ export default function LiveProjectPreview({
 
     const el = viewportRef.current;
     if (!el) return;
+
+    // Only mount the live iframe when the project card genuinely approaches the viewport
+    // A brief delay ensures the page layout has settled before measuring intersection
+    const timer = setTimeout(() => {
+      const intersectionObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setShouldMount(true);
+              intersectionObserver.disconnect();
+            }
+          });
+        },
+        { rootMargin: '100px' }
+      );
+      intersectionObserver.observe(el);
+      cleanupObserver = () => intersectionObserver.disconnect();
+    }, 150);
+
+    let cleanupObserver = () => {};
 
     const updateDimensions = () => {
       if (el.clientWidth > 0 && el.clientHeight > 0) {
@@ -45,19 +66,23 @@ export default function LiveProjectPreview({
     resizeObserver.observe(el);
 
     return () => {
+      clearTimeout(timer);
+      cleanupObserver();
       resizeObserver.disconnect();
     };
   }, []);
 
   return (
     <div ref={viewportRef} className="project-live-viewport">
-      {isTopWindow && (
+      {isTopWindow && shouldMount && (
         <iframe
           src={liveUrl}
           title={title}
-          loading="eager"
+          loading="lazy"
           tabIndex={-1}
           aria-hidden="true"
+          // @ts-expect-error inert is standard in WHATWG HTML and React 18/19
+          inert=""
           className="project-live-iframe-ready"
           style={{
             width: `${VIRTUAL_DESKTOP_WIDTH}px`,

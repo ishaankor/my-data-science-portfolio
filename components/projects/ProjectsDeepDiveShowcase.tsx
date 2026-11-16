@@ -298,7 +298,7 @@ export default function ProjectsDeepDiveShowcase() {
                 {/* Live Dynamic Landing Page Viewport */}
                 <div className="relative overflow-hidden bg-ink aspect-[16/9]">
                   <LiveProjectPreview
-                    liveUrl="https://ishaankoradia.com"
+                    liveUrl="https://ishaankoradia.com?chat=open"
                     title="IshaanBot"
                     aspectRatio="16/9"
                   />
