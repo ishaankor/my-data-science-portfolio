@@ -1,4 +1,5 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+public/previews/ishaanbot.html,2,2,html,7e308dc,Ishaan Kor,2026-11-15,16:33:28,-08:00,2026-11-15T16:33:28-08:00,2,"build: update static export output and telemetry data"
 app/globals.css,31,0,css,13020f5,Ishaan Kor,2026-11-15,16:21:03,-08:00,2026-11-15T16:21:03-08:00,1,"feat: add live project preview component and styles"
 components/projects/LiveProjectPreview.tsx,117,0,tsx,13020f5,Ishaan Kor,2026-11-15,16:21:03,-08:00,2026-11-15T16:21:03-08:00,2,"feat: add live project preview component and styles"
 components/projects/ProjectsDeepDiveShowcase.tsx,16,63,tsx,13020f5,Ishaan Kor,2026-11-15,16:21:03,-08:00,2026-11-15T16:21:03-08:00,2,"feat: add live project preview component and styles"

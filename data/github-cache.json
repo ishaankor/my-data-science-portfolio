@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-16T00:31:14.351Z",
+  "updatedAt": "2026-11-16T00:34:28.938Z",
   "totalRepos": 20,
   "user": {
     "login": "ishaankor",
@@ -18,7 +18,7 @@
       "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
       "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
       "created_at": "2025-01-11T23:48:23Z",
-      "pushed_at": "2026-11-16T00:31:10Z",
+      "pushed_at": "2026-11-16T00:33:52Z",
       "updated_at": "2026-11-12T09:19:05Z",
       "fork": false,
       "is_fork": false
@@ -254,6 +254,102 @@
   ],
   "commits": [
     {
+      "sha": "7e308dc91c18f4c573ade93fdf25207e90abb35d",
+      "shortSha": "7e308dc",
+      "message": "build: update static export output and telemetry data",
+      "repoName": "my-data-science-portfolio",
+      "repoFullName": "ishaankor/my-data-science-portfolio",
+      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/7e308dc91c18f4c573ade93fdf25207e90abb35d",
+      "date": "2026-11-16T00:33:47Z",
+      "timeAgo": "just now",
+      "stats": {
+        "total": 749,
+        "additions": 736,
+        "deletions": 13
+      },
+      "linesChanged": 749,
+      "additions": 736,
+      "deletions": 13,
+      "filesCount": 30,
+      "files": [
+        {
+          "filename": "data/github-cache.json",
+          "status": "modified",
+          "additions": 2,
+          "deletions": 2,
+          "changes": 4
+        },
+        {
+          "filename": "out/404.html",
+          "status": "added",
+          "additions": 32,
+          "deletions": 0,
+          "changes": 32
+        },
+        {
+          "filename": "out/_next/static/7gpwLxgT4iAInvteF-P6a/_buildManifest.js",
+          "status": "renamed",
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0
+        },
+        {
+          "filename": "out/_next/static/7gpwLxgT4iAInvteF-P6a/_ssgManifest.js",
+          "status": "renamed",
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0
+        },
+        {
+          "filename": "out/_next/static/chunks/357-98ec9d2f5281da45.js",
+          "status": "added",
+          "additions": 1,
+          "deletions": 0,
+          "changes": 1
+        },
+        {
+          "filename": "out/_next/static/chunks/357-a5648ce02cf6eb11.js",
+          "status": "removed",
+          "additions": 0,
+          "deletions": 1,
+          "changes": 1
+        },
+        {
+          "filename": "out/_next/static/chunks/app/meta/page-62951f37610e6eb5.js",
+          "status": "added",
+          "additions": 1,
+          "deletions": 0,
+          "changes": 1
+        },
+        {
+          "filename": "out/_next/static/chunks/app/meta/page-ccae4b567ff89f0c.js",
+          "status": "removed",
+          "additions": 0,
+          "deletions": 1,
+          "changes": 1
+        },
+        {
+          "filename": "out/_next/static/chunks/app/page-8c5707c018dcb1a8.js",
+          "status": "renamed",
+          "additions": 1,
+          "deletions": 1,
+          "changes": 2
+        },
+        {
+          "filename": "out/_next/static/chunks/app/projects/page-b0ecc27dcd532b91.js",
+          "status": "removed",
+          "additions": 0,
+          "deletions": 1,
+          "changes": 1
+        }
+      ],
+      "author": {
+        "name": "Ishaan Kor",
+        "date": "2026-11-16T00:33:28Z"
+      }
+    },
+    {
       "sha": "13020f512f536a4dafeb154eeb82693bce731c8a",
       "shortSha": "13020f5",
       "message": "feat: add live project preview component and styles",
@@ -262,7 +358,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/13020f512f536a4dafeb154eeb82693bce731c8a",
       "date": "2026-11-16T00:30:46Z",
-      "timeAgo": "just now",
+      "timeAgo": "3m ago",
       "stats": {
         "total": 2730,
         "additions": 2081,
@@ -510,71 +606,10 @@
         "name": "Ishaan Kor",
         "date": "2026-11-15T09:02:11Z"
       }
-    },
-    {
-      "sha": "dce367b03099251edf2fad42cb275849badbebbe",
-      "shortSha": "dce367b",
-      "message": "refactor: update design system and typography with Inter font and refined color tokens",
-      "repoName": "RigScouter-AI",
-      "repoFullName": "ishaankor/RigScouter-AI",
-      "repoUrl": "https://github.com/ishaankor/RigScouter-AI",
-      "commitUrl": "https://github.com/ishaankor/RigScouter-AI/commit/dce367b03099251edf2fad42cb275849badbebbe",
-      "date": "2026-11-15T08:53:09Z",
-      "timeAgo": "15h ago",
-      "stats": {
-        "total": 1610,
-        "additions": 825,
-        "deletions": 785
-      },
-      "linesChanged": 1610,
-      "additions": 825,
-      "deletions": 785,
-      "filesCount": 5,
-      "files": [
-        {
-          "filename": "src/app/globals.css",
-          "status": "modified",
-          "additions": 469,
-          "deletions": 309,
-          "changes": 778
-        },
-        {
-          "filename": "src/app/layout.tsx",
-          "status": "modified",
-          "additions": 2,
-          "deletions": 32,
-          "changes": 34
-        },
-        {
-          "filename": "src/app/page.tsx",
-          "status": "modified",
-          "additions": 326,
-          "deletions": 438,
-          "changes": 764
-        },
-        {
-          "filename": "src/app/robots.ts",
-          "status": "modified",
-          "additions": 1,
-          "deletions": 2,
-          "changes": 3
-        },
-        {
-          "filename": "src/lib/scrapers/tavily-scraper.ts",
-          "status": "modified",
-          "additions": 27,
-          "deletions": 4,
-          "changes": 31
-        }
-      ],
-      "author": {
-        "name": "Ishaan Kor",
-        "date": "2026-11-15T08:53:09Z"
-      }
     }
   ],
   "contributionCalendar": {
-    "totalContributions": 789,
+    "totalContributions": 790,
     "weeks": [
       {
         "contributionDays": [
@@ -2608,8 +2643,8 @@
         "contributionDays": [
           {
             "date": "2026-11-15",
-            "contributionCount": 6,
-            "color": "#40c463"
+            "contributionCount": 7,
+            "color": "#30a14e"
           }
         ]
       }
