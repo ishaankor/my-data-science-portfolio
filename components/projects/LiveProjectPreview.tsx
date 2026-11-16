@@ -81,6 +81,8 @@ export default function LiveProjectPreview({
           loading="lazy"
           tabIndex={-1}
           aria-hidden="true"
+          scrolling="no"
+          sandbox="allow-scripts allow-forms"
           // @ts-expect-error inert is standard in WHATWG HTML and React 18/19
           inert=""
           className="project-live-iframe-ready"
@@ -88,6 +90,7 @@ export default function LiveProjectPreview({
             width: `${VIRTUAL_DESKTOP_WIDTH}px`,
             height: `${virtualHeight}px`,
             transform: `scale(${scale})`,
+            overflow: 'hidden',
           }}
         />
       )}
