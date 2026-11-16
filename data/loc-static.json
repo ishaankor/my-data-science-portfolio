@@ -1,5 +1,33 @@
 [
   {
+    "file": "app/globals.css",
+    "added": 2,
+    "deleted": 0,
+    "type": "css",
+    "commit": "623af4e",
+    "author": "Ishaan Kor",
+    "date": "2026-11-15",
+    "time": "21:29:40",
+    "timezone": "-08:00",
+    "datetime": "2026-11-15T21:29:40-08:00",
+    "depth": 1,
+    "message": "fix: prevent overflow and restrict iframe permissions in live project preview"
+  },
+  {
+    "file": "components/projects/LiveProjectPreview.tsx",
+    "added": 3,
+    "deleted": 0,
+    "type": "tsx",
+    "commit": "623af4e",
+    "author": "Ishaan Kor",
+    "date": "2026-11-15",
+    "time": "21:29:40",
+    "timezone": "-08:00",
+    "datetime": "2026-11-15T21:29:40-08:00",
+    "depth": 2,
+    "message": "fix: prevent overflow and restrict iframe permissions in live project preview"
+  },
+  {
     "file": "components/projects/LiveProjectPreview.tsx",
     "added": 27,
     "deleted": 2,

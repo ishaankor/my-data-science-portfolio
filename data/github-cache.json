@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-16T04:54:24.118Z",
+  "updatedAt": "2026-11-16T05:30:32.256Z",
   "totalRepos": 20,
   "user": {
     "login": "ishaankor",
@@ -18,7 +18,7 @@
       "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
       "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
       "created_at": "2025-01-11T23:48:23Z",
-      "pushed_at": "2026-11-16T04:53:33Z",
+      "pushed_at": "2026-11-16T05:29:46Z",
       "updated_at": "2026-11-12T09:19:05Z",
       "fork": false,
       "is_fork": false
@@ -254,6 +254,46 @@
   ],
   "commits": [
     {
+      "sha": "623af4e2c689a4d5300850ac0694f2ff646e2a8f",
+      "shortSha": "623af4e",
+      "message": "fix: prevent overflow and restrict iframe permissions in live project preview",
+      "repoName": "my-data-science-portfolio",
+      "repoFullName": "ishaankor/my-data-science-portfolio",
+      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/623af4e2c689a4d5300850ac0694f2ff646e2a8f",
+      "date": "2026-11-16T05:29:40Z",
+      "timeAgo": "just now",
+      "stats": {
+        "total": 5,
+        "additions": 5,
+        "deletions": 0
+      },
+      "linesChanged": 5,
+      "additions": 5,
+      "deletions": 0,
+      "filesCount": 2,
+      "files": [
+        {
+          "filename": "app/globals.css",
+          "status": "modified",
+          "additions": 2,
+          "deletions": 0,
+          "changes": 2
+        },
+        {
+          "filename": "components/projects/LiveProjectPreview.tsx",
+          "status": "modified",
+          "additions": 3,
+          "deletions": 0,
+          "changes": 3
+        }
+      ],
+      "author": {
+        "name": "Ishaan Kor",
+        "date": "2026-11-16T05:29:40Z"
+      }
+    },
+    {
       "sha": "f4ae8d74c426486552ce3b1daa3ab9adcebec7c3",
       "shortSha": "f4ae8d7",
       "message": "feat: lazy load live project preview iframes with intersection observer",
@@ -262,7 +302,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/f4ae8d74c426486552ce3b1daa3ab9adcebec7c3",
       "date": "2026-11-16T04:53:30Z",
-      "timeAgo": "just now",
+      "timeAgo": "36m ago",
       "stats": {
         "total": 2228,
         "additions": 2191,
@@ -358,7 +398,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/787d18f14afb3f498cbc71151f4ee1fd9032fa2c",
       "date": "2026-11-16T02:01:57Z",
-      "timeAgo": "2h ago",
+      "timeAgo": "3h ago",
       "stats": {
         "total": 1793,
         "additions": 126,
@@ -587,106 +627,10 @@
         "name": "Ishaan Kor",
         "date": "2026-11-16T00:33:28Z"
       }
-    },
-    {
-      "sha": "13020f512f536a4dafeb154eeb82693bce731c8a",
-      "shortSha": "13020f5",
-      "message": "feat: add live project preview component and styles",
-      "repoName": "my-data-science-portfolio",
-      "repoFullName": "ishaankor/my-data-science-portfolio",
-      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
-      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/13020f512f536a4dafeb154eeb82693bce731c8a",
-      "date": "2026-11-16T00:30:46Z",
-      "timeAgo": "4h ago",
-      "stats": {
-        "total": 2730,
-        "additions": 2081,
-        "deletions": 649
-      },
-      "linesChanged": 2730,
-      "additions": 2081,
-      "deletions": 649,
-      "filesCount": 53,
-      "files": [
-        {
-          "filename": "app/globals.css",
-          "status": "modified",
-          "additions": 31,
-          "deletions": 0,
-          "changes": 31
-        },
-        {
-          "filename": "components/projects/LiveProjectPreview.tsx",
-          "status": "added",
-          "additions": 117,
-          "deletions": 0,
-          "changes": 117
-        },
-        {
-          "filename": "components/projects/ProjectsDeepDiveShowcase.tsx",
-          "status": "modified",
-          "additions": 16,
-          "deletions": 63,
-          "changes": 79
-        },
-        {
-          "filename": "components/projects/ProjectsShowcase.tsx",
-          "status": "modified",
-          "additions": 7,
-          "deletions": 0,
-          "changes": 7
-        },
-        {
-          "filename": "data/github-cache.json",
-          "status": "modified",
-          "additions": 81,
-          "deletions": 116,
-          "changes": 197
-        },
-        {
-          "filename": "out/404.html",
-          "status": "removed",
-          "additions": 0,
-          "deletions": 32,
-          "changes": 32
-        },
-        {
-          "filename": "out/_next/static/L9bjDde8Esu3okkKYyJQr/_buildManifest.js",
-          "status": "renamed",
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0
-        },
-        {
-          "filename": "out/_next/static/L9bjDde8Esu3okkKYyJQr/_ssgManifest.js",
-          "status": "renamed",
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0
-        },
-        {
-          "filename": "out/_next/static/chunks/357-a5648ce02cf6eb11.js",
-          "status": "added",
-          "additions": 1,
-          "deletions": 0,
-          "changes": 1
-        },
-        {
-          "filename": "out/_next/static/chunks/357-cebaea90744adaae.js",
-          "status": "removed",
-          "additions": 0,
-          "deletions": 1,
-          "changes": 1
-        }
-      ],
-      "author": {
-        "name": "Ishaan Kor",
-        "date": "2026-11-16T00:21:03Z"
-      }
     }
   ],
   "contributionCalendar": {
-    "totalContributions": 793,
+    "totalContributions": 794,
     "weeks": [
       {
         "contributionDays": [
@@ -2720,7 +2664,7 @@
         "contributionDays": [
           {
             "date": "2026-11-15",
-            "contributionCount": 10,
+            "contributionCount": 11,
             "color": "#216e39"
           }
         ]
