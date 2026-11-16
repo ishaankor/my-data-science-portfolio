@@ -1,4 +1,13 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+app/globals.css,31,0,css,13020f5,Ishaan Kor,2026-11-15,16:21:03,-08:00,2026-11-15T16:21:03-08:00,1,"feat: add live project preview component and styles"
+components/projects/LiveProjectPreview.tsx,117,0,tsx,13020f5,Ishaan Kor,2026-11-15,16:21:03,-08:00,2026-11-15T16:21:03-08:00,2,"feat: add live project preview component and styles"
+components/projects/ProjectsDeepDiveShowcase.tsx,16,63,tsx,13020f5,Ishaan Kor,2026-11-15,16:21:03,-08:00,2026-11-15T16:21:03-08:00,2,"feat: add live project preview component and styles"
+components/projects/ProjectsShowcase.tsx,7,0,tsx,13020f5,Ishaan Kor,2026-11-15,16:21:03,-08:00,2026-11-15T16:21:03-08:00,2,"feat: add live project preview component and styles"
+public/previews/datafy.html,2,0,html,13020f5,Ishaan Kor,2026-11-15,16:21:03,-08:00,2026-11-15T16:21:03-08:00,2,"feat: add live project preview component and styles"
+public/previews/ishaanbot.html,731,0,html,13020f5,Ishaan Kor,2026-11-15,16:21:03,-08:00,2026-11-15T16:21:03-08:00,2,"feat: add live project preview component and styles"
+public/previews/rigscouter.html,1,0,html,13020f5,Ishaan Kor,2026-11-15,16:21:03,-08:00,2026-11-15T16:21:03-08:00,2,"feat: add live project preview component and styles"
+scripts/fetch-github-cache.mjs,35,1,mjs,13020f5,Ishaan Kor,2026-11-15,16:21:03,-08:00,2026-11-15T16:21:03-08:00,1,"feat: add live project preview component and styles"
+README.md,1,1,md,f736910,Ishaan,2026-11-15,01:18:44,-08:00,2026-11-15T01:18:44-08:00,0,"fix: update logo image path in README.md"
 app/globals.css,646,8,css,6486c9d,Ishaan Kor,2026-11-15,00:17:52,-08:00,2026-11-15T00:17:52-08:00,1,"refactor: update design system tokens and layout components"
 app/layout.tsx,39,2,tsx,6486c9d,Ishaan Kor,2026-11-15,00:17:52,-08:00,2026-11-15T00:17:52-08:00,1,"refactor: update design system tokens and layout components"
 app/page.tsx,1,1,tsx,6486c9d,Ishaan Kor,2026-11-15,00:17:52,-08:00,2026-11-15T00:17:52-08:00,1,"refactor: update design system tokens and layout components"
