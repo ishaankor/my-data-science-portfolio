@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-16T05:56:54.444Z",
+  "updatedAt": "2026-11-16T08:16:23.213Z",
   "totalRepos": 20,
   "user": {
     "login": "ishaankor",
@@ -18,7 +18,7 @@
       "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
       "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
       "created_at": "2025-01-11T23:48:23Z",
-      "pushed_at": "2026-11-16T05:56:07Z",
+      "pushed_at": "2026-11-16T08:15:28Z",
       "updated_at": "2026-11-12T09:19:05Z",
       "fork": false,
       "is_fork": false
@@ -254,6 +254,46 @@
   ],
   "commits": [
     {
+      "sha": "c0a19cb8bf41b0750ffccdb2ee3722726694d3f8",
+      "shortSha": "c0a19cb",
+      "message": "style: improve hero section responsiveness and styling and add viewport configuration",
+      "repoName": "my-data-science-portfolio",
+      "repoFullName": "ishaankor/my-data-science-portfolio",
+      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/c0a19cb8bf41b0750ffccdb2ee3722726694d3f8",
+      "date": "2026-11-16T08:15:23Z",
+      "timeAgo": "just now",
+      "stats": {
+        "total": 29,
+        "additions": 17,
+        "deletions": 12
+      },
+      "linesChanged": 29,
+      "additions": 17,
+      "deletions": 12,
+      "filesCount": 2,
+      "files": [
+        {
+          "filename": "app/globals.css",
+          "status": "modified",
+          "additions": 11,
+          "deletions": 11,
+          "changes": 22
+        },
+        {
+          "filename": "app/layout.tsx",
+          "status": "modified",
+          "additions": 6,
+          "deletions": 1,
+          "changes": 7
+        }
+      ],
+      "author": {
+        "name": "Ishaan Kor",
+        "date": "2026-11-16T08:15:23Z"
+      }
+    },
+    {
       "sha": "b548de32bc3ab769969578f1b2da1edea8e092be",
       "shortSha": "b548de3",
       "message": "refactor: optimize hero section layout and touch interactions for 3D memoji component",
@@ -262,7 +302,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/b548de32bc3ab769969578f1b2da1edea8e092be",
       "date": "2026-11-16T05:56:03Z",
-      "timeAgo": "just now",
+      "timeAgo": "2h ago",
       "stats": {
         "total": 72,
         "additions": 29,
@@ -309,7 +349,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/5911a25c64a2448cb2a05b6eaf78631cdbd5039c",
       "date": "2026-11-16T05:36:37Z",
-      "timeAgo": "20m ago",
+      "timeAgo": "2h ago",
       "stats": {
         "total": 40,
         "additions": 17,
@@ -384,7 +424,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/623af4e2c689a4d5300850ac0694f2ff646e2a8f",
       "date": "2026-11-16T05:29:40Z",
-      "timeAgo": "27m ago",
+      "timeAgo": "2h ago",
       "stats": {
         "total": 5,
         "additions": 5,
@@ -424,7 +464,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/f4ae8d74c426486552ce3b1daa3ab9adcebec7c3",
       "date": "2026-11-16T04:53:30Z",
-      "timeAgo": "1h ago",
+      "timeAgo": "3h ago",
       "stats": {
         "total": 2228,
         "additions": 2191,
@@ -510,106 +550,10 @@
         "name": "Ishaan Kor",
         "date": "2026-11-16T04:53:20Z"
       }
-    },
-    {
-      "sha": "787d18f14afb3f498cbc71151f4ee1fd9032fa2c",
-      "shortSha": "787d18f",
-      "message": "refactor: remove mirrored live preview fallbacks and proxy fetching in LiveProjectPreview",
-      "repoName": "my-data-science-portfolio",
-      "repoFullName": "ishaankor/my-data-science-portfolio",
-      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
-      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/787d18f14afb3f498cbc71151f4ee1fd9032fa2c",
-      "date": "2026-11-16T02:01:57Z",
-      "timeAgo": "3h ago",
-      "stats": {
-        "total": 1793,
-        "additions": 126,
-        "deletions": 1667
-      },
-      "linesChanged": 1793,
-      "additions": 126,
-      "deletions": 1667,
-      "filesCount": 36,
-      "files": [
-        {
-          "filename": "components/projects/LiveProjectPreview.tsx",
-          "status": "modified",
-          "additions": 2,
-          "deletions": 48,
-          "changes": 50
-        },
-        {
-          "filename": "components/projects/ProjectsDeepDiveShowcase.tsx",
-          "status": "modified",
-          "additions": 1,
-          "deletions": 1,
-          "changes": 2
-        },
-        {
-          "filename": "components/projects/ProjectsShowcase.tsx",
-          "status": "modified",
-          "additions": 0,
-          "deletions": 1,
-          "changes": 1
-        },
-        {
-          "filename": "data/github-cache.json",
-          "status": "modified",
-          "additions": 67,
-          "deletions": 88,
-          "changes": 155
-        },
-        {
-          "filename": "out/404.html",
-          "status": "modified",
-          "additions": 1,
-          "deletions": 1,
-          "changes": 2
-        },
-        {
-          "filename": "out/_next/static/62lRg0TVFd4zsAC2EG9S5/_buildManifest.js",
-          "status": "renamed",
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0
-        },
-        {
-          "filename": "out/_next/static/62lRg0TVFd4zsAC2EG9S5/_ssgManifest.js",
-          "status": "renamed",
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0
-        },
-        {
-          "filename": "out/_next/static/chunks/357-8774415da5c5a2c8.js",
-          "status": "added",
-          "additions": 1,
-          "deletions": 0,
-          "changes": 1
-        },
-        {
-          "filename": "out/_next/static/chunks/357-98ec9d2f5281da45.js",
-          "status": "removed",
-          "additions": 0,
-          "deletions": 1,
-          "changes": 1
-        },
-        {
-          "filename": "out/_next/static/chunks/app/meta/page-62951f37610e6eb5.js",
-          "status": "removed",
-          "additions": 0,
-          "deletions": 1,
-          "changes": 1
-        }
-      ],
-      "author": {
-        "name": "Ishaan Kor",
-        "date": "2026-11-16T02:01:57Z"
-      }
     }
   ],
   "contributionCalendar": {
-    "totalContributions": 796,
+    "totalContributions": 797,
     "weeks": [
       {
         "contributionDays": [
@@ -2645,6 +2589,11 @@
             "date": "2026-11-15",
             "contributionCount": 13,
             "color": "#216e39"
+          },
+          {
+            "date": "2026-11-16",
+            "contributionCount": 1,
+            "color": "#9be9a8"
           }
         ]
       }
