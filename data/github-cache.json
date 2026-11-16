@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-16T05:30:32.256Z",
+  "updatedAt": "2026-11-16T05:37:24.958Z",
   "totalRepos": 20,
   "user": {
     "login": "ishaankor",
@@ -18,7 +18,7 @@
       "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
       "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
       "created_at": "2025-01-11T23:48:23Z",
-      "pushed_at": "2026-11-16T05:29:46Z",
+      "pushed_at": "2026-11-16T05:36:38Z",
       "updated_at": "2026-11-12T09:19:05Z",
       "fork": false,
       "is_fork": false
@@ -254,6 +254,81 @@
   ],
   "commits": [
     {
+      "sha": "5911a25c64a2448cb2a05b6eaf78631cdbd5039c",
+      "shortSha": "5911a25",
+      "message": "refactor: update hero styling and page metadata titles",
+      "repoName": "my-data-science-portfolio",
+      "repoFullName": "ishaankor/my-data-science-portfolio",
+      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/5911a25c64a2448cb2a05b6eaf78631cdbd5039c",
+      "date": "2026-11-16T05:36:37Z",
+      "timeAgo": "just now",
+      "stats": {
+        "total": 40,
+        "additions": 17,
+        "deletions": 23
+      },
+      "linesChanged": 40,
+      "additions": 17,
+      "deletions": 23,
+      "filesCount": 7,
+      "files": [
+        {
+          "filename": "app/globals.css",
+          "status": "modified",
+          "additions": 9,
+          "deletions": 9,
+          "changes": 18
+        },
+        {
+          "filename": "app/layout.tsx",
+          "status": "modified",
+          "additions": 4,
+          "deletions": 4,
+          "changes": 8
+        },
+        {
+          "filename": "app/meta/page.tsx",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1,
+          "changes": 2
+        },
+        {
+          "filename": "app/projects/page.tsx",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1,
+          "changes": 2
+        },
+        {
+          "filename": "app/resume/page.tsx",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1,
+          "changes": 2
+        },
+        {
+          "filename": "components/projects/LiveProjectPreview.tsx",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1,
+          "changes": 2
+        },
+        {
+          "filename": "components/projects/ProjectsShowcase.tsx",
+          "status": "modified",
+          "additions": 0,
+          "deletions": 6,
+          "changes": 6
+        }
+      ],
+      "author": {
+        "name": "Ishaan Kor",
+        "date": "2026-11-16T05:36:35Z"
+      }
+    },
+    {
       "sha": "623af4e2c689a4d5300850ac0694f2ff646e2a8f",
       "shortSha": "623af4e",
       "message": "fix: prevent overflow and restrict iframe permissions in live project preview",
@@ -262,7 +337,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/623af4e2c689a4d5300850ac0694f2ff646e2a8f",
       "date": "2026-11-16T05:29:40Z",
-      "timeAgo": "just now",
+      "timeAgo": "7m ago",
       "stats": {
         "total": 5,
         "additions": 5,
@@ -302,7 +377,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/f4ae8d74c426486552ce3b1daa3ab9adcebec7c3",
       "date": "2026-11-16T04:53:30Z",
-      "timeAgo": "36m ago",
+      "timeAgo": "43m ago",
       "stats": {
         "total": 2228,
         "additions": 2191,
@@ -531,106 +606,10 @@
         "name": "Ishaan Kor",
         "date": "2026-11-16T00:42:09Z"
       }
-    },
-    {
-      "sha": "7e308dc91c18f4c573ade93fdf25207e90abb35d",
-      "shortSha": "7e308dc",
-      "message": "build: update static export output and telemetry data",
-      "repoName": "my-data-science-portfolio",
-      "repoFullName": "ishaankor/my-data-science-portfolio",
-      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
-      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/7e308dc91c18f4c573ade93fdf25207e90abb35d",
-      "date": "2026-11-16T00:33:47Z",
-      "timeAgo": "4h ago",
-      "stats": {
-        "total": 749,
-        "additions": 736,
-        "deletions": 13
-      },
-      "linesChanged": 749,
-      "additions": 736,
-      "deletions": 13,
-      "filesCount": 30,
-      "files": [
-        {
-          "filename": "data/github-cache.json",
-          "status": "modified",
-          "additions": 2,
-          "deletions": 2,
-          "changes": 4
-        },
-        {
-          "filename": "out/404.html",
-          "status": "added",
-          "additions": 32,
-          "deletions": 0,
-          "changes": 32
-        },
-        {
-          "filename": "out/_next/static/7gpwLxgT4iAInvteF-P6a/_buildManifest.js",
-          "status": "renamed",
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0
-        },
-        {
-          "filename": "out/_next/static/7gpwLxgT4iAInvteF-P6a/_ssgManifest.js",
-          "status": "renamed",
-          "additions": 0,
-          "deletions": 0,
-          "changes": 0
-        },
-        {
-          "filename": "out/_next/static/chunks/357-98ec9d2f5281da45.js",
-          "status": "added",
-          "additions": 1,
-          "deletions": 0,
-          "changes": 1
-        },
-        {
-          "filename": "out/_next/static/chunks/357-a5648ce02cf6eb11.js",
-          "status": "removed",
-          "additions": 0,
-          "deletions": 1,
-          "changes": 1
-        },
-        {
-          "filename": "out/_next/static/chunks/app/meta/page-62951f37610e6eb5.js",
-          "status": "added",
-          "additions": 1,
-          "deletions": 0,
-          "changes": 1
-        },
-        {
-          "filename": "out/_next/static/chunks/app/meta/page-ccae4b567ff89f0c.js",
-          "status": "removed",
-          "additions": 0,
-          "deletions": 1,
-          "changes": 1
-        },
-        {
-          "filename": "out/_next/static/chunks/app/page-8c5707c018dcb1a8.js",
-          "status": "renamed",
-          "additions": 1,
-          "deletions": 1,
-          "changes": 2
-        },
-        {
-          "filename": "out/_next/static/chunks/app/projects/page-b0ecc27dcd532b91.js",
-          "status": "removed",
-          "additions": 0,
-          "deletions": 1,
-          "changes": 1
-        }
-      ],
-      "author": {
-        "name": "Ishaan Kor",
-        "date": "2026-11-16T00:33:28Z"
-      }
     }
   ],
   "contributionCalendar": {
-    "totalContributions": 794,
+    "totalContributions": 795,
     "weeks": [
       {
         "contributionDays": [
@@ -2664,7 +2643,7 @@
         "contributionDays": [
           {
             "date": "2026-11-15",
-            "contributionCount": 11,
+            "contributionCount": 12,
             "color": "#216e39"
           }
         ]
