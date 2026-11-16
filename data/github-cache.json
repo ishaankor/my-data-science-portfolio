@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-16T05:37:24.958Z",
+  "updatedAt": "2026-11-16T05:56:54.444Z",
   "totalRepos": 20,
   "user": {
     "login": "ishaankor",
@@ -18,7 +18,7 @@
       "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
       "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
       "created_at": "2025-01-11T23:48:23Z",
-      "pushed_at": "2026-11-16T05:36:38Z",
+      "pushed_at": "2026-11-16T05:56:07Z",
       "updated_at": "2026-11-12T09:19:05Z",
       "fork": false,
       "is_fork": false
@@ -254,6 +254,53 @@
   ],
   "commits": [
     {
+      "sha": "b548de32bc3ab769969578f1b2da1edea8e092be",
+      "shortSha": "b548de3",
+      "message": "refactor: optimize hero section layout and touch interactions for 3D memoji component",
+      "repoName": "my-data-science-portfolio",
+      "repoFullName": "ishaankor/my-data-science-portfolio",
+      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/b548de32bc3ab769969578f1b2da1edea8e092be",
+      "date": "2026-11-16T05:56:03Z",
+      "timeAgo": "just now",
+      "stats": {
+        "total": 72,
+        "additions": 29,
+        "deletions": 43
+      },
+      "linesChanged": 72,
+      "additions": 29,
+      "deletions": 43,
+      "filesCount": 3,
+      "files": [
+        {
+          "filename": "app/globals.css",
+          "status": "modified",
+          "additions": 8,
+          "deletions": 8,
+          "changes": 16
+        },
+        {
+          "filename": "components/hero/HeroMemojiInteractive.tsx",
+          "status": "modified",
+          "additions": 20,
+          "deletions": 32,
+          "changes": 52
+        },
+        {
+          "filename": "components/hero/HeroSection.tsx",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 3,
+          "changes": 4
+        }
+      ],
+      "author": {
+        "name": "Ishaan Kor",
+        "date": "2026-11-16T05:56:02Z"
+      }
+    },
+    {
       "sha": "5911a25c64a2448cb2a05b6eaf78631cdbd5039c",
       "shortSha": "5911a25",
       "message": "refactor: update hero styling and page metadata titles",
@@ -262,7 +309,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/5911a25c64a2448cb2a05b6eaf78631cdbd5039c",
       "date": "2026-11-16T05:36:37Z",
-      "timeAgo": "just now",
+      "timeAgo": "20m ago",
       "stats": {
         "total": 40,
         "additions": 17,
@@ -337,7 +384,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/623af4e2c689a4d5300850ac0694f2ff646e2a8f",
       "date": "2026-11-16T05:29:40Z",
-      "timeAgo": "7m ago",
+      "timeAgo": "27m ago",
       "stats": {
         "total": 5,
         "additions": 5,
@@ -377,7 +424,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/f4ae8d74c426486552ce3b1daa3ab9adcebec7c3",
       "date": "2026-11-16T04:53:30Z",
-      "timeAgo": "43m ago",
+      "timeAgo": "1h ago",
       "stats": {
         "total": 2228,
         "additions": 2191,
@@ -559,57 +606,10 @@
         "name": "Ishaan Kor",
         "date": "2026-11-16T02:01:57Z"
       }
-    },
-    {
-      "sha": "8f435f6ef6e8754eda2e804a3149243017d71b62",
-      "shortSha": "8f435f6",
-      "message": "refactor: replace X-Frame-Options with frame-ancestors CSP directive",
-      "repoName": "RigScouter-AI",
-      "repoFullName": "ishaankor/RigScouter-AI",
-      "repoUrl": "https://github.com/ishaankor/RigScouter-AI",
-      "commitUrl": "https://github.com/ishaankor/RigScouter-AI/commit/8f435f6ef6e8754eda2e804a3149243017d71b62",
-      "date": "2026-11-16T00:42:09Z",
-      "timeAgo": "4h ago",
-      "stats": {
-        "total": 12,
-        "additions": 9,
-        "deletions": 3
-      },
-      "linesChanged": 12,
-      "additions": 9,
-      "deletions": 3,
-      "filesCount": 3,
-      "files": [
-        {
-          "filename": "next.config.mjs",
-          "status": "modified",
-          "additions": 4,
-          "deletions": 1,
-          "changes": 5
-        },
-        {
-          "filename": "public/_headers",
-          "status": "modified",
-          "additions": 1,
-          "deletions": 1,
-          "changes": 2
-        },
-        {
-          "filename": "src/middleware.ts",
-          "status": "modified",
-          "additions": 4,
-          "deletions": 1,
-          "changes": 5
-        }
-      ],
-      "author": {
-        "name": "Ishaan Kor",
-        "date": "2026-11-16T00:42:09Z"
-      }
     }
   ],
   "contributionCalendar": {
-    "totalContributions": 795,
+    "totalContributions": 796,
     "weeks": [
       {
         "contributionDays": [
@@ -2643,7 +2643,7 @@
         "contributionDays": [
           {
             "date": "2026-11-15",
-            "contributionCount": 12,
+            "contributionCount": 13,
             "color": "#216e39"
           }
         ]

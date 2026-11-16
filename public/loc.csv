@@ -1,4 +1,7 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+app/globals.css,8,8,css,b548de3,Ishaan Kor,2026-11-15,21:56:02,-08:00,2026-11-15T21:56:02-08:00,1,"refactor: optimize hero section layout and touch interactions for 3D memoji component"
+components/hero/HeroMemojiInteractive.tsx,20,32,tsx,b548de3,Ishaan Kor,2026-11-15,21:56:02,-08:00,2026-11-15T21:56:02-08:00,2,"refactor: optimize hero section layout and touch interactions for 3D memoji component"
+components/hero/HeroSection.tsx,1,3,tsx,b548de3,Ishaan Kor,2026-11-15,21:56:02,-08:00,2026-11-15T21:56:02-08:00,2,"refactor: optimize hero section layout and touch interactions for 3D memoji component"
 app/globals.css,9,9,css,5911a25,Ishaan Kor,2026-11-15,21:36:35,-08:00,2026-11-15T21:36:35-08:00,1,"refactor: update hero styling and page metadata titles"
 app/layout.tsx,4,4,tsx,5911a25,Ishaan Kor,2026-11-15,21:36:35,-08:00,2026-11-15T21:36:35-08:00,1,"refactor: update hero styling and page metadata titles"
 app/meta/page.tsx,1,1,tsx,5911a25,Ishaan Kor,2026-11-15,21:36:35,-08:00,2026-11-15T21:36:35-08:00,2,"refactor: update hero styling and page metadata titles"
