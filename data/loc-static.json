@@ -1,6 +1,34 @@
 [
   {
     "file": "components/projects/LiveProjectPreview.tsx",
+    "added": 27,
+    "deleted": 2,
+    "type": "tsx",
+    "commit": "f4ae8d7",
+    "author": "Ishaan Kor",
+    "date": "2026-11-15",
+    "time": "20:53:20",
+    "timezone": "-08:00",
+    "datetime": "2026-11-15T20:53:20-08:00",
+    "depth": 2,
+    "message": "feat: lazy load live project preview iframes with intersection observer"
+  },
+  {
+    "file": "components/projects/ProjectsDeepDiveShowcase.tsx",
+    "added": 1,
+    "deleted": 1,
+    "type": "tsx",
+    "commit": "f4ae8d7",
+    "author": "Ishaan Kor",
+    "date": "2026-11-15",
+    "time": "20:53:20",
+    "timezone": "-08:00",
+    "datetime": "2026-11-15T20:53:20-08:00",
+    "depth": 2,
+    "message": "feat: lazy load live project preview iframes with intersection observer"
+  },
+  {
+    "file": "components/projects/LiveProjectPreview.tsx",
     "added": 2,
     "deleted": 48,
     "type": "tsx",
