@@ -483,6 +483,37 @@
   .project-figure {
     @apply relative aspect-[16/10] overflow-hidden bg-ink/90 flex items-center justify-center m-0;
   }
+  .project-live-viewport {
+    @apply relative w-full h-full overflow-hidden bg-ink select-none;
+  }
+  .project-live-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1440px;
+    height: 900px;
+    border: 0;
+    transform-origin: top left;
+    pointer-events: none;
+    user-select: none;
+    opacity: 0;
+    transition: opacity 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: var(--background);
+  }
+  .project-live-iframe-ready {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1440px;
+    height: 900px;
+    border: 0;
+    transform-origin: top left;
+    pointer-events: none;
+    user-select: none;
+    opacity: 1;
+    transition: opacity 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: var(--background);
+  }
   .project-cover-img {
     @apply w-full h-full object-cover object-center transform transition-transform duration-500;
   }

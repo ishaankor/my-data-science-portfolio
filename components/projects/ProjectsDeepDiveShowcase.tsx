@@ -3,15 +3,7 @@
 import React from 'react';
 import { ExternalLink, Github, ArrowUpRight } from 'lucide-react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
-
-const rigScouterDeals = [
-  { title: 'USED - EVGA GeForce GTX 1080 8GB GDDR5', price: '$105.00', save: 'Save $65', source: 'eBay', score: '99/100' },
-  { title: 'AMD Ryzen 7 5800X3D 8-core, 16-Thread', price: '$299.00', save: 'Save $51', source: 'eBay', score: '86/100' },
-  { title: 'Intel Core i5-14400F 2.50GHz 10 Core', price: '$139.99', save: 'Save $70', source: 'eBay', score: '91/100' },
-  { title: 'MSI Gaming GeForce RTX 4070 12GB GDDR6X', price: '$529.00', save: 'Save $80', source: 'Amazon', score: '94/100' },
-  { title: 'Corsair Vengeance LPX 32GB (2x16GB) DDR4', price: '$58.99', save: 'Save $21', source: 'Newegg', score: '88/100' },
-  { title: 'Samsung 990 PRO NVMe 2TB PCIe Gen 4', price: '$149.99', save: 'Save $40', source: 'Amazon', score: '96/100' },
-];
+import LiveProjectPreview from './LiveProjectPreview';
 
 export default function ProjectsDeepDiveShowcase() {
   return (
@@ -47,15 +39,13 @@ export default function ProjectsDeepDiveShowcase() {
                   <div className="w-6" />
                 </div>
 
-                {/* Real Landing Page Photo */}
+                {/* Live Dynamic Landing Page Viewport */}
                 <div className="relative overflow-hidden bg-ink aspect-[16/9]">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src="/images/datafy-landing.png"
-                    alt="Datafy Editorial AI Data Canvas Landing Page"
-                    className="w-full h-full object-cover object-center transform group-hover:scale-[1.03] transition-transform duration-500"
+                  <LiveProjectPreview
+                    liveUrl="https://datafy.ishaankoradia.com"
+                    title="Datafy"
+                    aspectRatio="16/9"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent pointer-events-none" />
                 </div>
               </a>
             </div>
@@ -256,48 +246,13 @@ export default function ProjectsDeepDiveShowcase() {
                   <div className="w-6" />
                 </div>
 
-                {/* Real Landing Page Photo with Animated Live Ticker */}
+                {/* Live Dynamic Landing Page Viewport */}
                 <div className="relative overflow-hidden bg-ink aspect-[16/9]">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src="/images/rigscouter-landing.png"
-                    alt="RigScouter-AI Autonomous Hardware Deal Intelligence"
-                    className="w-full h-full object-cover object-center transform group-hover:scale-[1.03] transition-transform duration-500"
+                  <LiveProjectPreview
+                    liveUrl="https://rigscouter.ishaankoradia.com"
+                    title="RigScouter-AI"
+                    aspectRatio="16/9"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent pointer-events-none" />
-
-                  {/* Animated Live Price Drops Marquee Ticker Overlay */}
-                  <div className="absolute bottom-0 inset-x-0 h-7 sm:h-8 bg-[#070b13]/95 backdrop-blur-sm border-t border-cyan-500/20 flex items-center overflow-hidden z-10 pointer-events-none group-hover:pointer-events-auto">
-                    {/* Pinned Left Badge */}
-                    <div className="relative z-20 flex items-center gap-1.5 px-2.5 sm:px-3 h-full bg-[#070b13] border-r border-line/70 shrink-0 font-mono text-[9px] sm:text-[10px] font-bold text-cyan-400 tracking-wider">
-                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping shrink-0" />
-                      <span className="whitespace-nowrap">LIVE PRICE DROPS</span>
-                    </div>
-
-                    {/* Infinite Hardware Marquee Strip */}
-                    <div className="overflow-hidden w-full relative flex items-center">
-                      <div className="animate-live-ticker flex items-center gap-3 pl-2">
-                        {/* Loop 1 */}
-                        {rigScouterDeals.map((deal, idx) => (
-                          <div key={`d1-${idx}`} className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface/90 border border-line/60 shrink-0 font-mono text-[9px] text-bone">
-                            <span className="text-bone-dim truncate max-w-[110px] sm:max-w-[150px]">{deal.title}</span>
-                            <span className="font-bold text-cyan-400">{deal.price}</span>
-                            <span className="text-emerald-400 font-semibold">{deal.save}</span>
-                            <span className="px-1 py-0.2 rounded bg-sky-500/10 text-sky-300 border border-sky-500/20 text-[8px]">{deal.source} {deal.score}</span>
-                          </div>
-                        ))}
-                        {/* Loop 2 */}
-                        {rigScouterDeals.map((deal, idx) => (
-                          <div key={`d2-${idx}`} className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface/90 border border-line/60 shrink-0 font-mono text-[9px] text-bone">
-                            <span className="text-bone-dim truncate max-w-[110px] sm:max-w-[150px]">{deal.title}</span>
-                            <span className="font-bold text-cyan-400">{deal.price}</span>
-                            <span className="text-emerald-400 font-semibold">{deal.save}</span>
-                            <span className="px-1 py-0.2 rounded bg-sky-500/10 text-sky-300 border border-sky-500/20 text-[8px]">{deal.source} {deal.score}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </a>
             </div>
@@ -340,15 +295,13 @@ export default function ProjectsDeepDiveShowcase() {
                   <div className="w-6" />
                 </div>
 
-                {/* Real Landing Page Workspace Photo */}
+                {/* Live Dynamic Landing Page Viewport */}
                 <div className="relative overflow-hidden bg-ink aspect-[16/9]">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src="/images/ishaanbot-landing-animated.webp"
-                    alt="Model Context Protocol AI Assistant Workspace"
-                    className="w-full h-full object-cover object-center transform group-hover:scale-[1.03] transition-transform duration-500"
+                  <LiveProjectPreview
+                    liveUrl="https://ishaankoradia.com?chat=open"
+                    title="IshaanBot"
+                    aspectRatio="16/9"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent pointer-events-none" />
                 </div>
               </a>
             </div>

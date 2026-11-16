@@ -89,4 +89,38 @@ async function generateGitHubCache() {
   }
 }
 
-generateGitHubCache();
+async function refreshLiveProjectMirrors() {
+  const previewDir = path.join(__dirname, '../public/previews');
+  const targets = [
+    { url: 'https://datafy.ishaankoradia.com', file: 'datafy.html' },
+    { url: 'https://rigscouter.ishaankoradia.com', file: 'rigscouter.html' },
+    { url: 'https://ishaankoradia.com', file: 'ishaanbot.html' },
+  ];
+
+  fs.mkdirSync(previewDir, { recursive: true });
+
+  await Promise.allSettled(
+    targets.map(async ({ url, file }) => {
+      try {
+        const res = await fetch(url, { cache: 'no-store', headers: { 'User-Agent': 'Mozilla/5.0' } });
+        if (res.ok) {
+          const rawHtml = await res.text();
+          const origin = new URL(url).origin;
+          const cleanHtml = rawHtml
+            .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '')
+            .replace(
+              /<head>/i,
+              `<head><base href="${origin}/"><style>html,body{overflow:hidden !important;}</style>`
+            );
+          fs.writeFileSync(path.join(previewDir, file), cleanHtml, 'utf8');
+          console.log(`✅ Refreshed live HTML preview mirror: ${file}`);
+        }
+      } catch (err) {
+        console.warn(`ℹ️ Kept existing HTML preview mirror for ${file}:`, err.message);
+      }
+    })
+  );
+}
+
+await generateGitHubCache();
+await refreshLiveProjectMirrors();

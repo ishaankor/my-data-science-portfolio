@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import ScrollReveal from '@/components/ui/ScrollReveal';
+import LiveProjectPreview from './LiveProjectPreview';
 
 export default function ProjectsShowcase({ limit }: { limit?: number }) {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -115,6 +116,12 @@ export default function ProjectsShowcase({ limit }: { limit?: number }) {
                           </div>
                         </div>
                       </div>
+                    ) : project.liveUrl ? (
+                      <LiveProjectPreview
+                        liveUrl={project.liveUrl}
+                        title={project.title}
+                        fallbackImage={project.image || project.favicon}
+                      />
                     ) : (project.image || project.favicon) ? (
                       /* eslint-disable-next-line @next/next/no-img-element */
                       <img
