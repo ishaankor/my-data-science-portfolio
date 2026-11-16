@@ -220,7 +220,7 @@
      Hero Section & Typewriter
      ========================================================================= */
   .hero-banner {
-    @apply relative min-h-0 sm:min-h-[85vh] lg:min-h-[92vh] pt-14 sm:pt-24 lg:pt-28 pb-10 sm:pb-16 lg:pb-20 flex items-center overflow-hidden;
+    @apply relative min-h-0 sm:min-h-[85vh] lg:min-h-[92vh] pt-24 sm:pt-28 lg:pt-32 pb-12 sm:pb-16 lg:pb-20 flex items-center overflow-hidden;
   }
   .hero-ambient-glow {
     @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] sm:w-[1200px] lg:w-[1500px] h-[550px] sm:h-[750px] pointer-events-none -z-10 select-none;
