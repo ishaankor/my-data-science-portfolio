@@ -238,7 +238,7 @@
     @apply absolute -top-16 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 sm:-top-24 w-[360px] sm:w-[640px] lg:w-[760px] h-[280px] sm:h-[460px] pointer-events-none -z-10 select-none;
   }
   .hero-title {
-    @apply w-full mb-4 sm:mb-6 text-center lg:text-left text-[2.65rem] sm:text-[3.5rem] md:text-6xl lg:text-[4.75rem] xl:text-[5.5rem] 2xl:text-[6rem] font-black tracking-[-0.035em] leading-[1.08] min-h-[2.4em] sm:min-h-[2.3em] lg:min-h-[1.18em];
+    @apply w-full mb-4 sm:mb-6 text-center lg:text-left text-[3.35rem] sm:text-[4.25rem] md:text-6xl lg:text-[4.75rem] xl:text-[5.5rem] 2xl:text-[6rem] font-black tracking-[-0.035em] leading-[1.04] min-h-[2.35em] sm:min-h-[2.1em] lg:min-h-[1.18em];
   }
   .hero-greeting {
     @apply text-bone inline mr-2 sm:mr-3;
@@ -247,10 +247,10 @@
     @apply inline;
   }
   .hero-typewriter-text {
-    @apply bg-gradient-to-r from-white via-sky-200 to-sky-400 bg-clip-text text-transparent pb-[0.08em] [box-decoration-break:clone] [-webkit-box-decoration-break:clone] drop-shadow-[0_0_24px_rgba(56,189,248,0.35)];
+    @apply bg-gradient-to-r from-white via-sky-200 to-sky-400 bg-clip-text text-transparent pb-[0.08em] [box-decoration-break:clone] [-webkit-box-decoration-break:clone] drop-shadow-[0_0_28px_rgba(56,189,248,0.4)];
   }
   .hero-cursor {
-    @apply inline-block w-[3.5px] sm:w-[5px] lg:w-[6px] xl:w-[8px] h-[0.82em] bg-sky-400 ml-1.5 sm:ml-2.5 animate-pulse align-baseline shadow-[0_0_12px_rgba(56,189,248,0.9)];
+    @apply inline-block w-[4.5px] sm:w-[5.5px] lg:w-[6.5px] xl:w-[8px] h-[0.82em] bg-sky-400 ml-1.5 sm:ml-2.5 animate-pulse align-baseline shadow-[0_0_14px_rgba(56,189,248,0.95)];
   }
   .hero-lead {
     @apply text-base sm:text-xl lg:text-[1.35rem] xl:text-[1.5rem] text-bone-dim max-w-2xl leading-relaxed mt-3 sm:mt-5 text-center lg:text-left mx-auto lg:mx-0;
