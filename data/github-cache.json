@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-16T09:22:26.044Z",
+  "updatedAt": "2026-11-16T09:27:56.915Z",
   "totalRepos": 20,
   "user": {
     "login": "ishaankor",
@@ -18,7 +18,7 @@
       "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
       "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
       "created_at": "2025-01-11T23:48:23Z",
-      "pushed_at": "2026-11-16T09:21:34Z",
+      "pushed_at": "2026-11-16T09:27:06Z",
       "updated_at": "2026-11-12T09:19:05Z",
       "fork": false,
       "is_fork": false
@@ -254,6 +254,39 @@
   ],
   "commits": [
     {
+      "sha": "53c8fd233efef44ea62417bf021a05860f9ee05e",
+      "shortSha": "53c8fd2",
+      "message": "style: update hero typography size and glow effects in globals.css",
+      "repoName": "my-data-science-portfolio",
+      "repoFullName": "ishaankor/my-data-science-portfolio",
+      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/53c8fd233efef44ea62417bf021a05860f9ee05e",
+      "date": "2026-11-16T09:27:04Z",
+      "timeAgo": "just now",
+      "stats": {
+        "total": 6,
+        "additions": 3,
+        "deletions": 3
+      },
+      "linesChanged": 6,
+      "additions": 3,
+      "deletions": 3,
+      "filesCount": 1,
+      "files": [
+        {
+          "filename": "app/globals.css",
+          "status": "modified",
+          "additions": 3,
+          "deletions": 3,
+          "changes": 6
+        }
+      ],
+      "author": {
+        "name": "Ishaan Kor",
+        "date": "2026-11-16T09:27:03Z"
+      }
+    },
+    {
       "sha": "4c75625b5031dcfd65b96549da8e7118a92c5973",
       "shortSha": "4c75625",
       "message": "style: increase top padding and initial padding for hero banner section",
@@ -262,7 +295,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/4c75625b5031dcfd65b96549da8e7118a92c5973",
       "date": "2026-11-16T09:21:31Z",
-      "timeAgo": "just now",
+      "timeAgo": "6m ago",
       "stats": {
         "total": 2,
         "additions": 1,
@@ -295,7 +328,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/ee119278fccdb9f54d4a4526c8a2cb003797a03f",
       "date": "2026-11-16T09:13:08Z",
-      "timeAgo": "8m ago",
+      "timeAgo": "14m ago",
       "stats": {
         "total": 2518,
         "additions": 545,
@@ -391,7 +424,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/460fc8101a59fa60adaee3db8fd0559420673e1a",
       "date": "2026-11-16T08:30:20Z",
-      "timeAgo": "51m ago",
+      "timeAgo": "57m ago",
       "stats": {
         "total": 8,
         "additions": 4,
@@ -454,57 +487,10 @@
         "name": "Ishaan Kor",
         "date": "2026-11-16T08:15:23Z"
       }
-    },
-    {
-      "sha": "b548de32bc3ab769969578f1b2da1edea8e092be",
-      "shortSha": "b548de3",
-      "message": "refactor: optimize hero section layout and touch interactions for 3D memoji component",
-      "repoName": "my-data-science-portfolio",
-      "repoFullName": "ishaankor/my-data-science-portfolio",
-      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
-      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/b548de32bc3ab769969578f1b2da1edea8e092be",
-      "date": "2026-11-16T05:56:03Z",
-      "timeAgo": "3h ago",
-      "stats": {
-        "total": 72,
-        "additions": 29,
-        "deletions": 43
-      },
-      "linesChanged": 72,
-      "additions": 29,
-      "deletions": 43,
-      "filesCount": 3,
-      "files": [
-        {
-          "filename": "app/globals.css",
-          "status": "modified",
-          "additions": 8,
-          "deletions": 8,
-          "changes": 16
-        },
-        {
-          "filename": "components/hero/HeroMemojiInteractive.tsx",
-          "status": "modified",
-          "additions": 20,
-          "deletions": 32,
-          "changes": 52
-        },
-        {
-          "filename": "components/hero/HeroSection.tsx",
-          "status": "modified",
-          "additions": 1,
-          "deletions": 3,
-          "changes": 4
-        }
-      ],
-      "author": {
-        "name": "Ishaan Kor",
-        "date": "2026-11-16T05:56:02Z"
-      }
     }
   ],
   "contributionCalendar": {
-    "totalContributions": 800,
+    "totalContributions": 801,
     "weeks": [
       {
         "contributionDays": [
@@ -2543,7 +2529,7 @@
           },
           {
             "date": "2026-11-16",
-            "contributionCount": 4,
+            "contributionCount": 5,
             "color": "#40c463"
           }
         ]

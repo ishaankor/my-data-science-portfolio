@@ -1,6 +1,20 @@
 [
   {
     "file": "app/globals.css",
+    "added": 3,
+    "deleted": 3,
+    "type": "css",
+    "commit": "53c8fd2",
+    "author": "Ishaan Kor",
+    "date": "2026-11-16",
+    "time": "01:27:03",
+    "timezone": "-08:00",
+    "datetime": "2026-11-16T01:27:03-08:00",
+    "depth": 1,
+    "message": "style: update hero typography size and glow effects in globals.css"
+  },
+  {
+    "file": "app/globals.css",
     "added": 1,
     "deleted": 1,
     "type": "css",
