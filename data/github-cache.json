@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-16T01:53:52.906Z",
+  "updatedAt": "2026-11-16T02:02:38.692Z",
   "totalRepos": 20,
   "user": {
     "login": "ishaankor",
@@ -12,6 +12,18 @@
   },
   "repos": [
     {
+      "id": 915475199,
+      "name": "my-data-science-portfolio",
+      "language": "HTML",
+      "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
+      "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
+      "created_at": "2025-01-11T23:48:23Z",
+      "pushed_at": "2026-11-16T02:02:00Z",
+      "updated_at": "2026-11-12T09:19:05Z",
+      "fork": false,
+      "is_fork": false
+    },
+    {
       "id": 1323680935,
       "name": "RigScouter-AI",
       "language": "TypeScript",
@@ -20,18 +32,6 @@
       "created_at": "2026-08-05T05:50:28Z",
       "pushed_at": "2026-11-16T00:42:11Z",
       "updated_at": "2026-11-10T21:56:29Z",
-      "fork": false,
-      "is_fork": false
-    },
-    {
-      "id": 915475199,
-      "name": "my-data-science-portfolio",
-      "language": "HTML",
-      "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
-      "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
-      "created_at": "2025-01-11T23:48:23Z",
-      "pushed_at": "2026-11-16T00:34:30Z",
-      "updated_at": "2026-11-12T09:19:05Z",
       "fork": false,
       "is_fork": false
     },
@@ -253,6 +253,102 @@
     }
   ],
   "commits": [
+    {
+      "sha": "787d18f14afb3f498cbc71151f4ee1fd9032fa2c",
+      "shortSha": "787d18f",
+      "message": "refactor: remove mirrored live preview fallbacks and proxy fetching in LiveProjectPreview",
+      "repoName": "my-data-science-portfolio",
+      "repoFullName": "ishaankor/my-data-science-portfolio",
+      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/787d18f14afb3f498cbc71151f4ee1fd9032fa2c",
+      "date": "2026-11-16T02:01:57Z",
+      "timeAgo": "just now",
+      "stats": {
+        "total": 1793,
+        "additions": 126,
+        "deletions": 1667
+      },
+      "linesChanged": 1793,
+      "additions": 126,
+      "deletions": 1667,
+      "filesCount": 36,
+      "files": [
+        {
+          "filename": "components/projects/LiveProjectPreview.tsx",
+          "status": "modified",
+          "additions": 2,
+          "deletions": 48,
+          "changes": 50
+        },
+        {
+          "filename": "components/projects/ProjectsDeepDiveShowcase.tsx",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1,
+          "changes": 2
+        },
+        {
+          "filename": "components/projects/ProjectsShowcase.tsx",
+          "status": "modified",
+          "additions": 0,
+          "deletions": 1,
+          "changes": 1
+        },
+        {
+          "filename": "data/github-cache.json",
+          "status": "modified",
+          "additions": 67,
+          "deletions": 88,
+          "changes": 155
+        },
+        {
+          "filename": "out/404.html",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1,
+          "changes": 2
+        },
+        {
+          "filename": "out/_next/static/62lRg0TVFd4zsAC2EG9S5/_buildManifest.js",
+          "status": "renamed",
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0
+        },
+        {
+          "filename": "out/_next/static/62lRg0TVFd4zsAC2EG9S5/_ssgManifest.js",
+          "status": "renamed",
+          "additions": 0,
+          "deletions": 0,
+          "changes": 0
+        },
+        {
+          "filename": "out/_next/static/chunks/357-8774415da5c5a2c8.js",
+          "status": "added",
+          "additions": 1,
+          "deletions": 0,
+          "changes": 1
+        },
+        {
+          "filename": "out/_next/static/chunks/357-98ec9d2f5281da45.js",
+          "status": "removed",
+          "additions": 0,
+          "deletions": 1,
+          "changes": 1
+        },
+        {
+          "filename": "out/_next/static/chunks/app/meta/page-62951f37610e6eb5.js",
+          "status": "removed",
+          "additions": 0,
+          "deletions": 1,
+          "changes": 1
+        }
+      ],
+      "author": {
+        "name": "Ishaan Kor",
+        "date": "2026-11-16T02:01:57Z"
+      }
+    },
     {
       "sha": "8f435f6ef6e8754eda2e804a3149243017d71b62",
       "shortSha": "8f435f6",
@@ -501,7 +597,7 @@
       "repoUrl": "https://github.com/ishaankor/RigScouter-AI",
       "commitUrl": "https://github.com/ishaankor/RigScouter-AI/commit/87658ed5d37be8aa4952ed764d7178cd0a04a8e1",
       "date": "2026-11-15T20:01:54Z",
-      "timeAgo": "5h ago",
+      "timeAgo": "6h ago",
       "stats": {
         "total": 3050,
         "additions": 2021,
@@ -552,43 +648,10 @@
         "name": "Ishaan Kor",
         "date": "2026-11-15T20:01:54Z"
       }
-    },
-    {
-      "sha": "f736910df2d304681b8f18bcb3d2a38b528cf637",
-      "shortSha": "f736910",
-      "message": "fix: update logo image path in README.md",
-      "repoName": "my-data-science-portfolio",
-      "repoFullName": "ishaankor/my-data-science-portfolio",
-      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
-      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/f736910df2d304681b8f18bcb3d2a38b528cf637",
-      "date": "2026-11-15T09:18:44Z",
-      "timeAgo": "16h ago",
-      "stats": {
-        "total": 2,
-        "additions": 1,
-        "deletions": 1
-      },
-      "linesChanged": 2,
-      "additions": 1,
-      "deletions": 1,
-      "filesCount": 1,
-      "files": [
-        {
-          "filename": "README.md",
-          "status": "modified",
-          "additions": 1,
-          "deletions": 1,
-          "changes": 2
-        }
-      ],
-      "author": {
-        "name": "Ishaan",
-        "date": "2026-11-15T09:18:44Z"
-      }
     }
   ],
   "contributionCalendar": {
-    "totalContributions": 791,
+    "totalContributions": 792,
     "weeks": [
       {
         "contributionDays": [
@@ -2622,7 +2685,7 @@
         "contributionDays": [
           {
             "date": "2026-11-15",
-            "contributionCount": 8,
+            "contributionCount": 9,
             "color": "#30a14e"
           }
         ]
