@@ -220,7 +220,7 @@
      Hero Section & Typewriter
      ========================================================================= */
   .hero-banner {
-    @apply relative min-h-0 sm:min-h-[85vh] lg:min-h-[92vh] pt-20 sm:pt-24 lg:pt-28 pb-14 sm:pb-16 lg:pb-20 flex items-center overflow-hidden;
+    @apply relative min-h-0 sm:min-h-[85vh] lg:min-h-[92vh] pt-14 sm:pt-24 lg:pt-28 pb-10 sm:pb-16 lg:pb-20 flex items-center overflow-hidden;
   }
   .hero-ambient-glow {
     @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] sm:w-[1200px] lg:w-[1500px] h-[550px] sm:h-[750px] pointer-events-none -z-10 select-none;
@@ -229,7 +229,7 @@
     @apply max-w-7xl mx-auto px-5 sm:px-10 w-full relative z-10;
   }
   .hero-grid {
-    @apply grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center;
+    @apply grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-14 items-center;
   }
   .hero-copy-col {
     @apply lg:col-span-7 flex flex-col justify-center text-center items-center lg:text-left lg:items-start relative w-full max-w-full;
@@ -271,7 +271,7 @@
     @apply w-4 h-4 text-muted shrink-0;
   }
   .hero-visual-col {
-    @apply lg:col-span-5 h-auto w-full flex items-center justify-center relative mt-6 lg:mt-0;
+    @apply lg:col-span-5 h-auto w-full flex items-center justify-center relative mt-2 sm:mt-6 lg:mt-0;
   }
 
   /* =========================================================================
@@ -341,7 +341,7 @@
     @apply absolute -inset-2 rounded-full bg-gradient-to-tr from-sky-500/20 via-sky-400/15 to-indigo-500/20 blur-lg opacity-70 transition-opacity pointer-events-none;
   }
   .memoji-medallion {
-    @apply relative w-32 h-32 sm:w-38 sm:h-38 lg:w-44 lg:h-44 xl:w-48 xl:h-48 rounded-full overflow-hidden border-2 border-white/20 bg-[#060a14] shadow-[0_12px_35px_-6px_rgba(0,0,0,0.8),0_0_18px_rgba(56,189,248,0.25)] transition-all duration-300 hover:border-sky-400/80 hover:shadow-[0_16px_40px_-6px_rgba(0,0,0,0.85),0_0_26px_rgba(56,189,248,0.4)];
+    @apply relative w-32 h-32 sm:w-40 sm:h-40 lg:w-44 lg:h-44 xl:w-48 xl:h-48 rounded-full overflow-hidden border-2 border-white/20 bg-[#060a14] shadow-[0_12px_35px_-6px_rgba(0,0,0,0.8),0_0_18px_rgba(56,189,248,0.25)] transition-all duration-300 hover:border-sky-400/80 hover:shadow-[0_16px_40px_-6px_rgba(0,0,0,0.85),0_0_26px_rgba(56,189,248,0.4)];
   }
   .memoji-portrait-img {
     @apply w-full h-full object-cover transition-transform duration-300 hover:scale-105;
