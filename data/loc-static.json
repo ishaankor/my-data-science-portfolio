@@ -1,6 +1,20 @@
 [
   {
     "file": "app/globals.css",
+    "added": 4,
+    "deleted": 4,
+    "type": "css",
+    "commit": "460fc81",
+    "author": "Ishaan Kor",
+    "date": "2026-11-16",
+    "time": "00:30:20",
+    "timezone": "-08:00",
+    "datetime": "2026-11-16T00:30:20-08:00",
+    "depth": 1,
+    "message": "style: update hero typography and memoji component dimensions"
+  },
+  {
+    "file": "app/globals.css",
     "added": 11,
     "deleted": 11,
     "type": "css",
