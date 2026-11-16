@@ -12,9 +12,19 @@ export default function HeroMemojiInteractive() {
   const [isAvatarHovered, setIsAvatarHovered] = useState(false);
   const [shockwaveKey, setShockwaveKey] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
-  // Subtle ambient idle breathing when cursor is not over the card
   useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setIsTouchDevice(
+        'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.innerWidth < 768
+      );
+    }
+  }, []);
+
+  // Subtle ambient idle breathing when cursor is not over the card on desktop
+  useEffect(() => {
+    if (isTouchDevice) return;
     let animId: number;
     const startTime = performance.now();
 
@@ -37,10 +47,10 @@ export default function HeroMemojiInteractive() {
 
     animId = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(animId);
-  }, [isHovered, isFlipped]);
+  }, [isHovered, isFlipped, isTouchDevice]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return;
+    if (isTouchDevice || !containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -60,30 +70,7 @@ export default function HeroMemojiInteractive() {
     });
   };
 
-  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-    if (!containerRef.current || e.touches.length === 0) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const touch = e.touches[0];
-    const x = touch.clientX - rect.left;
-    const y = touch.clientY - rect.top;
-
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    setRotateX(((y - centerY) / centerY) * -8);
-    setRotateY(((x - centerX) / centerX) * (isFlipped ? -8 : 8));
-    setGlarePos({
-      x: Math.max(0, Math.min(100, (x / rect.width) * 100)),
-      y: Math.max(0, Math.min(100, (y / rect.height) * 100)),
-    });
-    setIsHovered(true);
-  };
-
   const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
-
-  const handleTouchEnd = () => {
     setIsHovered(false);
   };
 
@@ -114,11 +101,10 @@ export default function HeroMemojiInteractive() {
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
       className="memoji-scene"
+      style={{ touchAction: 'pan-y' }}
     >
-      {/* 3D Tilted Card Container - Expanded spacious proportions */}
+      {/* 3D Tilted Card Container */}
       <div
         onClick={handleCardClick}
         onKeyDown={handleKeyDown}
@@ -132,9 +118,11 @@ export default function HeroMemojiInteractive() {
         }
         className="memoji-card-stage"
         style={{
-          transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg) ${
-            isHovered ? 'scale3d(1.02, 1.02, 1.02)' : 'scale3d(1, 1, 1)'
-          }`,
+          transform: isTouchDevice
+            ? undefined
+            : `rotateX(${rotateX}deg) rotateY(${rotateY}deg) ${
+                isHovered ? 'scale3d(1.02, 1.02, 1.02)' : 'scale3d(1, 1, 1)'
+              }`,
           transformStyle: 'preserve-3d',
         }}
       >

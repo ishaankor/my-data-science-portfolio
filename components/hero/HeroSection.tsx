@@ -66,13 +66,11 @@ export default function HeroSection() {
               aria-hidden="true"
             />
 
-            {/* Grand Entrance Headline */}
+            {/* Unified Headline */}
             <h1 className="hero-title">
               <span className="hero-greeting">
                 I am
               </span>
-              
-              {/* Massive typewriter role: unified text stream, zero letter shifting, no orphaned cursor */}
               <span className="hero-typewriter-wrap">
                 <span 
                   className="hero-typewriter-text"
