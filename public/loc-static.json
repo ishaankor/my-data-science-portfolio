@@ -1,5 +1,19 @@
 [
   {
+    "file": "public/previews/ishaanbot.html",
+    "added": 2,
+    "deleted": 2,
+    "type": "html",
+    "commit": "7e308dc",
+    "author": "Ishaan Kor",
+    "date": "2026-11-15",
+    "time": "16:33:28",
+    "timezone": "-08:00",
+    "datetime": "2026-11-15T16:33:28-08:00",
+    "depth": 2,
+    "message": "build: update static export output and telemetry data"
+  },
+  {
     "file": "app/globals.css",
     "added": 31,
     "deleted": 0,

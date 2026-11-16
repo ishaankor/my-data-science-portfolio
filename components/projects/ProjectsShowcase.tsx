@@ -120,7 +120,6 @@ export default function ProjectsShowcase({ limit }: { limit?: number }) {
                       <LiveProjectPreview
                         liveUrl={project.liveUrl}
                         title={project.title}
-                        fallbackImage={project.image || project.favicon}
                       />
                     ) : (project.image || project.favicon) ? (
                       /* eslint-disable-next-line @next/next/no-img-element */
