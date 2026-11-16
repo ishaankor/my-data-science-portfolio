@@ -82,7 +82,7 @@ export default function LiveProjectPreview({
           tabIndex={-1}
           aria-hidden="true"
           scrolling="no"
-          sandbox="allow-scripts allow-forms"
+          sandbox="allow-scripts allow-same-origin allow-forms"
           // @ts-expect-error inert is standard in WHATWG HTML and React 18/19
           inert=""
           className="project-live-iframe-ready"

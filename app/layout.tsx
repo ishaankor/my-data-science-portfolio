@@ -6,7 +6,7 @@ import { portfolioData } from '@/data/portfolio';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://ishaankor.github.io/my-data-science-portfolio'),
-  title: 'Ishaan Koradia | AI Engineer & Data Science Developer',
+  title: 'Ishaan Koradia | Portfolio',
   description: portfolioData.bio,
   keywords: [
     'Ishaan Koradia',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     canonical: 'https://ishaankor.github.io/my-data-science-portfolio/',
   },
   openGraph: {
-    title: 'Ishaan Koradia | AI Engineer & Data Science Developer',
+    title: 'Ishaan Koradia | Portfolio',
     description: portfolioData.bio,
     type: 'website',
     url: 'https://ishaankor.github.io/my-data-science-portfolio/',
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
         url: '/favicons/portfolio-cover.png',
         width: 1200,
         height: 630,
-        alt: 'Ishaan Koradia Portfolio - AI Engineer & Data Science Developer',
+        alt: 'Ishaan Koradia | Portfolio',
       },
     ],
   },
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ishaan Koradia | AI Engineer & Data Science Developer',
+    title: 'Ishaan Koradia | Portfolio',
     description: portfolioData.bio,
     creator: '@ishaankoradia',
     images: ['/favicons/portfolio-cover.png'],

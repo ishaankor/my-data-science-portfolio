@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import GitHubMetaDashboard from '@/components/meta/GitHubMetaDashboard';
 
 export const metadata: Metadata = {
-  title: 'Meta & GitHub Analytics | Ishaan Koradia',
+  title: 'Metadata Analytics | Ishaan Koradia',
   description: 'Live GitHub activity, contribution heatmap, code commit stream, and repository explorer for Ishaan Koradia.',
 };
 
