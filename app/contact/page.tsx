@@ -2,7 +2,7 @@ import ContactSection from '@/components/contact/ContactSection';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Contact | Ishaan Koradia - AI Engineer',
+  title: 'Contact | Ishaan Koradia',
   description: 'Get in touch with Ishaan Koradia for AI engineering, Machine Learning, and web automation opportunities.',
 };
 

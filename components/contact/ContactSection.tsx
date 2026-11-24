@@ -88,10 +88,10 @@ export default function ContactSection() {
 
         <ScrollReveal direction="up" delay={0.1}>
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ember/10 border border-ember/30 text-ember font-mono text-xs mb-3">
+            {/* <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ember/10 border border-ember/30 text-ember font-mono text-xs mb-3">
               <Sparkles className="w-3.5 h-3.5" />
               <span>Get In Touch</span>
-            </div>
+            </div> */}
             <h2 className="font-display text-3xl sm:text-5xl font-bold text-bone tracking-tight">
               Let&apos;s Build Something <span className="text-ember">Great.</span>
             </h2>
@@ -151,12 +151,12 @@ export default function ContactSection() {
               </div>
             </div>
 
-            <div className="p-6 rounded-xl border border-line bg-surface/40 text-muted space-y-2">
+            {/* <div className="p-6 rounded-xl border border-line bg-surface/40 text-muted space-y-2">
               <span className="text-ember font-bold block text-sm">⚡ Quick Response Guaranteed</span>
               <p className="text-[0.75rem] leading-relaxed">
                 I typically respond to inquiries within 24 hours. Looking forward to discussing your ideas!
               </p>
-            </div>
+            </div> */}
           </ScrollReveal>
 
           {/* Right Column: Contact Form */}
