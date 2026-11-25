@@ -18,7 +18,7 @@ import ScrollReveal from '@/components/ui/ScrollReveal';
 
 export default function ProjectsShowcase({ limit }: { limit?: number }) {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const categories = ['All', 'Machine Learning', 'Automation', 'Data Visualization'];
+  const categories = ['All', 'AI & Web', 'Machine Learning', 'Automation', 'Data Visualization'];
 
   const filteredProjects = portfolioData.projects.filter((p) => {
     if (selectedCategory === 'All') return true;
@@ -42,7 +42,7 @@ export default function ProjectsShowcase({ limit }: { limit?: number }) {
   return (
     <section aria-labelledby="heading-projects" className="projects-section">
       <div className="projects-container">
-        
+
         {/* Section Header */}
         <ScrollReveal direction="up" delay={0.1}>
           <header className="projects-header-row">

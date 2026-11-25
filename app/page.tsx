@@ -3,6 +3,7 @@ import AboutMeSection from '@/components/sections/AboutMeSection';
 import ProjectsShowcase from '@/components/projects/ProjectsShowcase';
 import GitHubAnalytics from '@/components/analytics/GitHubAnalytics';
 import TechStackSection from '@/components/skills/TechStackSection';
+import ClosingCtaSection from '@/components/sections/ClosingCtaSection';
 
 export default function HomePage() {
   return (
@@ -12,6 +13,7 @@ export default function HomePage() {
       <ProjectsShowcase limit={3} />
       <GitHubAnalytics />
       <TechStackSection />
+      <ClosingCtaSection />
     </div>
   );
 }

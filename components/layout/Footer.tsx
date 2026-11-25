@@ -16,7 +16,7 @@ export default function Footer() {
               <HazeWaveText text="ishaan.koradia" />
             </Link>
             <p className="footer-tagline">
-              Data Science &amp; Analytics Engineer, {portfolioData.location}
+              AI Engineer, {portfolioData.location}
             </p>
           </div>
 

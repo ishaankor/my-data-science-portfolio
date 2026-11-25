@@ -103,9 +103,9 @@ export interface PortfolioData {
 
 export const portfolioData: PortfolioData = {
   name: "Ishaan Koradia",
-  title: "AI Engineer & Data Science Developer",
-  location: "San Jose, CA (Remote Ready)",
-  bio: "AI Engineer specializing in LLM evaluation, agentic pipelines, Model Context Protocol (MCP), and production machine learning systems. B.S. in Cognitive Science (ML & Neural Computation) from UC San Diego.",
+  title: "AI Engineer",
+  location: "San Jose, CA",
+  bio: "AI Engineer working on LLM evaluation, agentic pipelines, Model Context Protocol (MCP), and production machine learning systems. B.S. in Cognitive Science (ML & Neural Computation) from UC San Diego.",
   avatarUrl: "./images/personal-picture.avif",
   githubUsername: "ishaankor",
   email: "ishaankoradia@gmail.com",
@@ -113,11 +113,10 @@ export const portfolioData: PortfolioData = {
   twitter: "https://twitter.com/ishaankoradia",
 
   typingStrings: [
-    // "Ishaan Koradia.",
     "an AI Engineer.",
-    "an Agentic Systems Builder.",
+    "an ML Systems Builder.",
     "a Frontier LLM Evaluator.",
-    "a UCSD ML Undergrad.",
+    "a UCSD CogSci ML Grad.",
     "an Automation Specialist."
   ],
 

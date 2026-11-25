@@ -11,7 +11,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://ishaankor.github.io/my-data-science-portfolio'),
-  title: 'Ishaan Koradia | Portfolio',
+  title: 'Ishaan Koradia | AI Engineer',
   description: portfolioData.bio,
   keywords: [
     'Ishaan Koradia',
