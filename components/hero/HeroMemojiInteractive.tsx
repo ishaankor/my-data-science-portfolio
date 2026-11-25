@@ -5,6 +5,7 @@ import { RotateCw, RotateCcw, ExternalLink, Globe } from 'lucide-react';
 
 export default function HeroMemojiInteractive() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const pointerDownOnInteractiveRef = useRef(false);
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
   const [glarePos, setGlarePos] = useState({ x: 50, y: 50 });
@@ -74,12 +75,28 @@ export default function HeroMemojiInteractive() {
     setIsHovered(false);
   };
 
-  const handleCardClick = () => {
+  const handleStagePointerDownCapture = (e: React.PointerEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLElement | null;
+    pointerDownOnInteractiveRef.current = Boolean(
+      target?.closest('a, button, [data-no-flip="true"]')
+    );
+  };
+
+  const handleCardClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLElement | null;
+    if (
+      pointerDownOnInteractiveRef.current ||
+      target?.closest('a, button, [data-no-flip="true"]')
+    ) {
+      pointerDownOnInteractiveRef.current = false;
+      return;
+    }
     setShockwaveKey((k) => k + 1);
     setIsFlipped((prev) => !prev);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.target !== e.currentTarget) return;
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
       setIsFlipped((prev) => !prev);
@@ -106,14 +123,15 @@ export default function HeroMemojiInteractive() {
     >
       {/* 3D Tilted Card Container */}
       <div
+        onPointerDownCapture={handleStagePointerDownCapture}
         onClick={handleCardClick}
         onKeyDown={handleKeyDown}
-        role="button"
+        role={isFlipped ? undefined : 'button'}
         tabIndex={0}
         data-cursor="hover"
         aria-label={
           isFlipped
-            ? 'Avatar card showing personal website link. Click or press Enter to flip front.'
+            ? 'Avatar card showing personal website link. Click background or press Enter to flip front.'
             : 'Interactive avatar card. Click or press Enter to flip.'
         }
         className="memoji-card-stage"
@@ -149,11 +167,13 @@ export default function HeroMemojiInteractive() {
           {/* ================= FRONT FACE ================= */}
           <div
             className="memoji-face"
+            aria-hidden={isFlipped}
             style={{
               backfaceVisibility: 'hidden',
               WebkitBackfaceVisibility: 'hidden',
               transform: 'rotateY(0deg)',
               boxShadow: dynamicCardShadow,
+              pointerEvents: isFlipped ? 'none' : 'auto',
             }}
           >
             {/* Tilt-Reactive Holographic Foil Sheen */}
@@ -288,11 +308,13 @@ export default function HeroMemojiInteractive() {
           {/* ================= BACK FACE ================= */}
           <div
             className="memoji-face"
+            aria-hidden={!isFlipped}
             style={{
               backfaceVisibility: 'hidden',
               WebkitBackfaceVisibility: 'hidden',
               transform: 'rotateY(180deg)',
               boxShadow: dynamicCardShadow,
+              pointerEvents: isFlipped ? 'auto' : 'none',
             }}
           >
             {/* Tilt-Reactive Holographic Foil Sheen on Back */}
@@ -324,10 +346,7 @@ export default function HeroMemojiInteractive() {
             />
 
             {/* Top Header Row */}
-            <div
-              className="memoji-topbar"
-              style={{ transform: 'translateZ(30px)' }}
-            >
+            <div className="memoji-topbar">
               <div className="memoji-dots-group" aria-hidden="true">
                 <span className="memoji-dot-red" />
                 <span className="memoji-dot-amber" />
@@ -338,6 +357,7 @@ export default function HeroMemojiInteractive() {
               {/* Flip back button */}
               <button
                 type="button"
+                tabIndex={isFlipped ? 0 : -1}
                 onClick={(e) => {
                   e.stopPropagation();
                   setIsFlipped(false);
@@ -351,11 +371,12 @@ export default function HeroMemojiInteractive() {
             </div>
 
             {/* Center Area: Spacious Speech Bubble */}
-            <div
-              className="memoji-back-center"
-              style={{ transform: 'translateZ(45px)' }}
-            >
-              <div className="memoji-speech-card">
+            <div className="memoji-back-center">
+              <div
+                className="memoji-speech-card"
+                data-no-flip="true"
+                onClick={(e) => e.stopPropagation()}
+              >
                 <div className="memoji-speech-pointer" aria-hidden="true" />
 
                 <p className="memoji-speech-copy">
@@ -367,6 +388,8 @@ export default function HeroMemojiInteractive() {
                   href="https://ishaankoradia.com"
                   target="_blank"
                   rel="noopener noreferrer"
+                  tabIndex={isFlipped ? 0 : -1}
+                  data-no-flip="true"
                   onClick={(e) => e.stopPropagation()}
                   className="memoji-site-cta"
                 >
@@ -395,14 +418,19 @@ export default function HeroMemojiInteractive() {
             </div>
 
             {/* Bottom Status Row on Back */}
-            <div
-              className="memoji-bottombar"
-              style={{ transform: 'translateZ(20px)' }}
-            >
-              <span className="memoji-status-badge">
+            <div className="memoji-bottombar">
+              <a
+                href="https://ishaankoradia.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                tabIndex={isFlipped ? 0 : -1}
+                data-no-flip="true"
+                onClick={(e) => e.stopPropagation()}
+                className="memoji-status-badge hover:underline"
+              >
                 <Globe className="icon-xs-accent" aria-hidden="true" />
                 <span>ishaankoradia.com</span>
-              </span>
+              </a>
 
               <span className="memoji-location-label">
                 Click to flip

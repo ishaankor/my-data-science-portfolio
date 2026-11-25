@@ -80,9 +80,9 @@ export default function ContactSection() {
               <span className="text-ember">CHANNELS OPEN</span>
             </div>
 
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface border border-line font-mono text-xs text-bone-dim">
+            {/* <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface border border-line font-mono text-xs text-bone-dim">
               <span>Direct Inquiries Open</span>
-            </div>
+            </div> */}
           </div>
         </ScrollReveal>
 

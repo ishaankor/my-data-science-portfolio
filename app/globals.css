@@ -377,16 +377,16 @@
     @apply w-full my-auto flex flex-col items-center justify-center gap-3 sm:gap-4 relative z-10;
   }
   .memoji-speech-card {
-    @apply relative w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[410px] bg-[#0f1b36] border border-white/10 rounded-2xl p-4 sm:p-5 lg:p-6 shadow-xl text-center;
+    @apply relative w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[410px] bg-[#0f1b36] border border-white/10 rounded-2xl p-4 sm:p-5 lg:p-6 shadow-xl text-center cursor-default;
   }
   .memoji-speech-pointer {
-    @apply absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#0f1b36] border-r border-b border-white/10 rotate-45 transform;
+    @apply absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#0f1b36] border-r border-b border-white/10 rotate-45 transform pointer-events-none;
   }
   .memoji-speech-copy {
     @apply text-xs sm:text-sm lg:text-[15px] text-slate-200 leading-relaxed mb-3 sm:mb-4 font-sans;
   }
   .memoji-site-cta {
-    @apply relative inline-flex items-center justify-center gap-2 w-full py-2.5 sm:py-3 px-4 rounded-xl bg-white hover:bg-sky-50 text-slate-900 font-mono text-xs sm:text-sm font-semibold shadow-md transition-all duration-200 border border-white;
+    @apply relative z-10 inline-flex items-center justify-center gap-2 w-full py-2.5 sm:py-3 px-4 rounded-xl bg-white hover:bg-sky-50 text-slate-900 font-mono text-xs sm:text-sm font-semibold shadow-md transition-all duration-200 border border-white cursor-pointer touch-manipulation;
   }
   .memoji-mini-avatar-wrap {
     @apply relative w-10 h-10 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-full p-0.5 border border-white/15 bg-[#0f1b36] shadow-md mt-1;
