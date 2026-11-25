@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-25T21:07:18.318Z",
+  "updatedAt": "2026-11-25T23:21:15.847Z",
   "totalRepos": 20,
   "user": {
     "login": "ishaankor",
@@ -18,7 +18,7 @@
       "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
       "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
       "created_at": "2025-01-11T23:48:23Z",
-      "pushed_at": "2026-11-25T21:06:27Z",
+      "pushed_at": "2026-11-25T23:20:22Z",
       "updated_at": "2026-11-12T09:19:05Z",
       "fork": false,
       "is_fork": false
@@ -254,6 +254,102 @@
   ],
   "commits": [
     {
+      "sha": "ad270e878c198ca90caddd99581ca9e07774fd00",
+      "shortSha": "ad270e8",
+      "message": "feat: overhaul contact communication channels and add project architecture drawer",
+      "repoName": "my-data-science-portfolio",
+      "repoFullName": "ishaankor/my-data-science-portfolio",
+      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/ad270e878c198ca90caddd99581ca9e07774fd00",
+      "date": "2026-11-25T23:04:43Z",
+      "timeAgo": "16m ago",
+      "stats": {
+        "total": 1169,
+        "additions": 1007,
+        "deletions": 162
+      },
+      "linesChanged": 1169,
+      "additions": 1007,
+      "deletions": 162,
+      "filesCount": 12,
+      "files": [
+        {
+          "filename": "app/layout.tsx",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1,
+          "changes": 2
+        },
+        {
+          "filename": "app/page.tsx",
+          "status": "modified",
+          "additions": 2,
+          "deletions": 0,
+          "changes": 2
+        },
+        {
+          "filename": "app/projects/page.tsx",
+          "status": "modified",
+          "additions": 2,
+          "deletions": 2,
+          "changes": 4
+        },
+        {
+          "filename": "components/contact/ContactSection.tsx",
+          "status": "modified",
+          "additions": 243,
+          "deletions": 83,
+          "changes": 326
+        },
+        {
+          "filename": "components/layout/Footer.tsx",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 1,
+          "changes": 2
+        },
+        {
+          "filename": "components/projects/ProjectArchitectureDrawer.tsx",
+          "status": "added",
+          "additions": 376,
+          "deletions": 0,
+          "changes": 376
+        },
+        {
+          "filename": "components/projects/ProjectsDeepDiveShowcase.tsx",
+          "status": "modified",
+          "additions": 177,
+          "deletions": 48,
+          "changes": 225
+        },
+        {
+          "filename": "components/projects/ProjectsShowcase.tsx",
+          "status": "modified",
+          "additions": 2,
+          "deletions": 2,
+          "changes": 4
+        },
+        {
+          "filename": "components/projects/RepositoryMatrix.tsx",
+          "status": "modified",
+          "additions": 9,
+          "deletions": 19,
+          "changes": 28
+        },
+        {
+          "filename": "components/sections/ClosingCtaSection.tsx",
+          "status": "added",
+          "additions": 77,
+          "deletions": 0,
+          "changes": 77
+        }
+      ],
+      "author": {
+        "name": "Ishaan Kor",
+        "date": "2026-11-25T23:04:43Z"
+      }
+    },
+    {
       "sha": "d5e417f9a69c4ca5b51aede2d861fc7c33e9e82c",
       "shortSha": "d5e417f",
       "message": "fix: improve interactive handling and accessibility for hero memoji card",
@@ -262,7 +358,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/d5e417f9a69c4ca5b51aede2d861fc7c33e9e82c",
       "date": "2026-11-25T21:06:24Z",
-      "timeAgo": "just now",
+      "timeAgo": "2h ago",
       "stats": {
         "total": 74,
         "additions": 51,
@@ -433,64 +529,10 @@
         "name": "Ishaan Kor",
         "date": "2026-11-23T23:53:57Z"
       }
-    },
-    {
-      "sha": "23e2e0c5686f848521858556d09820903b6e4177",
-      "shortSha": "23e2e0c",
-      "message": "refactor: align watchlist digest dispatch pricing and matching logic with watchlist API",
-      "repoName": "RigScouter-AI",
-      "repoFullName": "ishaankor/RigScouter-AI",
-      "repoUrl": "https://github.com/ishaankor/RigScouter-AI",
-      "commitUrl": "https://github.com/ishaankor/RigScouter-AI/commit/23e2e0c5686f848521858556d09820903b6e4177",
-      "date": "2026-11-23T23:21:47Z",
-      "timeAgo": "1d ago",
-      "stats": {
-        "total": 425,
-        "additions": 335,
-        "deletions": 90
-      },
-      "linesChanged": 425,
-      "additions": 335,
-      "deletions": 90,
-      "filesCount": 4,
-      "files": [
-        {
-          "filename": "src/app/api/cron/dispatch-digest/route.ts",
-          "status": "modified",
-          "additions": 169,
-          "deletions": 41,
-          "changes": 210
-        },
-        {
-          "filename": "src/app/api/watchlist/route.ts",
-          "status": "modified",
-          "additions": 148,
-          "deletions": 46,
-          "changes": 194
-        },
-        {
-          "filename": "src/components/WatchlistManager.tsx",
-          "status": "modified",
-          "additions": 17,
-          "deletions": 2,
-          "changes": 19
-        },
-        {
-          "filename": "tsconfig.tsbuildinfo",
-          "status": "modified",
-          "additions": 1,
-          "deletions": 1,
-          "changes": 2
-        }
-      ],
-      "author": {
-        "name": "Ishaan Kor",
-        "date": "2026-11-23T23:21:47Z"
-      }
     }
   ],
   "contributionCalendar": {
-    "totalContributions": 810,
+    "totalContributions": 811,
     "weeks": [
       {
         "contributionDays": [
@@ -2539,7 +2581,7 @@
           },
           {
             "date": "2026-11-25",
-            "contributionCount": 1,
+            "contributionCount": 2,
             "color": "#9be9a8"
           }
         ]
