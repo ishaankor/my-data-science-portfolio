@@ -1,4 +1,7 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+app/globals.css,3,3,css,d5e417f,Ishaan Kor,2026-11-25,13:06:24,-08:00,2026-11-25T13:06:24-08:00,1,"fix: improve interactive handling and accessibility for hero memoji card"
+components/contact/ContactSection.tsx,2,2,tsx,d5e417f,Ishaan Kor,2026-11-25,13:06:24,-08:00,2026-11-25T13:06:24-08:00,2,"fix: improve interactive handling and accessibility for hero memoji card"
+components/hero/HeroMemojiInteractive.tsx,46,18,tsx,d5e417f,Ishaan Kor,2026-11-25,13:06:24,-08:00,2026-11-25T13:06:24-08:00,2,"fix: improve interactive handling and accessibility for hero memoji card"
 app/contact/page.tsx,1,1,tsx,3dc611c,Ishaan Kor,2026-11-24,02:01:30,-08:00,2026-11-24T02:01:30-08:00,2,"refactor: remove badge and quick response elements from contact section and update page title"
 components/contact/ContactSection.tsx,4,4,tsx,3dc611c,Ishaan Kor,2026-11-24,02:01:30,-08:00,2026-11-24T02:01:30-08:00,2,"refactor: remove badge and quick response elements from contact section and update page title"
 app/globals.css,3,3,css,53c8fd2,Ishaan Kor,2026-11-16,01:27:03,-08:00,2026-11-16T01:27:03-08:00,1,"style: update hero typography size and glow effects in globals.css"
