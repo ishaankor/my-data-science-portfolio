@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-26T00:43:25.516Z",
+  "updatedAt": "2026-11-26T00:48:47.479Z",
   "totalRepos": 20,
   "user": {
     "login": "ishaankor",
@@ -18,7 +18,7 @@
       "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
       "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
       "created_at": "2025-01-11T23:48:23Z",
-      "pushed_at": "2026-11-26T00:42:36Z",
+      "pushed_at": "2026-11-26T00:48:02Z",
       "updated_at": "2026-11-12T09:19:05Z",
       "fork": false,
       "is_fork": false
@@ -254,6 +254,46 @@
   ],
   "commits": [
     {
+      "sha": "ce0244f92cbadb1165424ffdefb5ec64ebb2d112",
+      "shortSha": "ce0244f",
+      "message": "feat: add communication channel label to contact section and update line of code metrics",
+      "repoName": "my-data-science-portfolio",
+      "repoFullName": "ishaankor/my-data-science-portfolio",
+      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/ce0244f92cbadb1165424ffdefb5ec64ebb2d112",
+      "date": "2026-11-26T00:48:01Z",
+      "timeAgo": "just now",
+      "stats": {
+        "total": 156,
+        "additions": 156,
+        "deletions": 0
+      },
+      "linesChanged": 156,
+      "additions": 156,
+      "deletions": 0,
+      "filesCount": 2,
+      "files": [
+        {
+          "filename": "components/contact/ContactSection.tsx",
+          "status": "modified",
+          "additions": 2,
+          "deletions": 0,
+          "changes": 2
+        },
+        {
+          "filename": "public/loc-static.json",
+          "status": "modified",
+          "additions": 154,
+          "deletions": 0,
+          "changes": 154
+        }
+      ],
+      "author": {
+        "name": "Ishaan Kor",
+        "date": "2026-11-26T00:47:58Z"
+      }
+    },
+    {
       "sha": "a1d1dba50f36dcf0e3ac4f6f29b72b8f52215965",
       "shortSha": "a1d1dba",
       "message": "feat: increase recent repos limit to 4 and improve github analytics layout consistency",
@@ -262,7 +302,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/a1d1dba50f36dcf0e3ac4f6f29b72b8f52215965",
       "date": "2026-11-26T00:42:33Z",
-      "timeAgo": "just now",
+      "timeAgo": "5m ago",
       "stats": {
         "total": 40,
         "additions": 20,
@@ -468,64 +508,10 @@
         "name": "Ishaan Kor",
         "date": "2026-11-24T10:01:30Z"
       }
-    },
-    {
-      "sha": "5b22ef49813adaa3632f391a13e31095666a5373",
-      "shortSha": "5b22ef4",
-      "message": "refactor: tighten component ID matching and strict query validation in watchlist and scraping logic",
-      "repoName": "RigScouter-AI",
-      "repoFullName": "ishaankor/RigScouter-AI",
-      "repoUrl": "https://github.com/ishaankor/RigScouter-AI",
-      "commitUrl": "https://github.com/ishaankor/RigScouter-AI/commit/5b22ef49813adaa3632f391a13e31095666a5373",
-      "date": "2026-11-24T00:13:03Z",
-      "timeAgo": "2d ago",
-      "stats": {
-        "total": 64,
-        "additions": 25,
-        "deletions": 39
-      },
-      "linesChanged": 64,
-      "additions": 25,
-      "deletions": 39,
-      "filesCount": 4,
-      "files": [
-        {
-          "filename": "src/app/api/cron/dispatch-digest/route.ts",
-          "status": "modified",
-          "additions": 1,
-          "deletions": 1,
-          "changes": 2
-        },
-        {
-          "filename": "src/app/api/watchlist/route.ts",
-          "status": "modified",
-          "additions": 9,
-          "deletions": 19,
-          "changes": 28
-        },
-        {
-          "filename": "src/components/WatchlistManager.tsx",
-          "status": "modified",
-          "additions": 14,
-          "deletions": 18,
-          "changes": 32
-        },
-        {
-          "filename": "tsconfig.tsbuildinfo",
-          "status": "modified",
-          "additions": 1,
-          "deletions": 1,
-          "changes": 2
-        }
-      ],
-      "author": {
-        "name": "Ishaan Kor",
-        "date": "2026-11-24T00:13:03Z"
-      }
     }
   ],
   "contributionCalendar": {
-    "totalContributions": 812,
+    "totalContributions": 813,
     "weeks": [
       {
         "contributionDays": [
@@ -2574,8 +2560,8 @@
           },
           {
             "date": "2026-11-25",
-            "contributionCount": 3,
-            "color": "#9be9a8"
+            "contributionCount": 4,
+            "color": "#40c463"
           }
         ]
       }
