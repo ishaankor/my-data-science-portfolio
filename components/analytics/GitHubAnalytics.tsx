@@ -33,7 +33,7 @@ export default function GitHubAnalytics() {
 
   const recentRepos = [...activeRepos]
     .sort((a, b) => new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime())
-    .slice(0, 3);
+    .slice(0, 4);
 
   const languageColors: Record<string, { hex: string; bg: string }> = {
     Python: { hex: '#38bdf8', bg: 'from-sky-400 to-blue-600' },
@@ -62,20 +62,20 @@ export default function GitHubAnalytics() {
     })),
     ...(otherCount > 0
       ? [
-          {
-            lang: 'Other',
-            count: otherCount,
-            percent: Math.max(0, 100 - topLanguageEntries.reduce((acc, [, c]) => acc + Math.round((c / totalTracked) * 100), 0)),
-            color: '#64748b',
-          },
-        ]
+        {
+          lang: 'Other',
+          count: otherCount,
+          percent: Math.max(0, 100 - topLanguageEntries.reduce((acc, [, c]) => acc + Math.round((c / totalTracked) * 100), 0)),
+          color: '#64748b',
+        },
+      ]
       : []),
   ];
 
   return (
     <section aria-labelledby="heading-github-analytics" className="telemetry-section">
       <div className="telemetry-container">
-        
+
         {/* Section Header */}
         <ScrollReveal direction="up" delay={0.1}>
           <header className="telemetry-header-row">
@@ -104,10 +104,10 @@ export default function GitHubAnalytics() {
 
         {/* Analytics Grid */}
         <div className="telemetry-bento-grid">
-          
+
           {/* Key Metrics Cards */}
           <div className="telemetry-kpi-grid">
-            <ScrollReveal direction="up" delay={0.15}>
+            <ScrollReveal direction="up" delay={0.15} className="h-full">
               <article className="kpi-card">
                 <div className="kpi-header">
                   <div className="kpi-icon-well">
@@ -124,7 +124,7 @@ export default function GitHubAnalytics() {
               </article>
             </ScrollReveal>
 
-            <ScrollReveal direction="up" delay={0.2}>
+            <ScrollReveal direction="up" delay={0.2} className="h-full">
               <article className="kpi-card">
                 <div className="kpi-header">
                   <div className="kpi-icon-well">
@@ -141,7 +141,7 @@ export default function GitHubAnalytics() {
               </article>
             </ScrollReveal>
 
-            <ScrollReveal direction="up" delay={0.25}>
+            <ScrollReveal direction="up" delay={0.25} className="h-full">
               <article className="kpi-card">
                 <div className="kpi-header">
                   <div className="kpi-icon-well">
@@ -158,7 +158,7 @@ export default function GitHubAnalytics() {
               </article>
             </ScrollReveal>
 
-            <ScrollReveal direction="up" delay={0.3}>
+            <ScrollReveal direction="up" delay={0.3} className="h-full">
               <article className="kpi-card">
                 <div className="kpi-header">
                   <div className="kpi-icon-well">
@@ -183,8 +183,8 @@ export default function GitHubAnalytics() {
           </div>
 
           {/* Languages Breakdown */}
-          <div className="telemetry-col">
-            <ScrollReveal direction="up" delay={0.25}>
+          <div className="telemetry-col h-full">
+            <ScrollReveal direction="up" delay={0.25} className="h-full">
               <article className="surface-panel">
                 <div>
                   <div className="panel-header-row">
@@ -254,10 +254,10 @@ export default function GitHubAnalytics() {
           </div>
 
           {/* Recent Repositories List */}
-          <div className="telemetry-col">
-            <ScrollReveal direction="up" delay={0.35}>
+          <div className="telemetry-col h-full">
+            <ScrollReveal direction="up" delay={0.35} className="h-full">
               <article className="surface-panel">
-                <div>
+                <div className="flex flex-col flex-1">
                   <div className="panel-header-row">
                     <h3 className="panel-heading">
                       <GitBranch className="icon-sm-accent" aria-hidden="true" />
@@ -266,7 +266,7 @@ export default function GitHubAnalytics() {
                   </div>
 
                   {recentRepos.length > 0 ? (
-                    <ul className="recent-repos-list">
+                    <ul className="recent-repos-list flex-1 flex flex-col justify-between !space-y-0 gap-2.5">
                       {recentRepos.map((repo) => (
                         <li key={repo.name}>
                           <a
