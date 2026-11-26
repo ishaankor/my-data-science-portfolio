@@ -162,6 +162,8 @@ export default function ContactSection() {
         <ScrollReveal direction="up" delay={0.05}>
           <div className="inline-flex items-center gap-2 font-mono text-[0.72rem] text-muted">
             <span className="text-bone">04 // CONTACT</span>
+            <span className="text-line">/</span>
+            <span className="text-ember">COMMUNICATION CHANNEL</span>
           </div>
         </ScrollReveal>
 
