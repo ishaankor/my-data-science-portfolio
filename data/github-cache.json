@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-25T23:21:15.847Z",
+  "updatedAt": "2026-11-26T00:43:25.516Z",
   "totalRepos": 20,
   "user": {
     "login": "ishaankor",
@@ -18,7 +18,7 @@
       "html_url": "https://github.com/ishaankor/my-data-science-portfolio",
       "description": "My Data Science Portfolio in the form of a website! Stay tuned as I keep making it better and better!",
       "created_at": "2025-01-11T23:48:23Z",
-      "pushed_at": "2026-11-25T23:20:22Z",
+      "pushed_at": "2026-11-26T00:42:36Z",
       "updated_at": "2026-11-12T09:19:05Z",
       "fork": false,
       "is_fork": false
@@ -254,6 +254,39 @@
   ],
   "commits": [
     {
+      "sha": "a1d1dba50f36dcf0e3ac4f6f29b72b8f52215965",
+      "shortSha": "a1d1dba",
+      "message": "feat: increase recent repos limit to 4 and improve github analytics layout consistency",
+      "repoName": "my-data-science-portfolio",
+      "repoFullName": "ishaankor/my-data-science-portfolio",
+      "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
+      "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/a1d1dba50f36dcf0e3ac4f6f29b72b8f52215965",
+      "date": "2026-11-26T00:42:33Z",
+      "timeAgo": "just now",
+      "stats": {
+        "total": 40,
+        "additions": 20,
+        "deletions": 20
+      },
+      "linesChanged": 40,
+      "additions": 20,
+      "deletions": 20,
+      "filesCount": 1,
+      "files": [
+        {
+          "filename": "components/analytics/GitHubAnalytics.tsx",
+          "status": "modified",
+          "additions": 20,
+          "deletions": 20,
+          "changes": 40
+        }
+      ],
+      "author": {
+        "name": "Ishaan Kor",
+        "date": "2026-11-26T00:42:33Z"
+      }
+    },
+    {
       "sha": "ad270e878c198ca90caddd99581ca9e07774fd00",
       "shortSha": "ad270e8",
       "message": "feat: overhaul contact communication channels and add project architecture drawer",
@@ -262,7 +295,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/ad270e878c198ca90caddd99581ca9e07774fd00",
       "date": "2026-11-25T23:04:43Z",
-      "timeAgo": "16m ago",
+      "timeAgo": "1h ago",
       "stats": {
         "total": 1169,
         "additions": 1007,
@@ -358,7 +391,7 @@
       "repoUrl": "https://github.com/ishaankor/my-data-science-portfolio",
       "commitUrl": "https://github.com/ishaankor/my-data-science-portfolio/commit/d5e417f9a69c4ca5b51aede2d861fc7c33e9e82c",
       "date": "2026-11-25T21:06:24Z",
-      "timeAgo": "2h ago",
+      "timeAgo": "3h ago",
       "stats": {
         "total": 74,
         "additions": 51,
@@ -445,7 +478,7 @@
       "repoUrl": "https://github.com/ishaankor/RigScouter-AI",
       "commitUrl": "https://github.com/ishaankor/RigScouter-AI/commit/5b22ef49813adaa3632f391a13e31095666a5373",
       "date": "2026-11-24T00:13:03Z",
-      "timeAgo": "1d ago",
+      "timeAgo": "2d ago",
       "stats": {
         "total": 64,
         "additions": 25,
@@ -489,50 +522,10 @@
         "name": "Ishaan Kor",
         "date": "2026-11-24T00:13:03Z"
       }
-    },
-    {
-      "sha": "4123697282351099b54235f1a4969126ec756ce9",
-      "shortSha": "4123697",
-      "message": "refactor: remove redundant marketing sections and unused icons from dashboard page",
-      "repoName": "RigScouter-AI",
-      "repoFullName": "ishaankor/RigScouter-AI",
-      "repoUrl": "https://github.com/ishaankor/RigScouter-AI",
-      "commitUrl": "https://github.com/ishaankor/RigScouter-AI/commit/4123697282351099b54235f1a4969126ec756ce9",
-      "date": "2026-11-23T23:53:57Z",
-      "timeAgo": "1d ago",
-      "stats": {
-        "total": 208,
-        "additions": 9,
-        "deletions": 199
-      },
-      "linesChanged": 208,
-      "additions": 9,
-      "deletions": 199,
-      "filesCount": 2,
-      "files": [
-        {
-          "filename": "src/app/dashboard/page.tsx",
-          "status": "modified",
-          "additions": 8,
-          "deletions": 198,
-          "changes": 206
-        },
-        {
-          "filename": "tsconfig.tsbuildinfo",
-          "status": "modified",
-          "additions": 1,
-          "deletions": 1,
-          "changes": 2
-        }
-      ],
-      "author": {
-        "name": "Ishaan Kor",
-        "date": "2026-11-23T23:53:57Z"
-      }
     }
   ],
   "contributionCalendar": {
-    "totalContributions": 811,
+    "totalContributions": 812,
     "weeks": [
       {
         "contributionDays": [
@@ -2581,7 +2574,7 @@
           },
           {
             "date": "2026-11-25",
-            "contributionCount": 2,
+            "contributionCount": 3,
             "color": "#9be9a8"
           }
         ]

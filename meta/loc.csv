@@ -1,4 +1,5 @@
 file,added,deleted,type,commit,author,date,time,timezone,datetime,depth,message
+components/analytics/GitHubAnalytics.tsx,20,20,tsx,a1d1dba,Ishaan Kor,2026-11-25,16:42:33,-08:00,2026-11-25T16:42:33-08:00,2,"feat: increase recent repos limit to 4 and improve github analytics layout consistency"
 app/layout.tsx,1,1,tsx,ad270e8,Ishaan Kor,2026-11-25,15:04:43,-08:00,2026-11-25T15:04:43-08:00,1,"feat: overhaul contact communication channels and add project architecture drawer"
 app/page.tsx,2,0,tsx,ad270e8,Ishaan Kor,2026-11-25,15:04:43,-08:00,2026-11-25T15:04:43-08:00,1,"feat: overhaul contact communication channels and add project architecture drawer"
 app/projects/page.tsx,2,2,tsx,ad270e8,Ishaan Kor,2026-11-25,15:04:43,-08:00,2026-11-25T15:04:43-08:00,2,"feat: overhaul contact communication channels and add project architecture drawer"
